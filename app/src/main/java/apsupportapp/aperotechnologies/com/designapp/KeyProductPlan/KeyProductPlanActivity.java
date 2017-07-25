@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -35,7 +36,7 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
     static String productName = "";
     RequestQueue queue;
     public static CustomViewPager plan_pager;
-
+    public static TextView txtStoreCode,txtStoreDesc;
 
 
     @Override
@@ -54,11 +55,12 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
 
         btnFilter = (RelativeLayout) findViewById(R.id.planactual_BtnFilter);
         btnFilter.setOnClickListener(this);
-
+        txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         tabLayout = (TabLayout) findViewById(R.id.planactual_tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Product Name "));
         tabLayout.addTab(tabLayout.newTab().setText("Option"));
-        tabLayout.addTab(tabLayout.newTab().setText("SKU"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sku"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         plan_pager = (CustomViewPager) findViewById(R.id.planactual_pager);
         adapter = new KeyProductPlanAdapter(getSupportFragmentManager(), tabLayout.getTabCount());

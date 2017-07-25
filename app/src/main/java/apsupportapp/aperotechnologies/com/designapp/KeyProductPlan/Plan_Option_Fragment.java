@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +59,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 /**
  * Created by pamrutkar on 27/02/17.
  */
-public class Plan_Option_Fragment extends Fragment {
+public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSelectedListener{
 
     public static TableLayout tableAPlanOpt_Frag;
     public static TableLayout tableBPlanOpt_Frag;
@@ -106,6 +107,7 @@ public class Plan_Option_Fragment extends Fragment {
     int count = 0;
     SharedPreferences sharedPreferences;
     TextView txtOptionName;
+    private TabLayout Tabview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,9 +133,13 @@ public class Plan_Option_Fragment extends Fragment {
         queue = new RequestQueue(cache, network);
         queue.start();
         optrel = (RelativeLayout) optionview.findViewById(R.id.planoptactual_rel);
-        segmentedGroupOption = (SegmentedGroup) optionview.findViewById(R.id.segmentedGrpOption);
-        opt_btnWTD = (RadioButton) optionview.findViewById(R.id.planactual_optbtnWTD);
-        opt_btnLW = (RadioButton) optionview.findViewById(R.id.planactual_optbtnLW);
+       // segmentedGroupOption = (SegmentedGroup) optionview.findViewById(R.id.segmentedGrpOption);
+      //  opt_btnWTD = (RadioButton) optionview.findViewById(R.id.planactual_optbtnWTD);
+      //  opt_btnLW = (RadioButton) optionview.findViewById(R.id.planactual_optbtnLW);
+        Tabview = (TabLayout)optionview.findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("WTD"));
+        Tabview.addTab(Tabview.newTab().setText("LW"));
+        Tabview.setOnTabSelectedListener(this);
         txtOptionGreen = (Button)optionview.findViewById(R.id.txtOptionGreen);
         txtOptionRed = (Button)optionview.findViewById(R.id.txtOptionRed);
         txtOptionAmber = (Button)optionview.findViewById(R.id.txtOptionAmber);
@@ -144,70 +150,14 @@ public class Plan_Option_Fragment extends Fragment {
             Snackbar.make(snackview, "Please select product to view options", Snackbar.LENGTH_LONG).show();
 
         }
-       segmentedGroupOption.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+   /*    segmentedGroupOption.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (!opttoggleClick){
-                    switch (checkedId) {
-                        case R.id.planactual_optbtnWTD:
-                            if (option_seg_clk.equals("WTD")) {
-                                  break;
-                            }
-                                option_seg_clk = "WTD";
-                                optrel.setVisibility(View.VISIBLE);
-                                tableAPlanOpt_Frag.removeAllViews();
-                                tableBPlanOpt_Frag.removeAllViews();
-                                tableCPlanOpt_Frag.removeAllViews();
-                                tableDPlanOpt_Frag.removeAllViews();
-                                if (Reusable_Functions.chkStatus(context)) {
-                                    Reusable_Functions.hDialog();
-                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
-                                    planlevel = 2;
-                                    requestPlanOptionAPI(offsetvalue, limit);
-                                } else {
-                                    Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
-                                }
 
-                            break;
-                        case R.id.planactual_optbtnLW:
-                            if (option_seg_clk.equals("LW")) {
-                                break;
-                            }
-                                option_seg_clk = "LW";
-                                optrel.setVisibility(View.VISIBLE);
-                                tableAPlanOpt_Frag.removeAllViews();
-                                tableBPlanOpt_Frag.removeAllViews();
-                                tableCPlanOpt_Frag.removeAllViews();
-                                tableDPlanOpt_Frag.removeAllViews();
-                                if (Reusable_Functions.chkStatus(context)) {
-
-                                    Reusable_Functions.hDialog();
-                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                    offsetvalue = 0;
-                                    limit = 100;
-                                    count = 0;
-                                    productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
-                                    planlevel = 2;
-                                    requestPlanOptionAPI(offsetvalue, limit);
-                                } else {
-                                    Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
-                                }
-
-                            break;
-                    }
-            }
-           else
-                {
-                   opttoggleClick=false;
-                }
 
 
            }
-        });
+        });*/
         txtOptionGreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -340,10 +290,10 @@ public class Plan_Option_Fragment extends Fragment {
 
          if(option_seg_clk.equals("WTD"))
         {
-           opt_btnWTD.toggle();
+          // opt_btnWTD.toggle();
         }else
         {
-           opt_btnLW.toggle();
+           //opt_btnLW.toggle();
 
         }
     }
@@ -483,7 +433,7 @@ public class Plan_Option_Fragment extends Fragment {
 
                     LinearLayout layout = (LinearLayout) KeyProductPlanActivity.plan_pager.getParent();
                     TabLayout tab = (TabLayout) layout.getChildAt(1);
-                    tab.addTab(tab.newTab().setText("SKU"));
+                    tab.addTab(tab.newTab().setText("Sku"));
                     tab.getTabAt(2).select();
                     rowPressListener.communicateToFragment3(productNameBeanArrayList.get(i).getLevel(),option_seg_clk);
 
@@ -688,6 +638,81 @@ public class Plan_Option_Fragment extends Fragment {
         return view.getMeasuredWidth();
     }
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        int checkedId= Tabview.getSelectedTabPosition();
+        Log.e("TAB", "onTabSelected: " );
+
+        if (!opttoggleClick){
+            switch (checkedId) {
+                case 0 :   //WTD selection
+                    if (option_seg_clk.equals("WTD")) {
+                        break;
+                    }
+                    option_seg_clk = "WTD";
+                    optrel.setVisibility(View.VISIBLE);
+                    tableAPlanOpt_Frag.removeAllViews();
+                    tableBPlanOpt_Frag.removeAllViews();
+                    tableCPlanOpt_Frag.removeAllViews();
+                    tableDPlanOpt_Frag.removeAllViews();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                        planlevel = 2;
+                        requestPlanOptionAPI(offsetvalue, limit);
+                    } else {
+                        Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
+                    }
+
+                    break;
+                case 1 :  // LW selection
+                    if (option_seg_clk.equals("LW")) {
+                        break;
+                    }
+                    option_seg_clk = "LW";
+                    optrel.setVisibility(View.VISIBLE);
+                    tableAPlanOpt_Frag.removeAllViews();
+                    tableBPlanOpt_Frag.removeAllViews();
+                    tableCPlanOpt_Frag.removeAllViews();
+                    tableDPlanOpt_Frag.removeAllViews();
+                    if (Reusable_Functions.chkStatus(context)) {
+
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                        planlevel = 2;
+                        requestPlanOptionAPI(offsetvalue, limit);
+                    } else {
+                        Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
+                    }
+
+                    break;
+            }
+        }
+        else
+        {
+            opttoggleClick=false;
+        }
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
     // horizontal scroll view custom class
     class MyHorizontalScrollView extends HorizontalScrollView {
 
@@ -729,6 +754,7 @@ public class Plan_Option_Fragment extends Fragment {
     private void requestPlanOptionAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
 
+        Log.e("TAG", "requestPlanOptionAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

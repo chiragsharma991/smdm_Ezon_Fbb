@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +57,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * Created by pamrutkar on 28/02/17.
  */
 
-public class Plan_Product extends Fragment {
+public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedListener{
    TableLayout tableAProd_Frag;
    TableLayout tableBProd_Frag;
    TableLayout tableCProd_Frag;
@@ -99,6 +101,7 @@ public class Plan_Product extends Fragment {
     OnRowPressListener1 rowPressListener;
     SharedPreferences sharedPreferences;
     String filterProductValues = "",achColor;
+    private TabLayout Tabview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +127,7 @@ public class Plan_Product extends Fragment {
         filterProductValues = getActivity().getIntent().getStringExtra("productfilterValue");
         relPlanProd_Frag = (RelativeLayout) view.findViewById(R.id.planactual_rel);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.planactual_productrelLayout);
-        relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));  //dfdedf
+        relativeLayout.setBackgroundColor(Color.parseColor("#ffffff"));  //dfdedf
         relPlanProd_Frag.setVisibility(View.VISIBLE);
 
         LinearLayout layout = (LinearLayout) KeyProductPlanActivity.plan_pager.getParent();
@@ -137,10 +140,16 @@ public class Plan_Product extends Fragment {
             tab.removeTabAt(1);
         }
 
-        segmentedGroupProduct = (SegmentedGroup) view.findViewById(R.id.segmentedGrpProduct);
+       /* segmentedGroupProduct = (SegmentedGroup) view.findViewById(R.id.segmentedGrpProduct);
         plan_btnWTD = (RadioButton) view.findViewById(R.id.planactual_prodbtnWTD);
 
-        plan_btnLW = (RadioButton) view.findViewById(R.id.planactual_prodbtnLW);
+        plan_btnLW = (RadioButton) view.findViewById(R.id.planactual_prodbtnLW);*/
+
+        Tabview = (TabLayout)view.findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("WTD"));
+        Tabview.addTab(Tabview.newTab().setText("LW"));
+        Tabview.setOnTabSelectedListener(this);
+
         txtProdGreen = (Button)view.findViewById(R.id.txtProdGreen);
         txtProdRed = (Button) view.findViewById(R.id.txtProdRed);
         txtProdAmber = (Button) view.findViewById(R.id.txtProdAmber);
@@ -171,83 +180,12 @@ public class Plan_Product extends Fragment {
 
         }
 
-         segmentedGroupProduct.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+      /*   segmentedGroupProduct.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
              @Override
              public void onCheckedChanged(RadioGroup group, int checkedId) {
-                 if(!plantoggleClick) {
 
-                    switch (checkedId) {
-                        case R.id.planactual_prodbtnWTD:
-                            if (prodsegClick.equals("WTD")) {
-                                break;
-                            }
-                            prodsegClick = "WTD";
-
-                            relPlanProd_Frag.setVisibility(View.VISIBLE);
-                            tableAProd_Frag.removeAllViews();
-                            tableBProd_Frag.removeAllViews();
-                            tableCProd_Frag.removeAllViews();
-                            tableDProd_Frag.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
-                                planlevel = 1;
-                                if(filterProductValues == null || filterProductValues == "") {
-                                    requestPlanProductAPI(offsetvalue, limit);
-                                }
-                                else
-                                {
-                                    requestFilterProductAPI(offsetvalue,limit);
-                                }
-                            } else {
-                                Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
-                            }
-
-                            break;
-                        case R.id.planactual_prodbtnLW:
-                            if (prodsegClick.equals("LW")) {
-                                break;
-                            }
-                            prodsegClick = "LW";
-
-                            relPlanProd_Frag.setVisibility(View.VISIBLE);
-                            tableAProd_Frag.removeAllViews();
-                            tableBProd_Frag.removeAllViews();
-                            tableCProd_Frag.removeAllViews();
-                            tableDProd_Frag.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-
-                                Reusable_Functions.hDialog();
-                                Reusable_Functions.sDialog(context, "Loading data...");
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
-                                planlevel = 1;
-                                if(filterProductValues == null || filterProductValues == "") {
-                                    requestPlanProductAPI(offsetvalue, limit);
-                                }
-                                else
-                                {
-                                    requestFilterProductAPI(offsetvalue,limit);
-                                }
-                            } else {
-                                Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
-                            }
-
-                            break;
-                    }
-                }
-                 else
-                 {
-                     plantoggleClick = false;
-                 }
              }
-         });
+         });*/
 
         txtProdGreen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -346,16 +284,16 @@ public class Plan_Product extends Fragment {
     }
 
     private void RetainSegVal() {
-        plantoggleClick = true;
+       // plantoggleClick = true;
 
         if(prodsegClick.equals("WTD"))
         {
-            plan_btnWTD.toggle();
+        //    plan_btnWTD.toggle();
 
 
         }else if(prodsegClick.equals("LW"))
         {
-            plan_btnLW.toggle();
+           // plan_btnLW.toggle();
 
         }
     }
@@ -381,8 +319,8 @@ public class Plan_Product extends Fragment {
         horizontalScrollViewD = new MyHorizontalScrollView(this.context);
         scrollViewC = new MyScrollView(this.context);
         scrollViewD = new MyScrollView(this.context);
-        tableAProd_Frag.setBackgroundColor(Color.parseColor("#000000"));
-        horizontalScrollViewB.setBackgroundColor(Color.parseColor("#dfdedf"));
+        tableAProd_Frag.setBackgroundColor(Color.parseColor("#ffffff"));
+        horizontalScrollViewB.setBackgroundColor(Color.parseColor("#ffffff"));
     }
 
     // set essential component IDs
@@ -434,14 +372,14 @@ public class Plan_Product extends Fragment {
     // generate table row of table A
     TableRow componentATableRow() {
         TableRow componentATableRow = new TableRow(this.context);
-        componentATableRow.setBackgroundColor(Color.parseColor("#2277b1"));
+        componentATableRow.setBackgroundColor(Color.parseColor("#ffffff"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#2277b1"));
-        textView.setTextColor(Color.parseColor("#ffffff"));
-        textView.setGravity(Gravity.CENTER);
+        textView.setBackgroundColor(Color.parseColor("#ffffff"));  // header fill color
+        textView.setTextColor(Color.parseColor("#000000"));
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         componentATableRow.addView(textView);
         return componentATableRow;
     }
@@ -450,7 +388,7 @@ public class Plan_Product extends Fragment {
     TableRow componentBTableRow() {
 
         TableRow componentBTableRow = new TableRow(this.context);
-        componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
+        componentBTableRow.setBackgroundColor(Color.parseColor("#ffffff"));  // header border color
         int headerFieldCount = headers.length;
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
@@ -459,8 +397,8 @@ public class Plan_Product extends Fragment {
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-           textView.setBackgroundColor(Color.parseColor("#2277b1"));
-            textView.setTextColor(Color.parseColor("#ffffff"));
+           textView.setBackgroundColor(Color.parseColor("#ffffff"));  // header fill color
+            textView.setTextColor(Color.parseColor("#000000"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
         }
@@ -480,7 +418,7 @@ public class Plan_Product extends Fragment {
             params.setMargins(2, 0, 0, 0);
 
             final TableRow tableRowForTableDProd_Frag = this.tableRowForTableDProd_Frag(productNameBeanArrayList.get(k));
-            tableRowForTableCProd_Frag.setBackgroundColor(Color.parseColor("#dfdedf"));
+            tableRowForTableCProd_Frag.setBackgroundColor(Color.parseColor("#dfdedf"));  // border line color
             tableRowForTableDProd_Frag.setBackgroundColor(Color.parseColor("#dfdedf"));
             final int i = k;
 
@@ -499,7 +437,7 @@ public class Plan_Product extends Fragment {
                     if(tab.getTabCount() == 2) {
                        tab.removeTabAt(1);
                     }
-                    tab.addTab(tab.newTab().setText("OPTION"));
+                    tab.addTab(tab.newTab().setText("Option"));
                     tab.getTabAt(1).select();
                     rowPressListener.communicateToFragment2(productNameBeanArrayList.get(i).getLevel(),prodsegClick);
                 }
@@ -516,6 +454,8 @@ public class Plan_Product extends Fragment {
         params.setMargins(2, 2, 0, 0);
         TableRow tableRowForTableCProd_Frag = new TableRow(this.context);
         TextView textView = this.bodyTextView(productNameDetails);
+        textView.setTextColor(Color.parseColor("#000000"));
+        textView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         tableRowForTableCProd_Frag.addView(textView, params);
         return tableRowForTableCProd_Frag;
@@ -541,18 +481,18 @@ public class Plan_Product extends Fragment {
             TableRow.LayoutParams params = new TableRow.LayoutParams(headerCellsWidth[x + 1], TableRow.LayoutParams.MATCH_PARENT);
             params.setMargins(2, 2, 0, 0);
             TextView textViewB = this.bodyTextView(info[x]);
-            textViewB.setTextColor(Color.WHITE);
+            textViewB.setTextColor(Color.parseColor("#000000"));
             if(productDetails.getPvaSales() >= Double.parseDouble("100"))
             {
-                textViewB.setBackgroundColor(Color.parseColor("#70e503"));
+                textViewB.setTextColor(Color.parseColor("#70e503"));
             }
             else if(productDetails.getPvaSales() > Double.parseDouble("80") && productDetails.getPvaSales() < Double.parseDouble("100"))
             {
-                textViewB.setBackgroundColor(Color.parseColor("#ff7e00"));
+                textViewB.setTextColor(Color.parseColor("#ff7e00"));
 
             }else if(productDetails.getPvaSales() < Double.parseDouble("80"))
             {
-                textViewB.setBackgroundColor(Color.parseColor("#fe0000"));
+                textViewB.setTextColor(Color.parseColor("#fe0000"));
             }
 
             tableRowForTableDProd_Frag.addView(textViewB, params);
@@ -566,9 +506,10 @@ public class Plan_Product extends Fragment {
     TextView bodyTextView(String label) {
 
         TextView bodyTextView = new TextView(context);
-        bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
+        bodyTextView.setBackgroundColor(Color.parseColor("#ffffff"));
         bodyTextView.setText(label);
         bodyTextView.setTextSize(12f);
+        bodyTextView.setTypeface(Typeface.DEFAULT_BOLD);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);
         return bodyTextView;
@@ -578,7 +519,7 @@ public class Plan_Product extends Fragment {
     TextView headerTextView(String label) {
 
         TextView headerTextView = new TextView(this.context);
-        headerTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
+        headerTextView.setBackgroundColor(Color.parseColor("#000000"));
         headerTextView.setText(label);
         headerTextView.setGravity(Gravity.CENTER);
         headerTextView.setPadding(5, 5, 5, 5);
@@ -686,6 +627,97 @@ public class Plan_Product extends Fragment {
         return view.getMeasuredWidth();
     }
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+        int checkedId= Tabview.getSelectedTabPosition();
+        Log.e("TAB", "onTabSelected: " );
+
+        if(!plantoggleClick) {
+
+            switch (checkedId) {
+                case 0 :   //WTD selection
+                    if (prodsegClick.equals("WTD")) {
+                        break;
+                    }
+                    prodsegClick = "WTD";
+
+                    relPlanProd_Frag.setVisibility(View.VISIBLE);
+                    tableAProd_Frag.removeAllViews();
+                    tableBProd_Frag.removeAllViews();
+                    tableCProd_Frag.removeAllViews();
+                    tableDProd_Frag.removeAllViews();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                        planlevel = 1;
+                        if(filterProductValues == null || filterProductValues == "") {
+                            requestPlanProductAPI(offsetvalue, limit);
+                        }
+                        else
+                        {
+                            requestFilterProductAPI(offsetvalue,limit);
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
+                    }
+
+                    break;
+                case 1 :  // LW selection
+                    if (prodsegClick.equals("LW")) {
+                        break;
+                    }
+                    prodsegClick = "LW";
+
+                    relPlanProd_Frag.setVisibility(View.VISIBLE);
+                    tableAProd_Frag.removeAllViews();
+                    tableBProd_Frag.removeAllViews();
+                    tableCProd_Frag.removeAllViews();
+                    tableDProd_Frag.removeAllViews();
+                    if (Reusable_Functions.chkStatus(context)) {
+
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
+                        planlevel = 1;
+                        if(filterProductValues == null || filterProductValues == "") {
+                            requestPlanProductAPI(offsetvalue, limit);
+                        }
+                        else
+                        {
+                            requestFilterProductAPI(offsetvalue,limit);
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
+                    }
+
+                    break;
+            }
+        }
+        else
+        {
+            plantoggleClick = false;
+        }
+
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 
 
     // horizontal scroll view custom class
@@ -849,7 +881,7 @@ public class Plan_Product extends Fragment {
 
     private void requestPlanProductAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
-
+        Log.e("TAG", "requestPlanProductAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

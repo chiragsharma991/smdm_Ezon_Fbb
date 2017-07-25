@@ -94,7 +94,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private RadioButton BestInvent_core, BestInvent_fashion;
     private ToggleButton Toggle_bestInvent_fav;
     private static String corefashion = "Fashion";
-    private static String orderbycol = "10";
+    private static String orderbycol = "8";
     private int level;
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
@@ -943,7 +943,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(true);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "11";
+                orderbycol = "9";
                 BestInventList.clear();
                 Reusable_Functions.sDialog(this, "Loading.......");
                 popPromo = 10;
@@ -974,7 +974,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(true);
-                orderbycol = "11,10";
+                orderbycol = "9,8";
                 BestInventList.clear();
                 Reusable_Functions.sDialog(this, "Loading.......");
                 popPromo = 10;
@@ -1006,7 +1006,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(true);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "10";
+                orderbycol = "8";
                 BestInventList.clear();
                 Reusable_Functions.sDialog(this, "Loading.......");
                 popPromo = 10;
@@ -1037,7 +1037,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "7";
+                orderbycol = "5";
                 BestInventList.clear();
                 Reusable_Functions.sDialog(this, "Loading...");
                 popPromo = 10;
@@ -1159,7 +1159,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         title = null;
         orderby = "DESC";
         view = "STD";
-        orderbycol = "10";
+        orderbycol = "8";
         preValue = 1;
         corefashion = "Fashion";
         seasonGroup = "Current";
