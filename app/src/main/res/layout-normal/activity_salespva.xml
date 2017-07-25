@@ -140,9 +140,8 @@
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             app:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
 
-
-
         <android.support.v4.widget.NestedScrollView
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -178,7 +177,7 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/linechart"
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
+                        android:layout_height="150dp"
                         android:nestedScrollingEnabled="true" />
 
                     <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"

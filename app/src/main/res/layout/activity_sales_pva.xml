@@ -9,13 +9,16 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
 
 
         <LinearLayout
+            android:id="@+id/linear_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -30,10 +33,10 @@
                 android:contentInsetLeft="0dp"
                 android:contentInsetRight="0dp"
                 android:contentInsetStart="0dp"
-                app:contentInsetEnd="0dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp">
+                segmentedgroup:contentInsetEnd="0dp"
+                segmentedgroup:contentInsetLeft="0dp"
+                segmentedgroup:contentInsetRight="0dp"
+                segmentedgroup:contentInsetStart="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -93,7 +96,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:padding="5dp">
 
 
                 <TextView
@@ -130,37 +133,43 @@
 
         </LinearLayout>
 
+
         <android.support.design.widget.TabLayout
             android:id="@+id/tabview_salespva"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/ezfb_Red"
-            app:tabSelectedTextColor="@color/ezfb_Red"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-            app:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
+            android:layout_below="@+id/linear_toolbar"
+            segmentedgroup:tabIndicatorColor="@color/ezfb_Red"
+            segmentedgroup:tabSelectedTextColor="@color/ezfb_Red"
+            segmentedgroup:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            segmentedgroup:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
 
         <android.support.v4.widget.NestedScrollView
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tabview_salespva">
 
-
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/llayoutSalesPvA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <com.numetriclabz.numandroidcharts.GaugeChart
-                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:id="@+id/gauge_chart"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp" />
+
 
                 <RelativeLayout
+                    android:layout_below="@+id/gauge_chart"
+                    android:orientation="vertical"
                     android:id="@+id/relChartlayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_height="wrap_content">
+
 
                     <TextView
                         android:id="@+id/pva_noChart"
@@ -175,7 +184,7 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/linechart"
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
+                        android:layout_height="250dp"
                         android:nestedScrollingEnabled="true" />
 
                     <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -203,10 +212,13 @@
                         android:textSize="11sp" />
                 </RelativeLayout>
 
+
+
                 <LinearLayout
                     android:id="@+id/llpvahierarchy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/relChartlayout"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
@@ -215,7 +227,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:textColor="@color/txt_color"
+                        android:textColor="@color/ezfbb_black"
                         android:textSize="@dimen/normallayout_textsize" />
 
                 </LinearLayout>
@@ -224,6 +236,7 @@
                     android:id="@+id/relTablelayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_below="@+id/llpvahierarchy"
                     android:layout_marginTop="10dp">
 
                     <View
@@ -338,7 +351,6 @@
                                 android:textSize="@dimen/normallayout_textsize"
                                 android:textStyle="normal" />
 
-
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -414,9 +426,9 @@
                 </RelativeLayout>
 
 
-            </LinearLayout>
+            </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>

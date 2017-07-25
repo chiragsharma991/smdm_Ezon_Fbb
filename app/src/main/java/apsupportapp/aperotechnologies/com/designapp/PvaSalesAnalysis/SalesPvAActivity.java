@@ -25,6 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -53,6 +54,7 @@ import com.numetriclabz.numandroidcharts.ChartData;
 import com.numetriclabz.numandroidcharts.GaugeChart;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,14 +75,15 @@ import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, TabLayout.OnTabSelectedListener {
+public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
 
-    RadioButton btn_WTD,btn_LW;
+    RadioButton btn_WTD, btn_LW;
     private static String salesPvA_SegmentClick = "WTD";
     ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList;
     RelativeLayout tableRelLayout;
-    LinearLayout llayoutSalesPvA, llpvahierarchy;
+    LinearLayout llpvahierarchy;
+
     TextView txtStoreCode, txtStoreDesc;
     String userId, bearertoken;
     SharedPreferences sharedPreferences;
@@ -99,7 +102,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     ArrayList<SalesPvAAnalysisWeek> salesPvAAnalysisWeekArrayList;
     String fromWhere, txtPvAClickedValue;
     TextView txtheaderplanclass;
-    RelativeLayout btnBack, btnFilter;
+    RelativeLayout btnBack, btnFilter, llayoutSalesPvA;
     RelativeLayout btnSalesPrev, btnSalesNext;
     Gson gson;
     GaugeChart gaugeChart;
@@ -108,22 +111,22 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     ArrayList<SalesAnalysisViewPagerValue> arrayList;
     static SalesAnalysisViewPagerValue salesAnalysisViewPagerValue;
     static String planDept, planCategory, planClass;
-    TextView txtpvahDeptName,txt_pva_noChart;
+    TextView txtpvahDeptName, txt_pva_noChart;
     String pvaVal, TAG = "SalesPvAActivity";
     int currentIndex;
     int prevState = RecyclerView.SCROLL_STATE_IDLE;
     int currentState = RecyclerView.SCROLL_STATE_IDLE;
-    boolean flag = false, onItemClickFlag = false,filter_toggleClick = false;
+    boolean flag = false, onItemClickFlag = false, filter_toggleClick = false;
     ProgressBar pva_progressBar;
     public static Activity Sales_Pva_Activity;
-    float planSaleNetVal1,saleNetVal1;
+    float planSaleNetVal1, saleNetVal1;
     private TabLayout tabLayout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_salespva);
+        setContentView(R.layout.activity_sales_pva);
         fromWhere = "Department";
         focusposition = 0;
         context = this;
@@ -142,29 +145,25 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        gaugeChart = (GaugeChart)findViewById(R.id.gauge_chart);
+        gaugeChart = (GaugeChart) findViewById(R.id.gauge_chart);
         List values = new ArrayList<>();
-        values.add(new ChartData(40f));
-        values.add(new ChartData(115f));
-        values.add(new ChartData(25f));
-        values.add(new ChartData(45f));
+        values.add(new ChartData((10f)));
         gaugeChart.setData(values);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
-        txt_pva_noChart = (TextView)findViewById(R.id.pva_noChart);
+        txt_pva_noChart = (TextView) findViewById(R.id.pva_noChart);
         //hierarchy header
         txtpvahDeptName = (TextView) findViewById(R.id.txtpvahDeptName);
         pvaVal = " ";
         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
         salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
         arrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-        tabLayout = (TabLayout)findViewById(R.id.tabview_salespva);
+        tabLayout = (TabLayout) findViewById(R.id.tabview_salespva);
         tabLayout.addTab(tabLayout.newTab().setText("WTD"));
         tabLayout.addTab(tabLayout.newTab().setText("LW"));
         tabLayout.setOnTabSelectedListener(this);
-        btn_WTD = (RadioButton) findViewById(R.id.btn_wtd);
-        btn_LW = (RadioButton) findViewById(R.id.btn_lw);
-        llayoutSalesPvA = (LinearLayout) findViewById(R.id.llayoutSalesPvA);
+
+        llayoutSalesPvA = (RelativeLayout) findViewById(R.id.llayoutSalesPvA);
         llpvahierarchy = (LinearLayout) findViewById(R.id.llpvahierarchy);
         llpvahierarchy.setOrientation(LinearLayout.HORIZONTAL);
         tableRelLayout = (RelativeLayout) findViewById(R.id.relTablelayout);
@@ -186,8 +185,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         l.setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
         l.setEnabled(true);
         handler = lineChart.getViewPortHandler();
-        SegmentedGroup segmented3 = (SegmentedGroup) findViewById(R.id.segmented3);
-        segmented3.setOnCheckedChangeListener(SalesPvAActivity.this);
+
         txtheaderplanclass = (TextView) findViewById(R.id.txtPlanClass);
 
         listViewSalesPvA = (RecyclerView) findViewById(R.id.list);
@@ -204,24 +202,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                 filter_toggleClick = false;
                 retainSegmentValuesFilter();
                 requestSalesViewPagerValueAPI();
-                Handler h = new Handler();
-                h.postDelayed(new Runnable() {
-                    public void run()
-                    {
-                        requestSalesListDisplayAPI();
-                    }
-                }, 700);
-
-            }
-            else if(getIntent().getStringExtra("selectedDept") != null) {
-                String  selectedString  = getIntent().getStringExtra("selectedDept");
+            } else if (getIntent().getStringExtra("selectedDept") != null) {
+                String selectedString = getIntent().getStringExtra("selectedDept");
                 filter_toggleClick = true;
                 retainSegmentValuesFilter();
                 requestSalesSelectedFilterVal(selectedString);
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
@@ -231,12 +218,10 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
             @Override
             public void onClick(View v) {
 
-                if(postRequest!=null)
-                {
+                if (postRequest != null) {
                     postRequest.cancel();
                 }
-                if(pva_progressBar.getVisibility() == View.VISIBLE)
-                {
+                if (pva_progressBar.getVisibility() == View.VISIBLE) {
                     return;
                 }
                 switch (txtheaderplanclass.getText().toString()) {
@@ -259,12 +244,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             limit = 100;
                             count = 0;
                             requestSalesViewPagerValueAPI();
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-                                    requestSalesListDisplayAPI();
-                                }
-                            }, 700);
+
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -286,12 +266,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             limit = 100;
                             count = 0;
                             requestSalesViewPagerValueAPI();
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-                                    requestSalesListDisplayAPI();
-                                }
-                            }, 700);
+
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -314,12 +289,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             limit = 100;
                             count = 0;
                             requestSalesViewPagerValueAPI();
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-                                    requestSalesListDisplayAPI();
-                                }
-                            }, 700);
 
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -345,16 +314,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             limit = 100;
                             count = 0;
                             requestSalesViewPagerValueAPI();
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-                                    requestSalesListDisplayAPI();
-                                }
-                            }, 700);
-
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
 
@@ -369,18 +329,14 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         btnSalesNext = (RelativeLayout) findViewById(R.id.btnSalesNext);
         btnSalesNext.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if(postRequest!=null)
-                {
+            public void onClick(View v) {
+                if (postRequest != null) {
                     postRequest.cancel();
                 }
-                if(pva_progressBar.getVisibility() == View.VISIBLE)
-                {
+                if (pva_progressBar.getVisibility() == View.VISIBLE) {
                     return;
                 }
-                switch (txtheaderplanclass.getText().toString())
-                {
+                switch (txtheaderplanclass.getText().toString()) {
 
                     case "Department":
                         btnSalesPrev.setVisibility(View.VISIBLE);
@@ -400,12 +356,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             limit = 100;
                             count = 0;
                             requestSalesViewPagerValueAPI();
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-                                    requestSalesListDisplayAPI();
-                                }
-                            }, 700);
+
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -427,12 +378,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             limit = 100;
                             count = 0;
                             requestSalesViewPagerValueAPI();
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-                                    requestSalesListDisplayAPI();
-                                }
-                            }, 700);
 
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -448,8 +393,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
 
-                        if (Reusable_Functions.chkStatus(context))
-                        {
+                        if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.GONE);
@@ -457,17 +401,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             limit = 100;
                             count = 0;
                             requestSalesViewPagerValueAPI();
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run()
-                                {
-                                    requestSalesListDisplayAPI();
-                                }
-                            }, 700);
-
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -482,8 +416,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                         listViewSalesPvA.removeAllViews();
                         llpvahierarchy.setVisibility(View.GONE);
 
-                        if (Reusable_Functions.chkStatus(context))
-                        {
+                        if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
                             pva_progressBar.setVisibility(View.GONE);
@@ -491,15 +424,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                             limit = 100;
                             count = 0;
                             requestSalesViewPagerValueAPI();
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-                                    requestSalesListDisplayAPI();
-                                }
-                            }, 700);
-                        }
-                        else
-                        {
+
+                        } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -511,23 +437,21 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
         listViewSalesPvA.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
-            {
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
                 totalItemCount = mRecyclerViewHelper.getItemCount();
                 focusposition = mRecyclerViewHelper.findFirstVisibleItemPosition();
             }
 
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
-            {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
-                            if(!onItemClickFlag) {
+                            if (!onItemClickFlag) {
                                 TimeUP();
                             }
                         }
@@ -539,144 +463,137 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
         //Drill Down
         listViewSalesPvA.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, final int position)
-                    {
-                        if (pva_progressBar.getVisibility() == View.VISIBLE)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            onItemClickFlag = true;
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
-                                    if (position < salesAnalysisClassArrayList.size())
-                                    {
-                                        switch (txtheaderplanclass.getText().toString())
-                                        {
-                                            case "Department":
-                                                btnSalesPrev.setVisibility(View.VISIBLE);
-                                                txtheaderplanclass.setText("Subdept");
-                                                txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
-                                                fromWhere = "Subdept";
-                                                level = 2;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.hDialog();
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    pva_progressBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    salesAnalysisClassArrayList.clear();
-                                                    requestSalesPvACategoryList(txtPvAClickedValue);
-                                                    planDept = txtPvAClickedValue;
+            @Override
+            public void onItemClick(View view, final int position) {
+                if (pva_progressBar.getVisibility() == View.VISIBLE) {
+                    return;
+                } else {
+                    onItemClickFlag = true;
+                    Handler h = new Handler();
+                    h.postDelayed(new Runnable() {
+                        public void run() {
+                            if (position < salesAnalysisClassArrayList.size()) {
+                                switch (txtheaderplanclass.getText().toString()) {
+                                    case "Department":
+                                        btnSalesPrev.setVisibility(View.VISIBLE);
+                                        txtheaderplanclass.setText("Subdept");
+                                        txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
+                                        fromWhere = "Subdept";
+                                        level = 2;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            pva_progressBar.setVisibility(View.GONE);
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            salesAnalysisClassArrayList.clear();
+                                            requestSalesPvACategoryList(txtPvAClickedValue);
+                                            planDept = txtPvAClickedValue;
 
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-                                                break;
-
-                                            case "Subdept":
-
-                                                txtheaderplanclass.setText("Class");
-                                                txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
-                                                fromWhere = "Class";
-                                                level = 3;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.hDialog();
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    pva_progressBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    salesAnalysisClassArrayList.clear();
-
-                                                    requestSalesPvAPlanClassListAPI(txtPvAClickedValue);
-                                                    planCategory = txtPvAClickedValue;
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-
-
-                                                break;
-                                            case "Class":
-                                                txtheaderplanclass.setText("Subclass");
-                                                txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
-                                                fromWhere = "Subclass";
-                                                level = 4;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.hDialog();
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    pva_progressBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    salesAnalysisClassArrayList.clear();
-                                                    requestSalesPvABrandListAPI(txtPvAClickedValue);
-                                                    planClass = txtPvAClickedValue;
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-
-                                                break;
-                                            case "Subclass":
-
-                                                btnSalesNext.setVisibility(View.INVISIBLE);
-                                                txtheaderplanclass.setText("MC");
-                                                txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
-                                                fromWhere = "MC";
-                                                level = 5;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.hDialog();
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    pva_progressBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    salesAnalysisClassArrayList.clear();
-                                                    requestSalesPvABrandPlanListAPI(txtPvAClickedValue);
-
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-
-
-                                                break;
-
-                                            default:
-                                                Reusable_Functions.hDialog();
-                                                Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
-                                                onItemClickFlag = false;
-                                                break;
-
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                         }
-                                    }
+                                        break;
+
+                                    case "Subdept":
+
+                                        txtheaderplanclass.setText("Class");
+                                        txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
+                                        fromWhere = "Class";
+                                        level = 3;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            pva_progressBar.setVisibility(View.GONE);
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            salesAnalysisClassArrayList.clear();
+
+                                            requestSalesPvAPlanClassListAPI(txtPvAClickedValue);
+                                            planCategory = txtPvAClickedValue;
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+
+
+                                        break;
+                                    case "Class":
+                                        txtheaderplanclass.setText("Subclass");
+                                        txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
+                                        fromWhere = "Subclass";
+                                        level = 4;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            pva_progressBar.setVisibility(View.GONE);
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            salesAnalysisClassArrayList.clear();
+                                            requestSalesPvABrandListAPI(txtPvAClickedValue);
+                                            planClass = txtPvAClickedValue;
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        break;
+                                    case "Subclass":
+
+                                        btnSalesNext.setVisibility(View.INVISIBLE);
+                                        txtheaderplanclass.setText("MC");
+                                        txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
+                                        fromWhere = "MC";
+                                        level = 5;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            pva_progressBar.setVisibility(View.GONE);
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            salesAnalysisClassArrayList.clear();
+                                            requestSalesPvABrandPlanListAPI(txtPvAClickedValue);
+
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+
+
+                                        break;
+
+                                    default:
+                                        Reusable_Functions.hDialog();
+                                        Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                        onItemClickFlag = false;
+                                        break;
+
                                 }
-                            }, 700);
+                            }
                         }
-                    }
-                }));
+                    }, 700);
+                }
+            }
+        }));
 
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-               onBackPressed();
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -694,11 +611,11 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     private void retainSegmentValuesFilter() {
         filter_toggleClick = true;
         if (salesPvA_SegmentClick.equals("WTD")) {
-         //   btn_WTD.toggle();
+            //   btn_WTD.toggle();
             tabLayout.getTabAt(0).select();
 
         } else if (salesPvA_SegmentClick.equals("LW")) {
-          //  btn_LW.toggle();
+            //  btn_LW.toggle();
             tabLayout.getTabAt(1).select();
 
         }
@@ -707,109 +624,109 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
     private void TimeUP() {
 
-       if(salesAnalysisClassArrayList.size() != 0) {
-           if (focusposition < salesAnalysisClassArrayList.size() && !onItemClickFlag) {
+        if (salesAnalysisClassArrayList.size() != 0) {
+            if (focusposition < salesAnalysisClassArrayList.size() && !onItemClickFlag) {
 
-               if (txtheaderplanclass.getText().toString().equals("Department")) {
-                   level = 1;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
-               } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
-                   level = 2;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
-               } else if (txtheaderplanclass.getText().toString().equals("Class")) {
-                   level = 3;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
-               } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
-                   level = 4;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
-               } else if (txtheaderplanclass.getText().toString().equals("MC")) {
-                   level = 5;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
-               }
+                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                    level = 1;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
+                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                    level = 2;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
+                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                    level = 3;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
+                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                    level = 4;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
+                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                    level = 5;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
+                }
 
-               if (Reusable_Functions.chkStatus(context)) {
-                   Reusable_Functions.hDialog();
-                   offsetvalue = 0;
-                   limit = 100;
-                   count = 0;
-                   if (focusposition != selFirstPositionValue) {
-                       if (postRequest != null) {
-                           postRequest.cancel();
-                       }
-                       pva_progressBar.setVisibility(View.VISIBLE);
-                       if (pvaFirstVisibleItem.equals("All")) {
-                           salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                           lineChart.invalidate();
-                           lineChart.setScaleEnabled(false);
-                           requestSalesWeekChart();
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.hDialog();
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    if (focusposition != selFirstPositionValue) {
+                        if (postRequest != null) {
+                            postRequest.cancel();
+                        }
+                        pva_progressBar.setVisibility(View.VISIBLE);
+                        if (pvaFirstVisibleItem.equals("All")) {
+                            salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                            lineChart.invalidate();
+                            lineChart.setScaleEnabled(false);
+                            requestSalesWeekChart();
 
-                       } else {
-                           salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                           lineChart.invalidate();
-                           lineChart.setScaleEnabled(false);
-                           requestPvAChartAPI();
-                       }
-                       selFirstPositionValue = focusposition;
-                   }
+                        } else {
+                            salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                            lineChart.invalidate();
+                            lineChart.setScaleEnabled(false);
+                            requestPvAChartAPI();
+                        }
+                        selFirstPositionValue = focusposition;
+                    }
 
-               } else {
-                   Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-               }
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
 
-           } else {
-               focusposition = salesAnalysisClassArrayList.size() - 1;
-               LinearLayoutManager llm = (LinearLayoutManager) listViewSalesPvA.getLayoutManager();
-               llm.scrollToPosition(focusposition);
+            } else {
+                focusposition = salesAnalysisClassArrayList.size() - 1;
+                LinearLayoutManager llm = (LinearLayoutManager) listViewSalesPvA.getLayoutManager();
+                llm.scrollToPosition(focusposition);
 
-               if (txtheaderplanclass.getText().toString().equals("Department")) {
-                   level = 1;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
-               } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
-                   level = 2;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
-               } else if (txtheaderplanclass.getText().toString().equals("Class")) {
-                   level = 3;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
-               } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
-                   level = 4;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
-               } else if (txtheaderplanclass.getText().toString().equals("MC")) {
-                   level = 5;
-                   pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
-               }
-               if (Reusable_Functions.chkStatus(context)) {
-                   Reusable_Functions.hDialog();
-                   offsetvalue = 0;
-                   limit = 100;
-                   count = 0;
-                   if (focusposition != selFirstPositionValue) {
-                       if (postRequest != null) {
-                           postRequest.cancel();
-                       }
-                       pva_progressBar.setVisibility(View.VISIBLE);
-                       if (pvaFirstVisibleItem.equals("All")) {
+                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                    level = 1;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
+                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                    level = 2;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
+                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                    level = 3;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
+                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                    level = 4;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
+                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                    level = 5;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
+                }
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.hDialog();
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    if (focusposition != selFirstPositionValue) {
+                        if (postRequest != null) {
+                            postRequest.cancel();
+                        }
+                        pva_progressBar.setVisibility(View.VISIBLE);
+                        if (pvaFirstVisibleItem.equals("All")) {
 
-                           salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                           lineChart.invalidate();
-                           lineChart.setScaleEnabled(false);
-                           requestSalesWeekChart();
+                            salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                            lineChart.invalidate();
+                            lineChart.setScaleEnabled(false);
+                            requestSalesWeekChart();
 
-                       } else {
-                           salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                           lineChart.invalidate();
-                           lineChart.setScaleEnabled(false);
-                           requestPvAChartAPI();
+                        } else {
+                            salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                            lineChart.invalidate();
+                            lineChart.setScaleEnabled(false);
+                            requestPvAChartAPI();
 
-                       }
-                       selFirstPositionValue = focusposition;
+                        }
+                        selFirstPositionValue = focusposition;
 
-                   }
+                    }
 
-               } else {
-                   Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-               }
-           }
-       }
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     private ArrayList<Entry> setYAxisValues() {
@@ -833,89 +750,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         }
 
         return xVals;
-    }
-
-
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-       if(!filter_toggleClick) {
-           switch (checkedId) {
-
-               case R.id.btn_wtd:
-                   if (salesPvA_SegmentClick.equals("WTD"))
-                       break;
-                   salesPvA_SegmentClick = "WTD";
-                   pvaVal = " ";
-                   llpvahierarchy.setVisibility(View.GONE);
-                   salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                   if (Reusable_Functions.chkStatus(context)) {
-                       Reusable_Functions.hDialog();
-                       Reusable_Functions.sDialog(context, "Loading Data...");
-                       pva_progressBar.setVisibility(View.GONE);
-                       offsetvalue = 0;
-                       limit = 100;
-                       count = 0;
-                      if (getIntent().getStringExtra("selectedDept") == null) {
-                           requestSalesViewPagerValueAPI();
-                           Handler h = new Handler();
-                           h.postDelayed(new Runnable() {
-                               public void run() {
-                                   requestSalesListDisplayAPI();
-                               }
-                           }, 700);
-
-                       } else if (getIntent().getStringExtra("selectedDept") != null) {
-                           String selectedString = getIntent().getStringExtra("selectedDept");
-                           requestSalesSelectedFilterVal(selectedString);
-                       }
-                   } else {
-                       Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                   }
-                   break;
-
-               case R.id.btn_lw:
-
-                   if (salesPvA_SegmentClick.equals("LW"))
-                       break;
-
-                   salesPvA_SegmentClick = "LW";
-                   pvaVal = " ";
-                   llpvahierarchy.setVisibility(View.GONE);
-                   salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                   if (Reusable_Functions.chkStatus(context)) {
-                       Reusable_Functions.hDialog();
-                       Reusable_Functions.sDialog(context, "Loading Data...");
-                       pva_progressBar.setVisibility(View.GONE);
-                       offsetvalue = 0;
-                       limit = 100;
-                       count = 0;
-                       if (getIntent().getStringExtra("selectedDept") == null) {
-                           requestSalesViewPagerValueAPI();
-                           Handler h = new Handler();
-                           h.postDelayed(new Runnable() {
-                               public void run() {
-                                   requestSalesListDisplayAPI();
-                               }
-                           }, 700);
-
-                       } else if (getIntent().getStringExtra("selectedDept") != null) {
-                           String selectedString = getIntent().getStringExtra("selectedDept");
-                           requestSalesSelectedFilterVal(selectedString);
-                       }
-
-                   } else {
-                       Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                   }
-                   break;
-
-               default:
-                   break;
-           }
-       }
-        else
-       {
-           filter_toggleClick = false;
-       }
     }
 
 
@@ -1008,8 +842,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                         }
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("Subdept"))
-                                {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
                                         level = 2;
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
@@ -1017,8 +850,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                         }
                                     }
-                                }
-                                else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
                                         level = 3;
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
@@ -1108,16 +940,15 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     // this method is used to create data for Bar graph<br for on scroll />
     private void requestPvAChartAPI() {
         String url = "";
-        pvaFirstVisibleItem = pvaFirstVisibleItem.replace("%","%25");
-        pvaFirstVisibleItem = pvaFirstVisibleItem.replace(" ","%20").replace("&","%26");
+        pvaFirstVisibleItem = pvaFirstVisibleItem.replace("%", "%25");
+        pvaFirstVisibleItem = pvaFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
 
         if (txtheaderplanclass.getText().toString().equals("Department")) {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?department=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-        } else if (txtheaderplanclass.getText().toString().equals("Subdept"))
-        {
+        } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
 
-            url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?category=" + pvaFirstVisibleItem+ "&offset=" + offsetvalue + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?category=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
         } else if (txtheaderplanclass.getText().toString().equals("Class")) {
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?class=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
@@ -1138,7 +969,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                 lineChart.setData(null);
+                                lineChart.setData(null);
                                 lineChart.notifyDataSetChanged();
                                 lineChart.invalidate();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -1146,8 +977,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
@@ -1155,21 +985,18 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 count++;
                                 requestPvAChartAPI();
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
                                 ArrayList<String> xVals = setXAxisValues();
                                 ArrayList<Entry> yVal_select_planSale = new ArrayList<Entry>();
-                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++)
-                                {
-                                     planSaleNetVal1 = (float) salesPvAAnalysisWeekArrayList.get(j).getPlanSaleNetVal();
+                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++) {
+                                    planSaleNetVal1 = (float) salesPvAAnalysisWeekArrayList.get(j).getPlanSaleNetVal();
                                     yVal_select_planSale.add(new Entry(j, planSaleNetVal1));
                                 }
                                 ArrayList<Entry> yVal_select_netSale = new ArrayList<Entry>();
-                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++)
-                                {
+                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++) {
                                     saleNetVal1 = (float) salesPvAAnalysisWeekArrayList.get(j).getSaleNetVal();
                                     yVal_select_netSale.add(new Entry(j, saleNetVal1));
                                 }
@@ -1212,13 +1039,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 lineChart.setDescription(null);
                                 lineChart.setTouchEnabled(false);
                                 lineChart.setScaleEnabled(false);
-                                onItemClickFlag=false;
+                                onItemClickFlag = false;
                                 pva_progressBar.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            onItemClickFlag=false;
+                            onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
@@ -1229,7 +1056,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        onItemClickFlag=false;
+                        onItemClickFlag = false;
                         pva_progressBar.setVisibility(View.GONE);
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
@@ -1250,7 +1077,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue.add(postRequest);
     }
 
-    private void requestSalesWeekChart() {
+    private void requestSalesWeekChart()
+    {
         String salespvaweekChart_url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvaweekChart_url,
                 new Response.Listener<JSONArray>() {
@@ -1329,13 +1157,13 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 lineChart.setTouchEnabled(false);
                                 lineChart.setScaleEnabled(false);
 
-                                onItemClickFlag=false;
-                                pva_progressBar.setVisibility(View.GONE);
+                                onItemClickFlag = false;
                                 Reusable_Functions.hDialog();
+                                requestGaugeChart_All();
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            onItemClickFlag=false;
+                            onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
@@ -1346,13 +1174,15 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        onItemClickFlag=false;
+                        onItemClickFlag = false;
                         pva_progressBar.setVisibility(View.GONE);
                         Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
-        ) {
+        )
+
+               {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -1367,9 +1197,77 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue.add(postRequest);
     }
 
-    // drill down level API
-    private void requestSalesPvACategoryList(final String deptName)
+    private void requestGaugeChart_All()
     {
+        String gaugechart_url = ConstsCore.web_url + "/v1/display/salesanalysispva_overall/" + userId ;
+        Log.e("gauge chart url :",""+gaugechart_url);
+        postRequest = new JsonArrayRequest(Request.Method.GET, gaugechart_url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                pva_progressBar.setVisibility(View.GONE);
+                                onItemClickFlag = false;
+                                Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                            } else
+                            {
+                                double saleNetVal,planSaleNetVal,pvaAchived = 0.0;
+                                for (int i = 0; i < response.length(); i++)
+                                {
+                                    JSONObject pvaDetls = response.getJSONObject(i);
+
+                                     saleNetVal = pvaDetls.getDouble("saleNetVal");
+                                     planSaleNetVal = pvaDetls.getDouble("planSaleNetVal");
+                                     pvaAchived = pvaDetls.getDouble("pvaAchived");
+                                }
+                                gaugeChart.invalidate();
+                                 List values = new ArrayList<>();
+                                values.add(new ChartData((float)pvaAchived));
+                                Log.e(TAG, "onResponse: "+pvaAchived);
+                                gaugeChart.setData(values);
+                               // gaugeChart.setAngle(((int)pvaAchived) * 2);
+                                pva_progressBar.setVisibility(View.GONE);
+                            }
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            onItemClickFlag = false;
+                            pva_progressBar.setVisibility(View.GONE);
+                            Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        onItemClickFlag = false;
+                        pva_progressBar.setVisibility(View.GONE);
+                        Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }
+        )
+
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+     // drill down level API
+    private void requestSalesPvACategoryList(final String deptName) {
         String salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvacategory_listurl,
                 new Response.Listener<JSONArray>() {
@@ -1536,10 +1434,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        try
-                        {
+                    public void onResponse(JSONArray response) {
+                        try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -1575,10 +1471,8 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandName();
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 requestPvAChartAPI();
-                             }
-                        }
-                        catch (Exception e)
-                        {
+                            }
+                        } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.GONE);
                             onItemClickFlag = false;
@@ -1612,15 +1506,14 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
         queue.add(postRequest);
     }
 
-    private void requestSalesPvABrandPlanListAPI(final String brandnm)
-    {
-        final String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level  + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+    private void requestSalesPvABrandPlanListAPI(final String brandnm) {
+        final String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                      try {
+                        try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -1639,8 +1532,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 requestSalesPvABrandPlanListAPI(brandnm);
 
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
@@ -1723,8 +1615,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                     salesAnalysisViewPagerValue = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
                                     arrayList.add(salesAnalysisViewPagerValue);
                                 }
-                                onItemClickFlag= false;
+                                onItemClickFlag = false;
                             }
+                            requestSalesListDisplayAPI();
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.GONE);
@@ -1760,64 +1653,47 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
     }
 
-    private void requestSalesSelectedFilterVal(final String selectedString)
-    {
+    private void requestSalesSelectedFilterVal(final String selectedString) {
         String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + SalesFilterActivity.level_filter + selectedString.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
-                       if(SalesFilterActivity.level_filter == 2)
-                        {
+                    public void onResponse(JSONArray response) {
+                        if (SalesFilterActivity.level_filter == 2) {
                             txtheaderplanclass.setText("Subdept");
                             fromWhere = "Subdept";
                             btnSalesPrev.setVisibility(View.VISIBLE);
 
-                        }
-                        else if(SalesFilterActivity.level_filter == 3)
-                        {
+                        } else if (SalesFilterActivity.level_filter == 3) {
                             txtheaderplanclass.setText("Class");
                             fromWhere = "Class";
                             btnSalesPrev.setVisibility(View.VISIBLE);
-                        }
-                        else if(SalesFilterActivity.level_filter == 4)
-                        {
+                        } else if (SalesFilterActivity.level_filter == 4) {
                             txtheaderplanclass.setText("Subclass");
                             fromWhere = "Subclass";
                             btnSalesPrev.setVisibility(View.VISIBLE);
-                        }
-                        else if(SalesFilterActivity.level_filter == 5)
-                        {
+                        } else if (SalesFilterActivity.level_filter == 5) {
                             txtheaderplanclass.setText("MC");
                             fromWhere = "MC";
                             btnSalesPrev.setVisibility(View.VISIBLE);
                             btnSalesNext.setVisibility(View.INVISIBLE);
-                       }
-                        else if(SalesFilterActivity.level_filter == 6)
-                        {
+                        } else if (SalesFilterActivity.level_filter == 6) {
                             txtheaderplanclass.setText("MC");
                             fromWhere = "MC";
                             btnSalesPrev.setVisibility(View.VISIBLE);
                             btnSalesNext.setVisibility(View.INVISIBLE);
                         }
 
-                        try
-                        {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
-                            {
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
 
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
 
-                            }
-                            else if (response.length() == limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
@@ -1825,8 +1701,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 count++;
                                 requestSalesSelectedFilterVal(selectedString);
 
-                            } else if (response.length() < limit)
-                            {
+                            } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
@@ -1847,32 +1722,21 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
-                                if (txtheaderplanclass.getText().toString().equals("Department"))
-                                {
+                                if (txtheaderplanclass.getText().toString().equals("Department")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
-                                }
-                                else if (txtheaderplanclass.getText().toString().equals("Subdept"))
-                                {
+                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanCategory();
-                                }
-                                else if (txtheaderplanclass.getText().toString().equals("Class"))
-                                {
-                                    pvaFirstVisibleItem  = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
-                                }
-                                else if (txtheaderplanclass.getText().toString().equals("Subclass"))
-                                {
+                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
+                                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
-                                }
-                                else if (txtheaderplanclass.getText().toString().equals("MC"))
-                                {
+                                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
                                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
                                 }
                                 salesPvAAnalysisWeekArrayList.clear();
                                 requestPvAChartAPI();
                             }
-                        }
-                        catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             pva_progressBar.setVisibility(View.GONE);
@@ -1908,8 +1772,7 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         salesPvA_SegmentClick = null;
         level = 0;
         salesPvA_SegmentClick = "WTD";
@@ -1919,12 +1782,10 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
 
 
     @Override
-    public void onTabSelected(TabLayout.Tab tab)
-    {
+    public void onTabSelected(TabLayout.Tab tab) {
         Log.e("TAG", "onTabSelected: " + tab.getPosition() + filter_toggleClick);
         int checkedId = tab.getPosition();
-        switch (checkedId)
-        {
+        switch (checkedId) {
             case 0:
                 if (salesPvA_SegmentClick.equals("WTD"))
                     break;
@@ -1941,12 +1802,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     count = 0;
                     if (getIntent().getStringExtra("selectedDept") == null) {
                         requestSalesViewPagerValueAPI();
-                        Handler h = new Handler();
-                        h.postDelayed(new Runnable() {
-                            public void run() {
-                                requestSalesListDisplayAPI();
-                            }
-                        }, 700);
 
                     } else if (getIntent().getStringExtra("selectedDept") != null) {
                         String selectedString = getIntent().getStringExtra("selectedDept");
@@ -1956,6 +1811,9 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 break;
+
+
+
 
             case 1:
 
@@ -1975,12 +1833,6 @@ public class SalesPvAActivity extends AppCompatActivity implements RadioGroup.On
                     count = 0;
                     if (getIntent().getStringExtra("selectedDept") == null) {
                         requestSalesViewPagerValueAPI();
-                        Handler h = new Handler();
-                        h.postDelayed(new Runnable() {
-                            public void run() {
-                                requestSalesListDisplayAPI();
-                            }
-                        }, 700);
 
                     } else if (getIntent().getStringExtra("selectedDept") != null) {
                         String selectedString = getIntent().getStringExtra("selectedDept");
