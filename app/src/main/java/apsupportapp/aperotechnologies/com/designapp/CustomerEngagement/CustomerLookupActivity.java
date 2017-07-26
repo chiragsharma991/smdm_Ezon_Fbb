@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty;
+package apsupportapp.aperotechnologies.com.designapp.CustomerEngagement;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,11 +22,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
 /**
  * Created by pamrutkar on 13/06/17.
@@ -38,7 +35,7 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     static LinearLayout ez_linear_dots;
     Context context;
     RequestQueue queue;
-    String userId, bearertoken;
+    String userId, bearertoken,geoLeveLDesc;
     SharedPreferences sharedPreferences;
     Gson gson;
     MySingleton m_config;
@@ -58,6 +55,13 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken","");
+        geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        if (geoLeveLDesc.equals("E ZONE")) {
+            userId = sharedPreferences.getString("userId", "");  //E zone userid =username
+        } else {
+            userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
+            userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
+        }
         gson = new Gson();
         initialiseUi();
         setTab();

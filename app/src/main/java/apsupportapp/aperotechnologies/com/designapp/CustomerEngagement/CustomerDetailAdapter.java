@@ -1,14 +1,12 @@
-package apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty;
+package apsupportapp.aperotechnologies.com.designapp.CustomerEngagement;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -20,8 +18,6 @@ import java.util.Locale;
 
 
 import apsupportapp.aperotechnologies.com.designapp.R;
-
-import static apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerLookup_PageTwo.edt_cust_Search;
 
 
 /**

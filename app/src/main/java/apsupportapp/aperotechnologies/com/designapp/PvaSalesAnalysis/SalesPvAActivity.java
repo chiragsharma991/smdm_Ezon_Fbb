@@ -21,7 +21,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,26 +38,26 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
-import com.numetriclabz.numandroidcharts.ChartData;
 import com.numetriclabz.numandroidcharts.GaugeChart;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -66,13 +65,11 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisSnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
-import info.hoang8f.android.segmented.SegmentedGroup;
 
 
 public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
@@ -93,7 +90,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     PvASnapAdapter salesPvAAdapter;
     ViewPortHandler handler;
     Context context;
-    LineChart lineChart;
+    BarChart barChart;
     RecyclerView listViewSalesPvA;
     int focusposition, selFirstPositionValue = 0, totalItemCount;
     private static int level = 1;
@@ -132,10 +129,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         context = this;
         Sales_Pva_Activity = this;
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        int densityDpi = (int) (metrics.density * 160f);
         // Display device width and height in pixels
-        int screenHeightpx = metrics.heightPixels;
-        int screenWidthpx = metrics.widthPixels;
         getSupportActionBar().hide();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
@@ -145,10 +139,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        gaugeChart = (GaugeChart) findViewById(R.id.gauge_chart);
-        List values = new ArrayList<>();
-        values.add(new ChartData((10f)));
-        gaugeChart.setData(values);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         txt_pva_noChart = (TextView) findViewById(R.id.pva_noChart);
@@ -168,26 +158,23 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         llpvahierarchy.setOrientation(LinearLayout.HORIZONTAL);
         tableRelLayout = (RelativeLayout) findViewById(R.id.relTablelayout);
         pva_progressBar = (ProgressBar) findViewById(R.id.pva_progressBar);
-        lineChart = (LineChart) findViewById(R.id.linechart);
-        LimitLine llXAxis = new LimitLine(10f, "Index 10");
-        llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-        llXAxis.setTextSize(10f);
-        XAxis xAxis = lineChart.getXAxis();
+        barChart = (BarChart) findViewById(R.id.bar_chart);
+
+        XAxis xAxis = barChart.getXAxis();
+
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        YAxis leftAxis = lineChart.getAxisLeft();
+        YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
         leftAxis.setDrawZeroLine(true);
         // limit lines are drawn behind data (and not on top)
         leftAxis.setDrawLimitLinesBehindData(false);
-        lineChart.getAxisRight().setEnabled(false);
-        Legend l = lineChart.getLegend();
+        barChart.getAxisRight().setEnabled(false);
+        Legend l = barChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
         l.setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
         l.setEnabled(true);
-        handler = lineChart.getViewPortHandler();
-
+        handler = barChart.getViewPortHandler();
         txtheaderplanclass = (TextView) findViewById(R.id.txtPlanClass);
-
         listViewSalesPvA = (RecyclerView) findViewById(R.id.list);
 
         if (Reusable_Functions.chkStatus(context)) {
@@ -434,7 +421,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             }
         });
 
-
         listViewSalesPvA.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -656,14 +642,14 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         pva_progressBar.setVisibility(View.VISIBLE);
                         if (pvaFirstVisibleItem.equals("All")) {
                             salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                            lineChart.invalidate();
-                            lineChart.setScaleEnabled(false);
+                            barChart.invalidate();
+                            barChart.setScaleEnabled(false);
                             requestSalesWeekChart();
 
                         } else {
                             salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                            lineChart.invalidate();
-                            lineChart.setScaleEnabled(false);
+                            barChart.invalidate();
+                            barChart.setScaleEnabled(false);
                             requestPvAChartAPI();
                         }
                         selFirstPositionValue = focusposition;
@@ -707,14 +693,14 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         if (pvaFirstVisibleItem.equals("All")) {
 
                             salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                            lineChart.invalidate();
-                            lineChart.setScaleEnabled(false);
+                            barChart.invalidate();
+                            barChart.setScaleEnabled(false);
                             requestSalesWeekChart();
 
                         } else {
                             salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                            lineChart.invalidate();
-                            lineChart.setScaleEnabled(false);
+                            barChart.invalidate();
+                            barChart.setScaleEnabled(false);
                             requestPvAChartAPI();
 
                         }
@@ -959,86 +945,91 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
             url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?brandclass=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
         }
-
+        Log.e(TAG, "requestPvAChartAPI: "+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Log.e(TAG, "onResponse: "+response);
                         try {
 
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
                                 Reusable_Functions.hDialog();
-                                lineChart.setData(null);
-                                lineChart.notifyDataSetChanged();
-                                lineChart.invalidate();
+                                barChart.setData(null);
+                                barChart.notifyDataSetChanged();
+                                barChart.invalidate();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
-                            } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() == limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestPvAChartAPI();
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
-                                ArrayList<String> xVals = setXAxisValues();
-                                ArrayList<Entry> yVal_select_planSale = new ArrayList<Entry>();
-                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++) {
-                                    planSaleNetVal1 = (float) salesPvAAnalysisWeekArrayList.get(j).getPlanSaleNetVal();
-                                    yVal_select_planSale.add(new Entry(j, planSaleNetVal1));
-                                }
-                                ArrayList<Entry> yVal_select_netSale = new ArrayList<Entry>();
-                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++) {
-                                    saleNetVal1 = (float) salesPvAAnalysisWeekArrayList.get(j).getSaleNetVal();
-                                    yVal_select_netSale.add(new Entry(j, saleNetVal1));
-                                }
-                                LineDataSet lineDataSet1, lineDataSet2;
-                                lineDataSet1 = new LineDataSet(yVal_select_planSale, "Plan Sales");
-                                lineDataSet1.setDrawValues(false);
-                                lineDataSet2 = new LineDataSet(yVal_select_netSale, "Net Sales");
-                                lineDataSet2.setDrawValues(false);
-                                //set the line to be drawn like this "- - - - - -"
-                                lineDataSet1.setColor(Color.parseColor("#198c19"));
-                                lineDataSet1.setCircleColor(Color.parseColor("#99cc99"));
-                                lineDataSet1.setLineWidth(1f);
-                                lineDataSet1.setCircleRadius(3f);
-                                lineDataSet1.setDrawCircleHole(false);
-                                lineDataSet1.setValueTextSize(9f);
-                                lineDataSet1.setDrawFilled(false);
-                                lineDataSet1.setFormLineWidth(1f);
-                                lineDataSet1.setFormSize(15.f);
-                                lineDataSet2.setColor(Color.MAGENTA);
-                                lineDataSet2.setCircleColor(Color.parseColor("#ffccff"));
-                                lineDataSet2.setLineWidth(1f);
-                                lineDataSet2.setCircleRadius(3f);
-                                lineDataSet2.setDrawCircleHole(false);
-                                lineDataSet2.setValueTextSize(9f);
-                                lineDataSet2.setDrawFilled(false);
-                                lineDataSet2.setFormLineWidth(1f);
-                                lineDataSet2.setFormSize(15.f);
+                                float groupSpace = 0.04f;
+                                float barSpace = 0.02f; // x2 dataset
+                                float barWidth = 0.46f; // x2 dataset
+                                ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+                                ArrayList<BarEntry> yVals2 = new ArrayList<BarEntry>();
 
-                                //create a data object with the datasets
-                                LineData data = new LineData(lineDataSet1, lineDataSet2);
-                                //set data
-                                //create a data object with the datasets
-                                LineData lineChartdata = new LineData(lineDataSet1, lineDataSet2);
 
-                                lineChart.setData(lineChartdata);
-                                lineChart.notifyDataSetChanged();
-                                lineChart.invalidate();
-                                lineChart.getAxisLeft().setDrawGridLines(false);
-                                lineChart.getXAxis().setDrawGridLines(false);
-                                lineChart.setDescription(null);
-                                lineChart.setTouchEnabled(false);
-                                lineChart.setScaleEnabled(false);
+                                for (int i = 0; i < salesPvAAnalysisWeekArrayList.size(); i++) {
+                                    yVals1.add(new BarEntry(i,(float)salesPvAAnalysisWeekArrayList.get(i).getPlanSaleNetVal()));
+                                }
+
+                                for (int i = 0; i < salesPvAAnalysisWeekArrayList.size(); i++) {
+                                    yVals2.add(new BarEntry(i,(float)salesPvAAnalysisWeekArrayList.get(i).getSaleNetVal()));
+                                }
+                                BarDataSet set1, set2;
+                                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
+                                    set1 = (BarDataSet)barChart.getData().getDataSetByIndex(0);
+                                    set2 = (BarDataSet)barChart.getData().getDataSetByIndex(1);
+                                    set1.setValues(yVals1);
+                                    set2.setValues(yVals2);
+                                    barChart.getData().notifyDataChanged();
+                                    barChart.notifyDataSetChanged();
+                                } else {
+                                    // create 2 datasets with different types
+                                    set1 = new BarDataSet(yVals1, "Plan Sales");
+                                    set1.setDrawValues(false);
+                                    set1.setColor(Color.parseColor("#20b5d3"));
+
+                                    set2 = new BarDataSet(yVals2, "Net Sales");
+                                    set2.setColor(Color.parseColor("#21d24c"));
+                                    set2.setDrawValues(false);
+
+                                    ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+                                    dataSets.add(set1);
+                                    dataSets.add(set2);
+
+                                    BarData data = new BarData(dataSets);
+                                    barChart.setData(data);
+                                }
+                                barChart.getBarData().setBarWidth(barWidth);
+                                barChart.getXAxis().setAxisMinValue(0);
+                                barChart.groupBars(0, groupSpace, barSpace);
+                                barChart.invalidate();
+
+                                barChart.getXAxis().setDrawGridLines(false);
+                                barChart.setDescription(null);
+                                barChart.setTouchEnabled(false);
+                                barChart.setScaleEnabled(false);
                                 onItemClickFlag = false;
                                 pva_progressBar.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
@@ -1080,17 +1071,18 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     private void requestSalesWeekChart()
     {
         String salespvaweekChart_url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e(TAG, "requestSalesWeekChart: "+salespvaweekChart_url );
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvaweekChart_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Log.e(TAG, "onResponse: "+response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                lineChart.setData(null);
-                                lineChart.notifyDataSetChanged();
-                                lineChart.invalidate();
+                                barChart.setData(null);
+                                barChart.notifyDataSetChanged();
+                                barChart.invalidate();
 
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
@@ -1105,67 +1097,72 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 count++;
                                 requestSalesWeekChart();
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
-                                ArrayList<String> xVals = setXAxisValues();
-                                ArrayList<Entry> yVals_PlanSale = new ArrayList<Entry>();
-                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++) {
-                                    float planSaleVal = (float) salesPvAAnalysisWeekArrayList.get(j).getPlanSaleNetVal();
-                                    yVals_PlanSale.add(new Entry(j, planSaleVal));
-                                }
-                                ArrayList<Entry> yVals_SaleNet = new ArrayList<Entry>();
-                                for (int j = 0; j < salesPvAAnalysisWeekArrayList.size(); j++) {
-                                    float saleNetVal = (float) salesPvAAnalysisWeekArrayList.get(j).getSaleNetVal();
-                                    yVals_SaleNet.add(new Entry(j, saleNetVal));
-                                }
-                                LineDataSet set1, set2;
-                                set1 = new LineDataSet(yVals_PlanSale, "Plan Sales");
-                                set1.setDrawValues(false);
-                                set2 = new LineDataSet(yVals_SaleNet, "Net Sales");
-                                set2.setDrawValues(false);
-                                //set the line to be drawn like this "- - - - - -"
 
-                                set1.setColor(Color.parseColor("#198c19"));
-                                set1.setCircleColor(Color.parseColor("#99cc99"));
-                                set1.setLineWidth(1f);
-                                set1.setCircleRadius(3f);
-                                set1.setDrawCircleHole(false);
-                                set1.setValueTextSize(9f);
-                                set1.setDrawFilled(false);
-                                set1.setFormLineWidth(1f);
-                                set1.setFormSize(15.f);
-                                set2.setColor(Color.MAGENTA);
-                                set2.setCircleColor(Color.parseColor("#ffccff"));
-                                set2.setLineWidth(1f);
-                                set2.setCircleRadius(3f);
-                                set2.setDrawCircleHole(false);
-                                set2.setValueTextSize(9f);
-                                set2.setDrawFilled(false);
-                                set2.setFormLineWidth(1f);
-                                set2.setFormSize(15.f);
+                                float groupSpace = 0.04f;
+                                float barSpace = 0.02f; // x2 dataset
+                                float barWidth = 0.46f; // x2 dataset
+                                ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+                                ArrayList<BarEntry> yVals2 = new ArrayList<BarEntry>();
 
-                                LineData data = new LineData(set1, set2);
-                                // set data
-                                lineChart.setData(data);
-                                lineChart.notifyDataSetChanged();
-                                lineChart.invalidate();
-                                lineChart.getAxisLeft().setDrawGridLines(false);
-                                lineChart.getXAxis().setDrawGridLines(false);
-                                lineChart.setDescription(null);
-                                lineChart.setTouchEnabled(false);
-                                lineChart.setScaleEnabled(false);
+
+                                for (int i = 0; i < salesPvAAnalysisWeekArrayList.size(); i++) {
+                                    yVals1.add(new BarEntry(i,(float)salesPvAAnalysisWeekArrayList.get(i).getPlanSaleNetVal()));
+                                }
+
+                                for (int i = 0; i < salesPvAAnalysisWeekArrayList.size(); i++) {
+                                    yVals2.add(new BarEntry(i,(float)salesPvAAnalysisWeekArrayList.get(i).getSaleNetVal()));
+                                }
+                                BarDataSet set1, set2;
+                                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
+                                    set1 = (BarDataSet)barChart.getData().getDataSetByIndex(0);
+                                    set2 = (BarDataSet)barChart.getData().getDataSetByIndex(1);
+                                    set1.setValues(yVals1);
+                                    set2.setValues(yVals2);
+                                    barChart.getData().notifyDataChanged();
+                                    barChart.notifyDataSetChanged();
+                                } else {
+                                    // create 2 datasets with different types
+                                    set1 = new BarDataSet(yVals1, "Plan Sales");
+                                    set1.setDrawValues(false);
+                                    set1.setColor(Color.parseColor("#20b5d3"));
+
+                                    set2 = new BarDataSet(yVals2, "Net Sales");
+                                    set2.setColor(Color.parseColor("#21d24c"));
+                                    set2.setDrawValues(false);
+
+                                    ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+                                    dataSets.add(set1);
+                                    dataSets.add(set2);
+
+                                    BarData data = new BarData(dataSets);
+                                    barChart.setData(data);
+                                }
+                                barChart.getBarData().setBarWidth(barWidth);
+                                barChart.getXAxis().setAxisMinValue(0);
+                                barChart.groupBars(0, groupSpace, barSpace);
+                                barChart.invalidate();
+
+                                barChart.getAxisLeft().setDrawGridLines(false);
+                                barChart.getXAxis().setDrawGridLines(false);
+                                barChart.setDescription(null);
+                                barChart.setTouchEnabled(false);
+                                barChart.setScaleEnabled(true);
 
                                 onItemClickFlag = false;
                                 Reusable_Functions.hDialog();
-                                requestGaugeChart_All();
+                                pva_progressBar.setVisibility(View.GONE);
+
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
-                            Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1176,7 +1173,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         Reusable_Functions.hDialog();
                         onItemClickFlag = false;
                         pva_progressBar.setVisibility(View.GONE);
-                        Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1197,75 +1194,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         queue.add(postRequest);
     }
 
-    private void requestGaugeChart_All()
-    {
-        String gaugechart_url = ConstsCore.web_url + "/v1/display/salesanalysispva_overall/" + userId ;
-        Log.e("gauge chart url :",""+gaugechart_url);
-        postRequest = new JsonArrayRequest(Request.Method.GET, gaugechart_url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
 
-                        try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                pva_progressBar.setVisibility(View.GONE);
-                                onItemClickFlag = false;
-                                Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
-                            } else
-                            {
-                                double saleNetVal,planSaleNetVal,pvaAchived = 0.0;
-                                for (int i = 0; i < response.length(); i++)
-                                {
-                                    JSONObject pvaDetls = response.getJSONObject(i);
-
-                                     saleNetVal = pvaDetls.getDouble("saleNetVal");
-                                     planSaleNetVal = pvaDetls.getDouble("planSaleNetVal");
-                                     pvaAchived = pvaDetls.getDouble("pvaAchived");
-                                }
-                                gaugeChart.invalidate();
-                                 List values = new ArrayList<>();
-                                values.add(new ChartData((float)pvaAchived));
-                                Log.e(TAG, "onResponse: "+pvaAchived);
-                                gaugeChart.setData(values);
-                                gaugeChart.setAngle(((int)pvaAchived) * 2);
-                                pva_progressBar.setVisibility(View.GONE);
-                            }
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            onItemClickFlag = false;
-                            pva_progressBar.setVisibility(View.GONE);
-                            Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        onItemClickFlag = false;
-                        pva_progressBar.setVisibility(View.GONE);
-                        Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                }
-        )
-
-        {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
      // drill down level API
     private void requestSalesPvACategoryList(final String deptName) {
         String salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
@@ -1857,6 +1786,77 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+    private class ValueFormatter implements IAxisValueFormatter
+    {
+        @Override
+        public String getFormattedValue(float value, AxisBase axis)
+        {
+            if(value == 0.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(0).getWeekNumber();
+
+            }
+            else  if(value == 1.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(1).getWeekNumber();
+
+            }
+            else  if(value == 2.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(2).getWeekNumber();
+
+            }
+            else  if(value == 3.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(3).getWeekNumber();
+
+            }else  if(value == 4.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(4).getWeekNumber();
+
+            }else  if(value == 5.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(5).getWeekNumber();
+
+            }else  if(value == 6.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(6).getWeekNumber();
+
+            }else  if(value == 7.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(7).getWeekNumber();
+
+            }else  if(value == 8.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(8).getWeekNumber();
+
+            }else  if(value == 9.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(1).getWeekNumber();
+
+            }else  if(value == 1.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(9).getWeekNumber();
+
+            }else  if(value == 10.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(10).getWeekNumber();
+
+            }
+            else  if(value == 11.0f)
+            {
+                return salesPvAAnalysisWeekArrayList.get(11).getWeekNumber();
+
+            }
+            else
+            {
+                return null;
+            }
+       }
+
 
     }
 }

@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty;
+package apsupportapp.aperotechnologies.com.designapp.CustomerEngagement;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.ListAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**

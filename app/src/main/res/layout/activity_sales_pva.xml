@@ -12,9 +12,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:orientation="vertical"
         android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:layout_alignParentStart="true">
 
 
         <LinearLayout
@@ -144,27 +144,28 @@
             segmentedgroup:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             segmentedgroup:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
 
-        <android.support.v4.widget.NestedScrollView
-            android:scrollbars="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tabview_salespva">
+        <!--<android.support.v4.widget.NestedScrollView-->
+            <!--android:scrollbars="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+           <!--&gt;-->
 
             <RelativeLayout
+                android:background="@color/white"
+                android:layout_below="@+id/tabview_salespva"
                 android:id="@+id/llayoutSalesPvA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.numetriclabz.numandroidcharts.GaugeChart
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/gauge_chart"
-                    android:layout_width="match_parent"
-                    android:layout_height="270dp" />
+                <!--<com.numetriclabz.numandroidcharts.GaugeChart-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:id="@+id/gauge_chart"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="270dp" />-->
 
 
                 <RelativeLayout
-                    android:layout_below="@+id/gauge_chart"
                     android:orientation="vertical"
                     android:id="@+id/relChartlayout"
                     android:layout_width="match_parent"
@@ -180,11 +181,10 @@
                         android:text="No Chart data available"
                         android:textSize="@dimen/largelayout_storesize"
                         android:visibility="gone" />
-
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/linechart"
+                        <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_chart"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="200dp"
                         android:nestedScrollingEnabled="true" />
 
                     <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -204,9 +204,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
-                        android:layout_below="@+id/linechart"
+                        android:layout_below="@+id/bar_chart"
                         android:layout_marginRight="15dp"
-                        android:gravity="right"
+                        android:gravity="right|center_horizontal"
                         android:text="@string/xaxis_label"
                         android:textColor="@color/ezfbb_black"
                         android:textSize="11sp" />
@@ -355,9 +355,7 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@color/bg_screen_color">
-
+                            android:layout_height="40dp">
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
@@ -413,7 +411,6 @@
 
                     </LinearLayout>
 
-
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/list"
                         android:layout_width="match_parent"
@@ -427,7 +424,7 @@
 
 
             </RelativeLayout>
-        </android.support.v4.widget.NestedScrollView>
+        <!--</android.support.v4.widget.NestedScrollView>-->
     </RelativeLayout>
 
 
