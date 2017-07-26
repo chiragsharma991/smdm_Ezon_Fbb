@@ -361,7 +361,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             ImageLoader_feedback.setVisibility(View.GONE);
 
             Glide.with(context).
-                    load(R.drawable.placeholder).
+                    load(R.mipmap.noimageavailable).
                     into(Feedback_image);
 
         }

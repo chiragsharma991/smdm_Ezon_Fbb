@@ -125,7 +125,7 @@
                 android:layout_below="@+id/prod_name_txt"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="0dp"
                 app:tabIndicatorColor="@color/ezfb_Red"
                 app:tabSelectedTextColor="@color/ezfb_Red"
                 app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
@@ -185,13 +185,60 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/innerrelLayout"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            app:cardUseCompatPadding="false"
+            android:id="@+id/table_area"
+            app:contentPadding="5dp"
+            app:cardBackgroundColor="@color/ezfb_White"
+            app:cardElevation="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="3dp"
+
+            >
+
+            <!--second layout starting    -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/ezfbb_black"></View>
+
+                <RelativeLayout
+                    android:background="@color/ezfb_White"
+                    android:id="@+id/planactual_optrelLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    >
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+<!--        <RelativeLayout
             android:id="@+id/planactual_optrelLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/innerrelLayout"
             android:layout_marginTop="8dp"
-            android:background="@color/ezfb_White"></RelativeLayout>
+            android:background="@color/ezfb_White"></RelativeLayout>-->
     </RelativeLayout>
 
 </RelativeLayout>

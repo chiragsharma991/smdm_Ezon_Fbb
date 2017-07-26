@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -81,7 +82,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     private  boolean plantoggleClick=true;
     // set the header titles
     String headers[] = {
-           "    Product Name   ",
+           "Product Name",
            " PvA\n\t\tSales% ",
            "  PvA\n\t\tStk%   ",
            "  Plan\n\t\tSales   ",
@@ -102,6 +103,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     SharedPreferences sharedPreferences;
     String filterProductValues = "",achColor;
     private TabLayout Tabview;
+    private CardView table_area;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,6 +129,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         filterProductValues = getActivity().getIntent().getStringExtra("productfilterValue");
         relPlanProd_Frag = (RelativeLayout) view.findViewById(R.id.planactual_rel);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.planactual_productrelLayout);
+        table_area = (CardView) view.findViewById(R.id.table_area);
+        table_area.setVisibility(View.GONE);
         relativeLayout.setBackgroundColor(Color.parseColor("#ffffff"));  //dfdedf
         relPlanProd_Frag.setVisibility(View.VISIBLE);
 
@@ -170,7 +174,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
             }
             else
             {
-                plantoggleClick = true;
+                //plantoggleClick = true;
                 RetainSegVal();
                 requestFilterProductAPI(offsetvalue,limit);
             }
@@ -294,6 +298,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         }else if(prodsegClick.equals("LW"))
         {
            // plan_btnLW.toggle();
+            plantoggleClick = true;
+            Tabview.getTabAt(1).select();
 
         }
     }
@@ -372,7 +378,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     // generate table row of table A
     TableRow componentATableRow() {
         TableRow componentATableRow = new TableRow(this.context);
-        componentATableRow.setBackgroundColor(Color.parseColor("#ffffff"));
+        componentATableRow.setBackgroundColor(Color.parseColor("#dfdedf"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
@@ -388,7 +394,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     TableRow componentBTableRow() {
 
         TableRow componentBTableRow = new TableRow(this.context);
-        componentBTableRow.setBackgroundColor(Color.parseColor("#ffffff"));  // header border color
+        componentBTableRow.setBackgroundColor(Color.parseColor("#dfdedf"));  // header border color
         int headerFieldCount = headers.length;
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
@@ -418,7 +424,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
             params.setMargins(2, 0, 0, 0);
 
             final TableRow tableRowForTableDProd_Frag = this.tableRowForTableDProd_Frag(productNameBeanArrayList.get(k));
-            tableRowForTableCProd_Frag.setBackgroundColor(Color.parseColor("#dfdedf"));  // border line color
+            tableRowForTableCProd_Frag.setBackgroundColor(Color.parseColor("#ffffff"));  // border line color
             tableRowForTableDProd_Frag.setBackgroundColor(Color.parseColor("#dfdedf"));
             final int i = k;
 
@@ -762,10 +768,13 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     private void requestFilterProductAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&productName="+filterProductValues.replace(" ","%20").replaceAll("&", "%26") +"&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
 
+        Log.e("TAG", "requestPlan_product: "+url );
+
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.d("TAG", "responsePlan_product: "+response );
                         try {
                             int i;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -837,6 +846,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
                                 txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+                                table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();
                                 resizeHeaderHeight();
@@ -956,6 +966,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
                                 txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+                                table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();
                                 resizeHeaderHeight();
@@ -1077,6 +1088,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
                                 txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+                                table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();
                                 resizeHeaderHeight();

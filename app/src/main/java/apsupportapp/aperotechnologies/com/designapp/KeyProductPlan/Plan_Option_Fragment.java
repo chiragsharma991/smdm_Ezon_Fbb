@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -87,7 +88,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     Button txtOptionGreen, txtOptionRed,txtOptionAmber;
     // set the header titles
     String headers[] = {
-            "       Option        ",
+            "Option",
             " PvA\n\t\tSales%  ",
             " PvA\n\t\tStk%   ",
             " Plan\n\tSales   ",
@@ -108,6 +109,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     SharedPreferences sharedPreferences;
     TextView txtOptionName;
     private TabLayout Tabview;
+    private CardView table_area;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,7 +125,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
         optionview = (ViewGroup) inflater.inflate(R.layout.plan_option_fragment, container, false);
         context = optionview.getContext();
         option_relativeLayout = (RelativeLayout) optionview.findViewById(R.id.planactual_optrelLayout);
-        option_relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));
+        option_relativeLayout.setBackgroundColor(Color.parseColor("#ffffff"));
         txtOptionName = (TextView) optionview.findViewById(R.id.prod_name_val);
 
         txtStoreCode = (TextView) optionview.findViewById(R.id.txtStoreCode);
@@ -133,6 +135,8 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
         queue = new RequestQueue(cache, network);
         queue.start();
         optrel = (RelativeLayout) optionview.findViewById(R.id.planoptactual_rel);
+        table_area = (CardView) optionview.findViewById(R.id.table_area);
+        table_area.setVisibility(View.GONE);
        // segmentedGroupOption = (SegmentedGroup) optionview.findViewById(R.id.segmentedGrpOption);
       //  opt_btnWTD = (RadioButton) optionview.findViewById(R.id.planactual_optbtnWTD);
       //  opt_btnLW = (RadioButton) optionview.findViewById(R.id.planactual_optbtnLW);
@@ -312,8 +316,8 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
         scrollViewC = new MyScrollView(this.context);
         scrollViewD = new MyScrollView(this.context);
 
-        tableAPlanOpt_Frag.setBackgroundColor(Color.GREEN);
-        horizontalScrollViewB.setBackgroundColor(Color.LTGRAY);
+        tableAPlanOpt_Frag.setBackgroundColor(Color.parseColor("#ffffff"));
+        horizontalScrollViewB.setBackgroundColor(Color.parseColor("#ffffff"));
     }
 
     // set essential component IDs
@@ -371,14 +375,15 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     TableRow componentATableRow() {
 
         TableRow componentATableRow = new TableRow(this.context);
-        componentATableRow.setBackgroundColor(Color.parseColor("#2277b1"));
+        componentATableRow.setBackgroundColor(Color.parseColor("#dfdedf"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
 
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#2277b1"));
-        textView.setTextColor(Color.parseColor("#ffffff"));
+        textView.setBackgroundColor(Color.parseColor("#ffffff"));
+        textView.setTextColor(Color.parseColor("#000000"));
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         componentATableRow.addView(textView);
 
         return componentATableRow;
@@ -388,7 +393,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     TableRow componentBTableRow() {
 
         TableRow componentBTableRow = new TableRow(this.context);
-        componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
+        componentBTableRow.setBackgroundColor(Color.parseColor("#dfdedf"));
         int headerFieldCount = headers.length;
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
@@ -397,8 +402,8 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-            textView.setBackgroundColor(Color.parseColor("#2277b1"));
-            textView.setTextColor(Color.parseColor("#ffffff"));
+            textView.setBackgroundColor(Color.parseColor("#ffffff"));
+            textView.setTextColor(Color.parseColor("#000000"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
         }
@@ -415,7 +420,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
 
             final TableRow tableRowForTableC = this.tableRowForTableC(productNameBeanArrayList.get(k).getLevel());
             final TableRow taleRowForTableD = this.taleRowForTableD(productNameBeanArrayList.get(k));
-            tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
+            tableRowForTableC.setBackgroundColor(Color.parseColor("#ffffff"));
             taleRowForTableD.setBackgroundColor(Color.parseColor("#dfdedf"));
             final int i = k;
             tableRowForTableC.setOnClickListener(new View.OnClickListener() {
@@ -454,6 +459,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
         TableRow tableRowForTableC = new TableRow(this.context);
         TextView textView = this.bodyTextView(productNameDetails);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+        textView.setTextColor(Color.parseColor("#000000"));
         tableRowForTableC.addView(textView, params);
         return tableRowForTableC;
 
@@ -478,18 +484,18 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
             params.setMargins(2, 2, 0, 0);
 
             TextView textViewB = this.bodyTextView(info[x]);
-            textViewB.setTextColor(Color.WHITE);
+            textViewB.setTextColor(Color.parseColor("#000000"));
             if(productDetails.getPvaSales() >= Double.parseDouble("100"))
             {
-                textViewB.setBackgroundColor(Color.parseColor("#70e503"));
+                textViewB.setTextColor(Color.parseColor("#70e503"));
             }
             else if(productDetails.getPvaSales() > Double.parseDouble("80") && productDetails.getPvaSales() < Double.parseDouble("100"))
             {
-                textViewB.setBackgroundColor(Color.parseColor("#ff7e00"));
+                textViewB.setTextColor(Color.parseColor("#ff7e00"));
 
             }else if(productDetails.getPvaSales() < Double.parseDouble("80"))
             {
-                textViewB.setBackgroundColor(Color.parseColor("#fe0000"));
+                textViewB.setTextColor(Color.parseColor("#fe0000"));
             }
 
             taleRowForTableD.addView(textViewB, params);
@@ -503,7 +509,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     TextView bodyTextView(String label) {
 
         TextView bodyTextView = new TextView(this.context);
-        bodyTextView.setBackgroundColor(Color.parseColor("#f8f6f6"));
+        bodyTextView.setBackgroundColor(Color.parseColor("#ffffff"));
         bodyTextView.setText(label);
         bodyTextView.setTextSize(12f);
         bodyTextView.setGravity(Gravity.CENTER);
@@ -516,7 +522,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     TextView headerTextView(String label) {
 
         TextView headerTextView = new TextView(this.context);
-        headerTextView.setBackgroundColor(Color.WHITE);
+        headerTextView.setBackgroundColor(Color.parseColor("#000000"));
         headerTextView.setText(label);
         headerTextView.setGravity(Gravity.CENTER);
         headerTextView.setPadding(5, 5, 5, 5);
@@ -754,11 +760,13 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     private void requestPlanOptionAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
 
-        Log.e("TAG", "requestPlanOptionAPI: "+url );
+        Log.e("TAG", "requestPlanOption: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.d("TAG", "responsePlan_Option: "+response );
+
                         try {
                             int i;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -829,6 +837,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
 
                                 txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+                                table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();
                                 resizeHeaderHeight();
@@ -843,8 +852,8 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
                                 resizeBodyTableRowHeight();
                             }
                         } catch (Exception e) {
-
                             e.printStackTrace();
+                            Reusable_Functions.hDialog();
                         }
                     }
                 },
@@ -952,6 +961,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
 
                                 txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
                                 txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+                                table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();
                                 resizeHeaderHeight();

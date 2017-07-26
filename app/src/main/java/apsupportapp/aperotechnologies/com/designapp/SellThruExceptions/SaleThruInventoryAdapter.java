@@ -166,7 +166,7 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
             holder.ProgressPicaso.setVisibility(View.GONE);
 
             Glide.with(this.context).
-                    load(R.mipmap.placeholder).
+                    load(R.mipmap.noimageavailable).
                     into(holder.BestInvent_image_child);
 
 
