@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                android:background="@color/bg_screen_color"
-                android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ezfb_White">
 
     <RelativeLayout
         android:id="@+id/planoptactual_rel"
@@ -15,10 +16,11 @@
             android:id="@+id/innerrelLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="0dp">
+            android:layout_marginTop="8dp">
+
             <RelativeLayout
                 android:id="@+id/innerrellay"
                 android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/store"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
@@ -40,7 +42,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
-                    android:textColor="@color/bg_store_code_text"
+                    android:textStyle="bold"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
@@ -50,37 +53,40 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
-                    android:textColor="@color/bg_store_code_text"
+                    android:textStyle="bold"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize" />
 
             </RelativeLayout>
 
             <TextView
-                android:layout_below="@id/innerrellay"
                 android:id="@+id/prod_name_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/innerrellay"
                 android:text="@string/prod_name"
-                android:textColor ="@color/colorPrimary"
+                android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/normallayout_storesize" />
 
 
             <TextView
-                android:layout_below="@id/innerrellay"
                 android:id="@+id/prod_name_val"
-                android:layout_toRightOf="@+id/prod_name_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/innerrellay"
                 android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@+id/prod_name_txt"
                 android:hint=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfb_black"
+                android:textStyle="bold"
                 android:textSize="@dimen/normallayout_storesize" />
 
+<!--
             <info.hoang8f.android.segmented.SegmentedGroup
                 android:id="@+id/segmentedGrpOption"
-                android:layout_below="@+id/prod_name_txt"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:layout_below="@+id/prod_name_txt"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp"
@@ -110,25 +116,43 @@
 
 
             </info.hoang8f.android.segmented.SegmentedGroup>
+-->
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/prod_name_txt"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="0dp"
+                app:tabIndicatorColor="@color/ezfb_Red"
+                app:tabSelectedTextColor="@color/ezfb_Red"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                app:tabTextColor="@color/ezfb_Red">
+
+            </android.support.design.widget.TabLayout>
+
+
             <RelativeLayout
                 android:id="@+id/colorRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_below="@+id/segmentedGrpOption"
+                android:layout_below="@+id/tabview"
                 android:layout_marginTop="8dp">
 
                 <Button
                     android:id="@+id/txtOptionGreen"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="70dp"
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="70dp"
+                    android:background="@color/smdm_green"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@color/smdm_green"
                     android:text=""
                     android:textColor="#000000"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
 
                 <Button
@@ -141,7 +165,7 @@
                     android:clickable="true"
                     android:text=""
                     android:textColor="#000000"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
 
                 <Button
@@ -155,20 +179,61 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#000000"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </RelativeLayout>
 
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/planactual_optrelLayout"
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/innerrelLayout"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            app:cardUseCompatPadding="false"
+            android:id="@+id/table_area"
+            app:contentPaddingLeft="3dp"
+            app:contentPaddingRight="3dp"
+            app:cardBackgroundColor="@color/ezfb_White"
+            app:cardElevation="3dp"
             android:layout_marginTop="8dp"
-            android:background="@color/bg_screen_color"
+            android:layout_marginBottom="3dp"
+
+            >
+
+            <!--second layout starting    -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+
+
+                <RelativeLayout
+                    android:background="@color/ezfb_White"
+                    android:id="@+id/planactual_optrelLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    >
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+<!--        <RelativeLayout
+            android:id="@+id/planactual_optrelLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/innerrelLayout">
-        </RelativeLayout>
+            android:layout_below="@+id/innerrelLayout"
+            android:layout_marginTop="8dp"
+            android:background="@color/ezfb_White"></RelativeLayout>-->
     </RelativeLayout>
 
 </RelativeLayout>

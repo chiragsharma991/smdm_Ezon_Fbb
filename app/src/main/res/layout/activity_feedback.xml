@@ -164,7 +164,6 @@
                     android:layout_below="@+id/feedback_option"
                     android:padding="5dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/placeholder"
                     />
 
                 <TextView

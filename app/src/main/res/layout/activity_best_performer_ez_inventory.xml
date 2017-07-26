@@ -259,6 +259,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tabview"
+            android:visibility="gone"
             app:tabIndicatorColor="@color/ezfb_Red"
             app:tabTextColor="@color/ezfb_Red"
             app:tabSelectedTextColor="@color/ezfb_Red"
@@ -296,6 +297,16 @@
                 android:layout_marginRight="5dp"
                 android:textColor="@color/ezfb_black"
                 android:layout_toLeftOf="@id/bestNworstswitch"
+                android:layout_alignBaseline="@id/bestNworstswitch"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/smdm_store_title_normal"
+                android:text="* In Units"
+                android:textColor="@color/ezfb_black"
+                android:layout_alignParentLeft="true"
                 android:layout_alignBaseline="@id/bestNworstswitch"/>
 
 

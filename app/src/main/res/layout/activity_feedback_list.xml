@@ -167,7 +167,6 @@
                     android:padding="5dp"
                     android:layout_below="@+id/feedbackList_option"
                     android:id="@+id/feedbackList_image"
-                    android:src="@drawable/placeholder"
                     />
 
 

@@ -107,8 +107,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         super.onCreate(savedInstanceState);
         context = this;
         statusbar();
-
-
         Log.e(TAG, "Oncreate: SnapDashboard..");
         m_config = MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -310,7 +308,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                                     etlStatusList.add(etlStatus);
 
                                 }
-                                RefreshTime.setText(etlStatusList.get(0).getLastETLDate());
+                                RefreshTime.setText(etlStatusList.get(1).getLastETLDate());
 
                             }
 

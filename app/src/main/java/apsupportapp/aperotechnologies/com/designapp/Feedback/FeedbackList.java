@@ -330,7 +330,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         } else {
             ImageLoader_feedback.setVisibility(View.GONE);
             Glide.with(context).
-                    load(R.drawable.placeholder).
+                    load(R.mipmap.noimageavailable).
                     into(Feedback_image);
         }
 

@@ -146,7 +146,7 @@ public class StockAgeingAdapter extends BaseAdapter {
         } else {
             holder.ProgressPicaso.setVisibility(View.GONE);
             Glide.with(this.context).
-                    load(R.mipmap.placeholder).
+                    load(R.mipmap.noimageavailable).
                     into(holder.stock_image_child);
 
         }

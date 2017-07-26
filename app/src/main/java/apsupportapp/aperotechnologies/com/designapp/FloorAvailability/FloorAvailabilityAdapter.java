@@ -155,7 +155,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter
         {
             holder.ProgressPicaso.setVisibility(View.GONE);
             Glide.with(this.context).
-                    load(R.mipmap.placeholder).
+                    load(R.mipmap.noimageavailable).
                     into(holder.floor_image_child);
         }
         // ---------------------click listener -------------------------
