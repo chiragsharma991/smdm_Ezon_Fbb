@@ -193,7 +193,8 @@
             android:layout_marginLeft="5dp"
             app:cardUseCompatPadding="false"
             android:id="@+id/table_area"
-            app:contentPadding="5dp"
+            app:contentPaddingLeft="3dp"
+            app:contentPaddingRight="3dp"
             app:cardBackgroundColor="@color/ezfb_White"
             app:cardElevation="3dp"
             android:layout_marginTop="8dp"
@@ -209,13 +210,7 @@
                 android:orientation="vertical">
 
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/ezfbb_black"></View>
+
 
                 <RelativeLayout
                     android:background="@color/ezfb_White"
