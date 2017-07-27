@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty;
+package apsupportapp.aperotechnologies.com.designapp.CustomerEngagement;
 
 import android.Manifest;
 import android.content.Intent;
@@ -9,20 +9,12 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.util.Log;
-import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.daimajia.easing.linear.Linear;
-
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -31,7 +23,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
@@ -42,11 +33,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-import static apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerDetailActivity.customerDetailsarray;
+import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerDetailActivity.customerDetailsarray;
 
 /**
  * Created by pamrutkar on 23/06/17.
@@ -164,7 +153,8 @@ public class CustDetailBarChart extends AppCompatActivity
     }
 
     // Horizontal Bar chart for Category
-    private void callCategoryBarChart() {
+    private void callCategoryBarChart()
+    {
         barChart_Category.setDescription(null);
         barChart_Category.setDrawGridBackground(false); //Do not display grid background
 
@@ -209,7 +199,6 @@ public class CustDetailBarChart extends AppCompatActivity
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
         l.setForm(Legend.LegendForm.SQUARE);
     }
-
 
     // Horizontal Bar chart for brand
     private void callBrandBarChart() {

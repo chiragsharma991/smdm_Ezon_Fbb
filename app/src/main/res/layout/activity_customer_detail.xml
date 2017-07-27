@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_screen_color"
-    tools:context=".CustomerLoyalty.CustomerDetailActivity">
+    tools:context=".CustomerEngagement.CustomerDetailActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_cust_detail"

@@ -1,6 +1,5 @@
 package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,7 @@ import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.Best
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
-import apsupportapp.aperotechnologies.com.designapp.CustomerLoyalty.CustomerLookupActivity;
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookupActivity;
 
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
@@ -23,7 +22,6 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreS
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion;
-import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisiorStaff;
@@ -49,8 +47,6 @@ import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.Target
 import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualReportActivity;
-import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
-
 
 
 /**
