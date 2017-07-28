@@ -124,19 +124,19 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
               if(Math.round(customerDetail.getSalesAch()) > 90)
                 {
-                    ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setBackgroundColor(Color.parseColor("#70e503"));
-                    ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setTextColor(Color.parseColor("#ffffff"));
+                  //  ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setBackgroundColor(Color.parseColor("#70e503"));
+                    ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setTextColor(Color.parseColor("#70e503"));
                 }
                 else if((Math.round(customerDetail.getSalesAch()) >= 80) && (Math.round(customerDetail.getSalesAch()) <= 90))
               {
-                  ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setBackgroundColor(Color.parseColor("#ff7e00"));
-                  ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setTextColor(Color.parseColor("#ffffff"));
+                 // ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setBackgroundColor(Color.parseColor("#ff7e00"));
+                  ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setTextColor(Color.parseColor("#ff7e00"));
 
               }
               else if(Math.round(customerDetail.getSalesAch())  < 80)
               {
-                  ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setBackgroundColor(Color.parseColor("#fe0000"));
-                  ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setTextColor(Color.parseColor("#ffffff"));
+                //  ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setBackgroundColor(Color.parseColor("#fe0000"));
+                  ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_ach_Val.setTextColor(Color.parseColor("#fe0000"));
 
               }
             }

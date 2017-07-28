@@ -89,7 +89,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_detail);
         getSupportActionBar().hide();
@@ -138,21 +139,21 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 txt_cd_tot_spent_Val.setText("");
                 txt_cd_tot_visit_Val.setText("");
               //  pieChart.setCurrentItem(0);
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     Reusable_Functions.sDialog(context, "Loading...");
                     requestResetCustomerDetailAPI();
-
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
     }
 
-
-    private void addTabs(ViewPager viewPager) {
+    private void addTabs(ViewPager viewPager)
+    {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OffersOnly(), "Recommendations");
         adapter.addFragment(new LastShop(), "Last Shopped");
@@ -225,7 +226,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -362,9 +364,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-
-
-    private void fillTopLayout() {
+    private void fillTopLayout()
+    {
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
         txt_cd_last_spent_Val.setText("₹ " + Math.round(customerDetailsarray.get(0).getLastSpend()));
         txt_cd_last_spent_Val.setTextColor(Color.parseColor("#404040"));
@@ -432,8 +433,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    private void createPieChart() {
-
+    private void createPieChart()
+    {
         pieChart.addPieSlice(new PieModel("Food", (int) customerDetailsarray.get(0).getFoodContr(), Color.parseColor("#20b5d3")));
         pieChart.addPieSlice(new PieModel("Fashion", (int) customerDetailsarray.get(0).getFashionContr(), Color.parseColor("#21d24c"))); //CDA67F
         pieChart.addPieSlice(new PieModel("Home", (int) customerDetailsarray.get(0).getHomeContr(), Color.parseColor("#f5204c"))); //CDA67F
@@ -507,10 +508,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
-    private void addLegendLayout() {
+    private void addLegendLayout()
+    {
         LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_pie_legend, null);
@@ -542,12 +543,11 @@ public class CustomerDetailActivity extends AppCompatActivity {
         txt_legend_color4.setBackgroundColor(Color.parseColor("#f89a20"));
         txt_legend_name4.setText("Electronics");
         txt_legend_val4.setText("" + Math.round(customerDetailsarray.get(0).getElectronicsContr()));
-
         linear_legend.addView(view);
     }
 
-
-    private void requestPieChartOnFocus() {
+    private void requestPieChartOnFocus()
+    {
         String url = "";
         if (businessCcb.equals("Food")) {
             url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;

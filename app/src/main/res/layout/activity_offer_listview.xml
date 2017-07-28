@@ -19,7 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:gravity="left"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfb_black"
             android:text="" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfb_black"
             android:text="" />
 
 
