@@ -45,8 +45,8 @@ public class ApiPostRequest {
     private String TAG;
     public static JsonObjectRequest postRequest;
 
-    public ApiPostRequest(Context context,String bearertoken,String Url, String TAG, RequestQueue queue, int id ,JSONObject object) {
-       // ResposeInterface = (HttpPostResponse) context;
+    public ApiPostRequest(Context context,String bearertoken,String Url, String TAG, RequestQueue queue, int id ,JSONObject object,HttpPostResponse ResposeInterface) {
+        this.ResposeInterface =ResposeInterface;
         this.context = context;
         this.URL = Url;
         this.TAG = TAG;
@@ -77,13 +77,13 @@ public class ApiPostRequest {
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                ResposeInterface.PostDataNotFound();
                                 return;
 
                             } else  {
 
-                                String result = response.getString("status");
-                                Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
                                 Reusable_Functions.hDialog();
+                                ResposeInterface.PostResponse(response);
 
                             }
 
@@ -92,8 +92,7 @@ public class ApiPostRequest {
                             Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, "onResponse catch: " + e.getMessage());
                             Reusable_Functions.hDialog();
-
-
+                            ResposeInterface.PostDataNotFound();
                         }
                     }
                 },
@@ -103,6 +102,8 @@ public class ApiPostRequest {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                         Log.e(TAG, "Server not found...: " + error.getMessage());
+                        ResposeInterface.PostDataNotFound();
+
                         error.printStackTrace();
                     }
 

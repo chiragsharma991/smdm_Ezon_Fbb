@@ -1,5 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.Httpcall;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
@@ -10,7 +12,7 @@ import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 
 public interface HttpPostResponse
 {
-    void PostResponse(String success);
+    void PostResponse(JSONObject response);
 
     void PostDataNotFound();
 

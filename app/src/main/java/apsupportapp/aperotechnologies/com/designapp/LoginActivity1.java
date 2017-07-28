@@ -81,7 +81,7 @@ public class LoginActivity1 extends AppCompatActivity
     SharedPreferences sharedPreferences;
     private ArrayList<String> storelist_data;
     private StoreListAdapter spinnerArrayAdapter;
-    private String SelectedStoreCode, userId;
+    private String SelectedStoreCode, userId,storeDescription;
     private boolean firstLogin = false;
     private AlertDialog dialog;
     private Snackbar snackbar;
@@ -318,6 +318,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("userId", userId);
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
+                                editor.putString("storeDescription",storeDescription);
                                 editor.putString("device_id", "");
                                 editor.putString("push_tokken", "");
                                 editor.apply();
@@ -500,6 +501,8 @@ public class LoginActivity1 extends AppCompatActivity
                     Reusable_Functions.sDialog(context, "Authenticating user...");
                     String value =  storelist_data.get(position);
                     SelectedStoreCode = value.trim().substring(0, 4);
+                    storeDescription = value.trim();
+                    Log.e("TAG", "store des: "+storeDescription );
                     firstLogin = true;
                     requestLoginWithStoreAPI();
                 } else {
