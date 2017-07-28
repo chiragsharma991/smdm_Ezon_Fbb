@@ -375,15 +375,16 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     TableRow componentATableRow() {
 
         TableRow componentATableRow = new TableRow(this.context);
-        componentATableRow.setBackgroundColor(Color.parseColor("#dfdedf"));
+        componentATableRow.setBackgroundColor(Color.parseColor("#ffffff"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+                200, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
 
         TextView textView = this.headerTextView(headers[0]);
         textView.setBackgroundColor(Color.parseColor("#ffffff"));
         textView.setTextColor(Color.parseColor("#000000"));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+        textView.setLayoutParams(params);
         componentATableRow.addView(textView);
 
         return componentATableRow;
@@ -438,7 +439,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
 
                     LinearLayout layout = (LinearLayout) KeyProductPlanActivity.plan_pager.getParent();
                     TabLayout tab = (TabLayout) layout.getChildAt(1);
-                    tab.addTab(tab.newTab().setText("Sku"));
+                    tab.addTab(tab.newTab().setText("SKU"));
                     tab.getTabAt(2).select();
                     rowPressListener.communicateToFragment3(productNameBeanArrayList.get(i).getLevel(),option_seg_clk);
 
@@ -454,7 +455,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
 
     TableRow tableRowForTableC(String productNameDetails) {
 
-        TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(200, TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
         TableRow tableRowForTableC = new TableRow(this.context);
         TextView textView = this.bodyTextView(productNameDetails);
@@ -843,6 +844,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
                                 resizeHeaderHeight();
                                 getTableRowHeaderCellWidth();
                                 if (optionview.getChildCount() == 1) {
+                                    optionview.removeAllViews();
                                     scrollViewC.scrollTo(0, 0);
                                     scrollViewD.scrollTo(0, 0);
                                     optionview.addView(optrel);

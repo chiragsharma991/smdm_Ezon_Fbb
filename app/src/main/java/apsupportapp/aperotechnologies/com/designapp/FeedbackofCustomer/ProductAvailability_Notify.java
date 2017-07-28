@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,7 +36,7 @@ import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterAct
  * Created by pamrutkar on 17/07/17.
  */
 
-public class ProductAvailability_Notify extends AppCompatActivity{
+public class ProductAvailability_Notify extends AppCompatActivity implements View.OnClickListener{
 
     private Context context;
     private RelativeLayout imageBtnBack1;
@@ -46,6 +47,7 @@ public class ProductAvailability_Notify extends AppCompatActivity{
     private Button btn_submit, btn_cancel;
     private LinearLayout linear_toolbar;
     SharedPreferences sharedPreferences;
+    private TextInputLayout layout_customer_mobile_number,layout_remarks;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,9 @@ public class ProductAvailability_Notify extends AppCompatActivity{
 
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         edt_customer_mobile_number = (EditText) findViewById(R.id.edt_customer_mobile_number);
+        layout_customer_mobile_number  = (TextInputLayout) findViewById(R.id.input_customer_mobile_number);
         edt_remarks = (EditText) findViewById(R.id.edt_remarks);
+        layout_remarks  = (TextInputLayout) findViewById(R.id.input_remarks);
         edt_first_name = (EditText) findViewById(R.id.edt_first_name);
         edt_last_name = (EditText) findViewById(R.id.edt_last_name);
         edt_ean_number = (EditText) findViewById(R.id.edt_ean_number);
@@ -87,247 +91,13 @@ public class ProductAvailability_Notify extends AppCompatActivity{
         linear_toolbar.setVisibility(View.VISIBLE);
 
 
-        imageBtnBack1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btn_submit.setOnClickListener(this);
+        btn_cancel.setOnClickListener(this);
 
-        edt_customer_mobile_number.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
 
-            }
-        });
-
-        edt_remarks.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_first_name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_first_name.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_last_name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_last_name.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_ean_number.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_ean_number.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_brand_name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_brand_name.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_product_name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_product_name.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_size.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_size.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_quantity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_quantity.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_color_option1.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_color_option1.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_color_option2.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_color_option2.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_fit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_fit.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_style.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_style.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
     }
 
@@ -342,4 +112,49 @@ public class ProductAvailability_Notify extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.btn_submit:
+                submitData();
+               break;
+
+            case R.id.btn_cancel:
+                cancelData();
+               break;
+
+        }
+
+    }
+
+    private void cancelData()
+    {
+
+    }
+
+
+
+    private void submitData()
+    {
+        if(edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null){
+
+            layout_customer_mobile_number.setError("Please Enter your mobile number");
+
+        }else{
+
+            layout_customer_mobile_number.setError(null);
+        }
+        if(edt_remarks.length() == 0 || edt_remarks.equals("") || edt_remarks == null){
+
+            layout_remarks.setError("Please Enter Remarks");
+
+        }else
+        {
+            layout_remarks.setError(null);
+        }
+
+
+    }
 }

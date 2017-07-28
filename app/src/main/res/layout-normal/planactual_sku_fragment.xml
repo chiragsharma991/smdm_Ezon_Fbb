@@ -5,7 +5,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen_color">
+    android:background="@color/ezfb_White">
 
     <RelativeLayout
         android:id="@+id/planskuactual_rel"

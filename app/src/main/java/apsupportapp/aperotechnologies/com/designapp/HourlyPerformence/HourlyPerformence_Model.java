@@ -1,10 +1,12 @@
 package apsupportapp.aperotechnologies.com.designapp.HourlyPerformence;
 
+import apsupportapp.aperotechnologies.com.designapp.model.CustomModel;
+
 /**
  * Created by csuthar on 19/06/17.
  */
 
-public class HourlyPerformence_Model {
+public class HourlyPerformence_Model extends CustomModel {
 
     double saleNetVal;
     double planSales;

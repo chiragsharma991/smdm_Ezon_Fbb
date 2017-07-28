@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -37,25 +38,22 @@ public class ApiPostRequest {
     private final RequestQueue queue;
     private final int id;
     private final JSONObject object;
-    private mpm_model mpm_modelClass;
     private HttpPostResponse ResposeInterface;
     private Context context;
     private String bearertoken;
-    private String Url;
+    private String URL;
     private String TAG;
-    private Gson gson;
-    public static JsonArrayRequest postRequest;
+    public static JsonObjectRequest postRequest;
 
-
-    public ApiPostRequest(Context context,  String Url, String TAG, RequestQueue queue, int id ,JSONObject object) {
-        ResposeInterface = (HttpPostResponse) context;
+    public ApiPostRequest(Context context,String bearertoken,String Url, String TAG, RequestQueue queue, int id ,JSONObject object) {
+       // ResposeInterface = (HttpPostResponse) context;
         this.context = context;
-        this.Url = Url;
+        this.URL = Url;
         this.TAG = TAG;
         this.queue = queue;
+        this.bearertoken = bearertoken;
         this.id = id;
         this.object = object;
-        gson = new Gson();
         setApi(context);
 
 
@@ -65,45 +63,33 @@ public class ApiPostRequest {
     private void setApi(final Context context) {
 
 
-        String URL = "";
-        if (TAG.equals("FreshnessIndex_Ez_Activity")) {
 
-            URL = Url ;
-
-        }
         Log.e(TAG, "final_setApi: URL " + URL);
-        postRequest = new JsonArrayRequest(Request.Method.POST, URL, object.toString(),
-                new Response.Listener<JSONArray>() {
+        Reusable_Functions.sDialog(context,"Submitting data…");
+        postRequest = new JsonObjectRequest(Request.Method.POST, URL, object.toString(),
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
 
 
                         try {
 
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
-                                if (TAG.equals("FreshnessIndex_Ez_Activity")) {
-                                    FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
-                                } else if (TAG.equals("HourlyPerformence")) {
-                                    HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
-                                    ResposeInterface.PostDataNotFound();
-                                }
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
                             } else  {
 
-                              //  String result = response.getString("status");
-                             //   Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
+                                String result = response.getString("status");
+                                Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
                                 Reusable_Functions.hDialog();
 
                             }
 
 
                         } catch (Exception e) {
-                            if (TAG.equals("FreshnessIndex_Ez_Activity")) {
-                                FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
-                            }
+                            Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, "onResponse catch: " + e.getMessage());
                             Reusable_Functions.hDialog();
 
@@ -114,15 +100,6 @@ public class ApiPostRequest {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "onErrorResponse : " + error.getMessage());
-
-                        if (TAG.equals("FreshnessIndex_Ez_Activity")) {
-                            FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
-                        }
-                        if (TAG.equals("HourlyPerformence")) {
-                            HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
-                            ResposeInterface.PostDataNotFound();
-                        }
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                         Log.e(TAG, "Server not found...: " + error.getMessage());
@@ -136,9 +113,14 @@ public class ApiPostRequest {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
+                params.put("Authorization", bearertoken);
+                //  params.put("Content-Type", "application/json");
                 return params;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
             }
         };
         int socketTimeout = 30000;//5 seconds

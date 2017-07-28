@@ -301,6 +301,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
             plantoggleClick = true;
             Tabview.getTabAt(1).select();
 
+
         }
     }
 

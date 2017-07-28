@@ -60,7 +60,7 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         tabLayout = (TabLayout) findViewById(R.id.planactual_tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Product Name "));
         tabLayout.addTab(tabLayout.newTab().setText("Option"));
-        tabLayout.addTab(tabLayout.newTab().setText("Sku"));
+        tabLayout.addTab(tabLayout.newTab().setText("SKU"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         plan_pager = (CustomViewPager) findViewById(R.id.planactual_pager);
         adapter = new KeyProductPlanAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -84,7 +84,7 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
                    Plan_Option_Fragment.tableBPlanOpt_Frag.removeAllViews();
                    Plan_Option_Fragment.tableCPlanOpt_Frag.removeAllViews();
                    Plan_Option_Fragment.tableDPlanOpt_Frag.removeAllViews();
-                   Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
+                  // Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
                    KeyProductPlanActivity.productName = "";
                    LinearLayout layout = (LinearLayout)plan_pager.getParent();
                    TabLayout tab1 = (TabLayout) layout.getChildAt(1);
