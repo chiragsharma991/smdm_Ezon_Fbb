@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -16,11 +17,13 @@ public class ProductAvailability_notify_HO extends AppCompatActivity {
     TabLayout tabLayout;
     private RelativeLayout imageBtnBack1;
     private Context context;
+    private String TAG="ProductAvailability_notify_HO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_availability_notify_ho);
+        Log.e(TAG, "onCreate:>> " );
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
         context = this;

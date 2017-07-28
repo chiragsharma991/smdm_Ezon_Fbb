@@ -17,6 +17,7 @@ repositories
         {
             maven {
                 url 'https://maven.fabric.io/public'
+
                 }
             maven { url 'https://dl.bintray.com/sj/maven/' }
         }
@@ -29,8 +30,8 @@ android {
                 applicationId "apsupportapp.aperotechnologies.com.designapp"
                 minSdkVersion 21
                 targetSdkVersion 25
-                versionCode 71
-                versionName "1.8"
+                versionCode 73
+                versionName "1.9"
             }
     buildTypes
             {
