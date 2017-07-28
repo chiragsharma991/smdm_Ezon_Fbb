@@ -187,4 +187,12 @@
     <string name="product_quality_range">Product Quality &amp; Range</string>
 
 
+    <!--Customer feedback-->
+
+    <string name="customer_feedback_number">Please enter a mobile number</string>
+    <string name="customer_feedback_digit">Please enter 10 digit mobile number</string>
+    <string name="customer_feedback_remarks">Please enter remarks</string>
+
+
+
 </resources>

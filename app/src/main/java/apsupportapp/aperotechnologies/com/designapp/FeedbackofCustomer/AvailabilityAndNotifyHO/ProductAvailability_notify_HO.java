@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,14 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.Adapter.ProductAvailability_ViewPagerAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-public class ProductAvailability_notify_HO extends AppCompatActivity {
+public class ProductAvailability_notify_HO extends AppCompatActivity implements ProductAvailability_Feedback.feedbackInterface{
 
     TabLayout tabLayout;
     private RelativeLayout imageBtnBack1;
     private Context context;
-    private String TAG="ProductAvailability_notify_HO";
+    private String TAG="ProductAvlHO";
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class ProductAvailability_notify_HO extends AppCompatActivity {
             }
         });
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager = (ViewPager) findViewById(R.id.pager);
         final ProductAvailability_ViewPagerAdapter adapter = new ProductAvailability_ViewPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
@@ -63,5 +65,12 @@ public class ProductAvailability_notify_HO extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onTrigger(int position) {
+        viewPager.setCurrentItem(position);
+        //tabLayout.getTabAt(position).select();
+
     }
 }

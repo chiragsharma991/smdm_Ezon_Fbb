@@ -1,5 +1,6 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +42,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoSnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiPostRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
+import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpPostResponse;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -52,7 +58,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
  * Created by rkanawade on 24/07/17.
  */
 
-public class ProductAvailability_Feedback extends Fragment implements View.OnClickListener {
+public class ProductAvailability_Feedback extends Fragment implements View.OnClickListener , View.OnFocusChangeListener {
     private Context context;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_ean_number, edt_brand_name, edt_product_name, edt_size;
     private EditText edt_quantity, edt_color_option1, edt_color_option2, edt_fit, edt_style;
@@ -61,27 +67,42 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
     private Button btn_submit, btn_cancel;
     private LinearLayout linear_toolbar;
     private View v;
-    private String TAG = "ProductAvailability_Feedback";
+    private String TAG = "ProductAvailability";
     private TextInputLayout layout_customer_mobile_number, layout_remarks;
     private SharedPreferences sharedPreferences;
-    private String userId, bearertoken, geoLeveLDesc;
+    private String userId, bearertoken, geoLeveLDesc,store;
     private RequestQueue queue;
-    private TextView incorrect_phone,incorrect_remark;
+    private TextView incorrect_phone,incorrect_remark,storedescription;
+    private feedbackInterface mCallback;
+    private ScrollView scrollView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        context = getContext();
         MainMethod();
         return inflater.inflate(R.layout.activity_product_availability, container, false);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+        try {
+            mCallback = (feedbackInterface) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(this.toString()
+                    + " must implement Interface");
+        }
     }
 
     private void MainMethod() {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
+        store = sharedPreferences.getString("storeDescription", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+      //  editor.putString("storeDescription",storeDescription);
+
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -97,6 +118,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
     private void initialiseUI() {
 
+        scrollView = (ScrollView) v.findViewById(R.id.scrollView);
         edt_customer_mobile_number = (EditText) v.findViewById(R.id.edt_customer_mobile_number);
         edt_remarks = (EditText) v.findViewById(R.id.edt_remarks);
         layout_customer_mobile_number = (TextInputLayout) v.findViewById(R.id.input_customer_mobile_number);
@@ -115,10 +137,13 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         radioCallbacks = (RadioGroup) v.findViewById(R.id.radioCallbacks);
         radioYes = (RadioButton) v.findViewById(R.id.radioYes);
         radioNo = (RadioButton) v.findViewById(R.id.radioNo);
+
         btn_submit = (Button) v.findViewById(R.id.btn_submit);
         btn_cancel = (Button) v.findViewById(R.id.btn_cancel);
         incorrect_phone = (TextView) v.findViewById(R.id.txt_incorrect_phone);
         incorrect_remark = (TextView) v.findViewById(R.id.txt_incorrect_remark);
+        storedescription = (TextView) v.findViewById(R.id.txtStoreCode);
+        storedescription.setText(store);
         incorrect_phone.setVisibility(View.GONE);
         incorrect_remark.setVisibility(View.GONE);
         linear_toolbar = (LinearLayout) v.findViewById(R.id.linear_toolbar);
@@ -126,6 +151,45 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
+        edt_customer_mobile_number.setOnFocusChangeListener(this);
+        edt_remarks.setOnFocusChangeListener(this);
+
+
+       /* edt_customer_mobile_number.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }@Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }@Override
+            public void afterTextChanged(Editable editable) {
+                incorrect_phone.setVisibility(View.GONE);
+                if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null  ) {
+                    incorrect_phone.setVisibility(View.VISIBLE);
+                    incorrect_phone.setText("Please Enter your mobile number");
+                }else if(edt_customer_mobile_number.length() < 10){
+                    incorrect_phone.setText("Please Enter 10 digits number");
+                    incorrect_phone.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+        edt_remarks.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}@Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                incorrect_remark.setVisibility(View.GONE);
+                if (edt_remarks.length() == 0 || edt_remarks.equals("") || edt_remarks == null) {
+                    incorrect_remark.setVisibility(View.VISIBLE);
+                    incorrect_remark.setText("Please Enter Remarks");
+                    edt_remarks.requestFocus();
+                    edt_remarks.clearFocus();
+
+                }
+            }
+        });*/
 
 
     }
@@ -153,34 +217,45 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
 
     private void submitData() {
+
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
-        if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null) {
-
-            Log.e(TAG, "submitData: null");
+        if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null  ) {
+            Log.e(TAG, "submitData: focus" );
             incorrect_phone.setVisibility(View.VISIBLE);
-           // Reusable_Functions.MakeToast(context, "Please Enter your mobile number");
+            incorrect_phone.setText(getResources().getString(R.string.customer_feedback_number));
+            edt_customer_mobile_number.requestFocus();
+            edt_customer_mobile_number.clearFocus();
 
-        } else if (edt_remarks.length() == 0 || edt_remarks.equals("") || edt_remarks == null) {
+        }else if(edt_customer_mobile_number.length() < 10){
+            incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
+            incorrect_phone.setVisibility(View.VISIBLE);
+            edt_customer_mobile_number.requestFocus();
+            edt_customer_mobile_number.clearFocus();
+        }
 
-            Log.e(TAG, "edt_remarks: null");
+        else if (edt_remarks.length() == 0 || edt_remarks.equals("") || edt_remarks == null) {
+
             incorrect_remark.setVisibility(View.VISIBLE);
-           // Reusable_Functions.MakeToast(context, "Please Enter Remarks");
+            incorrect_remark.setText(getResources().getString(R.string.customer_feedback_remarks));
+            edt_remarks.requestFocus();
+            edt_remarks.clearFocus();
 
         } else {
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
-            Log.e(TAG, "submitData: json is " + getObject().toString());
-            if (Reusable_Functions.chkStatus(context)) {
-                mpm_model model = new mpm_model();
-                ApiCallBack(getObject(), 0);            // id is zero.
-                //String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
+                Log.e(TAG,"submitData: json is " + getObject().toString());
+                if (Reusable_Functions.chkStatus(context)) {
+                    incorrect_remark.setVisibility(View.GONE);
+                    incorrect_phone.setVisibility(View.GONE);
+                    mpm_model model = new mpm_model();
+                    ApiCallBack(getObject(), 0);// id is zero.
 
-                //requestReceiverSubmitAPI(context,getObject(),url);
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
 
-            } else {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            }
+
         }
 
 
@@ -244,8 +319,26 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
             case 0:   //total values
 
                 String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
-                ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object);  // 0 is id for identification
+                ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, new HttpPostResponse() {
+                    @Override
+                    public void PostResponse(JSONObject response) {
+                        Log.e(TAG, "PostResponse: success" );
+                        String result = null;
+                        try {
+                            result = response.getString("status");
+                            Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
+                            clearData();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                    @Override
+                    public void PostDataNotFound() {
+                        Log.e(TAG, "PostDataNotFound" );
+
+                    }
+                });  // 0 is id for identification
                 break;
 
             default:
@@ -253,6 +346,67 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
 
         }
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(view == edt_customer_mobile_number){
+            //incorrect_remark.setVisibility(View.GONE);
+            if(!b){
+                incorrect_phone.setVisibility(View.GONE);
+                if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null  ) {
+                    Log.e(TAG, "submitData: focus" );
+                    incorrect_phone.setVisibility(View.VISIBLE);
+                    incorrect_phone.setText(getResources().getString(R.string.customer_feedback_number));
+
+
+                }else if(edt_customer_mobile_number.length() < 10){
+                    incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
+                    incorrect_phone.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+        }else if (view == edt_remarks){
+            if(!b){
+                incorrect_remark.setVisibility(View.GONE);
+                if (edt_remarks.length() == 0 || edt_remarks.equals("") || edt_remarks == null) {
+                    incorrect_remark.setVisibility(View.VISIBLE);
+                    incorrect_remark.setText(getResources().getString(R.string.customer_feedback_remarks));
+
+                }
+
+            }
+
+        }
+    }
+
+
+    public interface feedbackInterface {
+
+        void onTrigger(int position);
+
+    }
+
+
+    public void clearData(){
+
+        edt_customer_mobile_number.getText().clear();
+        edt_remarks.getText().clear();
+        edt_first_name.getText().clear();
+        edt_last_name.getText().clear();
+        edt_ean_number.getText().clear();
+        edt_brand_name.getText().clear();
+        edt_product_name.getText().clear();
+        edt_size.getText().clear();
+        edt_quantity.getText().clear();
+        edt_color_option1.getText().clear();
+        edt_color_option2.getText().clear();
+        edt_fit.getText().clear();
+        edt_style.getText().clear();
+        radioYes.setChecked(true);
+        edt_customer_mobile_number.requestFocus();
+
     }
 
 
