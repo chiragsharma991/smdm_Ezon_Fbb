@@ -28,6 +28,16 @@ public class SalesAnalysisListDisplay {
      double wowNetSalesUnitsGrowthPct;
      double planSaleNetVal;
      double pvaAchieved;
+
+    public double getPvaAchived() {
+        return pvaAchived;
+    }
+
+    public void setPvaAchived(double pvaAchived) {
+        this.pvaAchived = pvaAchived;
+    }
+
+    double pvaAchived;
      double stkOnhandQty;
      double stkGitQty;
      double  ros;

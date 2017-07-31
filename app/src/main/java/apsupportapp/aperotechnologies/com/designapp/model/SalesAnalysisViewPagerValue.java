@@ -14,6 +14,9 @@ public class SalesAnalysisViewPagerValue {
     double wowNetSalesUnitsGrowthPct;
     double planSaleNetVal;
     double pvaAchieved;
+
+
+    double pvaAchived;
     double stkOnhandQty;
     double stkGitQty;
     double ros;
@@ -48,6 +51,13 @@ public class SalesAnalysisViewPagerValue {
     }
 
 
+    public double getPvaAchived() {
+        return pvaAchived;
+    }
+
+    public void setPvaAchived(double pvaAchived) {
+        this.pvaAchived = pvaAchived;
+    }
 
 
     public String getStoreCode() {

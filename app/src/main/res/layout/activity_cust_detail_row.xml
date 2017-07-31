@@ -18,8 +18,8 @@
         android:layout_marginLeft="8dp"
         android:layout_toLeftOf="@+id/txt_cust_lastVisit_Val"
         android:text=""
-        android:textColor="@color/txt_color"
-        android:textSize="@dimen/smdm_departmentTitleLarge"
+        android:textColor="@color/ezfbb_black"
+        android:textSize="13sp"
         android:textStyle="normal" />
 
     <TextView
@@ -34,8 +34,8 @@
         android:layout_marginRight="190dp"
         android:layout_toLeftOf="@+id/txt_cust_ach_Val"
         android:text=""
-        android:textColor="@color/txt_color"
-        android:textSize="@dimen/smdm_departmentTitleLarge"
+        android:textColor="@color/ezfbb_black"
+        android:textSize="13sp"
         android:textStyle="normal" />
 
     <TextView
@@ -48,8 +48,8 @@
         android:layout_toLeftOf="@+id/txt_cust_planSales_Val"
         android:gravity="center|center_vertical"
         android:text=""
-        android:textColor="@color/txt_color"
-        android:textSize="@dimen/smdm_departmentTitleLarge"
+        android:textColor="@color/ezfbb_black"
+        android:textSize="13sp"
         android:textStyle="normal" />
 
     <TextView
@@ -62,8 +62,8 @@
         android:layout_toLeftOf="@+id/txt_cust_sales"
         android:gravity="center|center_vertical"
         android:text=""
-        android:textColor="@color/txt_color"
-        android:textSize="@dimen/smdm_departmentTitleLarge"
+        android:textColor="@color/ezfbb_black"
+        android:textSize="13sp"
         android:textStyle="normal" />
 
 
@@ -75,8 +75,8 @@
         android:layout_centerVertical="true"
         android:gravity="center|center_vertical"
         android:text=""
-        android:textColor="@color/txt_color"
-        android:textSize="@dimen/smdm_departmentTitle"
+        android:textColor="@color/ezfb_black"
+        android:textSize="13sp"
         android:textStyle="normal" />
 
     </RelativeLayout>

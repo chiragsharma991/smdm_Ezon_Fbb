@@ -31,7 +31,7 @@
             android:gravity="left"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="12sp" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:gravity="right"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="12sp" />
 
     </LinearLayout>
@@ -52,7 +52,7 @@
         android:id="@+id/view_legend1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smdm_divider"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@color/smdm_divider_Black">
 
     </View>
@@ -75,7 +75,6 @@
             android:gravity="center_horizontal" />
 
         <TextView
-
             android:id="@+id/txt_legend2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -84,7 +83,7 @@
             android:gravity="left"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="13sp" />
 
         <TextView
@@ -96,7 +95,7 @@
             android:gravity="right"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="13sp" />
 
     </LinearLayout>
@@ -105,7 +104,7 @@
         android:id="@+id/view_legend2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smdm_divider"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@color/smdm_divider_Black">
 
     </View>
@@ -128,7 +127,6 @@
             android:gravity="center_horizontal" />
 
         <TextView
-
             android:id="@+id/txt_legend3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -137,7 +135,7 @@
             android:gravity="left"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="13sp" />
 
         <TextView
@@ -149,7 +147,7 @@
             android:gravity="right"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="13sp" />
 
     </LinearLayout>
@@ -158,7 +156,7 @@
         android:id="@+id/view_legend3"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smdm_divider"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@color/smdm_divider_Black">
 
     </View>
@@ -190,7 +188,7 @@
             android:gravity="left"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="13sp" />
 
         <TextView
@@ -202,7 +200,7 @@
             android:gravity="right"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:textSize="13sp" />
 
     </LinearLayout>
@@ -211,7 +209,7 @@
         android:id="@+id/view_legend4"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smdm_divider"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:background="@color/smdm_divider_Black">
 
     </View>

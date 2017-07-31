@@ -123,7 +123,7 @@
     <string name="yoy_sales_grw">YOY Sales Grw %</string>
     <string name="pva">PvA%</string>
     <string name="yoy">YoY%</string>
-    <string name="sell_thru">Sell Thru(U)%</string>
+    <string name="sell_thru">Sell Thru%</string>
     <string name="mixsales">MixSales%</string>
     <string name="rank">Rank</string>
     <string name="git_u">GIT Units</string>

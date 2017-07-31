@@ -68,11 +68,13 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabSelected(TabLayout.Tab tab)
+            {
 
                 plan_pager.setCurrentItem(tab.getPosition());
 
-                if (plan_pager.getCurrentItem() == 1 && KeyProductPlanActivity.productName.equals("")) {
+                if (plan_pager.getCurrentItem() == 1 && KeyProductPlanActivity.productName.equals(""))
+                {
                     View view=findViewById(android.R.id.content);
                     Snackbar.make(view, "Please select product to view options", Snackbar.LENGTH_LONG).show();
                 }

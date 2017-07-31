@@ -38,9 +38,12 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -516,10 +519,18 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 //                PieEntry pe = (PieEntry) e;
 //                Log.e("-----", "" + pe.getLabel());
 //                e_bandnm = pe.getLabel();
-//
-//                engagemntBandClick.communicatefrag1(e_bandnm);
-//                CustomerLookupActivity.mViewPager.setCurrentItem(1);
-//
+//                if (Reusable_Functions.chkStatus(getActivity())) {
+//                    Reusable_Functions.sDialog(getActivity(), "Loading...");
+//                    offsetval = 0;
+//                    limit = 100;
+//                    count = 0;
+//                    bandClick = true;
+//                    requestEngagementBandDetail();
+//                }
+//                else
+//                {
+//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                }
 //            }
 //
 //            @Override
@@ -809,105 +820,105 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
 
-//    private void requestEngagementBandDetail()
-//    {
-//        String url = "";
-//        if(bandClick)
-//        {
-//            url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
-//
-//        }
-//        else
-//        {
-//            url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
-//
-//        }Log.e("detail url 1:", "" + url);
-//        postRequest = new JsonArrayRequest(Request.Method.GET, url,
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        Log.e("response 1:", "" + response + "size"+response.length());
-//                        try {
-//                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-//                                Reusable_Functions.hDialog();
-//                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-//                                return;
-//
-//                            } else
-//
-//                            if (response.length() == limit) {
+    private void requestEngagementBandDetail()
+    {
+        String url = "";
+        if(bandClick)
+        {
+            url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
+
+        }
+        else
+        {
+            url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
+
+        }Log.e("detail url 1:", "" + url);
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("response 1:", "" + response + "size"+response.length());
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else
+
+                            if (response.length() == limit) {
+
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+                                    customerDetailsList.add(customerDetail);
+                                }
+                            }
+                              //  offsetval = offsetval + limit;
+
+
+//                            } else if (response.length() < limit) {
 //
 //                                for (int i = 0; i < response.length(); i++) {
-//
 //                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
 //                                    customerDetailsList.add(customerDetail);
 //                                }
 //                            }
-//                              //  offsetval = offsetval + limit;
-//
-//
-////                            } else if (response.length() < limit) {
-////
-////                                for (int i = 0; i < response.length(); i++) {
-////                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-////                                    customerDetailsList.add(customerDetail);
-////                                }
-////                            }
-//
-//
-////                            if (lazyScroll.equals("ON")) {
-////                                customerDetailAdapter.notifyDataSetChanged();
-////                                lazyScroll = "OFF";
-////                                customerDetailAdapter.getItemViewType(1);
-////                            }
-////                            else
-////                            {
+
+
+//                            if (lazyScroll.equals("ON")) {
+//                                customerDetailAdapter.notifyDataSetChanged();
+//                                lazyScroll = "OFF";
+//                                customerDetailAdapter.getItemViewType(1);
+//                            }
+//                            else
+//                            {
 //                                lv_cust_details.removeAllViews();
 //                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
 //                                lv_cust_details.setAdapter(customerDetailAdapter);
 //                                customerDetailAdapter.notifyDataSetChanged();
 //                                customerDetailAdapter.getItemViewType(1);
-//                                engagemntBandClick.communicatefrag1(e_bandnm);
+//                                engagemntBandClick.communicatefrag1(customerDetailsList);
 //                                CustomerLookupActivity.mViewPager.setCurrentItem(1);
-//
-//                          //  }
-//                            Reusable_Functions.hDialog();
-//                    }
-//                        catch (Exception e)
-//                        {
-//                            Reusable_Functions.hDialog();
-//                            Log.e("exception :", "" + e.getMessage());
-//                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-//                            Reusable_Functions.hDialog();
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error)
-//                    {
-//                        Reusable_Functions.hDialog();
-//                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-//                        Reusable_Functions.hDialog();
-//                        error.printStackTrace();
-//                    }
-//                }
-//
-//        ) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("Content-Type", "application/json");
-//                params.put("Authorization", "Bearer " + bearertoken);
-//                return params;
-//            }
-//        };
-//        int socketTimeout = 60000;//5 seconds
-//        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-//        postRequest.setRetryPolicy(policy);
-//        queue.add(postRequest);
-//    }
+
+                          //  }
+                            Reusable_Functions.hDialog();
+                    }
+                        catch (Exception e)
+                        {
+                            Reusable_Functions.hDialog();
+                            Log.e("exception :", "" + e.getMessage());
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
 
 }
