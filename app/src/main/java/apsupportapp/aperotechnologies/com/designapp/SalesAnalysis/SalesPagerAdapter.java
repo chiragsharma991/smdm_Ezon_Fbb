@@ -82,6 +82,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
 
     }
 
+
     @Override
     public int getCount() {
         return 3;

@@ -73,7 +73,7 @@
                 android:layout_weight="0.5"
                 android:background="@android:color/transparent"
                 android:gravity="center_vertical"
-                android:text="12"
+                android:text=""
                 android:textColor="@color/ezfbb_black"
                 android:textSize="@dimen/normallayout_textsize" />
 

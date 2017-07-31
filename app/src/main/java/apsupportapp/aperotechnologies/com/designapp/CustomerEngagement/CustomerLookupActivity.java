@@ -22,6 +22,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
@@ -141,13 +143,14 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
 
     }
 
+
     @Override
-    public void communicatefrag1(String enagagemntband)
-    {
+    public void communicatefrag1(ArrayList<CustomerDetail> customerDetailsList) {
+
         CustomerLookup_PageTwo fragment = (CustomerLookup_PageTwo) adapter.getItem(1);
         if (fragment != null)
         {
-            fragment.fragmentCommunication(enagagemntband);
+            fragment.fragmentCommunication(customerDetailsList);
         }
     }
 }

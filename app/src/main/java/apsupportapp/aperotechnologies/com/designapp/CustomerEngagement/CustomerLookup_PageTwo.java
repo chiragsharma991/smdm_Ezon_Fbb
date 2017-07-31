@@ -237,19 +237,23 @@ public class CustomerLookup_PageTwo extends Fragment {
         }
     }
 
-    public void fragmentCommunication(String enagagemntband) {
-        e_bandnm = enagagemntband;
-        Log.e("test", "inerface call size is");
+    public void fragmentCommunication(ArrayList<CustomerDetail> customerDetails) {
+//        detailArrayList.clear();
+//        detailArrayList.addAll(customerDetails);
+//        Log.e("test", "inerface call size is" +detailArrayList.size()+customerDetails.size());
+//        customerDetailAdapter = new CustomerDetailAdapter(detailArrayList, context);
+//        lv_cust_details.setAdapter(customerDetailAdapter);
+//        customerDetailAdapter.notifyDataSetChanged();
 
 //            if (Reusable_Functions.chkStatus(getActivity())) {
 //                Reusable_Functions.hDialog();
 //                Reusable_Functions.sDialog(getActivity(), "Loading data...");
 
-                offset = 0;
-                limit = 100;
-                count = 0;
-                customerDetailArrayList = new ArrayList<CustomerDetail>();
-                requestEngagementBandDetail();
+//                offset = 0;
+//                limit = 100;
+//                count = 0;
+//                customerDetailArrayList = new ArrayList<CustomerDetail>();
+//                requestEngagementBandDetail();
 
 //            } else {
 //                Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();

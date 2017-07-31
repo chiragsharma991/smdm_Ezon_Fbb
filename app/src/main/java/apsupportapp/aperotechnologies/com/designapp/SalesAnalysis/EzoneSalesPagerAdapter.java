@@ -64,7 +64,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
         this.ez_sales_detail_array = ez_sales_pagerClassArrayList;
         this.ez_fromWhere = fromWhere;
         this.ez_pager_adapter = pagerAdapter;
-        ez_salesadapter = salesadapter;
+        this.ez_salesadapter = salesadapter;
         this.recycle_ez_sales = listView_SalesAnalysis;
         if (arrayList.size() != 0) {
             ez_sales_pager = arrayList.get(0);
@@ -160,34 +160,34 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_NetSalesUVal.setText("" + format.format(Math.round(ez_sales_pager.getSaleTotQty())));
                     txt_ez_SohUVal.setText("" + format.format(Math.round(ez_sales_pager.getStkOnhandQty())));
                     txt_ez_NetSalesPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesGrowthPct()) + "%");
-                    txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchieved()) + "%");
+                    txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchived()) + "%");
                     txt_ez_NetSalesUPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesUnitsGrowthPct()) + "%");
                     txt_ez_MarginPerc.setText("" + Math.round(ez_sales_pager.getMarginPct()) + "%");
 
                     // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
                     if (ez_sales_pager.getYoyNetSalesGrowthPct() <= 0) {
                         txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                      //  txt_ez_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
+                        //  txt_ez_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
                     } else if (ez_sales_pager.getYoyNetSalesGrowthPct() > 0) {
                         txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
 //                        txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
                     }
-                    if (ez_sales_pager.getPvaAchieved() < 70) {
+                    if (ez_sales_pager.getPvaAchived() < 70) {
                         txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                     //   txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
-                    } else if (ez_sales_pager.getPvaAchieved() > 90) {
+                        //   txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
+                    } else if (ez_sales_pager.getPvaAchived() > 90) {
                         txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                      //  txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#70e503"));
+                        //  txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#70e503"));
                     } else {
                         txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
-                    //    txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
+                        //    txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
                     }
                     if (ez_sales_pager.getYoyNetSalesUnitsGrowthPct() <= 0) {
                         txt_ez_NetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
-                    //    txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
+                        //    txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
                     } else if (ez_sales_pager.getYoyNetSalesUnitsGrowthPct() > 0) {
                         txt_ez_NetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
-                    //    txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#70e503"));
+                        //    txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#70e503"));
                     }
                 }
 
@@ -202,84 +202,55 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_SohUVal.setText("" + format.format(Math.round(ez_sales_pager.getStkOnhandQty())));
 
                     txt_ez_NetSalesPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesGrowthPct()) + "%");
-                    txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchieved()) + "%");
+                    txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchived()) + "%");
                     txt_ez_NetSalesUPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesUnitsGrowthPct()) + "%");
                     txt_ez_MarginPerc.setText("" + Math.round(ez_sales_pager.getMarginPct()) + "%");
 
                 }
                 if (ez_sales_pager.getYoyNetSalesGrowthPct() <= 0) {
                     txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                  //  txt_ez_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
+                    //  txt_ez_NetSalesVal.setTextColor(Color.parseColor("#fe0000"));
 
                 } else if (ez_sales_pager.getYoyNetSalesGrowthPct() > 0) {
                     txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                  //  txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
+                    //  txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
                 }
 
-                if (ez_sales_pager.getPvaAchieved() < 70) {
+                if (ez_sales_pager.getPvaAchived() < 70) {
                     txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
-                 //   txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
+                    //   txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
 
-                } else if (ez_sales_pager.getPvaAchieved() > 90) {
+                } else if (ez_sales_pager.getPvaAchived() > 90) {
                     txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
-                  //  txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#70e503"));
+                    //  txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#70e503"));
 
                 } else {
                     txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.yellow_arrow);
-                  //  txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
+                    //  txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#ff7e00"));
                 }
 
                 if (ez_sales_pager.getYoyNetSalesUnitsGrowthPct() <= 0) {
                     txt_ez_NetSalesUImage.setBackgroundResource(R.mipmap.red_arrow);
-                  //  txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
+                    //  txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#fe0000"));
                 } else if (ez_sales_pager.getYoyNetSalesUnitsGrowthPct() > 0) {
                     txt_ez_NetSalesUImage.setBackgroundResource(R.mipmap.green_arrow);
-                  //  txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#70e503"));
+                    //  txt_ez_NetSalesUVal.setTextColor(Color.parseColor("#70e503"));
                 }
 
             }
             // Add all values
-            if (ez_sales_detail_array.size() != 0) {
-                SalesAnalysisListDisplay ez_sales_pagerListDisplay = ez_sales_detail_array.get(position);
+            if(ez_sales_detail_array.size()!=0){
+                SalesAnalysisListDisplay salesAnalysisListDisplay = ez_sales_detail_array.get(position);
 
-                if (ez_sales_pagerListDisplay.getLevel() != null) {
-                    if (ez_sales_pagerListDisplay.getLevel().equals("All")) {
-                        ez_sales_pagerListDisplay.setPvaAchieved(ez_sales_pager.getPvaAchieved());
-                        ez_sales_detail_array.set(0, ez_sales_pagerListDisplay);
-                        ez_pager_adapter.notifyDataSetChanged();
-                    }
-                }
-                if (ez_sales_pagerListDisplay.getLevel() != null) {
-                    if (ez_sales_pagerListDisplay.getLevel().equals("All")) {
-                        ez_sales_pagerListDisplay.setPvaAchieved(ez_sales_pager.getPvaAchieved());
-                        ez_sales_detail_array.set(0, ez_sales_pagerListDisplay);
-                        ez_pager_adapter.notifyDataSetChanged();
+                if (salesAnalysisListDisplay.getLevel() != null) {
+                    if (salesAnalysisListDisplay.getLevel().equals("All")) {
+                        salesAnalysisListDisplay.setPvaAchived(ez_sales_pager.getPvaAchived());
+                        ez_sales_detail_array.set(0, salesAnalysisListDisplay);
+                        ez_salesadapter.notifyDataSetChanged();
+
                     }
                 }
 
-                if (ez_sales_pagerListDisplay.getLevel() != null) {
-                    if (ez_sales_pagerListDisplay.getLevel().equals("All")) {
-                        {
-                            ez_sales_pagerListDisplay.setPvaAchieved(ez_sales_pager.getPvaAchieved());
-                            ez_sales_detail_array.set(0, ez_sales_pagerListDisplay);
-                            ez_pager_adapter.notifyDataSetChanged();
-                        }
-                    }
-                }
-                if (ez_sales_pagerListDisplay.getLevel() != null) {
-                    if (ez_sales_pagerListDisplay.getLevel().equals("All")) {
-                        ez_sales_pagerListDisplay.setPvaAchieved(ez_sales_pager.getPvaAchieved());
-                        ez_sales_detail_array.set(0, ez_sales_pagerListDisplay);
-                        ez_pager_adapter.notifyDataSetChanged();
-                    }
-                }
-                if (ez_sales_pagerListDisplay.getLevel() != null) {
-                    if (ez_sales_pagerListDisplay.getLevel().equals("All")) {
-                        ez_sales_pagerListDisplay.setPvaAchieved(ez_sales_pager.getPvaAchieved());
-                        ez_sales_detail_array.set(0, ez_sales_pagerListDisplay);
-                        ez_pager_adapter.notifyDataSetChanged();
-                    }
-                }
             }
 
         }

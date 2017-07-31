@@ -4,6 +4,7 @@ package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,11 +99,14 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.child_sales_listview, parent, false);
             return new SalesViewHolder(v);
-        } else if (viewType == VIEW_PROG) {
+        }
+        else if (viewType == VIEW_PROG)
+        {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_footer, parent, false);
             return new ProgressViewHolder(v);
@@ -116,11 +120,12 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
 
         if (viewHolder instanceof SalesViewHolder) {
-            if (position < mSnaps.size()) {
-
+            if (position < mSnaps.size())
+            {
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
 
-                switch (fromwhere) {
+                switch (fromwhere)
+                {
                     case "Department":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());

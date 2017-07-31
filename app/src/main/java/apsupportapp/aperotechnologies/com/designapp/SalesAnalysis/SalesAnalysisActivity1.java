@@ -2952,7 +2952,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         }
                         offsetvalue = (limit * count) + limit;
                         count++;
-                        requestSalesListDisplayAPI();
+                        requestEzoneSalesDetailAPI();
 
                     } else if (response.length() < limit) {
                         for (i = 0; i < response.length(); i++) {
@@ -2987,9 +2987,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             ez_sales_detail_model.setLevel("All");
 
                         }
-//                        else if (txt_ez_header.getText().toString().equals("MC")) {
-//                            ez_sales_detail_model.setLevel("All");
-//                        }
+//
                         else if (txt_ez_header.getText().toString().equals("Region")) {
                             ez_sales_detail_model.setLevel("All");
                         } else if (txt_ez_header.getText().toString().equals("Store")) {
@@ -3003,7 +3001,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                         recyclevw_ez_sales.setOnFlingListener(null);
                         new GravitySnapHelper(48).attachToRecyclerView(recyclevw_ez_sales);
-
+                        Log.e( "onResponse in detail: ",""+ez_sales_detail_model.getPvaAchieved());
                         ez_sales_adapter = new EzoneSalesAdapter(ez_sales_detalis_array, context, ez_firstVisible_no, ez_fromWhere, recyclevw_ez_sales);
                         recyclevw_ez_sales.setAdapter(ez_sales_adapter);
 
@@ -3035,13 +3033,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 }
 
                             }
-//                            else if (txt_ez_header.getText().toString().equals("MC")) {
-//                                ezone_level = 5;
-//                                ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-//                                if (ez_sales_detalis_array.get(ez_firstVisible_no).getLevel().equals(ez_sale_first_item)) {
-//                                    recyclevw_ez_sales.getLayoutManager().scrollToPosition(ez_firstVisible_no);
-//                                }
-//                            }
+//
                         else if (txt_ez_header.getText().toString().equals("Region")) {
                                 ezone_level = 7;
                                 ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
@@ -3873,6 +3865,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     ez_sales_header_array.add(ez_sales_header_model);
                                 }
                             }
+                            Log.e( "onResponse in header: ",""+ez_sales_header_model.getPvaAchieved());
+
                             ez_sales_pager_adapter = new EzoneSalesPagerAdapter(context, ez_sales_header_array, ez_firstVisible_no, ez_viewpager, ez_linear_dots, ez_sales_adapter, recyclevw_ez_sales, ez_sales_detalis_array, ez_fromWhere, ez_sales_pager_adapter);
                             ez_viewpager.setAdapter(ez_sales_pager_adapter);
                             ez_viewpager.setCurrentItem(ez_currentVmPos);
