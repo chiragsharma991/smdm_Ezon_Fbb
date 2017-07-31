@@ -150,6 +150,9 @@
     <!--Freshness Index-->
     <string name="fi_title">Freshness Index</string>
 
+    <!--Customer Feedback-->
+    <string name="cf_title">Product Availability and Notify Me</string>
+
     <!--Customer Loyalty-->
     <string name="cust_loyalty">Customer Engagement</string>
     <string name="hourly_perform">Hourly Performance</string>

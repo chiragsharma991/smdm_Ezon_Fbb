@@ -58,7 +58,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
  * Created by rkanawade on 24/07/17.
  */
 
-public class ProductAvailability_Feedback extends Fragment implements View.OnClickListener , View.OnFocusChangeListener {
+public class ProductAvailability_Feedback extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
     private Context context;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_ean_number, edt_brand_name, edt_product_name, edt_size;
     private EditText edt_quantity, edt_color_option1, edt_color_option2, edt_fit, edt_style;
@@ -70,15 +70,19 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
     private String TAG = "ProductAvailability";
     private TextInputLayout layout_customer_mobile_number, layout_remarks;
     private SharedPreferences sharedPreferences;
-    private String userId, bearertoken, geoLeveLDesc,store;
+    private String userId, bearertoken, geoLeveLDesc, store;
     private RequestQueue queue;
-    private TextView incorrect_phone,incorrect_remark,storedescription;
+    private TextView incorrect_phone, incorrect_remark, storedescription;
     private feedbackInterface mCallback;
     private ScrollView scrollView;
+    private String customerFeedback, customerNumber, customerRemarks, customerName, customerLastname, customerEAN,
+            customerBrand, customerProduct, customerSize, customerQty, customerColorOption1, customerColorOption2,
+            customerFit, customerStyle, customerCallBack, customerArcDate;
+    private boolean prefocus = false;  // enable focus automatically when submit button click at first time
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MainMethod();
         return inflater.inflate(R.layout.activity_product_availability, container, false);
     }
 
@@ -101,7 +105,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         store = sharedPreferences.getString("storeDescription", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-      //  editor.putString("storeDescription",storeDescription);
+        //  editor.putString("storeDescription",storeDescription);
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -153,43 +157,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         btn_cancel.setOnClickListener(this);
         edt_customer_mobile_number.setOnFocusChangeListener(this);
         edt_remarks.setOnFocusChangeListener(this);
-
-
-       /* edt_customer_mobile_number.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }@Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }@Override
-            public void afterTextChanged(Editable editable) {
-                incorrect_phone.setVisibility(View.GONE);
-                if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null  ) {
-                    incorrect_phone.setVisibility(View.VISIBLE);
-                    incorrect_phone.setText("Please Enter your mobile number");
-                }else if(edt_customer_mobile_number.length() < 10){
-                    incorrect_phone.setText("Please Enter 10 digits number");
-                    incorrect_phone.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
-        edt_remarks.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}@Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-            @Override
-            public void afterTextChanged(Editable editable) {
-                incorrect_remark.setVisibility(View.GONE);
-                if (edt_remarks.length() == 0 || edt_remarks.equals("") || edt_remarks == null) {
-                    incorrect_remark.setVisibility(View.VISIBLE);
-                    incorrect_remark.setText("Please Enter Remarks");
-                    edt_remarks.requestFocus();
-                    edt_remarks.clearFocus();
-
-                }
-            }
-        });*/
+        MainMethod();
 
 
     }
@@ -217,34 +185,54 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
 
     private void submitData() {
-
+        getDetails();
+        prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
-        if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null  ) {
-            Log.e(TAG, "submitData: focus" );
+
+        if (customerNumber.length() == 0 || customerNumber.equals("") || customerNumber == null) {
+            Log.e(TAG, "submitData: focus");
             incorrect_phone.setVisibility(View.VISIBLE);
             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_number));
             edt_customer_mobile_number.requestFocus();
             edt_customer_mobile_number.clearFocus();
 
-        }else if(edt_customer_mobile_number.length() < 10){
+            if (customerRemarks.length() == 0 || customerRemarks.equals("") || customerRemarks == null) {
+
+                incorrect_remark.setVisibility(View.VISIBLE);
+                incorrect_remark.setText(getResources().getString(R.string.customer_feedback_remarks));
+                // edt_remarks.requestFocus();
+                // edt_remarks.clearFocus();
+
+            }
+
+
+        } else if (customerNumber.length() < 10) {
             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
             incorrect_phone.setVisibility(View.VISIBLE);
             edt_customer_mobile_number.requestFocus();
             edt_customer_mobile_number.clearFocus();
-        }
+            if (customerRemarks.length() == 0 || customerRemarks.equals("") || customerRemarks == null) {
 
-        else if (edt_remarks.length() == 0 || edt_remarks.equals("") || edt_remarks == null) {
+                incorrect_remark.setVisibility(View.VISIBLE);
+                incorrect_remark.setText(getResources().getString(R.string.customer_feedback_remarks));
+                // edt_remarks.requestFocus();
+                // edt_remarks.clearFocus();
 
-            incorrect_remark.setVisibility(View.VISIBLE);
-            incorrect_remark.setText(getResources().getString(R.string.customer_feedback_remarks));
-            edt_remarks.requestFocus();
-            edt_remarks.clearFocus();
-
+            }
         } else {
-            incorrect_remark.setVisibility(View.GONE);
-            incorrect_phone.setVisibility(View.GONE);
-                Log.e(TAG,"submitData: json is " + getObject().toString());
+
+            if (customerRemarks.length() == 0 || customerRemarks.equals("") || customerRemarks == null) {
+
+                incorrect_remark.setVisibility(View.VISIBLE);
+                incorrect_remark.setText(getResources().getString(R.string.customer_feedback_remarks));
+                edt_customer_mobile_number.requestFocus();
+                edt_customer_mobile_number.clearFocus();
+
+            } else {
+                incorrect_remark.setVisibility(View.GONE);
+                incorrect_phone.setVisibility(View.GONE);
+                Log.e(TAG, "submitData: json is " + getObject().toString());
                 if (Reusable_Functions.chkStatus(context)) {
                     incorrect_remark.setVisibility(View.GONE);
                     incorrect_phone.setVisibility(View.GONE);
@@ -256,31 +244,35 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                 }
 
 
+            }
         }
 
+    }
 
+
+    public void getDetails() {
+
+        customerFeedback = "1";  // fixed for notified feedback
+        customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
+        customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
+        customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerEAN = edt_ean_number.getText().toString().replaceAll("\\s+", "").trim();
+        customerBrand = edt_brand_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerProduct = edt_product_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerSize = edt_size.getText().toString().replaceAll("\\s+", "").trim();
+        customerQty = edt_quantity.getText().toString().replaceAll("\\s+", "").trim();
+        customerColorOption1 = edt_color_option1.getText().toString().replaceAll("\\s+", "").trim();
+        customerColorOption2 = edt_color_option2.getText().toString().replaceAll("\\s+", "").trim();
+        customerFit = edt_fit.getText().toString().replaceAll("\\s+", "").trim();
+        customerStyle = edt_style.getText().toString().replaceAll("\\s+", "").trim();
+        customerCallBack = radioYes.isChecked() ? "YES" : "NO";
+        customerArcDate = "2017-07-05 06:52:22";  //this will up to real time.
     }
 
     public JSONObject getObject() {
 
         // totoal is 14 contain and 3 extra like : feedback id,storecode,arcDate
-
-        String customerFeedback = "1";  // fixed for notified feedback
-        String customerNumber = edt_customer_mobile_number.getText().toString();
-        String customerRemarks = edt_remarks.getText().toString();
-        String customerName = edt_first_name.getText().toString();
-        String customerLastname = edt_last_name.getText().toString();
-        String customerEAN = edt_ean_number.getText().toString();
-        String customerBrand = edt_brand_name.getText().toString();
-        String customerProduct = edt_product_name.getText().toString();
-        String customerSize = edt_size.getText().toString();
-        String customerQty = edt_quantity.getText().toString();
-        String customerColorOption1 = edt_color_option1.getText().toString();
-        String customerColorOption2 = edt_color_option2.getText().toString();
-        String customerFit = edt_fit.getText().toString();
-        String customerStyle = edt_style.getText().toString();
-        String customerCallBack = radioYes.isChecked() ? "YES" : "NO";
-        String customerArcDate = "2017-07-05 06:52:22";  //this will up to real time.
 
 
         JSONObject jsonObject = new JSONObject();
@@ -322,7 +314,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, new HttpPostResponse() {
                     @Override
                     public void PostResponse(JSONObject response) {
-                        Log.e(TAG, "PostResponse: success" );
+                        Log.e(TAG, "PostResponse: success");
                         String result = null;
                         try {
                             result = response.getString("status");
@@ -335,7 +327,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
                     @Override
                     public void PostDataNotFound() {
-                        Log.e(TAG, "PostDataNotFound" );
+                        Log.e(TAG, "PostDataNotFound");
 
                     }
                 });  // 0 is id for identification
@@ -350,35 +342,63 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
     @Override
     public void onFocusChange(View view, boolean b) {
-        if(view == edt_customer_mobile_number){
+        if (view == edt_customer_mobile_number) {
             //incorrect_remark.setVisibility(View.GONE);
-            if(!b){
-                incorrect_phone.setVisibility(View.GONE);
-                if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null  ) {
-                    Log.e(TAG, "submitData: focus" );
-                    incorrect_phone.setVisibility(View.VISIBLE);
-                    incorrect_phone.setText(getResources().getString(R.string.customer_feedback_number));
-
-
-                }else if(edt_customer_mobile_number.length() < 10){
-                    incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
-                    incorrect_phone.setVisibility(View.VISIBLE);
+            // Log.e(TAG, "onFocusChange: customer_mobile_number" );
+            if (!b) {
+                if (!prefocus) {
+                    Log.e(TAG, "onFocusChange: " + b + "  and " + prefocus);
+                    incorrect_phone.setVisibility(View.GONE);
+                    if (!edt_customer_mobile_number.getText().toString().equals("")) {
+                        if (edt_customer_mobile_number.getText().toString().length() < 10) {
+                            incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
+                            incorrect_phone.setVisibility(View.VISIBLE);
+                        }
+                    }
+                } else {
+                    prefocus = prefocus == true ? false : true;
                 }
 
             }
-
-        }else if (view == edt_remarks){
-            if(!b){
-                incorrect_remark.setVisibility(View.GONE);
-                if (edt_remarks.length() == 0 || edt_remarks.equals("") || edt_remarks == null) {
-                    incorrect_remark.setVisibility(View.VISIBLE);
-                    incorrect_remark.setText(getResources().getString(R.string.customer_feedback_remarks));
-
-                }
-
-            }
-
         }
+        if (view == edt_remarks) {
+
+            if (!b) {
+                if (!prefocus) {
+                    incorrect_remark.setVisibility(View.GONE);
+                    if (!edt_remarks.getText().toString().equals("")) {
+                        incorrect_remark.setText(getResources().getString(R.string.customer_feedback_digit));
+                        incorrect_remark.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    prefocus = prefocus == true ? false : true;
+                }
+
+            }
+        }
+     /*   if(view == edt_remarks){
+
+            Log.e(TAG, "onFocusChange: customerRemarks" );
+            if(!customerRemarks.equals(""))
+            {
+                if(!b){
+                    incorrect_remark.setVisibility(View.GONE);
+                    if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null  ) {
+                        Log.e(TAG, "submitData: focus" );
+                        incorrect_phone.setVisibility(View.VISIBLE);
+                        incorrect_phone.setText(getResources().getString(R.string.customer_feedback_number));
+                    }
+                      if(edt_customer_mobile_number.length() < 10){
+                        incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
+                        incorrect_phone.setVisibility(View.VISIBLE);
+                    }
+                }
+
+            }
+
+
+        }*/
+
     }
 
 
@@ -389,7 +409,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
     }
 
 
-    public void clearData(){
+    public void clearData() {
 
         edt_customer_mobile_number.getText().clear();
         edt_remarks.getText().clear();
@@ -408,9 +428,6 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         edt_customer_mobile_number.requestFocus();
 
     }
-
-
-
 
 
 }
