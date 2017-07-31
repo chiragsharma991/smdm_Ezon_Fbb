@@ -281,7 +281,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                                     } else {
                                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                     }
-
                                                     break;
 
                                                 case "Class":
@@ -319,7 +318,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                                     {
                                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                     }
-
                                                     break;
 
 //                                                case "Subclass":

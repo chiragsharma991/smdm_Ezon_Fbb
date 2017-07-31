@@ -269,10 +269,6 @@ public class SwitchingActivity extends AppCompatActivity
 
 
             }
-
-
-
-
     }
     }
 
@@ -289,13 +285,13 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Option Report", R.mipmap.ageingexceptions));
                 break;
             case 2 :
+
                 apps.add(new App("Sales", R.mipmap.salesanalysis));
                 apps.add(new App("Plan Vs Actual ", R.mipmap.planvsactual));
                 apps.add(new App("Key Product PVA", R.mipmap.planvsactual));
                 apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
-
-
                 break;
+
             case 3 :
                 apps.add(new App("Freshness Index", R.mipmap.freshnessindex));
                 apps.add(new App("Option Efficiency", R.mipmap.optionefficiency));
@@ -306,12 +302,14 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Target Stock Exceptions", R.mipmap.targetstockexceptions));
                 apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions));
                 break;
+
             case 4 :
                 apps.add(new App("Running Promo", R.mipmap.runningpromo));
                 apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo));
                 apps.add(new App("Expiring Promo", R.mipmap.expiringpromo));
                 apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers));
                 break;
+
 //            case 5 :
 //                apps.add(new App("Hourly Info", R.mipmap.hourlyperformance));
 //                break;
@@ -344,7 +342,6 @@ public class SwitchingActivity extends AppCompatActivity
                 break;
 
             // switch for ezone user
-
             case 21 :
                 apps.add(new App("Sales", R.mipmap.salesanalysis));
                 break;

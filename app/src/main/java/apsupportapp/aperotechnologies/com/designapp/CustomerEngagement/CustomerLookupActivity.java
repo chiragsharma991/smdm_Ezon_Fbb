@@ -28,10 +28,11 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 /**
  * Created by pamrutkar on 13/06/17.
  */
-public class CustomerLookupActivity extends AppCompatActivity implements View.OnClickListener,OnEngagemntBandClick {
+public class CustomerLookupActivity extends AppCompatActivity implements View.OnClickListener,OnEngagemntBandClick
+{
     RelativeLayout rel_cust_btnBack;
     static ViewPager mViewPager;
-    private CustomerViewPagerAdapter adapter;
+    CustomerViewPagerAdapter adapter;
     static LinearLayout ez_linear_dots;
     Context context;
     RequestQueue queue;
@@ -41,7 +42,8 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     MySingleton m_config;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_lookup);
         getSupportActionBar().hide();
@@ -56,9 +58,13 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken","");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        if (geoLeveLDesc.equals("E ZONE")) {
+
+        if (geoLeveLDesc.equals("E ZONE"))
+        {
             userId = sharedPreferences.getString("userId", "");  //E zone userid =username
-        } else {
+        }
+        else
+        {
             userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
             userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
         }
@@ -68,10 +74,10 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     }
 
 
-    private void initialiseUi() {
+    private void initialiseUi()
+    {
         rel_cust_btnBack = (RelativeLayout) findViewById(R.id.rel_cust_lookup_btnBack);
         ez_linear_dots = (LinearLayout) findViewById(R.id.linear_cust_dots);
-
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         TabLayout tab = (TabLayout) findViewById(R.id.cust_dotTab);
         tab.setupWithViewPager(mViewPager, true);
@@ -81,8 +87,10 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         rel_cust_btnBack.setOnClickListener(this);
     }
 
-    private void setTab() {
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+    private void setTab()
+    {
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
 
             @Override
             public void onPageScrollStateChanged(int position) {
@@ -93,9 +101,11 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(int position)
+            {
                 // TODO Auto-generated method stub
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < 2; i++)
+                {
                     ImageView imgdot = new ImageView(CustomerLookupActivity.this);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
                     layoutParams.setMargins(3, 3, 3, 3);
