@@ -1,7 +1,9 @@
 package apsupportapp.aperotechnologies.com.designapp.Httpcall;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -11,12 +13,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_Feedback;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -36,8 +46,8 @@ public class ApiPostRequest {
     private String TAG;
     public static JsonObjectRequest postRequest;
 
-    public ApiPostRequest(Context context,String bearertoken,String Url, String TAG, RequestQueue queue, int id ,JSONObject object,HttpPostResponse ResposeInterface) {
-        this.ResposeInterface =ResposeInterface;
+    public ApiPostRequest(Context context, String bearertoken, String Url, String TAG, RequestQueue queue, int id, JSONObject object, ProductAvailability_Feedback productAvailability_feedback) {
+        this.ResposeInterface =(HttpPostResponse) productAvailability_feedback;
         this.context = context;
         this.URL = Url;
         this.TAG = TAG;
