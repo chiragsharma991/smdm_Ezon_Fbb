@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -18,7 +20,9 @@ import java.util.Locale;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
-public class Details_Fragment extends Fragment {
+public class
+
+Details_Fragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     StyleDetailsBean styleDetailsBean;
@@ -28,6 +32,8 @@ public class Details_Fragment extends Fragment {
             txtROS, txtBenefit, txtArticleOption,txtStoreDesc, txtStoreCode;
     ImageView imgPromo, imgKeyProduct, imgProfile;
     ProgressBar progressBar;
+    LinearLayout linear_prodDetails;
+    Button btn_cd_more,btn_cd_less;
     public Details_Fragment() {
         // Required empty public constructor
     }
@@ -77,11 +83,16 @@ public class Details_Fragment extends Fragment {
         imgKeyProduct = (ImageView) view.findViewById(R.id.imgKeyProduct);
         imgProfile = (ImageView) view.findViewById(R.id.imgProfile);
 
+        linear_prodDetails = (LinearLayout)view.findViewById(R.id.linear_prodDetails) ;
+        btn_cd_more = (Button)view.findViewById(R.id.btn_cd_more);
+        btn_cd_more.setOnClickListener(this);
+        btn_cd_less = (Button)view.findViewById(R.id.btn_cd_less);
+        btn_cd_less.setOnClickListener(this);
+
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
         if(!styleDetailsBean.getProductImageURL().equals(""))
         {
-            Glide.
-                    with(getActivity())
+            Glide.with(getActivity())
                     .load(styleDetailsBean.getProductImageURL())
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
@@ -163,5 +174,25 @@ public class Details_Fragment extends Fragment {
         txtROS.setText("" + String.format("%.1f", styleDetailsBean.getRos()));
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.btn_cd_more :
+                linear_prodDetails.setVisibility(View.VISIBLE);
+                btn_cd_less.setVisibility(View.VISIBLE);
+                btn_cd_more.setVisibility(View.GONE);
+                break;
+            case R.id.btn_cd_less :
+                btn_cd_less.setVisibility(View.GONE);
+                linear_prodDetails.setVisibility(View.GONE);
+                btn_cd_more.setVisibility(View.VISIBLE);
+                break;
+
+        }
+
     }
 }

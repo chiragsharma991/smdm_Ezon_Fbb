@@ -29,10 +29,9 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Supervisi
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaff_HO;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
-import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_activity;
+import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_activity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;

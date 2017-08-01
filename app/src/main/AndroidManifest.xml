@@ -232,7 +232,7 @@
             android:windowSoftInputMode="stateHidden" />
         android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MPM.mpm_activity"
+            android:name=".SeasonCatalogue.mpm_activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />

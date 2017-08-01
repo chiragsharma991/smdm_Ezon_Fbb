@@ -75,6 +75,15 @@
         android:id="@+id/switchRelay"
         android:background="@color/ezfb_White"
         android:padding="10dp">
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="* In Units"
+            android:textColor="@color/ezfbb_black"
+            android:textSize="13sp" />
 
 
         <Switch

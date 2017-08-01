@@ -6,8 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
-import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import android.content.Context;

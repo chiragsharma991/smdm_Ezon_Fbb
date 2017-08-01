@@ -57,7 +57,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     PieChart pieChart;
     RequestQueue queue;
     Context context;
-    String userId, bearertoken, TAG = "VisualReport";
+    String userId, bearertoken, TAG = "VisualReport",storeDescription;
     SharedPreferences sharedPreferences;
     Gson gson;
     int offset  = 0,limit = 10,count = 0;
@@ -65,7 +65,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     ProgressBar visual_report_progressBar;
     ArrayList<VisualReport> visualReportArrayList;
     float pendingOptions = 0.0f, likedOptions = 0.0f, dislikedOptions = 0.0f, totalOptions = 0.0f;
-    TextView vr_likeVal,vr_dislikeVal,vr_pendingVal,txt_like_color,txt_dislike_color,txt_pending_color;
+    TextView vr_likeVal,vr_dislikeVal,vr_pendingVal,txt_like_color,txt_dislike_color,txt_pending_color,txtStoreCode,txtStoreName;
     PieDataSet dataSet;
     PieData pieData;
     String recache;
@@ -79,11 +79,16 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
+        txtStoreCode = (TextView)findViewById(R.id.txtStoreCode);
+        txtStoreName = (TextView)findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreName.setText(storeDescription.substring(5));
         visualreport_imageBtnBack = (RelativeLayout)findViewById(R.id.visualreport_imageBtnBack);
         vr_likeVal = (TextView)findViewById(R.id.vr_likesVal);
         vr_dislikeVal = (TextView)findViewById(R.id.vr_dislikesVal);

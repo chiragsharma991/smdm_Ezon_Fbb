@@ -158,7 +158,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_NetSalesVal.setText("\u20B9\t" + format.format(Math.round(ez_sales_pager.getSaleNetVal())));
                     txt_ez_PlanSalesVal.setText("\u20B9\t" + format.format(Math.round(ez_sales_pager.getPlanSaleNetVal())));
                     txt_ez_NetSalesUVal.setText("" + format.format(Math.round(ez_sales_pager.getSaleTotQty())));
-                    txt_ez_SohUVal.setText("" + format.format(Math.round(ez_sales_pager.getStkOnhandQty())));
+                    txt_ez_SohUVal.setText("₹\t" + format.format(Math.round(ez_sales_pager.getRgm())));
                     txt_ez_NetSalesPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesGrowthPct()) + "%");
                     txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchived()) + "%");
                     txt_ez_NetSalesUPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesUnitsGrowthPct()) + "%");
@@ -199,7 +199,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_NetSalesVal.setText("\u20B9\t" + format.format(Math.round(ez_sales_pager.getSaleNetVal())));
                     txt_ez_PlanSalesVal.setText("\u20B9\t" + format.format(Math.round(ez_sales_pager.getPlanSaleNetVal())));
                     txt_ez_NetSalesUVal.setText("" + format.format(Math.round(ez_sales_pager.getSaleTotQty())));
-                    txt_ez_SohUVal.setText("" + format.format(Math.round(ez_sales_pager.getStkOnhandQty())));
+                    txt_ez_SohUVal.setText("₹\t" + format.format(Math.round(ez_sales_pager.getRgm())));
 
                     txt_ez_NetSalesPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesGrowthPct()) + "%");
                     txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchived()) + "%");

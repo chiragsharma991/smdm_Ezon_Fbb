@@ -41,13 +41,16 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -58,18 +61,18 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * Created by pamrutkar on 28/02/17.
  */
 
-public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedListener{
-   TableLayout tableAProd_Frag;
-   TableLayout tableBProd_Frag;
-   TableLayout tableCProd_Frag;
-   TableLayout tableDProd_Frag;
+public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedListener {
+    TableLayout tableAProd_Frag;
+    TableLayout tableBProd_Frag;
+    TableLayout tableCProd_Frag;
+    TableLayout tableDProd_Frag;
     ViewGroup view;
     HorizontalScrollView horizontalScrollViewB;
     HorizontalScrollView horizontalScrollViewD;
     ArrayList<KeyPlanProductBean> productNameBeanArrayList;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
-    static String prodsegClick ="WTD" ;
+    static String prodsegClick = "WTD";
     SegmentedGroup segmentedGroupProduct;
     RadioButton plan_btnWTD, plan_btnLW;
     RequestQueue queue;
@@ -78,17 +81,17 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     public static RelativeLayout relPlanProd_Frag;
     int planlevel;
 
-    Button txtProdGreen,txtProdRed,txtProdAmber;
-    private  boolean plantoggleClick=true;
+    Button txtProdGreen, txtProdRed, txtProdAmber;
+    private boolean plantoggleClick = true;
     // set the header titles
     String headers[] = {
-           "Product Name",
-           " PvA\n\t\tSales% ",
-           "  PvA\n\t\tStk%   ",
-           "  Plan\n\t\tSales   ",
-           "    Sales\n\t\t\t(U)    ",
-           "    Plan\n\t\t\tStk    ",
-           "    Stk\n\t\t\t(U)    "
+            "Product Name                      ",
+            " PvA\n\t\tSales% ",
+            "  PvA\n\t\tStk%   ",
+            "  Plan\n\t\tSales   ",
+            "    Sales\n\t\t(U)    ",
+            "    Plan\n\t\tStk    ",
+            "    Stk\n\t\t(U)    "
 
     };
 
@@ -101,7 +104,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     int count = 0;
     OnRowPressListener1 rowPressListener;
     SharedPreferences sharedPreferences;
-    String filterProductValues = "",achColor;
+    String filterProductValues = "", achColor;
     private TabLayout Tabview;
     private CardView table_area;
 
@@ -139,8 +142,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         if (tab.getTabCount() == 3) {
             tab.removeTabAt(2);
         }
-        if(tab.getTabCount() == 2)
-        {
+        if (tab.getTabCount() == 2) {
             tab.removeTabAt(1);
         }
 
@@ -149,16 +151,15 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
         plan_btnLW = (RadioButton) view.findViewById(R.id.planactual_prodbtnLW);*/
 
-        Tabview = (TabLayout)view.findViewById(R.id.tabview);
+        Tabview = (TabLayout) view.findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("WTD"));
         Tabview.addTab(Tabview.newTab().setText("LW"));
         Tabview.setOnTabSelectedListener(this);
 
-        txtProdGreen = (Button)view.findViewById(R.id.txtProdGreen);
+        txtProdGreen = (Button) view.findViewById(R.id.txtProdGreen);
         txtProdRed = (Button) view.findViewById(R.id.txtProdRed);
         txtProdAmber = (Button) view.findViewById(R.id.txtProdAmber);
-        if (Reusable_Functions.chkStatus(context))
-        {
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             offsetvalue = 0;
@@ -167,20 +168,18 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
             planlevel = 1;
             productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
 
-            if(filterProductValues == null || filterProductValues == "") {
+            if (filterProductValues == null || filterProductValues == "") {
                 plantoggleClick = false;
                 RetainSegVal();
                 requestPlanProductAPI(offsetvalue, limit);
-            }
-            else
-            {
+            } else {
                 //plantoggleClick = true;
                 RetainSegVal();
-                requestFilterProductAPI(offsetvalue,limit);
+                requestFilterProductAPI(offsetvalue, limit);
             }
         } else {
             Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
-            plantoggleClick=false;
+            plantoggleClick = false;
 
         }
 
@@ -214,7 +213,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                     RetainSegVal();
                     requestPlanProductAchColorAPI(offsetvalue, limit);
 
-            }
+                }
             }
 
         });
@@ -288,16 +287,14 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     }
 
     private void RetainSegVal() {
-       // plantoggleClick = true;
+        // plantoggleClick = true;
 
-        if(prodsegClick.equals("WTD"))
-        {
-        //    plan_btnWTD.toggle();
+        if (prodsegClick.equals("WTD")) {
+            //    plan_btnWTD.toggle();
 
 
-        }else if(prodsegClick.equals("LW"))
-        {
-           // plan_btnLW.toggle();
+        } else if (prodsegClick.equals("LW")) {
+            // plan_btnLW.toggle();
             plantoggleClick = true;
             Tabview.getTabAt(1).select();
 
@@ -384,7 +381,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                 TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#ffffff"));  // header fill color
+        textView.setBackgroundColor(Color.parseColor("#f8f6f6"));  // header fill color
         textView.setTextColor(Color.parseColor("#000000"));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         componentATableRow.addView(textView);
@@ -404,7 +401,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-           textView.setBackgroundColor(Color.parseColor("#ffffff"));  // header fill color
+            textView.setBackgroundColor(Color.parseColor("#f8f6f6"));  // header fill color
             textView.setTextColor(Color.parseColor("#000000"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
@@ -415,8 +412,6 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     private void generateTableC_AndTable_B() {
 
         // just seeing some header cell width
-
-
         for (int k = 0; k < productNameBeanArrayList.size(); k++) {
             final TableRow tableRowForTableCProd_Frag;
             tableRowForTableCProd_Frag = this.tableRowForTableCProd_Frag(productNameBeanArrayList.get(k).getLevel());
@@ -441,12 +436,12 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                     if (tab.getTabCount() == 3) {
                         tab.removeTabAt(2);
                     }
-                    if(tab.getTabCount() == 2) {
-                       tab.removeTabAt(1);
+                    if (tab.getTabCount() == 2) {
+                        tab.removeTabAt(1);
                     }
                     tab.addTab(tab.newTab().setText("Option"));
                     tab.getTabAt(1).select();
-                    rowPressListener.communicateToFragment2(productNameBeanArrayList.get(i).getLevel(),prodsegClick);
+                    rowPressListener.communicateToFragment2(productNameBeanArrayList.get(i).getLevel(), prodsegClick);
                 }
             });
             this.tableCProd_Frag.addView(tableRowForTableCProd_Frag);
@@ -481,7 +476,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                 String.valueOf(format.format(Math.round(productDetails.getSaleTotQty()))),
                 String.valueOf(format.format(Math.round(productDetails.getPlanTargetStockQty()))),
                 String.valueOf(format.format(Math.round(productDetails.getInvClosingQty()))),
-            };
+        };
 
         for (int x = 0; x < loopCount; x++) {
 
@@ -489,17 +484,29 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
             params.setMargins(2, 2, 0, 0);
             TextView textViewB = this.bodyTextView(info[x]);
             textViewB.setTextColor(Color.parseColor("#000000"));
-            if(productDetails.getPvaSales() >= Double.parseDouble("100"))
+            textViewB.setTypeface(Typeface.DEFAULT);
+            if (tableRowForTableDProd_Frag.getChildAt(0) != null)
             {
-                textViewB.setTextColor(Color.parseColor("#70e503"));
-            }
-            else if(productDetails.getPvaSales() > Double.parseDouble("80") && productDetails.getPvaSales() < Double.parseDouble("100"))
-            {
-                textViewB.setTextColor(Color.parseColor("#ff7e00"));
+                TextView txtPvaSales = (TextView) tableRowForTableDProd_Frag.getChildAt(0);
+                if (productDetails.getPvaSales() >= Double.parseDouble("100")) {
+                    txtPvaSales.setTextColor(Color.parseColor("#70e503"));
+                } else if (productDetails.getPvaSales() > Double.parseDouble("80") && productDetails.getPvaSales() < Double.parseDouble("100")) {
+                    txtPvaSales.setTextColor(Color.parseColor("#ff7e00"));
+                } else if (productDetails.getPvaSales() < Double.parseDouble("80")) {
+                    txtPvaSales.setTextColor(Color.parseColor("#fe0000"));
+                }
 
-            }else if(productDetails.getPvaSales() < Double.parseDouble("80"))
-            {
-                textViewB.setTextColor(Color.parseColor("#fe0000"));
+            }
+            if (tableRowForTableDProd_Frag.getChildAt(1) != null) {
+                TextView txtPvaStock = (TextView) tableRowForTableDProd_Frag.getChildAt(1);
+                if (productDetails.getPvaStock() >= Double.parseDouble("100")) {
+                    txtPvaStock.setTextColor(Color.parseColor("#70e503"));
+                } else if (productDetails.getPvaStock() > Double.parseDouble("80") && productDetails.getPvaStock() < Double.parseDouble("100")) {
+                    txtPvaStock.setTextColor(Color.parseColor("#ff7e00"));
+                } else if (productDetails.getPvaStock() < Double.parseDouble("80")) {
+                    txtPvaStock.setTextColor(Color.parseColor("#fe0000"));
+                }
+
             }
 
             tableRowForTableDProd_Frag.addView(textViewB, params);
@@ -528,6 +535,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         TextView headerTextView = new TextView(this.context);
         headerTextView.setBackgroundColor(Color.parseColor("#000000"));
         headerTextView.setText(label);
+        headerTextView.setTextSize(12f);
         headerTextView.setGravity(Gravity.CENTER);
         headerTextView.setPadding(5, 5, 5, 5);
         return headerTextView;
@@ -637,13 +645,13 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
 
-        int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: " );
+        int checkedId = Tabview.getSelectedTabPosition();
+        Log.e("TAB", "onTabSelected: ");
 
-        if(!plantoggleClick) {
+        if (!plantoggleClick) {
 
             switch (checkedId) {
-                case 0 :   //WTD selection
+                case 0:   //WTD selection
                     if (prodsegClick.equals("WTD")) {
                         break;
                     }
@@ -662,19 +670,17 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                         count = 0;
                         productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
                         planlevel = 1;
-                        if(filterProductValues == null || filterProductValues == "") {
+                        if (filterProductValues == null || filterProductValues == "") {
                             requestPlanProductAPI(offsetvalue, limit);
-                        }
-                        else
-                        {
-                            requestFilterProductAPI(offsetvalue,limit);
+                        } else {
+                            requestFilterProductAPI(offsetvalue, limit);
                         }
                     } else {
                         Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
 
                     break;
-                case 1 :  // LW selection
+                case 1:  // LW selection
                     if (prodsegClick.equals("LW")) {
                         break;
                     }
@@ -694,12 +700,10 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                         count = 0;
                         productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
                         planlevel = 1;
-                        if(filterProductValues == null || filterProductValues == "") {
+                        if (filterProductValues == null || filterProductValues == "") {
                             requestPlanProductAPI(offsetvalue, limit);
-                        }
-                        else
-                        {
-                            requestFilterProductAPI(offsetvalue,limit);
+                        } else {
+                            requestFilterProductAPI(offsetvalue, limit);
                         }
                     } else {
                         Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -707,9 +711,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
                     break;
             }
-        }
-        else
-        {
+        } else {
             plantoggleClick = false;
         }
 
@@ -767,15 +769,15 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
 
     private void requestFilterProductAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&productName="+filterProductValues.replace(" ","%20").replaceAll("&", "%26") +"&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&productName=" + filterProductValues.replace(" ", "%20").replaceAll("&", "%26") + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
 
-        Log.e("TAG", "requestPlan_product: "+url );
+        Log.e("TAG", "requestPlan_product: " + url);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("TAG", "responsePlan_product: "+response );
+                        Log.d("TAG", "responsePlan_product: " + response);
                         try {
                             int i;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -854,12 +856,12 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-                                plantoggleClick=false;
+                                plantoggleClick = false;
                             }
                         } catch (Exception e) {
 
                             e.printStackTrace();
-                            plantoggleClick=false;
+                            plantoggleClick = false;
 
                         }
                     }
@@ -869,7 +871,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
-                        plantoggleClick=false;
+                        plantoggleClick = false;
 
                     }
                 }
@@ -892,7 +894,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
     private void requestPlanProductAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e("TAG", "requestPlanProductAPI: "+url );
+        Log.e("TAG", "requestPlanProductAPI: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -974,12 +976,12 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-                                plantoggleClick=false;
+                                plantoggleClick = false;
                             }
                         } catch (Exception e) {
 
                             e.printStackTrace();
-                            plantoggleClick=false;
+                            plantoggleClick = false;
 
                         }
                     }
@@ -989,7 +991,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
-                        plantoggleClick=false;
+                        plantoggleClick = false;
 
                     }
                 }
@@ -1011,7 +1013,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     }
 
     private void requestPlanProductAchColorAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&achColor=" + achColor +"&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&achColor=" + achColor + "&offset=" + offsetvalue + "&limit=" + limit;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -1096,12 +1098,12 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-                                plantoggleClick=false;
+                                plantoggleClick = false;
                             }
                         } catch (Exception e) {
 
                             e.printStackTrace();
-                            plantoggleClick=false;
+                            plantoggleClick = false;
 
                         }
                     }
@@ -1111,7 +1113,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
-                        plantoggleClick=false;
+                        plantoggleClick = false;
 
                     }
                 }

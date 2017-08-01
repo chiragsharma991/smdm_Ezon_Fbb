@@ -8,6 +8,7 @@
         android:id="@+id/storeList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="13sp"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:gravity="center_vertical"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"

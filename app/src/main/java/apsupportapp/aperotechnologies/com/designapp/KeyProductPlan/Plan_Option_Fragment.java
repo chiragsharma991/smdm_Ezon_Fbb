@@ -4,6 +4,7 @@ package apsupportapp.aperotechnologies.com.designapp.KeyProductPlan;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
@@ -88,7 +89,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     Button txtOptionGreen, txtOptionRed,txtOptionAmber;
     // set the header titles
     String headers[] = {
-            "Option",
+            "Option                        ",
             " PvA\n\t\tSales%  ",
             " PvA\n\t\tStk%   ",
             " Plan\n\tSales   ",
@@ -375,13 +376,13 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     TableRow componentATableRow() {
 
         TableRow componentATableRow = new TableRow(this.context);
-        componentATableRow.setBackgroundColor(Color.parseColor("#ffffff"));
+        componentATableRow.setBackgroundColor(Color.parseColor("#dfdedf"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 200, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
 
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#ffffff"));
+        textView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         textView.setTextColor(Color.parseColor("#000000"));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         textView.setLayoutParams(params);
@@ -403,7 +404,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-            textView.setBackgroundColor(Color.parseColor("#ffffff"));
+            textView.setBackgroundColor(Color.parseColor("#f8f6f6"));
             textView.setTextColor(Color.parseColor("#000000"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
@@ -483,22 +484,32 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
         for (int x = 0; x < loopCount; x++) {
             TableRow.LayoutParams params = new TableRow.LayoutParams(headerCellsWidth[x + 1], TableRow.LayoutParams.MATCH_PARENT);
             params.setMargins(2, 2, 0, 0);
-
             TextView textViewB = this.bodyTextView(info[x]);
             textViewB.setTextColor(Color.parseColor("#000000"));
-            if(productDetails.getPvaSales() >= Double.parseDouble("100"))
+            textViewB.setTypeface(Typeface.DEFAULT);
+            if (taleRowForTableD.getChildAt(0) != null)
             {
-                textViewB.setTextColor(Color.parseColor("#70e503"));
-            }
-            else if(productDetails.getPvaSales() > Double.parseDouble("80") && productDetails.getPvaSales() < Double.parseDouble("100"))
-            {
-                textViewB.setTextColor(Color.parseColor("#ff7e00"));
+                TextView txtPvaSales = (TextView) taleRowForTableD.getChildAt(0);
+                if (productDetails.getPvaSales() >= Double.parseDouble("100")) {
+                    txtPvaSales.setTextColor(Color.parseColor("#70e503"));
+                } else if (productDetails.getPvaSales() > Double.parseDouble("80") && productDetails.getPvaSales() < Double.parseDouble("100")) {
+                    txtPvaSales.setTextColor(Color.parseColor("#ff7e00"));
+                } else if (productDetails.getPvaSales() < Double.parseDouble("80")) {
+                    txtPvaSales.setTextColor(Color.parseColor("#fe0000"));
+                }
 
-            }else if(productDetails.getPvaSales() < Double.parseDouble("80"))
-            {
-                textViewB.setTextColor(Color.parseColor("#fe0000"));
             }
+            if (taleRowForTableD.getChildAt(1) != null) {
+                TextView txtPvaStock = (TextView) taleRowForTableD.getChildAt(1);
+                if (productDetails.getPvaStock() >= Double.parseDouble("100")) {
+                    txtPvaStock.setTextColor(Color.parseColor("#70e503"));
+                } else if (productDetails.getPvaStock() > Double.parseDouble("80") && productDetails.getPvaStock() < Double.parseDouble("100")) {
+                    txtPvaStock.setTextColor(Color.parseColor("#ff7e00"));
+                } else if (productDetails.getPvaStock() < Double.parseDouble("80")) {
+                    txtPvaStock.setTextColor(Color.parseColor("#fe0000"));
+                }
 
+            }
             taleRowForTableD.addView(textViewB, params);
         }
 
@@ -507,15 +518,14 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     }
 
     // table cell standard TextView
-    TextView bodyTextView(String label) {
-
+    TextView bodyTextView(String label)
+    {
         TextView bodyTextView = new TextView(this.context);
         bodyTextView.setBackgroundColor(Color.parseColor("#ffffff"));
         bodyTextView.setText(label);
         bodyTextView.setTextSize(12f);
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(5, 5, 5, 5);
-
         return bodyTextView;
     }
 
@@ -525,9 +535,9 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
         TextView headerTextView = new TextView(this.context);
         headerTextView.setBackgroundColor(Color.parseColor("#000000"));
         headerTextView.setText(label);
+        headerTextView.setTextSize(12f);
         headerTextView.setGravity(Gravity.CENTER);
         headerTextView.setPadding(5, 5, 5, 5);
-
         return headerTextView;
     }
 
@@ -844,7 +854,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
                                 resizeHeaderHeight();
                                 getTableRowHeaderCellWidth();
                                 if (optionview.getChildCount() == 1) {
-                                    optionview.removeAllViews();
+                                    optionview.removeView(optrel);
                                     scrollViewC.scrollTo(0, 0);
                                     scrollViewD.scrollTo(0, 0);
                                     optionview.addView(optrel);

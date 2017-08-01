@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/tstoreCode"
-                android:text="NA"
+                android:text=""
                 android:textColor="@color/ezfbb_black"
                 android:textSize="13sp"
                 android:textStyle="bold" />
