@@ -612,6 +612,9 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         ApiRequest api_request;
         focusOnPie = false;
 
+
+
+
         switch (checkedId) {
             case 0 : // Concept Performance
                 concept_toggle = true;

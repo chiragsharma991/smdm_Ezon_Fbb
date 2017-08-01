@@ -58,7 +58,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
  * Created by rkanawade on 24/07/17.
  */
 
-public class ProductAvailability_Feedback extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
+public class ProductAvailability_Feedback extends Fragment implements View.OnClickListener, View.OnFocusChangeListener,HttpPostResponse {
     private Context context;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_ean_number, edt_brand_name, edt_product_name, edt_size;
     private EditText edt_quantity, edt_color_option1, edt_color_option2, edt_fit, edt_style;
@@ -311,26 +311,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
             case 0:   //total values
 
                 String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
-                ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, new HttpPostResponse() {
-                    @Override
-                    public void PostResponse(JSONObject response) {
-                        Log.e(TAG, "PostResponse: success");
-                        String result = null;
-                        try {
-                            result = response.getString("status");
-                            Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
-                            clearData();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object,this);
 
-                    @Override
-                    public void PostDataNotFound() {
-                        Log.e(TAG, "PostDataNotFound");
-
-                    }
-                });  // 0 is id for identification
                 break;
 
             default:
@@ -361,44 +343,26 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
             }
         }
-        if (view == edt_remarks) {
 
-            if (!b) {
-                if (!prefocus) {
-                    incorrect_remark.setVisibility(View.GONE);
-                    if (!edt_remarks.getText().toString().equals("")) {
-                        incorrect_remark.setText(getResources().getString(R.string.customer_feedback_digit));
-                        incorrect_remark.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    prefocus = prefocus == true ? false : true;
-                }
 
-            }
+    }
+
+    @Override
+    public void PostResponse(JSONObject response) {
+        Log.e(TAG, "PostResponse: success");
+        String result = null;
+        try {
+            result = response.getString("status");
+            Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
+            clearData();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-     /*   if(view == edt_remarks){
+    }
 
-            Log.e(TAG, "onFocusChange: customerRemarks" );
-            if(!customerRemarks.equals(""))
-            {
-                if(!b){
-                    incorrect_remark.setVisibility(View.GONE);
-                    if (edt_customer_mobile_number.length() == 0 || edt_customer_mobile_number.equals("") || edt_customer_mobile_number == null  ) {
-                        Log.e(TAG, "submitData: focus" );
-                        incorrect_phone.setVisibility(View.VISIBLE);
-                        incorrect_phone.setText(getResources().getString(R.string.customer_feedback_number));
-                    }
-                      if(edt_customer_mobile_number.length() < 10){
-                        incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
-                        incorrect_phone.setVisibility(View.VISIBLE);
-                    }
-                }
-
-            }
-
-
-        }*/
-
+    @Override
+    public void PostDataNotFound() {
+        Log.e(TAG, "PostDataNotFound");
     }
 
 

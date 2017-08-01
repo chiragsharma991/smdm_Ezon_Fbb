@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_Reports;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
@@ -66,6 +67,19 @@ public class ApiRequest  {
 
     }
 
+    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id, ProductAvailability_Reports productAvailability_reports) {
+        ResposeInterface= (HttpResponse)productAvailability_reports;
+        this.context=context;
+        bearertoken=token;
+        this.Url=Url;
+        this.TAG=TAG;
+        this.queue=queue;
+        this.id=id;
+        this.list=new ArrayList<>();
+        this.mpm_modelClass=mpm_modelClass;
+        gson=new Gson();
+        setApi(context);
+    }
 
 
     private  void setApi(final Context context) {
@@ -88,6 +102,11 @@ public class ApiRequest  {
 
         }
         else if(TAG.equals("HourlyPerformence")){
+
+            URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
+
+        }
+        else if(TAG.equals("customerFeedbackReport")){
 
             URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
 
@@ -158,6 +177,9 @@ public class ApiRequest  {
                             }
                             Log.e(TAG, "onResponse catch: "+e.getMessage() );
                             Reusable_Functions.hDialog();
+                            ResposeInterface.nodatafound();
+                            Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
+
 
 
 
@@ -178,7 +200,7 @@ public class ApiRequest  {
                         }
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Server not found...: "+error.getMessage() );
+                        Log.e(TAG, "Server not found..."+error.getMessage() );
                         error.printStackTrace();
                     }
 
