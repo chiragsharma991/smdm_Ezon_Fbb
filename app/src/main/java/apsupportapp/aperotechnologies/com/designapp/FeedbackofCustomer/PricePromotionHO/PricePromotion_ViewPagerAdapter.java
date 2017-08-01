@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotionHO;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

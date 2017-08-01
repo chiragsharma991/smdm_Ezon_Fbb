@@ -19,17 +19,17 @@ import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_notify_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServices;
-import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServices_HO;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServicesHO.OurStoreServices_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund;
-import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeRefund_HO;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.PolicyExchangeRefund_HO;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotionHO.PricePromotion_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange;
-import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange_HO;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisiorStaff;
-import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaff_HO;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaffHO.SupervisorStaff_HO;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
-import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_activity;
@@ -198,7 +198,7 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(PolicyExchangeRefund);
                     break;
                 case 92:
-                    Intent Price_Promotion = new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotion_HO.class);
+                    Intent Price_Promotion = new Intent(context, PricePromotion_HO.class);
                     startActivity(Price_Promotion);
                     break;
                 case 93:

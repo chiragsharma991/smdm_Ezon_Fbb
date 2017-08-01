@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,15 +23,15 @@ import apsupportapp.aperotechnologies.com.designapp.R;
  * Created by rkanawade on 25/07/17.
  */
 
-public class SupervisorStaff_Feedback extends Fragment {
-
+public class ProductQualityRange_Feedback extends Fragment {
     private Context context;
-    private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_emp_name, edt_store_name;
+    private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_article_id, edt_brand_name, edt_product_name, edt_size;
+    private EditText edt_color_option1, edt_color_option2, edt_fit, edt_style;
     private RadioGroup radioCallbacks;
     private RadioButton radioYes, radioNo;
     private Button btn_submit, btn_cancel;
-    private View v;
     private LinearLayout linear_toolbar;
+    private View v;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -39,7 +39,7 @@ public class SupervisorStaff_Feedback extends Fragment {
 
         context = getContext();
 
-        return inflater.inflate(R.layout.activity_supervisor_staff, container, false);
+        return inflater.inflate(R.layout.activity_product_quality_range, container, false);
     }
 
     @Override
@@ -55,8 +55,14 @@ public class SupervisorStaff_Feedback extends Fragment {
         edt_remarks = (EditText) v.findViewById(R.id.edt_remarks);
         edt_first_name = (EditText) v.findViewById(R.id.edt_first_name);
         edt_last_name = (EditText) v.findViewById(R.id.edt_last_name);
-        edt_emp_name = (EditText) v.findViewById(R.id.edt_emp_name);
-        edt_store_name = (EditText) v.findViewById(R.id.edt_store_name);
+        edt_article_id = (EditText) v.findViewById(R.id.edt_article_id);
+        edt_brand_name = (EditText) v.findViewById(R.id.edt_brand_name);
+        edt_product_name = (EditText) v.findViewById(R.id.edt_product_name);
+        edt_size = (EditText) v.findViewById(R.id.edt_size);
+        edt_color_option1 = (EditText) v.findViewById(R.id.edt_color_option1);
+        edt_color_option2 = (EditText) v.findViewById(R.id.edt_color_option2);
+        edt_fit = (EditText) v.findViewById(R.id.edt_fit);
+        edt_style = (EditText) v.findViewById(R.id.edt_style);
         radioCallbacks = (RadioGroup) v.findViewById(R.id.radioCallbacks);
         radioYes = (RadioButton) v.findViewById(R.id.radioYes);
         radioNo = (RadioButton) v.findViewById(R.id.radioNo);
@@ -133,7 +139,7 @@ public class SupervisorStaff_Feedback extends Fragment {
             }
         });
 
-        edt_emp_name.addTextChangedListener(new TextWatcher() {
+        edt_article_id.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -141,7 +147,7 @@ public class SupervisorStaff_Feedback extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_emp_name.setBackgroundResource(R.drawable.edittext_red_border);
+                edt_article_id.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
             @Override
@@ -150,7 +156,7 @@ public class SupervisorStaff_Feedback extends Fragment {
             }
         });
 
-        edt_store_name.addTextChangedListener(new TextWatcher() {
+        edt_brand_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -158,7 +164,7 @@ public class SupervisorStaff_Feedback extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_store_name.setBackgroundResource(R.drawable.edittext_red_border);
+                edt_brand_name.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
             @Override
@@ -167,6 +173,107 @@ public class SupervisorStaff_Feedback extends Fragment {
             }
         });
 
+        edt_product_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edt_product_name.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edt_size.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edt_size.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edt_color_option1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edt_color_option1.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edt_color_option2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edt_color_option2.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edt_fit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edt_fit.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edt_style.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edt_style.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,6 +290,5 @@ public class SupervisorStaff_Feedback extends Fragment {
         });
 
     }
-
 
 }

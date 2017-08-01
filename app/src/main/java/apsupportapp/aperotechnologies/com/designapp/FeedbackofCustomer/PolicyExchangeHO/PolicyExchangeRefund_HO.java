@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-public class ProductQualityRange_HO extends AppCompatActivity {
+public class PolicyExchangeRefund_HO extends AppCompatActivity {
     TabLayout tabLayout;
     private RelativeLayout imageBtnBack1;
     private Context context;
@@ -19,8 +19,7 @@ public class ProductQualityRange_HO extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_quality_range_ho);
-
+        setContentView(R.layout.activity_policy_exchange_refund_ho);
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
         context = this;
@@ -40,7 +39,7 @@ public class ProductQualityRange_HO extends AppCompatActivity {
         });
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final ProductQualityRange_ViewPagerAdapter adapter = new ProductQualityRange_ViewPagerAdapter
+        final PolicyExchange_ViewPagerAdapter adapter = new PolicyExchange_ViewPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -61,4 +60,5 @@ public class ProductQualityRange_HO extends AppCompatActivity {
             }
         });
     }
+
 }

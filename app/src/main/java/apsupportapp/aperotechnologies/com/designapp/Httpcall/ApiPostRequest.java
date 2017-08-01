@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_Feedback;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
@@ -45,8 +47,8 @@ public class ApiPostRequest {
     private String TAG;
     public static JsonObjectRequest postRequest;
 
-    public ApiPostRequest(Context context,String bearertoken,String Url, String TAG, RequestQueue queue, int id ,JSONObject object,HttpPostResponse ResposeInterface) {
-        this.ResposeInterface =ResposeInterface;
+    public ApiPostRequest(Context context, String bearertoken, String Url, String TAG, RequestQueue queue, int id, JSONObject object, ProductAvailability_Notify productAvailability_notify) {
+        this.ResposeInterface =(HttpPostResponse) productAvailability_notify;
         this.context = context;
         this.URL = Url;
         this.TAG = TAG;
@@ -61,8 +63,6 @@ public class ApiPostRequest {
 
 
     private void setApi(final Context context) {
-
-
 
         Log.e(TAG, "final_setApi: URL " + URL);
         Reusable_Functions.sDialog(context,"Submitting data…");
