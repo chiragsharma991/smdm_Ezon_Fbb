@@ -192,8 +192,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         dataSet.setValueTextColor(Color.BLACK);
         PieData pieData = new PieData(dataSet);
         pieData.setValueFormatter(new MyValueFormatter());
-        dataSet.setValueLinePart1Length(1.9f);
-        dataSet.setValueLinePart2Length(1.9f);
+        dataSet.setValueLinePart1Length(0.3f);
+        dataSet.setValueLinePart2Length(0.3f);
         pieChart.setDrawMarkers(false);
         pieData.setValueTextSize(11f);
         dataSet.setXValuePosition(null);
