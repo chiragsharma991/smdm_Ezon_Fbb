@@ -46,8 +46,8 @@ public class ApiPostRequest {
     private String TAG;
     public static JsonObjectRequest postRequest;
 
-    public ApiPostRequest(Context context, String bearertoken, String Url, String TAG, RequestQueue queue, int id, JSONObject object, ProductAvailability_Feedback productAvailability_feedback) {
-        this.ResposeInterface =(HttpPostResponse) productAvailability_feedback;
+    public ApiPostRequest(Context context, String bearertoken, String Url, String TAG, RequestQueue queue, int id, JSONObject object,HttpPostResponse ResposeInterface) {
+        this.ResposeInterface =ResposeInterface;
         this.context = context;
         this.URL = Url;
         this.TAG = TAG;

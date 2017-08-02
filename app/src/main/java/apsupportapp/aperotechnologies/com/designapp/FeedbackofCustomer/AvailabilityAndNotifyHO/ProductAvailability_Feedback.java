@@ -313,7 +313,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
             case 0:   //total values
 
                 String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
-               // ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, ProductAvailability_Notify);
+                ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
 
                 break;
 

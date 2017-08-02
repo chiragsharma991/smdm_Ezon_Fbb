@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.Adapter.ProductAvailability_ViewPagerAdapter;
@@ -52,20 +53,40 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Log.e(TAG, "onTabSelected: " );
+                View focus = getCurrentFocus();
+                if (focus != null) {
+                    hiddenKeyboard(focus);
+                }
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                View focus = getCurrentFocus();
+                if (focus != null) {
+                    hiddenKeyboard(focus);
+                }
 
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                View focus = getCurrentFocus();
+                if (focus != null) {
+                    hiddenKeyboard(focus);
+                }
 
             }
         });
     }
+
+
+    private void hiddenKeyboard(View v) {
+        InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        keyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
 
     @Override
     public void onTrigger(int position) {

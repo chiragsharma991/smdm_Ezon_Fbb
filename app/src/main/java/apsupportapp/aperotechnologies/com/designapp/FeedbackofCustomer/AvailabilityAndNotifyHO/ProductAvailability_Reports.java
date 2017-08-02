@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,11 +40,9 @@ import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessInde
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
-
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
-
 import static apsupportapp.aperotechnologies.com.designapp.R.id.listView;
 
 /**
@@ -71,6 +70,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     private ReportAdapter adapter;
     private ArrayList<mpm_model> callbacklist,piechartList;
     private String attribute14="YES";
+    private boolean ActivityCreated=false;
+    private CardView card;
 
 
     @Override
@@ -86,8 +87,22 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.e(TAG, "setUserVisibleHint: "+isVisibleToUser );
+        if(ActivityCreated && isVisibleToUser){
+           // pieChart.requestFocusFromTouch();
+            //pieChart.requestFocus();
+           // pieChart.clearFocus();
+        }
+       // pieChart.requestFocusFromTouch();
+      //````  pieChart.requestFocus();
+        //pieChart.clear();
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.e(TAG, "onCreateView: " );
         context = getContext();
         View view = inflater.inflate(R.layout.fragment_productavailability_reports, container, false);
         return view;
@@ -96,12 +111,15 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.e(TAG, "onActivityCreated: " );
+        ActivityCreated=true;
         v = getView();
         initialiseUI();
     }
 
     private void initialiseUI() {
-        listview = (RecyclerView) v.findViewById(listView);
+        listview = (RecyclerView) v.findViewById(R.id.listView);
+        card = (CardView) v.findViewById(R.id.cf_cardView);
         storedesc = (TextView) v.findViewById(R.id.txtStoreCode);
         pieChart = (PieChart) v.findViewById(R.id.cf_pieChart);
         Tabview = (TabLayout) v.findViewById(R.id.tabview);
@@ -241,6 +259,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                 LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
         adapter = new ReportAdapter(callbacklist, context);
         listview.setAdapter(adapter);
+      //  listview.setNestedScrollingEnabled(true);
+
     }
 
     @Override
