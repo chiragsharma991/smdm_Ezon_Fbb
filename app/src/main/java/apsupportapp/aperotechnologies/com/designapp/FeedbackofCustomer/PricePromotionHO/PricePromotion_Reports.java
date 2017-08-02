@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotionHO;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
- * Created by rkanawade on 24/07/17.
+ * Created by rkanawade on 25/07/17.
  */
 
-public class PolicyExchange_Reports extends Fragment{
+public class PricePromotion_Reports extends Fragment {
 
     private Context context;
 
@@ -23,7 +23,7 @@ public class PolicyExchange_Reports extends Fragment{
 
         context = getContext();
 
-        return inflater.inflate(R.layout.fragment_policyexchange_reports, container, false);
+        return inflater.inflate(R.layout.fragment_pricepromotion_reports, container, false);
     }
 
     @Override

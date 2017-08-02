@@ -18,79 +18,79 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-<!--
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_header_height"
-                android:layout_alignParentTop="true"
-                android:background="@color/ezfb_White"
-                android:contentInsetEnd="0dp"
-                android:contentInsetLeft="0dp"
-                android:contentInsetRight="0dp"
-                android:contentInsetStart="0dp"
-                app:contentInsetEnd="0dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp">
+            <!--
+                        <android.support.v7.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/toolbar_header_height"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/ezfb_White"
+                            android:contentInsetEnd="0dp"
+                            android:contentInsetLeft="0dp"
+                            android:contentInsetRight="0dp"
+                            android:contentInsetStart="0dp"
+                            app:contentInsetEnd="0dp"
+                            app:contentInsetLeft="0dp"
+                            app:contentInsetRight="0dp"
+                            app:contentInsetStart="0dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
-                    <RelativeLayout
-                        android:id="@+id/cf_imageBtnBack"
-                        android:layout_width="@dimen/header_clickable_width"
-                        android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="0dp"
-                        android:background="@drawable/button_click">
+                                <RelativeLayout
+                                    android:id="@+id/cf_imageBtnBack"
+                                    android:layout_width="@dimen/header_clickable_width"
+                                    android:layout_height="@dimen/header_clickable_height"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="0dp"
+                                    android:background="@drawable/button_click">
 
-                        <Button
-                            android:layout_width="@dimen/arrow_back_icon_width"
-                            android:layout_height="@dimen/arrow_back_icon_height"
-                            android:layout_centerInParent="true"
-                            android:background="@mipmap/ic_arrow_back_black"
-                            android:clickable="false" />
+                                    <Button
+                                        android:layout_width="@dimen/arrow_back_icon_width"
+                                        android:layout_height="@dimen/arrow_back_icon_height"
+                                        android:layout_centerInParent="true"
+                                        android:background="@mipmap/ic_arrow_back_black"
+                                        android:clickable="false" />
 
-                    </RelativeLayout>
+                                </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/toolbar_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_toRightOf="@+id/cf_imageBtnBack"
-                        android:text="@string/cf_title"
-                        android:singleLine="true"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="@dimen/smdm_header_title_normal"
-                        />
+                                <TextView
+                                    android:id="@+id/toolbar_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="40dp"
+                                    android:layout_toRightOf="@+id/cf_imageBtnBack"
+                                    android:text="@string/cf_title"
+                                    android:singleLine="true"
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_header_title_normal"
+                                    />
 
-                    <RelativeLayout
-                        android:id="@+id/cf_imgfilter"
-                        android:layout_width="@dimen/header_clickable_width"
-                        android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="0dp"
-                        android:background="@drawable/button_click">
+                                <RelativeLayout
+                                    android:id="@+id/cf_imgfilter"
+                                    android:layout_width="@dimen/header_clickable_width"
+                                    android:layout_height="@dimen/header_clickable_height"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="0dp"
+                                    android:background="@drawable/button_click">
 
-                        <Button
-                            android:layout_width="@dimen/icon_width"
-                            android:layout_height="@dimen/icon_height"
-                            android:layout_centerInParent="true"
-                            android:background="@mipmap/iconmore"
-                            android:clickable="false" />
+                                    <Button
+                                        android:layout_width="@dimen/icon_width"
+                                        android:layout_height="@dimen/icon_height"
+                                        android:layout_centerInParent="true"
+                                        android:background="@mipmap/iconmore"
+                                        android:clickable="false" />
 
-                    </RelativeLayout>
+                                </RelativeLayout>
 
-                </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
--->
+                            </RelativeLayout>
+                        </android.support.v7.widget.Toolbar>
+            -->
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -189,197 +189,209 @@
 
             </android.support.design.widget.TabLayout>
 
-           <!-- <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/smdm_divider"
-                android:background="@color/smdm_divider_Black">
+            <!-- <View
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/smdm_divider"
+                 android:background="@color/smdm_divider_Black">
 
-            </View>-->
+             </View>-->
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/llfreshnessIndex"
+
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/bst_cardView"
+            >
+            <LinearLayout
+                android:id="@+id/llfreshnessIndex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                app:cardUseCompatPadding="false"
-                app:contentPadding="5dp"
-                app:cardBackgroundColor="@color/ezfb_White"
-                app:cardElevation="3dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="3dp"
+                android:orientation="vertical">
 
-                >
 
-            <RelativeLayout
-                android:id="@+id/relPielayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/cf_pieChart"
-                    android:layout_width="240dp"
-                    android:layout_height="240dp"
-                    android:layout_centerInParent="true"
-                    />
-
-                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                <android.support.v7.widget.CardView
+                    android:id="@+id/bst_cardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:visibility="gone"
-                    android:id="@+id/progressBar"
-                    android:layout_centerInParent="true"
-                    android:background="#0000"
-                    android:keepScreenOn="true"
-                    android:theme="@style/ProgressBar"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    app:cardUseCompatPadding="false"
+                    app:contentPadding="5dp"
+                    app:cardBackgroundColor="@color/ezfb_White"
+                    app:cardElevation="3dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="3dp"
+
                     >
 
-                </ProgressBar>
-
-
-
-            </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-
-            <RelativeLayout
-                android:id="@+id/relFIndexTablelayout"
-                android:layout_width="match_parent"
-
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:id="@+id/cf_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="3dp"
-                    android:text="Callback Required from CSD"
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="@dimen/stock_textsize_Title"
-                    android:textStyle="normal" />
-
-                <View
-                    android:id="@+id/view1"
-                    android:layout_below="@+id/cf_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/border_round_edittext" />
-
-                <LinearLayout
-                    android:layout_below="@+id/view1"
-                    android:id="@+id/linear"
-                    android:paddingLeft="3dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
                     <RelativeLayout
-                        android:id="@+id/llFIndexheader"
+                        android:id="@+id/relPielayout"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@color/ezfb_activity_background"
+                        android:layout_height="match_parent"
                         >
 
-                        <LinearLayout
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/cf_pieChart"
+                            android:layout_width="240dp"
+                            android:layout_height="240dp"
+                            android:layout_centerInParent="true"
+                            />
+
+                        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:visibility="gone"
+                            android:id="@+id/progressBar"
+                            android:layout_centerInParent="true"
+                            android:background="#0000"
+                            android:keepScreenOn="true"
+                            android:theme="@style/ProgressBar"
                             >
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1.1"
-                                android:gravity="center_vertical"
-                                android:orientation="vertical"
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Customer Mobile"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_departmentTitle"
-                                    android:textStyle="normal" />
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.9"
-                                android:gravity="center_vertical"
-                                android:orientation="vertical"
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Remarks"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_departmentTitle"
-                                    android:textStyle="normal" />
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:orientation="vertical"
-                                >
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Feedback Date"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_departmentTitle"
-                                    android:textStyle="normal" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-
-
+                        </ProgressBar>
 
 
 
                     </RelativeLayout>
 
+                </android.support.v7.widget.CardView>
 
-                </LinearLayout>
-
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/relFIndexTablelayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/linear"
-                    android:orientation="vertical"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="3dp"
-                    >
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/listView"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/cf_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="3dp"
+                        android:text="Callback Required from CSD"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/stock_textsize_Title"
+                        android:textStyle="normal" />
+
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_below="@+id/cf_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/border_round_edittext" />
+
+                    <LinearLayout
+                        android:layout_below="@+id/view1"
+                        android:id="@+id/linear"
+                        android:paddingLeft="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:divider="@null"
-                        android:dividerHeight="0dp"
-                        android:smoothScrollbar="true" />
-                </LinearLayout>
+                        android:orientation="vertical">
 
-            </RelativeLayout>
-        </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/llFIndexheader"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@color/ezfb_activity_background"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Customer Mobile"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_departmentTitle"
+                                        android:textStyle="normal" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.9"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Remarks"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_departmentTitle"
+                                        android:textStyle="normal" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Feedback Date"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_departmentTitle"
+                                        android:textStyle="normal" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+
+
+
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linear"
+                        android:orientation="vertical"
+                        android:nestedScrollingEnabled="true"
+                        android:layout_marginLeft="3dp"
+                        >
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/listView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@null"
+                            android:nestedScrollingEnabled="true"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+        </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 </RelativeLayout>

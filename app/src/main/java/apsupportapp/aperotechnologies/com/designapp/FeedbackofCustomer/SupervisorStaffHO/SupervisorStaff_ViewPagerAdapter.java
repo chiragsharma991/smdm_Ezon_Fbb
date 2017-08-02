@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaffHO;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,11 +8,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  * Created by rkanawade on 25/07/17.
  */
 
-public class ProductQualityRange_ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class SupervisorStaff_ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     int mNumOfTabs;
 
-    public ProductQualityRange_ViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public SupervisorStaff_ViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
     }
@@ -22,10 +22,10 @@ public class ProductQualityRange_ViewPagerAdapter extends FragmentStatePagerAdap
 
         switch (position) {
             case 0:
-                ProductQualityRange_Reports tab1 = new ProductQualityRange_Reports();
+                SupervisorStaff_Reports tab1 = new SupervisorStaff_Reports();
                 return tab1;
             case 1:
-                ProductQualityRange_Feedback tab2 = new ProductQualityRange_Feedback();
+                SupervisorStaff_Feedback tab2 = new SupervisorStaff_Feedback();
                 return tab2;
             default:
                 return null;
