@@ -128,12 +128,16 @@ public class ApiRequest  {
                                 Reusable_Functions.hDialog();
                                 if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                                     FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 }
                                 else if(TAG.equals("HourlyPerformence")) {
                                     HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
                                     ResposeInterface.nodatafound();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    ResposeInterface.nodatafound();
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 }
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
                             }
@@ -173,10 +177,11 @@ public class ApiRequest  {
                         } catch (Exception e) {
                             if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                                 FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
+                            }else{
+                                ResposeInterface.nodatafound();
                             }
                             Log.e(TAG, "onResponse catch: "+e.getMessage() );
                             Reusable_Functions.hDialog();
-                            ResposeInterface.nodatafound();
                             Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
 
 
@@ -195,6 +200,8 @@ public class ApiRequest  {
                         }
                         if(TAG.equals("HourlyPerformence")) {
                             HourlyPerformence.hrl_pi_Process.setVisibility(View.GONE);
+                            ResposeInterface.nodatafound();
+                        }else{
                             ResposeInterface.nodatafound();
                         }
                         Reusable_Functions.hDialog();

@@ -82,7 +82,7 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 ((ReportViewHolder) viewHolder).mobileNumber.setText(data.getAttribute1());
                 ((ReportViewHolder) viewHolder).remark.setText(data.getAttribute2());
-                ((ReportViewHolder) viewHolder).date.setText(data.getArcDate());
+                ((ReportViewHolder) viewHolder).date.setText(data.getArcDate().substring(0,data.getArcDate().length()-3));
             }}
     }
 
