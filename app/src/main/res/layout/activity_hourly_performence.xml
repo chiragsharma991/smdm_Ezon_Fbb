@@ -80,7 +80,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/activity_horizontal_margin"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
 
             </RelativeLayout>

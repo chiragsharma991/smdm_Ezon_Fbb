@@ -58,24 +58,18 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
                 if (focus != null) {
                     hiddenKeyboard(focus);
                 }
-                viewPager.setCurrentItem(tab.getPosition());
+                //viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                View focus = getCurrentFocus();
-                if (focus != null) {
-                    hiddenKeyboard(focus);
-                }
+
 
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                View focus = getCurrentFocus();
-                if (focus != null) {
-                    hiddenKeyboard(focus);
-                }
+
 
             }
         });

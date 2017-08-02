@@ -465,6 +465,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 } else if (response.length() == limit) {
 
                                     for (int i = 0; i < response.length(); i++) {
+
                                         Log.e(TAG, "onResponse:list size is " + BestInventList.size() + "response length" + response.length());
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         BestInventList.add(BestInventSizeListDisplay);

@@ -97,8 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp"
-                >
+                android:layout_marginTop="8dp">
 
 
                 <TextView
@@ -107,8 +106,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/store"
                     android:textColor="@color/ezfb_black"
-                    android:textSize="@dimen/smdm_store_title_normal"
-                    />
+                    android:textSize="@dimen/smdm_store_title_normal" />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -118,8 +116,7 @@
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/smdm_store_title_normal"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -130,8 +127,7 @@
                     android:hint=""
                     android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/smdm_store_title_normal"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -175,17 +171,16 @@
             -->
 
             <android.support.design.widget.TabLayout
+                android:id="@+id/tabview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="8dp"
-                android:id="@+id/tabview"
                 app:tabIndicatorColor="@color/ezfb_Red"
-                app:tabTextColor="@color/ezfb_Red"
                 app:tabSelectedTextColor="@color/ezfb_Red"
                 app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-                >
+                app:tabTextColor="@color/ezfb_Red">
 
             </android.support.design.widget.TabLayout>
 
@@ -202,6 +197,7 @@
             android:layout_height="wrap_content"
 
             >
+
             <LinearLayout
                 android:id="@+id/llfreshnessIndex"
                 android:layout_width="match_parent"
@@ -209,52 +205,73 @@
                 android:orientation="vertical">
 
 
-
                 <android.support.v7.widget.CardView
                     android:id="@+id/cf_cardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="3dp"
                     android:layout_marginLeft="5dp"
-                    app:cardUseCompatPadding="false"
-                    app:contentPadding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     app:cardBackgroundColor="@color/ezfb_White"
                     app:cardElevation="3dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="3dp"
+                    app:cardUseCompatPadding="false"
+                    app:contentPadding="5dp"
 
                     >
 
                     <RelativeLayout
                         android:id="@+id/relPielayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        >
+                        android:layout_height="wrap_content">
 
-                        <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/cf_pieChart"
+                        <RelativeLayout
+                            android:id="@+id/chartview"
                             android:layout_width="240dp"
                             android:layout_height="240dp"
-                            android:layout_centerInParent="true"
-                            />
+                            android:layout_centerHorizontal="true">
 
-                        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:id="@+id/cf_pieChart"
+                                android:layout_width="240dp"
+                                android:layout_height="240dp"
+                                android:focusableInTouchMode="true" />
+
+
+                            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:id="@+id/processbar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:background="#0000"
+                                android:keepScreenOn="true"
+                                android:padding="10dp"
+                                android:theme="@style/ProgressBar"
+                                android:visibility="visible">
+
+                            </ProgressBar>
+
+
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/addleggend"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:visibility="gone"
-                            android:id="@+id/progressBar"
-                            android:layout_centerInParent="true"
-                            android:background="#0000"
-                            android:keepScreenOn="true"
-                            android:theme="@style/ProgressBar"
+                            android:layout_below="@+id/chartview"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:orientation="vertical"
+
                             >
 
-                        </ProgressBar>
 
-
+                        </LinearLayout>
 
                     </RelativeLayout>
+
 
                 </android.support.v7.widget.CardView>
 
@@ -278,40 +295,38 @@
 
                     <View
                         android:id="@+id/view1"
-                        android:layout_below="@+id/cf_text"
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
+                        android:layout_below="@+id/cf_text"
                         android:layout_marginTop="5dp"
                         android:background="@color/border_round_edittext" />
 
                     <LinearLayout
-                        android:layout_below="@+id/view1"
                         android:id="@+id/linear"
-                        android:paddingLeft="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_below="@+id/view1"
+                        android:orientation="vertical"
+                        android:paddingLeft="3dp">
 
                         <RelativeLayout
                             android:id="@+id/llFIndexheader"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:background="@color/ezfb_activity_background"
-                            >
+                            android:background="@color/ezfb_activity_background">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                >
+                                android:orientation="horizontal">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1.1"
                                     android:gravity="center_vertical"
-                                    android:orientation="vertical"
-                                    >
+                                    android:orientation="vertical">
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -321,13 +336,14 @@
                                         android:textStyle="normal" />
 
                                 </LinearLayout>
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.9"
                                     android:gravity="center_vertical"
-                                    android:orientation="vertical"
-                                    >
+                                    android:orientation="vertical">
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -337,13 +353,14 @@
                                         android:textStyle="normal" />
 
                                 </LinearLayout>
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
-                                    android:orientation="vertical"
-                                    >
+                                    android:orientation="vertical">
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -357,11 +374,6 @@
                             </LinearLayout>
 
 
-
-
-
-
-
                         </RelativeLayout>
 
 
@@ -371,25 +383,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_below="@+id/linear"
-                        android:orientation="vertical"
                         android:layout_marginLeft="3dp"
-                        >
+                        android:layout_marginRight="3dp"
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/listView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
                             android:divider="@null"
                             android:nestedScrollingEnabled="true"
-                            />
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
                     </LinearLayout>
 
                 </RelativeLayout>
 
 
             </LinearLayout>
-
 
 
         </android.support.v4.widget.NestedScrollView>
