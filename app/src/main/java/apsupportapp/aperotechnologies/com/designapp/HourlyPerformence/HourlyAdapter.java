@@ -8,7 +8,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
-import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.PvASnapAdapter;
+import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesAdapter;
-import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 
 
 public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>   {

@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,15 +20,14 @@ import android.widget.RelativeLayout;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
- * Created by rkanawade on 25/07/17.
+ * Created by rkanawade on 24/07/17.
  */
 
-public class OurStoreServices_Feedback extends Fragment {
+public class PolicyExchange_Feedback extends Fragment{
     private Context context;
-    private RelativeLayout imageBtnBack1;
-    private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_store_name;
-    private RadioGroup radioCallbacks;
-    private RadioButton radioYes, radioNo;
+    private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name;
+    private RadioGroup radioCallbacks, radioExchange, radioProduct;
+    private RadioButton radioYes, radioNo, radioExchangeYes, radioExchangeNo, radioProductYes, radioProductNo;
     private Button btn_submit, btn_cancel;
     private LinearLayout linear_toolbar;
     SharedPreferences sharedPreferences;
@@ -39,7 +38,7 @@ public class OurStoreServices_Feedback extends Fragment {
 
         context = getContext();
 
-        return inflater.inflate(R.layout.activity_store_service, container, false);
+        return inflater.inflate(R.layout.activity_policy_exchange, container, false);
     }
 
     @Override
@@ -51,15 +50,19 @@ public class OurStoreServices_Feedback extends Fragment {
 
     private void initializeUI() {
 
-        imageBtnBack1 = (RelativeLayout) v.findViewById(R.id.imageBtnBack1);
         edt_customer_mobile_number = (EditText) v.findViewById(R.id.edt_customer_mobile_number);
         edt_remarks = (EditText) v.findViewById(R.id.edt_remarks);
         edt_first_name = (EditText) v.findViewById(R.id.edt_first_name);
         edt_last_name = (EditText) v.findViewById(R.id.edt_last_name);
-        edt_store_name = (EditText) v.findViewById(R.id.edt_store_name);
         radioCallbacks = (RadioGroup) v.findViewById(R.id.radioCallbacks);
+        radioExchange = (RadioGroup) v.findViewById(R.id.radioExchange);
+        radioProduct = (RadioGroup) v.findViewById(R.id.radioProduct);
         radioYes = (RadioButton) v.findViewById(R.id.radioYes);
         radioNo = (RadioButton) v.findViewById(R.id.radioNo);
+        radioExchangeYes = (RadioButton) v.findViewById(R.id.radioExchangeYes);
+        radioExchangeNo = (RadioButton) v.findViewById(R.id.radioExchangeNo);
+        radioProductYes = (RadioButton) v.findViewById(R.id.radioProductYes);
+        radioProductNo = (RadioButton) v.findViewById(R.id.radioProductNo);
         btn_submit = (Button) v.findViewById(R.id.btn_submit);
         btn_cancel = (Button) v.findViewById(R.id.btn_cancel);
         linear_toolbar = (LinearLayout) v.findViewById(R.id.linear_toolbar);
@@ -133,24 +136,6 @@ public class OurStoreServices_Feedback extends Fragment {
             }
         });
 
-        edt_store_name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_store_name.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,8 +149,6 @@ public class OurStoreServices_Feedback extends Fragment {
 
             }
         });
-
-
 
     }
 

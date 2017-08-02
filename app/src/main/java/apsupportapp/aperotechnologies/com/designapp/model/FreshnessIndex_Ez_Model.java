@@ -1,8 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.model;
 
-import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence_Model;
-import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
 
 /**
  * Created by csuthar on 01/06/17.

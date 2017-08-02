@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServicesHO;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-public class SupervisorStaff_HO extends AppCompatActivity {
+public class OurStoreServices_HO extends AppCompatActivity {
     TabLayout tabLayout;
     private RelativeLayout imageBtnBack1;
     private Context context;
@@ -19,7 +19,7 @@ public class SupervisorStaff_HO extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_supervisor_staff_ho);
+        setContentView(R.layout.activity_our_store_services_ho);
 
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
@@ -40,7 +40,7 @@ public class SupervisorStaff_HO extends AppCompatActivity {
         });
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final SupervisorStaff_ViewPagerAdapter adapter = new SupervisorStaff_ViewPagerAdapter
+        final OurStoreServices_ViewPagerAdapter adapter = new OurStoreServices_ViewPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -60,6 +60,6 @@ public class SupervisorStaff_HO extends AppCompatActivity {
 
             }
         });
-
     }
+
 }

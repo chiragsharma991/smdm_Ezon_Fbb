@@ -78,6 +78,11 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
                     View view=findViewById(android.R.id.content);
                     Snackbar.make(view, "Please select product to view options", Snackbar.LENGTH_LONG).show();
                 }
+                if(plan_pager.getCurrentItem() == 1 && !KeyProductPlanActivity.productName.equals(""))
+                {
+                    Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
+                    Plan_Option_Fragment.optionview.addView(Plan_Option_Fragment.optrel);
+                }
 
                 if (plan_pager.getCurrentItem() == 0 && !KeyProductPlanActivity.productName.equals(""))
                 {
@@ -86,14 +91,14 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
                    Plan_Option_Fragment.tableBPlanOpt_Frag.removeAllViews();
                    Plan_Option_Fragment.tableCPlanOpt_Frag.removeAllViews();
                    Plan_Option_Fragment.tableDPlanOpt_Frag.removeAllViews();
-                  // Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
+                   Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
                    KeyProductPlanActivity.productName = "";
                    LinearLayout layout = (LinearLayout)plan_pager.getParent();
-                   TabLayout tab1 = (TabLayout) layout.getChildAt(1);
-                    if(tab1.getTabCount() == 2)
-                    {
-                        tab1.removeTabAt(1);
-                    }
+//                   TabLayout tab1 = (TabLayout) layout.getChildAt(1);
+//                    if(tab1.getTabCount() == 2)
+//                    {
+//                        tab1.removeTabAt(1);
+//                    }
                }
            }
 

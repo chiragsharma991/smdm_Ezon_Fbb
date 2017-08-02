@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotionHO;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,29 +23,30 @@ import apsupportapp.aperotechnologies.com.designapp.R;
  * Created by rkanawade on 25/07/17.
  */
 
-public class ProductQualityRange_Feedback extends Fragment {
+public class PricePromotion_Feedback extends Fragment {
     private Context context;
-    private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_article_id, edt_brand_name, edt_product_name, edt_size;
+    private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_brand_name, edt_product_name, edt_size;
     private EditText edt_color_option1, edt_color_option2, edt_fit, edt_style;
     private RadioGroup radioCallbacks;
     private RadioButton radioYes, radioNo;
     private Button btn_submit, btn_cancel;
     private LinearLayout linear_toolbar;
-    private View v;
     SharedPreferences sharedPreferences;
+    private View v;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         context = getContext();
 
-        return inflater.inflate(R.layout.activity_product_quality_range, container, false);
+        return inflater.inflate(R.layout.activity_price_promotion, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         v = getView();
+
         initializeUI();
     }
 
@@ -55,7 +56,6 @@ public class ProductQualityRange_Feedback extends Fragment {
         edt_remarks = (EditText) v.findViewById(R.id.edt_remarks);
         edt_first_name = (EditText) v.findViewById(R.id.edt_first_name);
         edt_last_name = (EditText) v.findViewById(R.id.edt_last_name);
-        edt_article_id = (EditText) v.findViewById(R.id.edt_article_id);
         edt_brand_name = (EditText) v.findViewById(R.id.edt_brand_name);
         edt_product_name = (EditText) v.findViewById(R.id.edt_product_name);
         edt_size = (EditText) v.findViewById(R.id.edt_size);
@@ -131,23 +131,6 @@ public class ProductQualityRange_Feedback extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 edt_last_name.setBackgroundResource(R.drawable.edittext_red_border);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_article_id.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_article_id.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
             @Override

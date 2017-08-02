@@ -47,12 +47,14 @@ import java.util.logging.LogRecord;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoSnapAdapter;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiPostRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpPostResponse;
-import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
 /**
  * Created by rkanawade on 24/07/17.
@@ -311,7 +313,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
             case 0:   //total values
 
                 String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
-                ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object,this);
+               // ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, ProductAvailability_Notify);
 
                 break;
 

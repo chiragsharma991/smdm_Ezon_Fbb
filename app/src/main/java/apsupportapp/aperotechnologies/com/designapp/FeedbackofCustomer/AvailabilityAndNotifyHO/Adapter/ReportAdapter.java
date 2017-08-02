@@ -15,9 +15,9 @@ import android.widget.TextView;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyAdapter;
-import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
+
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
 /**
  * Created by csuthar on 01/08/17.

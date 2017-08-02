@@ -4,7 +4,7 @@ package apsupportapp.aperotechnologies.com.designapp.Httpcall;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
+import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
 /**
  * Created by csuthar on 22/02/17.

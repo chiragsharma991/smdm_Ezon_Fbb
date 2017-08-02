@@ -232,7 +232,7 @@
             android:windowSoftInputMode="stateHidden" />
         android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MPM.mpm_activity"
+            android:name=".SeasonCatalogue.mpm_activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
@@ -289,11 +289,17 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_notify_HO" />
-        <activity android:name=".FeedbackofCustomer.PolicyExchangeRefund_HO" />
-        <activity android:name=".FeedbackofCustomer.OurStoreServices_HO" />
-        <activity android:name=".FeedbackofCustomer.PricePromotion_HO" />
-        <activity android:name=".FeedbackofCustomer.ProductQualityRange_HO" />
-        <activity android:name=".FeedbackofCustomer.SupervisorStaff_HO"></activity>
+        <activity android:name=".FeedbackofCustomer.PolicyExchangeHO.PolicyExchangeRefund_HO" />
+        <activity android:name=".FeedbackofCustomer.OurStoreServicesHO.OurStoreServices_HO" />
+        <activity android:name=".FeedbackofCustomer.PricePromotionHO.PricePromotion_HO" />
+        <activity android:name=".FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_HO" />
+        <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.SupervisorStaff_HO" />
+        <activity android:name=".FeedbackofCustomer.AvailabilityAndNotifyHO.Callback_ProductAvailability" />
+        <activity android:name=".FeedbackofCustomer.OurStoreServicesHO.Callback_OurStoreServices" />
+        <activity android:name=".FeedbackofCustomer.PolicyExchangeHO.Callback_PolicyExchange" />
+        <activity android:name=".FeedbackofCustomer.PricePromotionHO.Callback_PricePromotion" />
+        <activity android:name=".FeedbackofCustomer.ProductQualityRangeHO.Callback_ProductQualityRange" />
+        <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff"></activity>
     </application>
 
 </manifest>

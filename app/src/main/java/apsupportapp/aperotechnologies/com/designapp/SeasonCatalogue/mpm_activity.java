@@ -1,5 +1,5 @@
 
-package apsupportapp.aperotechnologies.com.designapp.MPM;
+package apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -145,6 +146,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
 
   @Override
   public void response(ArrayList<mpm_model> list,int id) {
+      Log.e(TAG, "response: "+ list.get(2).getMpmPath());
       listener = (DownloadFile.Listener) context;
       this.list = list;
       mpmAdapter = new mpm_adapter(context, list);
@@ -217,7 +219,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
           finish();
       }else{
           Reusable_Functions.ViewVisible(Bottom_listItem);
-          Toolbar_title.setText("MPM");
+          Toolbar_title.setText("Season Catalogue");
       }
   }
 
@@ -254,7 +256,8 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   }
 
   @Override
-  public void onProgressUpdate(int progress, int total) {
+  public void onProgressUpdate(int progress, int total)
+  {
       Process_count.setText(""+(int)((progress*100)/total));
   }
 

@@ -214,10 +214,8 @@ public class LoginActivity1 extends AppCompatActivity
                                 {
                                     editor.putBoolean("log_flag", true);
                                     editor.putString("authcode", auth_code);
-
                                     Log.e("authcode ", " --- " + username + " " + password + " " + auth_code);
                                     editor.apply();
-
                                 }
                                 Intent intent = new Intent(LoginActivity1.this, SnapDashboardActivity.class);
                                 intent.putExtra("from", "login");
@@ -319,6 +317,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
                                 editor.putString("storeDescription",storeDescription);
+                                Log.e("onResponse---: ","store desc"+storeDescription);
                                 editor.putString("device_id", "");
                                 editor.putString("push_tokken", "");
                                 editor.apply();
@@ -377,6 +376,7 @@ public class LoginActivity1 extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("onResponse: ",""+response);
                         try {
                             if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();

@@ -5,9 +5,7 @@ package apsupportapp.aperotechnologies.com.designapp.FreshnessIndex;
  */
 
 import android.content.Context;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +19,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import apsupportapp.aperotechnologies.com.designapp.MPM.mpm_model;
+import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 

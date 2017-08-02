@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.MPM;
+package apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue;
 
 import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndex_Ez_Model;
 

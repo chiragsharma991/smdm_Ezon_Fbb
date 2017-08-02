@@ -40,6 +40,8 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +63,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     SwipeDeckAdapter adapter;
     static String likeDislikeFlg ;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken;
+    String userId, bearertoken,storeCode;
     RadioButton visualAssort_PendingChk,visualAssort_CompletedChk;
     LinearLayout visualAssort_Pending,visualAssort_Completed;
     RequestQueue queue;
@@ -76,6 +78,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     static Button btnCommentDone;
     public static EditText edtTextSets, edtTextComment;
     static TextView txtSize;
+    private TextView txtStoreCode,txtStoreName;
     private LinearLayout SwipeLayout;
     public String selectedString="";
     boolean flag = false;
@@ -98,6 +101,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 //        userId = userId.substring(0,userId.length()-5);
 //        Log.e("userId",""+userId);
         bearertoken = sharedPreferences.getString("bearerToken","");
+        storeCode = sharedPreferences.getString("storeDescription","");
+        Log.e(TAG, "onCreate: " +storeCode +"\n"+storeCode.trim().substring(0, 4));
         reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
@@ -117,7 +122,10 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             }
         });
 
-
+        txtStoreCode = (TextView)findViewById(R.id.txtStoreCode);
+        txtStoreCode.setText(storeCode.trim().substring(0,4));
+        txtStoreName = (TextView)findViewById(R.id.txtStoreName);
+        txtStoreName.setText(storeCode.substring(5));
         imgBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         visualsort = (RelativeLayout)findViewById(R.id.visualsort);
         SwipeLayout = (LinearLayout)findViewById(R.id.swipeLayout);

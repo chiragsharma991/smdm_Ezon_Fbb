@@ -18,79 +18,79 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-<!--
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_header_height"
-                android:layout_alignParentTop="true"
-                android:background="@color/ezfb_White"
-                android:contentInsetEnd="0dp"
-                android:contentInsetLeft="0dp"
-                android:contentInsetRight="0dp"
-                android:contentInsetStart="0dp"
-                app:contentInsetEnd="0dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp">
+            <!--
+                        <android.support.v7.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/toolbar_header_height"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/ezfb_White"
+                            android:contentInsetEnd="0dp"
+                            android:contentInsetLeft="0dp"
+                            android:contentInsetRight="0dp"
+                            android:contentInsetStart="0dp"
+                            app:contentInsetEnd="0dp"
+                            app:contentInsetLeft="0dp"
+                            app:contentInsetRight="0dp"
+                            app:contentInsetStart="0dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
-                    <RelativeLayout
-                        android:id="@+id/cf_imageBtnBack"
-                        android:layout_width="@dimen/header_clickable_width"
-                        android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="0dp"
-                        android:background="@drawable/button_click">
+                                <RelativeLayout
+                                    android:id="@+id/cf_imageBtnBack"
+                                    android:layout_width="@dimen/header_clickable_width"
+                                    android:layout_height="@dimen/header_clickable_height"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="0dp"
+                                    android:background="@drawable/button_click">
 
-                        <Button
-                            android:layout_width="@dimen/arrow_back_icon_width"
-                            android:layout_height="@dimen/arrow_back_icon_height"
-                            android:layout_centerInParent="true"
-                            android:background="@mipmap/ic_arrow_back_black"
-                            android:clickable="false" />
+                                    <Button
+                                        android:layout_width="@dimen/arrow_back_icon_width"
+                                        android:layout_height="@dimen/arrow_back_icon_height"
+                                        android:layout_centerInParent="true"
+                                        android:background="@mipmap/ic_arrow_back_black"
+                                        android:clickable="false" />
 
-                    </RelativeLayout>
+                                </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/toolbar_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_toRightOf="@+id/cf_imageBtnBack"
-                        android:text="@string/cf_title"
-                        android:singleLine="true"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="@dimen/smdm_header_title_normal"
-                        />
+                                <TextView
+                                    android:id="@+id/toolbar_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="40dp"
+                                    android:layout_toRightOf="@+id/cf_imageBtnBack"
+                                    android:text="@string/cf_title"
+                                    android:singleLine="true"
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_header_title_normal"
+                                    />
 
-                    <RelativeLayout
-                        android:id="@+id/cf_imgfilter"
-                        android:layout_width="@dimen/header_clickable_width"
-                        android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="0dp"
-                        android:background="@drawable/button_click">
+                                <RelativeLayout
+                                    android:id="@+id/cf_imgfilter"
+                                    android:layout_width="@dimen/header_clickable_width"
+                                    android:layout_height="@dimen/header_clickable_height"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="0dp"
+                                    android:background="@drawable/button_click">
 
-                        <Button
-                            android:layout_width="@dimen/icon_width"
-                            android:layout_height="@dimen/icon_height"
-                            android:layout_centerInParent="true"
-                            android:background="@mipmap/iconmore"
-                            android:clickable="false" />
+                                    <Button
+                                        android:layout_width="@dimen/icon_width"
+                                        android:layout_height="@dimen/icon_height"
+                                        android:layout_centerInParent="true"
+                                        android:background="@mipmap/iconmore"
+                                        android:clickable="false" />
 
-                    </RelativeLayout>
+                                </RelativeLayout>
 
-                </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
--->
+                            </RelativeLayout>
+                        </android.support.v7.widget.Toolbar>
+            -->
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -189,12 +189,12 @@
 
             </android.support.design.widget.TabLayout>
 
-           <!-- <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/smdm_divider"
-                android:background="@color/smdm_divider_Black">
+            <!-- <View
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/smdm_divider"
+                 android:background="@color/smdm_divider_Black">
 
-            </View>-->
+             </View>-->
         </LinearLayout>
 
         <android.support.v4.widget.NestedScrollView
