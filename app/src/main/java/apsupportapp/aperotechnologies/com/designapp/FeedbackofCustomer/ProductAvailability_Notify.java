@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +71,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
     private LinearLayout linear_toolbar;
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
+    private ScrollView scrollView;
     private String TAG = "ProductAvailability";
     private TextView incorrect_phone, incorrect_remark, storedescription;
     private String userId, bearertoken, geoLeveLDesc, store;
@@ -96,6 +99,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
     private void initializeUI() {
 
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
         edt_customer_mobile_number = (EditText) findViewById(R.id.edt_customer_mobile_number);
         layout_customer_mobile_number  = (TextInputLayout) findViewById(R.id.input_customer_mobile_number);
         edt_remarks = (EditText) findViewById(R.id.edt_remarks);
@@ -121,30 +125,42 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         incorrect_phone = (TextView) findViewById(R.id.txt_incorrect_phone);
         incorrect_remark = (TextView) findViewById(R.id.txt_incorrect_remark);
         storedescription = (TextView) findViewById(R.id.txtStoreCode);
-        storedescription.setText(store);
+
+        imageBtnBack1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         incorrect_phone.setVisibility(View.GONE);
         incorrect_remark.setVisibility(View.GONE);
 
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
-        getDetails();
 
-//        edt_customer_mobile_number.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if(!hasFocus) {
-//
-//                    if ((customerNumber.equals("") || customerNumber == null) && customerNumber.length() < 10) {
-//
-//                    } else {
-//
-//                        incorrect_phone.setVisibility(View.GONE);
-//                        edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
-//                    }
-//                }
-//
-//            }
-//        });
+
+        edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
+                    if(!customerNumber.equals(""))
+                    {
+                        if (customerNumber.length() < 10) {
+                            incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
+                            incorrect_phone.setVisibility(View.VISIBLE);
+                            edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
+                        } else {
+
+                            incorrect_phone.setVisibility(View.GONE);
+                            edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
+                        }
+                    }
+                }
+
+            }
+        });
 //
 //        edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //            @Override
@@ -251,7 +267,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
 
     public void getDetails() {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String currentDateandTime = sdf.format(new Date());
 
         customerFeedback = "1";  // fixed for notified feedback
@@ -276,7 +292,10 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
+        Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
+        Log.e("store"," "+store);
+        storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         //  editor.putString("storeDescription",storeDescription);
@@ -327,7 +346,10 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
 
 
     private void submitData() {
-
+        scrollView.setFocusableInTouchMode(true);
+        scrollView.fullScroll(View.FOCUS_UP);
+      //  scrollView.setDescendantFocusability(ViewGroup.FOCUS_UP);
+        getDetails();
        // prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
@@ -346,14 +368,27 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
                 edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
+            if(!customerNumber.equals("")) {
 
-        }else if(customerNumber.length() < 10){
+                if (customerNumber.length() < 10) {
+
+                    incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
+                    incorrect_phone.setVisibility(View.VISIBLE);
+                    edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
+
+                }
+            }
+
+
+        }
+        else if(customerNumber.length() < 10){
 
             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
             incorrect_phone.setVisibility(View.VISIBLE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
 
-        } else {
+        }
+        else {
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
@@ -411,7 +446,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
             case 0:   //total values
 
                 String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
-               // ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object,this);
+                ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
 
                 break;
 
@@ -427,6 +462,15 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
     public void PostResponse(JSONObject response) {
 
         Log.e("response"," "+response.toString());
+        try {
+            String status = response.getString("status");
+            if(status.equals("User Feedback saved successfully ")){
+                cancelData();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

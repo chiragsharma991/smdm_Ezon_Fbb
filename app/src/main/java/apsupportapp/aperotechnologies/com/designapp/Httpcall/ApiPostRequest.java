@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Httpcall;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_Feedback;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 
@@ -46,8 +48,8 @@ public class ApiPostRequest {
     private String TAG;
     public static JsonObjectRequest postRequest;
 
-    public ApiPostRequest(Context context, String bearertoken, String Url, String TAG, RequestQueue queue, int id, JSONObject object, ProductAvailability_Feedback productAvailability_feedback) {
-        this.ResposeInterface =(HttpPostResponse) productAvailability_feedback;
+    public ApiPostRequest(Context context, String bearertoken, String Url, String TAG, RequestQueue queue, int id, JSONObject object, Activity activity) {
+        this.ResposeInterface =(HttpPostResponse) activity;
         this.context = context;
         this.URL = Url;
         this.TAG = TAG;
@@ -56,14 +58,11 @@ public class ApiPostRequest {
         this.id = id;
         this.object = object;
         setApi(context);
-
+        Log.e(TAG, "Activity " + activity);
 
     }
 
-
     private void setApi(final Context context) {
-
-
 
         Log.e(TAG, "final_setApi: URL " + URL);
         Reusable_Functions.sDialog(context,"Submitting data…");
@@ -82,7 +81,7 @@ public class ApiPostRequest {
                                 return;
 
                             } else  {
-
+                                Toast.makeText(context, "User Feedback saved successfully", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 ResposeInterface.PostResponse(response);
 
