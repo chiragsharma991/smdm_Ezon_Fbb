@@ -1,49 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content">
 
-        >
         <android.support.v7.widget.CardView
             android:id="@+id/bst_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+            android:layout_marginBottom="3dp"
             android:layout_marginLeft="5dp"
-            app:cardUseCompatPadding="false"
-            app:contentPadding="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             app:cardBackgroundColor="@color/ezfb_White"
             app:cardElevation="3dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="3dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="5dp"
 
             >
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 >
+
                 <RelativeLayout
                     android:id="@+id/bst_Rel_image_child"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/floor_image_child"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="0dp"
-                        android:scaleType="fitXY"
-                        />
+                        android:scaleType="fitXY" />
 
                     <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                         android:id="@+id/imageLoader_floor"
@@ -53,8 +51,7 @@
                         android:background="#0000"
                         android:keepScreenOn="true"
                         android:padding="10dp"
-                        android:theme="@style/ProgressBar"
-                        >
+                        android:theme="@style/ProgressBar">
 
                     </ProgressBar>
 
@@ -73,20 +70,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp"
-                        >
+                        android:paddingLeft="10dp">
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
                                 android:layout_weight="0.2"
+                                android:orientation="horizontal"
 
                                 >
 
@@ -97,18 +93,16 @@
                                     android:layout_height="wrap_content"
                                     android:text="Buy One Get One "
                                     android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_large"
-                                    />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center_horizontal|top"
                                 android:layout_weight="0.8"
-                                >
+                                android:gravity="center_horizontal|top"
+                                android:orientation="horizontal">
 
                                 <ToggleButton
                                     android:id="@+id/toggle_floor_fav"
@@ -124,161 +118,134 @@
                             </LinearLayout>
 
 
-
                         </LinearLayout>
 
 
                         <!--sales layout-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="0dp"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginRight="5dp"
-                            >
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:orientation="horizontal"
-                                android:weightSum="1">
+                            android:orientation="horizontal">
 
-                                <TextView
-                                    android:layout_width="0dp"
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="55dp">
+
+
+                                <LinearLayout
+                                    android:id="@+id/linear_sohU"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.5"
-                                    android:singleLine="true"
-                                    android:textColor="@color/ezfb_black"
-                                    android:text="SOH(U)"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="35dp"
+                                        android:text="SOH(U)"
+                                        android:textColor="@color/ezfbb_black"
+                                        android:textSize="12sp"
+                                        android:textStyle="normal" />
+
+                                    <TextView
+                                        android:id="@+id/floor_SOH_U"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <View
+                                    android:id="@+id/view"
+                                    android:layout_width="1dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.1"
-                                    android:visibility="visible"
-                                    android:text=":"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_toRightOf="@+id/linear_sohU"
+                                    android:background="@color/ezfb_black"></View>
 
-                                <TextView
-                                    android:id="@+id/floor_SOH_U"
-                                    android:layout_width="0dp"
+
+                                <LinearLayout
+                                    android:id="@+id/linear_dayspassed"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.4"
-                                    android:singleLine="true"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/ezfb_black"
-                                    android:text="100"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_toRightOf="@+id/view"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
 
-                            </LinearLayout>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="35dp"
+                                        android:text="Days Passed"
+                                        android:textColor="@color/ezfbb_black"
+                                        android:textSize="12sp" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="5dp"
-                                android:weightSum="1">
+                                    <TextView
+                                        android:id="@+id/floor_NoofDays"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <View
+                                    android:id="@+id/view1"
+                                    android:layout_width="1dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.5"
-                                    android:singleLine="true"
-                                    android:text="No of Days Passed"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_toRightOf="@+id/linear_dayspassed"
+                                    android:background="@color/ezfb_black"></View>
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <LinearLayout
+                                    android:id="@+id/linear_date"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.1"
-                                    android:text=":"
-                                    android:visibility="visible"
-                                    android:textColor="@color/smdm_default_color"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_toEndOf="@+id/view1"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/floor_NoofDays"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.4"
-                                    android:singleLine="true"
-                                    android:text="100"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="35dp"
+                                        android:text="First Receipt Date"
+                                        android:textColor="@color/ezfbb_black"
+                                        android:textSize="12sp" />
 
-                            </LinearLayout>
+                                    <TextView
+                                        android:id="@+id/floor_ReceiptDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="5dp"
-                                android:weightSum="1">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.5"
-                                    android:singleLine="true"
-                                    android:text="First Receipt Date"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.1"
-                                    android:text=":"
-                                    android:visibility="visible"
-                                    android:textColor="@color/smdm_default_color"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/floor_ReceiptDate"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.4"
-                                    android:singleLine="true"
-                                    android:text="100"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                            </LinearLayout>
-
-
+                                </LinearLayout>
+                            </RelativeLayout>
                         </LinearLayout>
-
-
-
-
-
+                        </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
-
-
             </RelativeLayout>
 
 
@@ -286,7 +253,6 @@
 
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

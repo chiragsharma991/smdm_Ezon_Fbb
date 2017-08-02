@@ -55,7 +55,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private String bearertoken;
+    private String bearertoken,storeDescription;
     private String TAG = "FeedbackList";
     private RequestQueue queue;
     private int count = 0;
@@ -83,15 +83,16 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback_list);
         getSupportActionBar().hide();//
-        initalise();
         gson = new Gson();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        initalise();
         feedbackListData = new ArrayList<>();
 
         if (Reusable_Functions.chkStatus(context)) {
@@ -305,8 +306,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         // set image per list
 
         Feedback_option.setText(feedbackListData.get(Listposition).getOption());
-        txtStoreCode.setText(feedbackListData.get(position).getStoreCode());
-        txtStoreName.setText(feedbackListData.get(position).getStoreDesc());
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreName.setText(storeDescription.substring(5));
         ImageLoader_feedback.setVisibility(View.VISIBLE);
         if (!feedbackListData.get(Listposition).getProdImageUrl().equals("")) {
             Glide.

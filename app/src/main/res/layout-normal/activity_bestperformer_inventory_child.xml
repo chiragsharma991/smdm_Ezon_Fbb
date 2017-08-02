@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        >
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
         <android.support.v7.widget.CardView
             android:id="@+id/bst_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+            android:layout_marginBottom="3dp"
             android:layout_marginLeft="5dp"
-            app:cardUseCompatPadding="false"
-            app:contentPadding="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             app:cardBackgroundColor="@color/ezfb_White"
             app:cardElevation="3dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="3dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="5dp"
 
             >
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 >
+
                 <RelativeLayout
                     android:id="@+id/bst_Rel_image_child"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/bestInvent_image_child"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="0dp"
-                        android:scaleType="fitXY"
-                        />
+                        android:scaleType="fitXY" />
 
                     <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                         android:id="@+id/progressPicaso"
@@ -53,8 +54,7 @@
                         android:background="#0000"
                         android:keepScreenOn="true"
                         android:padding="10dp"
-                        android:theme="@style/ProgressBar"
-                        >
+                        android:theme="@style/ProgressBar">
 
                     </ProgressBar>
 
@@ -73,20 +73,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp"
-                        >
+                        android:paddingLeft="10dp">
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
                                 android:layout_weight="0.2"
+                                android:orientation="horizontal"
 
                                 >
 
@@ -97,18 +96,16 @@
                                     android:layout_height="wrap_content"
                                     android:text="Buy One Get One "
                                     android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_large"
-                                    />
+                                    android:textSize="@dimen/smdm_inflator_subtitle_large" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center_horizontal|top"
                                 android:layout_weight="0.8"
-                                >
+                                android:gravity="center_horizontal|top"
+                                android:orientation="horizontal">
 
                                 <ToggleButton
                                     android:id="@+id/toggle_bestInvent_fav"
@@ -124,7 +121,6 @@
                             </LinearLayout>
 
 
-
                         </LinearLayout>
 
 
@@ -133,10 +129,10 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginTop="0dp"
                             android:layout_marginRight="5dp"
-                            >
+                            android:layout_marginTop="0dp"
+                            android:orientation="vertical">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -170,13 +166,16 @@
                                         android:textSize="@dimen/smdm_inflator_subtitle_large"
                                         android:textStyle="bold" />
 
-
                                 </LinearLayout>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
 
                                 <LinearLayout
+                                    android:layout_marginLeft="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
                                     android:layout_weight="1"
                                     android:orientation="vertical">
 
@@ -201,7 +200,13 @@
 
                                 </LinearLayout>
 
+                                <View
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
+
                                 <LinearLayout
+                                    android:layout_marginLeft="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="5dp"
@@ -239,7 +244,7 @@
                                 android:layout_alignStart="@+id/bst_head_child"
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginTop="5dp"
-                                android:background="@color/divider_salescard" />
+                                android:background="@color/ezfb_black" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -275,10 +280,15 @@
 
                                 </LinearLayout>
 
+                                <View
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
+
                                 <LinearLayout
+                                    android:layout_marginLeft="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
                                     android:layout_weight="1"
                                     android:orientation="vertical">
 
@@ -302,8 +312,13 @@
                                         android:textStyle="bold" />
 
                                 </LinearLayout>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
 
                                 <LinearLayout
+                                    android:layout_marginLeft="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="5dp"
@@ -337,9 +352,6 @@
                         </LinearLayout>
 
 
-
-
-
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -351,7 +363,6 @@
 
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

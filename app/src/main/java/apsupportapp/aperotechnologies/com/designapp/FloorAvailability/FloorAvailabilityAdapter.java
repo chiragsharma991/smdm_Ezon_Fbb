@@ -105,7 +105,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter
             holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.imageLoader_floor);
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.floor_image_child = (ImageView) convertView.findViewById(R.id.floor_image_child);
-            holder.floor_fav = (RelativeLayout) convertView.findViewById(R.id.floor_fav);
+//            holder.floor_fav = (RelativeLayout) convertView.findViewById(R.id.floor_fav);
             convertView.setTag(holder);
         }
         else

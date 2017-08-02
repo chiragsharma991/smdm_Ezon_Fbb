@@ -136,9 +136,7 @@
                 app:cardBackgroundColor="@color/ezfb_White"
                 app:cardElevation="3dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-
-                >
+                android:layout_marginBottom="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -402,7 +400,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="&lt; Previous"
-                                app:backgroundTint="@color/ezfb_Red"
+                                android:backgroundTint="@color/ezfb_Red"
                                 android:textColor="@color/ezfb_White"
                                 android:textAllCaps="false"
 
@@ -469,7 +467,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="Next >"
-                                app:backgroundTint="@color/ezfb_Red"
+                                android:backgroundTint="@color/ezfb_Red"
                                 android:textColor="@color/ezfb_White"
                                 android:textAllCaps="false"
 

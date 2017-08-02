@@ -89,7 +89,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     Button txtOptionGreen, txtOptionRed,txtOptionAmber;
     // set the header titles
     String headers[] = {
-            "Option                        ",
+            "Option                         ",
             " PvA\n\t\tSales%  ",
             " PvA\n\t\tStk%   ",
             " Plan\n\tSales   ",
@@ -236,8 +236,6 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
                     productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
                     retainSegmentVal();
                     requestPlanOptionAchColorAPI(offsetvalue, limit);
-
-
                 }
             }
 
@@ -491,22 +489,28 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
             {
                 TextView txtPvaSales = (TextView) taleRowForTableD.getChildAt(0);
                 if (productDetails.getPvaSales() >= Double.parseDouble("100")) {
-                    txtPvaSales.setTextColor(Color.parseColor("#70e503"));
+                    txtPvaSales.setBackgroundColor(Color.parseColor("#70e503"));
+                    txtPvaSales.setTextColor(Color.parseColor("#ffffff"));
                 } else if (productDetails.getPvaSales() > Double.parseDouble("80") && productDetails.getPvaSales() < Double.parseDouble("100")) {
-                    txtPvaSales.setTextColor(Color.parseColor("#ff7e00"));
+                    txtPvaSales.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    txtPvaSales.setTextColor(Color.parseColor("#ffffff"));
                 } else if (productDetails.getPvaSales() < Double.parseDouble("80")) {
-                    txtPvaSales.setTextColor(Color.parseColor("#fe0000"));
+                    txtPvaSales.setBackgroundColor(Color.parseColor("#fe0000"));
+                    txtPvaSales.setTextColor(Color.parseColor("#ffffff"));
                 }
 
             }
             if (taleRowForTableD.getChildAt(1) != null) {
                 TextView txtPvaStock = (TextView) taleRowForTableD.getChildAt(1);
                 if (productDetails.getPvaStock() >= Double.parseDouble("100")) {
-                    txtPvaStock.setTextColor(Color.parseColor("#70e503"));
+                    txtPvaStock.setBackgroundColor(Color.parseColor("#70e503"));
+                    txtPvaStock.setTextColor(Color.parseColor("#ffffff"));
                 } else if (productDetails.getPvaStock() > Double.parseDouble("80") && productDetails.getPvaStock() < Double.parseDouble("100")) {
-                    txtPvaStock.setTextColor(Color.parseColor("#ff7e00"));
+                    txtPvaStock.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    txtPvaStock.setTextColor(Color.parseColor("#ffffff"));
                 } else if (productDetails.getPvaStock() < Double.parseDouble("80")) {
-                    txtPvaStock.setTextColor(Color.parseColor("#fe0000"));
+                    txtPvaStock.setBackgroundColor(Color.parseColor("#fe0000"));
+                    txtPvaStock.setTextColor(Color.parseColor("#ffffff"));
                 }
 
             }
