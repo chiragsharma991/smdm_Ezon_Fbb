@@ -89,7 +89,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     Button txtOptionGreen, txtOptionRed,txtOptionAmber;
     // set the header titles
     String headers[] = {
-            "Option                         ",
+            "Option                                   ",
             " PvA\n\t\tSales%  ",
             " PvA\n\t\tStk%   ",
             " Plan\n\tSales   ",
