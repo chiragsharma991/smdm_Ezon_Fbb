@@ -48,7 +48,7 @@ public class ApiRequest  {
     private Gson gson;
     public static JsonArrayRequest getRequest;
 
-
+    // this constructer is useful for Activity
     public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id)
     {
         ResposeInterface= (HttpResponse)context;
@@ -66,6 +66,7 @@ public class ApiRequest  {
 
     }
 
+    // this constructer is useful for fragment
     public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id, ProductAvailability_Reports productAvailability_reports) {
         ResposeInterface= (HttpResponse)productAvailability_reports;
         this.context=context;

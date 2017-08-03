@@ -187,7 +187,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
     public void getDetails() {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String currentDateandTime = sdf.format(new Date());
 
         customerFeedback = "1";  // fixed for notified feedback

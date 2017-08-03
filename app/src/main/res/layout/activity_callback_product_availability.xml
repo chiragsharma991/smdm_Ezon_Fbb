@@ -35,7 +35,7 @@
                 <RelativeLayout
                     android:background="@drawable/button_click"
                     android:layout_marginLeft="0dp"
-                    android:id="@+id/imageBtnBack1"
+                    android:id="@+id/backButton"
                     android:layout_width="@dimen/header_clickable_width"
                     android:layout_height="@dimen/header_clickable_height"
                     android:layout_alignParentLeft="true"
@@ -57,7 +57,7 @@
                     android:textColor="@color/ezfbb_black"
                     android:textSize="19sp"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imageBtnBack1"
+                    android:layout_toRightOf="@+id/backButton"
                     android:layout_marginLeft="5dp"
                     android:id="@+id/toolbar_title" />
 
@@ -167,7 +167,8 @@
                     android:textAllCaps="false"
                     android:textStyle="normal"
                     android:textColor="@color/ezfb_black"
-                    android:text="1245215"/>
+                    android:text=""
+                    />
 
 
             </LinearLayout>
@@ -198,7 +199,7 @@
                     android:textAllCaps="false"
                     android:textStyle="normal"
                     android:textColor="@color/ezfb_black"
-                    android:text="2608"/>
+                    android:text=""/>
 
 
             </LinearLayout>
@@ -225,7 +226,7 @@
                 android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ajcidifj Ajisjd"/>
+                android:text=" "/>
 
 
             <TextView
@@ -250,7 +251,7 @@
                 android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7548953988"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/txt_brand"
@@ -274,7 +275,7 @@
                 android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Srishti"/>
+                android:text=""/>
 
             <LinearLayout
                 android:id="@+id/lin_product_name"
@@ -333,7 +334,7 @@
                     android:textAllCaps="false"
                     android:textStyle="normal"
                     android:textColor="@color/ezfb_black"
-                    android:text="M"/>
+                    android:text=""/>
 
 
             </LinearLayout>
@@ -395,7 +396,7 @@
                     android:textAllCaps="false"
                     android:textStyle="normal"
                     android:textColor="@color/ezfb_black"
-                    android:text="NA"/>
+                    android:text=""/>
 
 
             </LinearLayout>
@@ -426,7 +427,7 @@
                     android:textAllCaps="false"
                     android:textStyle="normal"
                     android:textColor="@color/ezfb_black"
-                    android:text="straight line"/>
+                    android:text=" "/>
 
 
             </LinearLayout>
@@ -452,7 +453,7 @@
                 android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yes"/>
+                android:text=""/>
 
 
             <TextView
@@ -476,7 +477,7 @@
                 android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shrishti yellow M size kurta not available....."/>
+                android:text=""/>
 
 
             <LinearLayout
@@ -505,7 +506,7 @@
                     android:textAllCaps="false"
                     android:textStyle="normal"
                     android:textColor="@color/ezfb_black"
-                    android:text="27-06-2017"/>
+                    android:text=""/>
 
 
             </LinearLayout>
@@ -531,7 +532,7 @@
                 android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yes"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/txt_sms_title"
@@ -554,7 +555,7 @@
                 android:textStyle="normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yes"/>
+                android:text=""/>
 
 
         </RelativeLayout>

@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -37,13 +38,8 @@ import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
-
-import org.eazegraph.lib.communication.IOnItemFocusChangedListener;
-import org.eazegraph.lib.models.PieModel;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.Adapter.ReportAdapter;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
@@ -53,12 +49,11 @@ import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
-
+import apsupportapp.aperotechnologies.com.designapp.model.RecyclerItemClickListener;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static apsupportapp.aperotechnologies.com.designapp.R.id.addleggend;
 import static apsupportapp.aperotechnologies.com.designapp.R.id.listView;
 import static apsupportapp.aperotechnologies.com.designapp.R.id.progressBar;
-
 /**
  * created: chari sharma.
  * Notes:
@@ -67,28 +62,30 @@ import static apsupportapp.aperotechnologies.com.designapp.R.id.progressBar;
  */
 
 
-public class ProductAvailability_Reports extends Fragment implements TabLayout.OnTabSelectedListener, HttpResponse, OnChartValueSelectedListener {
+public class ProductAvailability_Reports extends Fragment implements TabLayout.OnTabSelectedListener, HttpResponse, OnChartValueSelectedListener,ReportAdapter.RecyclerViewclick {
 
     private Context context;
     private ReportInterface mCallback;
     private View v;
     private RecyclerView listview;
     private TextView storedesc;
-    private PieChart pieChart;
+    private PieChart pieChart=null;
     private TabLayout Tabview;
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
     private String userId, store, bearertoken, geoLeveLDesc;
     private String TAG = "customerFeedbackReport";
     private String view_params = "LD";
-    private ReportAdapter adapter;
-    private ArrayList<mpm_model> callbacklist, piechartList;
+    private ReportAdapter adapter=null;
+    private ArrayList<mpm_model> callbacklist=null, piechartList=null;
     private String attribute14 = "YES";
+    private String feedbackKey = "1";
     private boolean ActivityCreated = false;
     private CardView card;
     private ProgressBar processbar_view;
     private LinearLayout addleggend;
     private float totalFeedbackCount, callbackFeedbackCount, nocallbackFeedbackCount;
+    private int runningId;
 
 
     @Override
@@ -147,10 +144,18 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         MainMethod();
         Apicallback(0, true);
 
+        storedesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // Callback_ProductAvailability.startScreen(context);
+            }
+        });
+
 
     }
 
     private void Apicallback(int id, boolean loader) {
+        runningId=id;
         if (Reusable_Functions.chkStatus(context)) {
             if (loader) {
                 Reusable_Functions.sDialog(context, "Loading...");
@@ -170,14 +175,19 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         String url = "";
         ApiRequest api_request;
         switch (id) {
+            // case 0 and 1 will follow like first update list and after pie chart
             case 0:
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey=1" + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this);  // 1 is id for call another api after response
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true"; //Pie chart Api
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this);  // 1 is id for new api response
                 break;
             case 1:
-                Log.e(TAG, "request  feedbackdisplaysummary-- ");
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey=1" + "&view=" + view_params + "&recache=true"; //Pie chart Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this);  // 0 is id for response
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this);  // 0 is id for call finish response.
+
+                break;
+            case 2:  // this is for only change list
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this);  // 1 is id for call another api after response
                 break;
             default:
                 break;
@@ -188,22 +198,31 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
 
     @Override
     public void response(ArrayList<mpm_model> list, int id) {
+        Log.e(TAG, "response: sucess"+id );
         switch (id) {
+            // case 0 and 1 will follow like first api call and set view in case 0;
             case 0:
-                piechartList = new ArrayList<>();
-                piechartList.addAll(list);
-                Log.e(TAG, "piechartList: " + id + " " + piechartList.size() + "chart total" + piechartList.get(0).getTotalFeedbackCount());
+                Log.e(TAG, "callback list log: " );
+                callbacklist = new ArrayList<>();
+                callbacklist.addAll(list);
                 setlistView(callbacklist);
-                setPiechart(piechartList);
                 Reusable_Functions.hDialog();
                 processbar_view.setVisibility(View.GONE);
                 break;
             case 1:
-                callbacklist = new ArrayList<>();
-                callbacklist.addAll(list);
-                Log.e(TAG, "callbacklist: " + id + " " + callbacklist.size() + "list name is" + callbacklist.get(0).getAttribute2());
+                Log.e(TAG, "Pie chart list log: " );
+                piechartList = new ArrayList<>();
+                piechartList.addAll(list);
+                setPiechart(piechartList);
                 mpm_model model = new mpm_model();
                 requestcallback(model, 1); //id 1 for call another api
+                break;
+
+            case 2:  // only for update listview
+                callbacklist = new ArrayList<>();
+                callbacklist.addAll(list);
+                setlistView(callbacklist);
+                processbar_view.setVisibility(View.GONE);
                 break;
 
             default:
@@ -220,6 +239,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         totalFeedbackCount = (float) piechartList.get(0).getTotalFeedbackCount();
         callbackFeedbackCount = (float) piechartList.get(0).getCallbackFeedbackCount();
         nocallbackFeedbackCount = (float) piechartList.get(0).getNoCallbackFeedbackCount();
+        Log.e(TAG, "Piechart: "+totalFeedbackCount+" "+callbackFeedbackCount+" "+nocallbackFeedbackCount );
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(Color.parseColor("#20b5d3"));
         colors.add(Color.parseColor("#21d24c"));
@@ -294,6 +314,16 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
 
     }
 
+    @Override
+    public void onclickList(int position) {
+        Log.e(TAG, "onclickList: "+position );
+
+        Callback_ProductAvailability.startScreen(context,view_params,attribute14,feedbackKey,
+                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate());
+
+    }
+
+
     public class MyValueFormatter implements IValueFormatter {
 
         private DecimalFormat mFormat;
@@ -314,7 +344,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         listview.setLayoutManager(new LinearLayoutManager(context));
         listview.setLayoutManager(new LinearLayoutManager(context, 48 == Gravity.CENTER_HORIZONTAL ?
                 LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-        adapter = new ReportAdapter(callbacklist, context);
+        adapter = new ReportAdapter(callbacklist, context,this);
         listview.setAdapter(adapter);
         //  listview.setNestedScrollingEnabled(true);
 
@@ -327,12 +357,14 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         processbar_view.setVisibility(View.GONE);
         try {
 
-            if (piechartList != null) {
+            if (piechartList != null && runningId !=2) {
                 pieChart.clearValues();
                 pieChart.clearAnimation();
                 pieChart.clearFocus();
                 pieChart.clear();
                 pieChart.invalidate();
+                piechartList=null;
+
             }
             if (callbacklist != null) {
                 callbacklist.clear();
@@ -401,10 +433,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         addleggend.removeAllViewsInLayout();
         LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
-
-       // ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_header_legend, null);
-        //addleggend.addView(view);
-
         int k = 0;
         while (k < 2) {
             Log.e(TAG, "addViewLayout: " + k);
@@ -422,7 +450,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                         case 0:
                             if (attribute14.equals("NO")){
                                 attribute14 = "YES";
-                                Apicallback(0, false);
+                                Apicallback(2, false);
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;
@@ -430,16 +458,14 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                         case 1:
                             if (attribute14.equals("YES")){
                                 attribute14 = "NO";
-                                Apicallback(0, false);
+                                Apicallback(2, false);
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;
 
                         default:
                             break;
-
                     }
-
                 }
             });
             txt_legend_color.setBackgroundColor(colors[k]);
@@ -456,12 +482,9 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                     break;
                 default:
                     break;
-
             }
-
             k++;
         }
-
     }
 
 
