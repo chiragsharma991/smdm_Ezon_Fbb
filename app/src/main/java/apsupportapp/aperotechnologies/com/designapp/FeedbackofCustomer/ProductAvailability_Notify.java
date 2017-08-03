@@ -267,7 +267,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
 
     public void getDetails() {
 
-        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String currentDateandTime = time.format(new Date());
 
         customerFeedback = "1";  // fixed for notified feedback

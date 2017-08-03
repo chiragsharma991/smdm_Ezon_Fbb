@@ -493,7 +493,7 @@ public class LoginActivity1 extends AppCompatActivity
             {
 
                 Log.e("TAG", "onItemClick: "+position );
-             //   view.setBackgroundColor(Color.parseColor("#e8112d"));
+                //   view.setBackgroundColor(Color.parseColor("#e8112d"));
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 dialog.dismiss();

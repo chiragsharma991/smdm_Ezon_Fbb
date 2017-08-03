@@ -16,6 +16,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_Reports;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
@@ -28,6 +29,7 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
     private final ArrayList<mpm_model> list;
+    private final RecyclerViewclick recyclerViewclick;
     private LayoutInflater mInflater;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 2;
@@ -37,12 +39,16 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
 
 
-    public ReportAdapter(ArrayList<mpm_model> list, Context context) {
+    public ReportAdapter(ArrayList<mpm_model> list, Context context,ProductAvailability_Reports productAvailability_reports) {
 
         this.context = context;
+        this.recyclerViewclick = (RecyclerViewclick)productAvailability_reports;
         this.list = list;
         mInflater = LayoutInflater.from(this.context);
     }
+
+
+
 
     @Override
     public int getItemViewType(int position) {
@@ -83,6 +89,12 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ((ReportViewHolder) viewHolder).mobileNumber.setText(data.getAttribute1());
                 ((ReportViewHolder) viewHolder).remark.setText(data.getAttribute2());
                 ((ReportViewHolder) viewHolder).date.setText(data.getArcDate().substring(0,data.getArcDate().length()-3));
+                ((ReportViewHolder) viewHolder).mobileNumber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        recyclerViewclick.onclickList(position);
+                    }
+                });
             }}
     }
 
@@ -103,4 +115,12 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         }
     }
-}
+
+    public interface RecyclerViewclick{
+        void onclickList (int position);
+    }
+
+    }
+
+
+
