@@ -63,7 +63,7 @@ public class Style_Fragment extends Fragment {
     TextView txtarticleOption, txtStoreCode, txtStoreName, txttwSalesUnit, txtlwSales, txtytdSales, txtSoh, txtGit, txtSales, txtFwdWeekCover,
             txtsalesThruUnit, txtROS;
     View view;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     HorizontalScrollView horizontalScrollViewB;
     HorizontalScrollView horizontalScrollViewD;
     ArrayList<StyleDetailsBean> styleDetailsBeanList;
@@ -107,6 +107,8 @@ public class Style_Fragment extends Fragment {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
+
         Bundle bundle = getActivity().getIntent().getExtras();
         articleCode = bundle.getString("articleCode");
         articleOption = bundle.getString("articleOption");
@@ -297,8 +299,6 @@ public class Style_Fragment extends Fragment {
 
                                     //  txtSales.setText(": "+"\u20B9" + Sales);
                                     txtarticleOption.setText("" + articleOption);
-                                    txtStoreCode.setText(storeCode);
-                                    txtStoreName.setText(storeDesc);
                                     txttwSalesUnit.setText(" " + Math.round(twSaleTotQty));
                                     txtlwSales.setText("" + Math.round(lwSaleTotQty));
                                     txtytdSales.setText("" + Math.round(ytdSaleTotQty));
@@ -350,6 +350,8 @@ public class Style_Fragment extends Fragment {
         LinearTable = (LinearLayout) view.findViewById(R.id.linearTable);
         txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView) view.findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreName.setText(storeDescription.substring(5));
         txttwSalesUnit = (TextView) view.findViewById(R.id.txttwSalesUnit);
         txtlwSales = (TextView) view.findViewById(R.id.txtlwSales);
         txtytdSales = (TextView) view.findViewById(R.id.txtytdSales);

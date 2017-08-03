@@ -56,7 +56,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     RelativeLayout target_BtnBack, target_BtnFilter, target_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     FloorAvailabilityDetails targetStockDetails;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken, seasongroup = "Current";
+    String userId, bearertoken, seasongroup = "Current",storeDescription;
     String TAG = "TargetStockExceptionActivity";
     int count = 0;
     int limit = 10;
@@ -99,10 +99,13 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        target_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        target_txtStoreName.setText(storeDescription.substring(5));
         targetListView.setTag("FOOTER");
         targetListView.setVisibility(View.VISIBLE);
         if (Reusable_Functions.chkStatus(context)) {
@@ -188,8 +191,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                 } else {
                                     targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList, context);
                                     targetListView.setAdapter(targetAgeingAdapter);
-                                    target_txtStoreCode.setText(targetStockList.get(0).getStoreCode());
-                                    target_txtStoreName.setText(targetStockList.get(0).getStoreDescription());
 
                                 }
                                 Reusable_Functions.hDialog();

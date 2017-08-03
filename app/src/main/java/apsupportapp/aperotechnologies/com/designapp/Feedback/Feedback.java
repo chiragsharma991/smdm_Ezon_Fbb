@@ -59,7 +59,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private String bearertoken;
+    private String bearertoken,storeDescription;
     private String TAG = "Feedback";
     private RequestQueue queue;
     private int count = 0;
@@ -97,6 +97,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -332,8 +333,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void nextList(int position) {
         Feedback_option.setText(feedbackList.get(position).getOption());
-        txtStoreCode.setText(feedbackList.get(position).getStoreCode());
-        txtStoreName.setText(feedbackList.get(position).getStoreDesc());
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreName.setText(storeDescription.substring(5));
         storecode = feedbackList.get(position).getStoreCode();
         storeDes = feedbackList.get(position).getStoreDesc();
         ImageLoader_feedback.setVisibility(View.VISIBLE);

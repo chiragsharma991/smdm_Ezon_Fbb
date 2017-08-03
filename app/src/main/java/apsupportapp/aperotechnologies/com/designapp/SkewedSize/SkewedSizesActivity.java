@@ -57,7 +57,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private SharedPreferences sharedPreferences;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     RadioButton Skewed_checkWTD, Skewed_checkL4W, Skewed_checkSTD;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -102,11 +102,14 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        Skewed_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        Skewed_txtStoreName.setText(storeDescription.substring(5));
         SkewedSizeListview.setTag("FOOTER");
         Reusable_Functions.sDialog(this, "Loading.......");
         if (getIntent().getStringExtra("selectedDept") == null) {
@@ -218,8 +221,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                     SkewedSizeAdapter = new SkewedSizeAdapter(SkewedSizeList, context, getResources());
                                     SkewedSizeListview.setAdapter(SkewedSizeAdapter);
                                 }
-                                Skewed_txtStoreCode.setText(SkewedSizeList.get(0).getStoreCode());
-                                Skewed_txtStoreName.setText(SkewedSizeList.get(0).getStoreDescription());
+
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
                                 footer.setVisibility(View.GONE);

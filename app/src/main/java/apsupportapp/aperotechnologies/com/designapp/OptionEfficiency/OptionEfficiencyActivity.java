@@ -73,7 +73,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     ArrayList<OptionEfficiencyDetails> optionEfficiencyDetailsArrayList, optionArrayList, headerList;
     ArrayList<OptionEfficiencyHeader> oeHeaderList;
     TextView txtStoreCode, txtStoreDesc, oe_txtHeaderClass, oe_txtDeptName, txtNoChart;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100;
     int count = 0;
@@ -131,6 +131,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -731,6 +732,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void initializeUI() {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreDesc.setText(storeDescription.substring(5));
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         txtNoChart = (TextView) findViewById(R.id.noChartOption);
         oe_txtHeaderClass = (TextView) findViewById(R.id.oe_txtHeaderClass);
@@ -1093,8 +1096,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 new GravitySnapHelper(48).attachToRecyclerView(oe_listView);
                                 optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
                                 oe_listView.setAdapter(optionIndexSnapAdapter);
-                                txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(i).getStoreCode());
-                                txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(i).getStoreDescription());
+
                                 if (oe_txtHeaderClass.getText().toString().equals("Department")) {
                                     level = 1;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
@@ -1382,8 +1384,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
                                 oe_listView.setAdapter(optionIndexSnapAdapter);
                                 optionIndexSnapAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
+
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;

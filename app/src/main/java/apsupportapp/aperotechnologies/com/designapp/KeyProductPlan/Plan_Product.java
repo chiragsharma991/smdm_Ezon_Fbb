@@ -98,7 +98,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     int headerCellsWidth[] = new int[headers.length];
     KeyPlanProductBean productNameBean;
     TextView txtStoreCode, txtStoreDesc;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     MySingleton m_config;
     int offsetvalue = 0, limit = 100;
     int count = 0;
@@ -114,16 +114,18 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         m_config = MySingleton.getInstance(context);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
         view = (ViewGroup) inflater.inflate(R.layout.planactual_product_fragment, container, false);
         context = view.getContext();
         txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) view.findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreDesc.setText(storeDescription.substring(5));
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -853,9 +855,6 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 
-
-                                txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
                                 table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();
@@ -974,8 +973,6 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 
-                                txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
                                 table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();
@@ -1096,8 +1093,6 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 
-                                txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
                                 table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();

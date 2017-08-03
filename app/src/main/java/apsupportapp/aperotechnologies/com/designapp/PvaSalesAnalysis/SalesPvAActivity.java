@@ -82,7 +82,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     LinearLayout llpvahierarchy;
 
     TextView txtStoreCode, txtStoreDesc;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100;
     int count = 0;
@@ -134,6 +134,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -141,6 +142,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         gson = new Gson();
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreDesc.setText(storeDescription.substring(5));
         txt_pva_noChart = (TextView) findViewById(R.id.pva_noChart);
         //hierarchy header
         txtpvahDeptName = (TextView) findViewById(R.id.txtpvahDeptName);
@@ -816,8 +819,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
-                                txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
 
                                 // Retain values....
                                 if (txtheaderplanclass.getText().toString().equals("Department")) {
@@ -1086,7 +1087,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "no category data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -1230,8 +1231,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
 
-                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal = " ";
                                 pvaVal = deptName;
                                 txtpvahDeptName.setText(pvaVal);
@@ -1309,8 +1308,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal += " > " + category;
                                 txtpvahDeptName.setText(pvaVal);
                                 llpvahierarchy.setVisibility(View.VISIBLE);
@@ -1388,8 +1385,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal += " > " + planclass;
                                 txtpvahDeptName.setText(pvaVal);
                                 llpvahierarchy.setVisibility(View.VISIBLE);
@@ -1468,8 +1463,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 pvaVal += " > " + brandnm;
                                 txtpvahDeptName.setText(pvaVal);
                                 llpvahierarchy.setVisibility(View.VISIBLE);
@@ -1646,8 +1639,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;

@@ -1,8 +1,11 @@
 package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,8 @@ Details_Fragment extends Fragment implements View.OnClickListener{
     ProgressBar progressBar;
     LinearLayout linear_prodDetails;
     Button btn_cd_more,btn_cd_less;
+    private String storeDescription;
+    SharedPreferences sharedPreferences;
     public Details_Fragment() {
         // Required empty public constructor
     }
@@ -45,6 +50,11 @@ Details_Fragment extends Fragment implements View.OnClickListener{
         styleDetailsBean = (StyleDetailsBean) i.getSerializableExtra("styleDetailsBean");
         Bundle bundle = getActivity().getIntent().getExtras();
         articleOption = bundle.getString("articleOption");
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+        storeDescription = sharedPreferences.getString("storeDescription","");
+        Log.e( "onCreate: ",""+storeDescription );
+
+
     }
 
     @Override
@@ -134,8 +144,8 @@ Details_Fragment extends Fragment implements View.OnClickListener{
         {
             imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_green);
         }
-        txtStoreCode.setText(styleDetailsBean.getStoreCode());
-        txtStoreDesc.setText(styleDetailsBean.getStoreDesc());
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreDesc.setText(storeDescription.substring(5));
         txtProductName.setText(styleDetailsBean.getProductName());
         txtCollcetion.setText(styleDetailsBean.getCollectionName());
         txtFabric.setText(styleDetailsBean.getProductFabricDesc());

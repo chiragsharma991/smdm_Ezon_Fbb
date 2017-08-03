@@ -61,7 +61,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     RunningPromoListDisplay StockAgeingListDisplay;
     private SharedPreferences sharedPreferences;
     private LinearLayout qfDoneLayout;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     private static String seasongroup = "Current";
     private int count = 0;
     private int limit = 10;
@@ -103,10 +103,13 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        stock_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        stock_txtStoreName.setText(storeDescription.substring(5));
         StockAgListView.setTag("FOOTER");
         StockAgListView.setVisibility(View.VISIBLE);
         if (Reusable_Functions.chkStatus(context)) {
@@ -255,8 +258,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                                 } else {
                                     stockAgeingAdapter = new StockAgeingAdapter(StockAgeingList, context);
                                     StockAgListView.setAdapter(stockAgeingAdapter);
-                                    stock_txtStoreCode.setText(StockAgeingList.get(0).getStoreCode());
-                                    stock_txtStoreName.setText(StockAgeingList.get(0).getStoreDescription());
+
                                 }
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {

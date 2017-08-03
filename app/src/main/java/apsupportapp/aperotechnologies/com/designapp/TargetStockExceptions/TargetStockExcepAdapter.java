@@ -78,8 +78,9 @@ public class TargetStockExcepAdapter extends BaseAdapter {
            // holder.target_fav = (RelativeLayout) convertView.findViewById(R.id.target_fav);
             convertView.setTag(holder);
 
-        } else {
-
+        }
+        else
+        {
             holder = (TargetStockExcepAdapter.Holder) convertView.getTag();
 
         }

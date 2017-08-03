@@ -88,7 +88,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     LinearLayout lldots, llhierarchy, llayoutSalesAnalysis;
     RecyclerView listView_SalesAnalysis;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken, geoLeveLDesc;
+    String userId, bearertoken, geoLeveLDesc,storeDescription;
     EditText etListText;
     RadioButton btnWTD, btnL4W, btnLW, btnYTD;
     public static String selectedsegValue = "WTD";
@@ -130,6 +130,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -654,6 +655,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //        etListText = (EditText) findViewById(R.id.etListText);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreDesc.setText(storeDescription.substring(5));
         //hierarchy header
         txthDeptName = (TextView) findViewById(R.id.txthDeptName);
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
@@ -1979,8 +1982,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         final int currentItem = vwpagersales.getCurrentItem();
                         ImageView img = (ImageView) lldots.getChildAt(currentItem);
                         img.setImageResource(R.mipmap.dots_selected);
-                        txtStoreCode.setText("" + salesAnalysisClassArrayList.get(i).getStoreCode());
-                        txtStoreDesc.setText("" + salesAnalysisClassArrayList.get(i).getStoreDesc());
+
 
                         // For Add "All"
                         salesAnalysisClass = new SalesAnalysisListDisplay();
@@ -2304,8 +2306,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-                                    txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
+
                                 }
 
                                 offsetvalue = (limit * count) + limit;
@@ -2317,8 +2318,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-                                    txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
+
                                 }
                                 for (int i = 0; i < 3; i++) {
                                     ImageView imgdot = new ImageView(context);
@@ -2433,8 +2433,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-                                    txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
+
 
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -2446,8 +2445,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-                                    txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
 
                                 }
 
@@ -2558,8 +2555,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-                                    txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
+
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
@@ -2570,8 +2566,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-                                    txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
+
                                 }
 
                                 for (int i = 0; i < 3; i++) {
@@ -2718,8 +2713,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
-                                txtStoreCode.setText(salesAnalysisClassArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(salesAnalysisClassArrayList.get(0).getStoreDesc());
+
                                 val += " > " + brandnm;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
@@ -2813,8 +2807,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-                                    txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
+
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
@@ -2824,8 +2817,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-                                    txtStoreCode.setText(salesAnalysisClassArrayList.get(i).getStoreCode());
-                                    txtStoreDesc.setText(salesAnalysisClassArrayList.get(i).getStoreDesc());
+
                                 }
                                 for (int i = 0; i < 3; i++) {
                                     ImageView imgdot = new ImageView(context);

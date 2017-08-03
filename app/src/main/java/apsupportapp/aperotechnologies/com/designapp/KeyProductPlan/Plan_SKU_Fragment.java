@@ -75,7 +75,7 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
     Gson gson;
     String sku_seg_clk = "WTD";
     int planlevel = 3;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
     RequestQueue queue;
@@ -119,6 +119,7 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
 
     }
 
@@ -132,6 +133,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
         optionName = "";
         txtStoreCode = (TextView) skuview.findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) skuview.findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreDesc.setText(storeDescription.substring(5));
         txtSkuGreen =(Button)skuview.findViewById(R.id.txtSkuGreen);
         txtSkuRed =(Button)skuview.findViewById(R.id.txtSkuRed);
         txtSkuAmber =(Button)skuview.findViewById(R.id.txtSkuAmber);
@@ -822,8 +825,7 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
 
                                 }
 
-                                txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+
                                 table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();
@@ -942,8 +944,7 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
 
                                 }
 
-                                txtStoreCode.setText(productNameBeanArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(productNameBeanArrayList.get(0).getStoreDesc());
+
                                 table_area.setVisibility(View.VISIBLE);
                                 addTableRowToTableA();
                                 addTableRowToTableB();

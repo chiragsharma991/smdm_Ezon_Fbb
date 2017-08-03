@@ -82,7 +82,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList, fIndexArrayList;
     ArrayList<mpm_model> freshnessIndexDetails_Ez_ArrayList;
     TextView txtStoreCode, txtStoreDesc, txtFIndexClass, txtfIndexDeptName, txtNoChart;
-    String userId, bearertoken, geoLeveLDesc;
+    String userId, bearertoken, geoLeveLDesc,storeDescription;
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100;
     int count = 0;
@@ -133,6 +133,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -318,18 +319,17 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
     }
 
-    private void initializeUI() {
+    private void initializeUI()
+    {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreDesc.setText(storeDescription.substring(5));
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
         txtNoChart = (TextView) findViewById(R.id.noChart);
         llfreshnessIndex = (LinearLayout) findViewById(R.id.llfreshnessIndex);
         btnFIndexNext = (RelativeLayout) findViewById(R.id.btnFIndexNext);
-        // segmented3 = (SegmentedGroup) findViewById(R.id.freshnessIndex_segmentedGrp);
-        // segmented3.setOnCheckedChangeListener(FreshnessIndexActivity.this);
-        // btnCore = (RadioButton) findViewById(R.id.btnCore);
-        //  btnFashion = (RadioButton) findViewById(R.id.btnFashion);
         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
         Tabview = (TabLayout) findViewById(R.id.tabview);
@@ -338,8 +338,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         Tabview.setOnTabSelectedListener(FreshnessIndexActivity.this);
     }
 
-    public void retainValuesFilter() {
-
+    public void retainValuesFilter()
+    {
         //   filter_toggleClick = true;
         if (FIndex_SegmentClick.equals("All")) {
             //btnCore.toggle();
@@ -354,7 +354,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
+    public void onCheckedChanged(RadioGroup group, int checkedId)
+    {
 
     }
 
@@ -424,7 +425,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         processBar.setVisibility(View.GONE);
 
                     }
-
 
                     break;
 
@@ -556,8 +556,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
                                 TestItem();
-                                txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
+
                                 // FreshnessIndexValue = " ";
                                 //FreshnessIndexValue = " > " + deptName;
                                 // txtfIndexDeptName.setText(FreshnessIndexValue);
@@ -653,8 +652,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
                                 TestItem();
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
+
                                 // FreshnessIndexValue += " > " + category;
                                 //  txtfIndexDeptName.setText(FreshnessIndexValue);
                                 txtfIndexDeptName.setText(hierarchy(category));
@@ -739,8 +737,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
                                 TestItem();
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
+
                                 // FreshnessIndexValue += " > " + planclass;
                                 // txtfIndexDeptName.setText(FreshnessIndexValue);
                                 txtfIndexDeptName.setText(hierarchy(planclass));
@@ -833,8 +830,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
                                 TestItem();
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
-                                txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
+
                                 // FreshnessIndexValue += " > " + brandnm;
                                 //  txtfIndexDeptName.setText(FreshnessIndexValue);
                                 txtfIndexDeptName.setText(hierarchy(brandnm));
@@ -1276,9 +1272,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
         listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
 
-
-        txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
-        txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
         if (txtFIndexClass.getText().toString().equals("Department")) {
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
@@ -1409,8 +1402,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
                                 freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
-                                txtStoreCode.setText(freshnessIndexDetailsArrayList.get(0).getStoreCode());
-                                txtStoreDesc.setText(freshnessIndexDetailsArrayList.get(0).getStoreDescription());
+
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;

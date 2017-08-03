@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -23,14 +22,11 @@
             app:cardBackgroundColor="@color/ezfb_White"
             app:cardElevation="3dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginBottom="3dp">
 
-            >
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                >
+                android:layout_height="wrap_content">
                 <!--
                                 <RelativeLayout
                                     android:id="@+id/bst_Rel_image_child"
@@ -76,8 +72,6 @@
                         android:orientation="vertical"
                         android:paddingLeft="10dp"
                         >
-
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -88,10 +82,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:layout_weight="0.2"
-
                                 >
-
-
                                 <TextView
                                     android:id="@+id/target_option"
                                     android:layout_width="match_parent"
@@ -120,203 +111,217 @@
                                     android:focusableInTouchMode="false"
                                     android:textOff=""
                                     android:textOn="" />
-
-
                             </LinearLayout>
-
-
-
                         </LinearLayout>
-
 
                         <!--sales layout-->
 
+
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginTop="0dp"
+                            android:layout_width="252dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="5dp"
-                            >
-                            <LinearLayout
+                            android:layout_marginTop="0dp"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:id="@+id/relative1"
+                                    android:layout_width="60dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/txt_sohnm"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="SOH(U)"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+
+                                        />
+
+                                    <TextView
+                                        android:layout_below="@+id/txt_sohnm"
+                                        android:id="@+id/target_SOH_U"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
+                                <View
+                                    android:layout_marginRight="20dp"
+                                    android:id="@+id/target_view1"
+                                    android:layout_toRightOf="@+id/relative1"
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
+
+                                <RelativeLayout
+                                    android:layout_toRightOf="@+id/target_view1"
+                                    android:layout_width="75dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/txt_stknm"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="Ideal Stock"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large" />
+
+                                    <TextView
+                                        android:layout_below="@+id/txt_stknm"
+                                        android:id="@+id/target_ROS_U"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
+
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_marginRight="60dp"
+                                android:id="@+id/bst_lineOne_child"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:orientation="horizontal"
-                                android:weightSum="1">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.5"
-                                    android:singleLine="true"
-                                    android:textColor="@color/ezfb_black"
-                                    android:text="SOH(U)"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.1"
-                                    android:visibility="visible"
-                                    android:text=":"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/target_SOH_U"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.4"
-                                    android:singleLine="true"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/ezfb_black"
-                                    android:text="100"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
+                                android:layout_height="@dimen/smdm_inflater_divider"
+                                android:layout_alignStart="@+id/bst_head_child"
+                                android:layout_marginBottom="5dp"
                                 android:layout_marginTop="5dp"
-                                android:weightSum="1">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.5"
-                                    android:singleLine="true"
-                                    android:text="Ideal Stock"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.1"
-                                    android:text=":"
-                                    android:visibility="visible"
-                                    android:textColor="@color/smdm_default_color"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/target_ROS_U"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.4"
-                                    android:singleLine="true"
-                                    android:text="100"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                            </LinearLayout>
+                                android:background="@color/ezfb_black" />
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="5dp"
-                                android:weightSum="1">
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal">
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RelativeLayout
+                                    android:layout_width="60dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.5"
-                                    android:singleLine="true"
-                                    android:text="ROS(U)"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.1"
-                                    android:text=":"
-                                    android:visibility="visible"
-                                    android:textColor="@color/smdm_default_color"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    <TextView
+                                        android:id="@+id/txt_ros_nm"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="ROS(U)"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large" />
 
-                                <TextView
-                                    android:id="@+id/target_ROS"
-                                    android:layout_width="0dp"
+                                    <TextView
+                                        android:layout_below="@+id/txt_ros_nm"
+                                        android:id="@+id/target_ROS"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
+
+
+                                </RelativeLayout>
+
+                                <View
+                                    android:layout_marginRight="20dp"
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
+
+                                <RelativeLayout
+                                    android:layout_width="75dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.4"
-                                    android:singleLine="true"
-                                    android:text="100"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/txt_availability_nm"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="Availability%"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large" />
+
+                                    <TextView
+                                        android:layout_below="@+id/txt_availability_nm"
+                                        android:id="@+id/target_Availability"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
+                                <View
+                                    android:visibility="invisible"
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
+
+                                <LinearLayout
+                                    android:visibility="invisible"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="ROS"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large" />
+
+                                    <TextView
+                                        android:id="@+id/bestInvent_RosU"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
 
                             </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="5dp"
-                                android:weightSum="1">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.5"
-                                    android:singleLine="true"
-                                    android:text="Availability%"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.1"
-                                    android:text=":"
-                                    android:visibility="visible"
-                                    android:textColor="@color/smdm_default_color"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/target_Availability"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="0.4"
-                                    android:singleLine="true"
-                                    android:text="100"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/ezfb_black"
-                                    android:textSize="@dimen/smdm_inflator_subtitle_normal"
-                                    />
-
-                            </LinearLayout>
-
 
                         </LinearLayout>
-
-
-
 
 
                     </LinearLayout>

@@ -49,14 +49,14 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class SaleThruInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
 
-    static TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
+    TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
     RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
             quickFilter_baseLayout, BestQfDoneLayout, BestQuickFilterBorder, SwitchRelay;
     RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
     CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming;
     RadioButton CheckWTD, CheckL4W, CheckSTD;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -107,10 +107,13 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        BestInvent_txtStoreName.setText(storeDescription.substring(5));
         BestInventListview.setTag("FOOTER");
 
         Reusable_Functions.hDialog();

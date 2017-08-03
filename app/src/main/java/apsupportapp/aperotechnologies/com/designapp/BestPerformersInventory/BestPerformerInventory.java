@@ -64,13 +64,13 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class BestPerformerInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
 
-    public static TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
+    public  TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
     private RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
             BestQfDoneLayout, BestQuickFilterBorder;
     private RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
     private RadioButton CheckWTD, CheckL4W, CheckSTD;
-    private String userId, bearertoken, geoLeveLDesc;
+    private String userId, bearertoken, geoLeveLDesc,storeDescription;
     private TextView Toolbar_title,toggle_txt;
     private String TAG = "";
     private int count = 0;
@@ -124,7 +124,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-
+        storeDescription = sharedPreferences.getString("storeDescription","");
         if (geoLeveLDesc.equals("E ZONE")) {
             setContentView(R.layout.activity_best_performer_ez_inventory);
             getSupportActionBar().hide();
@@ -496,11 +496,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
                                     Log.e(TAG, "onResponse: list size is" + BestInventList.size());
 
-                                    if (!TAG.equals("BestPerformer_Ez_Inventory")) {
 
-                                        BestInvent_txtStoreCode.setText(BestInventList.get(0).getStoreCode());
-                                        BestInvent_txtStoreName.setText(BestInventList.get(0).getStoreDesc());
-                                    }
                                 }
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
@@ -651,6 +647,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
+        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        BestInvent_txtStoreName.setText(storeDescription.substring(5));
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
         BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
         BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);

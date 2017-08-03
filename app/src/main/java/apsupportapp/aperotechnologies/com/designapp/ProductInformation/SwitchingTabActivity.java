@@ -31,6 +31,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
     public static ViewPager viewPager;
     public static TabLayout tabLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
