@@ -63,8 +63,6 @@ public class ApiPostRequest {
 
     private void setApi(final Context context) {
 
-
-
         Log.e(TAG, "final_setApi: URL " + URL);
         Reusable_Functions.sDialog(context,"Submitting data…");
         postRequest = new JsonObjectRequest(Request.Method.POST, URL, object.toString(),
@@ -82,7 +80,7 @@ public class ApiPostRequest {
                                 return;
 
                             } else  {
-
+                                Toast.makeText(context, "User Feedback saved successfully", Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 ResposeInterface.PostResponse(response);
 
