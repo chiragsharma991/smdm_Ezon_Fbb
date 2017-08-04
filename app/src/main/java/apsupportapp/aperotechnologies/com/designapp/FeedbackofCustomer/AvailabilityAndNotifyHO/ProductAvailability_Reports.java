@@ -148,7 +148,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
             }
         });
 
-
     }
 
     private void Apicallback(int id, boolean loader) {
@@ -478,7 +477,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
             k++;
         }
     }
-
 
     public interface ReportInterface {
 
