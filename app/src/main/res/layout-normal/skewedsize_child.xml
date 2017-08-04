@@ -180,7 +180,7 @@
                                     android:id="@+id/view"
                                     android:layout_width="1dp"
                                     android:background="@color/ezfbb_black"
-                                    android:layout_height="wrap_content"></View>
+                                    android:layout_height="match_parent"></View>
 
 
 

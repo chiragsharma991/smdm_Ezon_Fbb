@@ -42,7 +42,8 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
     private RelativeLayout backButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_callback_product_availability);
         getSupportActionBar().hide();
@@ -50,8 +51,8 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         initialiseUI();
     }
 
-    private void initialiseUI() {
-
+    private void initialiseUI()
+    {
         storedesc = (TextView) findViewById(R.id.txtStoreCode);
         txt_ean_number = (TextView) findViewById(R.id.txt_ean_number);
         txt_store_number = (TextView) findViewById(R.id.txt_store_number);
@@ -77,11 +78,10 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         txt_sms = (TextView) findViewById(R.id.txt_sms);
         MainMethod();
         Apicallback(0, false);
-
     }
 
-    private void MainMethod() {
-
+    private void MainMethod()
+    {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         //userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
@@ -101,21 +101,26 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         queue.start();
     }
 
-    private void Apicallback(int id, boolean loader) {
-        if (Reusable_Functions.chkStatus(context)) {
-            if (loader) {
+    private void Apicallback(int id, boolean loader)
+    {
+        if (Reusable_Functions.chkStatus(context))
+        {
+            if (loader)
+            {
                 Reusable_Functions.sDialog(context, "Loading...");
             }
             mpm_model model = new mpm_model();
             requestcallback(model, id);            //this id is select for url.
-
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private synchronized void requestcallback(mpm_model model, int id) {
+    private synchronized void requestcallback(mpm_model model, int id)
+    {
 
         String url = "";
         ApiRequest api_request;
@@ -134,10 +139,9 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         }
     }
 
-
-
     @Override
-    public void response(ArrayList<mpm_model> list, int id) {
+    public void response(ArrayList<mpm_model> list, int id)
+    {
         Log.e(TAG, "response: sucess"+id );
         switch (id) {
             // case 0 and 1 will follow like first api call and set view in case 0;
@@ -151,11 +155,10 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
                 break;
 
         }
-
     }
 
-    private void setlist(ArrayList<mpm_model> callbacklist) {
-
+    private void setlist(ArrayList<mpm_model> callbacklist)
+    {
         txt_ean_number.setText(callbacklist.get(0).getAttribute1());
         txt_store_number.setText(callbacklist.get(0).getAttribute2());
         txt_cust_name.setText(callbacklist.get(0).getAttribute3());
@@ -170,14 +173,12 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         txt_remarks.setText(callbacklist.get(0).getAttribute12());
         txt_email.setText(callbacklist.get(0).getAttribute13());
         txt_sms.setText(callbacklist.get(0).getAttribute14());
-
-
     }
 
     @Override
-    public void nodatafound() {
+    public void nodatafound()
+    {
         Log.e(TAG, "response: null" );
-
         txt_ean_number.setText("");
         txt_store_number.setText("");
         txt_cust_name.setText("");

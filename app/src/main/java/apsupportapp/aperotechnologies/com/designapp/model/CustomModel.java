@@ -131,15 +131,15 @@ public class CustomModel {
     }
 
     public double getTotalFeedbackCount() {
-        return this.totalFeedbackCount;
+        return totalFeedbackCount;
     }
 
     public double getCallbackFeedbackCount() {
-        return this.callbackFeedbackCount;
+        return callbackFeedbackCount;
     }
 
     public double getNoCallbackFeedbackCount() {
-        return this.noCallbackFeedbackCount;
+        return noCallbackFeedbackCount;
     }
 
 

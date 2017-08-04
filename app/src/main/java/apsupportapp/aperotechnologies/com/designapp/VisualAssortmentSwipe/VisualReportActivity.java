@@ -192,7 +192,8 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
                                 pieChart.setEntryLabelColor(Color.WHITE);
                                 pieChart.setHoleRadius(65);
                                 pieChart.setHoleColor(Color.parseColor("#ffffff"));
-                                pieChart.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                                pieChart.setOnFocusChangeListener(new View.OnFocusChangeListener()
+                                {
                                     @Override
                                     public void onFocusChange(View v, boolean hasFocus) {
                                         v = pieChart.focusSearch(v.focusSearch(View.FOCUS_LEFT),View.FOCUS_LEFT);
@@ -249,7 +250,6 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
             }
         };
         int socketTimeout = 60000;//5 seconds
-
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);

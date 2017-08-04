@@ -67,8 +67,8 @@ public class ApiRequest  {
     }
 
     // this constructer is useful for fragment
-    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id, ProductAvailability_Reports productAvailability_reports) {
-        ResposeInterface= (HttpResponse)productAvailability_reports;
+    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id, HttpResponse httpResponse) {
+        ResposeInterface= (HttpResponse)httpResponse;
         this.context=context;
         bearertoken=token;
         this.Url=Url;
@@ -168,13 +168,7 @@ public class ApiRequest  {
                                 limit = 100;
                                 offsetvalue = 0;
                               //  Reusable_Functions.hDialog();
-
-
-
                             }
-
-
-
                         } catch (Exception e) {
                             if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                                 FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
@@ -184,10 +178,6 @@ public class ApiRequest  {
                             Log.e(TAG, "onResponse catch: "+e.getMessage() );
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
-
-
-
-
                         }
                     }
                 },
@@ -210,10 +200,7 @@ public class ApiRequest  {
                         Log.e(TAG, "Server not found..."+error.getMessage() );
                         error.printStackTrace();
                     }
-
-
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -228,12 +215,7 @@ public class ApiRequest  {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         getRequest.setRetryPolicy(policy);
         queue.add(getRequest);
-
-
-
     }
-
-
 }
 
 

@@ -74,7 +74,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
     private String userId, store, bearertoken, geoLeveLDesc;
-    private String TAG = "customerFeedbackReport";
+    private String TAG = "ProductAvailability_Notify";
     private String view_params = "LD";
     private ReportAdapter adapter=null;
     private ArrayList<mpm_model> callbacklist=null, piechartList=null;
@@ -104,9 +104,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         Log.e(TAG, "setUserVisibleHint: " + isVisibleToUser);
-        if (ActivityCreated && isVisibleToUser) {
-
-        }
 
     }
 
@@ -229,12 +226,10 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                 break;
 
         }
-
-
     }
 
-    private void setPiechart(ArrayList<mpm_model> piechartList) {
-
+    private void setPiechart(ArrayList<mpm_model> piechartList)
+    {
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
         totalFeedbackCount = (float) piechartList.get(0).getTotalFeedbackCount();
         callbackFeedbackCount = (float) piechartList.get(0).getCallbackFeedbackCount();
@@ -243,7 +238,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(Color.parseColor("#20b5d3"));
         colors.add(Color.parseColor("#21d24c"));
-        //colors.add(Color.parseColor("#f5204c"));
         entries.add(new PieEntry(callbackFeedbackCount, "Feedback with Callback"));
         entries.add(new PieEntry(nocallbackFeedbackCount, "Feedback"));
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -251,9 +245,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         dataSet.setValueLineWidth(0.5f);
         dataSet.setValueTextColor(Color.BLACK);
         PieData pieData = new PieData(dataSet);
-        //pieData.setValueFormatter(new MyValueFormatter());
-        dataSet.setValueLinePart1Length(0.3f);
-        dataSet.setValueLinePart2Length(0.3f);
         pieChart.setDrawMarkers(false);
         pieData.setValueTextSize(11f);
         dataSet.setXValuePosition(null);
@@ -275,8 +266,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         l.setFormSize(11f);
         l.setEnabled(false);
         addViewLayout();
-
-
     }
 
 
@@ -305,12 +294,11 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                 break;
 
         }
-
-
     }
 
     @Override
-    public void onNothingSelected() {
+    public void onNothingSelected()
+    {
 
     }
 
@@ -339,7 +327,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     }
 
 
-    private void setlistView(ArrayList<mpm_model> callbacklist) {
+    private void setlistView(ArrayList<mpm_model> callbacklist)
+    {
 
         listview.setLayoutManager(new LinearLayoutManager(context));
         listview.setLayoutManager(new LinearLayoutManager(context, 48 == Gravity.CENTER_HORIZONTAL ?
@@ -357,13 +346,13 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         processbar_view.setVisibility(View.GONE);
         try {
 
-            if (piechartList != null && runningId !=2) {
+            if (piechartList == null) {
                 pieChart.clearValues();
                 pieChart.clearAnimation();
                 pieChart.clearFocus();
                 pieChart.clear();
                 pieChart.invalidate();
-                piechartList=null;
+//                piechartList=null;
 
             }
             if (callbacklist != null) {
@@ -377,11 +366,12 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     }
 
 
-    private void MainMethod() {
+    private void MainMethod()
+    {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
-        userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
+      //  userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
         store = sharedPreferences.getString("storeDescription", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
@@ -394,7 +384,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
 
 
     @Override
-    public void onTabSelected(TabLayout.Tab tab) {
+    public void onTabSelected(TabLayout.Tab tab)
+    {
         int checkedId = Tabview.getSelectedTabPosition();
 
         Log.e(TAG, "onTabSelected: " + checkedId);
@@ -434,7 +425,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
         int k = 0;
-        while (k < 2) {
+        while (k < 2)
+        {
             Log.e(TAG, "addViewLayout: " + k);
             ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_legend, null);
             TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
