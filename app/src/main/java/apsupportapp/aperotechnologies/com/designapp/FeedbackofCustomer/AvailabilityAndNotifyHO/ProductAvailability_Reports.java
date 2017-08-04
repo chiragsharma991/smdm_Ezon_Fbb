@@ -141,13 +141,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         MainMethod();
         Apicallback(0, true);
 
-        storedesc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Callback_ProductAvailability.startScreen(context);
-            }
-        });
-
     }
 
     private void Apicallback(int id, boolean loader) {

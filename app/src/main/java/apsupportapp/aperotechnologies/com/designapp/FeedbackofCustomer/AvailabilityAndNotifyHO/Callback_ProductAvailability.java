@@ -179,8 +179,8 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
     public void nodatafound()
     {
         Log.e(TAG, "response: null" );
-        txt_ean_number.setText("");
-        txt_store_number.setText("");
+        txt_ean_number.setText(callbacklist.get(0).getAttribute1());
+        txt_store_number.setText(callbacklist.get(0).getAttribute2());
         txt_cust_name.setText("");
         txt_mobile_number.setText("");
         txt_brand_name.setText("");

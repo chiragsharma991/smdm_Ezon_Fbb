@@ -23,19 +23,20 @@ import java.util.ArrayList;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.Callback_ProductAvailability;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
+import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
-public class Callback_PolicyExchange extends AppCompatActivity {
+public class Callback_PolicyExchange extends AppCompatActivity implements HttpResponse{
 
     private TextView txt_mobile_number, txt_exchange, txt_product_verified, txt_remarks, txt_cust_name, txt_callback, txt_feedback_date, txt_email, txt_sms;
     private Context context;
     private SharedPreferences sharedPreferences;
-    private TextView storedesc;
+    private TextView txt_storedesc,txt_storecode;
     private String userId,store,bearertoken,geoLeveLDesc;
     private RequestQueue queue;
-    private String TAG="CallbackActivity";
+    private String TAG="Callback_PolicyExchange";
     private String attribute14,attribute1,feedbackdate,view_params,feedbackKey;
     private ArrayList<mpm_model> callbacklist;
     private RelativeLayout backButton;
@@ -45,6 +46,7 @@ public class Callback_PolicyExchange extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_callback_policy_exchange_ho);
         getSupportActionBar().hide();
+        context = this;
         initializeUI();
     }
 
@@ -60,6 +62,8 @@ public class Callback_PolicyExchange extends AppCompatActivity {
         txt_feedback_date = (TextView) findViewById(R.id.txt_feedback_date);
         txt_email = (TextView) findViewById(R.id.txt_email);
         txt_sms = (TextView) findViewById(R.id.txt_sms);
+        txt_storedesc = (TextView) findViewById(R.id.txtStoreName);
+        txt_storecode = (TextView)findViewById(R.id.txtStoreCode);
         backButton = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +83,8 @@ public class Callback_PolicyExchange extends AppCompatActivity {
         store = sharedPreferences.getString("storeDescription", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        storedesc.setText(store);
+        txt_storecode.setText(store.trim().substring(0,4));
+        txt_storedesc.setText(store.substring(5));
         Intent intent=getIntent();
         view_params=intent.getStringExtra("view_params");
         attribute14=intent.getStringExtra("attribute14");
@@ -149,15 +154,15 @@ public class Callback_PolicyExchange extends AppCompatActivity {
     private void setlist(ArrayList<mpm_model> callbacklist)
     {
 
-        txt_mobile_number.setText("9876543210"); ;
-        txt_exchange .setText("test");
-        txt_product_verified.setText("test");
-        txt_remarks.setText("test");
-        txt_cust_name.setText("test"); ;
-        txt_callback.setText("test");
-        txt_feedback_date.setText("test");
-        txt_email.setText("test");
-        txt_sms.setText("test");
+        txt_mobile_number.setText(callbacklist.get(0).getAttribute1()); ;
+        txt_exchange .setText(callbacklist.get(0).getAttribute2());
+        txt_product_verified.setText(callbacklist.get(0).getAttribute3());
+        txt_remarks.setText(callbacklist.get(0).getAttribute4());
+        txt_cust_name.setText(callbacklist.get(0).getAttribute5()); ;
+        txt_callback.setText(callbacklist.get(0).getAttribute6());
+        txt_feedback_date.setText(callbacklist.get(0).getAttribute7());
+        txt_email.setText(callbacklist.get(0).getAttribute8());
+        txt_sms.setText(callbacklist.get(0).getAttribute9());
 
     }
 

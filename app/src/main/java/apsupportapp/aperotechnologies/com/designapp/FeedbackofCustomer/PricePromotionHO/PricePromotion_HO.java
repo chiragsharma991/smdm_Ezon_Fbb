@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotionHO.Adapter.PricePromotion_ViewPagerAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 public class PricePromotion_HO extends AppCompatActivity {

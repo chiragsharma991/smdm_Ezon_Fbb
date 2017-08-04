@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_Reports;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.PolicyExchange_Reports;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
@@ -17,7 +18,7 @@ import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
  * Created by csuthar on 01/08/17.
  */
 
-public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PolicyExchange_ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
@@ -32,7 +33,7 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
 
 
-    public ReportAdapter(ArrayList<mpm_model> list, Context context, PolicyExchange_Reports policyExchange_reports) {
+    public PolicyExchange_ReportAdapter(ArrayList<mpm_model> list, Context context, PolicyExchange_Reports policyExchange_reports) {
 
         this.context = context;
         this.recyclerViewclick = (RecyclerViewclick)policyExchange_reports;

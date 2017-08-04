@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -102,6 +103,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private TextView RefreshTime;
     private SnapAdapter snapAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -250,23 +252,23 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
             apps = getProduct(3);
             snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
-            apps = getProduct(4);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
+//            apps = getProduct(4);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
 //            apps = getProduct(5);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Key Product", apps));
-            apps = getProduct(5);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
-            apps = getProduct(6);
+//            apps = getProduct(5);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+            apps = getProduct(4);
             snapAdapter.addSnap(new Snap(Gravity.START, "Feedback", apps));
 //            apps = getProduct(7);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
-            apps = getProduct(7);
+            apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
-            apps = getProduct(8);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+//            apps = getProduct(8);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
 //            apps = getProduct(10);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
-            apps = getProduct(9);
+            apps = getProduct(6);
             snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
 
         }
@@ -352,6 +354,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkPermission() {
         boolean checkDeviceId = sharedPreferences.getString("device_id", "").equals("") ? true : false;   //true means you not get any device id.
 
@@ -434,6 +437,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 .setMessage(Constants.REQUEST_PERMISSION_ALERT)
                 .setPositiveButton("RE-TRY", new DialogInterface.OnClickListener()
                 {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
                     public void onClick(DialogInterface dialog, int which) {
                         Log.e("Click of I m sure", ", permission request Retry");
                         requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);

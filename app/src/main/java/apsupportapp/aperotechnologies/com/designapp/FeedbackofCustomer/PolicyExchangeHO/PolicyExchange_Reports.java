@@ -41,6 +41,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.Adapter.PolicyExchange_ReportAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -53,7 +54,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
  * Created by rkanawade on 24/07/17.
  */
 
-public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabSelectedListener, HttpResponse, OnChartValueSelectedListener,ReportAdapter.RecyclerViewclick
+public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabSelectedListener, HttpResponse, OnChartValueSelectedListener,PolicyExchange_ReportAdapter.RecyclerViewclick
 {
 
     private Context context;
@@ -68,7 +69,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     private String userId, store, bearertoken, geoLeveLDesc;
     private String TAG = "PolicyExchange_Notify";
     private String view_params = "LD";
-    private ReportAdapter adapter=null;
+    private PolicyExchange_ReportAdapter adapter=null;
     private ArrayList<mpm_model> callbacklist=null, piechartList=null;
     private String attribute14 = "YES";
     private String feedbackKey = "2";
@@ -133,12 +134,6 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
         MainMethod();
         Apicallback(0, true);
 
-        storedesc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Callback_ProductAvailability.startScreen(context);
-            }
-        });
 
 
     }
@@ -304,28 +299,13 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     }
 
 
-    public class MyValueFormatter implements IValueFormatter {
-
-        private DecimalFormat mFormat;
-
-        public MyValueFormatter() {
-            mFormat = new DecimalFormat("###,###,###,##0.0"); // use two decimal if needed
-        }
-
-        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-            if (value < 0.0) return "";
-            else return mFormat.format(value) + "";
-        }
-    }
-
-
     private void setlistView(ArrayList<mpm_model> callbacklist)
     {
 
         listview.setLayoutManager(new LinearLayoutManager(context));
         listview.setLayoutManager(new LinearLayoutManager(context, 48 == Gravity.CENTER_HORIZONTAL ?
                 LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-        adapter = new ReportAdapter(callbacklist, context,this);
+        adapter = new PolicyExchange_ReportAdapter(callbacklist, context,this);
         listview.setAdapter(adapter);
         //  listview.setNestedScrollingEnabled(true);
 
