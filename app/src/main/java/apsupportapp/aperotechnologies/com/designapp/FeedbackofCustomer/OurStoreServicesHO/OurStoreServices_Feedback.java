@@ -290,7 +290,7 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode", store.trim().substring(0,4));
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);

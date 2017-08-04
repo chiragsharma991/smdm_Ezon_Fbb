@@ -202,12 +202,12 @@
                                     <View
                                         android:id="@+id/view"
                                         android:layout_width="1dp"
+                                        android:layout_marginTop="18dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_centerInParent="true"
                                         android:layout_marginLeft="25dp"
                                         android:layout_marginRight="5dp"
                                         android:layout_toRightOf="@+id/linear_ageing"
-                                        android:background="@color/ezfb_black"></View>
+                                        android:background="@color/smdm_divider_Black"></View>
 
 
                                     <LinearLayout

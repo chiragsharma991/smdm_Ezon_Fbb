@@ -23,9 +23,9 @@ import java.util.Locale;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
-public class
+public class Details_Fragment extends Fragment implements View.OnClickListener{
 
-Details_Fragment extends Fragment implements View.OnClickListener{
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     StyleDetailsBean styleDetailsBean;
@@ -104,6 +104,7 @@ Details_Fragment extends Fragment implements View.OnClickListener{
         {
             Glide.with(getActivity())
                     .load(styleDetailsBean.getProductImageURL())
+                    .placeholder(R.mipmap.placeholder)
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -119,12 +120,13 @@ Details_Fragment extends Fragment implements View.OnClickListener{
                     })
                     .into(imgProfile);
 
-        }else {
+        }
+        else {
             progressBar.setVisibility(View.GONE);
 
-            Glide.with(getActivity()).
-                    load(R.mipmap.placeholder).
-                    into(imgProfile);
+            Glide.with(getActivity())
+                    .load(R.mipmap.noimageavailable)
+                    .into(imgProfile);
         }
 
         if (styleDetailsBean.getPromoFlg().equals("N") || styleDetailsBean.getPromoFlg().equals(""))

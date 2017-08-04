@@ -169,7 +169,7 @@
                                 </LinearLayout>
                                 <View
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfb_black"
+                                    android:background="@color/smdm_divider_Black"
                                     android:layout_height="match_parent"></View>
 
                                 <LinearLayout
@@ -202,7 +202,7 @@
 
                                 <View
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfb_black"
+                                    android:background="@color/smdm_divider_Black"
                                     android:layout_height="match_parent"></View>
 
                                 <LinearLayout
@@ -282,7 +282,7 @@
 
                                 <View
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfb_black"
+                                    android:background="@color/smdm_divider_Black"
                                     android:layout_height="match_parent"></View>
 
                                 <LinearLayout
@@ -314,7 +314,7 @@
                                 </LinearLayout>
                                 <View
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfb_black"
+                                    android:background="@color/smdm_divider_Black"
                                     android:layout_height="match_parent"></View>
 
                                 <LinearLayout

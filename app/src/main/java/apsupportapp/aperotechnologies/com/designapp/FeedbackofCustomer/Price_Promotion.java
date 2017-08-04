@@ -49,6 +49,7 @@ import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
  */
 
 public class Price_Promotion extends AppCompatActivity implements View.OnClickListener, HttpPostResponse {
+
     private Context context;
     private RelativeLayout imageBtnBack1;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_brand_name, edt_product_name, edt_size;
@@ -71,7 +72,6 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_price_promotion);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
         context = this;
@@ -179,9 +179,7 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-
         MainMethod();
-
 
     }
 
@@ -234,7 +232,6 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
         queue.start();
     }
 
-
     @Override
     public void onClick(View v) {
 
@@ -273,29 +270,32 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
     private void submitData() {
         scrollView.setFocusableInTouchMode(true);
         scrollView.fullScroll(View.FOCUS_UP);
-        //  scrollView.setDescendantFocusability(ViewGroup.FOCUS_UP);
         getDetails();
-        // prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
 
-        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null)) {
+        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null))
+        {
 
-            if(customerNumber.equals("") || customerNumber == null){
+            if(customerNumber.equals("") || customerNumber == null)
+            {
                 incorrect_phone.setText(context.getResources().getString(R.string.customer_feedback_number));
                 incorrect_phone.setVisibility(View.VISIBLE);
                 edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
-            if(customerRemarks.equals("") || customerRemarks == null){
+            if(customerRemarks.equals("") || customerRemarks == null)
+            {
                 incorrect_remark.setText(context.getResources().getString(R.string.customer_feedback_remarks));
                 incorrect_remark.setVisibility(View.VISIBLE);
                 edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
-            if(!customerNumber.equals("")) {
+            if(!customerNumber.equals(""))
+            {
 
-                if (customerNumber.length() < 10) {
+                if (customerNumber.length() < 10)
+                {
 
                     incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
                     incorrect_phone.setVisibility(View.VISIBLE);
@@ -304,26 +304,29 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
                 }
             }
 
-
         }
-        else if(customerNumber.length() < 10){
+        else if(customerNumber.length() < 10)
+        {
 
             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
             incorrect_phone.setVisibility(View.VISIBLE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
 
         }
-        else {
+        else
+        {
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
             Log.e("submitData: json is "," " + getObject().toString());
-            if (Reusable_Functions.chkStatus(context)) {
+            if (Reusable_Functions.chkStatus(context))
+            {
                 mpm_model model = new mpm_model();
                 ApiCallBack(getObject(), 0);// id is zero.
 
-            } else {
+            } else
+            {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             }
         }
@@ -334,11 +337,10 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
 
         // totoal is 14 contain and 3 extra like : feedback id,storecode,arcDate
 
-
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode", store.trim().substring(0,4));
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -357,10 +359,8 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
             e.printStackTrace();
         }
 
-
         return jsonObject;
     }
-
 
     private synchronized void ApiCallBack(JSONObject object, int id) {
 
@@ -370,12 +370,10 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
 
                 String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
-
                 break;
 
             default:
                 break;
-
 
         }
     }

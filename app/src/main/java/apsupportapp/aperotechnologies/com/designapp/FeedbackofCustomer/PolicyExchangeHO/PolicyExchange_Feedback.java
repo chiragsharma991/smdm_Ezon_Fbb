@@ -200,6 +200,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         store = sharedPreferences.getString("storeDescription", "");
+        storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         //  editor.putString("storeDescription",storeDescription);
@@ -293,7 +294,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode", store.trim().substring(0,4));
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerExchangeDone);
             jsonObject.put("attribute3", customerProductVerified);
