@@ -361,13 +361,12 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
     @Override
     public void PostResponse(JSONObject response) {
-
-        Log.e("response"," "+response.toString());
+        Log.e(TAG, "PostResponse: success");
+        String result = null;
         try {
-            String status = response.getString("status");
-            if(status.equals("User Feedback saved successfully ")){
-                cancelData();
-            }
+            result = response.getString("status");
+            Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
+            cancelData();
         } catch (JSONException e) {
             e.printStackTrace();
         }

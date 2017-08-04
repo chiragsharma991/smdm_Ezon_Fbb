@@ -56,6 +56,7 @@ public class ApiPostRequest {
         this.id = id;
         this.object = object;
         setApi(context);
+        Log.e(TAG, "ResposeInterface" + ResposeInterface);
 
 
     }
@@ -80,7 +81,7 @@ public class ApiPostRequest {
                                 return;
 
                             } else  {
-                                Toast.makeText(context, "User Feedback saved successfully", Toast.LENGTH_SHORT).show();
+
                                 Reusable_Functions.hDialog();
                                 ResposeInterface.PostResponse(response);
 
