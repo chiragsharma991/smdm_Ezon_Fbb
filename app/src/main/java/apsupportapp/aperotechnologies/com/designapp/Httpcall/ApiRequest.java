@@ -113,7 +113,7 @@ public class ApiRequest  {
         }
         else{
 
-            URL=Url+ "?offset=" + offsetvalue + "&limit=" +limit;
+            URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
 
         }
         Log.e(TAG, "final_setApi: URL "+URL );

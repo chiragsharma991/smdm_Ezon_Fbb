@@ -72,7 +72,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     private PolicyExchange_ReportAdapter adapter=null;
     private ArrayList<mpm_model> callbacklist=null, piechartList=null;
     private String attribute14 = "YES";
-    private String feedbackKey = "2";
+    private String feedbackKey = "3";
     private boolean ActivityCreated = false;
     private CardView card;
     private ProgressBar processbar_view;
@@ -104,7 +104,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.e(TAG, "onCreateView: ");
         context = getContext();
-        View view = inflater.inflate(R.layout.fragment_productavailability_reports, container, false);
+        View view = inflater.inflate(R.layout.fragment_policyexchange_reports, container, false);
         return view;
     }
 

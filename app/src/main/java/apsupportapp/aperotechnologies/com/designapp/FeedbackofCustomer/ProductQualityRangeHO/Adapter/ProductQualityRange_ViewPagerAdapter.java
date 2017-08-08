@@ -1,8 +1,11 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_Feedback;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_Reports;
 
 /**
  * Created by rkanawade on 25/07/17.

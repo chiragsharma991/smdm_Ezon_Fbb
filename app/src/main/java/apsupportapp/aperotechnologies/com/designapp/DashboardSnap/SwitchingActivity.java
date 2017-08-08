@@ -177,17 +177,17 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(CustomerLookupActivity);
                     break;
 
-                case 90:
-                    Intent ProductAvailability_Notify= new Intent(context,ProductAvailability_notify_HO.class);
-               startActivity(ProductAvailability_Notify);
-                break;
+
 //                case 110:
 //                    Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
 //                    startActivity(HourlyPerformence);
 //                    break;
 //                case 120:
 //
-
+                case 90:
+                    Intent ProductAvailability_Notify= new Intent(context,ProductAvailability_notify_HO.class);
+                    startActivity(ProductAvailability_Notify);
+                    break;
 
                 case 91:
                     Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund_HO.class);
@@ -298,7 +298,7 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Target Stock Exceptions", R.mipmap.targetstockexceptions));
                 apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions));
                 break;
-//
+
             case 4 :
                 apps.add(new App("Running Promo", R.mipmap.runningpromo));
                 apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo));

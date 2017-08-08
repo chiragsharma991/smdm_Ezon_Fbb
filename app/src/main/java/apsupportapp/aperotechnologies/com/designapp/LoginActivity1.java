@@ -392,6 +392,8 @@ public class LoginActivity1 extends AppCompatActivity
                             if (storelist_data.size() == 1) {
                                 String value = storelist_data.get(0);
                                 SelectedStoreCode = value.trim().substring(0, 4);
+                                storeDescription = value.trim();
+                                Log.e("onResponse: Response is 1 ", ""+storeDescription);
                                 firstLogin = true;
                                 requestLoginWithStoreAPI();
                             } else {

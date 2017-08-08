@@ -102,7 +102,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 //        Log.e("userId",""+userId);
         bearertoken = sharedPreferences.getString("bearerToken","");
         storeCode = sharedPreferences.getString("storeDescription","");
-        Log.e(TAG, "onCreate: " +storeCode +"\n"+storeCode.trim().substring(0, 4));
         reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
