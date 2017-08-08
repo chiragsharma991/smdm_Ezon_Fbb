@@ -321,7 +321,7 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
             jsonObject.put("attribute4", customerLastname);
             jsonObject.put("attribute5", customerEmpname);
             jsonObject.put("attribute6", customerStorename);
-            jsonObject.put("attribute7", customerCallBack);
+            jsonObject.put("attribute14", customerCallBack);
             jsonObject.put("arcDate", customerArcDate);
 
         } catch (JSONException e) {

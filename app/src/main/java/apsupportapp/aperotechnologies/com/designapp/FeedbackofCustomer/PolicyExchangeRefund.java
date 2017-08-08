@@ -324,12 +324,13 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             jsonObject.put("feedbackKey", customerFeedback);
             jsonObject.put("storeCode", "2663");
             jsonObject.put("attribute1", customerNumber);
-            jsonObject.put("attribute2", customerExchangeDone);
-            jsonObject.put("attribute3", customerProductVerified);
-            jsonObject.put("attribute4", customerRemarks);
-            jsonObject.put("attribute5", customerName);
-            jsonObject.put("attribute6", customerLastname);
-            jsonObject.put("attribute7", customerCallBack);
+            jsonObject.put("attribute2", customerRemarks);
+            jsonObject.put("attribute3", customerName);
+            jsonObject.put("attribute4", customerLastname);
+            jsonObject.put("attribute14", customerCallBack);
+            jsonObject.put("attribute15", customerExchangeDone);
+            jsonObject.put("attribute16", customerProductVerified);
+
             jsonObject.put("arcDate", customerArcDate);
 
         } catch (JSONException e) {
