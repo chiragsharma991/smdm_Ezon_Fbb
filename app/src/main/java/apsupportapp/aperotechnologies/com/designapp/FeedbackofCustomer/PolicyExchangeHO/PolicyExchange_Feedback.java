@@ -200,6 +200,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         store = sharedPreferences.getString("storeDescription", "");
+        storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         //  editor.putString("storeDescription",storeDescription);

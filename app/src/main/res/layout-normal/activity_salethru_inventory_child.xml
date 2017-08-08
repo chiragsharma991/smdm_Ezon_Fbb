@@ -173,7 +173,7 @@
                                     android:layout_toRightOf="@+id/relative1"
                                     android:id="@+id/sale_view1"
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfb_black"
+                                    android:background="@color/smdm_divider_Black"
                                     android:layout_height="match_parent"></View>
 
                                 <RelativeLayout
@@ -262,7 +262,7 @@
                                     android:layout_toRightOf="@+id/relative2"
                                     android:id="@+id/sale_view2"
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfb_black"
+                                    android:background="@color/smdm_divider_Black"
                                     android:layout_height="match_parent"></View>
 
                                 <RelativeLayout

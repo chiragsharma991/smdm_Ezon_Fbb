@@ -175,12 +175,12 @@
                                 <View
                                     android:layout_marginRight="5dp"
                                     android:layout_marginLeft="30dp"
-                                    android:layout_centerInParent="true"
+                                    android:layout_marginTop="18dp"
                                     android:layout_toRightOf="@+id/linear_soh"
                                     android:id="@+id/view"
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfbb_black"
-                                    android:layout_height="match_parent"></View>
+                                    android:background="@color/smdm_divider_Black"
+                                    android:layout_height="wrap_content"></View>
 
 
 

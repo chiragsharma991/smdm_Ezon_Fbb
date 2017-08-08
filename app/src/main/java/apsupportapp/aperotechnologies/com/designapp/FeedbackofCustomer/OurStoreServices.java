@@ -51,6 +51,7 @@ import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
  */
 
 public class OurStoreServices extends AppCompatActivity implements View.OnClickListener, HttpPostResponse {
+
     private Context context;
     private RelativeLayout imageBtnBack1;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_store_name;
@@ -71,7 +72,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_service);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
         context = this;
@@ -133,7 +133,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                         }
                     }
                 }
-
             }
         });
 
@@ -173,7 +172,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
             }
         });
 
-
         MainMethod();
 
     }
@@ -190,7 +188,7 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
 
     public void getDetails() {
 
-        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String currentDateandTime = time.format(new Date());
 
         customerFeedback = "1";  // fixed for notified feedback
@@ -213,7 +211,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
         storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        //  editor.putString("storeDescription",storeDescription);
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -233,7 +230,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
             case R.id.btn_cancel:
                 cancelData();
                 break;
-
         }
 
     }
@@ -241,13 +237,12 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
     private void submitData() {
         scrollView.setFocusableInTouchMode(true);
         scrollView.fullScroll(View.FOCUS_UP);
-        //  scrollView.setDescendantFocusability(ViewGroup.FOCUS_UP);
         getDetails();
-        // prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
 
-        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null)) {
+        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null))
+        {
 
             if(customerNumber.equals("") || customerNumber == null){
                 incorrect_phone.setText(context.getResources().getString(R.string.customer_feedback_number));
@@ -271,27 +266,29 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
 
                 }
             }
-
-
         }
-        else if(customerNumber.length() < 10){
+        else if(customerNumber.length() < 10)
+        {
 
             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
             incorrect_phone.setVisibility(View.VISIBLE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
 
         }
-        else {
+        else
+        {
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
             Log.e("submitData: json is "," " + getObject().toString());
-            if (Reusable_Functions.chkStatus(context)) {
+            if (Reusable_Functions.chkStatus(context))
+            {
                 mpm_model model = new mpm_model();
                 ApiCallBack(getObject(), 0);// id is zero.
 
-            } else {
+            } else
+            {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             }
         }
@@ -332,16 +329,13 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
 
                 String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
-
                 break;
 
             default:
                 break;
 
-
         }
     }
-
 
     @Override
     public void PostResponse(JSONObject response) {

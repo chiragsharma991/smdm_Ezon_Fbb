@@ -48,6 +48,7 @@ import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
  */
 
 public class ProductQualityRange extends AppCompatActivity implements View.OnClickListener, HttpPostResponse {
+
     private Context context;
     private RelativeLayout imageBtnBack1;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_article_id, edt_brand_name, edt_product_name, edt_size;
@@ -70,7 +71,6 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_quality_range);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
         context = this;
@@ -120,7 +120,6 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
 
-
         edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -160,7 +159,7 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
 
             }
         });
-//
+
         edt_remarks.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -178,7 +177,6 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
 
             }
         });
-
 
         MainMethod();
     }
@@ -253,15 +251,14 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
     private void submitData() {
         scrollView.setFocusableInTouchMode(true);
         scrollView.fullScroll(View.FOCUS_UP);
-        //  scrollView.setDescendantFocusability(ViewGroup.FOCUS_UP);
         getDetails();
-        // prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
 
         if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null)) {
 
-            if(customerNumber.equals("") || customerNumber == null){
+            if(customerNumber.equals("") || customerNumber == null)
+            {
                 incorrect_phone.setText(context.getResources().getString(R.string.customer_feedback_number));
                 incorrect_phone.setVisibility(View.VISIBLE);
                 edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
@@ -273,9 +270,11 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
                 edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
-            if(!customerNumber.equals("")) {
+            if(!customerNumber.equals(""))
+            {
 
-                if (customerNumber.length() < 10) {
+                if (customerNumber.length() < 10)
+                {
 
                     incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
                     incorrect_phone.setVisibility(View.VISIBLE);
@@ -286,24 +285,28 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
 
 
         }
-        else if(customerNumber.length() < 10){
+        else if(customerNumber.length() < 10)
+        {
 
             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
             incorrect_phone.setVisibility(View.VISIBLE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
 
         }
-        else {
+        else
+        {
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
             Log.e("submitData: json is "," " + getObject().toString());
-            if (Reusable_Functions.chkStatus(context)) {
+            if (Reusable_Functions.chkStatus(context))
+            {
                 mpm_model model = new mpm_model();
                 ApiCallBack(getObject(), 0);// id is zero.
 
-            } else {
+            } else
+            {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             }
         }
@@ -313,7 +316,6 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
     public JSONObject getObject() {
 
         // totoal is 14 contain and 3 extra like : feedback id,storecode,arcDate
-
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -338,7 +340,6 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
             e.printStackTrace();
         }
 
-
         return jsonObject;
     }
 
@@ -355,7 +356,6 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
 
             default:
                 break;
-
 
         }
     }
@@ -379,7 +379,6 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
 
     }
 
-
     private void cancelData()
     {
         edt_customer_mobile_number.getText().clear();
@@ -397,9 +396,6 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
         radioYes.setChecked(true);
         edt_customer_mobile_number.requestFocus();
     }
-
-
-
 
 
 }

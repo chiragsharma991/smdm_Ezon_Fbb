@@ -167,7 +167,7 @@
                                     android:id="@+id/target_view1"
                                     android:layout_toRightOf="@+id/relative1"
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfb_black"
+                                    android:background="@color/smdm_divider_Black"
                                     android:layout_height="match_parent"></View>
 
                                 <RelativeLayout
@@ -252,7 +252,7 @@
                                 <View
                                     android:layout_marginRight="20dp"
                                     android:layout_width="1dp"
-                                    android:background="@color/ezfb_black"
+                                    android:background="@color/smdm_divider_Black"
                                     android:layout_height="match_parent"></View>
 
                                 <RelativeLayout

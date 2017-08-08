@@ -85,7 +85,6 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_availability);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
         context = this;
@@ -161,59 +160,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
 
             }
         });
-//
-//        edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if(hasFocus) {
-//
-//                    if (customerNumber.equals("") || customerNumber == null) {
-//                        incorrect_phone.setText(context.getResources().getString(R.string.customer_feedback_number));
-//                        incorrect_phone.setVisibility(View.VISIBLE);
-//                        edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
-//                    } else if (customerNumber.length() < 10) {
-//                        incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
-//                        incorrect_phone.setVisibility(View.VISIBLE);
-//                        edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
-//                    } else {
-//                        incorrect_phone.setVisibility(View.GONE);
-//                        edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
-//                    }
-//                }else {
-//
-//
-//                    if (customerRemarks.equals("") || customerRemarks == null) {
-//                        incorrect_remark.setText(context.getResources().getString(R.string.customer_feedback_remarks));
-//                        incorrect_remark.setVisibility(View.VISIBLE);
-//                        edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
-//                    } else {
-//                        incorrect_remark.setVisibility(View.GONE);
-//                        edt_remarks.setBackgroundResource(R.drawable.edittext_border);
-//
-//                    }
-//                }
-//
-//            }
-//        });
-//
-//        edt_first_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if(hasFocus) {
-//                    if (customerRemarks.equals("") || customerRemarks == null) {
-//                        incorrect_remark.setText(context.getResources().getString(R.string.customer_feedback_remarks));
-//                        incorrect_remark.setVisibility(View.VISIBLE);
-//                        edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
-//                    } else {
-//                        incorrect_remark.setVisibility(View.GONE);
-//                        edt_remarks.setBackgroundResource(R.drawable.edittext_border);
-//
-//                    }
-//                }
-//
-//            }
-//        });
-//
+
         edt_customer_mobile_number.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -343,34 +290,35 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         edt_customer_mobile_number.requestFocus();
     }
 
-
-
     private void submitData() {
         scrollView.setFocusableInTouchMode(true);
         scrollView.fullScroll(View.FOCUS_UP);
-      //  scrollView.setDescendantFocusability(ViewGroup.FOCUS_UP);
         getDetails();
-       // prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
 
-        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null)) {
+        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null))
+        {
 
-            if(customerNumber.equals("") || customerNumber == null){
+            if(customerNumber.equals("") || customerNumber == null)
+            {
                 incorrect_phone.setText(context.getResources().getString(R.string.customer_feedback_number));
                 incorrect_phone.setVisibility(View.VISIBLE);
                 edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
-            if(customerRemarks.equals("") || customerRemarks == null){
+            if(customerRemarks.equals("") || customerRemarks == null)
+            {
                 incorrect_remark.setText(context.getResources().getString(R.string.customer_feedback_remarks));
                 incorrect_remark.setVisibility(View.VISIBLE);
                 edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
-            if(!customerNumber.equals("")) {
+            if(!customerNumber.equals(""))
+            {
 
-                if (customerNumber.length() < 10) {
+                if (customerNumber.length() < 10)
+                {
 
                     incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
                     incorrect_phone.setVisibility(View.VISIBLE);
@@ -381,24 +329,28 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
 
 
         }
-        else if(customerNumber.length() < 10){
+        else if(customerNumber.length() < 10)
+        {
 
             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
             incorrect_phone.setVisibility(View.VISIBLE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
 
         }
-        else {
+        else
+        {
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
             Log.e("submitData: json is "," " + getObject().toString());
-            if (Reusable_Functions.chkStatus(context)) {
+            if (Reusable_Functions.chkStatus(context))
+            {
                 mpm_model model = new mpm_model();
                 ApiCallBack(getObject(), 0);// id is zero.
 
-            } else {
+            } else
+            {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             }
         }
@@ -408,7 +360,6 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
     public JSONObject getObject() {
 
         // totoal is 14 contain and 3 extra like : feedback id,storecode,arcDate
-
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -434,7 +385,6 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
             e.printStackTrace();
         }
 
-
         return jsonObject;
     }
 
@@ -447,12 +397,10 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
 
                 String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
-
                 break;
 
             default:
                 break;
-
 
         }
     }

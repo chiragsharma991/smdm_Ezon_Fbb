@@ -173,7 +173,7 @@
                                     android:layout_centerInParent="true"
                                     android:layout_marginLeft="5dp"
                                     android:layout_toRightOf="@+id/linear_sohU"
-                                    android:background="@color/ezfb_black"></View>
+                                    android:background="@color/smdm_divider_Black"></View>
 
 
                                 <LinearLayout
@@ -211,7 +211,7 @@
                                     android:layout_centerInParent="true"
                                     android:layout_marginLeft="5dp"
                                     android:layout_toRightOf="@+id/linear_dayspassed"
-                                    android:background="@color/ezfb_black"></View>
+                                    android:background="@color/smdm_divider_Black"></View>
 
                                 <LinearLayout
                                     android:id="@+id/linear_date"

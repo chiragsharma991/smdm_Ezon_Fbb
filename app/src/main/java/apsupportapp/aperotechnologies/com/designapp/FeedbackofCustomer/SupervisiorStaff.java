@@ -48,6 +48,7 @@ import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
  */
 
 public class SupervisiorStaff extends AppCompatActivity implements View.OnClickListener, HttpPostResponse {
+
     private Context context;
     private RelativeLayout imageBtnBack1;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_emp_name, edt_store_name;
@@ -150,7 +151,7 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
 
             }
         });
-//
+
         edt_remarks.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -169,9 +170,7 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
             }
         });
 
-
         MainMethod();
-
 
     }
 
@@ -249,14 +248,10 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
         edt_customer_mobile_number.requestFocus();
     }
 
-
-
     private void submitData() {
         scrollView.setFocusableInTouchMode(true);
         scrollView.fullScroll(View.FOCUS_UP);
-        //  scrollView.setDescendantFocusability(ViewGroup.FOCUS_UP);
         getDetails();
-        // prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
 
