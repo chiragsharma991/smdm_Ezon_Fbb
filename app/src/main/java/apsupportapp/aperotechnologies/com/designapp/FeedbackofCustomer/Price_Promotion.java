@@ -345,14 +345,14 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
             jsonObject.put("attribute4", customerLastname);
-            jsonObject.put("attribute5", customerBrand);
-            jsonObject.put("attribute6", customerProduct);
-            jsonObject.put("attribute7", customerSize);
-            jsonObject.put("attribute8", customerColorOption1);
-            jsonObject.put("attribute9", customerColorOption2);
-            jsonObject.put("attribute10", customerFit);
-            jsonObject.put("attribute11", customerStyle);
-            jsonObject.put("attribute12", customerCallBack);
+            jsonObject.put("attribute6", customerBrand);
+            jsonObject.put("attribute7", customerProduct);
+            jsonObject.put("attribute8", customerSize);
+            jsonObject.put("attribute10", customerColorOption1);
+            jsonObject.put("attribute11", customerColorOption2);
+            jsonObject.put("attribute12", customerFit);
+            jsonObject.put("attribute13", customerStyle);
+            jsonObject.put("attribute14", customerCallBack);
             jsonObject.put("arcDate", customerArcDate);
 
         } catch (JSONException e) {

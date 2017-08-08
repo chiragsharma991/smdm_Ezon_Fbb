@@ -71,16 +71,6 @@
 
 
 
-                <ProgressBar
-                    android:id="@+id/hrl_pi_process"
-                    style="?android:attr/progressBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/activity_horizontal_margin"
-                    android:visibility="gone" />
 
 
             </RelativeLayout>
@@ -178,11 +168,12 @@
                         android:orientation="vertical"
                         >
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:gravity="center_horizontal|center_vertical"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
 
                             >
 
@@ -202,12 +193,18 @@
                                 app:egUseCustomInnerValue="true"
                                 app:egUseInnerPadding="true"
                                 app:egUsePieRotation="true"
-
-
                                 app:egValueTextSize="22sp" />
 
+                            <ProgressBar
+                                android:id="@+id/hrl_pi_process"
+                                style="?android:attr/progressBarStyleSmall"
+                                android:layout_width="30dp"
+                                android:layout_marginTop="78dp"
+                                android:layout_marginLeft="105dp"
+                                android:layout_height="30dp"
+                                android:visibility="gone" />
 
-                        </LinearLayout>
+                        </RelativeLayout>
 
 
                         <LinearLayout

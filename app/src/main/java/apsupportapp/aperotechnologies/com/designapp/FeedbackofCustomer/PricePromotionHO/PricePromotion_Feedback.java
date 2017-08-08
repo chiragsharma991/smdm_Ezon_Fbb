@@ -319,19 +319,19 @@ public class PricePromotion_Feedback extends Fragment implements View.OnClickLis
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", store.trim().substring(0,4));
+            jsonObject.put("storeCode","2663");
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
             jsonObject.put("attribute4", customerLastname);
-            jsonObject.put("attribute5", customerBrand);
-            jsonObject.put("attribute6", customerProduct);
-            jsonObject.put("attribute7", customerSize);
-            jsonObject.put("attribute8", customerColorOption1);
-            jsonObject.put("attribute9", customerColorOption2);
-            jsonObject.put("attribute10", customerFit);
-            jsonObject.put("attribute11", customerStyle);
-            jsonObject.put("attribute12", customerCallBack);
+            jsonObject.put("attribute6", customerBrand);
+            jsonObject.put("attribute7", customerProduct);
+            jsonObject.put("attribute8", customerSize);
+            jsonObject.put("attribute10", customerColorOption1);
+            jsonObject.put("attribute11", customerColorOption2);
+            jsonObject.put("attribute12", customerFit);
+            jsonObject.put("attribute13", customerStyle);
+            jsonObject.put("attribute14", customerCallBack);
             jsonObject.put("arcDate", customerArcDate);
 
         } catch (JSONException e) {

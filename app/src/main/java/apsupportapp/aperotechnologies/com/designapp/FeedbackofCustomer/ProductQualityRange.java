@@ -323,9 +323,8 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
             jsonObject.put("storeCode", "2663");
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
-            jsonObject.put("attribute3", customerArticleId);
-            jsonObject.put("attribute4", customerName);
-            jsonObject.put("attribute5", customerLastname);
+            jsonObject.put("attribute3", customerName);
+            jsonObject.put("attribute4", customerLastname);
             jsonObject.put("attribute6", customerBrand);
             jsonObject.put("attribute7", customerProduct);
             jsonObject.put("attribute8", customerSize);
@@ -334,6 +333,8 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
             jsonObject.put("attribute11", customerFit);
             jsonObject.put("attribute12", customerStyle);
             jsonObject.put("attribute13", customerCallBack);
+            jsonObject.put("attribute14", customerCallBack);
+            jsonObject.put("articleId", customerArticleId);
             jsonObject.put("arcDate", customerArcDate);
 
         } catch (JSONException e) {
