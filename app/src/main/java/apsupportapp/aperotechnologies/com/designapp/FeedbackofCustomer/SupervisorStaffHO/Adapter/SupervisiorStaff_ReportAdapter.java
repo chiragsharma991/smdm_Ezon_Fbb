@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaffHO;
+package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaffHO.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.Adapter.ReportAdapter;
-import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServicesHO.Adapter.OurStoreServices_ReportAdapter;
-import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServicesHO.OurStoreServices_Reports;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaffHO.SupervisorStaff_Reports;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 

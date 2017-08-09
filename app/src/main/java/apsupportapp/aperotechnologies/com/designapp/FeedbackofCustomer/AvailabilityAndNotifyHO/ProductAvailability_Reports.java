@@ -68,7 +68,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     private ReportInterface mCallback;
     private View v;
     private RecyclerView listview;
-    private TextView storedesc;
+    private TextView storedesc,cf_text;
     private PieChart pieChart=null;
     private TabLayout Tabview;
     private SharedPreferences sharedPreferences;
@@ -79,7 +79,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     private ReportAdapter adapter=null;
     private ArrayList<mpm_model> callbacklist=null, piechartList=null;
     private String attribute14 = "YES";
-    private String feedbackKey = "1";
+    private String feedbackKey = "1",callback_header="";
     private boolean ActivityCreated = false;
     private CardView card;
     private ProgressBar processbar_view;
@@ -128,6 +128,9 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         listview = (RecyclerView) v.findViewById(R.id.listView);
         card = (CardView) v.findViewById(R.id.cf_cardView);
         storedesc = (TextView) v.findViewById(R.id.txtStoreCode);
+        cf_text = (TextView)v.findViewById(R.id.cf_text);
+        cf_text.setText("Callback Required from CSD");
+        callback_header = cf_text.getText().toString();
         processbar_view = (ProgressBar) v.findViewById(R.id.processbar);
         processbar_view.setVisibility(View.GONE);
         pieChart = (PieChart) v.findViewById(R.id.cf_pieChart);
@@ -170,11 +173,13 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this);  // 1 is id for new api response
                 break;
             case 1:
+
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this);  // 0 is id for call finish response.
 
                 break;
             case 2:  // this is for only change list
+
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this);  // 1 is id for call another api after response
                 break;
@@ -299,7 +304,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         Log.e(TAG, "onclickList: "+position );
 
         Callback_ProductAvailability.startScreen(context,view_params,attribute14,feedbackKey,
-                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate());
+                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate(),callback_header);
 
     }
 
@@ -435,6 +440,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                             if (attribute14.equals("NO")){
                                 attribute14 = "YES";
                                 Apicallback(2, false);
+                                cf_text.setText("Callback Required from CSD");
+                                callback_header = cf_text.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;
@@ -443,6 +450,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                             if (attribute14.equals("YES")){
                                 attribute14 = "NO";
                                 Apicallback(2, false);
+                                cf_text.setText("No Callback Required");
+                                callback_header = cf_text.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;

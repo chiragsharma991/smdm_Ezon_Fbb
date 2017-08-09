@@ -69,7 +69,6 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
         });
         MainMethod();
         Apicallback(0, false);
-
     }
 
     private void MainMethod()
@@ -115,13 +114,14 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
 
         String url = "";
         ApiRequest api_request;
-        switch (id) {
+        switch (id)
+        {
             // case 0 and 1 will follow like first update list and after pie chart
             case 0://
                 //https://smdm.manthan.com/v1/display/feedbackdisplaydetail/69-2669?feedbackKey=1&view=LD&attribute14=YES&attribute1=7506556384&feedbackdate=2017-07-01 10:06:55
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params +
                         "&recache=true"+"&attribute14="+attribute14+"&attribute1="+attribute1+"&feedbackdate="+feedbackdate.replaceAll(" ", "%20").replaceAll("&", "%26"); //Callback  Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for new api response
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 1 is id for new api response
                 break;
             default:
                 break;
@@ -150,15 +150,15 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
 
     private void setlist(ArrayList<mpm_model> callbacklist)
     {
-        txt_cust_name.setText(callbacklist.get(0).getAttribute3() + callbacklist.get(0).getAttribute4());
+        txt_cust_name.setText(callbacklist.get(0).getAttribute3()+" " + callbacklist.get(0).getAttribute4());
         txt_mobile_number.setText(callbacklist.get(0).getAttribute1()); ;
         txt_employee_name .setText(callbacklist.get(0).getAttribute17());
         txt_store_name.setText(callbacklist.get(0).getAttribute18());
         txt_callback.setText(callbacklist.get(0).getAttribute14());
         txt_remarks.setText(callbacklist.get(0).getAttribute2());
         txt_feedback_date .setText(callbacklist.get(0).getArcDate());
-        txt_email.setText("");
-        txt_sms.setText("");
+        txt_email.setText("Yes");
+        txt_sms.setText("Yes");
     }
 
     @Override
@@ -175,7 +175,8 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
         txt_sms.setText("");
     }
 
-    public static void startScreen(Context context, String view_params, String attribute14, String feedbackKey, String attribute1, String arcDate) {
+    public static void startScreen(Context context, String view_params, String attribute14, String feedbackKey, String attribute1, String arcDate)
+    {
         context.startActivity(new Intent(context, Callback_ProductAvailability.class)
                 .putExtra("view_params",view_params).putExtra("attribute14",attribute14).putExtra("feedbackKey",feedbackKey).putExtra("attribute1",attribute1).putExtra("arcDate",arcDate)
         );

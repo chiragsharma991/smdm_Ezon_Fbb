@@ -172,10 +172,10 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
 
     public void getDetails() {
 
-        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String currentDateandTime = time.format(new Date());
 
-        customerFeedback = "1";  // fixed for notified feedback
+        customerFeedback = "5";  // fixed for notified feedback
         customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
         customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
         customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
@@ -306,9 +306,9 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
             jsonObject.put("attribute4", customerLastname);
-            jsonObject.put("attribute5", customerEmpname);
-            jsonObject.put("attribute6", customerStorename);
-            jsonObject.put("attribute7", customerCallBack);
+            jsonObject.put("attribute17", customerEmpname);
+            jsonObject.put("attribute18", customerStorename);
+            jsonObject.put("attribute14", customerCallBack);
             jsonObject.put("arcDate", customerArcDate);
 
         } catch (JSONException e) {

@@ -177,10 +177,10 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
 
     public void getDetails() {
 
-        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String currentDateandTime = time.format(new Date());
 
-        customerFeedback = "1";  // fixed for notified feedback
+        customerFeedback = "2";  // fixed for notified feedback
         customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
         customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
         customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
@@ -303,19 +303,18 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
             jsonObject.put("storeCode", store.trim().substring(0,4));
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
-            jsonObject.put("attribute3", customerArticleId);
-            jsonObject.put("attribute4", customerName);
-            jsonObject.put("attribute5", customerLastname);
+            jsonObject.put("attribute3", customerName);
+            jsonObject.put("attribute4", customerLastname);
+            jsonObject.put("attribute5", customerArticleId);
             jsonObject.put("attribute6", customerBrand);
             jsonObject.put("attribute7", customerProduct);
             jsonObject.put("attribute8", customerSize);
-            jsonObject.put("attribute9", customerColorOption1);
-            jsonObject.put("attribute10", customerColorOption2);
-            jsonObject.put("attribute11", customerFit);
-            jsonObject.put("attribute12", customerStyle);
-            jsonObject.put("attribute13", customerCallBack);
+            jsonObject.put("attribute10", customerColorOption1);
+            jsonObject.put("attribute11", customerColorOption2);
+            jsonObject.put("attribute12", customerFit);
+            jsonObject.put("attribute13", customerStyle);
+            jsonObject.put("attribute14", customerCallBack);
             jsonObject.put("arcDate", customerArcDate);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

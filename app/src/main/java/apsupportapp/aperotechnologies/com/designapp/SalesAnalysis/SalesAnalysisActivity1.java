@@ -209,9 +209,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, final int position) {
-                            if (ez_progessBar.getVisibility() == View.VISIBLE) {
+                            if (ez_progessBar.getVisibility() == View.VISIBLE)
+                            {
                                 return;
-                            } else {
+                            }
+                            else
+                            {
                                 ezone_onClickflg = true;
                                 Handler h = new Handler();
                                 h.postDelayed(new Runnable() {

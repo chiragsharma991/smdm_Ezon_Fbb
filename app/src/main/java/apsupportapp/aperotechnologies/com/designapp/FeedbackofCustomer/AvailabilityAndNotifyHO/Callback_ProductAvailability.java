@@ -33,8 +33,8 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
     private TextView txt_fit, txt_style, txt_callback, txt_remarks, txt_feedback_date, txt_email, txt_sms;
     private Context context;
     private SharedPreferences sharedPreferences;
-    private TextView storedesc;
-    private String userId,store,bearertoken,geoLeveLDesc;
+    private TextView storedesc,toolbar_title;
+    private String userId,store,bearertoken,geoLeveLDesc,callback_header;
     private RequestQueue queue;
     private String TAG="CallbackActivity";
     private String attribute14,attribute1,feedbackdate,view_params,feedbackKey;
@@ -53,6 +53,7 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
 
     private void initialiseUI()
     {
+        toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         storedesc = (TextView) findViewById(R.id.txtStoreCode);
         txt_ean_number = (TextView) findViewById(R.id.txt_ean_number);
         txt_store_number = (TextView) findViewById(R.id.txt_store_number);
@@ -95,6 +96,9 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         feedbackKey=intent.getStringExtra("feedbackKey");
         attribute1=intent.getStringExtra("attribute1");
         feedbackdate=intent.getStringExtra("arcDate");
+        callback_header = intent.getStringExtra("callback_header");
+        toolbar_title.setText(callback_header);
+
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -121,7 +125,6 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
 
     private synchronized void requestcallback(mpm_model model, int id)
     {
-
         String url = "";
         ApiRequest api_request;
         switch (id) {
@@ -130,11 +133,10 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
                 //https://smdm.manthan.com/v1/display/feedbackdisplaydetail/69-2669?feedbackKey=1&view=LD&attribute14=YES&attribute1=7506556384&feedbackdate=2017-07-01 10:06:55
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params +
                         "&recache=true"+"&attribute14="+attribute14+"&attribute1="+attribute1+"&feedbackdate="+feedbackdate.replaceAll(" ", "%20").replaceAll("&", "%26"); //Callback  Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for new api response
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 1 is id for new api response
                 break;
             default:
                 break;
-
 
         }
     }
@@ -146,8 +148,9 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         switch (id) {
             // case 0 and 1 will follow like first api call and set view in case 0;
             case 0:
-                callbacklist = new ArrayList<>();
+                callbacklist = new ArrayList<mpm_model>();
                 callbacklist.addAll(list);
+                Log.e(TAG, "callbacklist "+list.size());
                 setlist(callbacklist);
                // processbar_view.setVisibility(View.GONE);
                 break;
@@ -159,28 +162,36 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
 
     private void setlist(ArrayList<mpm_model> callbacklist)
     {
-        txt_ean_number.setText(callbacklist.get(0).getAttribute1());
-        txt_store_number.setText(callbacklist.get(0).getAttribute2());
-        txt_cust_name.setText(callbacklist.get(0).getAttribute3());
-        txt_mobile_number.setText(callbacklist.get(0).getAttribute4());
-        txt_brand_name.setText(callbacklist.get(0).getAttribute5());
-        txt_product_name.setText(callbacklist.get(0).getAttribute6());
-        txt_size.setText(callbacklist.get(0).getAttribute7());
-        txt_color.setText(callbacklist.get(0).getAttribute8());
-        txt_fit.setText(callbacklist.get(0).getAttribute9());
-        txt_style.setText(callbacklist.get(0).getAttribute10());
-        txt_callback.setText(callbacklist.get(0).getAttribute11());
-        txt_remarks.setText(callbacklist.get(0).getAttribute12());
-        txt_email.setText(callbacklist.get(0).getAttribute13());
-        txt_sms.setText(callbacklist.get(0).getAttribute14());
+        txt_ean_number.setText(callbacklist.get(0).getAttribute5());
+        txt_store_number.setText(callbacklist.get(0).getAttribute18());
+        txt_cust_name.setText(callbacklist.get(0).getAttribute3() + " " + callbacklist.get(0).getAttribute4());
+        txt_mobile_number.setText(callbacklist.get(0).getAttribute1());
+        txt_brand_name.setText(callbacklist.get(0).getAttribute6());
+        txt_product_name.setText(callbacklist.get(0).getAttribute7());
+        txt_size.setText(callbacklist.get(0).getAttribute8());
+        if((callbacklist.get(0).getAttribute10().equals(null) && callbacklist.get(0).getAttribute11().equals(null)) || (callbacklist.get(0).getAttribute10().equals("") && callbacklist.get(0).getAttribute11().equals("")))
+        {
+           txt_color.setText("");
+        }
+        else
+        {
+          txt_color.setText(" " + callbacklist.get(0).getAttribute10() + "," + callbacklist.get(0).getAttribute11());
+        }
+        txt_fit.setText(callbacklist.get(0).getAttribute12());
+        txt_style.setText(callbacklist.get(0).getAttribute13());
+        txt_callback.setText(callbacklist.get(0).getAttribute14());
+        txt_remarks.setText(callbacklist.get(0).getAttribute2());
+        txt_feedback_date.setText(callbacklist.get(0).getArcDate());
+        txt_email.setText("Yes");
+        txt_sms.setText("Yes");
     }
 
     @Override
     public void nodatafound()
     {
         Log.e(TAG, "response: null" );
-        txt_ean_number.setText(callbacklist.get(0).getAttribute1());
-        txt_store_number.setText(callbacklist.get(0).getAttribute2());
+        txt_ean_number.setText("");
+        txt_store_number.setText("");
         txt_cust_name.setText("");
         txt_mobile_number.setText("");
         txt_brand_name.setText("");
@@ -191,16 +202,17 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         txt_style.setText("");
         txt_callback.setText("");
         txt_remarks.setText("");
+        txt_feedback_date.setText("");
         txt_email.setText("");
         txt_sms.setText("");
 
     }
 
-    public static void startScreen(Context context, String view_params, String attribute14, String feedbackKey, String attribute1, String arcDate)
+    public static void startScreen(Context context, String view_params, String attribute14, String feedbackKey, String attribute1, String arcDate,String cf_Text)
     {
         context.startActivity(new Intent(context, Callback_ProductAvailability.class)
-        .putExtra("view_params",view_params).putExtra("attribute14",attribute14).putExtra("feedbackKey",feedbackKey).putExtra("attribute1",attribute1).putExtra("arcDate",arcDate)
+        .putExtra("view_params",view_params).putExtra("attribute14",attribute14).putExtra("feedbackKey",feedbackKey).putExtra("attribute1",attribute1).putExtra("arcDate",arcDate).putExtra("callback_header",cf_Text)
         );
-
+        Log.e( "startScreen: ", ""+cf_Text);
     }
 }

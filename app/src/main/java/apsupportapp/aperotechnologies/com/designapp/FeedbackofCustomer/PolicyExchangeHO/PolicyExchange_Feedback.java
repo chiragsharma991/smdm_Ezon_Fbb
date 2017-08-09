@@ -184,7 +184,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String currentDateandTime = sdf.format(new Date());
 
-        customerFeedback = "1";  // fixed for notified feedback
+        customerFeedback = "3";  // fixed for notified feedback
         customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
         customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
         customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();

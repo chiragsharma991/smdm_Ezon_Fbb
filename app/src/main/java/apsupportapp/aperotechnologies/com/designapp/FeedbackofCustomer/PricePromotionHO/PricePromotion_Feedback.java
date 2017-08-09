@@ -178,10 +178,10 @@ public class PricePromotion_Feedback extends Fragment implements View.OnClickLis
 
     public void getDetails() {
 
-        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String currentDateandTime = time.format(new Date());
 
-        customerFeedback = "1";  // fixed for notified feedback
+        customerFeedback = "4";  // fixed for notified feedback
         customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
         customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
         customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
@@ -319,7 +319,7 @@ public class PricePromotion_Feedback extends Fragment implements View.OnClickLis
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode","2663");
+            jsonObject.put("storeCode",store.trim().substring(0,4));
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);

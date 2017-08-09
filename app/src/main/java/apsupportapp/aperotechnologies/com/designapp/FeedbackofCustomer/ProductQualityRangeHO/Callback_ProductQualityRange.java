@@ -51,8 +51,8 @@ public class Callback_ProductQualityRange extends AppCompatActivity implements H
         initialiseUI();
     }
 
-    private void initialiseUI() {
-
+    private void initialiseUI()
+    {
         txt_mobile_number = (TextView) findViewById(R.id.txt_mobile_number);
         txt_remarks = (TextView) findViewById(R.id.txt_remarks);
         txt_article_id = (TextView) findViewById(R.id.txt_article_id);
@@ -119,16 +119,16 @@ public class Callback_ProductQualityRange extends AppCompatActivity implements H
 
     private synchronized void requestcallback(mpm_model model, int id)
     {
-
         String url = "";
         ApiRequest api_request;
-        switch (id) {
+        switch (id)
+        {
             // case 0 and 1 will follow like first update list and after pie chart
             case 0://
                 //https://smdm.manthan.com/v1/display/feedbackdisplaydetail/69-2669?feedbackKey=1&view=LD&attribute14=YES&attribute1=7506556384&feedbackdate=2017-07-01 10:06:55
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params +
                         "&recache=true"+"&attribute14="+attribute14+"&attribute1="+attribute1+"&feedbackdate="+feedbackdate.replaceAll(" ", "%20").replaceAll("&", "%26"); //Callback  Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for new api response
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 1 is id for new api response
                 break;
             default:
                 break;
@@ -159,18 +159,25 @@ public class Callback_ProductQualityRange extends AppCompatActivity implements H
     {
         txt_mobile_number.setText(callbacklist.get(0).getAttribute1());
         txt_remarks .setText(callbacklist.get(0).getAttribute2());
-        txt_article_id .setText(callbacklist.get(0).getAttribute3());
-        txt_cust_name.setText(callbacklist.get(0).getAttribute4());
-        txt_brand_name .setText(callbacklist.get(0).getAttribute5());
-        txt_product_name.setText(callbacklist.get(0).getAttribute6());
-        txt_size.setText(callbacklist.get(0).getAttribute7());
-        txt_color .setText(callbacklist.get(0).getAttribute8());
-        txt_fit .setText(callbacklist.get(0).getAttribute9());
-        txt_style .setText(callbacklist.get(0).getAttribute10());
-        txt_feedback_date.setText(callbacklist.get(0).getAttribute11());
-        txt_callback .setText(callbacklist.get(0).getAttribute12());
-        txt_email .setText(callbacklist.get(0).getAttribute13());
-        txt_sms.setText(callbacklist.get(0).getAttribute14());
+        txt_article_id .setText(callbacklist.get(0).getAttribute5());
+        txt_cust_name.setText(callbacklist.get(0).getAttribute3()+" "+callbacklist.get(0).getAttribute4());
+        txt_brand_name .setText(callbacklist.get(0).getAttribute6());
+        txt_product_name.setText(callbacklist.get(0).getAttribute7());
+        txt_size.setText(callbacklist.get(0).getAttribute8());
+        if((callbacklist.get(0).getAttribute10().equals(null) && callbacklist.get(0).getAttribute11().equals(null)) || (callbacklist.get(0).getAttribute10().equals("") && callbacklist.get(0).getAttribute11().equals("")))
+        {
+            txt_color.setText("");
+        }
+        else
+        {
+            txt_color.setText(" " + callbacklist.get(0).getAttribute10() + "," + callbacklist.get(0).getAttribute11());
+        }
+        txt_fit .setText(callbacklist.get(0).getAttribute12());
+        txt_style .setText(callbacklist.get(0).getAttribute13());
+        txt_feedback_date.setText(callbacklist.get(0).getArcDate());
+        txt_callback .setText(callbacklist.get(0).getAttribute14());
+        txt_email .setText("Yes");
+        txt_sms.setText("Yes");
     }
 
     @Override

@@ -195,10 +195,10 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
 
     public void getDetails() {
 
-        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         String currentDateandTime = time.format(new Date());
 
-        customerFeedback = "1";  // fixed for notified feedback
+        customerFeedback = "4";  // fixed for notified feedback
         customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
         customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
         customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
