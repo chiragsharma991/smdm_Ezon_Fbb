@@ -218,7 +218,7 @@
                                 android:layout_alignStart="@+id/bst_head_child"
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginTop="5dp"
-                                android:background="@color/ezfb_black" />
+                                android:background="@color/smdm_divider_Black" />
 
                             <RelativeLayout
 

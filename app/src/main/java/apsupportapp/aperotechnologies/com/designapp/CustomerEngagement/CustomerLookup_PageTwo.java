@@ -53,6 +53,9 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 
+import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookup_PageOne.customerDetail;
+import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookup_PageOne.customerDetailsList;
+
 /**
  * Created by pamrutkar on 14/06/17.
  */
@@ -211,7 +214,17 @@ public class CustomerLookup_PageTwo extends Fragment {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
             }
 
+
+        }
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
             Log.e("is visible", "");
+
+            requestCustomerDetail();
         }
     }
 
@@ -270,7 +283,7 @@ public class CustomerLookup_PageTwo extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response :", "" + response);
+                        Log.e("response two:", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -280,18 +293,23 @@ public class CustomerLookup_PageTwo extends Fragment {
                             } else if (response.length() == limit) {
 
                                 for (int i = 0; i < response.length(); i++) {
-
+                                   // customerDetailsList.clear();
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-                                    detailArrayList.add(customerDetail);
+                                    customerDetailsList.add(customerDetail);
+                                    Log.e("===two"," "+customerDetailsList.get(i).getFullName()+"  "+customerDetailsList.get(i).getSalesAch());
+
                                 }
                                 arr_count = response.length();
                                 offset = offset + limit;
 
                             } else if (response.length() < limit) {
+                              //  customerDetailsList.clear();
 
                                 for (int i = 0; i < response.length(); i++) {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-                                    detailArrayList.add(customerDetail);
+                                    customerDetailsList.add(customerDetail);
+                                    Log.e("===two"," "+customerDetailsList.get(i).getFullName()+"  "+customerDetailsList.get(i).getSalesAch());
+
                                 }
                             }
 
@@ -305,8 +323,9 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 lv_cust_details.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
-                                customerDetailAdapter = new CustomerDetailAdapter(detailArrayList, context);
+                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, context);
                                 lv_cust_details.setAdapter(customerDetailAdapter);
+                                customerDetailAdapter.notifyDataSetChanged();
 
                             }
 
@@ -401,7 +420,7 @@ public class CustomerLookup_PageTwo extends Fragment {
 //                            else
 //                            {
                                 lv_cust_details.removeAllViews();
-                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailArrayList,getContext());
+                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
                                 lv_cust_details.setAdapter(customerDetailAdapter);
                                 customerDetailAdapter.notifyDataSetChanged();
 

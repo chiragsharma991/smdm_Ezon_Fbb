@@ -36,35 +36,45 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.99"
-            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
 
 
             >
-            <RelativeLayout
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:id="@+id/rel_ez_outer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <!--<RelativeLayout-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:id="@+id/rel_ez_outer"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
 
 
-                <RelativeLayout
-                    android:layout_centerVertical="true"
-                    android:id="@+id/rel_ez_inner"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="80dp"
-                    android:layout_height="10dp">
+                <!--<RelativeLayout-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:id="@+id/rel_ez_inner"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="10dp">-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/hrl_salesarch_Name"
+                        android:layout_height="wrap_content"
+                        android:text="PvA%"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/normallayout_textsize"
+                        android:textColor="@color/ezfb_black"
+
+                        />
+
+
+                <!--</RelativeLayout>-->
 
 
 
 
-                </RelativeLayout>
-
-
-
-
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
 
         </LinearLayout>
