@@ -19,6 +19,8 @@ import java.util.Locale;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
+import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookup_PageOne.customerDetailsList;
+
 
 /**
  * Created by pamrutkar on 20/06/17.
@@ -40,7 +42,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
 
 
-    public CustomerDetailAdapter(ArrayList<CustomerDetail> detailArrayList, Context context)
+    public CustomerDetailAdapter(ArrayList customerDetailsList, Context context)
     {
         this.context = context;
         this.detailArrayList = detailArrayList;
@@ -59,7 +61,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 //            return VIEW_PROG;
 //        }
 
-        if(detailArrayList.get(position) == null)
+        if(customerDetailsList.get(position) == null)
         {
             return VIEW_PROG;
 
@@ -71,14 +73,14 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private boolean isPositionItem(int position) {
 
 
-        return position != detailArrayList.size();
+        return position != customerDetailsList.size();
     }
     @Override
     public int getItemCount()
     {
-        if(detailArrayList != null)
+        if(customerDetailsList != null)
         {
-            return detailArrayList.size();
+            return customerDetailsList.size();
         }
         else
         {
@@ -112,9 +114,9 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     {
         if (viewHolder instanceof CustDetailHolder)
         {
-            if (position < detailArrayList.size())
+            if (position < customerDetailsList.size())
             {
-                CustomerDetail customerDetail = detailArrayList.get(position);
+                CustomerDetail customerDetail = customerDetailsList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
                 ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_name_Val.setText(customerDetail.getFullName());
                 ((CustomerDetailAdapter.CustDetailHolder) viewHolder).txt_cust_lastVisit_Val.setText(customerDetail.getLastPurchaseDate());
@@ -214,7 +216,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         protected void publishResults(CharSequence constraint,FilterResults results)
         {
-            detailArrayList = (ArrayList<CustomerDetail>) results.values ;
+            customerDetailsList = (ArrayList<CustomerDetail>) results.values ;
             notifyDataSetChanged();
         }
     }

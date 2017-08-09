@@ -122,6 +122,7 @@ public class ApiRequest  {
                     @Override
                     public  void onResponse(JSONArray response) {
 
+                        Log.e(TAG, "response hourly "+response );
 
                         try {
 
