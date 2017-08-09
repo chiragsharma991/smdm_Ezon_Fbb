@@ -61,7 +61,7 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
     private ReportInterface mCallback;
     private View v;
     private RecyclerView listview;
-    private TextView storedesc;
+    private TextView storedesc,title;
     private PieChart pieChart=null;
     private TabLayout Tabview;
     private SharedPreferences sharedPreferences;
@@ -79,6 +79,8 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
     private LinearLayout addleggend;
     private float totalFeedbackCount, callbackFeedbackCount, nocallbackFeedbackCount;
     private int runningId;
+    private String callback_header="Callback Required from CSD";
+
 
 
     @Override
@@ -126,6 +128,7 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
         pieChart = (PieChart) v.findViewById(R.id.cf_pieChart);
         addleggend = (LinearLayout) v.findViewById(R.id.addleggend);
         pieChart.setOnChartValueSelectedListener(this);
+        title =(TextView) v.findViewById(R.id.cf_text);
         Tabview = (TabLayout) v.findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Yesterday"));
         Tabview.addTab(Tabview.newTab().setText("Last Week"));
@@ -292,7 +295,7 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
         Log.e(TAG, "onclickList: "+position );
 
         Callback_ProductQualityRange.startScreen(context,view_params,attribute14,feedbackKey,
-                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate());
+                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate(),callback_header);
 
     }
 
@@ -428,6 +431,8 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
                             if (attribute14.equals("NO")){
                                 attribute14 = "YES";
                                 Apicallback(2, false);
+                                title.setText("Callback Required from CSD");
+                                callback_header = title.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;
@@ -436,6 +441,8 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
                             if (attribute14.equals("YES")){
                                 attribute14 = "NO";
                                 Apicallback(2, false);
+                                title.setText("No Callback Required");
+                                callback_header = title.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;

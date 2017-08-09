@@ -33,13 +33,13 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
     private TextView txt_mobile_number, txt_remarks, txt_cust_name, txt_employee_name, txt_store_name, txt_callback, txt_feedback_date, txt_email, txt_sms;
     private Context context;
     private SharedPreferences sharedPreferences;
-    private TextView storedesc;
+    private TextView storedesc,toolbar_title;
     private String userId,store,bearertoken,geoLeveLDesc;
     private RequestQueue queue;
     private String TAG="Callback_SupervisorStaff";
-    private String attribute14,attribute1,feedbackdate,view_params,feedbackKey;
+    private String attribute14,attribute1,feedbackdate,view_params,feedbackKey,title;
     private ArrayList<mpm_model> callbacklist;
-    private RelativeLayout backButton;
+    private RelativeLayout backButton,processBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,10 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
         txt_remarks = (TextView) findViewById(R.id.txt_remarks);
         txt_feedback_date = (TextView) findViewById(R.id.txt_feedback_date);
         txt_email = (TextView) findViewById(R.id.txt_email);
+        toolbar_title = (TextView)findViewById(R.id.toolbar_title);
         txt_sms = (TextView) findViewById(R.id.txt_sms);
+        processBar = (RelativeLayout) findViewById(R.id.processBar);
+        processBar.setVisibility(View.GONE);
         backButton  = (RelativeLayout)findViewById(R.id.imageBtnBack1);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +89,8 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
         feedbackKey=intent.getStringExtra("feedbackKey");
         attribute1=intent.getStringExtra("attribute1");
         feedbackdate=intent.getStringExtra("arcDate");
+        title=intent.getStringExtra("callback_header");
+        toolbar_title.setText(title);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -100,6 +105,7 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
             {
                 Reusable_Functions.sDialog(context, "Loading...");
             }
+            processBar.setVisibility(View.VISIBLE);
             mpm_model model = new mpm_model();
             requestcallback(model, id);            //this id is select for url.
         }
@@ -140,9 +146,10 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
                 callbacklist = new ArrayList<>();
                 callbacklist.addAll(list);
                 setlist(callbacklist);
-                // processbar_view.setVisibility(View.GONE);
+                processBar.setVisibility(View.GONE);
                 break;
             default:
+                processBar.setVisibility(View.GONE);
                 break;
 
         }
@@ -173,12 +180,14 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
         txt_feedback_date .setText("");
         txt_email.setText("");
         txt_sms.setText("");
+        processBar.setVisibility(View.GONE);
     }
 
-    public static void startScreen(Context context, String view_params, String attribute14, String feedbackKey, String attribute1, String arcDate)
+    public static void startScreen(Context context, String view_params, String attribute14, String feedbackKey, String attribute1, String arcDate,String callback_header)
     {
         context.startActivity(new Intent(context, Callback_ProductAvailability.class)
-                .putExtra("view_params",view_params).putExtra("attribute14",attribute14).putExtra("feedbackKey",feedbackKey).putExtra("attribute1",attribute1).putExtra("arcDate",arcDate)
+                .putExtra("view_params",view_params).putExtra("attribute14",attribute14).putExtra("feedbackKey",feedbackKey).putExtra("attribute1",attribute1)
+                .putExtra("arcDate",arcDate).putExtra("callback_header",callback_header)
         );
     }
 }

@@ -61,7 +61,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     private ReportInterface mCallback;
     private View v;
     private RecyclerView listview;
-    private TextView storedesc;
+    private TextView storedesc,title;
     private PieChart pieChart=null;
     private TabLayout Tabview;
     private SharedPreferences sharedPreferences;
@@ -79,6 +79,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     private LinearLayout addleggend;
     private float totalFeedbackCount, callbackFeedbackCount, nocallbackFeedbackCount;
     private int runningId;
+    private String callback_header="Callback Required from CSD";
 
 
     @Override
@@ -123,6 +124,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
         storedesc = (TextView) v.findViewById(R.id.txtStoreCode);
         processbar_view = (ProgressBar) v.findViewById(R.id.processbar);
         processbar_view.setVisibility(View.GONE);
+        title =(TextView) v.findViewById(R.id.cf_text);
         pieChart = (PieChart) v.findViewById(R.id.cf_pieChart);
         addleggend = (LinearLayout) v.findViewById(R.id.addleggend);
         pieChart.setOnChartValueSelectedListener(this);
@@ -294,7 +296,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
         Log.e(TAG, "onclickList: "+position );
 
         Callback_PolicyExchange.startScreen(context,view_params,attribute14,feedbackKey,
-                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate());
+                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate(),callback_header);
 
     }
 
@@ -415,6 +417,8 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
                             if (attribute14.equals("NO")){
                                 attribute14 = "YES";
                                 Apicallback(2, false);
+                                title.setText("Callback Required from CSD");
+                                callback_header = title.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;
@@ -423,6 +427,8 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
                             if (attribute14.equals("YES")){
                                 attribute14 = "NO";
                                 Apicallback(2, false);
+                                title.setText("No Callback Required");
+                                callback_header = title.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;
