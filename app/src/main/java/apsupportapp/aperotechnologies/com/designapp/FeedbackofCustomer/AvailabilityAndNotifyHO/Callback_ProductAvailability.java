@@ -39,7 +39,7 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
     private String TAG="CallbackActivity";
     private String attribute14,attribute1,feedbackdate,view_params,feedbackKey;
     private ArrayList<mpm_model> callbacklist;
-    private RelativeLayout backButton;
+    private RelativeLayout backButton,processBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,6 +70,8 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         txt_feedback_date = (TextView) findViewById(R.id.txt_feedback_date);
         txt_email = (TextView) findViewById(R.id.txt_email);
         backButton = (RelativeLayout) findViewById(R.id.backButton);
+        processBar = (RelativeLayout) findViewById(R.id.processBar);
+        processBar.setVisibility(View.GONE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +115,7 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
             {
                 Reusable_Functions.sDialog(context, "Loading...");
             }
+            processBar.setVisibility(View.VISIBLE);
             mpm_model model = new mpm_model();
             requestcallback(model, id);            //this id is select for url.
         }
@@ -152,9 +155,10 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
                 callbacklist.addAll(list);
                 Log.e(TAG, "callbacklist "+list.size());
                 setlist(callbacklist);
-               // processbar_view.setVisibility(View.GONE);
+                processBar.setVisibility(View.GONE);
                 break;
             default:
+                processBar.setVisibility(View.GONE);
                 break;
 
         }
@@ -205,6 +209,8 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         txt_feedback_date.setText("");
         txt_email.setText("");
         txt_sms.setText("");
+        processBar.setVisibility(View.GONE);
+
 
     }
 

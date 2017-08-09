@@ -60,7 +60,7 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
     private PricePromotion_Reports.ReportInterface mCallback;
     private View v;
     private RecyclerView listview;
-    private TextView storedesc;
+    private TextView storedesc,title;
     private PieChart pieChart=null;
     private TabLayout Tabview;
     private SharedPreferences sharedPreferences;
@@ -78,6 +78,8 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
     private LinearLayout addleggend;
     private float totalFeedbackCount, callbackFeedbackCount, nocallbackFeedbackCount;
     private int runningId;
+    private String callback_header="Callback Required from CSD";
+
 
 
     @Override
@@ -124,6 +126,7 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
         processbar_view.setVisibility(View.GONE);
         pieChart = (PieChart) v.findViewById(R.id.cf_pieChart);
         addleggend = (LinearLayout) v.findViewById(R.id.addleggend);
+        title =(TextView) v.findViewById(R.id.cf_text);
         pieChart.setOnChartValueSelectedListener(this);
         Tabview = (TabLayout) v.findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Yesterday"));
@@ -292,7 +295,7 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
     public void onclickList(int position) {
         Log.e(TAG, "onclickList: "+position );
         Callback_PricePromotion.startScreen(context,view_params,attribute14,feedbackKey,
-                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate());
+                callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate(),callback_header);
 
 
     }
@@ -413,6 +416,8 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
                             if (attribute14.equals("NO")){
                                 attribute14 = "YES";
                                 Apicallback(2, false);
+                                title.setText("Callback Required from CSD");
+                                callback_header = title.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;
@@ -421,6 +426,8 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
                             if (attribute14.equals("YES")){
                                 attribute14 = "NO";
                                 Apicallback(2, false);
+                                title.setText("No Callback Required");
+                                callback_header = title.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
                             }
                             break;
