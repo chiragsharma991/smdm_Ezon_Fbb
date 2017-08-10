@@ -34,6 +34,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 2;
+    private final String geoLeveLDesc;
     int curerntindex;
     private Context context;
     String fromWhere;
@@ -41,16 +42,16 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     ArrayList<SalesAnalysisListDisplay> mSnaps;
     RecyclerView listViewSalesPvA;
     Gson gson;
+    private String department;
 
 
-
-
-    public PvASnapAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList, Context context, int currentIndex, String fromWhere, RecyclerView listViewSalesPvA) {
+    public PvASnapAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList, Context context, int currentIndex, String fromWhere, RecyclerView listViewSalesPvA, String geoLeveLDesc) {
         this.context = context;
         this.mSnaps = salesAnalysisListDisplayArrayList;
         this.fromWhere = fromWhere;
         this.listViewSalesPvA = listViewSalesPvA;
         this.curerntindex = currentIndex;
+        this.geoLeveLDesc = geoLeveLDesc;
         level = 1;
         gson = new Gson();
     }
@@ -106,36 +107,61 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         if (viewHolder instanceof PvAViewHolder) {
             if(position < mSnaps.size()) {
+
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
+
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
 
                 if (fromWhere.equals("Department")) {
 
-                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getPlanDept());
+                    if (geoLeveLDesc.equals("E ZONE")) {
+                         department = productNameBean.getLevel();
+                    }else{
+                        department=productNameBean.getPlanDept();
+                    }
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
                 } else if (fromWhere.equals("Subdept")) {
-
-                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getPlanCategory());
+                    if (geoLeveLDesc.equals("E ZONE")) {
+                        department = productNameBean.getLevel();
+                    }else{
+                        department=productNameBean.getPlanCategory();
+                    }
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
                 } else if (fromWhere.equals("Class")) {
-
-                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getPlanClass());
+                    if (geoLeveLDesc.equals("E ZONE")) {
+                        department = productNameBean.getLevel();
+                    }else{
+                        department=productNameBean.getPlanClass();
+                    }
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
 
                 } else if (fromWhere.equals("Subclass")) {
-                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getBrandName());
+                    if (geoLeveLDesc.equals("E ZONE")) {
+                        department = productNameBean.getLevel();
+                    }else{
+                        department=productNameBean.getBrandName();
+                    }
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
                 } else if (fromWhere.equals("MC")) {
-                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(productNameBean.getBrandplanClass());
+                    if (geoLeveLDesc.equals("E ZONE")) {
+                        department = productNameBean.getLevel();
+                    }else{
+                        department=productNameBean.getBrandplanClass();
+                    }
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 

@@ -13,6 +13,8 @@ public class SalesPvAAnalysisWeek {
     double pvaAchieved;
     String weekNumber;
 
+
+
     public String getStoreCode() {
         return storeCode;
     }
