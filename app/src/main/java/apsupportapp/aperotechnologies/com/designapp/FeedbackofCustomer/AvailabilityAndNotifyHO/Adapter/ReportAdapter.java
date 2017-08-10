@@ -95,6 +95,19 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         recyclerViewclick.onclickList(position);
                     }
                 });
+                ((ReportViewHolder) viewHolder).remark.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        recyclerViewclick.onclickList(position);
+                    }
+                });
+                ((ReportViewHolder) viewHolder).date.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        recyclerViewclick.onclickList(position);
+                    }
+                });
+
             }}
     }
 

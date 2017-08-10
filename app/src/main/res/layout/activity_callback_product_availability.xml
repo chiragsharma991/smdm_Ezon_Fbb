@@ -202,13 +202,19 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/lin_cust_name"
+                android:layout_below="@+id/lin_store_number"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txt_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lin_store_number"
-                android:layout_marginTop="10dp"
-                android:text="Customer Name :"
+                android:text="Customer Name : "
                 android:textAllCaps="false"
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
@@ -218,22 +224,27 @@
                 android:id="@+id/txt_cust_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_name"
-                android:layout_marginTop="2dp"
                 android:inputType="textCapWords"
                 android:text=" "
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
                 android:textStyle="normal" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_cust_mobno"
+                android:layout_below="@+id/lin_cust_name"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/txt_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_cust_name"
-                android:layout_marginTop="10dp"
-                android:text="Customer mobile number :"
+                android:text="Customer mobile number : "
                 android:textAllCaps="false"
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
@@ -243,21 +254,27 @@
                 android:id="@+id/txt_mobile_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_number"
-                android:layout_marginTop="2dp"
                 android:inputType="phone"
                 android:text=""
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
                 android:textStyle="normal" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_brand"
+                android:layout_below="@+id/lin_cust_mobno"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txt_brand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_mobile_number"
-                android:layout_marginTop="10dp"
-                android:text="Brand Name :"
+                android:text="Brand Name : "
                 android:textAllCaps="false"
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
@@ -267,19 +284,19 @@
                 android:id="@+id/txt_brand_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_brand"
-                android:layout_marginTop="2dp"
                 android:inputType="textCapWords"
                 android:text=""
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
                 android:textStyle="normal" />
 
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/lin_product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_brand_name"
+                android:layout_below="@+id/lin_brand"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -425,13 +442,19 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/lin_callback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_style"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txt_callback_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lin_style"
-                android:layout_marginTop="10dp"
-                android:text="Do you want  a call  back?"
+                android:text="Do you want a call back ? "
                 android:textAllCaps="false"
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
@@ -441,20 +464,25 @@
                 android:id="@+id/txt_callback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_callback_title"
-                android:layout_marginTop="2dp"
                 android:text=""
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
                 android:textStyle="normal" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_callback"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/txt_remarks_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_callback"
-                android:layout_marginTop="10dp"
                 android:text="Remarks : "
                 android:textAllCaps="false"
                 android:textColor="@color/ezfb_black"
@@ -465,19 +493,21 @@
                 android:id="@+id/txt_remarks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_remarks_title"
-                android:layout_marginTop="2dp"
                 android:text=""
+                android:singleLine="false"
+                android:maxLines="2"
                 android:textColor="@color/ezfb_black"
                 android:textSize="13sp"
                 android:textStyle="normal" />
+
+            </LinearLayout>
 
 
             <LinearLayout
                 android:id="@+id/lin_feedback_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_remarks"
+                android:layout_below="@+id/lin_remarks"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 

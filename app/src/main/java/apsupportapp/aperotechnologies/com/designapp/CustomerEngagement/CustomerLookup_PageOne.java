@@ -83,7 +83,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     ViewGroup root;
     CustomerLoyaltySummary customerLoyaltySummary;
     CustomerEngagementDetail customerEngagementDetail;
-    public static CustomerDetail customerDetail;
+    CustomerDetail customerDetail;
     private ArrayList<CustomerEngagementDetail> planengagementArrayList, actualengagementArrayList;
     private ArrayList<CustomerLoyaltySummary> array_custLoyaltySummaries;
     public static ArrayList<CustomerDetail> customerDetailsList;
@@ -851,7 +851,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                             if (response.length() == limit) {
 
                                 for (int i = 0; i < response.length(); i++) {
-
+                                    customerDetailsList.clear();
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
 

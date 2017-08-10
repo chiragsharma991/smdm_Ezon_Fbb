@@ -192,23 +192,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/text_exchange_done"
-                    android:layout_below="@+id/txt_incorrect_phone"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                <LinearLayout
+                    android:id="@+id/lin_exchange_done"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:layout_below="@+id/txt_incorrect_phone"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/text_exchange_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:text="Exchange done *"/>
+
+                    <TextView
+                        android:id="@+id/txt_empty_exchange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Please Select yes or no"
+                        android:textColor="@color/ezfbb_red"
+                        android:textSize="10sp"
+                        android:gravity="end"
+                        android:visibility="gone"
+                        android:layout_marginLeft="10dp"
+                        android:letterSpacing="0.1"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lin_radiogroup_exchange"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_below="@+id/text_exchange_done"
+                    android:layout_below="@+id/lin_exchange_done"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
@@ -224,7 +244,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Yes"
-                            android:checked="true" />
+                            />
 
                         <RadioButton
                             android:id="@+id/radioExchangeNo"
@@ -237,23 +257,44 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/text_product_verified"
-                    android:layout_below="@+id/lin_radiogroup_exchange"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+
+                <LinearLayout
+                    android:id="@+id/lin_prod_verified"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@+id/lin_radiogroup_exchange"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/text_product_verified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:text="Product Verified *"/>
+
+                    <TextView
+                        android:id="@+id/txt_empty_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Please Select yes or no"
+                        android:textColor="@color/ezfbb_red"
+                        android:textSize="10sp"
+                        android:gravity="end"
+                        android:visibility="gone"
+                        android:layout_marginLeft="10dp"
+                        android:letterSpacing="0.1"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lin_radiogroup_product"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_below="@+id/text_product_verified"
+                    android:layout_below="@+id/lin_prod_verified"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
@@ -269,7 +310,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Yes"
-                            android:checked="true" />
+                             />
 
                         <RadioButton
                             android:id="@+id/radioProductNo"

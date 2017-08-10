@@ -121,9 +121,13 @@ public class CustomerDetailActivity extends AppCompatActivity {
         rel_cust_detl_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 onBackPressed();
             }
         });
+
+
         btn_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -618,10 +622,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        CustomerLookup_PageTwo.edt_cust_Search.setText("");
-        CustomerLookupActivity.mViewPager.setCurrentItem(0);
-//        customerDetailsarray.clear();
-//        customerDetailArrayList.clear();
-        finish();
+
     }
 }
