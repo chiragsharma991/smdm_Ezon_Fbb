@@ -225,8 +225,8 @@ public class PricePromotion_Reports extends Fragment implements TabLayout.OnTabS
         nocallbackFeedbackCount = (float) piechartList.get(0).getNoCallbackFeedbackCount();
         Log.e(TAG, "Piechart: "+totalFeedbackCount+" "+callbackFeedbackCount+" "+nocallbackFeedbackCount );
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#20b5d3"));
-        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#e8112d"));    //#20b5d3
+        colors.add(Color.parseColor("#f8f6f6"));    //#21d24c
         entries.add(new PieEntry(callbackFeedbackCount, "Feedback with Callback"));
         entries.add(new PieEntry(nocallbackFeedbackCount, "Feedback"));
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -393,7 +393,7 @@ public class PricePromotion_Reports extends Fragment implements TabLayout.OnTabS
     }
 
     private void addViewLayout() {
-        int[] colors = {Color.parseColor("#20b5d3"), Color.parseColor("#21d24c"), Color.parseColor("#f5204c"), Color.parseColor("#f89a20"), Color.parseColor("#78bc2c"), Color.parseColor("#db5a81"), Color.parseColor("#955eb9"), Color.parseColor("#dcd52d"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
+        int[] colors = {Color.parseColor("#e8112d"), Color.parseColor("#f8f6f6"), Color.parseColor("#f5204c"), Color.parseColor("#f89a20"), Color.parseColor("#78bc2c"), Color.parseColor("#db5a81"), Color.parseColor("#955eb9"), Color.parseColor("#dcd52d"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
         addleggend.removeAllViewsInLayout();
         LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);

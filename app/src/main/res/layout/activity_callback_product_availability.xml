@@ -144,449 +144,450 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/lin_ean_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                >
-                <LinearLayout
-                    android:id="@+id/lin_ean_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="EAN number : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_ean_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lin_store_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_ean_number"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Store number : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_store_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-
-
-                </LinearLayout>
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txt_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_store_number"
-                    android:layout_marginTop="10dp"
-                    android:text="Customer Name :"
+                    android:text="EAN number : "
                     android:textAllCaps="false"
                     android:textColor="@color/ezfb_black"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txt_cust_name"
+                    android:id="@+id/txt_ean_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_name"
-                    android:layout_marginTop="2dp"
-                    android:inputType="textCapWords"
-                    android:text=" "
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
-
-
-                <TextView
-                    android:id="@+id/txt_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_cust_name"
-                    android:layout_marginTop="10dp"
-                    android:text="Customer mobile number :"
-                    android:textAllCaps="false"
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txt_mobile_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_number"
-                    android:layout_marginTop="2dp"
-                    android:inputType="phone"
                     android:text=""
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/txt_brand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_mobile_number"
-                    android:layout_marginTop="10dp"
-                    android:text="Brand Name :"
                     android:textAllCaps="false"
                     android:textColor="@color/ezfb_black"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txt_brand_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_brand"
-                    android:layout_marginTop="2dp"
-                    android:inputType="textCapWords"
-                    android:text=""
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
-
-                <LinearLayout
-                    android:id="@+id/lin_product_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_brand_name"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Product Name : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_product_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lin_size"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_product_name"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Size : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lin_color"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_size"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/callback_text_color"
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_color"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lin_fit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_color"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fit : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_fit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lin_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_fit"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Style : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/txt_callback_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_style"
-                    android:layout_marginTop="10dp"
-                    android:text="Do you want  a call  back?"
-                    android:textAllCaps="false"
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txt_callback"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_callback_title"
-                    android:layout_marginTop="2dp"
-                    android:text=""
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="13sp"
                     android:textStyle="normal" />
 
 
-                <TextView
-                    android:id="@+id/txt_remarks_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_callback"
-                    android:layout_marginTop="10dp"
-                    android:text="Remarks : "
-                    android:textAllCaps="false"
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txt_remarks"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_remarks_title"
-                    android:layout_marginTop="2dp"
-                    android:text=""
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
-
-
-                <LinearLayout
-                    android:id="@+id/lin_feedback_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_remarks"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Feedback creation date : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_feedback_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lin_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_feedback_date"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/txt_email_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Email Triggered to CSD : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lin_sms"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/lin_email"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/txt_sms_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SMS sent to customer : "
-                        android:textAllCaps="false"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_sms"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-                </LinearLayout>
-
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:clickable="true"
-                android:id="@+id/processBar"
+            <LinearLayout
+                android:id="@+id/lin_store_number"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:visibility="visible">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_ean_number"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/ez_filter_progressBar"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="#0000"
-                    android:keepScreenOn="true"
-                    android:padding="10dp">
+                    android:text="Store number : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
-                </ProgressBar>
-            </RelativeLayout>
+                <TextView
+                    android:id="@+id/txt_store_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_cust_name"
+                android:layout_below="@+id/lin_store_number"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Name : "
+                android:textAllCaps="false"
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_cust_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:text=" "
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_cust_mobno"
+                android:layout_below="@+id/lin_cust_name"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer mobile number : "
+                android:textAllCaps="false"
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_mobile_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:text=""
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_brand"
+                android:layout_below="@+id/lin_cust_mobno"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brand Name : "
+                android:textAllCaps="false"
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_brand_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:text=""
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_brand"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Name : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_product_name"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Size : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_size"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/callback_text_color"
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_fit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_color"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fit : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_fit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_fit"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Style : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_callback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_style"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_callback_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Do you want a call back ? "
+                android:textAllCaps="false"
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_callback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_callback"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_remarks_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remarks : "
+                android:textAllCaps="false"
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_remarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:singleLine="false"
+                android:maxLines="2"
+                android:textColor="@color/ezfb_black"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lin_feedback_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_remarks"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Feedback creation date : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_feedback_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_feedback_date"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_email_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email Triggered to CSD : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_sms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_email"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_sms_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SMS sent to customer : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
 
         </RelativeLayout>
     </ScrollView>

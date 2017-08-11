@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -51,6 +52,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
     private Context context;
     private RelativeLayout imageBtnBack1;
+    private TextView txt_empty_product, txt_empty_exchange;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name;
     private RadioGroup radioCallbacks, radioExchange, radioProduct;
     private RadioButton radioYes, radioNo, radioExchangeYes, radioExchangeNo, radioProductYes, radioProductNo;
@@ -100,6 +102,8 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
         incorrect_phone = (TextView) findViewById(R.id.txt_incorrect_phone);
         incorrect_remark = (TextView) findViewById(R.id.txt_incorrect_remark);
+        txt_empty_product = (TextView) findViewById(R.id.txt_empty_product);
+        txt_empty_exchange = (TextView) findViewById(R.id.txt_empty_exchange);
         storedescription = (TextView) findViewById(R.id.txtStoreCode);
         storedescription.setText(store);
         linear_toolbar = (LinearLayout) findViewById(R.id.linear_toolbar);
@@ -175,6 +179,46 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             }
         });
 
+        radioExchangeYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    txt_empty_exchange.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        radioExchangeNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    txt_empty_exchange.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        radioProductYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    txt_empty_product.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        radioProductNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    txt_empty_product.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
         MainMethod();
 
     }
@@ -190,7 +234,9 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
         customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
         customerExchangeDone = radioExchangeYes.isChecked() ? "YES" : "NO";
+        Log.e("----","customerExchangeDone"+customerExchangeDone.toString());
         customerProductVerified =  radioProductYes.isChecked() ? "YES" : "NO";
+        Log.e("----","customerExchangeDone"+customerProductVerified.toString());
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
         customerArcDate = currentDateandTime;  //this will up to real time.
     }
@@ -286,6 +332,17 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                 }
             }
 
+            if(!radioExchangeYes.isChecked() && !radioExchangeNo.isChecked()){
+
+                txt_empty_exchange.setVisibility(View.VISIBLE);
+            }
+
+            if(!radioProductYes.isChecked() && !radioProductNo.isChecked()){
+
+                txt_empty_product.setVisibility(View.VISIBLE);
+
+            }
+
         }
         else if(customerNumber.length() < 10)
         {
@@ -295,10 +352,22 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
 
         }
+        else if(!radioExchangeYes.isChecked() && !radioExchangeNo.isChecked()){
+
+            txt_empty_exchange.setVisibility(View.VISIBLE);
+        }
+
+        else if(!radioProductYes.isChecked() && !radioProductNo.isChecked()){
+
+            txt_empty_product.setVisibility(View.VISIBLE);
+
+        }
         else
         {
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
+            txt_empty_exchange.setVisibility(View.GONE);
+            txt_empty_product.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
             Log.e("submitData: json is "," " + getObject().toString());
