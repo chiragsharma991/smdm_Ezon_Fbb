@@ -22,6 +22,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiEmail.req_email_API;
+
 /**
  * Created by rkanawade on 14/08/17.
  */
@@ -30,7 +32,7 @@ public class ApiSMS {
     public static RequestQueue queue;
 
 
-    public static void req_sms_API(String userId, String customerNumber, final String bearertoken, Context context) {
+    public static void req_sms_API(final String userId, String customerNumber, final String bearertoken, final Context context) {
 
         final JSONObject[] jObj = {null};
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -47,7 +49,7 @@ public class ApiSMS {
                     public void onResponse(String response) {
 
                         Log.e("sms api ", " " + response.toString());
-                        //req_email_API();
+                        req_email_API(userId, context, bearertoken);
                         // Reusable_Functions.displayToast(context, response.toString());
                     }
                 },

@@ -15,6 +15,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -31,7 +32,7 @@ public class ApiEmail {
     public static RequestQueue queue;
 
 
-    public static void req_email_API(String userId, final String bearertoken, Context context) {
+    public static void req_email_API(String userId, Context context, final String bearertoken) {
 
         final JSONObject[] jObj = {null};
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -40,14 +41,14 @@ public class ApiEmail {
         queue.start();
         final Gson gson = new Gson();
         String url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=EMAIL_TYPE_1";
-        Log.e("sms url ",""+url);
+        Log.e("email url ",""+url);
 
-        JsonObjectRequest emailrequest = new JsonObjectRequest(Request.Method.GET, url,
-                new Response.Listener<JSONObject>() {
+        StringRequest emailrequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
 
-                        Log.e("sms api "," "+response.toString());
+                        Log.e("email api "," "+response.toString());
                         //  Reusable_Functions.displayToast(context, response.toString());
                     }
                 },
