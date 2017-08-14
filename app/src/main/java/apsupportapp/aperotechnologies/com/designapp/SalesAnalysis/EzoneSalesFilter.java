@@ -250,7 +250,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
         loc_listDataHeader.add("Region");
         loc_listDataHeader.add("Store");
-        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
             prod_listDataHeader.add("Department");
             prod_listDataHeader.add("Subdept");
             prod_listDataHeader.add("Class");
@@ -277,7 +277,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         }
 
 
-        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
             listdataFill();
         } else {
             listdataFill();
@@ -332,7 +332,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Send selected hierarchy level to selected activity
-                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales"))
+                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
                 {
                     selectbuild();
 
@@ -464,7 +464,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             Toast.makeText(context, "Please select value...", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
+            if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")  ||  getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
                 callFilterLevelSales();
 
 

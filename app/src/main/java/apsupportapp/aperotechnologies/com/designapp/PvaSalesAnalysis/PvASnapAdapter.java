@@ -166,6 +166,20 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
                 }
+                 else if (fromWhere.equals("Region")) {
+                        department = productNameBean.getLevel();
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                    ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+
+                }
+                 else if (fromWhere.equals("Store")) {
+                        department = productNameBean.getLevel();
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                    ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+
+                }
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc
 
