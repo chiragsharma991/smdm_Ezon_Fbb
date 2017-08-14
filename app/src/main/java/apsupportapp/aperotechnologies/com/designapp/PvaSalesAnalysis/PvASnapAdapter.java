@@ -115,9 +115,12 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 if (fromWhere.equals("Department")) {
 
-                    if (geoLeveLDesc.equals("E ZONE")) {
+                    if (geoLeveLDesc.equals("E ZONE"))
+                    {
                          department = productNameBean.getLevel();
-                    }else{
+                    }
+                    else
+                    {
                         department=productNameBean.getPlanDept();
                     }
                     ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);

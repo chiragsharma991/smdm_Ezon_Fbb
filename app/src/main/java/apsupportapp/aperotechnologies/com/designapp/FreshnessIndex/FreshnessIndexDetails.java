@@ -10,7 +10,7 @@ public class FreshnessIndexDetails {
     String storeCode;
     String storeDescription;
     String planDept;
-    int stkOnhandQty;
+    double stkOnhandQty;
     double stkOnhandQtyCount;
     double stkGitQty;
     double ros;
@@ -115,11 +115,11 @@ public class FreshnessIndexDetails {
         this.planCategory = planCategory;
     }
 
-    public int getStkOnhandQty() {
+    public double getStkOnhandQty() {
         return stkOnhandQty;
     }
 
-    public void setStkOnhandQty(int stkOnhandQty) {
+    public void setStkOnhandQty(double stkOnhandQty) {
         this.stkOnhandQty = stkOnhandQty;
     }
 

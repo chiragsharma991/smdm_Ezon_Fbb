@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
@@ -71,14 +70,15 @@
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
+
                     <RelativeLayout
                         android:id="@+id/imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="0dp"
-                        android:background="@drawable/button_click">
+                        android:layout_toLeftOf="@+id/sortPopup"
+                        android:background="@drawable/button_click"
+                        >
 
                         <Button
                             android:layout_width="@dimen/icon_width"
@@ -89,11 +89,31 @@
 
                     </RelativeLayout>
 
+                    <RelativeLayout
+                        android:id="@+id/sortPopup"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click"
+                        >
+
+                        <Button
+                            android:layout_width="@dimen/icon_width"
+                            android:layout_height="@dimen/icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/iconmore"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
 
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
             <RelativeLayout
+                android:id="@+id/rel_store_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp">
@@ -145,285 +165,286 @@
             segmentedgroup:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
 
         <!--<android.support.v4.widget.NestedScrollView-->
-            <!--android:scrollbars="vertical"-->
+        <!--android:scrollbars="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--&gt;-->
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_below="@+id/tabview_salespva"
+            android:id="@+id/llayoutSalesPvA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--<com.numetriclabz.numandroidcharts.GaugeChart-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/gauge_chart"-->
             <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-           <!--&gt;-->
+            <!--android:layout_height="270dp" />-->
+
 
             <RelativeLayout
-                android:background="@color/white"
-                android:layout_below="@+id/tabview_salespva"
-                android:id="@+id/llayoutSalesPvA"
+                android:orientation="vertical"
+                android:id="@+id/relChartlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/pva_noChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="No Chart data available"
+                    android:textSize="@dimen/largelayout_storesize"
+                    android:visibility="gone" />
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/bar_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:nestedScrollingEnabled="true" />
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/pva_progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:padding="10dp"
+                    android:theme="@style/ProgressBar"
+                    android:visibility="gone">
+
+                </ProgressBar>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/bar_chart"
+                    android:layout_marginRight="15dp"
+                    android:gravity="right|center_horizontal"
+                    android:text="@string/xaxis_label"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="11sp" />
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/llpvahierarchy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_below="@+id/relChartlayout"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-                <!--<com.numetriclabz.numandroidcharts.GaugeChart-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:id="@+id/gauge_chart"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="270dp" />-->
+                <TextView
+                    android:id="@+id/txtpvahDeptName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="@dimen/normallayout_textsize" />
 
+            </LinearLayout>
 
-                <RelativeLayout
-                    android:orientation="vertical"
-                    android:id="@+id/relChartlayout"
+            <RelativeLayout
+                android:id="@+id/relTablelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llpvahierarchy"
+                >
+
+                <View
+                    android:id="@+id/view1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:id="@+id/pva_noChart"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:text="No Chart data available"
-                        android:textSize="@dimen/largelayout_storesize"
-                        android:visibility="gone" />
-                        <com.github.mikephil.charting.charts.BarChart
-                        android:id="@+id/bar_chart"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:nestedScrollingEnabled="true" />
-
-                    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/pva_progressBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:layout_centerInParent="true"
-                        android:background="#0000"
-                        android:keepScreenOn="true"
-                        android:padding="10dp"
-                        android:theme="@style/ProgressBar"
-                        android:visibility="gone">
-
-                    </ProgressBar>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@+id/bar_chart"
-                        android:layout_marginRight="15dp"
-                        android:gravity="right|center_horizontal"
-                        android:text="@string/xaxis_label"
-                        android:textColor="@color/ezfbb_black"
-                        android:textSize="11sp" />
-                </RelativeLayout>
-
+                    android:layout_height="1dip"
+                    android:background="@color/smdm_divider_Black" />
 
 
                 <LinearLayout
-                    android:id="@+id/llpvahierarchy"
+                    android:id="@+id/linear"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/relChartlayout"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
+                    android:layout_height="80dp"
+                    android:layout_below="@+id/view1"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtpvahDeptName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/ezfbb_black"
-                        android:textSize="@dimen/normallayout_textsize" />
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relTablelayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/llpvahierarchy"
-                    android:layout_marginTop="10dp">
-
-                    <View
-                        android:id="@+id/view1"
+                    <RelativeLayout
+                        android:id="@+id/llheader"
                         android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/smdm_divider_Black" />
-
-
-                    <LinearLayout
-                        android:id="@+id/linear"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/view1"
-                        android:orientation="vertical">
+                        android:layout_height="40dp"
+                        android:background="@color/ezfb_activity_background">
 
                         <RelativeLayout
-                            android:id="@+id/llheader"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:background="@color/ezfb_activity_background">
+                            android:layout_marginRight="10dp"
+                            android:layout_toLeftOf="@+id/txtPlanSales">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_toLeftOf="@+id/txtPlanSales">
+                                android:id="@+id/btnSalesBack"
+                                android:layout_width="20dp"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true">
 
-                                <RelativeLayout
-                                    android:id="@+id/btnSalesBack"
+                                <Button
                                     android:layout_width="20dp"
-                                    android:layout_height="40dp"
-                                    android:layout_centerVertical="true">
-
-                                    <Button
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:layout_centerInParent="true"
-                                        android:background="@mipmap/back_arrow"
-                                        android:clickable="false" />
-                                </RelativeLayout>
-
-                                <TextView
-                                    android:id="@+id/txtPlanClass"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="20dp"
                                     android:layout_centerInParent="true"
-                                    android:layout_toRightOf="@+id/btnSalesBack"
-                                    android:text="Department"
-                                    android:textColor="@color/ezfbb_black"
-                                    android:textSize="@dimen/normallayout_textsize"
-                                    android:textStyle="normal" />
-
-
-                                <RelativeLayout
-                                    android:id="@+id/btnSalesNext"
-                                    android:layout_width="20dp"
-                                    android:layout_height="40dp"
-                                    android:layout_centerVertical="true"
-                                    android:layout_toRightOf="@+id/txtPlanClass">
-
-                                    <Button
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:layout_centerInParent="true"
-                                        android:background="@mipmap/next_arrow"
-                                        android:clickable="false" />
-                                </RelativeLayout>
-
+                                    android:background="@mipmap/back_arrow"
+                                    android:clickable="false" />
                             </RelativeLayout>
 
                             <TextView
-                                android:id="@+id/txtPlanSales"
-                                android:layout_width="70dp"
+                                android:id="@+id/txtPlanClass"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginRight="160dp"
-                                android:layout_toLeftOf="@+id/txtNetSales"
-                                android:gravity="center_vertical|center"
-                                android:text="@string/plan_sales"
+                                android:layout_centerInParent="true"
+                                android:layout_toRightOf="@+id/btnSalesBack"
+                                android:text="Department"
                                 android:textColor="@color/ezfbb_black"
                                 android:textSize="@dimen/normallayout_textsize"
                                 android:textStyle="normal" />
 
 
-                            <TextView
-                                android:id="@+id/txtNetSales"
-                                android:layout_width="70dp"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
+                            <RelativeLayout
+                                android:id="@+id/btnSalesNext"
+                                android:layout_width="20dp"
+                                android:layout_height="40dp"
                                 android:layout_centerVertical="true"
-                                android:layout_marginRight="90dp"
-                                android:layout_toLeftOf="@+id/rel"
-                                android:gravity="center_vertical|center"
-                                android:text="@string/net_sales"
-                                android:textColor="@color/ezfbb_black"
-                                android:textSize="@dimen/normallayout_textsize"
-                                android:textStyle="normal" />
+                                android:layout_toRightOf="@+id/txtPlanClass">
 
-
-                            <TextView
-                                android:id="@+id/rel"
-                                android:layout_width="90dp"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:gravity="center_vertical|center"
-                                android:text="Ach%"
-                                android:textColor="@color/ezfbb_black"
-                                android:textSize="@dimen/normallayout_textsize"
-                                android:textStyle="normal" />
+                                <Button
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:background="@mipmap/next_arrow"
+                                    android:clickable="false" />
+                            </RelativeLayout>
 
                         </RelativeLayout>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp">
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="230dp"
-                                android:layout_toLeftOf="@+id/edt_plansales"
-                                android:background="@drawable/border"
-                                android:editable="false"
-                                android:gravity="center_vertical"
-                                android:padding="2dp"
-                                android:textColor="@android:color/black" />
+                        <TextView
+                            android:id="@+id/txtPlanSales"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="160dp"
+                            android:layout_toLeftOf="@+id/txtNetSales"
+                            android:gravity="center_vertical|center"
+                            android:text="@string/plan_sales"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
 
 
-                            <EditText
-                                android:id="@+id/edt_plansales"
-                                android:layout_width="70dp"
-                                android:layout_height="30dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="160dp"
-                                android:layout_toLeftOf="@+id/edt_netsales"
-                                android:background="@drawable/border"
-                                android:editable="false"
-                                android:gravity="center_vertical"
-                                android:paddingRight="2dp" />
+                        <TextView
+                            android:id="@+id/txtNetSales"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="90dp"
+                            android:layout_toLeftOf="@+id/rel"
+                            android:gravity="center_vertical|center"
+                            android:text="@string/net_sales"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
 
 
-                            <EditText
-                                android:id="@+id/edt_netsales"
-                                android:layout_width="70dp"
-                                android:layout_height="30dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="90dp"
-                                android:layout_toLeftOf="@+id/edt_pvaSales"
-                                android:background="@drawable/border"
-                                android:editable="false"
-                                android:textColor="@android:color/black" />
+                        <TextView
+                            android:id="@+id/rel"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical|center"
+                            android:text="Ach%"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
 
-                            <EditText
-                                android:id="@+id/edt_pvaSales"
-                                android:layout_width="90dp"
-                                android:layout_height="30dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:background="@drawable/border"
-                                android:editable="false"
-                                android:textColor="@android:color/black" />
+                    </RelativeLayout>
 
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/list"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="45dp"
-                        android:divider="@null"
-                        android:dividerHeight="0dp"
-                        android:smoothScrollbar="true" />
+                        android:layout_height="30dp">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="230dp"
+                            android:layout_toLeftOf="@+id/edt_plansales"
+                            android:background="@drawable/border"
+                            android:editable="false"
+                            android:gravity="center_vertical"
+                            android:padding="2dp"
+                            android:textColor="@android:color/black" />
 
-                </RelativeLayout>
 
+                        <EditText
+                            android:id="@+id/edt_plansales"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="160dp"
+                            android:layout_toLeftOf="@+id/edt_netsales"
+                            android:background="@drawable/border"
+                            android:editable="false"
+                            android:gravity="center_vertical"
+                            android:paddingRight="2dp" />
+
+
+                        <EditText
+                            android:id="@+id/edt_netsales"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="90dp"
+                            android:layout_toLeftOf="@+id/edt_pvaSales"
+                            android:background="@drawable/border"
+                            android:editable="false"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/edt_pvaSales"
+                            android:layout_width="90dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/border"
+                            android:editable="false"
+                            android:textColor="@android:color/black" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="40dp"
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:smoothScrollbar="true"
+                    />
 
             </RelativeLayout>
+
+
+        </RelativeLayout>
         <!--</android.support.v4.widget.NestedScrollView>-->
     </RelativeLayout>
 

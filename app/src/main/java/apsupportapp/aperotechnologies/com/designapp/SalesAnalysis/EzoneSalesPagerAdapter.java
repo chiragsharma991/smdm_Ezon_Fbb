@@ -160,9 +160,9 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_NetSalesUVal.setText("" + format.format(Math.round(ez_sales_pager.getSaleTotQty())));
                     txt_ez_SohUVal.setText("₹\t" + format.format(Math.round(ez_sales_pager.getRgm())));
                     txt_ez_NetSalesPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesGrowthPct()) + "%");
-                    txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchived()) + "%");
+                    txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchieved()) + "%");
                     txt_ez_NetSalesUPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesUnitsGrowthPct()) + "%");
-                    txt_ez_MarginPerc.setText("" + Math.round(ez_sales_pager.getMarginPct()) + "%");
+                    txt_ez_MarginPerc.setText("" +String.format("%.1f",ez_sales_pager.getMarginPct()) + "%");
 
                     // Color Condition for Wow Net Sale, Pva Achieved , Wow net sale Growth
                     if (ez_sales_pager.getYoyNetSalesGrowthPct() <= 0) {
@@ -172,10 +172,10 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                         txt_ez_NetSalesImage.setBackgroundResource(R.mipmap.green_arrow);
 //                        txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
                     }
-                    if (ez_sales_pager.getPvaAchived() < 70) {
+                    if (ez_sales_pager.getPvaAchieved() < 70) {
                         txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                         //   txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
-                    } else if (ez_sales_pager.getPvaAchived() > 90) {
+                    } else if (ez_sales_pager.getPvaAchieved() > 90) {
                         txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
                         //  txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#70e503"));
                     } else {
@@ -202,9 +202,9 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     txt_ez_SohUVal.setText("₹\t" + format.format(Math.round(ez_sales_pager.getRgm())));
 
                     txt_ez_NetSalesPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesGrowthPct()) + "%");
-                    txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchived()) + "%");
+                    txt_ez_PlanSalesPerc.setText("" + Math.round(ez_sales_pager.getPvaAchieved()) + "%");
                     txt_ez_NetSalesUPerc.setText("" + Math.round(ez_sales_pager.getYoyNetSalesUnitsGrowthPct()) + "%");
-                    txt_ez_MarginPerc.setText("" + Math.round(ez_sales_pager.getMarginPct()) + "%");
+                    txt_ez_MarginPerc.setText("" +String.format("%.1f",ez_sales_pager.getMarginPct()) + "%");
 
                 }
                 if (ez_sales_pager.getYoyNetSalesGrowthPct() <= 0) {
@@ -216,11 +216,11 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                     //  txt_ez_NetSalesVal.setTextColor(Color.parseColor("#70e503"));
                 }
 
-                if (ez_sales_pager.getPvaAchived() < 70) {
+                if (ez_sales_pager.getPvaAchieved() < 70) {
                     txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.red_arrow);
                     //   txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#fe0000"));
 
-                } else if (ez_sales_pager.getPvaAchived() > 90) {
+                } else if (ez_sales_pager.getPvaAchieved() > 90) {
                     txt_ez_PlanSalesImage.setBackgroundResource(R.mipmap.green_arrow);
                     //  txt_ez_PlanSalesVal.setTextColor(Color.parseColor("#70e503"));
 
@@ -244,7 +244,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
 
                 if (salesAnalysisListDisplay.getLevel() != null) {
                     if (salesAnalysisListDisplay.getLevel().equals("All")) {
-                        salesAnalysisListDisplay.setPvaAchived(ez_sales_pager.getPvaAchived());
+                        salesAnalysisListDisplay.setPvaAchieved(ez_sales_pager.getPvaAchieved());
                         ez_sales_detail_array.set(0, salesAnalysisListDisplay);
                         ez_salesadapter.notifyDataSetChanged();
 
@@ -256,6 +256,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
         }
         else if (position == 1) {
             if (ez_sales_pager != null) {
+
                 double ros = Double.parseDouble(String.format("%.1f", ez_sales_pager.getRos()));
                 double fwdwkcover = Double.parseDouble(String.format("%.1f", ez_sales_pager.getFwdWeekCover()));
 

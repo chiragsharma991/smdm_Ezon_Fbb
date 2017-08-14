@@ -114,6 +114,7 @@
             </android.support.v7.widget.Toolbar>
 
             <RelativeLayout
+                android:id="@+id/rel_store_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp">
@@ -257,7 +258,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/llpvahierarchy"
-                android:layout_marginTop="10dp">
+              >
 
                 <View
                     android:id="@+id/view1"
@@ -281,7 +282,7 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/txtPlanSales">
 
@@ -434,7 +435,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="45dp"
                     android:divider="@null"
                     android:dividerHeight="0dp"

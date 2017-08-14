@@ -123,22 +123,22 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 {
                     case "Department":
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchived()) + "%");
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Subdept":
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchived()) + "%");
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Class":
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchived()) + "%");
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Subclass":
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchived()) + "%");
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
 //                    case "MC":
@@ -147,19 +147,19 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //                        break;
                     case "Region":
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchived()) + "%");
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Store":
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchived()) + "%");
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                 }
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc
                 int planVal = 100; // planned value from API
-                double achieveVal = productNameBean.getPvaAchived();// Achieved value from API
+                double achieveVal = productNameBean.getPvaAchieved();// Achieved value from API
                 double calplanVal = planVal * singlePercVal; // planned value multiplied by single perc value
                 double calachieveVal = achieveVal * singlePercVal; // Achieved value multiplied by single perc value
                 float density = context.getResources().getDisplayMetrics().density;
