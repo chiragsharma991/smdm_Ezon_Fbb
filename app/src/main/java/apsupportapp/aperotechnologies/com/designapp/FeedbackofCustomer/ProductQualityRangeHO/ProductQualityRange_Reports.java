@@ -158,21 +158,27 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
     private synchronized void requestcallback(mpm_model model, int id) {
 
         String url = "";
+        String data;
         ApiRequest api_request;
         switch (id) {
             // case 0 and 1 will follow like first update list and after pie chart
             case 0:
+                data = "";
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true"; //Pie chart Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this);  // 1 is id for new api response
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:
+                data = "yes";
+
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this);  // 0 is id for call finish response.
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
             case 2:  // this is for only change list
+                data = "no";
+
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this);  // 1 is id for call another api after response
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             default:
                 break;
@@ -225,7 +231,7 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
         Log.e(TAG, "Piechart: "+totalFeedbackCount+" "+callbackFeedbackCount+" "+nocallbackFeedbackCount );
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(Color.parseColor("#e8112d"));    //#20b5d3
-        colors.add(Color.parseColor("#f8f6f6"));    //#21d24c
+        colors.add(Color.parseColor("#c6c4c4"));    //#21d24c
         entries.add(new PieEntry(callbackFeedbackCount, "Feedback with Callback"));
         entries.add(new PieEntry(nocallbackFeedbackCount, "Feedback"));
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -408,7 +414,7 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
     }
 
     private void addViewLayout() {
-        int[] colors = {Color.parseColor("#e8112d"), Color.parseColor("#f8f6f6"), Color.parseColor("#f5204c"), Color.parseColor("#f89a20"), Color.parseColor("#78bc2c"), Color.parseColor("#db5a81"), Color.parseColor("#955eb9"), Color.parseColor("#dcd52d"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
+        int[] colors = {Color.parseColor("#e8112d"), Color.parseColor("#c6c4c4"), Color.parseColor("#f5204c"), Color.parseColor("#f89a20"), Color.parseColor("#78bc2c"), Color.parseColor("#db5a81"), Color.parseColor("#955eb9"), Color.parseColor("#dcd52d"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
         addleggend.removeAllViewsInLayout();
         LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);

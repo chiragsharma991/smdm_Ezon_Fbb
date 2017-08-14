@@ -207,7 +207,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                                ez_level = groupPosition + 2;
                                                if (!cb.isChecked()) {
 
-                                                   if (str_checkFrom.equals("ezoneSales")) {
+                                                   if (str_checkFrom.equals("ezoneSales")  || str_checkFrom.equals("pvaAnalysis")) {
                                                        salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                        cb.setChecked(true);
                                                        ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.VISIBLE);

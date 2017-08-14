@@ -61,7 +61,6 @@ public class ApiPostRequest {
 
     }
 
-
     private void setApi(final Context context) {
 
         Log.e(TAG, "final_setApi: URL " + URL);

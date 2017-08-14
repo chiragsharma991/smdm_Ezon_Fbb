@@ -9,6 +9,11 @@
         android:gravity="top"
       >
 
+        <RelativeLayout
+            android:id="@+id/rel_edt"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
     <EditText
         android:id="@+id/edt_remark_dialog"
         android:layout_width="fill_parent"
@@ -19,6 +24,8 @@
         android:background="@null"
         android:singleLine="false" >
     </EditText>
+
+        </RelativeLayout>
 
     <Button
         android:id="@+id/btn_submit"

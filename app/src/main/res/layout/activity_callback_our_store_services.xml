@@ -156,9 +156,18 @@
                 android:textColor="@color/ezfb_black"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:layout_width="wrap_content"
+                android:layout_width="172dp"
                 android:layout_height="wrap_content"
-                android:text="Customer mobile number : "/>
+                android:text="Customer mobile number "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txt_mobile_number"
@@ -192,13 +201,15 @@
                 android:layout_height="wrap_content"
                 android:text="Remarks : "/>
 
+
+
                 <TextView
                     android:id="@+id/txt_remarks"
                     android:textSize="13sp"
                     android:textColor="@color/ezfb_black"
                     android:textStyle="normal"
                     android:singleLine="false"
-                    android:maxLines="2"
+                    android:maxLines="3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""/>
@@ -220,11 +231,21 @@
                 android:textColor="@color/ezfb_black"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:layout_width="wrap_content"
+                android:layout_width="172dp"
                 android:layout_height="wrap_content"
-                android:text="Customer Name : "/>
+                android:text="Customer Name "/>
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
                 android:id="@+id/txt_cust_name"
                 android:textSize="13sp"
                 android:textColor="@color/ezfb_black"
@@ -247,13 +268,23 @@
 
                 <TextView
                     android:id="@+id/txt_store_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/ezfb_black"
-                    android:text="Store name : "/>
+                    android:text="Store name "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
 
                 <TextView
                     android:id="@+id/txt_store_number"
@@ -284,11 +315,21 @@
                 android:textColor="@color/ezfb_black"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:layout_width="wrap_content"
+                android:layout_width="172dp"
                 android:layout_height="wrap_content"
                 android:text="Do You want a call back ? "/>
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
                 android:id="@+id/txt_callback"
                 android:textSize="13sp"
                 android:textColor="@color/ezfb_black"
@@ -310,13 +351,23 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/ezfb_black"
-                    android:text="Feedback creation date : "/>
+                    android:text="Feedback creation date "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
 
                 <TextView
                     android:id="@+id/txt_feedback_date"
@@ -346,11 +397,21 @@
                 android:textColor="@color/ezfb_black"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:layout_width="wrap_content"
+                android:layout_width="172dp"
                 android:layout_height="wrap_content"
-                android:text="Email Triggered to CSD : "/>
+                android:text="Email Triggered to CSD "/>
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
                 android:id="@+id/txt_email"
                 android:textSize="13sp"
                 android:textColor="@color/ezfb_black"
@@ -376,11 +437,21 @@
                 android:textColor="@color/ezfb_black"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:layout_width="wrap_content"
+                android:layout_width="172dp"
                 android:layout_height="wrap_content"
-                android:text="SMS sent to customer : "/>
+                android:text="SMS sent to customer "/>
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
                 android:id="@+id/txt_sms"
                 android:textSize="13sp"
                 android:textColor="@color/ezfb_black"

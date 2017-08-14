@@ -14,11 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,18 +40,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.Adapter.ReportAdapter;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
-import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
-import apsupportapp.aperotechnologies.com.designapp.model.RecyclerItemClickListener;
+
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static apsupportapp.aperotechnologies.com.designapp.R.id.addleggend;
-import static apsupportapp.aperotechnologies.com.designapp.R.id.listView;
-import static apsupportapp.aperotechnologies.com.designapp.R.id.progressBar;
+
 /**
  * created: chari sharma.
  * Notes:
@@ -165,23 +159,29 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     private synchronized void requestcallback(mpm_model model, int id) {
 
         String url = "";
+        String data;
         ApiRequest api_request;
         switch (id) {
+
             // case 0 and 1 will follow like first update list and after pie chart
             case 0:
+                Log.e("here","case 0");
+                data = "";
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true"; //Pie chart Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this);  // 1 is id for new api response
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:
-
+                Log.e("here","case 1");
+                data = "yes";
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this);  // 0 is id for call finish response.
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
             case 2:  // this is for only change list
-
+                Log.e("here","case 2");
+                data = "no";
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
-                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this);  // 1 is id for call another api after response
+                api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             default:
                 break;
@@ -234,7 +234,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         Log.e(TAG, "Piechart: "+totalFeedbackCount+" "+callbackFeedbackCount+" "+nocallbackFeedbackCount );
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(Color.parseColor("#e8112d"));    //#20b5d3
-        colors.add(Color.parseColor("#f8f6f6"));    //#21d24c
+        colors.add(Color.parseColor("#c6c4c4"));    //#21d24c
         entries.add(new PieEntry(callbackFeedbackCount, "Feedback with Callback"));
         entries.add(new PieEntry(nocallbackFeedbackCount, "Feedback"));
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -417,7 +417,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     }
 
     private void addViewLayout() {
-        int[] colors = {Color.parseColor("#e8112d"), Color.parseColor("#f8f6f6"), Color.parseColor("#f5204c"), Color.parseColor("#f89a20"), Color.parseColor("#78bc2c"), Color.parseColor("#db5a81"), Color.parseColor("#955eb9"), Color.parseColor("#dcd52d"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
+        int[] colors = {Color.parseColor("#e8112d"), Color.parseColor("#c6c4c4"), Color.parseColor("#f5204c"), Color.parseColor("#f89a20"), Color.parseColor("#78bc2c"), Color.parseColor("#db5a81"), Color.parseColor("#955eb9"), Color.parseColor("#dcd52d"), Color.parseColor("#6666FF"), Color.parseColor("#008040")};
         addleggend.removeAllViewsInLayout();
         LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
