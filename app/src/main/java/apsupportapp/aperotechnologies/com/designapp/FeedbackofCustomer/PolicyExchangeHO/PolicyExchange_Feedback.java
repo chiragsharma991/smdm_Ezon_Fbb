@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,13 +9,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -46,6 +47,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -68,6 +70,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
+import static apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiSMS.req_sms_API;
 
 /**
  * Created by rkanawade on 24/07/17.
@@ -83,15 +86,17 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
     private Button btn_submit, btn_cancel;
     private LinearLayout linear_toolbar;
     private Spinner spinner_reasons;
+    private TextInputLayout input_remarks;
     private ScrollView scrollView;
     private String TAG = "PolicyExchangeRefund";
     private RequestQueue queue;
     private View v;
+    private String remarks_text;
     ArrayAdapter<String> adp3;
-    private String remark, user_trim;
+    private String remark, user_trim, SelectedStoreCode;
     private String userId, bearertoken, geoLeveLDesc, store;
     private String customerFeedback, customerNumber, customerRemarks, customerName, customerLastname,
-            customerCallBack, customerExchangeDone, customerProductVerified, customerArcDate;
+            customerCallBack, customerExchangeDone, customerProductVerified, exchangeReason, customerArcDate;
     private TextView incorrect_phone, incorrect_remark, storedescription;
     SharedPreferences sharedPreferences;
 
@@ -115,6 +120,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
     private void initializeUI() {
 
         edt_customer_mobile_number = (EditText) v.findViewById(R.id.edt_customer_mobile_number);
+        input_remarks = (TextInputLayout) v.findViewById(R.id.input_remarks);
         scrollView = (ScrollView) v.findViewById(R.id.scrollView);
         edt_remarks = (EditText) v.findViewById(R.id.edt_remarks);
         edt_first_name = (EditText) v.findViewById(R.id.edt_first_name);
@@ -147,8 +153,6 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
 
-
-
         edt_remarks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,17 +166,85 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+                remarks_text = edt_remarks.getText().toString().trim();
+                Log.e("===","remarks_text "+remarks_text);
+                if(!remarks_text.equals("")){
+                    edt_remark_dialog.setText(remarks_text);
+                }
+                edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
 
                 final AlertDialog alertDialog = dialogBuilder.create();
+
+                rel_edt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    }
+                });
 
                 btn_submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         remark = edt_remark_dialog.getText().toString().trim();
                         Log.e("remark ",""+remark);
                         edt_remarks.setText(remark);
+                        edt_remarks.setSelection(edt_remarks.getText().length());
+                        edt_first_name.requestFocus();
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.setCancelable(true);
+                alertDialog.show();
+            }
+        });
+
+        input_remarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater =  getActivity().getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                dialogBuilder.setView(dialogView);
+
+                final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+
+                remarks_text = edt_remarks.getText().toString().trim();
+                Log.e("===","remarks_text "+remarks_text);
+
+                if(!remarks_text.equals("")){
+                    edt_remark_dialog.setText(remarks_text);
+                }
+                edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
+
+                final AlertDialog alertDialog = dialogBuilder.create();
+
+                rel_edt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    }
+                });
+
+                btn_submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                        remark = edt_remark_dialog.getText().toString().trim();
+                        Log.e("remark ",""+remark);
+                        edt_remarks.setText(remark);
+                        edt_remarks.setSelection(edt_remarks.getText().length());
+                        edt_first_name.requestFocus();
                         alertDialog.dismiss();
                     }
                 });
@@ -185,21 +257,110 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-                    if(!customerNumber.equals("")) {
+                    if (!customerNumber.equals("")) {
                         if (customerNumber.length() < 10) {
+
                             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
                             incorrect_phone.setVisibility(View.VISIBLE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
-                        } else {
+                            InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                            inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                            // ...Irrelevant code for customizing the buttons and title
+                            LayoutInflater inflater =  getActivity().getLayoutInflater();
+                            final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                            dialogBuilder.setView(dialogView);
 
+                            final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                            final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+                            remarks_text = edt_remarks.getText().toString().trim();
+                            Log.e("===","remarks_text "+remarks_text);
+                            if(!remarks_text.equals("")){
+                                edt_remark_dialog.setText(remarks_text);
+                            }
+                            edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
+
+                            final AlertDialog alertDialog = dialogBuilder.create();
+
+                            rel_edt.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                                }
+                            });
+
+                            btn_submit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                                    remark = edt_remark_dialog.getText().toString().trim();
+                                    Log.e("remark ",""+remark);
+                                    edt_remarks.setText(remark);
+                                    edt_remarks.setSelection(edt_remarks.getText().length());
+                                    edt_first_name.requestFocus();
+                                    alertDialog.dismiss();
+                                }
+                            });
+                            alertDialog.setCancelable(true);
+                            alertDialog.show();
+                        } else {
+                            remarks_text = edt_remarks.getText().toString().trim();
+                            Log.e("===","remarks_text "+remarks_text);
                             incorrect_phone.setVisibility(View.GONE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
+                            InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                            inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                            // ...Irrelevant code for customizing the buttons and title
+                            LayoutInflater inflater =  getActivity().getLayoutInflater();
+                            final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                            dialogBuilder.setView(dialogView);
+
+                            final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                            final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+                            if(!remarks_text.equals("")){
+                                edt_remark_dialog.setText(remarks_text);
+                            }
+                            edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
+
+                            final AlertDialog alertDialog = dialogBuilder.create();
+
+                            rel_edt.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                                }
+                            });
+
+                            btn_submit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                                    remark = edt_remark_dialog.getText().toString().trim();
+                                    Log.e("remark ",""+remark);
+                                    edt_remarks.setText(remark);
+                                    edt_remarks.setSelection(edt_remarks.getText().length());
+                                    edt_first_name.requestFocus();
+                                    alertDialog.dismiss();
+                                }
+                            });
+                            alertDialog.setCancelable(true);
+                            alertDialog.show();
                         }
                     }
-                    else
-                    {
+                    else{
+                        remarks_text = edt_remarks.getText().toString().trim();
+                        Log.e("===","remarks_text "+remarks_text);
+                        incorrect_phone.setVisibility(View.GONE);
+                        edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                         InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
                         inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
                         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
@@ -210,28 +371,43 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                        final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+                        if(!remarks_text.equals("")){
+                            edt_remark_dialog.setText(remarks_text);
+                        }
+                        edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
 
                         final AlertDialog alertDialog = dialogBuilder.create();
+
+                        rel_edt.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                            }
+                        });
 
                         btn_submit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                                InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                 remark = edt_remark_dialog.getText().toString().trim();
                                 Log.e("remark ",""+remark);
                                 edt_remarks.setText(remark);
+                                edt_remarks.setSelection(edt_remarks.getText().length());
+                                edt_first_name.requestFocus();
                                 alertDialog.dismiss();
                             }
                         });
                         alertDialog.setCancelable(true);
                         alertDialog.show();
                     }
+
                 }
 
             }
         });
-
 
         edt_customer_mobile_number.addTextChangedListener(new TextWatcher() {
             @Override
@@ -341,7 +517,8 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         customerExchangeDone = radioExchangeYes.isChecked() ? "YES" : "NO";
         customerProductVerified =  radioProductYes.isChecked() ? "YES" : "NO";
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
-        customerArcDate = currentDateandTime;  //this will up to real time.
+        exchangeReason = spinner_reasons.getSelectedItem().toString();
+      //  customerArcDate = currentDateandTime;  //this will up to real time.
     }
 
     private void MainMethod() {
@@ -351,6 +528,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         user_trim = userId.substring(0,2);
         Log.e("user_trim ",""+user_trim);
         store = sharedPreferences.getString("storeDescription", "");
+        SelectedStoreCode = store.trim().substring(0, 4);
         storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
@@ -526,7 +704,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode", SelectedStoreCode);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -534,8 +712,8 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
             jsonObject.put("attribute14", customerCallBack);
             jsonObject.put("attribute15", customerExchangeDone);
             jsonObject.put("attribute16", customerProductVerified);
-
-            jsonObject.put("arcDate", customerArcDate);
+            jsonObject.put("attribute17", exchangeReason);
+           // jsonObject.put("arcDate", customerArcDate);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -570,10 +748,11 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         String result = null;
         try {
             result = response.getString("status");
-           // req_sms_API();
             Reusable_Functions.displayToast(context, result);
+            req_sms_API(userId, customerNumber, bearertoken, context);
             cancelData();
             Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
+            dashboard.putExtra("from","feedback");
             getActivity().startActivity(dashboard);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -598,100 +777,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         edt_customer_mobile_number.requestFocus();
     }
 
-    public void req_sms_API()
-    {
-        final JSONObject[] jObj = {null};
-        final Gson gson = new Gson();
-        String url = "https://smdm.manthan.com/v1/notification/sms/"+user_trim+"?smstype=SMS_TYPE_1&mobilenumber="+customerNumber;
-        Log.e("sms url ",""+url);
 
-        JsonObjectRequest smsrequest = new JsonObjectRequest(Request.Method.GET, url,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        Log.e("sms api "," "+response.toString());
-                        req_email_API();
-                       // Reusable_Functions.displayToast(context, response.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Log.e("sms api "," "+error.toString());
-
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Authorization", bearertoken);
-                params.put("Content-Type", "application/json");
-                params.put("Accept", "application/json");
-                return params;
-            }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/json";
-            }
-        };
-
-        int socketTimeout = 30000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        smsrequest.setRetryPolicy(policy);
-        queue.add(smsrequest);
-
-    }
-
-    public void req_email_API()
-    {
-        final JSONObject[] jObj = {null};
-        final Gson gson = new Gson();
-        String url = "https://smdm.manthan.com/v1/notification/email/"+user_trim+"?storecode=2663&emailtype=EMAIL_TYPE_1";
-        Log.e("sms url ",""+url);
-
-        JsonObjectRequest smsrequest = new JsonObjectRequest(Request.Method.GET, url,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        Log.e("sms api "," "+response.toString());
-                      //  Reusable_Functions.displayToast(context, response.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Log.e("sms api "," "+error.toString());
-
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Authorization", bearertoken);
-                params.put("Content-Type", "application/json");
-                params.put("Accept", "application/json");
-                return params;
-            }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/json";
-            }
-        };
-
-        int socketTimeout = 30000;//5 seconds
-
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        smsrequest.setRetryPolicy(policy);
-        queue.add(smsrequest);
-
-    }
 
     public void req_fetch_spinnerdata_YES_API()
     {
@@ -707,11 +793,12 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
                         Log.e("sms api "," "+response.toString());
                         List<String> listist = new ArrayList<String>();
+                        listist.add(0, "Reason for Exchange");
 
 
-                        for (int i = 0; i < response.length(); i++) {
+                        for (int i = 0,j = 1; i < response.length(); i++,j++) {
                             try {
-                                listist.add("" + response.get(i));
+                                listist.add(j, "" + response.get(i));
                             } catch (JSONException e) {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
@@ -772,6 +859,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
                         Log.e("sms api "," "+response.toString());
                         List<String> listist = new ArrayList<String>();
+                        listist.add(0, "Reason for store refusal");
 
 
                         for (int i = 0; i < response.length(); i++) {

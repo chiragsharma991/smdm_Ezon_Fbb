@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,10 +78,10 @@ import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
 public class SnapDashboardActivity extends SwitchingActivity implements onclickView {
 
-    private RecyclerView Recycler_verticalView;
+    public static RecyclerView Recycler_verticalView;
     private String TAG = "SnapDashboardActivity";
     private Context context;
-
+    private NestedScrollView nestedScrollview;
     RequestQueue queue;
     String userId, bearertoken, geoLeveLDesc;
     SharedPreferences sharedPreferences;
@@ -101,7 +102,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private ArrayList<EtlStatus> etlStatusList;
     private Snackbar snackbar;
     private TextView RefreshTime;
-    private SnapAdapter snapAdapter;
+    public static SnapAdapter snapAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -124,7 +125,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         setContentView(R.layout.activity_snap_dashboard);
         initalise();
         eventUrlList = new ArrayList<>();
-
 
         if (geoLeveLDesc.equals("E ZONE"))
         {
@@ -162,6 +162,22 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         checkPermission();
         setupAdapter();
 
+        if( getIntent().getExtras() != null)
+        {
+            if(getIntent().getExtras().getString("from").equals("feedback")) {
+
+                nestedScrollview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        nestedScrollview.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
+
+
+            }
+        }
+
+
     }
 
     private void statusbar()
@@ -180,6 +196,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         setSupportActionBar(toolbar);
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
         RefreshTime = (TextView) findViewById(R.id.refreshTime);
+        nestedScrollview = (NestedScrollView) findViewById(R.id.nestedScrollview);
+
         Recycler_verticalView.setNestedScrollingEnabled(false);
         Recycler_verticalView.setLayoutManager(new LinearLayoutManager(this));
         Recycler_verticalView.setHasFixedSize(true);
