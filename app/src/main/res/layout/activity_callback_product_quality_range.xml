@@ -151,25 +151,34 @@
                 >
 
 
-        <TextView
-            android:id="@+id/txt_number"
-            android:textSize="13sp"
-            android:textColor="@color/ezfb_black"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Customer mobile number : "/>
+                <TextView
+                    android:id="@+id/txt_number"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Customer mobile number "/>
 
-        <TextView
-            android:id="@+id/txt_mobile_number"
-            android:textSize="13sp"
-            android:textColor="@color/ezfb_black"
-            android:inputType="phone"
-            android:textStyle="normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_mobile_number"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:inputType="phone"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -183,26 +192,26 @@
                 >
 
 
-            <TextView
-                android:id="@+id/txt_remarks_title"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remarks : "/>
+                <TextView
+                    android:id="@+id/txt_remarks_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remarks : "/>
 
-            <TextView
-                android:id="@+id/txt_remarks"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textStyle="normal"
-                android:singleLine="false"
-                android:maxLines="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""/>
+                <TextView
+                    android:id="@+id/txt_remarks"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:singleLine="false"
+                    android:maxLines="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -215,24 +224,33 @@
                 android:orientation="horizontal"
                 >
 
-            <TextView
-                android:id="@+id/txt_article_id_title"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Article Id : "/>
+                <TextView
+                    android:id="@+id/txt_article_id_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Article Id "/>
 
-            <TextView
-                android:id="@+id/txt_article_id"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textStyle="normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_article_id"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -245,25 +263,34 @@
                 android:orientation="horizontal"
                 >
 
-            <TextView
-                android:id="@+id/txt_name"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Customer Name : "/>
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name "/>
 
-            <TextView
-                android:id="@+id/txt_cust_name"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:inputType="textCapWords"
-                android:textStyle="normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_cust_name"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:inputType="textCapWords"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -276,25 +303,34 @@
                 android:orientation="horizontal"
                 >
 
-            <TextView
-                android:id="@+id/txt_brand"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Brand Name : "/>
+                <TextView
+                    android:id="@+id/txt_brand"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Brand Name "/>
 
-            <TextView
-                android:id="@+id/txt_brand_name"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:inputType="textCapWords"
-                android:textStyle="normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_brand_name"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:inputType="textCapWords"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -308,13 +344,23 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/ezfb_black"
-                    android:text="Product Name : "/>
+                    android:text="Product Name "/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_product_name"
@@ -339,13 +385,23 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/ezfb_black"
-                    android:text=""/>
+                    android:text="Size "/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_size"
@@ -355,7 +411,7 @@
                     android:textAllCaps="false"
                     android:textStyle="normal"
                     android:textColor="@color/ezfb_black"
-                    android:text="M"/>
+                    android:text=""/>
 
 
             </LinearLayout>
@@ -370,13 +426,23 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/ezfb_black"
                     android:text="@string/callback_text_color"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_color"
@@ -401,13 +467,23 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/ezfb_black"
-                    android:text="Fit : "/>
+                    android:text="Fit "/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_fit"
@@ -432,13 +508,23 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/ezfb_black"
-                    android:text="Style : "/>
+                    android:text="Style "/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_style"
@@ -462,24 +548,34 @@
                 android:orientation="horizontal"
                 >
 
-            <TextView
-                android:id="@+id/txt_callback_title"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Do You want a call back ? "/>
+                <TextView
+                    android:id="@+id/txt_callback_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Do You want a call back ? "/>
 
-            <TextView
-                android:id="@+id/txt_callback"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textStyle="normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_callback"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -493,13 +589,23 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textColor="@color/ezfb_black"
-                    android:text="Feedback creation date : "/>
+                    android:text="Feedback creation date "/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_feedback_date"
@@ -523,24 +629,34 @@
                 android:orientation="horizontal"
                 >
 
-            <TextView
-                android:id="@+id/txt_email_title"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email Triggered to CSD : "/>
+                <TextView
+                    android:id="@+id/txt_email_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Email Triggered to CSD "/>
 
-            <TextView
-                android:id="@+id/txt_email"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textStyle="normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_email"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -553,24 +669,34 @@
                 android:orientation="horizontal"
                 >
 
-            <TextView
-                android:id="@+id/txt_sms_title"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SMS sent to customer : "/>
+                <TextView
+                    android:id="@+id/txt_sms_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="SMS sent to customer "/>
 
-            <TextView
-                android:id="@+id/txt_sms"
-                android:textSize="13sp"
-                android:textColor="@color/ezfb_black"
-                android:textStyle="normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_sms"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
 
             </LinearLayout>
 

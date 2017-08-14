@@ -44,6 +44,7 @@ public class ApiRequest  {
     private String bearertoken;
     private String Url;
     private String TAG;
+    private String data;
     private int count = 0;
     private Gson gson;
     public static JsonArrayRequest getRequest;
@@ -67,7 +68,7 @@ public class ApiRequest  {
     }
 
     // this constructer is useful for fragment
-    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id, HttpResponse httpResponse) {
+    public ApiRequest(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id, HttpResponse httpResponse, String data) {
         ResposeInterface= (HttpResponse)httpResponse;
         this.context=context;
         bearertoken=token;
@@ -75,6 +76,7 @@ public class ApiRequest  {
         this.TAG=TAG;
         this.queue=queue;
         this.id=id;
+        this.data = data;
         this.list=new ArrayList<>();
         this.mpm_modelClass=mpm_modelClass;
         gson=new Gson();
@@ -137,7 +139,17 @@ public class ApiRequest  {
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 }else{
                                     ResposeInterface.nodatafound();
-                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    if(data.equals("yes")) {
+                                        Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if(data.equals("no")){
+                                        Toast.makeText(context, "no data found for Feedback", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                    else{
+                                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+
+                                    }
                                 }
                                 return;
 

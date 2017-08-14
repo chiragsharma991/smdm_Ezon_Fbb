@@ -49,6 +49,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
+import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
@@ -366,6 +367,15 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     intent = new Intent(EzoneSalesFilter.this, FreshnessIndexActivity.class);
                     if (build.length() != 0) {
                         FreshnessIndexActivity.freshness_Index.finish();
+                        Log.e("TAG", "freshnessIndex:  call finish ");
+
+
+                    }
+                    callback(build);
+                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+                    intent = new Intent(EzoneSalesFilter.this, SalesPvAActivity.class);
+                    if (build.length() != 0) {
+                        SalesPvAActivity.SalesPvAActivity.finish();
                         Log.e("TAG", "freshnessIndex:  call finish ");
 
 

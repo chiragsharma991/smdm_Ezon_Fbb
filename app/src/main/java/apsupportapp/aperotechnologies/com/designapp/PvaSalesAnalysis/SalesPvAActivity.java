@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -16,8 +17,11 @@ import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -63,6 +67,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
+import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.model.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
@@ -83,6 +88,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     PvASnapAdapter salesPvAAdapter;
     ViewPortHandler handler;
     Context context;
+    public static Activity SalesPvAActivity;
     BarChart barChart,ez_barChart;
     RecyclerView listViewSalesPvA,ez_listView;
     int focusposition, selFirstPositionValue = 0, totalItemCount;
@@ -105,6 +111,10 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     ProgressBar pva_progressBar,ez_progressBar;
     public static Activity Sales_Pva_Activity;
     private TabLayout tabLayout,ez_tabLayout;
+    private PopupWindow popupWindow;
+    private RadioButton product_radiobtn,location_radiobtn;
+    private int preValue=1,postValue;
+    private boolean from_filter;
 
 
     @Override
@@ -278,9 +288,12 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
                                         break;
                                     case "Class":
+
                                         txtheaderplanclass.setText("Subclass");
                                         if (geoLeveLDesc.equals("E ZONE")) {
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getLevel();
+                                            btnSalesNext.setVisibility(View.INVISIBLE);
+
                                         }else{
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
                                         }
@@ -305,6 +318,12 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
                                         break;
                                     case "Subclass":
+                                        if (geoLeveLDesc.equals("E ZONE")) {
+                                            Reusable_Functions.hDialog();
+                                            Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                            onItemClickFlag = false;
+                                            break;
+                                        }
                                         btnSalesNext.setVisibility(View.INVISIBLE);
                                         txtheaderplanclass.setText("MC");
                                         if (geoLeveLDesc.equals("E ZONE")) {
@@ -326,6 +345,30 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                             count = 0;
                                             salesAnalysisClassArrayList.clear();
                                             requestSalesPvABrandPlanListAPI(txtPvAClickedValue);
+                                        } else {
+                                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                        }
+                                        break;
+
+                                    case "Region":
+                                        btnSalesNext.setVisibility(View.INVISIBLE);
+                                        btnSalesPrev.setVisibility(View.VISIBLE);
+                                        txtheaderplanclass.setText("Store");
+                                        txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getLevel();
+                                        fromWhere = "MC";
+                                        level = 9;
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            if (postRequest != null) {
+                                                postRequest.cancel();
+                                            }
+                                            Reusable_Functions.hDialog();
+                                            Reusable_Functions.sDialog(context, "Loading data...");
+                                            pva_progressBar.setVisibility(View.GONE);
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            salesAnalysisClassArrayList.clear();
+                                            requestProductAndLocation(txtPvAClickedValue);
                                         } else {
                                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                         }
@@ -356,10 +399,19 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 startActivity(filterIntent);
             }
         });
+        show_popup();
+        RelativeLayout sortPopup = (RelativeLayout) findViewById(R.id.sortPopup);
+        sortPopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.showAsDropDown(view);
+            }
+        });
 
     }
 
     private void commanInitialize() {
+        SalesPvAActivity=this;
         pva_progressBar = (ProgressBar) findViewById(R.id.pva_progressBar);
         tabLayout = (TabLayout) findViewById(R.id.tabview_salespva);
         tabLayout.addTab(tabLayout.newTab().setText("WTD"));
@@ -430,6 +482,128 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
     }
 
+    public void show_popup() {
+
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.activity_ezon_sorting, null);
+
+        popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout location = (LinearLayout) popupView.findViewById(R.id.lin_ez_location);
+        LinearLayout product = (LinearLayout) popupView.findViewById(R.id.lin_ez_Product);
+        product_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_ProductChk);
+        location_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_LocatnChk);
+        if(preValue==1){   product_radiobtn.setChecked(true);} else{ location_radiobtn.setChecked(true);}
+
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postValue = 2;
+                from_filter=false;
+                location_radiobtn.setChecked(true);
+                product_radiobtn.setChecked(false);
+                popupWindow.dismiss();
+                sortFunction();
+                // popupWindow.dismiss();
+
+            }
+        });
+
+        product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postValue = 1;
+                from_filter=false;
+                product_radiobtn.setChecked(true);
+                location_radiobtn.setChecked(false);
+                popupWindow.dismiss();
+                sortFunction();
+
+                // popupWindow.dismiss();
+
+
+            }
+        });
+
+
+        popupWindow.setOutsideTouchable(true);
+        //   popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setFocusable(true);  //focus as a side background
+
+        // Removes default black background
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                //TODO do sth here on dismiss
+                popupWindow.dismiss();
+
+
+            }
+        });
+
+
+    }
+
+    private void sortFunction() {
+
+        if (!(postValue == preValue)) {
+            Log.e(TAG, "sortFunction: post value is" + postValue + " and prevalue" + preValue);
+// for product...
+            if (postValue == 1) {
+
+                Log.e(TAG, "sortFunction: true...");
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    llpvahierarchy.setVisibility(View.GONE);
+                    preValue = postValue;
+                    txtheaderplanclass.setText("Department");
+                    level = 1;
+                    btnSalesPrev.setVisibility(View.INVISIBLE);
+                    btnSalesNext.setVisibility(View.VISIBLE);
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                    arrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                    requestSalesViewPagerValueAPI();
+
+
+                } else {
+                    product_radiobtn.setChecked(false);
+                    location_radiobtn.setChecked(true);
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+
+
+            } else if (postValue == 2) {
+// for location...
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    llpvahierarchy.setVisibility(View.GONE);
+                    txtheaderplanclass.setText("Region");
+                    btnSalesPrev.setVisibility(View.INVISIBLE);
+                    btnSalesNext.setVisibility(View.VISIBLE);
+                    preValue = postValue;
+                    level = 7;
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+                    arrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                    requestSalesViewPagerValueAPI();
+
+
+                } else {
+                    product_radiobtn.setChecked(true);
+                    location_radiobtn.setChecked(false);
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        }
+    }
+
+
     private void retainSegmentValuesFilter() {
         filter_toggleClick = true;
         if (salesPvA_SegmentClick.equals("WTD")) {
@@ -490,6 +664,14 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandplanClass();
                     }
                 }
+                else if (txtheaderplanclass.getText().toString().equals("Region")) {
+                    level = 7;
+                        pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
+                }
+                else if (txtheaderplanclass.getText().toString().equals("Store")) {
+                    level = 9;
+                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
+                }
                 Log.e(TAG, "pvaFirstVisibleItem: "+pvaFirstVisibleItem );
 
                 if (Reusable_Functions.chkStatus(context)) {
@@ -524,9 +706,12 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 }
 
             } else {
+
+
                 focusposition = salesAnalysisClassArrayList.size() - 1;
-                LinearLayoutManager llm = (LinearLayoutManager) listViewSalesPvA.getLayoutManager();
-                llm.scrollToPosition(3);
+               // LinearLayoutManager llm = (LinearLayoutManager) listViewSalesPvA.getLayoutManager();
+             //   llm.scrollToPosition(focusposition);
+                listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
 
                 if (txtheaderplanclass.getText().toString().equals("Department")) {
                     level = 1;
@@ -704,6 +889,20 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
                                 }
+                                else if(txtheaderplanclass.getText().toString().equals("Region")){
+                                    salesAnalysisListDisplay.setBrandplanClass("All");
+                                    salesAnalysisListDisplay.setLevel("All");
+                                    salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
+                                    salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
+                                    salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
+                                }
+                                else if(txtheaderplanclass.getText().toString().equals("Store")){
+                                    salesAnalysisListDisplay.setBrandplanClass("All");
+                                    salesAnalysisListDisplay.setLevel("All");
+                                    salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
+                                    salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
+                                    salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
+                                }
 
                                 salesAnalysisClassArrayList.add(0, salesAnalysisListDisplay);
                                 listViewSalesPvA.setLayoutManager(new LinearLayoutManager(context));
@@ -716,6 +915,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
                                 salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA,geoLeveLDesc);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
+
 
                                 // Retain values....
                                 if (txtheaderplanclass.getText().toString().equals("Department")) {
@@ -792,6 +992,26 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                             if (salesAnalysisClassArrayList.get(focusposition).getBrandplanClass().equals(pvaFirstVisibleItem)) {
                                                 listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                             }
+                                        }
+                                    }
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Region")) {
+                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+                                        level = 7;
+                                            pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
+                                            if (salesAnalysisClassArrayList.get(focusposition).getLevel().equals(pvaFirstVisibleItem)) {
+                                                listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
+
+                                        }
+                                    }
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Store")) {
+                                    for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
+                                        level = 9;
+                                        pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
+                                        if (salesAnalysisClassArrayList.get(focusposition).getLevel().equals(pvaFirstVisibleItem)) {
+                                            listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
+
                                         }
                                     }
                                 }
@@ -887,6 +1107,16 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             }else{
                 url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?brandclass=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&view="+salesPvA_SegmentClick;
             }
+        }
+        else if (txtheaderplanclass.getText().toString().equals("Region")) {
+
+                url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZ/" + userId + "?region=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&view="+salesPvA_SegmentClick;
+
+        }
+        else if (txtheaderplanclass.getText().toString().equals("Store")) {
+
+            url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZ/" + userId + "?store=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&view="+salesPvA_SegmentClick;
+
         }
         Log.e(TAG, "requestPvAChartAPI: "+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -1279,6 +1509,89 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
                                 pvaVal += " > " + category;
+                                txtpvahDeptName.setText(pvaVal);
+                                llpvahierarchy.setVisibility(View.VISIBLE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                salesPvAAnalysisWeekArrayList.clear();
+                                if (geoLeveLDesc.equals("E ZONE")) {
+                                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getLevel();
+
+                                }else{
+                                    pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanClass();
+                                }
+                                salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
+
+                                requestPvAChartAPI();
+                            }
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            onItemClickFlag = false;
+                            pva_progressBar.setVisibility(View.GONE);
+                            Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        pva_progressBar.setVisibility(View.GONE);
+                        onItemClickFlag = false;
+                        Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
+    private void requestProductAndLocation(final String region) {
+        String salespva_planclass_listurl;
+        salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&region=" + region.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        Log.e(TAG, "requestSalesPvAPlanClassListAPI: "+salespva_planclass_listurl );
+        postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                pva_progressBar.setVisibility(View.GONE);
+                                onItemClickFlag = false;
+                                Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
+                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
+                                    salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                requestSalesPvAPlanClassListAPI(region);
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+                                    salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
+                                    salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
+                                }
+                                salesPvAAdapter = new PvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA, geoLeveLDesc);
+                                listViewSalesPvA.setAdapter(salesPvAAdapter);
+                                salesPvAAdapter.notifyDataSetChanged();
+                                pvaVal += " > " + region;
                                 txtpvahDeptName.setText(pvaVal);
                                 llpvahierarchy.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
@@ -1848,6 +2161,9 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         break;
 
                     case "Class":
+                        if (geoLeveLDesc.equals("E ZONE")) {
+                            btnSalesNext.setVisibility(View.INVISIBLE);
+                        }
                         txtheaderplanclass.setText("Subclass");
                         fromWhere = "Subclass";
                         level = 4;
@@ -1874,6 +2190,31 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         txtheaderplanclass.setText("MC");
                         fromWhere = "MC";
                         level = 5;
+                        pvaVal = " ";
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        listViewSalesPvA.removeAllViews();
+                        llpvahierarchy.setVisibility(View.GONE);
+
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            pva_progressBar.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            requestSalesViewPagerValueAPI();
+
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    case "Region":
+                        btnSalesNext.setVisibility(View.INVISIBLE);
+                        btnSalesPrev.setVisibility(View.VISIBLE);
+                        txtheaderplanclass.setText("Store");
+                        fromWhere = "MC";
+                        level = 9;
                         pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                         listViewSalesPvA.removeAllViews();
@@ -1930,6 +2271,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
                         break;
                     case "Subclass":
+                        btnSalesNext.setVisibility(View.VISIBLE);
                         txtheaderplanclass.setText("Class");
                         fromWhere = "Class";
                         level = 3;
@@ -1998,6 +2340,33 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         }
 
                         break;
+
+
+                    case "Store":
+                        btnSalesPrev.setVisibility(View.INVISIBLE);
+                        btnSalesNext.setVisibility(View.VISIBLE);
+                        txtheaderplanclass.setText("Region");
+                        fromWhere = "Department";
+                        level = 7;
+                        pvaVal = " ";
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        listViewSalesPvA.removeAllViews();
+                        llpvahierarchy.setVisibility(View.GONE);
+                        if (Reusable_Functions.chkStatus(context)) {
+
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            pva_progressBar.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            requestSalesViewPagerValueAPI();
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+
+                        break;
+
                     default:
                 }
                 break;

@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -43,6 +45,8 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -65,6 +69,8 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
+import static apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiSMS.req_sms_API;
+
 /**
  * Created by pamrutkar on 17/07/17.
  */
@@ -80,14 +86,15 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
     private Button btn_submit, btn_cancel;
     private LinearLayout linear_toolbar;
     private ScrollView scrollView;
-    private String remark;
+    private TextInputLayout input_remarks;
+    private String remark, remarks_text, SelectedStoreCode;
     private Spinner spinner_reasons;
     private String TAG = "PolicyExchangeRefund";
     private RequestQueue queue;
     ArrayAdapter<String> adp3;
     private String userId, bearertoken, geoLeveLDesc, store, user_trim;
     private String customerFeedback, customerNumber, customerRemarks, customerName, customerLastname,
-                   customerCallBack, customerExchangeDone, customerProductVerified, customerArcDate;
+                   customerCallBack, customerExchangeDone, customerProductVerified, exchangeReason, customerArcDate;
     private TextView incorrect_phone, incorrect_remark, storedescription;
     SharedPreferences sharedPreferences;
 
@@ -108,6 +115,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
     private void initializeUI() {
 
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+        input_remarks = (TextInputLayout) findViewById(R.id.input_remarks);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         edt_customer_mobile_number = (EditText) findViewById(R.id.edt_customer_mobile_number);
         edt_remarks = (EditText) findViewById(R.id.edt_remarks);
@@ -160,16 +168,35 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+                remarks_text = edt_remarks.getText().toString().trim();
+                Log.e("===","remarks_text "+remarks_text);
+                if(!remarks_text.equals("")){
+                    edt_remark_dialog.setText(remarks_text);
+                }
+                edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
 
                 final AlertDialog alertDialog = dialogBuilder.create();
+
+                rel_edt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    }
+                });
 
                 btn_submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         remark = edt_remark_dialog.getText().toString().trim();
                         Log.e("remark ",""+remark);
                         edt_remarks.setText(remark);
+                        edt_remarks.setSelection(edt_remarks.getText().length());
+                        edt_first_name.requestFocus();
+
                         alertDialog.dismiss();
                     }
                 });
@@ -178,24 +205,124 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             }
         });
 
+        input_remarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater =  getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                dialogBuilder.setView(dialogView);
+
+                final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+
+                remarks_text = edt_remarks.getText().toString().trim();
+                Log.e("===","remarks_text "+remarks_text);
+
+                if(!remarks_text.equals("")){
+                    edt_remark_dialog.setText(remarks_text);
+                }
+                edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
+
+                final AlertDialog alertDialog = dialogBuilder.create();
+
+                rel_edt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    }
+                });
+
+                btn_submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                        remark = edt_remark_dialog.getText().toString().trim();
+                        Log.e("remark ",""+remark);
+                        edt_remarks.setText(remark);
+                        edt_remarks.setSelection(edt_remarks.getText().length());
+                        edt_first_name.requestFocus();
+
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.setCancelable(true);
+                alertDialog.show();
+            }
+        });
+
+
         edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-                    if(!customerNumber.equals("")) {
+                    if (!customerNumber.equals("")) {
                         if (customerNumber.length() < 10) {
+
                             incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
                             incorrect_phone.setVisibility(View.VISIBLE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
                         } else {
-
+                            remarks_text = edt_remarks.getText().toString().trim();
+                            Log.e("===","remarks_text "+remarks_text);
                             incorrect_phone.setVisibility(View.GONE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
+                            InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                            inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                            // ...Irrelevant code for customizing the buttons and title
+                            LayoutInflater inflater =  getLayoutInflater();
+                            final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                            dialogBuilder.setView(dialogView);
+
+                            final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                            final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+                            if(!remarks_text.equals("")){
+                                edt_remark_dialog.setText(remarks_text);
+                            }
+                            edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
+
+                            final AlertDialog alertDialog = dialogBuilder.create();
+
+                            rel_edt.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                                }
+                            });
+
+                            btn_submit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                                    remark = edt_remark_dialog.getText().toString().trim();
+                                    Log.e("remark ",""+remark);
+                                    edt_remarks.setText(remark);
+                                    edt_remarks.setSelection(edt_remarks.getText().length());
+                                    edt_first_name.requestFocus();
+
+                                    alertDialog.dismiss();
+                                }
+                            });
+                            alertDialog.setCancelable(true);
+                            alertDialog.show();
                         }
                     }
-                    else
-                    {
+                    else{
+                        remarks_text = edt_remarks.getText().toString().trim();
+                        Log.e("===","remarks_text "+remarks_text);
+                        incorrect_phone.setVisibility(View.GONE);
+                        edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                         InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
                         inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
                         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
@@ -206,22 +333,40 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+                        final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
+                        if(!remarks_text.equals("")){
+                            edt_remark_dialog.setText(remarks_text);
+                        }
+                        edt_remark_dialog.setSelection(edt_remark_dialog.getText().length());
 
                         final AlertDialog alertDialog = dialogBuilder.create();
+
+                        rel_edt.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                            }
+                        });
 
                         btn_submit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                 remark = edt_remark_dialog.getText().toString().trim();
                                 Log.e("remark ",""+remark);
                                 edt_remarks.setText(remark);
+                                edt_remarks.setSelection(edt_remarks.getText().length());
+                                edt_first_name.requestFocus();
+
                                 alertDialog.dismiss();
                             }
                         });
                         alertDialog.setCancelable(true);
                         alertDialog.show();
                     }
+
                 }
 
             }
@@ -329,7 +474,9 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         customerProductVerified =  radioProductYes.isChecked() ? "YES" : "NO";
         Log.e("----","customerExchangeDone"+customerProductVerified.toString());
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
-        customerArcDate = currentDateandTime;  //this will up to real time.
+        exchangeReason = spinner_reasons.getSelectedItem().toString();
+
+        // customerArcDate = currentDateandTime;  //this will up to real time.
     }
 
     private void MainMethod() {
@@ -338,6 +485,8 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         user_trim = userId.substring(0,2);
         store = sharedPreferences.getString("storeDescription", "");
+        SelectedStoreCode = store.trim().substring(0, 4);
+
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         //  editor.putString("storeDescription",storeDescription);
@@ -483,7 +632,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode", SelectedStoreCode);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -491,8 +640,9 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             jsonObject.put("attribute14", customerCallBack);
             jsonObject.put("attribute15", customerExchangeDone);
             jsonObject.put("attribute16", customerProductVerified);
+            jsonObject.put("attribute17", exchangeReason);
 
-            jsonObject.put("arcDate", customerArcDate);
+          //  jsonObject.put("arcDate", customerArcDate);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -524,8 +674,11 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
+            req_sms_API(userId, customerNumber, bearertoken, context);
+
             cancelData();
             Intent dashboard = new Intent(context, SnapDashboardActivity.class);
+            dashboard.putExtra("from","feedback");
             startActivity(dashboard);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -551,6 +704,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
                         Log.e("sms api "," "+response.toString());
                         List<String> listist = new ArrayList<String>();
+                        listist.add(0, "Reason for Exchange");
 
 
                         for (int i = 0; i < response.length(); i++) {
@@ -616,6 +770,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
                         Log.e("sms api "," "+response.toString());
                         List<String> listist = new ArrayList<String>();
+                        listist.add(0, "Reason for store refusal");
 
 
                         for (int i = 0; i < response.length(); i++) {
