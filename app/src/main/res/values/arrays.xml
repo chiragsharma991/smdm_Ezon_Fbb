@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="exchange_reasons">
+        <item>Reason for Exchange</item>
+        <item>size</item>
+        <item>quantity</item>
+        <item>wrong product</item>
+        <item>change of mind</item>
+        <item>others</item>
+
+    </string-array>
+
+    <string-array name="refusal_reasons">
+        <item>Reason for store refusal</item>
+        <item>Used product return</item>
+        <item>Bought from another store -different city</item>
+        <item>Bought from another store -same city</item>
+        <item>Beyond validity/Delayed return</item>
+        <item>No bill &amp; No price sticker</item>
+        <item>Credit note lost</item>
+        <item>others</item>
+
+    </string-array>
+
+
+
+</resources>

@@ -558,6 +558,38 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             txt_legend_name.setText(planengagementArrayList.get(i).getLevel());
             txt_legend_val.setText("" + String.format("%.1f",planengagementArrayList.get(i).getSalesAch()));
             linearLayout.addView(view);
+
+//            txt_legend_name.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int position = (int) v.getTag();
+//                    Log.e("", "onClick: " + position);
+//                    switch (position) {
+//                        case 0:
+//                            if (attribute14.equals("NO")){
+//                                attribute14 = "YES";
+//                                Apicallback(2, false);
+//                                cf_text.setText("Callback Required from CSD");
+//                                callback_header = cf_text.getText().toString();
+//                                processbar_view.setVisibility(View.VISIBLE);
+//                            }
+//                            break;
+//
+//                        case 1:
+//                            if (attribute14.equals("YES")){
+//                                attribute14 = "NO";
+//                                Apicallback(2, false);
+//                                cf_text.setText("No Callback Required");
+//                                callback_header = cf_text.getText().toString();
+//                                processbar_view.setVisibility(View.VISIBLE);
+//                            }
+//                            break;
+//
+//                        default:
+//                            break;
+//                    }
+//                }
+//            });
         }
         legend.setEnabled(false);
         Reusable_Functions.hDialog();
