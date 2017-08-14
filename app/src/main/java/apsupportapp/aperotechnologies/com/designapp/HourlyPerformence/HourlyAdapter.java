@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,71 +79,85 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (viewHolder instanceof HourlyViewHolder) {
             if (position < store_list.size()) {
 
+
                 final mpm_model data = store_list.get(position);
+                Log.e("===","store_list "+store_list.toString());
+                Log.e("===","data "+data.toString());
 
                 ((HourlyViewHolder) viewHolder).Hrl_root_Name.setText(data.getLevel());
                 ((HourlyViewHolder) viewHolder).Hrl_root_netsales.setText("" + thousandSaperator.format((int) data.getSaleNetVal()));
                 ((HourlyViewHolder) viewHolder).Hrl_root_plansales.setText("" +thousandSaperator.format((int) data.getPlanSales()));
+                ((HourlyViewHolder) viewHolder).hrl_salesarch_Name.setText("" +thousandSaperator.format((int) Math.round(data.getSalesAch()))+"%");
+
+                if (data.getSalesAch() < 70)
+                {
+                    ((HourlyViewHolder) viewHolder).hrl_salesarch_Name.setTextColor(Color.RED);
+                }
+                else if (data.getSalesAch() > 90)
+                {
+                    ((HourlyViewHolder) viewHolder).hrl_salesarch_Name.setTextColor(Color.GREEN);
+                }
+                else{
+                    ((HourlyViewHolder) viewHolder).hrl_salesarch_Name.setTextColor(Color.parseColor("#ff7e00"));
+
+                }
 
                 //calculate screen view size and add line bar process.
 
-                ViewTreeObserver vto = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver();
-                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @SuppressWarnings("deprecation")
-                    @Override
-                    public void onGlobalLayout() {
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                            ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        } else {
-                            ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        }
-                        int width = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getMeasuredWidth();
-                        int height = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getMeasuredHeight();
+//                ViewTreeObserver vto = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver();
+//                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                    @SuppressWarnings("deprecation")
+//                    @Override
+//                    public void onGlobalLayout() {
+//                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+//                            ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                        } else {
+//                            ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                        }
+//                        int width = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getMeasuredWidth();
+//                        int height = ((HourlyViewHolder) viewHolder).Hrl_root_innerview.getMeasuredHeight();
+//                        Double a = data.getSalesAch();
+
 
                         // Calculation width acording to size of phone
-                        double x = 0;  // x is result of calculation.
-                        x = ((double) data.getSalesAch() / 100) * width/2;   // divide by 2 to show process under the threshold.
+            //            double x = 0;  // x is result of calculation.
 
+                  //      x = ((double) data.getSalesAch() / 100) * width/2;   // divide by 2 to show process under the threshold.
+//                        Log.e("===","data.getSalesAch() "+data.getSalesAch());
+//
+//
+//                        int percentage =(int)x;
+//                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.removeAllViewsInLayout();
+//
+//
+//                        View lp = new View(context);
+//                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
+//                        lp.setLayoutParams(layoutParams);
+//                        if (percentage < 70) {
+//                            lp.setBackgroundColor(Color.RED);
+//                        } else if (percentage > 90) {
+//                            lp.setBackgroundColor(Color.GREEN);
+//                        }
+//                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(lp);
+//
+//
+//                        View threshold =new View (context);
+//                        RelativeLayout.LayoutParams layoutParams1=new RelativeLayout.LayoutParams(3,RelativeLayout.LayoutParams.MATCH_PARENT);
+//                        layoutParams1.addRule(RelativeLayout.CENTER_IN_PARENT);
+//                        threshold.setLayoutParams(layoutParams1);
+//                        threshold.setBackgroundColor(Color.BLACK);
+//                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(threshold);
 
-                        int percentage =(int)x;
-                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.removeAllViewsInLayout();
-
-
-                        View lp = new View(context);
-                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
-                        lp.setLayoutParams(layoutParams);
-                        if (percentage < 70) {
-                            lp.setBackgroundColor(Color.RED);
-                        } else if (percentage > 90) {
-                            lp.setBackgroundColor(Color.GREEN);
-                        }
-                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(lp);
-
-
-                        View threshold =new View (context);
-                        RelativeLayout.LayoutParams layoutParams1=new RelativeLayout.LayoutParams(3,RelativeLayout.LayoutParams.MATCH_PARENT);
-                        layoutParams1.addRule(RelativeLayout.CENTER_IN_PARENT);
-                        threshold.setLayoutParams(layoutParams1);
-                        threshold.setBackgroundColor(Color.BLACK);
-                        ((HourlyViewHolder) viewHolder).Hrl_root_innerview.addView(threshold);
-
-
-
-
-
-
-                    }
-                });
-
-
-            }}}
+            }
+        }
+    }
 
 
 
     public class HourlyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView Hrl_root_netsales,Hrl_root_plansales, Hrl_root_Name,Hrl_root_sAchieve,Hrl_root_sPlan;
+        TextView Hrl_root_netsales,Hrl_root_plansales, Hrl_root_Name,hrl_salesarch_Name,Hrl_root_sAchieve,Hrl_root_sPlan;
         RelativeLayout Hrl_root_innerview;
 
         public HourlyViewHolder(View itemView) {
@@ -151,7 +166,7 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Hrl_root_netsales = (TextView) itemView.findViewById(R.id.hrl_root_netsales);
             Hrl_root_plansales = (TextView) itemView.findViewById(R.id.hrl_root_plansales);
             Hrl_root_Name = (TextView) itemView.findViewById(R.id.hrl_root_Name);
-          //  Hrl_root_sAchieve = (TextView) itemView.findViewById(R.id.hrl_root_sAchieve);
+            hrl_salesarch_Name = (TextView) itemView.findViewById(R.id.hrl_salesarch_Name);
           //  Hrl_root_sPlan = (TextView) itemView.findViewById(R.id.hrl_root_sPlan);
             Hrl_root_innerview = (RelativeLayout) itemView.findViewById(R.id.rel_ez_inner);
 

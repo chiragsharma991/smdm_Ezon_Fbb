@@ -1,18 +1,25 @@
 package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,11 +42,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SwitchingActivity;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiPostRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpPostResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by rkanawade on 24/07/17.
@@ -59,6 +70,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
     private SharedPreferences sharedPreferences;
     private String userId, bearertoken, geoLeveLDesc, store;
     private RequestQueue queue;
+    private String remark;
     private TextView incorrect_phone, incorrect_remark, storedescription;
     private feedbackInterface mCallback;
     private ScrollView scrollView;
@@ -143,27 +155,76 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
 
-
-        edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        edt_remarks.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-                    if (!customerNumber.equals("")) {
-                        if (customerNumber.length() < 10) {
-                            incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
-                            incorrect_phone.setVisibility(View.VISIBLE);
-                            edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
-                        } else {
+            public void onClick(View v) {
+                InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater =  getActivity().getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                dialogBuilder.setView(dialogView);
 
-                            incorrect_phone.setVisibility(View.GONE);
-                            edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
-                        }
+                final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+
+                final AlertDialog alertDialog = dialogBuilder.create();
+
+                btn_submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        remark = edt_remark_dialog.getText().toString().trim();
+                        Log.e("remark ",""+remark);
+                        edt_remarks.setText(remark);
+                        alertDialog.dismiss();
                     }
-                }
-
+                });
+                alertDialog.setCancelable(true);
+                alertDialog.show();
             }
         });
+
+       edt_remarks.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View v, MotionEvent event) {
+               InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+               inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+               AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+               // ...Irrelevant code for customizing the buttons and title
+               LayoutInflater inflater =  getActivity().getLayoutInflater();
+               final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+               dialogBuilder.setView(dialogView);
+
+               final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+               final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+
+               final AlertDialog alertDialog = dialogBuilder.create();
+
+               btn_submit.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                       imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                       remark = edt_remark_dialog.getText().toString().trim();
+                       Log.e("remark ",""+remark);
+                       edt_remarks.setText(remark);
+                       alertDialog.dismiss();
+                   }
+               });
+               alertDialog.setCancelable(true);
+               alertDialog.show();
+               return false;
+           }
+       });
+
+//        if(!remark.equals(""))
+//        {
+//            edt_remarks.setText(remark);
+//        }
+
 
         edt_customer_mobile_number.addTextChangedListener(new TextWatcher() {
             @Override
@@ -216,17 +277,11 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                 break;
 
             case R.id.btn_cancel:
-                cancelData();
+                clearData();
                 break;
 
         }
     }
-
-
-    private void cancelData() {
-
-    }
-
 
     private void submitData() {
         scrollView.setFocusableInTouchMode(true);
@@ -368,8 +423,10 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         String result = null;
         try {
             result = response.getString("status");
-            Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
+            Reusable_Functions.displayToast(context, result);
             clearData();
+            Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
+            getActivity().startActivity(dashboard);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -406,5 +463,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         radioYes.setChecked(true);
         edt_customer_mobile_number.requestFocus();
 
+
     }
+
+
 }

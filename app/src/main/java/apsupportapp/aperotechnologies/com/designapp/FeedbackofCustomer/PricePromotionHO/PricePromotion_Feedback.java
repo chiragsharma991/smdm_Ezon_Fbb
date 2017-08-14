@@ -1,6 +1,8 @@
 package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotionHO;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,8 +12,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,11 +39,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiPostRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpPostResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by rkanawade on 25/07/17.
@@ -57,6 +64,7 @@ public class PricePromotion_Feedback extends Fragment implements View.OnClickLis
     SharedPreferences sharedPreferences;
     private RequestQueue queue;
     private ScrollView scrollView;
+    private String remark;
     private String TAG = "ProductAvailability";
     private TextView incorrect_phone, incorrect_remark, storedescription;
     private String userId, bearertoken, geoLeveLDesc, store;
@@ -113,6 +121,40 @@ public class PricePromotion_Feedback extends Fragment implements View.OnClickLis
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
 
+        edt_remarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater =  getActivity().getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                dialogBuilder.setView(dialogView);
+
+                final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+
+                final AlertDialog alertDialog = dialogBuilder.create();
+
+                btn_submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        remark = edt_remark_dialog.getText().toString().trim();
+                        Log.e("remark ",""+remark);
+                        edt_remarks.setText(remark);
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.setCancelable(true);
+                alertDialog.show();
+            }
+        });
+
+
+
         edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -129,6 +171,35 @@ public class PricePromotion_Feedback extends Fragment implements View.OnClickLis
                             incorrect_phone.setVisibility(View.GONE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                         }
+                    }
+                    else
+                    {
+                        InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                        inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                        // ...Irrelevant code for customizing the buttons and title
+                        LayoutInflater inflater =  getActivity().getLayoutInflater();
+                        final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                        dialogBuilder.setView(dialogView);
+
+                        final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+
+                        final AlertDialog alertDialog = dialogBuilder.create();
+
+                        btn_submit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                                remark = edt_remark_dialog.getText().toString().trim();
+                                Log.e("remark ",""+remark);
+                                edt_remarks.setText(remark);
+                                alertDialog.dismiss();
+                            }
+                        });
+                        alertDialog.setCancelable(true);
+                        alertDialog.show();
                     }
                 }
 
@@ -367,8 +438,10 @@ public class PricePromotion_Feedback extends Fragment implements View.OnClickLis
         String result = null;
         try {
             result = response.getString("status");
-            Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
+            Reusable_Functions.displayToast(context, result);
             cancelData();
+            Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
+            getActivity().startActivity(dashboard);
         } catch (JSONException e) {
             e.printStackTrace();
         }

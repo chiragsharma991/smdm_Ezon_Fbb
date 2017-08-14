@@ -1,6 +1,8 @@
 package apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,38 +14,60 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiPostRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpPostResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by rkanawade on 24/07/17.
@@ -53,14 +77,18 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
     private Context context;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name;
+    private TextView txt_empty_product, txt_empty_exchange;
     private RadioGroup radioCallbacks, radioExchange, radioProduct;
     private RadioButton radioYes, radioNo, radioExchangeYes, radioExchangeNo, radioProductYes, radioProductNo;
     private Button btn_submit, btn_cancel;
     private LinearLayout linear_toolbar;
+    private Spinner spinner_reasons;
     private ScrollView scrollView;
     private String TAG = "PolicyExchangeRefund";
     private RequestQueue queue;
     private View v;
+    ArrayAdapter<String> adp3;
+    private String remark, user_trim;
     private String userId, bearertoken, geoLeveLDesc, store;
     private String customerFeedback, customerNumber, customerRemarks, customerName, customerLastname,
             customerCallBack, customerExchangeDone, customerProductVerified, customerArcDate;
@@ -105,6 +133,10 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         incorrect_phone = (TextView) v.findViewById(R.id.txt_incorrect_phone);
         incorrect_remark = (TextView) v.findViewById(R.id.txt_incorrect_remark);
         storedescription = (TextView) v.findViewById(R.id.txtStoreCode);
+        txt_empty_product = (TextView) v.findViewById(R.id.txt_empty_product);
+        txt_empty_exchange = (TextView) v.findViewById(R.id.txt_empty_exchange);
+        spinner_reasons = (Spinner) v.findViewById(R.id.spinner_reasons);
+
         storedescription.setText(store);
         linear_toolbar = (LinearLayout) v.findViewById(R.id.linear_toolbar);
         linear_toolbar.setVisibility(View.GONE);
@@ -114,6 +146,41 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
+
+
+
+        edt_remarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater =  getActivity().getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                dialogBuilder.setView(dialogView);
+
+                final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+
+                final AlertDialog alertDialog = dialogBuilder.create();
+
+                btn_submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        remark = edt_remark_dialog.getText().toString().trim();
+                        Log.e("remark ",""+remark);
+                        edt_remarks.setText(remark);
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.setCancelable(true);
+                alertDialog.show();
+            }
+        });
+
 
         edt_remarks.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -130,6 +197,35 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
                             incorrect_phone.setVisibility(View.GONE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                         }
+                    }
+                    else
+                    {
+                        InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+                        inputMethodManager.toggleSoftInputFromWindow(edt_remarks.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                        // ...Irrelevant code for customizing the buttons and title
+                        LayoutInflater inflater =  getActivity().getLayoutInflater();
+                        final View dialogView = inflater.inflate(R.layout.dialog_remark, null);
+                        dialogBuilder.setView(dialogView);
+
+                        final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
+
+                        final AlertDialog alertDialog = dialogBuilder.create();
+
+                        btn_submit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                                remark = edt_remark_dialog.getText().toString().trim();
+                                Log.e("remark ",""+remark);
+                                edt_remarks.setText(remark);
+                                alertDialog.dismiss();
+                            }
+                        });
+                        alertDialog.setCancelable(true);
+                        alertDialog.show();
                     }
                 }
 
@@ -174,6 +270,59 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         });
 
 
+        radioExchangeYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    txt_empty_exchange.setVisibility(View.GONE);
+                    spinner_reasons.setVisibility(View.VISIBLE);
+
+                    req_fetch_spinnerdata_YES_API();
+
+                }
+
+            }
+        });
+
+        radioExchangeNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    txt_empty_exchange.setVisibility(View.GONE);
+                    spinner_reasons.setVisibility(View.VISIBLE);
+                    req_fetch_spinnerdata_NO_API();
+//                    adp3 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.refusal_reasons));
+//                    adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    spinner_reasons.setAdapter(adp3);
+//                    spinner_reasons.setSelection(0);
+
+                }
+
+            }
+        });
+
+        radioProductYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    txt_empty_product.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        radioProductNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    txt_empty_product.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+
+
         MainMethod();
 
 
@@ -199,6 +348,8 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
+        user_trim = userId.substring(0,2);
+        Log.e("user_trim ",""+user_trim);
         store = sharedPreferences.getString("storeDescription", "");
         storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -261,6 +412,39 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
                 }
             }
 
+            if(!radioExchangeYes.isChecked() && !radioExchangeNo.isChecked()){
+
+                txt_empty_exchange.setVisibility(View.VISIBLE);
+            }
+
+            if(!radioProductYes.isChecked() && !radioProductNo.isChecked()){
+
+                txt_empty_product.setVisibility(View.VISIBLE);
+
+            }
+
+//            if(radioExchangeYes.isChecked() || radioProductNo.isChecked()){
+//
+//                if(radioExchangeYes.isChecked()){
+//
+//                    if(spinner_reasons.getSelectedItem().equals("Reason for Exchange")){
+//
+//                        txt_empty_exchange.setVisibility(View.VISIBLE);
+//                        txt_empty_exchange.setText("Please select reason for exchange");
+//                    }
+//                }
+//                else{
+//
+//                    if(spinner_reasons.getSelectedItem().equals("Reason for store refusal")){
+//
+//                        txt_empty_exchange.setVisibility(View.VISIBLE);
+//                        txt_empty_exchange.setText("Please select reason for store refusal");
+//                    }
+//
+//                }
+//
+//            }
+
         }
         else if(customerNumber.length() < 10){
 
@@ -269,9 +453,57 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
 
         }
+        else if(!radioExchangeYes.isChecked() && !radioExchangeNo.isChecked()){
+
+            txt_empty_exchange.setVisibility(View.VISIBLE);
+        }
+
+        else if(!radioProductYes.isChecked() && !radioProductNo.isChecked()){
+
+            txt_empty_product.setVisibility(View.VISIBLE);
+
+        }
+
+//        else if(radioExchangeYes.isChecked() || radioExchangeNo.isChecked()){
+//
+//            Log.e("here","");
+//            if(radioExchangeYes.isChecked()){
+//                Log.e("here","inside radioExchangeYes checked");
+//
+//                if(spinner_reasons.getSelectedItem().equals("Reason for Exchange")){
+//
+//                    txt_empty_exchange.setVisibility(View.VISIBLE);
+//                    txt_empty_exchange.setText("Please select reason for exchange");
+//                }else
+//                {
+//                    txt_empty_exchange.setVisibility(View.GONE);
+//
+//                }
+//            }
+//            else if(radioExchangeNo.isChecked()){
+//                Log.e("here","inside radioExchangeNo checked");
+//
+//                if(spinner_reasons.getSelectedItem().equals("Reason for store refusal")){
+//
+//                    txt_empty_exchange.setVisibility(View.VISIBLE);
+//                    txt_empty_exchange.setText("Please select reason for store refusal");
+//                }
+//                else
+//                {
+//
+//                    txt_empty_exchange.setVisibility(View.GONE);
+//
+//                }
+//
+//            }
+//
+//        }
+
         else {
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
+            txt_empty_exchange.setVisibility(View.GONE);
+            txt_empty_product.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
             Log.e("submitData: json is "," " + getObject().toString());
@@ -338,8 +570,11 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         String result = null;
         try {
             result = response.getString("status");
-            Toast.makeText(context, "" + result, Toast.LENGTH_LONG).show();
+           // req_sms_API();
+            Reusable_Functions.displayToast(context, result);
             cancelData();
+            Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
+            getActivity().startActivity(dashboard);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -362,5 +597,230 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         radioYes.setChecked(true);
         edt_customer_mobile_number.requestFocus();
     }
+
+    public void req_sms_API()
+    {
+        final JSONObject[] jObj = {null};
+        final Gson gson = new Gson();
+        String url = "https://smdm.manthan.com/v1/notification/sms/"+user_trim+"?smstype=SMS_TYPE_1&mobilenumber="+customerNumber;
+        Log.e("sms url ",""+url);
+
+        JsonObjectRequest smsrequest = new JsonObjectRequest(Request.Method.GET, url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("sms api "," "+response.toString());
+                        req_email_API();
+                       // Reusable_Functions.displayToast(context, response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.e("sms api "," "+error.toString());
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", bearertoken);
+                params.put("Content-Type", "application/json");
+                params.put("Accept", "application/json");
+                return params;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+
+        int socketTimeout = 30000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        smsrequest.setRetryPolicy(policy);
+        queue.add(smsrequest);
+
+    }
+
+    public void req_email_API()
+    {
+        final JSONObject[] jObj = {null};
+        final Gson gson = new Gson();
+        String url = "https://smdm.manthan.com/v1/notification/email/"+user_trim+"?storecode=2663&emailtype=EMAIL_TYPE_1";
+        Log.e("sms url ",""+url);
+
+        JsonObjectRequest smsrequest = new JsonObjectRequest(Request.Method.GET, url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("sms api "," "+response.toString());
+                      //  Reusable_Functions.displayToast(context, response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.e("sms api "," "+error.toString());
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", bearertoken);
+                params.put("Content-Type", "application/json");
+                params.put("Accept", "application/json");
+                return params;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+
+        int socketTimeout = 30000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        smsrequest.setRetryPolicy(policy);
+        queue.add(smsrequest);
+
+    }
+
+    public void req_fetch_spinnerdata_YES_API()
+    {
+        final JSONObject[] jObj = {null};
+        final Gson gson = new Gson();
+        String url = "https://smdm.manthan.com/v1/display/returnreason/"+userId+"?feedbackKey=3&exchangeRequired=YES";
+        Log.e("sms url ",""+url);
+
+        JsonArrayRequest smsrequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        Log.e("sms api "," "+response.toString());
+                        List<String> listist = new ArrayList<String>();
+
+
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                listist.add("" + response.get(i));
+                            } catch (JSONException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                        adp3 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, listist);
+                        adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner_reasons.setAdapter(adp3);
+                        spinner_reasons.setSelection(0);
+                    }
+
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.e("sms api "," "+error.toString());
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", bearertoken);
+                params.put("Content-Type", "application/json");
+                params.put("Accept", "application/json");
+                return params;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+
+        int socketTimeout = 30000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        smsrequest.setRetryPolicy(policy);
+        queue.add(smsrequest);
+
+    }
+
+
+
+    public void req_fetch_spinnerdata_NO_API()
+    {
+        final JSONObject[] jObj = {null};
+        final Gson gson = new Gson();
+        String url = "https://smdm.manthan.com/v1/display/returnreason/"+userId+"?feedbackKey=3&exchangeRequired=NO";
+        Log.e("sms url ",""+url);
+
+        JsonArrayRequest smsrequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        Log.e("sms api "," "+response.toString());
+                        List<String> listist = new ArrayList<String>();
+
+
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                listist.add("" + response.get(i));
+                            } catch (JSONException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                        adp3 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, listist);
+                    adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_reasons.setAdapter(adp3);
+                    spinner_reasons.setSelection(0);
+                    }
+
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.e("sms api "," "+error.toString());
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", bearertoken);
+                params.put("Content-Type", "application/json");
+                params.put("Accept", "application/json");
+                return params;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+
+        int socketTimeout = 30000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        smsrequest.setRetryPolicy(policy);
+        queue.add(smsrequest);
+
+    }
+
+
 
 }

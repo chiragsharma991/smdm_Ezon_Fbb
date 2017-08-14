@@ -86,7 +86,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     CustomerDetail customerDetail;
     private ArrayList<CustomerEngagementDetail> planengagementArrayList, actualengagementArrayList;
     private ArrayList<CustomerLoyaltySummary> array_custLoyaltySummaries;
-    ArrayList<CustomerDetail> customerDetailsList;
+    public static ArrayList<CustomerDetail> customerDetailsList;
     private LinearLayout linearLayout,linearLayout1;
     JsonArrayRequest postRequest;
     RequestQueue queue;
@@ -558,6 +558,38 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             txt_legend_name.setText(planengagementArrayList.get(i).getLevel());
             txt_legend_val.setText("" + String.format("%.1f",planengagementArrayList.get(i).getSalesAch()));
             linearLayout.addView(view);
+
+//            txt_legend_name.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int position = (int) v.getTag();
+//                    Log.e("", "onClick: " + position);
+//                    switch (position) {
+//                        case 0:
+//                            if (attribute14.equals("NO")){
+//                                attribute14 = "YES";
+//                                Apicallback(2, false);
+//                                cf_text.setText("Callback Required from CSD");
+//                                callback_header = cf_text.getText().toString();
+//                                processbar_view.setVisibility(View.VISIBLE);
+//                            }
+//                            break;
+//
+//                        case 1:
+//                            if (attribute14.equals("YES")){
+//                                attribute14 = "NO";
+//                                Apicallback(2, false);
+//                                cf_text.setText("No Callback Required");
+//                                callback_header = cf_text.getText().toString();
+//                                processbar_view.setVisibility(View.VISIBLE);
+//                            }
+//                            break;
+//
+//                        default:
+//                            break;
+//                    }
+//                }
+//            });
         }
         legend.setEnabled(false);
         Reusable_Functions.hDialog();
@@ -839,7 +871,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response 1 -:", "" + response + " size "+response.length());
+                        Log.e("response page one:", "" + response + " size "+response.length());
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -851,18 +883,22 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                             if (response.length() == limit) {
 
                                 for (int i = 0; i < response.length(); i++) {
-
+                                    customerDetailsList.clear();
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
+
                                 }
 
-                                CustomerLookup_PageTwo fragment2 = new CustomerLookup_PageTwo();
-                                FragmentManager fragmentManager = getFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.container, fragment2);
-                                fragmentTransaction.commit();
-                            }
+                                CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
+//                                CustomerLookup_PageTwo fragment2 = new CustomerLookup_PageTwo();
+//                                FragmentManager fragmentManager = getFragmentManager();
+//                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                                fragmentTransaction.add(R.id.container, fragment2);
+//                                fragmentTransaction.addToBackStack(null);
+//                                fragmentTransaction.commit();
+
+                            }
                               //  offsetval = offsetval + limit;
 
 
@@ -876,7 +912,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
 
 //                            if (lazyScroll.equals("ON")) {
-//                                customerDetailAdapter.notifyDataSetChanged();
+//
 //                                lazyScroll = "OFF";
 //                                customerDetailAdapter.getItemViewType(1);
 //                            }

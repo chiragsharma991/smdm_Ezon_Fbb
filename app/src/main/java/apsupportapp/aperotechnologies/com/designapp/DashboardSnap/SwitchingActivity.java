@@ -221,6 +221,10 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
                     startActivity(SalesAnalysisActivity1);
                     break;
+                case 1:
+                    Intent SalesPvAActivity = new Intent(context, SalesPvAActivity.class);
+                    startActivity(SalesPvAActivity);
+                    break;
                 case 10:
                     Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
                     startActivity(FreshnessIndexActivity);
@@ -281,7 +285,6 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Option Report", R.mipmap.ageingexceptions));
                 break;
             case 2 :
-
                 apps.add(new App("Sales", R.mipmap.salesanalysis));
                 apps.add(new App("Plan Vs Actual ", R.mipmap.planvsactual));
                 apps.add(new App("Key Product PVA", R.mipmap.planvsactual));
@@ -319,7 +322,6 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Begin Inspection", R.mipmap.storeinspection));
                 apps.add(new App("Inspection History", R.mipmap.storeinspection));
                 break;
-
             case 7 :
                 apps.add(new App("Season Catalogue", R.mipmap.seasoncatalogue));
                 break;
@@ -340,6 +342,7 @@ public class SwitchingActivity extends AppCompatActivity
             // switch for ezone user
             case 21 :
                 apps.add(new App("Sales", R.mipmap.salesanalysis));
+                apps.add(new App("Plan Vs Actual",R.mipmap.planvsactual));
                 break;
             case 22 :
                 apps.add(new App("Assortment Analysis", R.mipmap.freshnessindex));

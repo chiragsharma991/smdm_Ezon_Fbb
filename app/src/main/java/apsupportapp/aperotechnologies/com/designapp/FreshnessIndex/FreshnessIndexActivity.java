@@ -1628,7 +1628,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         location_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_LocatnChk);
         if(preValue==1){   product_radiobtn.setChecked(true);} else{ location_radiobtn.setChecked(true);}
 
-        location.setOnClickListener(new View.OnClickListener() {
+        location.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 postValue = 2;
