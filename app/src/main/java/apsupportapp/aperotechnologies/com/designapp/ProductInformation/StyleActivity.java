@@ -511,6 +511,7 @@ public class StyleActivity extends AppCompatActivity {
 
     private void requestCollectionAPI(int offsetvalue1, final int limit1) {
         String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
+        Log.e("TAG", "requestCollectionAPI: "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -543,16 +544,20 @@ public class StyleActivity extends AppCompatActivity {
                             Reusable_Functions.hDialog();
                             if (selcollectionName == null || selcollectionName.equals("")) {
                                 collection.setText("Select Collection");
+                                Log.e("TAG 546", "Select Collection: " );
                             } else {
                                 if (arrayList.contains(selcollectionName)) {
                                     collectionNM = selcollectionName;
                                     optionName = seloptionName;
                                     collection.setText(selcollectionName);
+                                    Log.e("TAG 552", "Select Collection: "+selcollectionName );
                                     style.setText(seloptionName);
                                     style.setEnabled(true);
                                     articleOptionList.addAll(SnapDashboardActivity._collectionitems);
                                 } else {
                                     collection.setText("Select Collection");
+                                    Log.e("TAG 558", "Select Collection: " );
+
                                 }
                             }
 
@@ -561,7 +566,10 @@ public class StyleActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     collectionNM = (String) collectionAdapter.getItem(position);
+                                    Log.e("TAG", "onItemClick: "+collectionNM );
                                     collection.setText(collectionNM.trim());
+                                    Log.e("TAG 570", "Select Collection: "+collectionNM );
+
 
                                     if (selcollectionName == null || selcollectionName.equals(" ")) {
 
@@ -631,10 +639,12 @@ public class StyleActivity extends AppCompatActivity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 articleOptionList.add(0, "Select Option");
+                                Log.e("TAG", "requestArticleOptionsAPI:  null" );
                                 style.setEnabled(false);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No options data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
+
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");
@@ -645,6 +655,7 @@ public class StyleActivity extends AppCompatActivity {
                                 count++;
                                 requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
                             } else if (response.length() < limit) {
+
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");

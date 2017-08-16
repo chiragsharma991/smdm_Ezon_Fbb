@@ -1238,7 +1238,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
-                                float groupSpace = 0.04f;
+                                float groupSpace = 0.08f;
                                 float barSpace = 0.02f; // x2 dataset
                                 float barWidth = 0.46f; // x2 dataset
                                 ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
