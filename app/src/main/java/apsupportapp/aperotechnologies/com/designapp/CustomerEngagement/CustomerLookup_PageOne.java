@@ -514,32 +514,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.setTouchEnabled(true);
         pieChart_band.invalidate();
         pieChart_band.notifyDataSetChanged();
-        pieChart_band.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h)
-            {
-                PieEntry pe = (PieEntry) e;
-                Log.e("pieChart_band 1-----", "" + pe.getLabel());
-                e_bandnm = pe.getLabel();
-                if (Reusable_Functions.chkStatus(getActivity())) {
-                    Reusable_Functions.sDialog(getActivity(), "Loading...");
-                    offsetval = 0;
-                    limit = 100;
-                    count = 0;
-                    bandClick = true;
-                    requestEngagementBandDetail();
-                }
-                else
-                {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
         Legend legend = pieChart_band.getLegend();
         for (int i = 0; i < planengagementArrayList.size(); i++)
         {
@@ -557,39 +532,35 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             txt_legend_color.setBackgroundColor(colors.get(i));
             txt_legend_name.setText(planengagementArrayList.get(i).getLevel());
             txt_legend_val.setText("" + String.format("%.1f",planengagementArrayList.get(i).getSalesAch()));
+
+            txt_legend_name.setTag(i);
+            txt_legend_name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = (int) v.getTag();
+                    Log.e("", "onClick: " + position);
+
+                            e_bandnm = planengagementArrayList.get(position).getLevel();
+                            Log.e("e_bandnm :",""+e_bandnm);
+
+                            if (Reusable_Functions.chkStatus(getActivity())) {
+                                Reusable_Functions.sDialog(getActivity(), "Loading...");
+                                offsetval = 0;
+                                limit = 100;
+                                count = 0;
+                                bandClick = true;
+                                requestEngagementBandDetail();
+                            }
+                            else
+                            {
+                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                            }
+
+                }
+            });
             linearLayout.addView(view);
 
-//            txt_legend_name.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int position = (int) v.getTag();
-//                    Log.e("", "onClick: " + position);
-//                    switch (position) {
-//                        case 0:
-//                            if (attribute14.equals("NO")){
-//                                attribute14 = "YES";
-//                                Apicallback(2, false);
-//                                cf_text.setText("Callback Required from CSD");
-//                                callback_header = cf_text.getText().toString();
-//                                processbar_view.setVisibility(View.VISIBLE);
-//                            }
-//                            break;
-//
-//                        case 1:
-//                            if (attribute14.equals("YES")){
-//                                attribute14 = "NO";
-//                                Apicallback(2, false);
-//                                cf_text.setText("No Callback Required");
-//                                callback_header = cf_text.getText().toString();
-//                                processbar_view.setVisibility(View.VISIBLE);
-//                            }
-//                            break;
-//
-//                        default:
-//                            break;
-//                    }
-//                }
-//            });
+
         }
         legend.setEnabled(false);
         Reusable_Functions.hDialog();
@@ -629,33 +600,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.animateXY(4000, 4000);
         pieChart_band.setDescription(null);
         pieChart_band.setTouchEnabled(true);
-        pieChart_band.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h)
-            {
-                PieEntry pe = (PieEntry) e;
-                Log.e("pieChart_band 2-----", "" + pe.getLabel());
-                e_bandnm = pe.getLabel();
-                if (Reusable_Functions.chkStatus(getActivity())) {
-                    Reusable_Functions.sDialog(getActivity(), "Loading...");
-                    offsetval = 0;
-                    limit = 100;
-                    count = 0;
-                    bandClick = true;
-                    requestEngagementBandDetail();
-                }
-                else
-                {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                }
 
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
         Legend legend = pieChart_band.getLegend();
         linearLayout.removeAllViewsInLayout();
         for (int i = 0; i < planengagementArrayList.size(); i++)
@@ -673,6 +618,31 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             txt_legend_color.setBackgroundColor(colors.get(i));
             txt_legend_name.setText(planengagementArrayList.get(i).getLevel());
             txt_legend_val.setText("" + String.format("%.1f", planengagementArrayList.get(i).getCustAch()));
+            txt_legend_name.setTag(i);
+            txt_legend_name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = (int) v.getTag();
+                    Log.e("", "onClick: " + position);
+
+                    e_bandnm = planengagementArrayList.get(position).getLevel();
+                    Log.e("e_bandnm :",""+e_bandnm);
+
+                    if (Reusable_Functions.chkStatus(getActivity())) {
+                        Reusable_Functions.sDialog(getActivity(), "Loading...");
+                        offsetval = 0;
+                        limit = 100;
+                        count = 0;
+                        bandClick = true;
+                        requestEngagementBandDetail();
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
             linearLayout.addView(view);
         }
         legend.setEnabled(false);
@@ -713,33 +683,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
-        pieChart_lifestage.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h)
-            {
-                PieEntry pe = (PieEntry) e;
-                Log.e("-----", "" + pe.getLabel());
-                e_bandnm = pe.getLabel();
-                if (Reusable_Functions.chkStatus(getActivity())) {
-                    Reusable_Functions.sDialog(getActivity(), "Loading...");
-                    offsetval = 0;
-                    limit = 100;
-                    count = 0;
-                    bandClick = false;
-                    requestEngagementBandDetail();
-                }
-                else
-                {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                }
 
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
         Legend legend = pieChart_lifestage.getLegend();
         for (int i = 0; i < actualengagementArrayList.size(); i++) {
 
@@ -758,6 +702,31 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             txt_legend_color.setBackgroundColor(colors.get(i));
             txt_legend_name.setText(actualengagementArrayList.get(i).getLevel());
             txt_legend_val.setText("" + String.format("%.1f",actualengagementArrayList.get(i).getSalesAch()));
+            txt_legend_name.setTag(i);
+            txt_legend_name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = (int) v.getTag();
+                    Log.e("", "onClick: " + position);
+
+                    e_bandnm = actualengagementArrayList.get(position).getLevel();
+                    Log.e("e_bandnm :",""+e_bandnm);
+
+                    if (Reusable_Functions.chkStatus(getActivity())) {
+                        Reusable_Functions.sDialog(getActivity(), "Loading...");
+                        offsetval = 0;
+                        limit = 100;
+                        count = 0;
+                        bandClick = false;
+                        requestEngagementBandDetail();
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
             linearLayout1.addView(view);
         }
         legend.setEnabled(false);
@@ -802,34 +771,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.setDescription(null);
         pieChart_lifestage.setTouchEnabled(true);
         txt_lifestage_ach.setVisibility(View.VISIBLE);
-        pieChart_lifestage.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h)
-            {
-                PieEntry pe = (PieEntry) e;
-                Log.e("-----", "" + pe.getLabel());
-                e_bandnm = pe.getLabel();
-                if (Reusable_Functions.chkStatus(getActivity())) {
-                    Reusable_Functions.sDialog(getActivity(), "Loading...");
-                    offsetval = 0;
-                    limit = 100;
-                    count = 0;
-                    bandClick = false;
-                    requestEngagementBandDetail();
-                }
-                else
-                {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                }
 
-            }
-
-            @Override
-            public void onNothingSelected()
-            {
-
-            }
-        });
         Legend legend = pieChart_lifestage.getLegend();
         linearLayout1.removeAllViewsInLayout();
         for (int i = 0; i < actualengagementArrayList.size(); i++)
@@ -848,6 +790,31 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             txt_legend_color.setBackgroundColor(colors.get(i));
             txt_legend_name.setText(actualengagementArrayList.get(i).getLevel());
             txt_legend_val.setText("" + String.format("%.1f", actualengagementArrayList.get(i).getCustAch()));
+            txt_legend_name.setTag(i);
+            txt_legend_name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = (int) v.getTag();
+                    Log.e("", "onClick: " + position);
+
+                    e_bandnm = actualengagementArrayList.get(position).getLevel();
+                    Log.e("e_bandnm :",""+e_bandnm);
+
+                    if (Reusable_Functions.chkStatus(getActivity())) {
+                        Reusable_Functions.sDialog(getActivity(), "Loading...");
+                        offsetval = 0;
+                        limit = 100;
+                        count = 0;
+                        bandClick = false;
+                        requestEngagementBandDetail();
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
             linearLayout1.addView(view);
         }
         legend.setEnabled(false);

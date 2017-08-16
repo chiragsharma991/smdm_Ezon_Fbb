@@ -76,6 +76,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     private LinearLayout addleggend;
     private float totalFeedbackCount, callbackFeedbackCount, nocallbackFeedbackCount;
     private int runningId;
+    String data;
     private String callback_header="Callback Required from CSD";
 
 
@@ -156,7 +157,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     private synchronized void requestcallback(mpm_model model, int id) {
 
         String url = "";
-        String data;
+
         ApiRequest api_request;
         switch (id) {
             // case 0 and 1 will follow like first update list and after pie chart
