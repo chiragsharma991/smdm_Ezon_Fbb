@@ -9,7 +9,7 @@ import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerf
 public class FreshnessIndex_Ez_Model extends HourlyPerformence_Model {
 
     String level;
-    int stkOnhandQty;
+    double stkOnhandQty;
     double stkOnhandQtyCont;
     double sohAssortmentGrp;
     double assortmentGrpCont;
@@ -27,11 +27,11 @@ public class FreshnessIndex_Ez_Model extends HourlyPerformence_Model {
         this.level = level;
     }
 
-    public int getStkOnhandQty() {
+    public double getStkOnhandQty() {
         return stkOnhandQty;
     }
 
-    public void setStkOnhandQty(int stkOnhandQty) {
+    public void setStkOnhandQty(double stkOnhandQty) {
         this.stkOnhandQty = stkOnhandQty;
     }
 

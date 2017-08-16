@@ -98,7 +98,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     ArrayList<SalesPvAAnalysisWeek> salesPvAAnalysisWeekArrayList;
     String fromWhere, txtPvAClickedValue,ez_fromWhere,ez_txtClickedVal;
     TextView txtStoreCode, txtStoreDesc, txtheaderplanclass,txtpvahDeptName, txt_pva_noChart,ez_txtheaderclass,ez_txtpvahDeptName;
-    RelativeLayout tableRelLayout,btnBack, btnFilter, llayoutSalesPvA, btnSalesPrev, btnSalesNext,btn_ez_back,btn_ez_filter,btn_ez_prev,btn_ez_next,btn_ez_sort;
+    RelativeLayout tableRelLayout,btnBack, btnFilter, llayoutSalesPvA, btnSalesPrev, btnSalesNext,rel_store_layout,btn_ez_back,btn_ez_filter,btn_ez_prev,btn_ez_next,btn_ez_sort;
     Gson gson;
     String pvaFirstVisibleItem,ez_firstVisibleItem;
     JsonArrayRequest postRequest,ez_postRequest;
@@ -138,6 +138,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             setContentView(R.layout.activity_ezone_pva);
             Log.e(TAG, "----Wellcome in Ezone----" );
             getSupportActionBar().hide();
+            salesAnalysisClassArrayList= new ArrayList<SalesAnalysisListDisplay>();
             commanInitialize();
             initializeEzoneUI();
             commanListView();
@@ -148,6 +149,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             setContentView(R.layout.activity_sales_pva);
             Log.e(TAG, "----Wellcome in FBB----" );
             getSupportActionBar().hide();
+            salesAnalysisClassArrayList= new ArrayList<SalesAnalysisListDisplay>();
             commanInitialize();
             initializeFBBUI();
             commanListView();
@@ -482,11 +484,23 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         llpvahierarchy = (LinearLayout) findViewById(R.id.llpvahierarchy);
         llpvahierarchy.setOrientation(LinearLayout.HORIZONTAL);
         barChart = (BarChart) findViewById(R.id.bar_chart);
+
+        rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
+        rel_store_layout.setVisibility(View.VISIBLE);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         Log.e(TAG, "store desc: "+storeDescription );
-       // txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        //txtStoreDesc.setText(storeDescription.substring(5));
+        if(geoLeveLDesc.equals("E ZONE"))
+        {
+            rel_store_layout.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            rel_store_layout.setVisibility(View.VISIBLE);
+            txtStoreCode.setText(storeDescription.trim().substring(0,4));
+            txtStoreDesc.setText(storeDescription.substring(5));
+        }
+
         txt_pva_noChart = (TextView) findViewById(R.id.pva_noChart);
         //hierarchy header
         txtpvahDeptName = (TextView) findViewById(R.id.txtpvahDeptName);
@@ -556,7 +570,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         LinearLayout product = (LinearLayout) popupView.findViewById(R.id.lin_ez_Product);
         product_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_ProductChk);
         location_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_LocatnChk);
-        if(preValue==1){   product_radiobtn.setChecked(true);} else{ location_radiobtn.setChecked(true);}
+        if(preValue==1)
+        {   product_radiobtn.setChecked(true);} else{ location_radiobtn.setChecked(true);}
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -682,7 +697,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     private void TimeUP() {
 
         if (salesAnalysisClassArrayList.size() != 0) {
-            if (focusposition < salesAnalysisClassArrayList.size() && !onItemClickFlag) {
+            if (focusposition < salesAnalysisClassArrayList.size() - 1 && !onItemClickFlag) {
 
                 if (txtheaderplanclass.getText().toString().equals("Department")) {
                     level = 1;
@@ -733,7 +748,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     level = 9;
                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
                 }
-                Log.e(TAG, "pvaFirstVisibleItem: "+pvaFirstVisibleItem );
+                Log.e(TAG, "pvaFirstVisibleItem: "+pvaFirstVisibleItem + "\t"+focusposition );
 
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
@@ -770,9 +785,9 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
 
                 focusposition = salesAnalysisClassArrayList.size() - 1;
-               // LinearLayoutManager llm = (LinearLayoutManager) listViewSalesPvA.getLayoutManager();
-             //   llm.scrollToPosition(focusposition);
-                listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
+                LinearLayoutManager llm = (LinearLayoutManager) listViewSalesPvA.getLayoutManager();
+                llm.scrollToPosition(focusposition);
+              //  listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
 
                 if (txtheaderplanclass.getText().toString().equals("Department")) {
                     level = 1;

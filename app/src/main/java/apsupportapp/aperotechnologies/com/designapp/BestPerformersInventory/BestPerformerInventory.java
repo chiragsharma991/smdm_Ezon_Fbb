@@ -66,7 +66,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     public  TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
     private RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
-            BestQfDoneLayout, BestQuickFilterBorder;
+            BestQfDoneLayout, BestQuickFilterBorder,rel_store_layout;
     private RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
     private RadioButton CheckWTD, CheckL4W, CheckSTD;
@@ -645,10 +645,12 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void initalise() {
 
+        rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
         BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
         BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
         BestInvent_txtStoreName.setText(storeDescription.substring(5));
+        rel_store_layout.setVisibility(View.VISIBLE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
         BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
         BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);
@@ -1276,7 +1278,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void intializeUIofEzon() {
 
-
+        rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
+        rel_store_layout.setVisibility(View.INVISIBLE);
         FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);
         FreshnessIndex_Ez_moreVertical.setOnClickListener(new View.OnClickListener() {
             @Override
