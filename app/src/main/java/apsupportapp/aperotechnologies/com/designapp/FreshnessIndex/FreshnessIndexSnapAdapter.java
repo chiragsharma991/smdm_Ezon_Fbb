@@ -204,9 +204,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     }
 }
 
-
-
-
     class ProgressViewHolder extends RecyclerView.ViewHolder {
         TextView txtView;
 

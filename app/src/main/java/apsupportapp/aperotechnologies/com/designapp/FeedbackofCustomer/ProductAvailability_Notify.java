@@ -458,7 +458,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         userId = sharedPreferences.getString("userId", "");
         Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
-        SelectedStoreCode = store.trim().substring(0, 4);
+    //    SelectedStoreCode = store.trim().substring(0, 4);
 
         Log.e("store"," "+store);
         storedescription.setText(store);
@@ -583,7 +583,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", SelectedStoreCode);
+            jsonObject.put("storeCode", "2663");
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);

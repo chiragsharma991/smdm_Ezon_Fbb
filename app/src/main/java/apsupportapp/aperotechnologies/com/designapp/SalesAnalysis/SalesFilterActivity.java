@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -428,8 +429,24 @@ public class SalesFilterActivity extends Activity {
                                     requestCategoryAPI(offsetvalue, limit);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
+
+                            Log.e(TAG, "onResponse1: "+e );
+                            processbar.setVisibility(View.GONE);
                             e.printStackTrace();
+                        }
+                        finally
+                        {
+                            if (listDataHeader.get(1).equals("Subdept")) {
+                                processbar.setVisibility(View.VISIBLE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                process_flag_cat = false;
+                                level_filter = 2;
+                                requestCategoryAPI(offsetvalue, limit);
+                            }
                         }
                     }
                 },
@@ -498,8 +515,23 @@ public class SalesFilterActivity extends Activity {
                                     requestPlanClassAPI(offsetvalue, limit);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
+                            Log.e(TAG, "onResponse2: "+e );
+                            processbar.setVisibility(View.GONE);
                             e.printStackTrace();
+                        }
+                        finally
+                        {
+                            if (listDataHeader.get(2).equals("Class")) {
+                                processbar.setVisibility(View.VISIBLE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                process_flag_class = false;
+                                level_filter = 3;
+                                requestPlanClassAPI(offsetvalue, limit);
+                            }
                         }
                     }
                 },
@@ -574,7 +606,21 @@ public class SalesFilterActivity extends Activity {
                         }
                         catch (Exception e)
                         {
+                            Log.e(TAG, "onResponse3: "+e);
+                            processbar.setVisibility(View.GONE);
                             e.printStackTrace();
+                        }
+                        finally
+                        {
+                            if (listDataHeader.get(3).equals("Subclass")) {
+                                processbar.setVisibility(View.VISIBLE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                process_flag_brand = false;
+                                level_filter = 4;
+                                requestBrandNameAPI(offsetvalue, limit);
+                            }
                         }
                     }
                 },
@@ -605,10 +651,13 @@ public class SalesFilterActivity extends Activity {
     public void requestBrandNameAPI(int offsetvalue1, int limit1)
     {
         String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
+        Log.e(TAG, "requestBrandNameAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "onResponse: "+response );
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -648,14 +697,30 @@ public class SalesFilterActivity extends Activity {
                                 }
 
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
+                            Log.e(TAG, "onResponse4----: " +e);
+                            processbar.setVisibility(View.GONE);
                             e.printStackTrace();
+                        }
+                        finally
+                        {
+                            if (listDataHeader.get(4).equals("MC")) {
+                                processbar.setVisibility(View.VISIBLE);
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                process_flag_mc = false;
+                                level_filter = 5;
+                                requestBrandPlanClassAPI(offsetvalue, limit);
+                            }
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        processbar.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -716,6 +781,8 @@ public class SalesFilterActivity extends Activity {
                             }
                         } catch (Exception e)
                         {
+                            Log.e(TAG, "onResponse5: "+e );
+                            processbar.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
