@@ -517,7 +517,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         customerExchangeDone = radioExchangeYes.isChecked() ? "YES" : "NO";
         customerProductVerified =  radioProductYes.isChecked() ? "YES" : "NO";
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
-        exchangeReason = spinner_reasons.getSelectedItem().toString();
+
       //  customerArcDate = currentDateandTime;  //this will up to real time.
     }
 
@@ -601,27 +601,19 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
             }
 
-//            if(radioExchangeYes.isChecked() || radioProductNo.isChecked()){
-//
-//                if(radioExchangeYes.isChecked()){
-//
-//                    if(spinner_reasons.getSelectedItem().equals("Reason for Exchange")){
-//
-//                        txt_empty_exchange.setVisibility(View.VISIBLE);
-//                        txt_empty_exchange.setText("Please select reason for exchange");
-//                    }
-//                }
-//                else{
-//
-//                    if(spinner_reasons.getSelectedItem().equals("Reason for store refusal")){
-//
-//                        txt_empty_exchange.setVisibility(View.VISIBLE);
-//                        txt_empty_exchange.setText("Please select reason for store refusal");
-//                    }
-//
-//                }
-//
-//            }
+            if(radioExchangeYes.isChecked() && spinner_reasons.getSelectedItem().equals("Reason for Exchange"))
+            {
+
+                txt_empty_exchange.setVisibility(View.VISIBLE);
+                txt_empty_exchange.setText("Please select reason for exchange");
+
+            }
+            if(radioExchangeNo.isChecked() && spinner_reasons.getSelectedItem().equals("Reason for store refusal")){
+
+                txt_empty_exchange.setVisibility(View.VISIBLE);
+                txt_empty_exchange.setText("Please select reason for store refusal");
+
+            }
 
         }
         else if(customerNumber.length() < 10){
@@ -642,42 +634,21 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
         }
 
-//        else if(radioExchangeYes.isChecked() || radioExchangeNo.isChecked()){
-//
-//            Log.e("here","");
-//            if(radioExchangeYes.isChecked()){
-//                Log.e("here","inside radioExchangeYes checked");
-//
-//                if(spinner_reasons.getSelectedItem().equals("Reason for Exchange")){
-//
-//                    txt_empty_exchange.setVisibility(View.VISIBLE);
-//                    txt_empty_exchange.setText("Please select reason for exchange");
-//                }else
-//                {
-//                    txt_empty_exchange.setVisibility(View.GONE);
-//
-//                }
-//            }
-//            else if(radioExchangeNo.isChecked()){
-//                Log.e("here","inside radioExchangeNo checked");
-//
-//                if(spinner_reasons.getSelectedItem().equals("Reason for store refusal")){
-//
-//                    txt_empty_exchange.setVisibility(View.VISIBLE);
-//                    txt_empty_exchange.setText("Please select reason for store refusal");
-//                }
-//                else
-//                {
-//
-//                    txt_empty_exchange.setVisibility(View.GONE);
-//
-//                }
-//
-//            }
-//
-//        }
+        else if(radioExchangeYes.isChecked() && spinner_reasons.getSelectedItem().equals("Reason for Exchange"))
+        {
 
+            txt_empty_exchange.setVisibility(View.VISIBLE);
+            txt_empty_exchange.setText("Please select reason for exchange");
+
+        }
+        else if(radioExchangeNo.isChecked() && spinner_reasons.getSelectedItem().equals("Reason for store refusal")){
+
+            txt_empty_exchange.setVisibility(View.VISIBLE);
+            txt_empty_exchange.setText("Please select reason for store refusal");
+
+        }
         else {
+            exchangeReason = spinner_reasons.getSelectedItem().toString();
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
             txt_empty_exchange.setVisibility(View.GONE);
@@ -796,9 +767,9 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
                         listist.add(0, "Reason for Exchange");
 
 
-                        for (int i = 0,j = 1; i < response.length(); i++,j++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
-                                listist.add(j, "" + response.get(i));
+                                listist.add("" + response.get(i));
                             } catch (JSONException e) {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
