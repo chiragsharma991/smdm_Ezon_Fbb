@@ -237,7 +237,7 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent CustomerLookupActivity = new Intent(context,CustomerLookupActivity.class);
                     startActivity(CustomerLookupActivity);
                     break;
-                case 30:
+                case 2:
                     Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
                     startActivity(HourlyPerformence);
                     break;
@@ -343,6 +343,8 @@ public class SwitchingActivity extends AppCompatActivity
             case 21 :
                 apps.add(new App("Sales", R.mipmap.salesanalysis));
                 apps.add(new App("Plan Vs Actual",R.mipmap.planvsactual));
+                apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance));
+
                 break;
             case 22 :
                 apps.add(new App("Assortment Analysis", R.mipmap.freshnessindex));
