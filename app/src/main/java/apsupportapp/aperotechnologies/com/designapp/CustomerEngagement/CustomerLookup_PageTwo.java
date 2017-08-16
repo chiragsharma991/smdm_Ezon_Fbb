@@ -340,8 +340,6 @@ public class CustomerLookup_PageTwo extends Fragment {
 //                                customerDetailAdapter.notifyDataSetChanged();
 //
 //                            }
-
-
                             Reusable_Functions.hDialog();
 
                         } catch (Exception e) {
@@ -378,100 +376,6 @@ public class CustomerLookup_PageTwo extends Fragment {
         };
         int socketTimeout = 60000;//5 seconds
 
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
-    private void requestEngagementBandDetail()
-    {
-        String url = "";
-//        if(bandClick)
-//        {
-            url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache;// + "&offset=" + offset + "&limit=" + limit;
-
-//
-          Log.e("detail url 1:", "" + url);
-        postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("response 1:", "" + response + "size"+response.length());
-                        try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                return;
-
-                            } else
-
-                            if (response.length() == limit) {
-
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-                                    customerDetailArrayList.add(customerDetail);
-                                }
-                            }
-                              //  offsetval = offsetval + limit;
-
-
-//                            } else if (response.length() < limit) {
-//
-//                                for (int i = 0; i < response.length(); i++) {
-//                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-//                                    customerDetailsList.add(customerDetail);
-//                                }
-//                            }
-
-
-//                            if (lazyScroll.equals("ON")) {
-//                                customerDetailAdapter.notifyDataSetChanged();
-//                                lazyScroll = "OFF";
-//                                customerDetailAdapter.getItemViewType(1);
-//                            }
-//                            else
-//                            {
-                                lv_cust_details.removeAllViews();
-                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
-                                lv_cust_details.setAdapter(customerDetailAdapter);
-                                customerDetailAdapter.notifyDataSetChanged();
-
-
-
-                            Reusable_Functions.hDialog();
-                    }
-                        catch (Exception e)
-                        {
-                            Reusable_Functions.hDialog();
-                            Log.e("exception :", "" + e.getMessage());
-                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);

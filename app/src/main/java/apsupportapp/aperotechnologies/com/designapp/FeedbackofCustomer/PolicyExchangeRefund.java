@@ -485,7 +485,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         user_trim = userId.substring(0,2);
         store = sharedPreferences.getString("storeDescription", "");
-        SelectedStoreCode = store.trim().substring(0, 4);
+       // SelectedStoreCode = store.trim().substring(0, 4);
 
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
@@ -632,7 +632,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", SelectedStoreCode);
+            jsonObject.put("storeCode", "2663");
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
