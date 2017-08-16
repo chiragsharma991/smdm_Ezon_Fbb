@@ -474,7 +474,6 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         customerProductVerified =  radioProductYes.isChecked() ? "YES" : "NO";
         Log.e("----","customerExchangeDone"+customerProductVerified.toString());
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
-        exchangeReason = spinner_reasons.getSelectedItem().toString();
 
         // customerArcDate = currentDateandTime;  //this will up to real time.
     }
@@ -485,7 +484,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         user_trim = userId.substring(0,2);
         store = sharedPreferences.getString("storeDescription", "");
-       // SelectedStoreCode = store.trim().substring(0, 4);
+//        SelectedStoreCode = store.trim().substring(0, 4);
 
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
@@ -584,6 +583,20 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
             }
 
+            if(radioExchangeYes.isChecked() && spinner_reasons.getSelectedItem().equals("Reason for Exchange"))
+            {
+
+                txt_empty_exchange.setVisibility(View.VISIBLE);
+                txt_empty_exchange.setText("Please select reason for exchange");
+
+            }
+            if(radioExchangeNo.isChecked() && spinner_reasons.getSelectedItem().equals("Reason for store refusal")){
+
+                txt_empty_exchange.setVisibility(View.VISIBLE);
+                txt_empty_exchange.setText("Please select reason for store refusal");
+
+            }
+
         }
         else if(customerNumber.length() < 10)
         {
@@ -603,8 +616,23 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             txt_empty_product.setVisibility(View.VISIBLE);
 
         }
+
+        else if(radioExchangeYes.isChecked() && spinner_reasons.getSelectedItem().equals("Reason for Exchange"))
+        {
+
+            txt_empty_exchange.setVisibility(View.VISIBLE);
+            txt_empty_exchange.setText("Please select reason for exchange");
+
+        }
+        else if(radioExchangeNo.isChecked() && spinner_reasons.getSelectedItem().equals("Reason for store refusal")){
+
+            txt_empty_exchange.setVisibility(View.VISIBLE);
+            txt_empty_exchange.setText("Please select reason for store refusal");
+
+        }
         else
         {
+            exchangeReason = spinner_reasons.getSelectedItem().toString();
             incorrect_remark.setVisibility(View.GONE);
             incorrect_phone.setVisibility(View.GONE);
             txt_empty_exchange.setVisibility(View.GONE);

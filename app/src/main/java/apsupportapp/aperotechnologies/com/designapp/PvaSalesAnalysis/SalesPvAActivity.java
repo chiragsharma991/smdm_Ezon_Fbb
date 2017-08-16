@@ -1254,6 +1254,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 });
 
                                 YAxis leftAxis = barChart.getAxisLeft();
+                                leftAxis.setDrawAxisLine(false);
+                                leftAxis.setDrawGridLines(false);
                                 leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
                                 leftAxis.setDrawZeroLine(true);
                                 leftAxis.setDrawLimitLinesBehindData(false);
@@ -1399,6 +1401,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 });
 
                                 YAxis leftAxis = barChart.getAxisLeft();
+                                leftAxis.setDrawAxisLine(false);
+                                leftAxis.setDrawGridLines(false);
                                 leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
                                 leftAxis.setDrawZeroLine(true);
                                 leftAxis.setDrawLimitLinesBehindData(false);
