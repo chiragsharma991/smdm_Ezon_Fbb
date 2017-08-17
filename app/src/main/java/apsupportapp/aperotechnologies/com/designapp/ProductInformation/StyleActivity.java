@@ -124,7 +124,9 @@ public class StyleActivity extends AppCompatActivity {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading collection data...");
             requestCollectionAPI(collectionoffset, collectionlimit);
-        } else {
+        }
+        else
+        {
             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
@@ -402,11 +404,15 @@ public class StyleActivity extends AppCompatActivity {
         }
     }
 
-    private void requestStyleDetailsAPI(String content, String check) {
+    private void requestStyleDetailsAPI(String content, String check)
+    {
         String url = " ";
-        if (check.equals("optionname")) {
+        if (check.equals("optionname"))
+        {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + content.replaceAll(" ", "%20").replaceAll("&", "%26");
-        } else if (check.equals("barcode")) {
+        }
+        else if (check.equals("barcode"))
+        {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
 
@@ -509,7 +515,8 @@ public class StyleActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    private void requestCollectionAPI(int offsetvalue1, final int limit1) {
+    private void requestCollectionAPI(int offsetvalue1, final int limit1)
+    {
         String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -519,79 +526,105 @@ public class StyleActivity extends AppCompatActivity {
                             if (response.equals("") || response == null || response.length() == 0 && collectioncount == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No collection data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == collectionlimit) {
-
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() == collectionlimit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
-                                    arrayList.add(collectionName.getString("collectionName"));
+                                    arrayList.add(collectionNM);
                                 }
                                 collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
                                 collectioncount++;
                                 requestCollectionAPI(collectionoffset, collectionlimit);
-                            } else if (response.length() < collectionlimit) {
-                                Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() < collectionlimit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
-                                    arrayList.add(collectionName.getString("collectionName"));
+                                    arrayList.add(collectionNM);
                                 }
                             }
                             Collections.sort(arrayList);
                             arrayList.add(0, "Select Collection");
                             collectionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
-                            if (selcollectionName == null || selcollectionName.equals("")) {
-                                collection.setText("Select Collection");
-                            } else {
-                                if (arrayList.contains(selcollectionName)) {
-                                    collectionNM = selcollectionName;
-                                    optionName = seloptionName;
-                                    collection.setText(selcollectionName);
-                                    style.setText(seloptionName);
-                                    style.setEnabled(true);
-                                    articleOptionList.addAll(SnapDashboardActivity._collectionitems);
-                                } else {
-                                    collection.setText("Select Collection");
-                                }
-                            }
-
-                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                            {
                                 @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                {
                                     collectionNM = (String) collectionAdapter.getItem(position);
                                     collection.setText(collectionNM.trim());
-
-                                    if (selcollectionName == null || selcollectionName.equals(" ")) {
-
-                                    } else {
-                                        selcollectionName = null;
-                                        seloptionName = null;
-                                    }
+//                                    if (selcollectionName == null || selcollectionName.equals(" "))
+//                                    {
+//
+//                                    }
+//                                    else
+//                                    {
+//                                        Log.e( "onItemClick: ","--------" );
+//                                        selcollectionName = null;
+//                                        seloptionName = null;
+//                                    }
                                     collectionLayout.setVisibility(View.GONE);
                                     optionLayout.setVisibility(View.GONE);
                                     InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                    if (inputManager != null) {
+                                    if (inputManager != null)
+                                    {
                                         inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                                     }
-                                    if (collectionNM.equalsIgnoreCase("Select Collection")) {
-                                    } else {
-                                        if (Reusable_Functions.chkStatus(context)) {
+                                    if (collectionNM.equalsIgnoreCase("Select Collection"))
+                                    {
+                                        Log.e(" come ","here" );
+                                    }
+                                    else
+                                    {
+                                        if (Reusable_Functions.chkStatus(context))
+                                        {
                                             Reusable_Functions.sDialog(context, "Loading options data...");
                                             offsetvalue = 0;
                                             limit = 100;
                                             count = 0;
                                             articleOptionList.clear();
                                             requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }
                             });
-
-                        } catch (Exception e) {
+                            if (selcollectionName == null || selcollectionName.equals(""))
+                            {
+                                collection.setText("Select Collection");
+                                Log.e( "Collection Text in if : "," ");
+                            }
+                            else
+                            {
+                                Log.e("selcollectionNm: ",""+selcollectionName);
+                                if (arrayList.contains(selcollectionName))
+                                {
+                                    Log.e( "Collection Text in else : "," ");
+                                    collectionNM = selcollectionName;
+                                    optionName = seloptionName;
+                                    collection.setText(selcollectionName);
+                                    style.setText(seloptionName);
+                                    style.setEnabled(true);
+                                    articleOptionList.addAll(SnapDashboardActivity._collectionitems);
+                                }
+                                else
+                                {
+                                    collection.setText("Select Collection");
+                                    Log.e( "Collection Text in else of else: "," ");
+                                }
+                            }
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
@@ -619,7 +652,8 @@ public class StyleActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1) {
+    private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1)
+    {
         String url;
         url = ConstsCore.web_url + "/v1/display/collectionoptions/" + userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url ", "" + url);
@@ -627,15 +661,20 @@ public class StyleActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("option response", "" + response);
-                        try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+//                        Log.e("option response", "" + response);
+                        try
+                        {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
                                 articleOptionList.add(0, "Select Option");
                                 style.setEnabled(false);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No options data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() == limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");
                                     String articleOptions = jsonResponse.getString("articleOptions");
@@ -644,43 +683,55 @@ public class StyleActivity extends AppCompatActivity {
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");
                                     String articleOptions = jsonResponse.getString("articleOptions");
                                     articleOptionList.add(articleOptions);
                                 }
-
                             }
                             Collections.sort(articleOptionList);
                             articleOptionList.add(0, "Select Option");
                             style.setEnabled(true);
                             SnapDashboardActivity._collectionitems = new ArrayList();
                             SnapDashboardActivity._collectionitems.addAll(articleOptionList);
-                            if (seloptionName == null || seloptionName.equals("")) {
+                            if (seloptionName == null || seloptionName.equals(""))
+                            {
                                 style.setText("Select Option");
+                            }
+                            else
+                            {
+                                Log.e("seloptionName :",""+seloptionName );
+                                style.setText(seloptionName);
                             }
                             optionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
-
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Log.e("catch log", "" + e.getMessage());
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
         ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
@@ -715,7 +766,8 @@ public class StyleActivity extends AppCompatActivity {
             selcollectionName = null;
             seloptionName = null;
             SnapDashboardActivity._collectionitems = new ArrayList();
-            finish();
+
         }
+        finish();
     }
 }

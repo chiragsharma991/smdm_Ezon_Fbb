@@ -13,7 +13,9 @@ import android.support.v4.app.Fragment;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +48,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -100,7 +103,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private ArrayList<PieEntry> entries;
     private PieData pieData;
     private Switch sales_cust_switch;
-
+    CustomerLookup_PageTwo customerLookup_pageTwo;
     private boolean bandcustToggle = false,bandClick = false;
     private String lazyScroll = "OFF";
     private int totalItemCount = 0;  // this is total item present in listview
@@ -511,7 +514,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.setData(pieData);
         pieChart_band.animateXY(4000, 4000);
         pieChart_band.setDescription(null);
-        pieChart_band.setTouchEnabled(true);
+        pieChart_band.setTouchEnabled(false);
         pieChart_band.invalidate();
         pieChart_band.notifyDataSetChanged();
 
@@ -543,7 +546,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                             e_bandnm = planengagementArrayList.get(position).getLevel();
                             Log.e("e_bandnm :",""+e_bandnm);
 
-                            if (Reusable_Functions.chkStatus(getActivity())) {
+                            if (Reusable_Functions.chkStatus(getActivity()))
+                            {
                                 Reusable_Functions.sDialog(getActivity(), "Loading...");
                                 offsetval = 0;
                                 limit = 100;
@@ -599,7 +603,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_band.notifyDataSetChanged();
         pieChart_band.animateXY(4000, 4000);
         pieChart_band.setDescription(null);
-        pieChart_band.setTouchEnabled(true);
+        pieChart_band.setTouchEnabled(false);
 
         Legend legend = pieChart_band.getLegend();
         linearLayout.removeAllViewsInLayout();
@@ -682,7 +686,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.setData(pieData);
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
-        pieChart_lifestage.setTouchEnabled(true);
+        pieChart_lifestage.setTouchEnabled(false);
 
         Legend legend = pieChart_lifestage.getLegend();
         for (int i = 0; i < actualengagementArrayList.size(); i++) {
@@ -769,7 +773,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         pieChart_lifestage.notifyDataSetChanged();
         pieChart_lifestage.animateXY(4000, 4000);
         pieChart_lifestage.setDescription(null);
-        pieChart_lifestage.setTouchEnabled(true);
+        pieChart_lifestage.setTouchEnabled(false);
         txt_lifestage_ach.setVisibility(View.VISIBLE);
 
         Legend legend = pieChart_lifestage.getLegend();
@@ -847,54 +851,22 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
                             } else
 
-                            if (response.length() == limit) {
+                            if (response.length() == limit)
+                            {
 
                                 for (int i = 0; i < response.length(); i++) {
-                                    customerDetailsList.clear();
+                                   // customerDetailsList.clear();
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
 
+
                                 }
+                                Log.e( "array size: ",""+customerDetailsList.size());
 
                                 CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
-//                                CustomerLookup_PageTwo fragment2 = new CustomerLookup_PageTwo();
-//                                FragmentManager fragmentManager = getFragmentManager();
-//                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                                fragmentTransaction.add(R.id.container, fragment2);
-//                                fragmentTransaction.addToBackStack(null);
-//                                fragmentTransaction.commit();
-
+                               Reusable_Functions.hDialog();
                             }
-                              //  offsetval = offsetval + limit;
-
-
-//                            } else if (response.length() < limit) {
-//
-//                                for (int i = 0; i < response.length(); i++) {
-//                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
-//                                    customerDetailsList.add(customerDetail);
-//                                }
-//                            }
-
-
-//                            if (lazyScroll.equals("ON")) {
-//
-//                                lazyScroll = "OFF";
-//                                customerDetailAdapter.getItemViewType(1);
-//                            }
-//                            else
-//                            {
-//                                lv_cust_details.removeAllViews();
-//                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList,getContext());
-//                                lv_cust_details.setAdapter(customerDetailAdapter);
-//                                customerDetailAdapter.notifyDataSetChanged();
-//                                customerDetailAdapter.getItemViewType(1);
-//                                engagemntBandClick.communicatefrag1(customerDetailsList);
-//                                CustomerLookupActivity.mViewPager.setCurrentItem(1);
-
-                          //  }
-                            Reusable_Functions.hDialog();
                     }
                         catch (Exception e)
                         {

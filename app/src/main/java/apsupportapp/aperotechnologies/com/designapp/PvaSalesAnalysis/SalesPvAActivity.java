@@ -1244,17 +1244,16 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 xAxis.setDrawGridLines(false);
                                 barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
-                                xAxis.setValueFormatter(new IAxisValueFormatter() {
-                                    @Override
-                                    public String getFormattedValue(float value, AxisBase axis) {
-                                        int position = (int)value;
-                                        String val = salesPvAAnalysisWeekArrayList.get(position).getWeekNumber();
-                                        return val;
-                                    }
-                                });
+//                                xAxis.setValueFormatter(new IAxisValueFormatter() {
+//                                    @Override
+//                                    public String getFormattedValue(float value, AxisBase axis) {
+//                                        int position = (int)value;
+//                                        String val = salesPvAAnalysisWeekArrayList.get(position).getWeekNumber();
+//                                        return val;
+//                                    }
+//                                });
 
                                 YAxis leftAxis = barChart.getAxisLeft();
-                                leftAxis.setDrawAxisLine(false);
                                 leftAxis.setDrawGridLines(false);
                                 leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
                                 leftAxis.setDrawZeroLine(true);
@@ -1391,17 +1390,16 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 xAxis.setDrawGridLines(false);
                                 barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
-                                xAxis.setValueFormatter(new IAxisValueFormatter() {
-                                    @Override
-                                    public String getFormattedValue(float value, AxisBase axis) {
-                                        int position = (int)value;
-                                        String val = salesPvAAnalysisWeekArrayList.get(position).getWeekNumber();
-                                        return val;
-                                    }
-                                });
+//                                xAxis.setValueFormatter(new IAxisValueFormatter() {
+//                                    @Override
+//                                    public String getFormattedValue(float value, AxisBase axis) {
+//                                        int position = (int)value;
+//                                        String val = salesPvAAnalysisWeekArrayList.get(position).getWeekNumber();
+//                                        return val;
+//                                    }
+//                                });
 
                                 YAxis leftAxis = barChart.getAxisLeft();
-                                leftAxis.setDrawAxisLine(false);
                                 leftAxis.setDrawGridLines(false);
                                 leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
                                 leftAxis.setDrawZeroLine(true);

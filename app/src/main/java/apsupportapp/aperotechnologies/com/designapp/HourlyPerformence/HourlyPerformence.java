@@ -265,11 +265,10 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         barChart.setData(data);
         barChart.invalidate();
         // combinedChart.setDescription("activity_hourly_nested_sc1");
-
-
     }
 
-    public int getRandomColor() {
+    public int getRandomColor()
+    {
         Random rnd = new Random();
         return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
