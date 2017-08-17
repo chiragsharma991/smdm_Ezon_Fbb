@@ -438,7 +438,7 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
         userId = sharedPreferences.getString("userId", "");
         Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
-       // SelectedStoreCode = store.trim().substring(0, 4);
+      //  SelectedStoreCode = store.trim().substring(0, 4);
         Log.e("store"," "+store);
         storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");

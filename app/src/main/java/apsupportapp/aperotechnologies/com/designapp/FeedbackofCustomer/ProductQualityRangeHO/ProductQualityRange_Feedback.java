@@ -179,8 +179,7 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
                         Log.e("remark ",""+remark);
                         edt_remarks.setText(remark);
                         edt_remarks.setSelection(edt_remarks.getText().length());
-                        edt_first_name.requestFocus();
-
+                        edt_article_id.requestFocus();
                         alertDialog.dismiss();
                     }
                 });
@@ -231,7 +230,7 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
                         Log.e("remark ",""+remark);
                         edt_remarks.setText(remark);
                         edt_remarks.setSelection(edt_remarks.getText().length());
-                        edt_first_name.requestFocus();
+                        edt_article_id.requestFocus();
 
                         alertDialog.dismiss();
                     }
@@ -293,7 +292,7 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
                                     Log.e("remark ",""+remark);
                                     edt_remarks.setText(remark);
                                     edt_remarks.setSelection(edt_remarks.getText().length());
-                                    edt_first_name.requestFocus();
+                                    edt_article_id.requestFocus();
 
                                     alertDialog.dismiss();
                                 }
@@ -342,7 +341,7 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
                                 Log.e("remark ",""+remark);
                                 edt_remarks.setText(remark);
                                 edt_remarks.setSelection(edt_remarks.getText().length());
-                                edt_first_name.requestFocus();
+                                edt_article_id.requestFocus();
 
                                 alertDialog.dismiss();
                             }

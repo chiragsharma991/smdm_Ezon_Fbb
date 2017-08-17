@@ -458,7 +458,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         userId = sharedPreferences.getString("userId", "");
         Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
-    //    SelectedStoreCode = store.trim().substring(0, 4);
+       // SelectedStoreCode = store.trim().substring(0, 4);
 
         Log.e("store"," "+store);
         storedescription.setText(store);

@@ -299,7 +299,7 @@ public class CustomerLookup_PageTwo extends Fragment {
                                    // customerDetailsList.clear();
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
-                                    Log.e("===two first"," "+customerDetailsList.get(i).getFullName()+"  "+customerDetailsList.get(i).getSalesAch());
+                                    Log.e("===two first"," "+customerDetailsList.get(i).getFullName()+"  "+customerDetailsList.get(i).getMbrPlanSaleNetVal());
 
                                 }
                                 Reusable_Functions.hDialog();
@@ -312,7 +312,7 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 for (int i = 0; i < response.length(); i++) {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
-                                    Log.e("===two second"," "+customerDetailsList.get(i).getFullName()+"  "+customerDetailsList.get(i).getSalesAch());
+                                    Log.e("===two second"," "+customerDetailsList.get(i).getFullName()+"  "+customerDetailsList.get(i).getMbrPlanSaleNetVal());
 
                                 }
                                 Reusable_Functions.hDialog();

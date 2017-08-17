@@ -139,10 +139,10 @@ public class ApiRequest  {
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 }else{
                                     ResposeInterface.nodatafound();
-                                    if(data.equals("yes")) {
+                                    if(data.equals("Feedback with callback")) {
                                         Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
                                     }
-                                    else if(data.equals("no")){
+                                    else if(data.equals("Feedback")){
                                         Toast.makeText(context, "no data found for Feedback", Toast.LENGTH_SHORT).show();
 
                                     }

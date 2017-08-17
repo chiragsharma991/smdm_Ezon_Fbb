@@ -131,20 +131,20 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
         Tabview.addTab(Tabview.newTab().setText("Last Month"));
         Tabview.setOnTabSelectedListener(this);
         MainMethod();
-        Apicallback(0, true);
+        Apicallback(0, true, "Feedback with callback");
 
 
 
     }
 
-    private void Apicallback(int id, boolean loader) {
+    private void Apicallback(int id, boolean loader, String s) {
         runningId=id;
         if (Reusable_Functions.chkStatus(context)) {
             if (loader) {
                 Reusable_Functions.sDialog(context, "Loading...");
             }
             mpm_model model = new mpm_model();
-            requestcallback(model, id);            //this id is select for url.
+            requestcallback(model, id, s);            //this id is select for url.
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -153,28 +153,22 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
     }
 
 
-    private synchronized void requestcallback(mpm_model model, int id) {
+    private synchronized void requestcallback(mpm_model model, int id, String data) {
 
         String url = "";
-        String data;
         ApiRequest api_request;
         switch (id) {
             // case 0 and 1 will follow like first update list and after pie chart
             case 0:
-                data = "";
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true"; //Pie chart Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:
-                data = "yes";
-
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
             case 2:  // this is for only change list
-                data = "no";
-
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
@@ -204,7 +198,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
                 piechartList.addAll(list);
                 setPiechart(piechartList);
                 mpm_model model = new mpm_model();
-                requestcallback(model, 1); //id 1 for call another api
+                requestcallback(model, 1, "Feedback with callback"); //id 1 for call another api
                 break;
 
             case 2:  // only for update listview
@@ -270,14 +264,14 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
             case "Feedback with Callback":
                 if (attribute14.equals("NO"))
                     attribute14 = "YES";
-                Apicallback(0, false);
+                Apicallback(0, false, "Feedback with callback");
                 processbar_view.setVisibility(View.VISIBLE);
                 break;
 
             case "Feedback":
                 if (attribute14.equals("YES"))
                     attribute14 = "NO";
-                Apicallback(0, false);
+                Apicallback(0, false, "Feedback");
                 processbar_view.setVisibility(View.VISIBLE);
 
                 break;
@@ -369,15 +363,15 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
         switch (checkedId) {
             case 0: // Yesterday
                 view_params = "LD";
-                Apicallback(0, true);
+                Apicallback(0, true, "Feedback with callback");
                 break;
             case 1: // Last Week
                 view_params = "LW";
-                Apicallback(0, true);
+                Apicallback(0, true, "Feedback with callback");
                 break;
             case 2: // Last Month
                 view_params = "LM";
-                Apicallback(0, true);
+                Apicallback(0, true, "Feedback with callback");
                 break;
             default:
                 break;
@@ -419,7 +413,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
                         case 0:
                             if (attribute14.equals("NO")){
                                 attribute14 = "YES";
-                                Apicallback(2, false);
+                                Apicallback(2, false, "Feedback with callback");
                                 title.setText("Callback Required from CSD");
                                 callback_header = title.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
@@ -429,7 +423,7 @@ public class PolicyExchange_Reports extends Fragment implements TabLayout.OnTabS
                         case 1:
                             if (attribute14.equals("YES")){
                                 attribute14 = "NO";
-                                Apicallback(2, false);
+                                Apicallback(2, false, "Feedback");
                                 title.setText("No Callback Required");
                                 callback_header = title.getText().toString();
                                 processbar_view.setVisibility(View.VISIBLE);
