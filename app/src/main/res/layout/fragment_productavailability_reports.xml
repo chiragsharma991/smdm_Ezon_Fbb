@@ -272,13 +272,25 @@
 
                         </LinearLayout>
 
+
                     </RelativeLayout>
 
 
                 </android.support.v7.widget.CardView>
 
+                <TextView
+                    android:id="@+id/text_no_data_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="170dp"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone"
+                    android:text="No feedback data to display"/>
+
+
                 <RelativeLayout
-                    android:id="@+id/relFIndexTablelayout"
+                    android:id="@+id/relFIndexTablelayout_productavail"
                     android:layout_width="match_parent"
 
                     android:layout_height="match_parent"
