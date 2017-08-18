@@ -360,10 +360,10 @@ public class SalesFilterActivity extends Activity {
 
         // Adding group name data
         listDataHeader.add("Department");
-        listDataHeader.add("Subdept");
+        listDataHeader.add("Category");
         listDataHeader.add("Class");
-        listDataHeader.add("Subclass");
-        listDataHeader.add("MC");
+        listDataHeader.add("Brand");
+        listDataHeader.add("Brand Class");
         if (Reusable_Functions.chkStatus(SalesFilterActivity.this))
         {
             if (listDataHeader.get(0).equals("Department"))
@@ -419,7 +419,7 @@ public class SalesFilterActivity extends Activity {
                                 }
                                 process_flag_dept = true;
                                 processbar.setVisibility(View.GONE);
-                                if (listDataHeader.get(1).equals("Subdept")) {
+                                if (listDataHeader.get(1).equals("Category")) {
                                     processbar.setVisibility(View.VISIBLE);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -438,7 +438,7 @@ public class SalesFilterActivity extends Activity {
                         }
                         finally
                         {
-                            if (listDataHeader.get(1).equals("Subdept")) {
+                            if (listDataHeader.get(1).equals("Category")) {
                                 processbar.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
                                 limit = 100;
@@ -483,7 +483,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in subdept", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Category", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -593,7 +593,7 @@ public class SalesFilterActivity extends Activity {
                                 }
                                 process_flag_class = true;
                                 processbar.setVisibility(View.GONE);
-                                if (listDataHeader.get(3).equals("Subclass")) {
+                                if (listDataHeader.get(3).equals("Brand")) {
                                     processbar.setVisibility(View.VISIBLE);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -612,7 +612,7 @@ public class SalesFilterActivity extends Activity {
                         }
                         finally
                         {
-                            if (listDataHeader.get(3).equals("Subclass")) {
+                            if (listDataHeader.get(3).equals("Brand")) {
                                 processbar.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
                                 limit = 100;
@@ -661,7 +661,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in subclass", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -686,7 +686,7 @@ public class SalesFilterActivity extends Activity {
                                 process_flag_brand = true;
                                 processbar.setVisibility(View.GONE);
 
-                                if (listDataHeader.get(4).equals("MC")) {
+                                if (listDataHeader.get(4).equals("Brand Class")) {
                                     processbar.setVisibility(View.VISIBLE);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -705,7 +705,7 @@ public class SalesFilterActivity extends Activity {
                         }
                         finally
                         {
-                            if (listDataHeader.get(4).equals("MC")) {
+                            if (listDataHeader.get(4).equals("Brand Class")) {
                                 processbar.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
                                 limit = 100;
@@ -753,7 +753,7 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in mc", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand Class", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++)

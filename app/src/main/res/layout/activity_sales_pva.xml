@@ -72,11 +72,10 @@
 
 
                     <RelativeLayout
-                        android:layout_alignParentRight="true"
                         android:id="@+id/imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
-                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
                         android:background="@drawable/button_click"
                         >
 
@@ -89,6 +88,24 @@
 
                     </RelativeLayout>
 
+                 <!--   <RelativeLayout
+                        android:id="@+id/sortPopup"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click"
+                        >
+
+                        <Button
+                            android:layout_width="@dimen/icon_width"
+                            android:layout_height="@dimen/icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/iconmore"
+                            android:clickable="false" />
+
+                    </RelativeLayout>-->
 
 
                 </RelativeLayout>
@@ -166,11 +183,13 @@
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="270dp" />-->
 
+
             <RelativeLayout
                 android:orientation="vertical"
                 android:id="@+id/relChartlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
 
                 <TextView
                     android:id="@+id/pva_noChart"
@@ -181,11 +200,11 @@
                     android:text="No Chart data available"
                     android:textSize="@dimen/largelayout_storesize"
                     android:visibility="gone" />
-
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/bar_chart"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="220dp"
                     android:nestedScrollingEnabled="true" />
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -201,17 +220,10 @@
 
                 </ProgressBar>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/bar_chart"
-                    android:layout_marginRight="15dp"
-                    android:gravity="right|center_horizontal"
-                    android:text="@string/xaxis_label"
-                    android:textColor="@color/ezfbb_black"
-                    android:textSize="11sp" />
+
             </RelativeLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/llpvahierarchy"
@@ -235,13 +247,15 @@
                 android:id="@+id/relTablelayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/llpvahierarchy">
+                android:layout_below="@+id/llpvahierarchy"
+                >
 
                 <View
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:background="@color/smdm_divider_Black" />
+
 
                 <LinearLayout
                     android:id="@+id/linear"
@@ -286,6 +300,7 @@
                                 android:textColor="@color/ezfbb_black"
                                 android:textSize="@dimen/normallayout_textsize"
                                 android:textStyle="normal" />
+
 
                             <RelativeLayout
                                 android:id="@+id/btnSalesNext"
@@ -334,6 +349,7 @@
                             android:textSize="@dimen/normallayout_textsize"
                             android:textStyle="normal" />
 
+
                         <TextView
                             android:id="@+id/rel"
                             android:layout_width="90dp"
@@ -351,7 +367,6 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="30dp">
-
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
@@ -364,6 +379,7 @@
                             android:gravity="center_vertical"
                             android:padding="2dp"
                             android:textColor="@android:color/black" />
+
 
                         <EditText
                             android:id="@+id/edt_plansales"
@@ -401,6 +417,7 @@
                             android:editable="false"
                             android:textColor="@android:color/black" />
 
+
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -412,11 +429,15 @@
                     android:layout_height="match_parent"
                     android:divider="@null"
                     android:dividerHeight="0dp"
-                    android:smoothScrollbar="true"/>
+                    android:smoothScrollbar="true"
+                    />
 
             </RelativeLayout>
 
 
         </RelativeLayout>
+        <!--</android.support.v4.widget.NestedScrollView>-->
     </RelativeLayout>
+
+
 </RelativeLayout>

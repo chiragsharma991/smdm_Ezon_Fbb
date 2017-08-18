@@ -252,15 +252,15 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         loc_listDataHeader.add("Store");
         if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
             prod_listDataHeader.add("Department");
-            prod_listDataHeader.add("Subdept");
+            prod_listDataHeader.add("Category");
             prod_listDataHeader.add("Class");
-            prod_listDataHeader.add("Subclass");
+            prod_listDataHeader.add("Brand");
         } else {
             prod_listDataHeader.add("Department");
-            prod_listDataHeader.add("Subdept");
+            prod_listDataHeader.add("Category");
             prod_listDataHeader.add("Class");
-            prod_listDataHeader.add("Subclass");
-            prod_listDataHeader.add("MC");
+            prod_listDataHeader.add("Brand");
+            prod_listDataHeader.add("Brand Class");
         }
 
         if (Reusable_Functions.chkStatus(EzoneSalesFilter.this)) {
@@ -704,7 +704,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     ez_deptList.add(plandept);
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(1).equals("Subdept")) {
+                                if (prod_listDataHeader.get(1).equals("Category")) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -752,7 +752,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(EzoneSalesFilter.this, "no data found in subdept", Toast.LENGTH_LONG).show();
+                                Toast.makeText(EzoneSalesFilter.this, "no data found in Category", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -839,7 +839,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
-                                if (prod_listDataHeader.get(3).equals("Subclass")) {
+                                if (prod_listDataHeader.get(3).equals("Brand")) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -888,7 +888,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(EzoneSalesFilter.this, "no data found in subclass", Toast.LENGTH_LONG).show();
+                                Toast.makeText(EzoneSalesFilter.this, "no data found in Brand", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -912,7 +912,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     rel_ez_process_filter.setVisibility(View.GONE);
                                 } else {
                                     rel_ez_process_filter.setVisibility(View.GONE);
-                                    if (prod_listDataHeader.get(4).equals("MC")) {
+                                    if (prod_listDataHeader.get(4).equals("Brand Class")) {
                                         rel_ez_process_filter.setVisibility(View.VISIBLE);
                                         offset = 0;
                                         limit = 100;
@@ -959,7 +959,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("mc response :", "" + response);
+                        //Log.e("mc response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();

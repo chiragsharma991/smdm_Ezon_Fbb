@@ -131,7 +131,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
 
                         break;
-                    case "Subdept":
+                    case "Category":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
 
@@ -141,12 +141,12 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
 
                         break;
-                    case "Subclass":
+                    case "Brand":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
 
                         break;
-                    case "MC":
+                    case "Brand Class":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
                         break;

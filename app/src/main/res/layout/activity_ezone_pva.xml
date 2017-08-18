@@ -204,8 +204,9 @@
                     android:visibility="gone" />
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/bar_chart"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="220dp"
                     android:nestedScrollingEnabled="true" />
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -221,17 +222,7 @@
 
                 </ProgressBar>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/bar_chart"
-                    android:layout_marginRight="15dp"
-                    android:visibility="invisible"
-                    android:gravity="right|center_horizontal"
-                    android:text="@string/xaxis_label"
-                    android:textColor="@color/ezfbb_black"
-                    android:textSize="11sp" />
+
             </RelativeLayout>
 
 
