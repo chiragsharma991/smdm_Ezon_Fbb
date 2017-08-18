@@ -545,20 +545,23 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
                             e_bandnm = planengagementArrayList.get(position).getLevel();
                             Log.e("e_bandnm :",""+e_bandnm);
+                    bandClick = true;
+                    engagemntBandClick.communicatefrag1(e_bandnm,bandClick,context,userId,bearertoken);
+                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
-                            if (Reusable_Functions.chkStatus(getActivity()))
-                            {
-                                Reusable_Functions.sDialog(getActivity(), "Loading...");
-                                offsetval = 0;
-                                limit = 100;
-                                count = 0;
-                                bandClick = true;
-                                requestEngagementBandDetail();
-                            }
-                            else
-                            {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
+//                            if (Reusable_Functions.chkStatus(getActivity()))
+//                            {
+//                                Reusable_Functions.sDialog(getActivity(), "Loading...");
+//                                offsetval = 0;
+//                                limit = 100;
+//                                count = 0;
+//                                bandClick = true;
+//                                requestEngagementBandDetail();
+//                            }
+//                            else
+//                            {
+//                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                            }
 
                 }
             });
@@ -631,19 +634,22 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
                     e_bandnm = planengagementArrayList.get(position).getLevel();
                     Log.e("e_bandnm :",""+e_bandnm);
+                    bandClick = true;
+                    engagemntBandClick.communicatefrag1(e_bandnm,bandClick,context,userId,bearertoken);
+                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
-                    if (Reusable_Functions.chkStatus(getActivity())) {
-                        Reusable_Functions.sDialog(getActivity(), "Loading...");
-                        offsetval = 0;
-                        limit = 100;
-                        count = 0;
-                        bandClick = true;
-                        requestEngagementBandDetail();
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
+//                    if (Reusable_Functions.chkStatus(getActivity())) {
+//                        Reusable_Functions.sDialog(getActivity(), "Loading...");
+//                        offsetval = 0;
+//                        limit = 100;
+//                        count = 0;
+//                        bandClick = true;
+//                        requestEngagementBandDetail();
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                    }
 
                 }
             });
@@ -715,19 +721,23 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
                     e_bandnm = actualengagementArrayList.get(position).getLevel();
                     Log.e("e_bandnm :",""+e_bandnm);
+                    bandClick = false;
+                    engagemntBandClick.communicatefrag1(e_bandnm,bandClick,context,userId,bearertoken);
+                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
-                    if (Reusable_Functions.chkStatus(getActivity())) {
-                        Reusable_Functions.sDialog(getActivity(), "Loading...");
-                        offsetval = 0;
-                        limit = 100;
-                        count = 0;
-                        bandClick = false;
-                        requestEngagementBandDetail();
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
+
+//                    if (Reusable_Functions.chkStatus(getActivity())) {
+//                        Reusable_Functions.sDialog(getActivity(), "Loading...");
+//                        offsetval = 0;
+//                        limit = 100;
+//                        count = 0;
+//                        bandClick = false;
+//                        requestEngagementBandDetail();
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                    }
 
                 }
             });
@@ -803,19 +813,23 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
                     e_bandnm = actualengagementArrayList.get(position).getLevel();
                     Log.e("e_bandnm :",""+e_bandnm);
+                    bandClick = false;
+                    engagemntBandClick.communicatefrag1(e_bandnm,bandClick,context,userId,bearertoken);
+                    CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
-                    if (Reusable_Functions.chkStatus(getActivity())) {
-                        Reusable_Functions.sDialog(getActivity(), "Loading...");
-                        offsetval = 0;
-                        limit = 100;
-                        count = 0;
-                        bandClick = false;
-                        requestEngagementBandDetail();
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
+
+//                    if (Reusable_Functions.chkStatus(getActivity())) {
+//                        Reusable_Functions.sDialog(getActivity(), "Loading...");
+//                        offsetval = 0;
+//                        limit = 100;
+//                        count = 0;
+//                        bandClick = false;
+//                        requestEngagementBandDetail();
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                    }
 
                 }
             });

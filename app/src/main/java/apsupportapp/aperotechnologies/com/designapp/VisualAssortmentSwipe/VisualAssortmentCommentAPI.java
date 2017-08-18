@@ -146,7 +146,6 @@ public class VisualAssortmentCommentAPI {
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         String formatted = format1.format(cal.getTime());
         System.out.println(formatted);
-
-        return formatted;
+       return formatted;
     }
 }

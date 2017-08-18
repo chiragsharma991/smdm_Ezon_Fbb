@@ -15,7 +15,7 @@ public class FreshnessIndex_Ez_Model extends HourlyPerformence_Model {
     double assortmentGrpCont;
     double sohNonAssortmentGrp;
     double nonAssortmentGrpCont;
-    int stkGitQty;
+    double stkGitQty;
 
 
 
@@ -75,11 +75,11 @@ public class FreshnessIndex_Ez_Model extends HourlyPerformence_Model {
         this.nonAssortmentGrpCont = nonAssortmentGrpCont;
     }
 
-    public int getStkGitQty() {
+    public double getStkGitQty() {
         return stkGitQty;
     }
 
-    public void setStkGitQty(int stkGitQty) {
+    public void setStkGitQty(double stkGitQty) {
         this.stkGitQty = stkGitQty;
     }
 }

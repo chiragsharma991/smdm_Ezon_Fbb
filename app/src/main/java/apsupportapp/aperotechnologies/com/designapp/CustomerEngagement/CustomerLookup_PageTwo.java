@@ -20,7 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
@@ -53,20 +56,24 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 
+import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerDetailAdapter.ProgressViewHolder.cust_progressBar;
 import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookup_PageOne.customerDetailsList;
+
 
 /**
  * Created by pamrutkar on 14/06/17.
  */
 public class CustomerLookup_PageTwo extends Fragment {
-    String e_bandnm;
+    public static String e_bandnm;
     OnEngagemntBandClick onEngagemntBandClick;
-    TextView txt_engagementnm_Val, txt_pending_Val, txt_color_engagemnt_nm;
+    static public TextView txt_engagemnt_nm;
     static EditText edt_cust_Search;
-     RecyclerView lv_cust_details;
+    static public RecyclerView lv_cust_details;
+    static public Button btn_reset;
     CustomerDetail customerDetail;
     CustomerDetailAdapter customerDetailAdapter;
     ArrayList<CustomerDetail> detailArrayList, customerDetailArrayList = new ArrayList<CustomerDetail>();
+    static public LinearLayout linear_engagement_type_nm;
     ViewGroup root;
     Context context;
     SharedPreferences sharedPreferences;
@@ -76,19 +83,22 @@ public class CustomerLookup_PageTwo extends Fragment {
     private boolean checkNetworkFalse = false;
     JsonArrayRequest postRequest;
     private String recache = "true";
-    private String lazyScroll = "OFF";
+    public static String lazyScroll = "OFF";
     private int totalItemCount = 0;  // this is total item present in listview
     int firstVisibleItem = 0;
     MySingleton m_config;
     String updated_userId;
-    private boolean clickFlag = false;
+    public static boolean band_Click;
+    public static boolean flag = false ;
     int offset = 0, count = 0, limit = 100;
     private int arr_count = 0;
     int pos;
 
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        root = (ViewGroup) inflater.inflate(R.layout.fragment_custlookup_pagetwo, container, false);
+        context = getContext();
         m_config = MySingleton.getInstance(getActivity());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
@@ -97,25 +107,21 @@ public class CustomerLookup_PageTwo extends Fragment {
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         arr_count = 0;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = (ViewGroup) inflater.inflate(R.layout.fragment_custlookup_pagetwo, container, false);
-        context = root.getContext();
-        initialise();
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        Cache cache = new DiskBasedCache(getActivity().getApplicationContext().getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
+        initialise();
+
         if (Reusable_Functions.chkStatus(context))
         {
             Reusable_Functions.sDialog(context, "Loading...");
             offset = 0;
             limit = 100;
             count = 0;
-            clickFlag = false;
+            flag = false;
+            linear_engagement_type_nm.setVisibility(View.GONE);
             requestCustomerDetail();
         }
         else
@@ -125,12 +131,13 @@ public class CustomerLookup_PageTwo extends Fragment {
         Log.e("test", "onCreateView: page two");
 
 
-        edt_cust_Search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
+        edt_cust_Search.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
             Boolean handled = false;
 
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+            {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE) || (actionId == EditorInfo.IME_ACTION_NEXT) || (actionId == EditorInfo.IME_ACTION_NONE)) {
                     edt_cust_Search.clearFocus();
                     InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -150,7 +157,8 @@ public class CustomerLookup_PageTwo extends Fragment {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
                 String searchData = edt_cust_Search.getText().toString();
                 customerDetailAdapter.getFilter().filter(searchData);
             }
@@ -160,9 +168,11 @@ public class CustomerLookup_PageTwo extends Fragment {
             }
         });
 
-        lv_cust_details.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        lv_cust_details.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
                 super.onScrollStateChanged(recyclerView, newState);
                 RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
                 int visibleItemCount = recyclerView.getChildCount();
@@ -171,23 +181,39 @@ public class CustomerLookup_PageTwo extends Fragment {
 
                 Log.e(" arr_count ", "" + arr_count);
 
-                if (arr_count == 100 && lazyScroll.equals("OFF")) {
-                    detailArrayList.add(null);
-                    customerDetailAdapter.notifyItemInserted(detailArrayList.size() - 1);
-                    pos = detailArrayList.size() - 1;
+                if (arr_count == 100 && lazyScroll.equals("OFF"))
+                {
+                    customerDetailsList.add(null);
+                    customerDetailAdapter.notifyItemInserted(customerDetailsList.size() - 1);
+                    pos = customerDetailsList.size() - 1;
                     arr_count = 0;
                     lazyScroll = "ON";
                     android.os.Handler h = new android.os.Handler();
-                    h.postDelayed(new Runnable() {
-                        public void run() {
-                            requestCustomerDetail();
+                    h.postDelayed(new Runnable()
+                    {
+                        public void run()
+                        {
+                            if (flag == false)
+                            {
+                                Log.e("run: ", "one");
+                                linear_engagement_type_nm.setVisibility(View.GONE);
+                                requestCustomerDetail();
+                            }
+                            else
+                            {
+                                Log.e("run: ", "two");
+                                linear_engagement_type_nm.setVisibility(View.VISIBLE);
+                                requestEngagementBandDetail(context,userId,bearertoken);
+                                cust_progressBar.setVisibility(View.GONE);
+                            }
                         }
                     }, 5000);
                 }
             }
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
@@ -195,8 +221,8 @@ public class CustomerLookup_PageTwo extends Fragment {
 
         lv_cust_details.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-
+            public void onItemClick(View view, int position)
+            {
                 Intent intent = new Intent(context, CustomerDetailActivity.class);
                 intent.putExtra("uniqueCustomer", customerDetailsList.get(position).getUniqueCustomer());
                 Log.e("Customer Id ", "" + customerDetailsList.get(position).getUniqueCustomer());
@@ -206,75 +232,99 @@ public class CustomerLookup_PageTwo extends Fragment {
         return root;
     }
 
-    public CustomerLookup_PageTwo() {
+    public CustomerLookup_PageTwo()
+    {
 
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser)
-        {
+        if (isVisibleToUser) {
             Log.e("setUserVisibleHint: ", "" + isVisibleToUser);
-            Reusable_Functions.sDialog(context, "Loading...");
-            clickFlag = false;
-            requestCustomerDetail();
-
-            if (checkNetworkFalse)
-            {
+            if (checkNetworkFalse) {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
             }
         }
 
     }
 
-    private void initialise() {
+    private void initialise()
+    {
+        customerDetailsList = new ArrayList<CustomerDetail>();
         detailArrayList = new ArrayList<CustomerDetail>();
         edt_cust_Search = (EditText) root.findViewById(R.id.edt_cust_Search);
-        txt_color_engagemnt_nm = (TextView) root.findViewById(R.id.txt_color_engagemnt_nm);
-        txt_engagementnm_Val = (TextView) root.findViewById(R.id.txt_engagementnm_Val);
-        txt_pending_Val = (TextView) root.findViewById(R.id.txt_pending_Val);
+        txt_engagemnt_nm = (TextView) root.findViewById(R.id.txt_engagemnt_nm);
+        btn_reset = (Button)root.findViewById(R.id.btn_reset);
+        linear_engagement_type_nm = (LinearLayout)root.findViewById(R.id.linear_engagement_type_nm);
         lv_cust_details = (RecyclerView) root.findViewById(R.id.lv_cust_details);
-        lv_cust_details.setLayoutManager(new LinearLayoutManager(context));
+        btn_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    customerDetailsList.clear();
+                    offset = 0;
+                    limit = 100;
+                    count = 0;
+                    flag = false;
+                    linear_engagement_type_nm.setVisibility(View.GONE);
+                    requestCustomerDetail();
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
         this.context = context;
-        try {
+        try
+        {
             onEngagemntBandClick = (OnEngagemntBandClick) context;
-        } catch (ClassCastException e) {
+        }
+        catch (ClassCastException e)
+        {
             throw new ClassCastException(context.toString()
                     + " must implement IFragmentToActivity");
         }
     }
 
-    public void fragmentCommunication(String customerDetails) {
-//        detailArrayList.clear();
-//        detailArrayList.addAll(customerDetails);
-//        Log.e("test", "inerface call size is" +detailArrayList.size()+customerDetails.size());
-//        customerDetailAdapter = new CustomerDetailAdapter(detailArrayList, context);
-//        lv_cust_details.setAdapter(customerDetailAdapter);
-//        customerDetailAdapter.notifyDataSetChanged();
-
-//            if (Reusable_Functions.chkStatus(getActivity())) {
-//                Reusable_Functions.hDialog();
-//                Reusable_Functions.sDialog(getActivity(), "Loading data...");
-
-//                offset = 0;
-//                limit = 100;
-//                count = 0;
-//                customerDetailArrayList = new ArrayList<CustomerDetail>();
-//                requestEngagementBandDetail();
-
-//            } else {
-//                Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
-//            }
+    public void fragmentCommunication(String engagementBand, boolean bandClick, Context mcontext, String user_id, String bearer_token) {
+        e_bandnm = engagementBand;
+        band_Click = bandClick;
+        context = mcontext;
+        userId = user_id;
+        bearertoken = bearer_token;
+        Log.e("fragmentCommunication: ", " " + band_Click + e_bandnm + userId + bearertoken);
+        linear_engagement_type_nm.setVisibility(View.VISIBLE);
+        txt_engagemnt_nm.setText(e_bandnm);
+        if (Reusable_Functions.chkStatus(mcontext)) {
+            Reusable_Functions.sDialog(mcontext, "Loading...");
+        flag = true;
+        customerDetailsList.clear();
+        lv_cust_details.removeAllViews();
+        offset = 0;
+        limit = 100;
+        count = 0;
+        lazyScroll = "OFF";
+        arr_count = 0;
+        requestEngagementBandDetail(context, userId, bearertoken);
+        } else {
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
-    private void requestCustomerDetail() {
+    private void requestCustomerDetail()
+    {
         String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
         Log.e("detail url :", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -290,8 +340,8 @@ public class CustomerLookup_PageTwo extends Fragment {
 
                             } else if (response.length() == limit) {
 
-                                for (int i = 0; i < response.length(); i++) {
-                                    // customerDetailsList.clear();
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
                                     Log.e("===two first", " " + customerDetailsList.get(i).getFullName() + "  " + customerDetailsList.get(i).getMbrPlanSaleNetVal());
@@ -301,8 +351,8 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 arr_count = response.length();
                                 offset = offset + limit;
 
-                            } else if (response.length() < limit) {
-                                //  customerDetailsList.clear();
+                            } else if (response.length() < limit)
+                            {
 
                                 for (int i = 0; i < response.length(); i++) {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
@@ -312,19 +362,19 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 }
                             }
 
-
-                                lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                                lv_cust_details.setOnFlingListener(null);
-                                new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
-                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, context);
-                                lv_cust_details.setAdapter(customerDetailAdapter);
-                                customerDetailAdapter.notifyDataSetChanged();
+                            flag = false;
+                            lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                            lv_cust_details.setOnFlingListener(null);
+                            new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
+                            customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, context);
+                            lv_cust_details.setAdapter(customerDetailAdapter);
+                            customerDetailAdapter.notifyDataSetChanged();
 
 
                             Reusable_Functions.hDialog();
 
                         } catch (Exception e) {
-                            detailArrayList.remove(pos);
+                            customerDetailsList.remove(pos);
                             customerDetailAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             Log.e("exception :", "" + e.getMessage());
@@ -337,7 +387,7 @@ public class CustomerLookup_PageTwo extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        detailArrayList.remove(pos);
+                        customerDetailsList.remove(pos);
                         customerDetailAdapter.notifyDataSetChanged();
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
@@ -345,7 +395,6 @@ public class CustomerLookup_PageTwo extends Fragment {
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -362,5 +411,100 @@ public class CustomerLookup_PageTwo extends Fragment {
         queue.add(postRequest);
     }
 
+
+    private void requestEngagementBandDetail(final Context mcontext, String user_id, final String bearer_token)
+    {
+        Cache cache = new DiskBasedCache(mcontext.getCacheDir(), 1024 * 1024); // 1MB cap
+        Network network = new BasicNetwork(new HurlStack());
+        RequestQueue mqueue;
+        mqueue = new RequestQueue(cache, network);
+        mqueue.start();
+        user_id = user_id.substring(0, user_id.length() - 5);
+        String url = "";
+        final Gson gson;
+        gson = new Gson();
+        if (band_Click) {
+
+            url = ConstsCore.web_url + "/v1/display/customerdetails/" + user_id + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
+        } else {
+            url = ConstsCore.web_url + "/v1/display/customerdetails/" + user_id + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
+        }
+        Log.e("detail url 1:", "" + url);
+        JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("response page one:", "" + response + " size " + response.length());
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(mcontext, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else if (response.length() == limit) {
+
+                                for (int i = 0; i < response.length(); i++) {
+                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+                                    customerDetailsList.add(customerDetail);
+                                    Log.e("=== engagement band click", " " + customerDetailsList.get(i).getFullName());
+
+                                }
+                                arr_count = response.length();
+                                Log.e("array size: ", "" + customerDetailsList.size() + "\t"+ arr_count);
+
+                                offset = offset + limit;
+
+                            } else if (response.length() < limit) {
+
+                                for (int i = 0; i < response.length(); i++) {
+                                    customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
+                                    customerDetailsList.add(customerDetail);
+                                    Log.e("===engagement band click", " " + customerDetailsList.get(i).getFullName());
+
+                                }
+                            }
+
+                            flag = true;
+                            customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, mcontext);
+                            lv_cust_details.setAdapter(customerDetailAdapter);
+                            customerDetailAdapter.notifyDataSetChanged();
+                            Reusable_Functions.hDialog();
+
+
+                        } catch (Exception e)
+                        {
+
+                            Reusable_Functions.hDialog();
+                            Log.e("exception :", "" + e.getMessage());
+                            Toast.makeText(mcontext, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(mcontext, "server not responding..", Toast.LENGTH_SHORT).show();
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearer_token);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        mqueue.add(postRequest);
+    }
 }
 

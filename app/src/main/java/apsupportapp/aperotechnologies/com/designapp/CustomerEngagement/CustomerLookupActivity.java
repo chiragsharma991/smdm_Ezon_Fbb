@@ -144,11 +144,11 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void communicatefrag1(String engagementband) {
+    public void communicatefrag1(String engagementband,boolean bandClick,Context context,String user_id,String bearertoken) {
         CustomerLookup_PageTwo fragment = (CustomerLookup_PageTwo) adapter.getItem(1);
         if (fragment != null)
         {
-            fragment.fragmentCommunication(engagementband);
+            fragment.fragmentCommunication(engagementband,bandClick,context,user_id,bearertoken);
         }
     }
 }
