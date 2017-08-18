@@ -188,19 +188,27 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
         switch (id) {
             // case 0 and 1 will follow like first update list and after pie chart
             case 0:
+                card_supervisor.setVisibility(View.GONE);
+                relFIndexTablelayout_supervisor.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true"; //Pie chart Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:
+                card_supervisor.setVisibility(View.GONE);
+                relFIndexTablelayout_supervisor.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
             case 2:  // this is for only change list
+                card_supervisor.setVisibility(View.GONE);
+                relFIndexTablelayout_supervisor.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             case 3:  // this is for only change list
+                card_supervisor.setVisibility(View.GONE);
+                relFIndexTablelayout_supervisor.setVisibility(View.GONE);
                 Log.e("here","case 2");
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 ApiRequestNew_supervisor api_request_new = new ApiRequestNew_supervisor(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
@@ -229,8 +237,8 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
                 processbar_view.setVisibility(View.GONE);
                 break;
             case 1:
-                card_supervisor.setVisibility(View.VISIBLE);
-                relFIndexTablelayout_supervisor.setVisibility(View.VISIBLE);
+//                card_supervisor.setVisibility(View.VISIBLE);
+//                relFIndexTablelayout_supervisor.setVisibility(View.VISIBLE);
                 text_no_data_supervisor.setVisibility(View.GONE);
                 Log.e(TAG, "Pie chart list log: " );
                 piechartList = new ArrayList<>();
@@ -672,6 +680,7 @@ class ApiRequestNew_supervisor {
                                 card_supervisor.setVisibility(View.VISIBLE);
                                 relFIndexTablelayout_supervisor.setVisibility(View.VISIBLE);
                                 text_no_data_supervisor.setVisibility(View.GONE);
+                                Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
 
                                 Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
@@ -690,6 +699,7 @@ class ApiRequestNew_supervisor {
                                 card_supervisor.setVisibility(View.VISIBLE);
                                 relFIndexTablelayout_supervisor.setVisibility(View.VISIBLE);
                                 text_no_data_supervisor.setVisibility(View.GONE);
+                                Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
 
                                 Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++)
