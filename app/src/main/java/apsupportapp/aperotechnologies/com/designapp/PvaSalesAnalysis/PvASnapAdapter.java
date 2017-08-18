@@ -127,7 +127,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
-                } else if (fromWhere.equals("Subdept")) {
+                } else if (fromWhere.equals("Category")) {
                     if (geoLeveLDesc.equals("E ZONE")) {
                         department = productNameBean.getLevel();
                     }else{
@@ -148,7 +148,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
 
-                } else if (fromWhere.equals("Subclass")) {
+                } else if (fromWhere.equals("Brand")) {
                     if (geoLeveLDesc.equals("E ZONE")) {
                         department = productNameBean.getLevel();
                     }else{
@@ -158,7 +158,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                     ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
-                } else if (fromWhere.equals("MC")) {
+                } else if (fromWhere.equals("Brand Class")) {
                     if (geoLeveLDesc.equals("E ZONE")) {
                         department = productNameBean.getLevel();
                     }else{

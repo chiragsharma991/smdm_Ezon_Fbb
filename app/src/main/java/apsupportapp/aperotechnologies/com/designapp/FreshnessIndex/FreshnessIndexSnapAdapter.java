@@ -133,7 +133,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(stkGitQty));
 
 
-                } else if (fromWhere.equals("Subdept")) {
+                } else if (fromWhere.equals("Category")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanCategory());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
@@ -148,7 +148,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(stkGitQty));
 
 
-                } else if (fromWhere.equals("Subclass")) {
+                } else if (fromWhere.equals("Brand")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandName());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
@@ -156,7 +156,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(stkGitQty));
 
 
-                } else if (fromWhere.equals("MC")) {
+                } else if (fromWhere.equals("Brand Class")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandplanClass());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));

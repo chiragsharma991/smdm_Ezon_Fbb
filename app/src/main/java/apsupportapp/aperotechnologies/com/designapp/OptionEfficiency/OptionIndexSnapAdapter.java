@@ -111,7 +111,7 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
                         break;
-                    case "Subdept":
+                    case "Category":
 
                         ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanCategory());
                         ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
@@ -130,7 +130,7 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
                         break;
-                    case "Subclass":
+                    case "Brand":
 
                         ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandName());
                         ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
@@ -140,7 +140,7 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
                         break;
-                    case "MC":
+                    case "Brand Class":
 
                         ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandplanClass());
                         ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));

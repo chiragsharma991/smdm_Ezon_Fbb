@@ -217,10 +217,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                 switch (oe_txtHeaderClass.getText().toString()) {
 
-                    case "MC":
+                    case "Brand Class":
                         oe_btnNext.setVisibility(View.VISIBLE);
-                        oe_txtHeaderClass.setText("Subclass");
-                        fromWhere = "Subclass";
+                        oe_txtHeaderClass.setText("Brand");
+                        fromWhere = "Brand";
                         level = 4;
                         flag = false;
                         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -240,7 +240,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         break;
 
-                    case "Subclass":
+                    case "Brand":
                         oe_txtHeaderClass.setText("Class");
                         fromWhere = "Class";
                         level = 3;
@@ -264,8 +264,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
 
                     case "Class":
-                        oe_txtHeaderClass.setText("Subdept");
-                        fromWhere = "Subdept";
+                        oe_txtHeaderClass.setText("Category");
+                        fromWhere = "Category";
                         level = 2;
                         flag = false;
                         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -288,7 +288,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         break;
 
-                    case "Subdept":
+                    case "Category":
                         oe_btnPrev.setVisibility(View.INVISIBLE);
                         oe_txtHeaderClass.setText("Department");
                         fromWhere = "Department";
@@ -335,8 +335,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                     case "Department":
                         oe_btnPrev.setVisibility(View.VISIBLE);
-                        oe_txtHeaderClass.setText("Subdept");
-                        fromWhere = "Subdept";
+                        oe_txtHeaderClass.setText("Category");
+                        fromWhere = "Category";
                         level = 2;
                         flag = false;
                         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -354,7 +354,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         }
                         break;
 
-                    case "Subdept":
+                    case "Category":
                         fromWhere = "Class";
                         oe_txtHeaderClass.setText("Class");
                         level = 3;
@@ -376,8 +376,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         break;
 
                     case "Class":
-                        oe_txtHeaderClass.setText("Subclass");
-                        fromWhere = "Subclass";
+                        oe_txtHeaderClass.setText("Brand");
+                        fromWhere = "Brand";
                         level = 4;
                         flag = false;
                         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -397,10 +397,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         break;
 
-                    case "Subclass":
+                    case "Brand":
                         oe_btnNext.setVisibility(View.INVISIBLE);
-                        oe_txtHeaderClass.setText("MC");
-                        fromWhere = "MC";
+                        oe_txtHeaderClass.setText("Brand Class");
+                        fromWhere = "Brand Class";
                         level = 5;
                         flag = false;
                         optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -467,9 +467,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                             case "Department":
                                 oe_btnPrev.setVisibility(View.VISIBLE);
-                                oe_txtHeaderClass.setText("Subdept");
+                                oe_txtHeaderClass.setText("Category");
                                 oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanDept();
-                                fromWhere = "Subdept";
+                                fromWhere = "Category";
                                 level = 2;
                                 seasonGroup = "Current";
                                 if (Reusable_Functions.chkStatus(context)) {
@@ -493,7 +493,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 }
                                 break;
 
-                            case "Subdept":
+                            case "Category":
 
                                 oe_txtHeaderClass.setText("Class");
                                 oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanCategory();
@@ -521,9 +521,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 break;
                             case "Class":
-                                oe_txtHeaderClass.setText("Subclass");
+                                oe_txtHeaderClass.setText("Brand");
                                 oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanClass();
-                                fromWhere = "Subclass";
+                                fromWhere = "Brand";
                                 seasonGroup = "Current";
                                 level = 4;
                                 if (Reusable_Functions.chkStatus(context)) {
@@ -546,11 +546,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                                 break;
 
-                            case "Subclass":
+                            case "Brand":
                                 oe_btnNext.setVisibility(View.INVISIBLE);
-                                oe_txtHeaderClass.setText("MC");
+                                oe_txtHeaderClass.setText("Brand Class");
                                 oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getBrandName();
-                                fromWhere = "MC";
+                                fromWhere = "Brand Class";
                                 seasonGroup = "Current";
                                 level = 5;
                                 if (Reusable_Functions.chkStatus(context)) {
@@ -642,16 +642,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 if (oe_txtHeaderClass.getText().toString().equals("Department")) {
                     level = 1;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
-                } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
+                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
                     level = 2;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
                 } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
                     level = 3;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanClass().toString();
-                } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
+                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
                     level = 4;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
-                } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
+                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
                     level = 5;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
                 }
@@ -689,16 +689,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 if (oe_txtHeaderClass.getText().toString().equals("Department")) {
                     level = 1;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
-                } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
+                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
                     level = 2;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
                 } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
                     level = 3;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanClass().toString();
-                } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
+                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
                     level = 4;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
-                } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
+                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
                     level = 5;
                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
                 }
@@ -1069,17 +1069,17 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     optionEfficiencyDetails.setPlanDept("All");
 
 
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
                                     optionEfficiencyDetails.setPlanCategory("All");
 
 
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
                                     optionEfficiencyDetails.setPlanClass("All");
 
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
                                     optionEfficiencyDetails.setBrandName("All");
 
-                                } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
                                     optionEfficiencyDetails.setBrandplanClass("All");
 
                                 }
@@ -1129,7 +1129,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     }
 
 
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
                                     level = 2;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
                                     Boolean ContainEqual = false;
@@ -1193,7 +1193,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                         Toast.makeText(context, "Selected item is not available in Core", Toast.LENGTH_SHORT).show();
                                     }
 
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
                                     level = 4;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
                                     Boolean ContainEqual = false;
@@ -1223,7 +1223,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                         Toast.makeText(context, "Selected item is not available in Core", Toast.LENGTH_SHORT).show();
                                     }
 
-                                } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
                                     level = 5;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
                                     Boolean ContainEqual = false;
@@ -1319,8 +1319,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onResponse(JSONArray response) {
                         if (SalesFilterActivity.level_filter == 2) {
-                            oe_txtHeaderClass.setText("Subdept");
-                            fromWhere = "Subdept";
+                            oe_txtHeaderClass.setText("Category");
+                            fromWhere = "Category";
                             oe_btnPrev.setVisibility(View.VISIBLE);
 
                         } else if (SalesFilterActivity.level_filter == 3) {
@@ -1330,20 +1330,20 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
 
                         } else if (SalesFilterActivity.level_filter == 4) {
-                            oe_txtHeaderClass.setText("Subclass");
-                            fromWhere = "Subclass";
+                            oe_txtHeaderClass.setText("Brand");
+                            fromWhere = "Brand";
                             oe_btnPrev.setVisibility(View.VISIBLE);
 
                         } else if (SalesFilterActivity.level_filter == 5) {
-                            oe_txtHeaderClass.setText("MC");
-                            fromWhere = "MC";
+                            oe_txtHeaderClass.setText("Brand Class");
+                            fromWhere = "Brand Class";
                             oe_btnPrev.setVisibility(View.VISIBLE);
                             oe_btnNext.setVisibility(View.INVISIBLE);
 
 
                         } else if (SalesFilterActivity.level_filter == 6) {
-                            oe_txtHeaderClass.setText("MC");
-                            fromWhere = "MC";
+                            oe_txtHeaderClass.setText("Brand Class");
+                            fromWhere = "Brand Class";
                             oe_btnPrev.setVisibility(View.VISIBLE);
                             oe_btnNext.setVisibility(View.INVISIBLE);
 
@@ -1392,16 +1392,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 if (oe_txtHeaderClass.getText().toString().equals("Department")) {
                                     level = 1;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Subdept")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
                                     level = 2;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
                                     level = 3;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanClass().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Subclass")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
                                     level = 4;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("MC")) {
+                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
                                     level = 5;
                                     oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
                                 }
@@ -1629,7 +1629,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 OnItemClick = false;
-                                Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
 
 
@@ -1682,7 +1682,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             OnItemClick = false;
-                            Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1692,7 +1692,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         OnItemClick = false;
-                        Toast.makeText(context, "No Subdept data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1849,7 +1849,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 OnItemClick = false;
-                                Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -1892,7 +1892,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             OnItemClick = false;
-                            Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1902,7 +1902,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         OnItemClick = false;
-                        Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1939,7 +1939,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 OnItemClick = false;
-                                Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1986,7 +1986,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             OnItemClick = false;
-                            Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1996,7 +1996,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         OnItemClick = false;
-                        Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -2035,7 +2035,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
             }
         }
-        else if (oe_txtHeaderClass.getText().toString().equals("Subdept"))
+        else if (oe_txtHeaderClass.getText().toString().equals("Category"))
         {
             if (coreSelection)
             {
@@ -2057,7 +2057,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
             }
         }
-        else if (oe_txtHeaderClass.getText().toString().equals("Subclass"))
+        else if (oe_txtHeaderClass.getText().toString().equals("Brand"))
         {
             if (coreSelection)
             {
@@ -2068,7 +2068,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
             }
         }
-        else if (oe_txtHeaderClass.getText().toString().equals("MC"))
+        else if (oe_txtHeaderClass.getText().toString().equals("Brand Class"))
         {
             if (coreSelection)
             {

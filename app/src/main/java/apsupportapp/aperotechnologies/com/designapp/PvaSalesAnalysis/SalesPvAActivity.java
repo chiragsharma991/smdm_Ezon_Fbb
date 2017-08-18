@@ -51,6 +51,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -61,10 +62,12 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
+import apsupportapp.aperotechnologies.com.designapp.MyMarkerView;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
@@ -248,13 +251,13 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 switch (txtheaderplanclass.getText().toString()) {
                                     case "Department":
                                         btnSalesPrev.setVisibility(View.VISIBLE);
-                                        txtheaderplanclass.setText("Subdept");
+                                        txtheaderplanclass.setText("Category");
                                         if (geoLeveLDesc.equals("E ZONE")) {
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getLevel();
                                         } else {
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
                                         }
-                                        fromWhere = "Subdept";
+                                        fromWhere = "Category";
                                         level = 2;
                                         if (Reusable_Functions.chkStatus(context)) {
                                             if (postRequest != null) {
@@ -276,7 +279,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                         }
                                         break;
 
-                                    case "Subdept":
+                                    case "Category":
 
                                         txtheaderplanclass.setText("Class");
                                         if (geoLeveLDesc.equals("E ZONE")) {
@@ -308,7 +311,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                         break;
                                     case "Class":
 
-                                        txtheaderplanclass.setText("Subclass");
+                                        txtheaderplanclass.setText("Brand");
                                         if (geoLeveLDesc.equals("E ZONE")) {
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getLevel();
                                             btnSalesNext.setVisibility(View.INVISIBLE);
@@ -316,7 +319,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                         } else {
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
                                         }
-                                        fromWhere = "Subclass";
+                                        fromWhere = "Brand";
                                         level = 4;
                                         if (Reusable_Functions.chkStatus(context)) {
                                             if (postRequest != null) {
@@ -336,7 +339,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                         }
 
                                         break;
-                                    case "Subclass":
+                                    case "Brand":
                                         if (geoLeveLDesc.equals("E ZONE")) {
                                             Reusable_Functions.hDialog();
                                             Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
@@ -344,13 +347,13 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                             break;
                                         }
                                         btnSalesNext.setVisibility(View.INVISIBLE);
-                                        txtheaderplanclass.setText("MC");
+                                        txtheaderplanclass.setText("Brand Class");
                                         if (geoLeveLDesc.equals("E ZONE")) {
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getLevel();
                                         } else {
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
                                         }
-                                        fromWhere = "MC";
+                                        fromWhere = "Brand Class";
                                         level = 5;
                                         if (Reusable_Functions.chkStatus(context)) {
                                             if (postRequest != null) {
@@ -410,8 +413,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     private void requestfromPvaFilter(String filterSelectedString) {
 
         if (level == 2) {
-            txtheaderplanclass.setText("Subdept");
-            fromWhere = "Subdept";
+            txtheaderplanclass.setText("Category");
+            fromWhere = "Category";
             btnSalesPrev.setVisibility(View.VISIBLE);
 
         } else if (level == 3) {
@@ -419,17 +422,17 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             fromWhere = "Class";
             btnSalesPrev.setVisibility(View.VISIBLE);
         } else if (level == 4) {
-            txtheaderplanclass.setText("Subclass");
-            fromWhere = "Subclass";
+            txtheaderplanclass.setText("Brand");
+            fromWhere = "Brand";
             btnSalesPrev.setVisibility(View.VISIBLE);
         } else if (level == 5) {
-            txtheaderplanclass.setText("MC");
-            fromWhere = "MC";
+            txtheaderplanclass.setText("Brand Class");
+            fromWhere = "Brand Class";
             btnSalesPrev.setVisibility(View.VISIBLE);
             btnSalesNext.setVisibility(View.INVISIBLE);
         } else if (level == 6) {
-            txtheaderplanclass.setText("MC");
-            fromWhere = "MC";
+            txtheaderplanclass.setText("Brand Class");
+            fromWhere = "Brand Class";
             btnSalesPrev.setVisibility(View.VISIBLE);
             btnSalesNext.setVisibility(View.INVISIBLE);
         } else if (level == 9) {
@@ -686,7 +689,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     } else {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
                     }
-                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
                     level = 2;
                     if (geoLeveLDesc.equals("E ZONE")) {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
@@ -702,7 +705,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     } else {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
                     }
-                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
                     level = 4;
                     if (geoLeveLDesc.equals("E ZONE")) {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
@@ -710,7 +713,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     } else {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
                     }
-                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
                     level = 5;
                     if (geoLeveLDesc.equals("E ZONE")) {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
@@ -774,7 +777,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     } else {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
                     }
-                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
                     level = 2;
                     if (geoLeveLDesc.equals("E ZONE")) {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
@@ -790,14 +793,14 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     } else {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
                     }
-                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
                     level = 4;
                     if (geoLeveLDesc.equals("E ZONE")) {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
                     } else {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
                     }
-                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
                     level = 5;
                     if (geoLeveLDesc.equals("E ZONE")) {
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
@@ -919,7 +922,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
                                     salesAnalysisListDisplay.setPlanCategory("All");
                                     salesAnalysisListDisplay.setLevel("All");
                                     salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
@@ -933,14 +936,14 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
                                     salesAnalysisListDisplay.setBrandName("All");
                                     salesAnalysisListDisplay.setLevel("All");
                                     salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                     salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                     salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
 
-                                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
                                     salesAnalysisListDisplay.setBrandplanClass("All");
                                     salesAnalysisListDisplay.setLevel("All");
                                     salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
@@ -989,7 +992,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                             }
                                         }
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
                                         level = 2;
                                         if (geoLeveLDesc.equals("E ZONE")) {
@@ -1020,7 +1023,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                             }
                                         }
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
                                         level = 4;
                                         if (geoLeveLDesc.equals("E ZONE")) {
@@ -1035,7 +1038,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                             }
                                         }
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
                                         level = 5;
                                         if (geoLeveLDesc.equals("E ZONE")) {
@@ -1139,7 +1142,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             } else {
                 url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?department=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick;
             }
-        } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+        } else if (txtheaderplanclass.getText().toString().equals("Category")) {
             if (geoLeveLDesc.equals("E ZONE")) {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZ/" + userId + "?category=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick;
             } else {
@@ -1151,13 +1154,13 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             } else {
                 url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?class=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick;
             }
-        } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+        } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
             if (geoLeveLDesc.equals("E ZONE")) {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZ/" + userId + "?brand=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick;
             } else {
                 url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweek/" + userId + "?brand=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick;
             }
-        } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+        } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
             if (geoLeveLDesc.equals("E ZONE")) {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZ/" + userId + "?brandclass=" + pvaFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick;
             } else {
@@ -1202,74 +1205,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     salesPvAAnalysisWeek = gson.fromJson(response.get(i).toString(), SalesPvAAnalysisWeek.class);
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
-                                float groupSpace = 0.20f;
-                                float barSpace = 0.02f; // x2 dataset
-                                float barWidth = 0.46f; // x2 dataset
-                                ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-                                ArrayList<BarEntry> yVals2 = new ArrayList<BarEntry>();
-
-
-                                for (int i = 0; i < salesPvAAnalysisWeekArrayList.size(); i++) {
-                                    yVals1.add(new BarEntry(i, (float) salesPvAAnalysisWeekArrayList.get(i).getPlanSaleNetVal()));
-                                }
-
-                                for (int i = 0; i < salesPvAAnalysisWeekArrayList.size(); i++) {
-                                    yVals2.add(new BarEntry(i, (float) salesPvAAnalysisWeekArrayList.get(i).getSaleNetVal()));
-                                }
-                                BarDataSet set1, set2;
-                                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
-                                    set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
-                                    set2 = (BarDataSet) barChart.getData().getDataSetByIndex(1);
-                                    set1.setValues(yVals1);
-                                    set2.setValues(yVals2);
-                                    barChart.getData().notifyDataChanged();
-                                    barChart.notifyDataSetChanged();
-                                } else {
-                                    // create 2 datasets with different types
-                                    set1 = new BarDataSet(yVals1, "Plan Sales");
-                                    set1.setDrawValues(false);
-                                    set1.setColor(Color.parseColor("#20b5d3"));
-
-                                    set2 = new BarDataSet(yVals2, "Net Sales");
-                                    set2.setColor(Color.parseColor("#21d24c"));
-                                    set2.setDrawValues(false);
-
-                                    ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-                                    dataSets.add(set1);
-                                    dataSets.add(set2);
-
-                                    BarData data = new BarData(dataSets);
-                                    barChart.setData(data);
-                                }
-                                barChart.getBarData().setBarWidth(barWidth);
-                                barChart.getXAxis().setAxisMinValue(0);
-                                barChart.groupBars(0, groupSpace, barSpace);
-                                barChart.invalidate();
-                                XAxis xAxis = barChart.getXAxis();
-                                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                                xAxis.setValueFormatter(new IAxisValueFormatter() {
-                                    @Override
-                                    public String getFormattedValue(float value, AxisBase axis) {
-                                        int position = (int) value;
-                                        String val = salesPvAAnalysisWeekArrayList.get(position).getWeekNumber();
-                                        return val;
-                                    }
-                                });
-
-                                YAxis leftAxis = barChart.getAxisLeft();
-                                leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
-                                leftAxis.setDrawZeroLine(true);
-                                leftAxis.setDrawLimitLinesBehindData(false);
-                                barChart.getAxisRight().setEnabled(false);
-                                Legend l = barChart.getLegend();
-                                l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-                                l.setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
-                                l.setEnabled(true);
-                                barChart.getXAxis().setDrawGridLines(false);
-                                barChart.setDescription(null);
-                                barChart.setTouchEnabled(true);
-                                barChart.setScaleEnabled(true);
-                                barChart.setPinchZoom(true);
+                                multidatasetBarGraph(salesPvAAnalysisWeekArrayList);
                                 onItemClickFlag = false;
                                 pva_progressBar.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
@@ -1278,7 +1214,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                             Reusable_Functions.hDialog();
                             onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
-                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, "catch: "+e.getMessage() );
                             e.printStackTrace();
                         }
                     }
@@ -1348,131 +1284,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     salesPvAAnalysisWeekArrayList.add(salesPvAAnalysisWeek);
                                 }
 
-
-                                barChart.getDescription().setEnabled(false);
-
-//        mChart.setDrawBorders(true);
-
-                                // scaling can now only be done on x- and y-axis separately
-                                barChart.setPinchZoom(false);
-
-                                barChart.setDrawBarShadow(false);
-
-                                barChart.setDrawGridBackground(false);
-
-
-                                Legend l = barChart.getLegend();
-                                l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-                                l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-                                l.setOrientation(Legend.LegendOrientation.VERTICAL);
-                                l.setDrawInside(true);
-                                l.setYOffset(0f);
-                                l.setXOffset(10f);
-                                l.setYEntrySpace(0f);
-                                l.setTextSize(8f);
-
-                                XAxis xAxis = barChart.getXAxis();
-                                xAxis.setGranularity(1f);
-                                xAxis.setCenterAxisLabels(true);
-                                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                                xAxis.setValueFormatter(new IAxisValueFormatter() {
-                                    @Override
-                                    public String getFormattedValue(float value, AxisBase axis) {
-
-                                        int position = (int)value;
-                                        Log.e(TAG, "getFormattedValue: "+position );
-                                       // String val = salesPvAAnalysisWeekArrayList.get(position).getWeekNumber();
-                                        return "week";
-                                    }
-                                });
-
-                                YAxis leftAxis = barChart.getAxisLeft();
-                               // leftAxis.setValueFormatter(new LargeValueFormatter());
-                                leftAxis.setDrawGridLines(false);
-                                leftAxis.setSpaceTop(35f);
-                                leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-
-                                barChart.getAxisRight().setEnabled(false);
-
-                                float groupSpace = 0.08f;
-                                float barSpace = 0.03f; // x4 DataSet
-                                float barWidth = 0.2f; // x4 DataSet
-                                // (0.2 + 0.03) * 4 + 0.08 = 1.00 -> interval per "group"
-
-                                int groupCount = 10 + 1;
-                                int startYear = 1980;
-                                int endYear = startYear + groupCount;
-
-
-                                ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-                                ArrayList<BarEntry> yVals2 = new ArrayList<BarEntry>();
-                                ArrayList<BarEntry> yVals3 = new ArrayList<BarEntry>();
-                                ArrayList<BarEntry> yVals4 = new ArrayList<BarEntry>();
-
-                                float randomMultiplier = 10 * 100000f;
-
-
-
-                                for (int i = 0; i < salesPvAAnalysisWeekArrayList.size(); i++) {
-                                    yVals1.add(new BarEntry(i, (float)salesPvAAnalysisWeekArrayList.get(i).getPlanSaleNetVal()));
-                                    yVals2.add(new BarEntry(i, (float)salesPvAAnalysisWeekArrayList.get(i).getSaleNetVal()));
-                                    yVals3.add(new BarEntry(i, 0f));
-                                    yVals4.add(new BarEntry(i, 0f));
-                                }
-
-                                BarDataSet set1, set2, set3, set4;
-
-                                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
-
-                                    set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
-                                    set2 = (BarDataSet) barChart.getData().getDataSetByIndex(1);
-                                    set3 = (BarDataSet) barChart.getData().getDataSetByIndex(2);
-                                    set4 = (BarDataSet) barChart.getData().getDataSetByIndex(3);
-                                    set1.setValues(yVals1);
-                                    set2.setValues(yVals2);
-                                    set3.setValues(yVals3);
-                                    set4.setValues(yVals4);
-                                    set1.setDrawValues(true);
-                                    set2.setDrawValues(false);
-                                    set3.setDrawValues(false);
-                                    set4.setDrawValues(false);
-
-                                    barChart.getData().notifyDataChanged();
-                                    barChart.notifyDataSetChanged();
-
-                                } else {
-                                    // create 4 DataSets
-                                    set1 = new BarDataSet(yVals1, "Company A");
-                                    set1.setColor(Color.rgb(104, 241, 175));
-                                    set2 = new BarDataSet(yVals2, "Company B");
-                                    set2.setColor(Color.rgb(164, 228, 251));
-                                    set3 = new BarDataSet(yVals3, "Company C");
-                                    set3.setColor(Color.rgb(242, 247, 158));
-                                    set4 = new BarDataSet(yVals4, "Company D");
-                                    set4.setColor(Color.rgb(255, 102, 0));
-
-                                    BarData data = new BarData(set1, set2, set3, set4);
-                                    data.setValueFormatter(new LargeValueFormatter());
-                                    data.setDrawValues(false);
-
-                                    barChart.setData(data);
-                                }
-
-                                // specify the width each bar should have
-                                barChart.getBarData().setBarWidth(barWidth);
-
-                                // restrict the x-axis range
-                                //  mChart.getXAxis().setAxisMinimum(startYear);
-
-                                // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
-                               // barChart.getXAxis().setAxisMaximum(startYear + mChart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
-                                barChart.groupBars(0, groupSpace, barSpace);
-                                barChart.getDescription().setText("Weeks >");
-                                barChart.invalidate();
-                                barChart.animateXY(3000, 3000);
-
-
-
+                                multidatasetBarGraph(salesPvAAnalysisWeekArrayList);
                                 onItemClickFlag = false;
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -1515,6 +1327,97 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         queue.add(postRequest);
     }
 
+    public void multidatasetBarGraph(ArrayList<SalesPvAAnalysisWeek> salesPvAAnalysisWeekArrayList){
+
+        try{
+            if(salesPvAAnalysisWeekArrayList !=null & salesPvAAnalysisWeekArrayList.size() > 0){
+                barChart.setDrawBarShadow(false);
+                barChart.setDrawValueAboveBar(true);
+                barChart.setMaxVisibleValueCount(50);
+                barChart.setPinchZoom(false);
+                barChart.setDrawGridBackground(false);
+                barChart.getDescription().setEnabled(false);
+
+                MyMarkerView mv = new MyMarkerView(context, R.layout.custom_marker_view);
+                mv.setChartView(barChart); // For bounds control
+                barChart.setMarker(mv); // Set the marker to the chart
+
+                XAxis xl = barChart.getXAxis();
+                xl.setGranularity(1f);
+                xl.setCenterAxisLabels(true);
+
+                YAxis leftAxis = barChart.getAxisLeft();
+                leftAxis.setGranularity(1f);
+                leftAxis.setDrawGridLines(false);
+                leftAxis.setSpaceTop(30f);
+                leftAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true
+                barChart.getAxisRight().setEnabled(false);
+
+                //data
+                float groupSpace = 0.04f;
+                float barSpace = 0.02f; // x2 dataset
+                float barWidth = 0.46f; // x2 dataset
+                // (0.46 + 0.02) * 2 + 0.04 = 1.00 -> interval per "group"
+
+                List<BarEntry> yVals1 = new ArrayList<BarEntry>();
+                List<BarEntry> yVals2 = new ArrayList<BarEntry>();
+                String[]labels=new String[salesPvAAnalysisWeekArrayList.size()];
+
+                for (int i = 0; i < salesPvAAnalysisWeekArrayList.size(); i++) {
+                    yVals1.add(new BarEntry(i, (float) salesPvAAnalysisWeekArrayList.get(i).getPlanSaleNetVal()));
+                    yVals2.add(new BarEntry(i, (float) salesPvAAnalysisWeekArrayList.get(i).getSaleNetVal()));
+                    labels[i] = salesPvAAnalysisWeekArrayList.get(i).getWeekNumber();
+
+                }
+
+                BarDataSet set1, set2;
+
+                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
+                    set1 = (BarDataSet)barChart.getData().getDataSetByIndex(0);
+                    set2 = (BarDataSet)barChart.getData().getDataSetByIndex(1);
+                    set1.setValues(yVals1);
+                    set2.setValues(yVals2);
+                    barChart.getData().notifyDataChanged();
+                    barChart.notifyDataSetChanged();
+                } else {
+                    // create 2 datasets with different types
+                    set1 = new BarDataSet(yVals1, "Plan Sales");
+                    set1.setColor(Color.parseColor("#20b5d3"));
+                    set2 = new BarDataSet(yVals2, "Net Sales");
+                    set2.setColor(Color.parseColor("#21d24c"));
+
+                    ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+                    dataSets.add(set1);
+                    dataSets.add(set2);
+
+                    BarData data = new BarData(dataSets);
+                    data.setDrawValues(false);  //remove for number on bar
+                    barChart.setData(data);
+                }
+
+                barChart.getXAxis().setDrawLabels(true);
+                barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+                barChart.getBarData().setBarWidth(barWidth);
+                barChart.getXAxis().setAxisMinValue(0);
+                barChart.getXAxis().setAxisMaximum(salesPvAAnalysisWeekArrayList.size());
+                barChart.groupBars(0, groupSpace, barSpace);
+                Legend l = barChart.getLegend();
+                l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+
+                barChart.setFitBars(true);
+                barChart.invalidate();
+                barChart.animateXY(3000, 3000);
+            }else{
+                barChart.clear();
+
+            }
+        }catch (Exception e){
+            barChart.clear();
+
+        }
+
+    }
+
 
     // drill down level API
     private void requestSalesPvACategoryList(final String deptName) {
@@ -1538,7 +1441,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "No Subdept found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Category found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1581,7 +1484,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                             Reusable_Functions.hDialog();
                             onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
-                            Toast.makeText(context, "No Subdept found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Category found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1592,7 +1495,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         Reusable_Functions.hDialog();
                         onItemClickFlag = false;
                         pva_progressBar.setVisibility(View.GONE);
-                        Toast.makeText(context, "No Subdept found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Category found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1802,7 +1705,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1841,7 +1744,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.GONE);
                             onItemClickFlag = false;
-                            Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1852,7 +1755,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         Reusable_Functions.hDialog();
                         pva_progressBar.setVisibility(View.GONE);
                         onItemClickFlag = false;
-                        Toast.makeText(context, "No Subclass data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1891,7 +1794,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1932,7 +1835,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                             Reusable_Functions.hDialog();
                             pva_progressBar.setVisibility(View.GONE);
                             onItemClickFlag = false;
-                            Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1943,7 +1846,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         Reusable_Functions.hDialog();
                         pva_progressBar.setVisibility(View.GONE);
                         onItemClickFlag = false;
-                        Toast.makeText(context, "No MC data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -2049,8 +1952,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     @Override
                     public void onResponse(JSONArray response) {
                         if (level == 2) {
-                            txtheaderplanclass.setText("Subdept");
-                            fromWhere = "Subdept";
+                            txtheaderplanclass.setText("Category");
+                            fromWhere = "Category";
                             btnSalesPrev.setVisibility(View.VISIBLE);
 
                         } else if (level == 3) {
@@ -2058,17 +1961,17 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                             fromWhere = "Class";
                             btnSalesPrev.setVisibility(View.VISIBLE);
                         } else if (level == 4) {
-                            txtheaderplanclass.setText("Subclass");
-                            fromWhere = "Subclass";
+                            txtheaderplanclass.setText("Brand");
+                            fromWhere = "Brand";
                             btnSalesPrev.setVisibility(View.VISIBLE);
                         } else if (level == 5) {
-                            txtheaderplanclass.setText("MC");
-                            fromWhere = "MC";
+                            txtheaderplanclass.setText("Brand Class");
+                            fromWhere = "Brand Class";
                             btnSalesPrev.setVisibility(View.VISIBLE);
                             btnSalesNext.setVisibility(View.INVISIBLE);
                         } else if (level == 6) {
-                            txtheaderplanclass.setText("MC");
-                            fromWhere = "MC";
+                            txtheaderplanclass.setText("Brand Class");
+                            fromWhere = "Brand Class";
                             btnSalesPrev.setVisibility(View.VISIBLE);
                             btnSalesNext.setVisibility(View.INVISIBLE);
                         } else if (level == 9) {
@@ -2122,7 +2025,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     } else {
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanDept();
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
                                     if (geoLeveLDesc.equals("E ZONE")) {
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
                                     } else {
@@ -2134,13 +2037,13 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     } else {
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getPlanClass();
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
                                     if (geoLeveLDesc.equals("E ZONE")) {
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
                                     } else {
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getBrandName();
                                     }
-                                } else if (txtheaderplanclass.getText().toString().equals("MC")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
                                     if (geoLeveLDesc.equals("E ZONE")) {
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
                                     } else {
@@ -2308,8 +2211,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
                     case "Department":
                         btnSalesPrev.setVisibility(View.VISIBLE);
-                        txtheaderplanclass.setText("Subdept");
-                        fromWhere = "Subdept";
+                        txtheaderplanclass.setText("Category");
+                        fromWhere = "Category";
                         level = 2;
                         pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -2330,7 +2233,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         }
                         break;
 
-                    case "Subdept":
+                    case "Category":
                         fromWhere = "Class";
                         txtheaderplanclass.setText("Class");
                         level = 3;
@@ -2356,8 +2259,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         if (geoLeveLDesc.equals("E ZONE")) {
                             btnSalesNext.setVisibility(View.INVISIBLE);
                         }
-                        txtheaderplanclass.setText("Subclass");
-                        fromWhere = "Subclass";
+                        txtheaderplanclass.setText("Brand");
+                        fromWhere = "Brand";
                         level = 4;
                         pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -2377,10 +2280,10 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         }
                         break;
 
-                    case "Subclass":
+                    case "Brand":
                         btnSalesNext.setVisibility(View.INVISIBLE);
-                        txtheaderplanclass.setText("MC");
-                        fromWhere = "MC";
+                        txtheaderplanclass.setText("Brand Class");
+                        fromWhere = "Brand Class";
                         level = 5;
                         pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -2437,10 +2340,10 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 }
                 switch (txtheaderplanclass.getText().toString()) {
 
-                    case "MC":
+                    case "Brand Class":
                         btnSalesNext.setVisibility(View.VISIBLE);
-                        txtheaderplanclass.setText("Subclass");
-                        fromWhere = "Subclass";
+                        txtheaderplanclass.setText("Brand");
+                        fromWhere = "Brand";
                         level = 4;
                         pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -2459,7 +2362,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         }
 
                         break;
-                    case "Subclass":
+                    case "Brand":
                         btnSalesNext.setVisibility(View.VISIBLE);
                         txtheaderplanclass.setText("Class");
                         fromWhere = "Class";
@@ -2483,8 +2386,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                         break;
 
                     case "Class":
-                        txtheaderplanclass.setText("Subdept");
-                        fromWhere = "Subdept";
+                        txtheaderplanclass.setText("Category");
+                        fromWhere = "Category";
                         level = 2;
                         pvaVal = " ";
                         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
@@ -2506,7 +2409,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
                         break;
 
-                    case "Subdept":
+                    case "Category":
                         btnSalesPrev.setVisibility(View.INVISIBLE);
                         txtheaderplanclass.setText("Department");
                         fromWhere = "Department";

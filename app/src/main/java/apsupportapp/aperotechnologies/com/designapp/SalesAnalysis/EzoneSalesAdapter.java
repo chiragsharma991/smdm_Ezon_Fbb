@@ -126,7 +126,7 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-                    case "Subdept":
+                    case "Category":
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
@@ -136,12 +136,12 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-                    case "Subclass":
+                    case "Brand":
                         ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-//                    case "MC":
+//                    case "Brand Class":
 //                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
 //                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 //                        break;
