@@ -187,23 +187,28 @@ public class OurStoreServices_Reports extends Fragment  implements TabLayout.OnT
         switch (id) {
             // case 0 and 1 will follow like first update list and after pie chart
             case 0:
-
+                card_ourstore.setVisibility(View.GONE);
+                relFIndexTablelayout_store.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true"; //Pie chart Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:
-
+                card_ourstore.setVisibility(View.GONE);
+                relFIndexTablelayout_store.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
             case 2:  // this is for only change list
-
+                card_ourstore.setVisibility(View.GONE);
+                relFIndexTablelayout_store.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             case 3:  // this is for only change list
                 Log.e("here","case 2");
+                card_ourstore.setVisibility(View.GONE);
+                relFIndexTablelayout_store.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 ApiRequestNew_storeServices api_request_new = new ApiRequestNew_storeServices(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
@@ -231,8 +236,8 @@ public class OurStoreServices_Reports extends Fragment  implements TabLayout.OnT
                 processbar_view.setVisibility(View.GONE);
                 break;
             case 1:
-                card_ourstore.setVisibility(View.VISIBLE);
-                relFIndexTablelayout_store.setVisibility(View.VISIBLE);
+//                card_ourstore.setVisibility(View.VISIBLE);
+//                relFIndexTablelayout_store.setVisibility(View.VISIBLE);
                 text_no_data_store.setVisibility(View.GONE);
                 Log.e(TAG, "Pie chart list log: " );
                 piechartList = new ArrayList<>();
@@ -690,6 +695,7 @@ class ApiRequestNew_storeServices {
                                 card_ourstore.setVisibility(View.VISIBLE);
                                 relFIndexTablelayout_store.setVisibility(View.VISIBLE);
                                 text_no_data_store.setVisibility(View.GONE);
+                                Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
 
                                 Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
@@ -708,6 +714,7 @@ class ApiRequestNew_storeServices {
                                 card_ourstore.setVisibility(View.VISIBLE);
                                 relFIndexTablelayout_store.setVisibility(View.VISIBLE);
                                 text_no_data_store.setVisibility(View.GONE);
+                                Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
 
                                 Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++)
