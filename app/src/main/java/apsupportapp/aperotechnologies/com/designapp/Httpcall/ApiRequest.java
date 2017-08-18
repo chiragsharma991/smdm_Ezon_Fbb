@@ -86,8 +86,7 @@ public class ApiRequest  {
 
     private  void setApi(final Context context) {
 
-
-    /*    Reusable_Functions.progressDialog = new ProgressDialog(context);
+        /*    Reusable_Functions.progressDialog = new ProgressDialog(context);
         if(!Reusable_Functions.progressDialog.isShowing())
         {
             Reusable_Functions.progressDialog.show();
@@ -138,7 +137,9 @@ public class ApiRequest  {
                                     ResposeInterface.nodatafound();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 }else{
+
                                     ResposeInterface.nodatafound();
+
                                     if(data.equals("Feedback with callback")) {
                                         Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
                                     }
@@ -150,6 +151,8 @@ public class ApiRequest  {
                                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
                                     }
+
+
                                 }
                                 return;
 
