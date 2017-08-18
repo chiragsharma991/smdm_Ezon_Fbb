@@ -92,7 +92,7 @@ public class CustomerLookup_PageTwo extends Fragment {
     public static boolean flag = false ;
     int offset = 0, count = 0, limit = 100;
     private int arr_count = 0;
-    int pos;
+    static public int pos;
 
 
     @Override
@@ -204,7 +204,7 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 Log.e("run: ", "two");
                                 linear_engagement_type_nm.setVisibility(View.VISIBLE);
                                 requestEngagementBandDetail(context,userId,bearertoken);
-                                cust_progressBar.setVisibility(View.GONE);
+
                             }
                         }
                     }, 5000);
@@ -362,17 +362,16 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 }
                             }
 
-                            flag = false;
-                            lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                            lv_cust_details.setOnFlingListener(null);
-                            new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
-                            customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, context);
-                            lv_cust_details.setAdapter(customerDetailAdapter);
-                            customerDetailAdapter.notifyDataSetChanged();
 
+                                flag = false;
+                                lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                lv_cust_details.setOnFlingListener(null);
+                                new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
+                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, context);
+                                lv_cust_details.setAdapter(customerDetailAdapter);
+                                customerDetailAdapter.notifyDataSetChanged();
 
                             Reusable_Functions.hDialog();
-
                         } catch (Exception e) {
                             customerDetailsList.remove(pos);
                             customerDetailAdapter.notifyDataSetChanged();
@@ -464,16 +463,21 @@ public class CustomerLookup_PageTwo extends Fragment {
                                 }
                             }
 
-                            flag = true;
-                            customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, mcontext);
-                            lv_cust_details.setAdapter(customerDetailAdapter);
-                            customerDetailAdapter.notifyDataSetChanged();
-                            Reusable_Functions.hDialog();
+                                flag = true;
+                                customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, mcontext);
+                                lv_cust_details.setAdapter(customerDetailAdapter);
+                                customerDetailAdapter.notifyDataSetChanged();
+//                            if(lazyScroll.equals("ON"))
+//                            {
+//                                cust_progressBar.setVisibility(View.GONE);
+//                            }
 
+                            Reusable_Functions.hDialog();
 
                         } catch (Exception e)
                         {
-
+                            customerDetailsList.remove(pos);
+                            customerDetailAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             Log.e("exception :", "" + e.getMessage());
                             Toast.makeText(mcontext, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
@@ -486,6 +490,8 @@ public class CustomerLookup_PageTwo extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
+                        customerDetailsList.remove(pos);
+                        customerDetailAdapter.notifyDataSetChanged();
                         Reusable_Functions.hDialog();
                         Toast.makeText(mcontext, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
