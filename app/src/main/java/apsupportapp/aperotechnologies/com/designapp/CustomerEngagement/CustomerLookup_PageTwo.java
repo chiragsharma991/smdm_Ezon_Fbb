@@ -49,6 +49,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -56,6 +57,7 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 
+import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerDetailAdapter.ProgressViewHolder.cust_progressBar;
 import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookup_PageOne.customerDetailsList;
 
 
@@ -71,7 +73,7 @@ public class CustomerLookup_PageTwo extends Fragment
     static public RecyclerView lv_cust_details;
     static public Button btn_reset;
     CustomerDetail customerDetail;
-    CustomerDetailAdapter customerDetailAdapter;
+    static public CustomerDetailAdapter customerDetailAdapter;
     ArrayList<CustomerDetail> detailArrayList, customerDetailArrayList = new ArrayList<CustomerDetail>();
     static public LinearLayout linear_engagement_type_nm;
     ViewGroup root;
@@ -92,10 +94,9 @@ public class CustomerLookup_PageTwo extends Fragment
     public static boolean flag = false ;
     int offset = 0, count = 0, limit = 100;
     private int arr_count = 0;
-    static public int pos;
+    public int pos;
 
-
-    @Override
+   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = (ViewGroup) inflater.inflate(R.layout.fragment_custlookup_pagetwo, container, false);
         context = getContext();
@@ -121,6 +122,8 @@ public class CustomerLookup_PageTwo extends Fragment
             limit = 100;
             count = 0;
             flag = false;
+            pos = 0;
+            customerDetailsList = new ArrayList<CustomerDetail>();
             linear_engagement_type_nm.setVisibility(View.GONE);
             requestCustomerDetail();
         }
@@ -186,6 +189,7 @@ public class CustomerLookup_PageTwo extends Fragment
                     customerDetailsList.add(null);
                     customerDetailAdapter.notifyItemInserted(customerDetailsList.size() - 1);
                     pos = customerDetailsList.size() - 1;
+                    Log.e( "onScrollStateChanged: ", ""+pos);
                     arr_count = 0;
                     lazyScroll = "ON";
                     android.os.Handler h = new android.os.Handler();
@@ -217,7 +221,6 @@ public class CustomerLookup_PageTwo extends Fragment
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
-
 
         lv_cust_details.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -309,7 +312,7 @@ public class CustomerLookup_PageTwo extends Fragment
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.sDialog(mcontext, "Loading...");
         flag = true;
-        customerDetailsList.clear();
+        customerDetailsList = new ArrayList<CustomerDetail>();
         lv_cust_details.removeAllViews();
         offset = 0;
         limit = 100;
@@ -349,6 +352,7 @@ public class CustomerLookup_PageTwo extends Fragment
                                 }
 
                                 arr_count = response.length();
+                                flag = false;
                                 offset = offset + limit;
 
                             } else if (response.length() < limit)
@@ -360,10 +364,21 @@ public class CustomerLookup_PageTwo extends Fragment
                                     Log.e("===two second", " " + customerDetailsList.get(i).getFullName() + "  " + customerDetailsList.get(i).getMbrPlanSaleNetVal());
 
                                 }
-                            }
-
-
+                                arr_count = response.length();
                                 flag = false;
+                                offset = offset + limit;
+
+                            }
+                            if (lazyScroll.equals("ON"))
+                            {
+                                customerDetailAdapter.notifyDataSetChanged();
+                                lazyScroll = "OFF";
+                                customerDetailsList.remove(pos);
+
+
+                            }
+                            else
+                            {
                                 lv_cust_details.setLayoutManager(new LinearLayoutManager(lv_cust_details.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 lv_cust_details.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(lv_cust_details);
@@ -371,11 +386,14 @@ public class CustomerLookup_PageTwo extends Fragment
                                 lv_cust_details.setAdapter(customerDetailAdapter);
                                 customerDetailAdapter.notifyDataSetChanged();
 
+                            }
                             Reusable_Functions.hDialog();
+
                         } catch (Exception e) {
                             customerDetailsList.remove(pos);
                             customerDetailAdapter.notifyDataSetChanged();
-                            Reusable_Functions.hDialog();
+
+                             Reusable_Functions.hDialog();
                             Log.e("exception :", "" + e.getMessage());
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
@@ -383,11 +401,13 @@ public class CustomerLookup_PageTwo extends Fragment
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         customerDetailsList.remove(pos);
                         customerDetailAdapter.notifyDataSetChanged();
+                        cust_progressBar.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -445,33 +465,40 @@ public class CustomerLookup_PageTwo extends Fragment
                                 for (int i = 0; i < response.length(); i++) {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
-                                    Log.e("=== engagement band click", " " + customerDetailsList.get(i).getFullName());
 
                                 }
                                 arr_count = response.length();
                                 Log.e("array size: ", "" + customerDetailsList.size() + "\t"+ arr_count);
-
+                                flag = true;
                                 offset = offset + limit;
 
-                            } else if (response.length() < limit) {
+                            } else if (response.length() < limit)
+                            {
 
                                 for (int i = 0; i < response.length(); i++) {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
-                                    Log.e("===engagement band click", " " + customerDetailsList.get(i).getFullName());
 
                                 }
-                            }
-
+                                arr_count = response.length();
+                                Log.e("array size: ", "" + customerDetailsList.size() + "\t"+ arr_count);
                                 flag = true;
+                                offset = offset + limit;
+
+                            }
+                            if (lazyScroll.equals("ON"))
+                            {
+                                customerDetailAdapter.notifyDataSetChanged();
+                                lazyScroll = "OFF";
+                                customerDetailsList.remove(pos);
+                            }
+                            else
+                            {
                                 customerDetailAdapter = new CustomerDetailAdapter(customerDetailsList, mcontext);
                                 lv_cust_details.setAdapter(customerDetailAdapter);
                                 customerDetailAdapter.notifyDataSetChanged();
-//                            if(lazyScroll.equals("ON"))
-//                            {
-//                                cust_progressBar.setVisibility(View.GONE);
-//                            }
 
+                            }
                             Reusable_Functions.hDialog();
 
                         } catch (Exception e)
@@ -486,7 +513,8 @@ public class CustomerLookup_PageTwo extends Fragment
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {

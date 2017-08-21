@@ -277,17 +277,18 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
             apps = getProduct(6);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Feedback", apps));
+            snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
+
+            apps = getProduct(7);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
 //            apps = getProduct(7);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
-            apps = getProduct(7);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
             apps = getProduct(8);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+            apps = getProduct(9);
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
 //            apps = getProduct(10);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
-            apps = getProduct(9);
-            snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
 
         }
        Recycler_verticalView.setAdapter(snapAdapter);

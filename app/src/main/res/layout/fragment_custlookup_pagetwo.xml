@@ -51,7 +51,7 @@
                     android:id="@+id/btn_reset"
                     android:textColor="@color/ezfbb_red"
                     android:textSize="15sp"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:text="Reset"
                     android:background="@color/white"
                     android:layout_width="match_parent"
