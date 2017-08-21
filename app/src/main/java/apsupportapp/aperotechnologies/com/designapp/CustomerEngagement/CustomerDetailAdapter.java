@@ -106,7 +106,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         else if (viewType == VIEW_PROG)
         {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.bestpromo_footer, parent, false);
+                    .inflate(R.layout.best_footer, parent, false);
             return new CustomerDetailAdapter.ProgressViewHolder(v);
         }
 
@@ -167,12 +167,11 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static class ProgressViewHolder extends RecyclerView.ViewHolder
     {
         TextView txtView;
-        public static ProgressBar cust_progressBar;
         public ProgressViewHolder(View footerView)
         {
             super(footerView);
             txtView = (TextView) footerView.findViewById(R.id.txtView);
-            cust_progressBar = (ProgressBar) footerView.findViewById(R.id.cust_progressBar);
+//            cust_progressBar = (ProgressBar) footerView.findViewById(R.id.cust_progressBar);
         }
     }
 

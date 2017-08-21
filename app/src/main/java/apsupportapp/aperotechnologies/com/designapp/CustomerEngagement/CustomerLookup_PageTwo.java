@@ -56,14 +56,14 @@ import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 
-import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerDetailAdapter.ProgressViewHolder.cust_progressBar;
 import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookup_PageOne.customerDetailsList;
 
 
 /**
  * Created by pamrutkar on 14/06/17.
  */
-public class CustomerLookup_PageTwo extends Fragment {
+public class CustomerLookup_PageTwo extends Fragment
+{
     public static String e_bandnm;
     OnEngagemntBandClick onEngagemntBandClick;
     static public TextView txt_engagemnt_nm;
