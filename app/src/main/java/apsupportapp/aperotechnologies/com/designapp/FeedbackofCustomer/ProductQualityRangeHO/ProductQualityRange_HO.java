@@ -29,7 +29,7 @@ public class ProductQualityRange_HO extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Reports"));
-        tabLayout.addTab(tabLayout.newTab().setText("Feedback"));
+        tabLayout.addTab(tabLayout.newTab().setText("New Feedback"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#e8112d"));
 

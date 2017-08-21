@@ -8,6 +8,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.BORIS.MobileScreenActivity;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
@@ -185,7 +186,7 @@ public class SwitchingActivity extends AppCompatActivity
 //                case 120:
 //
                 case 90:
-                    Intent ProductAvailability_Notify= new Intent(context,ProductAvailability_notify_HO.class);
+                    Intent ProductAvailability_Notify= new Intent(context,MobileScreenActivity.class);
                     startActivity(ProductAvailability_Notify);
                     break;
 

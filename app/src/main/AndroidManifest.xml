@@ -151,7 +151,6 @@
             android:name=".BestPerformersInventory.BestPerformerInventory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".FloorAvailability.FloorAvailabilityActivity"
             android:screenOrientation="portrait"
@@ -230,7 +229,6 @@
             android:name=".StoreInspection.InspectionHistoryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".SeasonCatalogue.mpm_activity"
             android:screenOrientation="portrait"
@@ -299,8 +297,10 @@
         <activity android:name=".FeedbackofCustomer.PolicyExchangeHO.Callback_PolicyExchange" />
         <activity android:name=".FeedbackofCustomer.PricePromotionHO.Callback_PricePromotion" />
         <activity android:name=".FeedbackofCustomer.ProductQualityRangeHO.Callback_ProductQualityRange" />
-        <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff"></activity>
-
+        <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff" />
+        <activity android:name=".BORIS.MobileScreenActivity" />
+        <activity android:name=".BORIS.ReturnCatalogueActivity" />
+        <activity android:name=".BORIS.ReturnDetailActivity"></activity>
     </application>
 
 </manifest>
