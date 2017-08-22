@@ -10,7 +10,7 @@
     android:layout_marginRight="10dp"
     android:layout_marginTop="10dp"
     card_view:cardBackgroundColor="@android:color/white"
-    card_view:cardElevation="4dp"
+    card_view:cardElevation="3dp"
     card_view:cardUseCompatPadding="true">
 
 
@@ -42,9 +42,20 @@
             android:layout_toRightOf="@+id/text_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:textColor="@color/ezfbb_black"
             android:textSize="13sp"
             android:text="6347234678"/>
+
+            <TextView
+                android:id="@+id/text_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ezfbb_black"
+                android:layout_toLeftOf="@+id/text_status_value"
+                android:textSize="13sp"
+                android:visibility="gone"
+                android:text="Status : "/>
 
 
             <TextView
@@ -53,9 +64,10 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/ezfbb_black"
                 android:textSize="13sp"
+                android:textStyle="bold"
                 android:visibility="gone"
                 android:layout_alignParentEnd="true"
-                android:text="Status : Return Accepted"/>
+                android:text=""/>
 
         </RelativeLayout>
 
@@ -92,8 +104,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rs. 4465"
+                    android:textStyle="bold"
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                 />
 
             </RelativeLayout>
@@ -106,7 +119,8 @@
                 android:text="DG J"
                 android:textColor="@color/ezfbb_black"
                 android:layout_marginTop="5dp"
-                android:textSize="14sp"
+                android:textSize="13sp"
+                android:textStyle="bold"
                 android:layout_toRightOf="@+id/img_product"/>
 
             <TextView
@@ -117,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Knee Length Lace Pleated Dress"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/ezfbb_black"
                 android:layout_toRightOf="@+id/img_product"/>
 
@@ -138,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:text="Size : "
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_toRightOf="@+id/img_product"/>
 
                 <TextView
@@ -147,13 +161,13 @@
                     android:layout_height="wrap_content"
                     android:text="38"
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_toRightOf="@+id/img_product"/>
 
                 <View
                     android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_height="13dp"
+                    android:layout_marginTop="1dp"
                     android:layout_marginLeft="10dp"
                     android:background="@color/ezfb_black"/>
 
@@ -164,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:text="Qty : "
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/img_product"/>
 
@@ -174,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:text="1"
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_toRightOf="@+id/img_product"/>
 
 
@@ -188,7 +202,7 @@
                 android:text="SKU ID : "
                 android:textColor="@color/ezfbb_black"
                 android:layout_marginTop="2dp"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/img_product"/>
 
@@ -200,8 +214,7 @@
                 android:text="23674"
                 android:textColor="@color/ezfbb_black"
                 android:layout_marginTop="2dp"
-                android:textSize="13sp"
-                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
                 android:layout_toRightOf="@+id/txt_sku_id"/>
 
 
@@ -209,7 +222,7 @@
 
         <LinearLayout
             android:id="@+id/lin_text_promo"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/rel_product"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
@@ -223,21 +236,23 @@
             android:layout_gravity="center"
             android:textColor="@color/ezfbb_black"
             android:text="Free / Promo Product"
-            android:textSize="14sp"
+            android:textSize="12sp"
           />
 
             <RelativeLayout
                 android:id="@+id/img_free_product_click"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:layout_marginLeft="10dp"
               >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/back_arrow"
+            <TextView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/ezfb_black"
+                android:text=">>"
               />
 
             </RelativeLayout>
@@ -272,8 +287,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Free"
+                android:textStyle="bold"
                 android:textColor="@color/ezfbb_black"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 />
 
             </RelativeLayout>
@@ -286,7 +302,8 @@
                 android:text="DG J"
                 android:textColor="@color/ezfbb_black"
                 android:layout_marginTop="5dp"
-                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textSize="13sp"
                 android:layout_toRightOf="@+id/img_promo_product"/>
 
             <TextView
@@ -297,7 +314,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Knee Length Lace Pleated Dress"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/ezfbb_black"
                 android:layout_toRightOf="@+id/img_promo_product"/>
 
@@ -318,7 +335,7 @@
                     android:layout_height="wrap_content"
                     android:text="Size : "
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_toRightOf="@+id/img_promo_product"/>
 
                 <TextView
@@ -327,13 +344,13 @@
                     android:layout_height="wrap_content"
                     android:text="38"
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_toRightOf="@+id/img_promo_product"/>
 
                 <View
                     android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_height="13dp"
+                    android:layout_marginTop="1dp"
                     android:layout_marginLeft="10dp"
                     android:background="@color/ezfb_black"/>
 
@@ -344,7 +361,7 @@
                     android:layout_height="wrap_content"
                     android:text="Qty : "
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/img_promo_product"/>
 
@@ -354,7 +371,7 @@
                     android:layout_height="wrap_content"
                     android:text="1"
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_toRightOf="@+id/img_promo_product"/>
 
 
@@ -368,7 +385,7 @@
                 android:text="SKU ID : "
                 android:textColor="@color/ezfbb_black"
                 android:layout_marginTop="2dp"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/img_promo_product"/>
 
@@ -380,8 +397,7 @@
                 android:text="23674"
                 android:textColor="@color/ezfbb_black"
                 android:layout_marginTop="2dp"
-                android:textSize="13sp"
-                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
                 android:layout_toRightOf="@+id/txt_promo_sku_id"/>
 
 

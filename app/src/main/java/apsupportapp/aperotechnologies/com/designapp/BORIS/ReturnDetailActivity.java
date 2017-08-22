@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp.BORIS;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -108,6 +110,11 @@ public class ReturnDetailActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         alertDialog.dismiss();
+                        Intent i = new Intent(ReturnDetailActivity.this, ReturnCatalogueActivity.class);
+                        i.putExtra("from","return_detail");
+                        i.putExtra("status","accepted");
+                        startActivity(i);
+                        finish();
                     }
                 });
                 alertDialog.setCancelable(true);
@@ -180,6 +187,7 @@ public class ReturnDetailActivity extends AppCompatActivity {
                 btn_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         if(radioSKU.isChecked())
                         {
 
@@ -194,8 +202,26 @@ public class ReturnDetailActivity extends AppCompatActivity {
                         {
                             radio_value = "Tags Missing";
                         }
-                        Log.e("radio_value "," "+radio_value);
-                        alertDialog.dismiss();
+                        else
+                        {
+                            radio_value = " ";
+                        }
+
+                        if(radio_value.equals(" "))
+                        {
+                            Toast.makeText(context,"Please choose one option",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Log.e("radio_value "," "+radio_value);
+                            alertDialog.dismiss();
+                            Intent i = new Intent(ReturnDetailActivity.this, ReturnCatalogueActivity.class);
+                            i.putExtra("from","return_detail");
+                            i.putExtra("status","rejected");
+                            startActivity(i);
+                            finish();
+                        }
+
                     }
                 });
                 alertDialog.setCancelable(true);

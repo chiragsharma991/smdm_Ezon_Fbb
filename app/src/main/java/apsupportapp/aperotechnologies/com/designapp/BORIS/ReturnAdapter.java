@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.BORIS;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -26,10 +27,12 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private Context context;
     RecyclerView recycler_view_return_catalogue;
+    String status;
 
-    public ReturnAdapter(Context context, RecyclerView recycler_view_return_catalogue) {
+    public ReturnAdapter(Context context, RecyclerView recycler_view_return_catalogue, String status) {
         this.context = context;
         this.recycler_view_return_catalogue = recycler_view_return_catalogue;
+        this.status = status;
     }
 
     @Override
@@ -51,6 +54,28 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         Glide.with(context).load(R.mipmap.noimageavailable).placeholder(R.mipmap.noimageavailable).centerCrop().into(returnCatHolder.img_promo_product);
 
+        if(status.equals(" "))
+        {
+            returnCatHolder.text_status_value.setVisibility(View.GONE);
+            returnCatHolder.text_status.setVisibility(View.GONE);
+        }
+        else if(status.equals("accepted"))
+        {
+            returnCatHolder.text_status_value.setVisibility(View.VISIBLE);
+            returnCatHolder.text_status_value.setText("Return Accepted");
+            returnCatHolder.text_status.setVisibility(View.VISIBLE);
+            returnCatHolder.text_status_value.setTextColor(context.getResources().getColor(R.color.green));
+
+        }
+        else if(status.equals("rejected"))
+        {
+            returnCatHolder.text_status_value.setVisibility(View.VISIBLE);
+            returnCatHolder.text_status_value.setText("Return Rejected");
+            returnCatHolder.text_status.setVisibility(View.VISIBLE);
+            returnCatHolder.text_status_value.setTextColor(context.getResources().getColor(R.color.ezfbb_red));
+
+        }
+
         returnCatHolder.img_free_product_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +96,7 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 Intent int_detail = new Intent(context, ReturnDetailActivity.class);
                 context.startActivity(int_detail);
+                ((Activity)context).finish();
             }
         });
     }
@@ -91,7 +117,7 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         CardView card_catalogue;
         ImageView img_product, img_promo_product;
         TextView text_order_no, txt_title, txt_description, txt_size_number, txt_qty_number, txt_sku_id_no, txt_price, txt_promo_title, txt_promo_description,
-                txt_promo_size_number, txt_promo_qty_number, txt_promo_price;
+                txt_promo_size_number, txt_promo_qty_number, txt_promo_price, text_status_value, text_status;
 
         public ReturnCatHolder(View v, Context context) {
             super(v);
@@ -112,6 +138,8 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             txt_promo_size_number = (TextView) v.findViewById(R.id.txt_promo_size_number);
             txt_promo_qty_number = (TextView) v.findViewById(R.id.txt_promo_qty_number);
             txt_promo_price = (TextView) v.findViewById(R.id.txt_promo_price);
+            text_status_value = (TextView) v.findViewById(R.id.text_status_value);
+            text_status = (TextView) v.findViewById(R.id.text_status);
 
         }
 

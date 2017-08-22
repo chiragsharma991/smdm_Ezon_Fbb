@@ -633,7 +633,6 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
             req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context);
-
             cancelData();
             Intent dashboard = new Intent(context, SnapDashboardActivity.class);
             dashboard.putExtra("from","feedback");
