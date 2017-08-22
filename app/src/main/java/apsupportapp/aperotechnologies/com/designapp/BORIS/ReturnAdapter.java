@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -44,6 +46,11 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
          final ReturnCatHolder returnCatHolder = (ReturnCatHolder) holder;
         returnCatHolder.text_order_no.setText("473434");
+
+        Glide.with(context).load(R.mipmap.noimageavailable).placeholder(R.mipmap.noimageavailable).centerCrop().into(returnCatHolder.img_product);
+
+        Glide.with(context).load(R.mipmap.noimageavailable).placeholder(R.mipmap.noimageavailable).centerCrop().into(returnCatHolder.img_promo_product);
+
         returnCatHolder.img_free_product_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,8 +69,8 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onClick(View v) {
 
-//                Intent int_detail = new Intent(context, ReturnDetailActivity.class);
-//                context.startActivity(int_detail);
+                Intent int_detail = new Intent(context, ReturnDetailActivity.class);
+                context.startActivity(int_detail);
             }
         });
     }

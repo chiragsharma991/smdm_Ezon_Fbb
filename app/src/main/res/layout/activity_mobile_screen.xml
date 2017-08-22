@@ -88,14 +88,17 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/rel_edittext"
             android:layout_above="@+id/btn_search"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         <EditText
             android:id="@+id/edt_mobno"
             android:hint="Enter Customer's Mobile No."
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="13sp"
             android:padding="2dp"
@@ -104,7 +107,21 @@
             android:background="@drawable/edittext_red_border"
             android:layout_centerInParent="true"/>
 
+            <TextView
+                android:id="@+id/txt_incorrect_phone"
+                android:layout_below="@+id/edt_mobno"
+                android:visibility="gone"
+                android:textColor="@color/ezfbb_red"
+                android:textSize="10sp"
+                android:gravity="right"
+                android:text=" "
+                android:letterSpacing="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
         </RelativeLayout>
+
 
 
         <Button
