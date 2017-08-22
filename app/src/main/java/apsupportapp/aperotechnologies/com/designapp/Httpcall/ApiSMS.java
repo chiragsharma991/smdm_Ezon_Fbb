@@ -30,9 +30,9 @@ import static apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiEmail.req
 
 public class ApiSMS {
     public static RequestQueue queue;
+    static String url;
 
-
-    public static void req_sms_API(final String userId, String customerNumber, final String bearertoken, final Context context) {
+    public static void req_sms_API(final String userId, String customerNumber, final String bearertoken, String callback, final Context context) {
 
         final JSONObject[] jObj = {null};
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -40,7 +40,16 @@ public class ApiSMS {
         queue = new RequestQueue(cache, network);
         queue.start();
         final Gson gson = new Gson();
-        String url = "https://smdm.manthan.com/v1/notification/sms/" + userId + "?smstype=SMS_TYPE_1&mobilenumber=" + customerNumber;
+      //  url = "https://smdm.manthan.com/v1/notification/sms/" + userId + "?smstype=SMS_TYPE_1&mobilenumber=" + customerNumber;
+        Log.e("callback ",""+callback);
+        if(callback.equals("YES"))
+        {
+            url = "https://smdm.manthan.com/v1/notification/sms/" + userId + "?smstype=Callback&mobilenumber=" + customerNumber;
+        }
+        else if(callback.equals("NO"))
+        {
+            url = "https://smdm.manthan.com/v1/notification/sms/" + userId + "?smstype=NoCallback&mobilenumber=" + customerNumber;
+        }
         Log.e("sms url ", "" + url);
 
         StringRequest smsrequest = new StringRequest(Request.Method.GET, url,

@@ -13,7 +13,6 @@
         android:clickable="true"
         app:cardBackgroundColor="#ffffff"
         app:cardCornerRadius="0.9dp"
-        android:orientation="vertical"
 
         >
         <LinearLayout
@@ -36,7 +35,7 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:padding="6dp"
+            android:padding="4dp"
             android:id="@+id/recycler_horizentalView"
             android:layout_width="match_parent"
             android:layout_marginTop="15dp"

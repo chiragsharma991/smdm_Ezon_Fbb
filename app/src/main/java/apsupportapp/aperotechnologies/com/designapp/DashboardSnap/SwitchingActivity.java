@@ -8,6 +8,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.BORIS.MobileScreenActivity;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
@@ -152,8 +153,6 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent StatusActivity = new Intent(context,StatusActivity.class);
                     startActivity(StatusActivity);
                     break;
-
-
                 case 60:
                     Intent ProductAvailability_Notify= new Intent(context,ProductAvailability_notify_HO.class);
                     startActivity(ProductAvailability_Notify);
@@ -179,7 +178,6 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent SupervisiorStaff = new Intent(context, SupervisorStaff_HO.class);
                     startActivity(SupervisiorStaff);
                     break;
-
                 case 70:
                     Intent Feedback = new Intent(context,Feedback.class);
                     startActivity(Feedback);
@@ -203,6 +201,10 @@ public class SwitchingActivity extends AppCompatActivity
                 case 90:
                     Intent CustomerLookupActivity = new Intent(context,CustomerLookupActivity.class);
                     startActivity(CustomerLookupActivity);
+                    break;
+                case 100:
+                    Intent MobileScreenActivity = new Intent(context,MobileScreenActivity.class);
+                    startActivity(MobileScreenActivity);
                     break;
 
 
@@ -319,7 +321,8 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("To Do", R.mipmap.stocktransfer));
                 apps.add(new App("Status", R.mipmap.stocktransfer));
                 break;
-            case 6 :
+
+            case 6:
                 apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability));
                 apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn));
                 apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion));
@@ -327,6 +330,7 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Our Store Services",R.mipmap.ourstoreservices));
                 apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff));
                 break;
+
 
             case 7 :
                 apps.add(new App("Best Worst Performer", R.mipmap.feedback));
@@ -339,6 +343,9 @@ public class SwitchingActivity extends AppCompatActivity
                 break;
             case 9 :
                 apps.add(new App("Customer Engagement", R.mipmap.customerengagement));
+                break;
+            case 10 :
+                apps.add(new App("Boris",R.mipmap.customerengagement));
                 break;
 //            case 9 :
 //                break;

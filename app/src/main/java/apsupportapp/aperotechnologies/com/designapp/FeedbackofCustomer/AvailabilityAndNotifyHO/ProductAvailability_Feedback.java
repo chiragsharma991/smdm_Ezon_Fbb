@@ -517,6 +517,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         customerFit = edt_fit.getText().toString().replaceAll("\\s+", "").trim();
         customerStyle = edt_style.getText().toString().replaceAll("\\s+", "").trim();
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
+        Log.e("customerCallBack ",""+customerCallBack);
        // customerArcDate = "2017-07-15 10:06:55";  //this will up to real time.
     }
 
@@ -580,7 +581,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, context);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context);
             clearData();
             Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
             dashboard.putExtra("from","feedback");
@@ -618,7 +619,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         edt_color_option2.getText().clear();
         edt_fit.getText().clear();
         edt_style.getText().clear();
-        radioYes.setChecked(true);
+        radioYes.setChecked(false);
         edt_customer_mobile_number.requestFocus();
 
 

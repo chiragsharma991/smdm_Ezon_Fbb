@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/bg_screen_color"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.AboutUsActivity">
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_header_height"
         android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
+        android:background="@color/white"
         android:contentInsetStart="0dp"
         android:contentInsetLeft="0dp"
         android:contentInsetRight="0dp"
@@ -31,7 +31,7 @@
         <RelativeLayout
             android:layout_marginLeft="0dp"
             android:id="@+id/imageBtnBack"
-            android:background="@drawable/button_click_effect"
+            android:background="@drawable/button_click"
             android:layout_width="40dp"
             android:layout_height="@dimen/toolbar_header_height"
             android:layout_alignParentLeft="true"
@@ -53,7 +53,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imageBtnBack"
                 android:layout_marginLeft="20dp"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:id="@+id/toolbar_title" />
 
 
@@ -69,7 +69,7 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:layout_margin="20dp"
-        android:textColor="@color/bg_store_code_text" />
+        android:textColor="@color/ezfb_black" />
 
 
     <TextView
@@ -80,7 +80,7 @@
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:textColor="@color/smdm_default_color"
+        android:textColor="@color/ezfb_black"
         />
 
     <TextView
@@ -91,6 +91,6 @@
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:textColor="@color/smdm_default_color"
+        android:textColor="@color/ezfb_black"
         />
 </LinearLayout>
