@@ -14,10 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
@@ -29,6 +33,7 @@ public class ReturnDetailActivity extends AppCompatActivity {
     private TextView storedescription;
     private ImageView img_product, img_promo_product;
     private Button btn_accept, btn_reject;
+    String radio_value;
     private RelativeLayout imageBtnBack1, img_free_product_click, rel_promo_product;
 
     @Override
@@ -57,6 +62,10 @@ public class ReturnDetailActivity extends AppCompatActivity {
         storedescription.setText(store);
 
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+
+        Glide.with(context).load(R.mipmap.noimageavailable).placeholder(R.mipmap.noimageavailable).centerCrop().into(img_product);
+        Glide.with(context).load(R.mipmap.noimageavailable).placeholder(R.mipmap.noimageavailable).centerCrop().into(img_promo_product);
+
 
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +119,87 @@ public class ReturnDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater =  getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.dialog_reject_return, null);
+                dialogBuilder.setView(dialogView);
+
+                final Button btn_ok = (Button) dialogView.findViewById(R.id.btn_ok);
+                final RadioButton radioSKU = (RadioButton) dialogView.findViewById(R.id.radioSKU);
+                final RadioButton radioDefective = (RadioButton) dialogView.findViewById(R.id.radioDefective);
+                final RadioButton radioTags = (RadioButton) dialogView.findViewById(R.id.radioTags);
+
+                final AlertDialog alertDialog = dialogBuilder.create();
+
+                radioSKU.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked) {
+                            radioSKU.setChecked(true);
+                            radioDefective.setChecked(false);
+                            radioTags.setChecked(false);
+                        }
+                        else
+                        {
+                            radioSKU.setChecked(false);
+                        }
+                    }
+                });
+
+                radioTags.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked) {
+                            radioTags.setChecked(true);
+                            radioSKU.setChecked(false);
+                            radioDefective.setChecked(false);
+                        }
+                        else
+                        {
+                            radioTags.setChecked(false);
+                        }
+                    }
+                });
+
+                radioDefective.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked) {
+                            radioDefective.setChecked(true);
+                            radioSKU.setChecked(false);
+                            radioTags.setChecked(false);
+                        }
+                        else
+                        {
+                            radioDefective.setChecked(false);
+                        }
+                    }
+                });
+
+                btn_ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(radioSKU.isChecked())
+                        {
+
+                            radio_value = "Incorrect SKU";
+                        }
+                        else if(radioDefective.isChecked())
+                        {
+                            radio_value = "Defective Return";
+
+                        }
+                        else if(radioTags.isChecked())
+                        {
+                            radio_value = "Tags Missing";
+                        }
+                        Log.e("radio_value "," "+radio_value);
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.setCancelable(true);
+                alertDialog.show();
             }
         });
 

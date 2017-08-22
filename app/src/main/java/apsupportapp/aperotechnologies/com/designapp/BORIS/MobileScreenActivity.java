@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -18,6 +19,7 @@ public class MobileScreenActivity extends AppCompatActivity {
     private EditText edt_mobno;
     private Button btn_search;
     private RelativeLayout imageBtnBack1;
+    private TextView txt_incorrect_phone;
     String mob_no;
 
     @Override
@@ -36,6 +38,7 @@ public class MobileScreenActivity extends AppCompatActivity {
         edt_mobno = (EditText) findViewById(R.id.edt_mobno);
         btn_search = (Button) findViewById(R.id.btn_search);
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+        txt_incorrect_phone = (TextView) findViewById(R.id.txt_incorrect_phone);
 
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,10 +53,17 @@ public class MobileScreenActivity extends AppCompatActivity {
                 mob_no = edt_mobno.getText().toString().trim();
                 if(mob_no.equals("") || mob_no == null)
                 {
-                    Toast.makeText(context, "Please enter mobile no.",Toast.LENGTH_SHORT).show();
+                    txt_incorrect_phone.setVisibility(View.VISIBLE);
+                    txt_incorrect_phone.setText(context.getResources().getString(R.string.customer_feedback_number));
+                }
+                else if(mob_no.length() != 10)
+                {
+                    txt_incorrect_phone.setVisibility(View.VISIBLE);
+                    txt_incorrect_phone.setText(getResources().getString(R.string.customer_feedback_digit));
                 }
                 else
                 {
+                    txt_incorrect_phone.setVisibility(View.GONE);
                     Intent int_catalogue = new Intent(MobileScreenActivity.this, ReturnCatalogueActivity.class);
                     startActivity(int_catalogue);
                 }

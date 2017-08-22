@@ -156,6 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Order No : "
+                    android:textSize="13sp"
                     android:textColor="@color/ezfbb_black"
                     />
 
@@ -164,6 +165,7 @@
                     android:layout_toRightOf="@+id/text_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="13sp"
                     android:textColor="@color/ezfbb_black"
                     android:text="6347234678"/>
 
@@ -172,8 +174,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/ezfbb_black"
-                    android:textSize="14sp"
                     android:visibility="gone"
+                    android:textSize="13sp"
                     android:layout_alignParentEnd="true"
                     android:text="Status : Return Accepted"/>
 
@@ -212,7 +214,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rs. 4465"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textColor="@color/ezfbb_black"
                         />
 
@@ -225,7 +227,7 @@
                     android:layout_height="wrap_content"
                     android:text="DG J"
                     android:layout_marginTop="5dp"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/ezfbb_black"
                     android:layout_toRightOf="@+id/img_product"/>
 
@@ -237,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Knee Length Lace Pleated Dress"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textColor="@color/ezfbb_black"
                     android:layout_toRightOf="@+id/img_product"/>
 
@@ -258,7 +260,7 @@
                         android:layout_height="wrap_content"
                         android:text="Size : "
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_toRightOf="@+id/img_product"/>
 
                     <TextView
@@ -267,7 +269,7 @@
                         android:layout_height="wrap_content"
                         android:text="38"
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_toRightOf="@+id/img_product"/>
 
                     <View
@@ -285,7 +287,7 @@
                         android:layout_height="wrap_content"
                         android:text="Qty : "
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/img_product"/>
 
@@ -295,7 +297,7 @@
                         android:layout_height="wrap_content"
                         android:text="1"
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_toRightOf="@+id/img_product"/>
 
 
@@ -308,7 +310,7 @@
                     android:layout_height="wrap_content"
                     android:text="SKU ID : "
                     android:layout_marginTop="2dp"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textColor="@color/ezfbb_black"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/img_product"/>
@@ -321,7 +323,7 @@
                     android:text="23674"
                     android:textColor="@color/ezfbb_black"
                     android:layout_marginTop="2dp"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/txt_sku_id"/>
 
@@ -394,7 +396,7 @@
                         android:layout_height="wrap_content"
                         android:text="Free"
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         />
 
                 </RelativeLayout>
@@ -407,7 +409,7 @@
                     android:text="DG J"
                     android:textColor="@color/ezfbb_black"
                     android:layout_marginTop="5dp"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:layout_toRightOf="@+id/img_promo_product"/>
 
                 <TextView
@@ -418,7 +420,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Knee Length Lace Pleated Dress"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textColor="@color/ezfbb_black"
                     android:layout_toRightOf="@+id/img_promo_product"/>
 
@@ -439,7 +441,7 @@
                         android:layout_height="wrap_content"
                         android:text="Size : "
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_toRightOf="@+id/img_promo_product"/>
 
                     <TextView
@@ -448,7 +450,7 @@
                         android:layout_height="wrap_content"
                         android:text="38"
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_toRightOf="@+id/img_promo_product"/>
 
                     <View
@@ -465,7 +467,7 @@
                         android:layout_height="wrap_content"
                         android:text="Qty : "
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/img_promo_product"/>
 
@@ -475,7 +477,7 @@
                         android:layout_height="wrap_content"
                         android:text="1"
                         android:textColor="@color/ezfbb_black"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_toRightOf="@+id/img_promo_product"/>
 
 
@@ -489,7 +491,7 @@
                     android:text="SKU ID : "
                     android:textColor="@color/ezfbb_black"
                     android:layout_marginTop="2dp"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/img_promo_product"/>
 
@@ -501,7 +503,7 @@
                     android:text="23674"
                     android:textColor="@color/ezfbb_black"
                     android:layout_marginTop="2dp"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/txt_promo_sku_id"/>
 
