@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:text="Select Reason For Rejection"
             android:textSize="14sp"
+            android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/ezfb_black"/>
@@ -32,7 +33,7 @@
         <RelativeLayout
             android:id="@+id/rel_incorrect_sku"
             android:layout_below="@+id/view"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="12dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_width="match_parent"
