@@ -96,13 +96,14 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 Intent int_detail = new Intent(context, ReturnDetailActivity.class);
                 context.startActivity(int_detail);
-                ((Activity)context).finish();
+                //((Activity)context).finish();
             }
         });
     }
 
     @Override
-    public long getItemId(int pos) {
+    public long getItemId(int pos)
+    {
         return pos;
     }
 
@@ -112,14 +113,16 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return 1;
     }
 
-    class ReturnCatHolder extends RecyclerView.ViewHolder {
+    class ReturnCatHolder extends RecyclerView.ViewHolder
+    {
         RelativeLayout rel_promo_product, img_free_product_click;
         CardView card_catalogue;
         ImageView img_product, img_promo_product;
         TextView text_order_no, txt_title, txt_description, txt_size_number, txt_qty_number, txt_sku_id_no, txt_price, txt_promo_title, txt_promo_description,
                 txt_promo_size_number, txt_promo_qty_number, txt_promo_price, text_status_value, text_status;
 
-        public ReturnCatHolder(View v, Context context) {
+        public ReturnCatHolder(View v, Context context)
+        {
             super(v);
             rel_promo_product = (RelativeLayout) v.findViewById(R.id.rel_promo_product);
             img_product = (ImageView) v.findViewById(R.id.img_product);
@@ -142,8 +145,6 @@ public class ReturnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             text_status = (TextView) v.findViewById(R.id.text_status);
 
         }
-
-
     }
 
 
