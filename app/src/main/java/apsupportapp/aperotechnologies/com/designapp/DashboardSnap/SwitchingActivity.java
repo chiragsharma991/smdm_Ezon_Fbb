@@ -33,6 +33,7 @@ import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvail
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.Samplebarcode;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_activity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;

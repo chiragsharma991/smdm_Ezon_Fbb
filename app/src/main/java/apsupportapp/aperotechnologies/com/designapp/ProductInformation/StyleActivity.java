@@ -1,8 +1,10 @@
 package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +42,9 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.cipherlab.barcode.GeneralString;
+import com.cipherlab.barcode.ReaderManager;
+import com.cipherlab.barcode.decoder.BcReaderType;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -97,10 +102,14 @@ public class StyleActivity extends AppCompatActivity {
     private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
     private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
     private static String ourIntentAction = "com.motorolasolutions.emdk.sample.dwdemosample.RECVR";
+    private com.cipherlab.barcode.ReaderManager mReaderManager;
+    private IntentFilter filter;
+
     String barcode;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_product_info);
@@ -197,34 +206,27 @@ public class StyleActivity extends AppCompatActivity {
         btnBarcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isAMobileModel()) {
-                    Intent intent_barcode = new Intent();
-                    intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
-                    intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
-                    StyleActivity.this.sendBroadcast(intent_barcode);
-                    edit_barcode.setText(" ");
-                    barcode = " ";
-                    android.os.Handler h = new android.os.Handler();
-                    h.postDelayed(new Runnable() {
-                        public void run() {
+                if (isAMobileModel())
+                {
+                    mReaderManager = ReaderManager.InitInstance(StyleActivity.this);
+                    filter = new IntentFilter();
+                    filter.addAction(com.cipherlab.barcode.GeneralString.Intent_SOFTTRIGGER_DATA);
+                    filter.addAction(com.cipherlab.barcode.GeneralString.Intent_PASS_TO_APP);
+                    filter.addAction(com.cipherlab.barcode.GeneralString.Intent_READERSERVICE_CONNECTED);
+                   // ExeSampleCode();
+                    //registerReceiver(myDataReceiver, filter);
 
-                            Intent i1 = getIntent();
-                            barcode = edit_barcode.getText().toString();
-                            if (!barcode.equals(" ")) {
-                                Toast.makeText(StyleActivity.this, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                TimeUP();
-                            } else {
-                                View view = findViewById(android.R.id.content);
-                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
-                    }, 1500);
+
 
                 } else if (!isAMobileModel()) {
                     scanBarcode(view);
                 }
             }
         });
+
+
+
+
 
         imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,6 +327,51 @@ public class StyleActivity extends AppCompatActivity {
         });
     }
 
+    private void ExeSampleCode()
+    {
+
+                    if (mReaderManager != null)
+                    {
+                        Log.e( "onClick: ", "------");
+//                        com.cipherlab.barcode.decoder.BcReaderType myReaderType =  mReaderManager.GetReaderType();
+//                        edit_barcode.setText(myReaderType.toString());
+//                        // Enable/Disable barcode reader service
+//                        com.cipherlab.barcode.decoder.ClResult clRet = mReaderManager.SetActive(false);
+//                        boolean bRet = mReaderManager.GetActive();
+//                        clRet = mReaderManager.SetActive(true);
+//                        bRet = mReaderManager.GetActive();
+
+                        //software trigger
+                        Thread sThread = new Thread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                mReaderManager.SoftScanTrigger();
+                            }
+                        });
+                        sThread.setPriority( Thread.MAX_PRIORITY );
+                        sThread.start();
+
+                    }
+                    barcode = " ";
+                    android.os.Handler h = new android.os.Handler();
+                    h.postDelayed(new Runnable() {
+                        public void run() {
+
+                            Intent i1 = getIntent();
+                            barcode = edit_barcode.getText().toString();
+                            if (!barcode.equals(" ")) {
+                                Toast.makeText(StyleActivity.this, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
+                                TimeUP();
+                            } else {
+                                View view = findViewById(android.R.id.content);
+                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
+                            }
+                        }
+                    }, 1500);
+    }
+
+
     private void TimeUP() {
         if (Reusable_Functions.chkStatus(StyleActivity.this)) {
             Reusable_Functions.hDialog();
@@ -344,7 +391,7 @@ public class StyleActivity extends AppCompatActivity {
 
     private boolean isAMobileModel() {
         getDeviceInfo();
-        return Build.MODEL.contains("TC75");
+        return Build.MODEL.contains("RS31");
     }
 
     public void scanBarcode(View view) {
@@ -381,6 +428,45 @@ public class StyleActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
+    /// create a BroadcastReceiver for receiving intents from barcode reader service
+    private final BroadcastReceiver myDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Software trigger must receive this intent message
+            if (intent.getAction().equals(GeneralString.Intent_SOFTTRIGGER_DATA)) {
+
+                // extra string from intent
+                String data = intent.getStringExtra(GeneralString.BcReaderData);
+
+                // show decoded data
+                edit_barcode.setText(data);
+            }else if (intent.getAction().equals(GeneralString.Intent_PASS_TO_APP)){
+                // If user disable KeyboardEmulation, barcode reader service will broadcast Intent_PASS_TO_APP
+
+                // extra string from intent
+                String data = intent.getStringExtra(GeneralString.BcReaderData);
+
+                // show decoded data
+                edit_barcode.setText(data);
+
+            }else if(intent.getAction().equals(GeneralString.Intent_READERSERVICE_CONNECTED)){
+                // Make sure this app bind to barcode reader service , then user can use APIs to get/set settings from barcode reader service
+
+                BcReaderType myReaderType =  mReaderManager.GetReaderType();
+                edit_barcode.setText(myReaderType.toString());
+
+				/*NotificationParams settings = new NotificationParams();
+				mReaderManager.Get_NotificationParams(settings);
+
+				ReaderOutputConfiguration settings2 = new ReaderOutputConfiguration();
+				mReaderManager.Get_ReaderOutputConfiguration(settings2);
+				*/
+            }
+
+        }
+    };
 
     public String getDeviceInfo() {
         String manufacturer = Build.MANUFACTURER;
@@ -769,5 +855,24 @@ public class StyleActivity extends AppCompatActivity {
 
         }
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+        // ***************************************************//
+        // Unregister Broadcast Receiver before app close
+        // ***************************************************//
+        unregisterReceiver(myDataReceiver);
+
+        // ***************************************************//
+        // release(unbind) before app close
+        // ***************************************************//
+        if (mReaderManager != null)
+        {
+            mReaderManager.Release();
+        }
     }
 }

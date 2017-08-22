@@ -301,6 +301,9 @@
         <activity android:name=".BORIS.MobileScreenActivity" />
         <activity android:name=".BORIS.ReturnCatalogueActivity" />
         <activity android:name=".BORIS.ReturnDetailActivity"></activity>
+
+
+        <activity android:name=".SalesAnalysis.Samplebarcode"/>
     </application>
 
 </manifest>
