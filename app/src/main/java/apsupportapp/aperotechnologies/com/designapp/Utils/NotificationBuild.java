@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Utils;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -21,35 +22,40 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  * Created by csuthar on 21/08/17.
  */
 
-public class NotificationBuild extends AppCompatActivity{
+public class NotificationBuild extends AppCompatActivity {
 
 
     private SharedPreferences sharedPreferences;
     private Intent intent;
 
-    public NotificationBuild(String messageBody,Context context) {
+    public NotificationBuild(String title,String message, Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String userId = sharedPreferences.getString("userId", "");
-        if(userId !=null && !userId.equals("")){
+        if (userId != null && !userId.equals("")) {
             intent = new Intent(context, SnapDashboardActivity.class);
-        } else{
+        } else {
             intent = new Intent(context, LoginActivity1.class);
         }
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+      /*  PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT);*/
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                PendingIntent.FLAG_NO_CREATE);
+
+       // Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Firebase Push Notification")
-                .setContentText(messageBody)
+                .setSmallIcon(R.mipmap.notification_logo)
+                .setContentTitle(title)
+                .setContentText(message)
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
+              //  .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent)
+                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS);
+
 
         NotificationManager notificationManager =
-                (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, notificationBuilder.build());
     }

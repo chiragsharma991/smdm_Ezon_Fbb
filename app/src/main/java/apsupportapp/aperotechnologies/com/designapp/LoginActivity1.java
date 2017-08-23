@@ -376,7 +376,7 @@ public class LoginActivity1 extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("onResponse: ",""+response);
+//                        Log.e("onResponse: ",""+response);
                         try {
                             if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
@@ -465,7 +465,8 @@ public class LoginActivity1 extends AppCompatActivity
         final EditText search = (EditText) v.findViewById(R.id.search_store);
         final ArrayList<String> dublicateStoreList = new ArrayList<>();
         dublicateStoreList.addAll(storelist_data);
-        search.addTextChangedListener(new TextWatcher() {
+        search.addTextChangedListener(new TextWatcher()
+        {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
             {
@@ -473,7 +474,8 @@ public class LoginActivity1 extends AppCompatActivity
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
                 String searchData = search.getText().toString();
                 filterData(searchData, storelist_data, dublicateStoreList);
             }
@@ -484,10 +486,7 @@ public class LoginActivity1 extends AppCompatActivity
             }
         });
         spinnerArrayAdapter = new StoreListAdapter(context,storelist_data);
-
         select_storeList.setAdapter(spinnerArrayAdapter);
-
-
         select_storeList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -499,7 +498,8 @@ public class LoginActivity1 extends AppCompatActivity
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 dialog.dismiss();
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     Reusable_Functions.sDialog(context, "Authenticating user...");
                     String value =  storelist_data.get(position);
                     SelectedStoreCode = value.trim().substring(0, 4);
@@ -507,7 +507,9 @@ public class LoginActivity1 extends AppCompatActivity
                     Log.e("TAG", "store des: "+storeDescription );
                     firstLogin = true;
                     requestLoginWithStoreAPI();
-                } else {
+                }
+                else
+                {
                     Toast.makeText(LoginActivity1.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
             }
@@ -539,7 +541,6 @@ public class LoginActivity1 extends AppCompatActivity
         }
     }
 
-
     @Override
     protected void onDestroy() {
         Log.e("LOGIN", "onDestroy: " );
@@ -548,22 +549,17 @@ public class LoginActivity1 extends AppCompatActivity
 
     }
 
-
-
-
     // --------- Adapter-----------
 
-    private class StoreListAdapter extends BaseAdapter {
+    private class StoreListAdapter extends BaseAdapter
+    {
         private final Context context;
         private final ArrayList<String> storelist_data;
 
-
-
-        public StoreListAdapter(Context context, ArrayList<String> storelist_data) {
+        public StoreListAdapter(Context context, ArrayList<String> storelist_data)
+        {
             this.context=context;
             this.storelist_data=storelist_data;
-
-
         }
 
         @Override
@@ -582,9 +578,8 @@ public class LoginActivity1 extends AppCompatActivity
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-
-
+        public View getView(int i, View view, ViewGroup viewGroup)
+        {
             LayoutInflater inflater = getLayoutInflater();
             View row;
             row = inflater.inflate(R.layout.simple_list_item, null, false);

@@ -18,6 +18,9 @@ import android.widget.Toast;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URL;
 
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
@@ -38,7 +41,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
     private SharedPreferences sharedPreferences;
     private Intent intent;
     private  Handler handler;
-    private String messageBody;
+    private String title,message;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -46,44 +49,52 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
-        Log.e("TAG", "From:-------- " + remoteMessage.getFrom());
-        Log.e("TAG", "Notification Message Body:------- " + remoteMessage.getNotification().getBody());
-        sendNotification(remoteMessage.getNotification().getBody().toString());
-    }
-
-    private void sendNotification(final String messageBody) {
-
-        this.messageBody=messageBody;
-        UiTask task=new UiTask(this);
-        task.execute();
 
 
-       /* sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String userId = sharedPreferences.getString("userId", "");
-        if(userId !=null && !userId.equals("")){
-            intent = new Intent(this, SnapDashboardActivity.class);
-        } else{
-            intent = new Intent(this, LoginActivity1.class);
+
+
+        if (remoteMessage == null)
+            return;
+
+        // Check if message contains a notification payload.
+        if (remoteMessage.getNotification() != null) {
+            Log.e("TAG", "Notification Body:-- " + remoteMessage.getNotification().getBody());
         }
 
-        //Intent intent = new Intent(this, LoginActivity1.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+        // Check if message contains a data payload.
+        if (remoteMessage.getData().size() > 0) {
+            Log.e("TAG", "Data Payload: --" + remoteMessage.getData().toString());
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Firebase Push Notification")
-                .setContentText(messageBody)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
+            try {
+                JSONObject json = new JSONObject(remoteMessage.getData().toString());
+                handleDataMessage(json);
+            } catch (Exception e) {
+                Log.e("TAG", "Exception: " + e.getMessage());
+            }
+        }
+    }
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    private void handleDataMessage(JSONObject json) {
+        try {
 
-        notificationManager.notify(0, notificationBuilder.build());*/
+            String title = json.getString("title");
+            String message = json.getString("message");
+            sendNotification(title,message);
+
+
+        } catch (JSONException e) {
+            Log.e("TAG", "JSONException: "+e.getMessage() );
+            e.printStackTrace();
+        }
+
+    }
+
+    private void sendNotification(final String title, String message) {
+
+        this.title=title;
+        this.message=message;
+        UiTask task=new UiTask(this);
+        task.execute();
 
 
     }
@@ -104,7 +115,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
 
         @Override
         protected void onPostExecute(Long aLong) {
-            new NotificationBuild(messageBody,context);
+            new NotificationBuild(title,message,context);
 
         }
     }

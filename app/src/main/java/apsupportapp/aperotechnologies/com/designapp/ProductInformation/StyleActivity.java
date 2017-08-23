@@ -1,8 +1,10 @@
 package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +42,9 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.cipherlab.barcode.GeneralString;
+import com.cipherlab.barcode.ReaderManager;
+import com.cipherlab.barcode.decoder.BcReaderType;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -97,10 +102,14 @@ public class StyleActivity extends AppCompatActivity {
     private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
     private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
     private static String ourIntentAction = "com.motorolasolutions.emdk.sample.dwdemosample.RECVR";
+    private com.cipherlab.barcode.ReaderManager mReaderManager;
+    private IntentFilter filter;
+
     String barcode;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_product_info);
@@ -124,7 +133,9 @@ public class StyleActivity extends AppCompatActivity {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading collection data...");
             requestCollectionAPI(collectionoffset, collectionlimit);
-        } else {
+        }
+        else
+        {
             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
 
@@ -195,34 +206,27 @@ public class StyleActivity extends AppCompatActivity {
         btnBarcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isAMobileModel()) {
-                    Intent intent_barcode = new Intent();
-                    intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
-                    intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
-                    StyleActivity.this.sendBroadcast(intent_barcode);
-                    edit_barcode.setText(" ");
-                    barcode = " ";
-                    android.os.Handler h = new android.os.Handler();
-                    h.postDelayed(new Runnable() {
-                        public void run() {
+                if (isAMobileModel())
+                {
+                    mReaderManager = ReaderManager.InitInstance(StyleActivity.this);
+                    filter = new IntentFilter();
+                    filter.addAction(com.cipherlab.barcode.GeneralString.Intent_SOFTTRIGGER_DATA);
+                    filter.addAction(com.cipherlab.barcode.GeneralString.Intent_PASS_TO_APP);
+                    filter.addAction(com.cipherlab.barcode.GeneralString.Intent_READERSERVICE_CONNECTED);
+                   // ExeSampleCode();
+                    //registerReceiver(myDataReceiver, filter);
 
-                            Intent i1 = getIntent();
-                            barcode = edit_barcode.getText().toString();
-                            if (!barcode.equals(" ")) {
-                                Toast.makeText(StyleActivity.this, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                TimeUP();
-                            } else {
-                                View view = findViewById(android.R.id.content);
-                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
-                    }, 1500);
+
 
                 } else if (!isAMobileModel()) {
                     scanBarcode(view);
                 }
             }
         });
+
+
+
+
 
         imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,6 +327,51 @@ public class StyleActivity extends AppCompatActivity {
         });
     }
 
+    private void ExeSampleCode()
+    {
+
+                    if (mReaderManager != null)
+                    {
+                        Log.e( "onClick: ", "------");
+//                        com.cipherlab.barcode.decoder.BcReaderType myReaderType =  mReaderManager.GetReaderType();
+//                        edit_barcode.setText(myReaderType.toString());
+//                        // Enable/Disable barcode reader service
+//                        com.cipherlab.barcode.decoder.ClResult clRet = mReaderManager.SetActive(false);
+//                        boolean bRet = mReaderManager.GetActive();
+//                        clRet = mReaderManager.SetActive(true);
+//                        bRet = mReaderManager.GetActive();
+
+                        //software trigger
+                        Thread sThread = new Thread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                mReaderManager.SoftScanTrigger();
+                            }
+                        });
+                        sThread.setPriority( Thread.MAX_PRIORITY );
+                        sThread.start();
+
+                    }
+                    barcode = " ";
+                    android.os.Handler h = new android.os.Handler();
+                    h.postDelayed(new Runnable() {
+                        public void run() {
+
+                            Intent i1 = getIntent();
+                            barcode = edit_barcode.getText().toString();
+                            if (!barcode.equals(" ")) {
+                                Toast.makeText(StyleActivity.this, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
+                                TimeUP();
+                            } else {
+                                View view = findViewById(android.R.id.content);
+                                Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
+                            }
+                        }
+                    }, 1500);
+    }
+
+
     private void TimeUP() {
         if (Reusable_Functions.chkStatus(StyleActivity.this)) {
             Reusable_Functions.hDialog();
@@ -342,7 +391,7 @@ public class StyleActivity extends AppCompatActivity {
 
     private boolean isAMobileModel() {
         getDeviceInfo();
-        return Build.MODEL.contains("TC75");
+        return Build.MODEL.contains("RS31");
     }
 
     public void scanBarcode(View view) {
@@ -380,6 +429,45 @@ public class StyleActivity extends AppCompatActivity {
         }
     }
 
+
+    /// create a BroadcastReceiver for receiving intents from barcode reader service
+    private final BroadcastReceiver myDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Software trigger must receive this intent message
+            if (intent.getAction().equals(GeneralString.Intent_SOFTTRIGGER_DATA)) {
+
+                // extra string from intent
+                String data = intent.getStringExtra(GeneralString.BcReaderData);
+
+                // show decoded data
+                edit_barcode.setText(data);
+            }else if (intent.getAction().equals(GeneralString.Intent_PASS_TO_APP)){
+                // If user disable KeyboardEmulation, barcode reader service will broadcast Intent_PASS_TO_APP
+
+                // extra string from intent
+                String data = intent.getStringExtra(GeneralString.BcReaderData);
+
+                // show decoded data
+                edit_barcode.setText(data);
+
+            }else if(intent.getAction().equals(GeneralString.Intent_READERSERVICE_CONNECTED)){
+                // Make sure this app bind to barcode reader service , then user can use APIs to get/set settings from barcode reader service
+
+                BcReaderType myReaderType =  mReaderManager.GetReaderType();
+                edit_barcode.setText(myReaderType.toString());
+
+				/*NotificationParams settings = new NotificationParams();
+				mReaderManager.Get_NotificationParams(settings);
+
+				ReaderOutputConfiguration settings2 = new ReaderOutputConfiguration();
+				mReaderManager.Get_ReaderOutputConfiguration(settings2);
+				*/
+            }
+
+        }
+    };
+
     public String getDeviceInfo() {
         String manufacturer = Build.MANUFACTURER;
         String model = Build.MODEL;
@@ -402,11 +490,15 @@ public class StyleActivity extends AppCompatActivity {
         }
     }
 
-    private void requestStyleDetailsAPI(String content, String check) {
+    private void requestStyleDetailsAPI(String content, String check)
+    {
         String url = " ";
-        if (check.equals("optionname")) {
+        if (check.equals("optionname"))
+        {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + content.replaceAll(" ", "%20").replaceAll("&", "%26");
-        } else if (check.equals("barcode")) {
+        }
+        else if (check.equals("barcode"))
+        {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
 
@@ -509,9 +601,9 @@ public class StyleActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    private void requestCollectionAPI(int offsetvalue1, final int limit1) {
+    private void requestCollectionAPI(int offsetvalue1, final int limit1)
+    {
         String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
-        Log.e("TAG", "requestCollectionAPI: "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -520,86 +612,105 @@ public class StyleActivity extends AppCompatActivity {
                             if (response.equals("") || response == null || response.length() == 0 && collectioncount == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No collection data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == collectionlimit) {
-
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() == collectionlimit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
-                                    arrayList.add(collectionName.getString("collectionName"));
+                                    arrayList.add(collectionNM);
                                 }
                                 collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
                                 collectioncount++;
                                 requestCollectionAPI(collectionoffset, collectionlimit);
-                            } else if (response.length() < collectionlimit) {
-                                Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() < collectionlimit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
-                                    arrayList.add(collectionName.getString("collectionName"));
+                                    arrayList.add(collectionNM);
                                 }
                             }
                             Collections.sort(arrayList);
                             arrayList.add(0, "Select Collection");
                             collectionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
-                            if (selcollectionName == null || selcollectionName.equals("")) {
-                                collection.setText("Select Collection");
-                                Log.e("TAG 546", "Select Collection: " );
-                            } else {
-                                if (arrayList.contains(selcollectionName)) {
-                                    collectionNM = selcollectionName;
-                                    optionName = seloptionName;
-                                    collection.setText(selcollectionName);
-                                    Log.e("TAG 552", "Select Collection: "+selcollectionName );
-                                    style.setText(seloptionName);
-                                    style.setEnabled(true);
-                                    articleOptionList.addAll(SnapDashboardActivity._collectionitems);
-                                } else {
-                                    collection.setText("Select Collection");
-                                    Log.e("TAG 558", "Select Collection: " );
-
-                                }
-                            }
-
-                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                            {
                                 @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                {
                                     collectionNM = (String) collectionAdapter.getItem(position);
-                                    Log.e("TAG", "onItemClick: "+collectionNM );
                                     collection.setText(collectionNM.trim());
-                                    Log.e("TAG 570", "Select Collection: "+collectionNM );
-
-
-                                    if (selcollectionName == null || selcollectionName.equals(" ")) {
-
-                                    } else {
-                                        selcollectionName = null;
-                                        seloptionName = null;
-                                    }
+//                                    if (selcollectionName == null || selcollectionName.equals(" "))
+//                                    {
+//
+//                                    }
+//                                    else
+//                                    {
+//                                        Log.e( "onItemClick: ","--------" );
+//                                        selcollectionName = null;
+//                                        seloptionName = null;
+//                                    }
                                     collectionLayout.setVisibility(View.GONE);
                                     optionLayout.setVisibility(View.GONE);
                                     InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                    if (inputManager != null) {
+                                    if (inputManager != null)
+                                    {
                                         inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                                     }
-                                    if (collectionNM.equalsIgnoreCase("Select Collection")) {
-                                    } else {
-                                        if (Reusable_Functions.chkStatus(context)) {
+                                    if (collectionNM.equalsIgnoreCase("Select Collection"))
+                                    {
+                                        Log.e(" come ","here" );
+                                    }
+                                    else
+                                    {
+                                        if (Reusable_Functions.chkStatus(context))
+                                        {
                                             Reusable_Functions.sDialog(context, "Loading options data...");
                                             offsetvalue = 0;
                                             limit = 100;
                                             count = 0;
                                             articleOptionList.clear();
                                             requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }
                             });
-
-                        } catch (Exception e) {
+                            if (selcollectionName == null || selcollectionName.equals(""))
+                            {
+                                collection.setText("Select Collection");
+                                Log.e( "Collection Text in if : "," ");
+                            }
+                            else
+                            {
+                                Log.e("selcollectionNm: ",""+selcollectionName);
+                                if (arrayList.contains(selcollectionName))
+                                {
+                                    Log.e( "Collection Text in else : "," ");
+                                    collectionNM = selcollectionName;
+                                    optionName = seloptionName;
+                                    collection.setText(selcollectionName);
+                                    style.setText(seloptionName);
+                                    style.setEnabled(true);
+                                    articleOptionList.addAll(SnapDashboardActivity._collectionitems);
+                                }
+                                else
+                                {
+                                    collection.setText("Select Collection");
+                                    Log.e( "Collection Text in else of else: "," ");
+                                }
+                            }
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
@@ -627,7 +738,8 @@ public class StyleActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1) {
+    private void requestArticleOptionsAPI(final String collectionNM, int offsetvalue1, final int limit1)
+    {
         String url;
         url = ConstsCore.web_url + "/v1/display/collectionoptions/" + userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         Log.e("url ", "" + url);
@@ -635,17 +747,20 @@ public class StyleActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("option response", "" + response);
-                        try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+//                        Log.e("option response", "" + response);
+                        try
+                        {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
                                 articleOptionList.add(0, "Select Option");
-                                Log.e("TAG", "requestArticleOptionsAPI:  null" );
                                 style.setEnabled(false);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No options data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
-
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() == limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");
                                     String articleOptions = jsonResponse.getString("articleOptions");
@@ -654,44 +769,55 @@ public class StyleActivity extends AppCompatActivity {
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
-                            } else if (response.length() < limit) {
-
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");
                                     String articleOptions = jsonResponse.getString("articleOptions");
                                     articleOptionList.add(articleOptions);
                                 }
-
                             }
                             Collections.sort(articleOptionList);
                             articleOptionList.add(0, "Select Option");
                             style.setEnabled(true);
                             SnapDashboardActivity._collectionitems = new ArrayList();
                             SnapDashboardActivity._collectionitems.addAll(articleOptionList);
-                            if (seloptionName == null || seloptionName.equals("")) {
+                            if (seloptionName == null || seloptionName.equals(""))
+                            {
                                 style.setText("Select Option");
+                            }
+                            else
+                            {
+                                Log.e("seloptionName :",""+seloptionName );
+                                style.setText(seloptionName);
                             }
                             optionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
-
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Log.e("catch log", "" + e.getMessage());
                             e.printStackTrace();
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
         ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
@@ -726,7 +852,27 @@ public class StyleActivity extends AppCompatActivity {
             selcollectionName = null;
             seloptionName = null;
             SnapDashboardActivity._collectionitems = new ArrayList();
-            finish();
+
+        }
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+        // ***************************************************//
+        // Unregister Broadcast Receiver before app close
+        // ***************************************************//
+        unregisterReceiver(myDataReceiver);
+
+        // ***************************************************//
+        // release(unbind) before app close
+        // ***************************************************//
+        if (mReaderManager != null)
+        {
+            mReaderManager.Release();
         }
     }
 }

@@ -122,6 +122,13 @@
 
     </style>
 
+    <style name="ProgressBar_red" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/ezfbb_red</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:background">#666666</item>
+
+    </style>
+
     <style name="ProgressBar_black" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">#000</item>
         <item name="android:textColorPrimary">#ffffff</item>

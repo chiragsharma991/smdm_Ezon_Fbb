@@ -39,12 +39,14 @@ public class Details_Fragment extends Fragment implements View.OnClickListener{
     Button btn_cd_more,btn_cd_less;
     private String storeDescription;
     SharedPreferences sharedPreferences;
-    public Details_Fragment() {
+    public Details_Fragment()
+    {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         Intent i = getActivity().getIntent();
         styleDetailsBean = (StyleDetailsBean) i.getSerializableExtra("styleDetailsBean");
@@ -53,8 +55,6 @@ public class Details_Fragment extends Fragment implements View.OnClickListener{
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         storeDescription = sharedPreferences.getString("storeDescription","");
         Log.e( "onCreate: ",""+storeDescription );
-
-
     }
 
     @Override
@@ -104,10 +104,12 @@ public class Details_Fragment extends Fragment implements View.OnClickListener{
         {
             Glide.with(getActivity())
                     .load(styleDetailsBean.getProductImageURL())
-                    .placeholder(R.mipmap.placeholder)
-                    .listener(new RequestListener<String, GlideDrawable>() {
+                    .placeholder(null)
+                    .listener(new RequestListener<String, GlideDrawable>()
+                    {
                         @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource)
+                        {
                            progressBar.setVisibility(View.GONE);
                             return false;
                         }
@@ -121,9 +123,9 @@ public class Details_Fragment extends Fragment implements View.OnClickListener{
                     .into(imgProfile);
 
         }
-        else {
+        else
+        {
             progressBar.setVisibility(View.GONE);
-
             Glide.with(getActivity())
                     .load(R.mipmap.noimageavailable)
                     .into(imgProfile);
@@ -176,15 +178,12 @@ public class Details_Fragment extends Fragment implements View.OnClickListener{
         txtTwSalesUnit.setText("" + styleDetailsBean.getTwSaleTotQty());
         txtLwSalesUnit.setText("" + styleDetailsBean.getLwSaleTotQty());
         txtYtdSalesUnit.setText("" + styleDetailsBean.getYtdSaleTotQty());
-
         txtSOH.setText("" + styleDetailsBean.getStkOnhandQty());
         txtGIT.setText("" + styleDetailsBean.getStkGitQty());
         txtBaseStock.setText("" + styleDetailsBean.getTargetStock());
-
         txtPrice.setText("₹" +format.format(Math.round(styleDetailsBean.getUnitGrossPrice())));
         txtsalesThruUnit.setText("" + String.format("%.1f", styleDetailsBean.getSellThruUnitsRcpt()) + "%");
         txtROS.setText("" + String.format("%.1f", styleDetailsBean.getRos()));
-
         return view;
     }
 
@@ -205,6 +204,5 @@ public class Details_Fragment extends Fragment implements View.OnClickListener{
                 break;
 
         }
-
     }
 }

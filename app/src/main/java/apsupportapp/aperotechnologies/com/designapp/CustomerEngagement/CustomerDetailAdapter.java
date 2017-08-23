@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.google.gson.Gson;
 import java.text.NumberFormat;
@@ -21,6 +22,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookup_PageOne.customerDetailsList;
+import static apsupportapp.aperotechnologies.com.designapp.R.id.cust_progressBar;
 
 
 /**
@@ -46,7 +48,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public CustomerDetailAdapter(ArrayList customerDetailsList, Context context)
     {
         this.context = context;
-        this.detailArrayList = detailArrayList;
+        this.detailArrayList = customerDetailsList;
         this.detailFilterList = detailArrayList;
         getFilter();
         gson = new Gson();
@@ -62,11 +64,15 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 //            return VIEW_PROG;
 //        }
 
-        if(customerDetailsList.get(position) == null)
+
+        if(customerDetailsList.get(position)  == null)
         {
+            Log.e( "getItemViewType: ", ""+position);
             return VIEW_PROG;
 
-        } else {
+        }
+        else
+        {
             return VIEW_ITEM;
         }
     }
@@ -164,10 +170,12 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static class ProgressViewHolder extends RecyclerView.ViewHolder
     {
         TextView txtView;
+        public static ProgressBar cust_progressBar;
         public ProgressViewHolder(View footerView)
         {
             super(footerView);
             txtView = (TextView) footerView.findViewById(R.id.txtView);
+            cust_progressBar = (ProgressBar) footerView.findViewById(R.id.cust_progressBar);
         }
     }
 
