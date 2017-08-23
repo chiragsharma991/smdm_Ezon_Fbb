@@ -270,25 +270,25 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
             apps = getProduct(3);
             snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
-            apps = getProduct(4);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
+//            apps = getProduct(4);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
 //            apps = getProduct(5);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Key Product", apps));
-            apps = getProduct(5);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
-            apps = getProduct(6);
+//            apps = getProduct(5);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+            apps = getProduct(4);
             snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
 
-            apps = getProduct(7);
+            apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
 //            apps = getProduct(7);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
-            apps = getProduct(8);
+            apps = getProduct(6);
             snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
-            apps = getProduct(9);
+            apps = getProduct(7);
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
-            apps = getProduct(10);
-            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
+//            apps = getProduct(10);
+//            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
 //            apps = getProduct(10);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
 

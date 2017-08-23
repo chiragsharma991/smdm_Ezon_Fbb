@@ -2338,26 +2338,30 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                {
                                     salesAnalysisClass.setPlanDept("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                {
                                     salesAnalysisClass.setPlanCategory("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Class"))
+                                {
                                     salesAnalysisClass.setPlanClass("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand"))
+                                {
                                     salesAnalysisClass.setBrandName("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+                                {
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
-
-
-                                listView_SalesAnalysis.setLayoutManager(new LinearLayoutManager(
-                                        listView_SalesAnalysis.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                listView_SalesAnalysis.setLayoutManager(new LinearLayoutManager(listView_SalesAnalysis.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 listView_SalesAnalysis.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
@@ -2376,8 +2380,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanCategory();
                                 requestSalesPagerOnScrollAPI();
                             }
-
-
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
@@ -2415,8 +2417,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
     }
 
-    private void requestSalesPlanClassListAPI(final String category) {
-
+    private void requestSalesPlanClassListAPI(final String category)
+    {
         String salespva_planclass_listurl = "";
         salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
@@ -2451,14 +2453,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 }
 
-                                for (int i = 0; i < 3; i++) {
+                                for (int i = 0; i < 3; i++)
+                                {
                                     ImageView imgdot = new ImageView(context);
                                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
                                     layoutParams.setMargins(3, 3, 3, 3);
                                     imgdot.setLayoutParams(layoutParams);
                                     imgdot.setImageResource(R.mipmap.dots_unselected);
                                     lldots.addView(imgdot);
-
                                 }
                                 int currentItem = vwpagersales.getCurrentItem();
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
@@ -2612,11 +2614,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
-
                                 val += " > " + planclass;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
-
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
@@ -2716,7 +2716,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
-
                                 val += " > " + brandnm;
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
@@ -2774,26 +2773,35 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        if (SalesFilterActivity.level_filter == 2) {
+                        if (SalesFilterActivity.level_filter == 2)
+                        {
                             txtheaderplanclass.setText("Category");
                             fromWhere = "Category";
                             relprevbtn.setVisibility(View.VISIBLE);
-                        } else if (SalesFilterActivity.level_filter == 3) {
+                        }
+                        else if (SalesFilterActivity.level_filter == 3)
+                        {
                             txtheaderplanclass.setText("Class");
                             fromWhere = "Class";
                             relprevbtn.setVisibility(View.VISIBLE);
 
-                        } else if (SalesFilterActivity.level_filter == 4) {
+                        }
+                        else if (SalesFilterActivity.level_filter == 4)
+                        {
                             txtheaderplanclass.setText("Brand");
                             fromWhere = "Brand";
                             relprevbtn.setVisibility(View.VISIBLE);
 
-                        } else if (SalesFilterActivity.level_filter == 5) {
+                        }
+                        else if (SalesFilterActivity.level_filter == 5)
+                        {
                             txtheaderplanclass.setText("Brand Class");
                             fromWhere = "Brand Class";
                             relprevbtn.setVisibility(View.VISIBLE);
                             relnextbtn.setVisibility(View.INVISIBLE);
-                        } else if (SalesFilterActivity.level_filter == 6) {
+                        }
+                        else if (SalesFilterActivity.level_filter == 6)
+                        {
                             txtheaderplanclass.setText("Brand Class");
                             fromWhere = "Brand Class";
                             relprevbtn.setVisibility(View.VISIBLE);
@@ -2817,7 +2825,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 requestSalesSelectedFilterVal(str);
 
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
 
@@ -2836,15 +2845,22 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                {
                                     salesAnalysisClass.setPlanDept("All");
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                {
                                     salesAnalysisClass.setPlanCategory("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Class"))
+                                {
                                     salesAnalysisClass.setPlanClass("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Brand"))
+                                {
                                     salesAnalysisClass.setBrandName("All");
                                 }
 //                                else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
@@ -2861,25 +2877,30 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
-
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
 
-                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                {
                                     level = 1;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                {
                                     level = 2;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
-                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Class")) {
                                     level = 3;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Brand")) {
                                     level = 4;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
                                     level = 5;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                                 }
@@ -3252,7 +3273,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 else if (txt_ez_header.getText().toString().equals("Region")) {
                                     ezone_level = 7;
                                     ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                                } else if (txt_ez_header.getText().toString().equals("Store")) {
+                                } else if (txt_ez_header.getText().toString().equals("Store"))
+                                {
                                     ezone_level = 9;
                                     ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                                 }
@@ -3439,7 +3461,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     ez_sales_detail_model = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     ez_sales_detalis_array.add(ez_sales_detail_model);
                                 }
-                                for (int i = 0; i < 2; i++) {
+                                for (int i = 0; i < 2; i++)
+                                {
                                     ImageView imgdot = new ImageView(context);
                                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(20, 20);
                                     layoutParams.setMargins(3, 3, 3, 3);
