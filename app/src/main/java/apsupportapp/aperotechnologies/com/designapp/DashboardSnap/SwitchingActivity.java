@@ -126,95 +126,86 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent SaleThruInventory = new Intent(context,SaleThruInventory.class);
                     startActivity(SaleThruInventory);
                     break;
-//                case 40:
-//                    Intent RunningPromoActivity = new Intent(context,RunningPromoActivity.class);
-//                    startActivity(RunningPromoActivity);
-//                    break;
-//                case 41:
-//                    Intent UpcomingPromo = new Intent(context,UpcomingPromo.class);
-//                    startActivity(UpcomingPromo);
-//                    break;
-//                case 42:
-//                    Intent ExpiringPromoActivity = new Intent(context,ExpiringPromoActivity.class);
-//                    startActivity(ExpiringPromoActivity);
-//                    break;
-//                case 43:
-//                    Intent BestPerformerActivity = new Intent(context,BestPerformerActivity.class);
-//                    startActivity(BestPerformerActivity);
-//                    break;
-//                case 51:
-//                    Intent KeyProductActivity = new Intent(context,KeyProductActivity.class);
-//                    startActivity(KeyProductActivity);
-//                    break;
-//                case 50:
-//                    Intent To_Do = new Intent(context,To_Do.class);
-//                    startActivity(To_Do);
-//                    break;
-//                case 51:
-//                    Intent StatusActivity = new Intent(context,StatusActivity.class);
-//                    startActivity(StatusActivity);
-//                    break;
                 case 40:
+                    Intent RunningPromoActivity = new Intent(context,RunningPromoActivity.class);
+                    startActivity(RunningPromoActivity);
+                    break;
+                case 41:
+                    Intent UpcomingPromo = new Intent(context,UpcomingPromo.class);
+                    startActivity(UpcomingPromo);
+                    break;
+                case 42:
+                    Intent ExpiringPromoActivity = new Intent(context,ExpiringPromoActivity.class);
+                    startActivity(ExpiringPromoActivity);
+                    break;
+                case 43:
+                    Intent BestPerformerActivity = new Intent(context,BestPerformerActivity.class);
+                    startActivity(BestPerformerActivity);
+                    break;
+
+                case 50:
+                    Intent To_Do = new Intent(context,To_Do.class);
+                    startActivity(To_Do);
+                    break;
+                case 51:
+                    Intent StatusActivity = new Intent(context,StatusActivity.class);
+                    startActivity(StatusActivity);
+                    break;
+                case 60:
                     Intent ProductAvailability_Notify= new Intent(context,ProductAvailability_notify_HO.class);
                     startActivity(ProductAvailability_Notify);
                     break;
 
-                case 41:
+                case 61:
                     Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund_HO.class);
                     startActivity(PolicyExchangeRefund);
                     break;
-                case 42:
+                case 62:
                     Intent Price_Promotion = new Intent(context, PricePromotion_HO.class);
                     startActivity(Price_Promotion);
                     break;
-                case 43:
+                case 63:
                     Intent ProductQualityRange = new Intent(context, ProductQualityRange_HO.class);
                     startActivity(ProductQualityRange);
                     break;
-                case 44:
+                case 64:
                     Intent OurStoreServices = new Intent(context,OurStoreServices_HO.class);
                     startActivity(OurStoreServices);
                     break;
-                case 45:
+                case 65:
                     Intent SupervisiorStaff = new Intent(context, SupervisorStaff_HO.class);
                     startActivity(SupervisiorStaff);
                     break;
-                case 50:
+                case 70:
                     Intent Feedback = new Intent(context,Feedback.class);
                     startActivity(Feedback);
                     break;
-                case 51:
+                case 71:
                     Intent FeedbackList = new Intent(context,FeedbackList.class);
                     startActivity(FeedbackList);
                     break;
-                case 52:
+                case 72:
                     Intent InspectionBeginActivity = new Intent(context,InspectionBeginActivity.class);
                     startActivity(InspectionBeginActivity);
                     break;
-                case 53:
+                case 73:
                     Intent InspectionHistoryActivity = new Intent(context,InspectionHistoryActivity.class);
                     startActivity(InspectionHistoryActivity);
                     break;
-                case 60:
+                case 80:
                     Intent mpm_activity = new Intent(context,mpm_activity.class);
                     startActivity(mpm_activity);
                     break;
-                case 70:
+                case 90:
                     Intent CustomerLookupActivity = new Intent(context,CustomerLookupActivity.class);
                     startActivity(CustomerLookupActivity);
                     break;
-//                case 100:
-//                    Intent MobileScreenActivity = new Intent(context,MobileScreenActivity.class);
-//                    startActivity(MobileScreenActivity);
-//                    break;
+                case 100:
+                    Intent MobileScreenActivity = new Intent(context,MobileScreenActivity.class);
+                    startActivity(MobileScreenActivity);
+                    break;
 
 
-//                case 110:
-//                    Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
-//                    startActivity(HourlyPerformence);
-//                    break;
-//                case 120:
-//
 
 
             }
@@ -308,22 +299,20 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions));
                 break;
 
-//            case 4 :
-//                apps.add(new App("Running Promo", R.mipmap.runningpromo));
-//                apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo));
-//                apps.add(new App("Expiring Promo", R.mipmap.expiringpromo));
-//                apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers));
-//                break;
+            case 4 :
+                apps.add(new App("Running Promo", R.mipmap.runningpromo));
+                apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo));
+                apps.add(new App("Expiring Promo", R.mipmap.expiringpromo));
+                apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers));
+                break;
 
-//            case 5 :
-//                apps.add(new App("Hourly Info", R.mipmap.hourlyperformance));
-//                break;
-//            case 5 :
-//                apps.add(new App("To Do", R.mipmap.stocktransfer));
-//                apps.add(new App("Status", R.mipmap.stocktransfer));
-//                break;
 
-            case 4:
+            case 5 :
+                apps.add(new App("To Do", R.mipmap.stocktransfer));
+                apps.add(new App("Status", R.mipmap.stocktransfer));
+                break;
+
+            case 6:
                 apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability));
                 apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn));
                 apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion));
@@ -333,23 +322,22 @@ public class SwitchingActivity extends AppCompatActivity
                 break;
 
 
-            case 5 :
+            case 7 :
                 apps.add(new App("Best Worst Performer", R.mipmap.feedback));
                 apps.add(new App("Best Worst Performer List", R.mipmap.feedbacklist));
                 apps.add(new App("Begin Inspection", R.mipmap.storeinspection));
                 apps.add(new App("Inspection History", R.mipmap.storeinspection));
                 break;
-            case 6 :
+            case 8 :
                 apps.add(new App("Season Catalogue", R.mipmap.seasoncatalogue));
                 break;
-            case 7 :
+            case 9 :
                 apps.add(new App("Customer Engagement", R.mipmap.customerengagement));
                 break;
-//            case 10 :
-//                apps.add(new App("Boris",R.mipmap.customerengagement));
-//                break;
-//            case 9 :
-//                break;
+            case 10 :
+                apps.add(new App("Boris",R.mipmap.customerengagement));
+                break;
+
 
             // switch for ezone user
             case 21 :
