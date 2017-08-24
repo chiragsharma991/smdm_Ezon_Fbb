@@ -294,7 +294,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
             apps = getProduct(10);
             snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
-//            apps = getProduct(10);
+            //apps = getProduct(10);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
 
         }
@@ -386,15 +386,12 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         if (checkDeviceId) {
 
-
             if (Reusable_Functions.checkPermission(android.Manifest.permission.READ_PHONE_STATE, this)) {
                 Log.e("TAG", ":check permission is okk");
                 getDeviceId();
-
-
             } else {
                 Log.e("TAG", ":check permission calling");
-                requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
+                requestPermissions (new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
             }
         }
     }
