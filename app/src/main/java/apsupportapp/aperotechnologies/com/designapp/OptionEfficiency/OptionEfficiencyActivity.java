@@ -2064,12 +2064,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     // For BrandPlanCLass on click of Brand Val
-    private void request_OE_BrandPlanList(String deptName, String category, String plan_class, final String brandnm) {
+    private void request_OE_BrandPlanList(String deptName, String category, String plan_class, final String brandnm)
+    {
         String oe_brandplan_listurl = "";
-        if (coreSelection) {
+        if (coreSelection)
+        {
             oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
 
-        } else {
+        }
+        else
+        {
             oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
         }
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brandplan_listurl,
@@ -2135,10 +2139,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 count = 0;
                                 level = 5;
                                 requestOEPieChart();
-
-
-
-
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             OnItemClick = false;
