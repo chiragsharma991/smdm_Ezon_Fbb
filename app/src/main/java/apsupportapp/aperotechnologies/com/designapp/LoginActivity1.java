@@ -208,7 +208,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
                                 editor.putString("device_id", "");
-                                editor.putString("push_tokken", "");
+                                //editor.putString("push_tokken", "");
                                 editor.apply();
                                 if (log_flag)
                                 {
@@ -319,7 +319,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("storeDescription",storeDescription);
                                 Log.e("onResponse---: ","store desc"+storeDescription);
                                 editor.putString("device_id", "");
-                                editor.putString("push_tokken", "");
+                                //editor.putString("push_tokken", "");
                                 editor.apply();
                                 if (log_flag)
                                 {

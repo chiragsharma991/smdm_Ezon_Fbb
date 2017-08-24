@@ -22,9 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Reusable_Functions {
+public class Reusable_Functions  {
 
     public static ProgressDialog progressDialog = null;
+
+
+
+
 
     public static boolean chkStatus(Context context) {
         final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -206,6 +210,7 @@ public class Reusable_Functions {
         }
         return true;
     }
+
 
 
 

@@ -43,17 +43,15 @@ public class AboutUsActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutUsActivity.this, SnapDashboardActivity.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
     }
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(AboutUsActivity.this, SnapDashboardActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(AboutUsActivity.this, SnapDashboardActivity.class);
+//        startActivity(intent);
         finish();
 
     }

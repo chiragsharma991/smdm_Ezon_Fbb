@@ -235,7 +235,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         } else if (id == R.id.aboutus) {
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
-            finish();
             return true;
         }
 

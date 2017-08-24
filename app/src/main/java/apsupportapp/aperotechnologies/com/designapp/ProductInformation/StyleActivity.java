@@ -565,7 +565,8 @@ public class StyleActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    private void requestCollectionAPI(int offsetvalue1, final int limit1) {
+    private void requestCollectionAPI(int offsetvalue1, final int limit1)
+    {
         String url = ConstsCore.web_url + "/v1/display/collections/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -600,16 +601,7 @@ public class StyleActivity extends AppCompatActivity {
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     collectionNM = (String) collectionAdapter.getItem(position);
                                     collection.setText(collectionNM.trim());
-//                                    if (selcollectionName == null || selcollectionName.equals(" "))
-//                                    {
-//
-//                                    }
-//                                    else
-//                                    {
-//                                        Log.e( "onItemClick: ","--------" );
-//                                        selcollectionName = null;
-//                                        seloptionName = null;
-//                                    }
+
                                     collectionLayout.setVisibility(View.GONE);
                                     optionLayout.setVisibility(View.GONE);
                                     InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -632,10 +624,13 @@ public class StyleActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-                            if (selcollectionName == null || selcollectionName.equals("")) {
+                            if (selcollectionName == null || selcollectionName.equals(""))
+                            {
                                 collection.setText("Select Collection");
                                 Log.e("Collection Text in if : ", " ");
-                            } else {
+                            }
+                            else
+                            {
                                 Log.e("selcollectionNm: ", "" + selcollectionName);
                                 if (arrayList.contains(selcollectionName)) {
                                     Log.e("Collection Text in else : ", " ");
@@ -783,18 +778,10 @@ public class StyleActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+      //  unregisterReceiver(myDataReceiver);
 
-
-        // ***************************************************//
-        // Unregister Broadcast Receiver before app close
-        // ***************************************************//
-        unregisterReceiver(myDataReceiver);
-
-        // ***************************************************//
-        // release(unbind) before app close
-        // ***************************************************//
-        if (mReaderManager != null) {
-            mReaderManager.Release();
-        }
+//        if (mReaderManager != null) {
+//            mReaderManager.Release();
+//        }
     }
 }
