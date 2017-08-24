@@ -79,7 +79,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     int count = 0;
     RequestQueue queue;
     String OptionefficiencyValue;
-    private static String seasonGroup = "Current";
+    private static String seasonGroup =null;
     Context context;
     String fromWhere, oe_FirstVisibleItem, oe_ClickedVal, oe_PlanDept, oe_Category, oe_PlanClass;
     PieChart oe_pieChart;
@@ -146,10 +146,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             limit = 100;
             count = 0;
             level = 1;
-            seasonGroup = "Current";
+
             oe_llayouthierarchy.setVisibility(View.GONE);
             if (getIntent().getStringExtra("selectedDept") == null) {
                // filter_toggleClick = false;
+                seasonGroup = "Current";
                 retainValuesFilter();
                 requestHearderAPI();
             } else if (getIntent().getStringExtra("selectedDept") != null) {
@@ -591,6 +592,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void maintainQuickFilterValues() {
+        Log.e("TAG", "maintainQuickFilterValues: "+checkValueIs+" and "+seasonGroup );
         if (checkValueIs == null) {
             checkCurrent.setChecked(true);
             checkPrevious.setChecked(false);
@@ -1313,7 +1315,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             oe_filterval_url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + SalesFilterActivity.level_filter + selectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
 
         }
-
+        Log.e("TAG", "requestOptionEfficiencyFilterVal: "+oe_filterval_url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_filterval_url,
                 new Response.Listener<JSONArray>() {
                     @Override

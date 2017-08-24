@@ -111,6 +111,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e(TAG, "onCreate: SnapDashboardActivity" );
         super.onCreate(savedInstanceState);
         context = this;
         statusbar();
@@ -182,6 +183,20 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
         }
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: SnapDashboardActivity" );
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e(TAG, "onNewIntent: " );
 
     }
 
