@@ -277,8 +277,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             //snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
             //apps = getProduct(24);
             //snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
-           // apps = getProduct(25);
-           // snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
+            // apps = getProduct(25);
+            // snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
 
 
         } else {
@@ -313,7 +313,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
 
         }
-       Recycler_verticalView.setAdapter(snapAdapter);
+        Recycler_verticalView.setAdapter(snapAdapter);
     }
 
 

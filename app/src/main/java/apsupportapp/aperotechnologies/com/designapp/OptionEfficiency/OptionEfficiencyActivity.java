@@ -26,6 +26,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -48,11 +49,14 @@ import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
+
 import org.json.JSONArray;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
@@ -66,20 +70,20 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 /**
  * Created by pamrutkar on 29/11/16.
  */
-public class OptionEfficiencyActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener,TabLayout.OnTabSelectedListener  {
+public class OptionEfficiencyActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, TabLayout.OnTabSelectedListener {
 
     private RadioButton oe_btnCore, oe_btnFashion, Skewed_checkWTD, Skewed_checkL4W, Skewed_checkSTD;
     private static String OEfficiency_SegmentClick = "Fashion";
     ArrayList<OptionEfficiencyDetails> optionEfficiencyDetailsArrayList, optionArrayList, headerList;
     ArrayList<OptionEfficiencyHeader> oeHeaderList;
     TextView txtStoreCode, txtStoreDesc, oe_txtHeaderClass, oe_txtDeptName, txtNoChart;
-    String userId, bearertoken,storeDescription;
+    String userId, bearertoken, storeDescription;
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100;
     int count = 0;
     RequestQueue queue;
     String OptionefficiencyValue;
-    private static String seasonGroup =null;
+    private static String seasonGroup = null;
     Context context;
     String fromWhere, oe_FirstVisibleItem, oe_ClickedVal, oe_PlanDept, oe_Category, oe_PlanClass;
     PieChart oe_pieChart;
@@ -131,7 +135,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+        storeDescription = sharedPreferences.getString("storeDescription", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -149,13 +153,13 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
             oe_llayouthierarchy.setVisibility(View.GONE);
             if (getIntent().getStringExtra("selectedDept") == null) {
-               // filter_toggleClick = false;
+                // filter_toggleClick = false;
                 seasonGroup = "Current";
                 retainValuesFilter();
                 requestHearderAPI();
             } else if (getIntent().getStringExtra("selectedDept") != null) {
                 String selectedString = getIntent().getStringExtra("selectedDept");
-               // filter_toggleClick = true;
+                // filter_toggleClick = true;
                 coreSelection = true;
                 retainValuesFilter();
                 optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
@@ -262,8 +266,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         }
 
                         break;
-
-
                     case "Class":
                         oe_txtHeaderClass.setText("Category");
                         fromWhere = "Category";
@@ -592,7 +594,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void maintainQuickFilterValues() {
-        Log.e("TAG", "maintainQuickFilterValues: "+checkValueIs+" and "+seasonGroup );
+        Log.e("TAG", "maintainQuickFilterValues: " + checkValueIs + " and " + seasonGroup);
         if (checkValueIs == null) {
             checkCurrent.setChecked(true);
             checkPrevious.setChecked(false);
@@ -734,7 +736,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void initializeUI() {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
         txtStoreDesc.setText(storeDescription.substring(5));
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         txtNoChart = (TextView) findViewById(R.id.noChartOption);
@@ -753,10 +755,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_btnPrev = (RelativeLayout) findViewById(R.id.oe_btnPrev);
         oe_btnPrev.setVisibility(View.INVISIBLE);
         oe_btnNext = (RelativeLayout) findViewById(R.id.oe_btnNext);
-     //   optionEfficiency_segmentedGrp = (SegmentedGroup) findViewById(R.id.optionEfficiency_segmentedGrp);
-     //   optionEfficiency_segmentedGrp.setOnCheckedChangeListener(this);
-     //   oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
-     //   oe_btnFashion = (RadioButton) findViewById(R.id.oe_btnFashion);
+        //   optionEfficiency_segmentedGrp = (SegmentedGroup) findViewById(R.id.optionEfficiency_segmentedGrp);
+        //   optionEfficiency_segmentedGrp.setOnCheckedChangeListener(this);
+        //   oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
+        //   oe_btnFashion = (RadioButton) findViewById(R.id.oe_btnFashion);
         Tabview = (TabLayout) findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Fashion"));
         Tabview.addTab(Tabview.newTab().setText("Core"));
@@ -779,9 +781,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void retainValuesFilter() {
-       // filter_toggleClick = true;
+        // filter_toggleClick = true;
         if (OEfficiency_SegmentClick.equals("Fashion")) {
-          //  oe_btnFashion.toggle();
+            //  oe_btnFashion.toggle();
             Tabview.getTabAt(0).select();
             coreSelection = false;
         } else {
@@ -948,6 +950,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     }
     //----------------------------API Declaration---------------------------//
+
 
     private void requestHearderAPI() {
 
@@ -1234,18 +1237,19 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                             LinearLayoutManager llm = (LinearLayoutManager) oe_listView.getLayoutManager();
                                             llm.scrollToPosition(focusposition);
                                             ContainEqual = true;
-                                            if (oe_FirstVisibleItem.equals("All")) {
+                                            if (oe_FirstVisibleItem.equals("All"))
+                                            {
                                                 flag = false;
                                                 oe_llayouthierarchy.setVisibility(View.GONE);
                                                 requestHeaderPieChart();
-                                            } else {
+                                            }
+                                            else
+                                            {
                                                 flag = false;
                                                 oe_llayouthierarchy.setVisibility(View.GONE);
                                                 requestOEPieChart();
-
                                             }
                                         }
-
                                     }
                                     if (!ContainEqual) {
                                         flag = false;
@@ -1286,7 +1290,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -1315,7 +1318,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             oe_filterval_url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + SalesFilterActivity.level_filter + selectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
 
         }
-        Log.e("TAG", "requestOptionEfficiencyFilterVal: "+oe_filterval_url );
+        Log.e("TAG", "requestOptionEfficiencyFilterVal: " + oe_filterval_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_filterval_url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1376,6 +1379,36 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionEfficiencyDetailsArrayList.add(optionEfficiencyDetails);
                                 }
+                            }
+                            oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+                            setHeaderValue();
+                            optionEfficiencyDetails = new OptionEfficiencyDetails();
+                            if (oe_txtHeaderClass.getText().toString().equals("Department"))
+                            {
+                                optionEfficiencyDetails.setPlanDept("All");
+                            }
+                            else if (oe_txtHeaderClass.getText().toString().equals("Category"))
+                            {
+                                optionEfficiencyDetails.setPlanCategory("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Class"))
+                            {
+                                optionEfficiencyDetails.setPlanClass("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Brand"))
+                            {
+                                optionEfficiencyDetails.setBrandName("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Brand Class"))
+                            {
+                                optionEfficiencyDetails.setBrandplanClass("All");
+                            }
+
+                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
+                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
+                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
+                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
+                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
 
                                 oe_listView.setLayoutManager(new LinearLayoutManager(context));
                                 oe_listView.setLayoutManager(new LinearLayoutManager(
@@ -1393,22 +1426,22 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionArrayList.clear();
                                 if (oe_txtHeaderClass.getText().toString().equals("Department")) {
                                     level = 1;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanDept().toString();
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanDept().toString();
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
                                     level = 2;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanCategory().toString();
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanCategory().toString();
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
                                     level = 3;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getPlanClass().toString();
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanClass().toString();
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
                                     level = 4;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandName().toString();
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getBrandName().toString();
                                 } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
                                     level = 5;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(focusposition).getBrandplanClass().toString();
+                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getBrandplanClass().toString();
                                 }
                                 requestOEPieChart();
-                            }
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1461,6 +1494,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
 
         }
+        Log.e( "requestHeaderPieChart: ",""+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1650,36 +1684,48 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionEfficiencyDetailsArrayList.add(optionEfficiencyDetails);
                                 }
+                            }
+                            oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+                            setHeaderValue();
+                            optionEfficiencyDetails = new OptionEfficiencyDetails();
+                            if (oe_txtHeaderClass.getText().toString().equals("Category")) {
+                                optionEfficiencyDetails.setPlanCategory("All");
 
-                                oe_listView.setLayoutManager(new LinearLayoutManager(context));
-
-                                oe_listView.setLayoutManager(new LinearLayoutManager(
-                                        oe_listView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
-                                        LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                                oe_listView.setOnFlingListener(null);
-                                new GravitySnapHelper(48).attachToRecyclerView(oe_listView);
-
-                                optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
-                                // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
-                                oe_listView.setAdapter(optionIndexSnapAdapter);
-
-                                // flag = true;
-                                // txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
-                                // txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
-                               // OptionefficiencyValue = " ";
-                               // OptionefficiencyValue = " > " + deptName;
-                              //  oe_txtDeptName.setText(OptionefficiencyValue);
-                                oe_txtDeptName.setText(hierarchy(deptName));
-                                oe_llayouthierarchy.setVisibility(View.VISIBLE);
-
-                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanCategory().toString();
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                level = 2;
-                                requestOEPieChart();
 
                             }
+                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
+                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
+                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
+                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
+                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
+                            oe_listView.setLayoutManager(new LinearLayoutManager(context));
+
+                            oe_listView.setLayoutManager(new LinearLayoutManager(
+                                    oe_listView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                    LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                            oe_listView.setOnFlingListener(null);
+                            new GravitySnapHelper(48).attachToRecyclerView(oe_listView);
+
+                            optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
+                            // fIndexAdapter = new FreshnessIndexAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex);
+                            oe_listView.setAdapter(optionIndexSnapAdapter);
+
+                            // flag = true;
+                            // txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
+                            // txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
+                            // OptionefficiencyValue = " ";
+                            // OptionefficiencyValue = " > " + deptName;
+                            //  oe_txtDeptName.setText(OptionefficiencyValue);
+                            oe_txtDeptName.setText(hierarchy(deptName));
+                            oe_llayouthierarchy.setVisibility(View.VISIBLE);
+
+                            oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanCategory().toString();
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            level = 2;
+                            requestOEPieChart();
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1716,14 +1762,81 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     }
 
-    public String hierarchy(String freshnessIndex_ClickedVal){
+    private void setHeaderValue() {
+        Log.e("come","here");
+        String url = "";
+        if (coreSelection) {
+            //core selection without season params
 
-        if(OptionefficiencyValue==null || OptionefficiencyValue.equals(""))
-        {
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level;
+        } else {
+            //  fashion select with season params
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup;
+        }
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
 
-            OptionefficiencyValue =  freshnessIndex_ClickedVal;
+                                return;
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
 
-        }else{
+                                    optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
+                                    oeHeaderList.add(optionEfficiencyHeader);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+
+                                requestHearderAPI();
+
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
+                                    oeHeaderList.add(optionEfficiencyHeader);
+                                }
+                            }
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, " no data found  ", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+
+    }
+
+    public String hierarchy(String freshnessIndex_ClickedVal) {
+
+        if (OptionefficiencyValue == null || OptionefficiencyValue.equals("")) {
+
+            OptionefficiencyValue = freshnessIndex_ClickedVal;
+
+        } else {
 
             OptionefficiencyValue += " > " + freshnessIndex_ClickedVal;
         }
@@ -1771,7 +1884,20 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionEfficiencyDetailsArrayList.add(optionEfficiencyDetails);
                                 }
+                            }
+                            oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+                            setHeaderValue();
+                            optionEfficiencyDetails = new OptionEfficiencyDetails();
+                            if (oe_txtHeaderClass.getText().toString().equals("Class")) {
+                                optionEfficiencyDetails.setPlanClass("All");
 
+
+                            }
+                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
+                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
+                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
+                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
+                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
                                 oe_listView.setLayoutManager(new LinearLayoutManager(context));
 
                                 oe_listView.setLayoutManager(new LinearLayoutManager(
@@ -1788,7 +1914,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 flag = true;
                                 //  txtStoreCode.setText(optionEfficiencyDetailsArrayList.get(0).getStoreCode());
                                 // txtStoreDesc.setText(optionEfficiencyDetailsArrayList.get(0).getStoreDescription());
-                              //  OptionefficiencyValue += " > " + category;
+                                //  OptionefficiencyValue += " > " + category;
                                 //oe_txtDeptName.setText(OptionefficiencyValue);
                                 oe_txtDeptName.setText(hierarchy(category));
                                 oe_llayouthierarchy.setVisibility(View.VISIBLE);
@@ -1799,7 +1925,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 count = 0;
                                 level = 3;
                                 requestOEPieChart();
-                            }
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1868,6 +1994,20 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionEfficiencyDetailsArrayList.add(optionEfficiencyDetails);
                                 }
+                            }
+                            oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+                            setHeaderValue();
+                            optionEfficiencyDetails = new OptionEfficiencyDetails();
+                            if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
+                                optionEfficiencyDetails.setBrandName("All");
+
+
+                            }
+                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
+                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
+                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
+                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
+                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
                                 oe_listView.setLayoutManager(new LinearLayoutManager(context));
 
                                 oe_listView.setLayoutManager(new LinearLayoutManager(
@@ -1878,8 +2018,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
                                 oe_listView.setAdapter(optionIndexSnapAdapter);
                                 flag = true;
-                              //  OptionefficiencyValue += " > " + planclass;
-                               // oe_txtDeptName.setText(OptionefficiencyValue);
+                                //  OptionefficiencyValue += " > " + planclass;
+                                // oe_txtDeptName.setText(OptionefficiencyValue);
                                 oe_txtDeptName.setText(hierarchy(planclass));
                                 oe_llayouthierarchy.setVisibility(View.VISIBLE);
                                 oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getBrandName().toString();
@@ -1889,7 +2029,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 level = 4;
                                 requestOEPieChart();
 
-                            }
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1959,6 +2099,20 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionEfficiencyDetailsArrayList.add(optionEfficiencyDetails);
                                 }
+                            }
+                            oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+                            setHeaderValue();
+                            optionEfficiencyDetails = new OptionEfficiencyDetails();
+                            if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
+                                optionEfficiencyDetails.setBrandplanClass("All");
+
+
+                            }
+                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
+                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
+                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
+                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
+                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
 
                                 oe_listView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -1971,8 +2125,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
                                 oe_listView.setAdapter(optionIndexSnapAdapter);
                                 flag = true;
-                             //   OptionefficiencyValue += " > " + brandnm;
-                               // oe_txtDeptName.setText(OptionefficiencyValue);
+                                //   OptionefficiencyValue += " > " + brandnm;
+                                // oe_txtDeptName.setText(OptionefficiencyValue);
                                 oe_txtDeptName.setText(hierarchy(brandnm));
                                 oe_llayouthierarchy.setVisibility(View.VISIBLE);
                                 oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getBrandplanClass().toString();
@@ -1982,7 +2136,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 level = 5;
                                 requestOEPieChart();
 
-                            }
+
 
 
                         } catch (Exception e) {
@@ -2019,65 +2173,45 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         queue.add(postRequest);
     }
 
-    private void requestOEPieChart()
-    {
+    private void requestOEPieChart() {
+        if(oe_FirstVisibleItem.equals("All"))
+        {
+            requestHeaderPieChart();
+            return;
+        }
         String url = "";
         txtNoChart.setVisibility(View.GONE);
         oe_FirstVisibleItem = oe_FirstVisibleItem.replace("%", "%25");
         oe_FirstVisibleItem = oe_FirstVisibleItem.replace(" ", "%20").replace("&", "%26");
-        if (oe_txtHeaderClass.getText().toString().equals("Department"))
-        {
-            if (coreSelection)
-            {
+        if (oe_txtHeaderClass.getText().toString().equals("Department")) {
+            if (coreSelection) {
                 //core selection without seasongroup
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-            }
-            else
-            {
+            } else {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&dept=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
             }
-        }
-        else if (oe_txtHeaderClass.getText().toString().equals("Category"))
-        {
-            if (coreSelection)
-            {
+        } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
+            if (coreSelection) {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-            }
-            else
-            {
+            } else {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
             }
-        }
-        else if (oe_txtHeaderClass.getText().toString().equals("Class"))
-        {
-            if (coreSelection)
-            {
+        } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
+            if (coreSelection) {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-            }
-            else
-            {
+            } else {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
             }
-        }
-        else if (oe_txtHeaderClass.getText().toString().equals("Brand"))
-        {
-            if (coreSelection)
-            {
+        } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
+            if (coreSelection) {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-            }
-            else
-            {
+            } else {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
             }
-        }
-        else if (oe_txtHeaderClass.getText().toString().equals("Brand Class"))
-        {
-            if (coreSelection)
-            {
+        } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
+            if (coreSelection) {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit;
-            }
-            else
-            {
+            } else {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetail/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup;
             }
         }
@@ -2093,18 +2227,13 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 OnItemClick = false;
                                 processBar.setVisibility(View.GONE);
 
-                            } else if (response.length() == limit)
-                            {
-                                for (i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() == limit) {
+                                for (i = 0; i < response.length(); i++) {
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionArrayList.add(optionEfficiencyDetails);
                                 }
-                            }
-                            else if (response.length() < limit)
-                            {
-                                for (i = 0; i < response.length(); i++)
-                                {
+                            } else if (response.length() < limit) {
+                                for (i = 0; i < response.length(); i++) {
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
                                     optionArrayList.add(optionEfficiencyDetails);
                                 }
@@ -2112,40 +2241,28 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 entries = new ArrayList<PieEntry>();
                                 oe_FirstVisibleItem = oe_FirstVisibleItem.replace("%25", "%");
                                 oe_FirstVisibleItem = oe_FirstVisibleItem.replace("%20", " ").replace("%26", "&");
-                                for (OptionEfficiencyDetails optionEfficiency : optionArrayList)
-                                {
-                                    if (oe_FirstVisibleItem.equals("All"))
-                                    {
+                                for (OptionEfficiencyDetails optionEfficiency : optionArrayList) {
+                                    if (oe_FirstVisibleItem.equals("All")) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
-                                    }
-                                    else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanDept()))
-                                    {
+                                    } else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanDept())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
-                                    }
-                                    else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanCategory()))
-                                    {
+                                    } else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanCategory())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
-                                    }
-                                    else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanClass()))
-                                    {
+                                    } else if (oe_FirstVisibleItem.equals(optionEfficiency.getPlanClass())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
-                                    }
-                                    else if (oe_FirstVisibleItem.equals(optionEfficiency.getBrandName()))
-                                    {
+                                    } else if (oe_FirstVisibleItem.equals(optionEfficiency.getBrandName())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
-                                    }
-                                    else if (oe_FirstVisibleItem.equals(optionEfficiency.getBrandplanClass()))
-                                    {
+                                    } else if (oe_FirstVisibleItem.equals(optionEfficiency.getBrandplanClass())) {
                                         fullSizeCount = (float) optionEfficiency.getFullSizeCount();
                                         partCutCount = (float) optionEfficiency.getPartCutCount();
                                         fullCutCount = (float) optionEfficiency.getFullCutCount();
@@ -2156,32 +2273,22 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 colors.add(Color.parseColor("#21d24c"));
                                 colors.add(Color.parseColor("#f5204c"));
                                 ArrayList<String> labels = new ArrayList<>();
-                                if (fullSizeCount > 0.0f)
-                                {
+                                if (fullSizeCount > 0.0f) {
                                     entries.add(new PieEntry(fullSizeCount, "Full Size"));
-                                }
-                                else
-                                {
+                                } else {
                                     fullSize = true;
                                 }
-                                if (partCutCount > 0.0f)
-                                {
+                                if (partCutCount > 0.0f) {
                                     entries.add(new PieEntry(partCutCount, "Part Cut"));
-                                }
-                                else
-                                {
+                                } else {
                                     CutCount = true;
                                 }
-                                if (fullCutCount > 0.0f)
-                                {
+                                if (fullCutCount > 0.0f) {
                                     entries.add(new PieEntry(fullCutCount, "Full Cut"));
-                                }
-                                else
-                                {
+                                } else {
                                     fullCut = true;
                                 }
-                                if (fullSize && CutCount && fullCut)
-                                {
+                                if (fullSize && CutCount && fullCut) {
                                     txtNoChart.setVisibility(View.VISIBLE);
                                     fullSize = false;
                                     CutCount = false;
@@ -2220,9 +2327,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 processBar.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
                             }
-                        }
-                        catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, " no data found ", Toast.LENGTH_SHORT).show();
                             OnItemClick = false;
@@ -2231,8 +2336,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         }
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
@@ -2244,8 +2348,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 }
         ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
-            {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
@@ -2261,15 +2364,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAG", "onTabSelected: " );
+        int checkedId = Tabview.getSelectedTabPosition();
+        Log.e("TAG", "onTabSelected: ");
 
         OnItemClick = true;
         OptionefficiencyValue = "";
         if (!filter_toggleClick) {
             switch (checkedId) {
 
-                case 1 :   //core selection
+                case 1:   //core selection
                     if (OEfficiency_SegmentClick.equals("Core"))
                         break;
                     OEfficiency_SegmentClick = "Core";
@@ -2294,7 +2397,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     }
                     break;
 
-                case 0 :  // fashion selection
+                case 0:  // fashion selection
 
                     if (OEfficiency_SegmentClick.equals("Fashion"))
                         break;
@@ -2341,31 +2444,25 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     }
 
-    public class MyValueFormatter implements IValueFormatter
-    {
+    public class MyValueFormatter implements IValueFormatter {
         private DecimalFormat mFormat;
-        public MyValueFormatter()
-        {
+
+        public MyValueFormatter() {
             mFormat = new DecimalFormat("###,###,###,##0.0"); // use two decimal if needed
         }
 
-       public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler)
-       {
-            if (value < 0.0)
-            {
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            if (value < 0.0) {
                 return "";
-            }
-            else
-            {
+            } else {
                 String val = String.valueOf(Html.fromHtml("\n 8,11,235"));
                 return mFormat.format(value) + " %";
             }
-       }
+        }
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         OEfficiency_SegmentClick = null;
         seasonGroup = null;
         level = 0;

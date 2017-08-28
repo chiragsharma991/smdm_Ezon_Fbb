@@ -15,10 +15,18 @@ public class ToDo_Modal {
     double stkGitQty;
     int noOfOptions;
     double fwdWeekCover;
+    double sellThruUnits;
     String mccodeDesc;
     String level;
 
 
+    public double getSellThruUnits() {
+        return sellThruUnits;
+    }
+
+    public void setSellThruUnits(double sellThruUnits) {
+        this.sellThruUnits = sellThruUnits;
+    }
 
     public String getOption() {
         return option;

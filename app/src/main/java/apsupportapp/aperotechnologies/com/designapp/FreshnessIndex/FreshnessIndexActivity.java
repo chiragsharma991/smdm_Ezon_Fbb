@@ -1856,7 +1856,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             }
             show_popup();
 
-        } else {
+        }
+        else
+        {
 
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -2117,7 +2119,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                         mpm_model model = new mpm_model();
                                         ApiCallBack(model, 1, freshnessIndex_ClickedVal);  //1 is for another id
 
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         listViewFIndex.setVisibility(View.GONE);
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                     }

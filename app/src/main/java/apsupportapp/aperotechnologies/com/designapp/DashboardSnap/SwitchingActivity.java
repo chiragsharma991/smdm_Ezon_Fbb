@@ -142,10 +142,7 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent BestPerformerActivity = new Intent(context,BestPerformerActivity.class);
                     startActivity(BestPerformerActivity);
                     break;
-//                case 51:
-//                    Intent KeyProductActivity = new Intent(context,KeyProductActivity.class);
-//                    startActivity(KeyProductActivity);
-//                    break;
+
                 case 50:
                     Intent To_Do = new Intent(context,To_Do.class);
                     startActivity(To_Do);
@@ -209,12 +206,6 @@ public class SwitchingActivity extends AppCompatActivity
                     break;
 
 
-//                case 110:
-//                    Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
-//                    startActivity(HourlyPerformence);
-//                    break;
-//                case 120:
-//
 
 
             }
@@ -315,9 +306,7 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers));
                 break;
 
-//            case 5 :
-//                apps.add(new App("Hourly Info", R.mipmap.hourlyperformance));
-//                break;
+
             case 5 :
                 apps.add(new App("To Do", R.mipmap.stocktransfer));
                 apps.add(new App("Status", R.mipmap.stocktransfer));
@@ -348,8 +337,7 @@ public class SwitchingActivity extends AppCompatActivity
             case 10 :
                 apps.add(new App("Boris",R.mipmap.customerengagement));
                 break;
-//            case 9 :
-//                break;
+
 
             // switch for ezone user
             case 21 :

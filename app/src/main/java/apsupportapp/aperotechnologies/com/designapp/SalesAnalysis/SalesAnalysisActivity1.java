@@ -4080,12 +4080,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             limit = 100;
                             count = 0;
                             val_hierarchy = "";
-                            if (filterSelectedString == null) {
+//                            if (filterSelectedString == null) {
                                 requestEzoneSalesDetailAPI();
-                            } else {
-
-                                requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
-                            }
+//                            } else {
+//
+//                                requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
+//                            }
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -4117,16 +4117,16 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             limit = 100;
                             count = 0;
                             val_hierarchy = "";
-                            if (filterSelectedString == null) {
+//                            if (filterSelectedString == null) {
                                 requestEzoneSalesDetailAPI();
-                            }
-                            else  {
-
+//                            }
+//                            else  {
+//
 //                            Log.e("welcome----","=======");
 //                            ez_filter_toggleClick = true;
 //                            retainEzoneSegVal();
-                                requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
-                            }
+//                                requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
+//                            }
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -4158,13 +4158,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             limit = 100;
                             count = 0;
                             val_hierarchy = "";
-                            if (filterSelectedString == null)
-                            {
+//                            if (filterSelectedString == null)
+//                            {
                               requestEzoneSalesDetailAPI();
-                            } else
-                            {
-                               requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
-                            }
+//                            } else
+//                            {
+//                               requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
+//                            }
                         }
                         else
                         {
@@ -4199,11 +4199,11 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             limit = 100;
                             count = 0;
                             val_hierarchy = "";
-                            if (filterSelectedString == null) {
+//                            if (filterSelectedString == null) {
                               requestEzoneSalesDetailAPI();
-                            } else  {
-                               requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
-                            }
+//                            } else  {
+//                               requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
+//                            }
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -4237,15 +4237,15 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             count = 0;
                             val = "";
                             Log.e("onTabSelected: WTD", "" + selectedsegValue);
-                            if (getIntent().getStringExtra("selectedDept") == null)
-                            {
+//                            if (getIntent().getStringExtra("selectedDept") == null)
+//                            {
                                 requestSalesListDisplayAPI();
-                            }
-                            else
-                            {
-                                String str = getIntent().getStringExtra("selectedDept");
-                                requestSalesSelectedFilterVal(str);
-                            }
+//                            }
+//                            else
+//                            {
+//                                String str = getIntent().getStringExtra("selectedDept");
+//                                requestSalesSelectedFilterVal(str);
+//                            }
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -4275,15 +4275,15 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             val = "";
                             Log.e("onTabSelected: LW", "" + selectedsegValue);
 
-                            if (getIntent().getStringExtra("selectedDept") == null)
-                            {
+//                            if (getIntent().getStringExtra("selectedDept") == null)
+//                            {
                                 requestSalesListDisplayAPI();
-                            }
-                            else
-                            {
-                                String str = getIntent().getStringExtra("selectedDept");
-                                requestSalesSelectedFilterVal(str);
-                            }
+//                            }
+//                            else
+//                            {
+//                                String str = getIntent().getStringExtra("selectedDept");
+//                                requestSalesSelectedFilterVal(str);
+//                            }
                         }
                         else
                         {
@@ -4310,12 +4310,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             limit = 100;
                             count = 0;
                             val = "";
-                            if (getIntent().getStringExtra("selectedDept") == null) {
+//                            if (getIntent().getStringExtra("selectedDept") == null) {
                                 requestSalesListDisplayAPI();
-                            } else {
-                                String str = getIntent().getStringExtra("selectedDept");
-                                requestSalesSelectedFilterVal(str);
-                            }
+//                            } else {
+//                                String str = getIntent().getStringExtra("selectedDept");
+//                                requestSalesSelectedFilterVal(str);
+//                            }
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
@@ -4341,12 +4341,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             limit = 100;
                             count = 0;
                             val = "";
-                            if (getIntent().getStringExtra("selectedDept") == null) {
+//                            if (getIntent().getStringExtra("selectedDept") == null) {
                                 requestSalesListDisplayAPI();
-                            } else {
-                                String str = getIntent().getStringExtra("selectedDept");
-                                requestSalesSelectedFilterVal(str);
-                            }
+//                            } else {
+//                                String str = getIntent().getStringExtra("selectedDept");
+//                                requestSalesSelectedFilterVal(str);
+//                            }
                         }
                         else
                         {
