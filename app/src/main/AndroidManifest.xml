@@ -276,7 +276,8 @@
         <activity
             android:name=".DashboardSnap.SnapDashboardActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".FeedbackofCustomer.ProductAvailability_Notify"
             android:screenOrientation="portrait"

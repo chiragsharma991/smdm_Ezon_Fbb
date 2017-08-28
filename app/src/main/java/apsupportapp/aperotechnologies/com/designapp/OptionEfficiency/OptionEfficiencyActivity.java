@@ -1381,36 +1381,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 }
                             }
                             oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
-                            setHeaderValue();
-                            optionEfficiencyDetails = new OptionEfficiencyDetails();
-                            if (oe_txtHeaderClass.getText().toString().equals("Department"))
-                            {
-                                optionEfficiencyDetails.setPlanDept("All");
-                            }
-                            else if (oe_txtHeaderClass.getText().toString().equals("Category"))
-                            {
-                                optionEfficiencyDetails.setPlanCategory("All");
-                            }
-                            if (oe_txtHeaderClass.getText().toString().equals("Class"))
-                            {
-                                optionEfficiencyDetails.setPlanClass("All");
-                            }
-                            if (oe_txtHeaderClass.getText().toString().equals("Brand"))
-                            {
-                                optionEfficiencyDetails.setBrandName("All");
-                            }
-                            if (oe_txtHeaderClass.getText().toString().equals("Brand Class"))
-                            {
-                                optionEfficiencyDetails.setBrandplanClass("All");
-                            }
+//                           addAll();
 
-                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
-                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
-                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
-                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
-                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
-
-                                oe_listView.setLayoutManager(new LinearLayoutManager(context));
                                 oe_listView.setLayoutManager(new LinearLayoutManager(
                                         oe_listView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
@@ -1477,6 +1449,105 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
 
+    }
+
+    private void addAll()
+    {
+        Log.e("come","here");
+        String url = "";
+        if (coreSelection) {
+            //core selection without season params
+
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + SalesFilterActivity.level_filter;
+        } else {
+            //  fashion select with season params
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheader/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + SalesFilterActivity.level_filter + "&seasongroup=" + seasonGroup;
+        }
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e( "onResponse:All Api ",""+response );
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+
+                                return;
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
+                                    oeHeaderList.add(optionEfficiencyHeader);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+
+                                requestHearderAPI();
+
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
+                                    oeHeaderList.add(optionEfficiencyHeader);
+                                }
+                            }
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, " no data found  ", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+
+        optionEfficiencyDetails = new OptionEfficiencyDetails();
+                            if (oe_txtHeaderClass.getText().toString().equals("Department"))
+                            {
+                                optionEfficiencyDetails.setPlanDept("All");
+                            }
+                            else if (oe_txtHeaderClass.getText().toString().equals("Category"))
+                            {
+                                optionEfficiencyDetails.setPlanCategory("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Class"))
+                            {
+                                optionEfficiencyDetails.setPlanClass("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Brand"))
+                            {
+                                optionEfficiencyDetails.setBrandName("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Brand Class"))
+                            {
+                                optionEfficiencyDetails.setBrandplanClass("All");
+                            }
+
+                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
+                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
+                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
+                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
+                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
+
+        oe_listView.setLayoutManager(new LinearLayoutManager(context));
     }
 
     private void requestHeaderPieChart() {
@@ -1777,6 +1848,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e( "onResponse:All Api ",""+response );
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
 

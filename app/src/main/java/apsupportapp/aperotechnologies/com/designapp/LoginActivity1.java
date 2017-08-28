@@ -172,6 +172,7 @@ public class LoginActivity1 extends AppCompatActivity
             LocalNotificationReceiver.logoutAlarm = false;
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.cancel(LocalNotificationReceiver.notId);
+            Log.e("TAG", "notification id:-- "+LocalNotificationReceiver.notId );
         }
     }
 

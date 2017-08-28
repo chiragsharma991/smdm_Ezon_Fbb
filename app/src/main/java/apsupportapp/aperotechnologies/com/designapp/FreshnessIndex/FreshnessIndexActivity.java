@@ -1439,6 +1439,27 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
                                 }
 
+                                //-----
+                                freshnessIndexDetails = new FreshnessIndexDetails();
+                                if (txtFIndexClass.getText().toString().equals("Department")) {
+                                    freshnessIndexDetails.setPlanDept("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Category")) {
+                                    freshnessIndexDetails.setPlanCategory("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                                    freshnessIndexDetails.setPlanClass("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+                                    freshnessIndexDetails.setBrandName("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
+                                    freshnessIndexDetails.setBrandplanClass("All");
+                                }
+                                freshnessIndexDetails.setStkOnhandQty(freshnessIndexDetail.getStkOnhandQty());
+                                freshnessIndexDetails.setStkOnhandQtyCount(100);
+                                freshnessIndexDetails.setStkGitQty(freshnessIndexDetail.getStkGitQty());
+
+                                freshnessIndexDetailsArrayList.add(0,freshnessIndexDetails);
+
+//-------
+
                                 listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
                                 listViewFIndex.setLayoutManager(new LinearLayoutManager(
                                         listViewFIndex.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
@@ -2733,7 +2754,5 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
 
     }
-
-
 }
 

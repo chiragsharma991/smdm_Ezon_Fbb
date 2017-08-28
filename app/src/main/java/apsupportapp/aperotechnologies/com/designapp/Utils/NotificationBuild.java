@@ -36,22 +36,23 @@ public class NotificationBuild extends AppCompatActivity {
         } else {
             intent = new Intent(context, LoginActivity1.class);
         }
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  //FLAG_ACTIVITY_SINGLE_TOP for unrefresh
 
-      /*  PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);*/
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
-                PendingIntent.FLAG_NO_CREATE);
+                PendingIntent.FLAG_ONE_SHOT);
+       /* PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                PendingIntent.FLAG_NO_CREATE);*/
 
-       // Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
+                .setOngoing(true)
                 .setSmallIcon(R.mipmap.notification_logo)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
-              //  .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent)
-                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS);
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+                //.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS);
 
 
         NotificationManager notificationManager =

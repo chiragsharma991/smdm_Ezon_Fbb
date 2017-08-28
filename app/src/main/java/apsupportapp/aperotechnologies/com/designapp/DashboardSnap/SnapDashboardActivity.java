@@ -50,9 +50,11 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -63,6 +65,8 @@ import java.util.Timer;
 import java.util.UUID;
 
 import apsupportapp.aperotechnologies.com.designapp.AboutUsActivity;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.TransferRequest_Details;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
@@ -83,7 +87,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private Context context;
     private NestedScrollView nestedScrollview;
     RequestQueue queue;
-    String userId, bearertoken, geoLeveLDesc;
+    String userId, bearertoken, geoLeveLDesc,pushtoken;
     SharedPreferences sharedPreferences;
     ArrayList<String> arrayList, eventUrlList;
     MySingleton m_config;
@@ -107,16 +111,18 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e(TAG, "onCreate: SnapDashboardActivity" );
         super.onCreate(savedInstanceState);
         context = this;
         statusbar();
-        Log.e(TAG, "Oncreate: SnapDashboard..");
         m_config = MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        Log.e("geoLeveLDesc :", "" + geoLeveLDesc);
+        pushtoken = sharedPreferences.getString("push_tokken", "");
+        Log.e(TAG,"userId :--"+ userId);
+        Log.e(TAG,"pushtoken :--"+ pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -180,6 +186,20 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: SnapDashboardActivity" );
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e(TAG, "onNewIntent: " );
+
+    }
+
     private void statusbar()
     {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -235,6 +255,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         } else if (id == R.id.aboutus) {
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
+           // finish();
             return true;
         }
 
@@ -256,8 +277,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             //snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
             //apps = getProduct(24);
             //snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
-           // apps = getProduct(25);
-           // snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
+            // apps = getProduct(25);
+            // snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
 
 
         } else {
@@ -279,16 +300,19 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
             apps = getProduct(7);
             snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
-
+//            apps = getProduct(7);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
             apps = getProduct(8);
             snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
             apps = getProduct(9);
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
             apps = getProduct(10);
             snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
+            //apps = getProduct(10);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
 
         }
-       Recycler_verticalView.setAdapter(snapAdapter);
+        Recycler_verticalView.setAdapter(snapAdapter);
     }
 
 
@@ -376,15 +400,12 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         if (checkDeviceId) {
 
-
             if (Reusable_Functions.checkPermission(android.Manifest.permission.READ_PHONE_STATE, this)) {
                 Log.e("TAG", ":check permission is okk");
                 getDeviceId();
-
-
             } else {
                 Log.e("TAG", ":check permission calling");
-                requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
+                requestPermissions (new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
             }
         }
     }
@@ -407,8 +428,99 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         edit.putString("device_id", deviceId);
         edit.apply();
 
+        requestSubmitAPI(context,getObject());
+
+
+
 
     }
+
+    public JSONObject getObject() {
+        String token = sharedPreferences.getString("push_tokken", "");
+        String device_id = sharedPreferences.getString("device_id", "");
+        Log.e(TAG, " device_id "+device_id+" token "+token);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("deviceId", device_id);
+            jsonObject.put("pushToken", token);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e(TAG, "jsonobject: "+jsonObject.toString());
+
+        return jsonObject;
+    }
+
+
+    private void requestSubmitAPI(final Context mcontext, JSONObject object)  // Sender Submit Api call
+    {
+
+        if (Reusable_Functions.chkStatus(mcontext)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(mcontext, "Submitting data…");
+//https://smdm.manthan.com/v1/submit/deviceID/69
+            String url = ConstsCore.web_url + "/v1/submit/deviceID/" + userId ;
+            Log.e(TAG, "requestSubmitAPI: "+url );
+            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response == null || response.equals("")) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
+
+                                } else
+                                {
+                                    String result=response.getString("status");
+                                  //  Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
+                                    Reusable_Functions.hDialog();
+                                }
+                            } catch (Exception e)
+                            {
+                                e.printStackTrace();
+                                Reusable_Functions.hDialog();
+
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
+                            error.printStackTrace();
+                        }
+                    }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", bearertoken);
+                    return params;
+                }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+            };
+            int socketTimeout = 60000;//5 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+        } else
+        {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
