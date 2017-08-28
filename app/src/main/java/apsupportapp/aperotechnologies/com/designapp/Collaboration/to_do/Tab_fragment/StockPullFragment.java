@@ -146,12 +146,13 @@ public class StockPullFragment extends Fragment {
 
     private void requestTransferRequestsummary()
     {
-        if (Reusable_Functions.chkStatus(context)) {
-
+        if (Reusable_Functions.chkStatus(context))
+        {
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiversummary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit +"&recache="+recache;
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
 
-                    new Response.Listener<JSONArray>() {
+                    new Response.Listener<JSONArray>()
+                    {
                         @Override
                         public void onResponse(JSONArray response)
                         {
@@ -163,18 +164,20 @@ public class StockPullFragment extends Fragment {
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
 
-                                } else if (response.length() == limit) {
-                                    for (int i = 0; i < response.length(); i++) {
-
+                                }
+                                else if (response.length() == limit)
+                                {
+                                    for (int i = 0; i < response.length(); i++)
+                                    {
                                         toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                         ReceiverSummaryList.add(toDo_Modal);
-
                                     }
                                     offsetvalue = (limit * count) + limit;
                                     count++;
                                     requestTransferRequestsummary();
-
-                                } else if (response.length() < limit) {
+                                }
+                                else if (response.length() < limit)
+                                {
                                     for (int i = 0; i < response.length(); i++)
                                     {
                                         toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
@@ -185,24 +188,24 @@ public class StockPullFragment extends Fragment {
                                     offsetvalue = 0;
 
                                 }
-
                                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 recyclerView.setOnFlingListener(null);
                                 StockPullAdapter stockPullAdapter;
                                 stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
                                 recyclerView.setAdapter(stockPullAdapter);
                                 Reusable_Functions.hDialog();
-
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
-
                                 e.printStackTrace();
                             }
                         }
                     },
-                    new Response.ErrorListener() {
+                    new Response.ErrorListener()
+                    {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
@@ -211,7 +214,6 @@ public class StockPullFragment extends Fragment {
                             error.printStackTrace();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -229,7 +231,6 @@ public class StockPullFragment extends Fragment {
         else
         {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-
             Reusable_Functions.hDialog();
         }
 
