@@ -74,7 +74,7 @@ public class StockPullFragment extends Fragment {
     private int level = 1;
     private boolean checkNetworkFalse = false;
     private RequestQueue queue;
-    private ArrayList<ToDo_Modal> ReceiverSummaryList;
+    private ArrayList<ToDo_Modal> ReceiverSummaryList,subcategoryList;
     private String recache;
     private String mParam1;
     private String mParam2;
@@ -157,7 +157,9 @@ public class StockPullFragment extends Fragment {
                 if(!item.equals("")){
                     selectprodLevel3Desc=item;
                 }
-                Log.e("TAG", "onValueSelected: " + item);
+                Log.e("TAG", "onValueSelected: " + selectprodLevel3Desc);
+                Reusable_Functions.sDialog(context, "Loading.......");
+                requestTransferRequestSubcategory(selectprodLevel3Desc);
 
             }
 
@@ -224,6 +226,97 @@ public class StockPullFragment extends Fragment {
                                 // stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
                                 // recyclerView.setAdapter(stockPullAdapter);
                                 Reusable_Functions.hDialog();
+
+                            } catch (Exception e) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                                Reusable_Functions.hDialog();
+
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                            error.printStackTrace();
+                        }
+                    }
+
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Bearer " + bearertoken);
+                    return params;
+                }
+            };
+            int socketTimeout = 60000;//5 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
+            Reusable_Functions.hDialog();
+        }
+
+    }
+
+
+    private void requestTransferRequestSubcategory(String prodLevel3Desc) {
+        if (Reusable_Functions.chkStatus(context)) {
+            level=2;  // 2 for sub category.
+            subcategoryList=new ArrayList<>();
+            //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear
+            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level
+                    +"&prodLevel3Desc="+prodLevel3Desc.replace("%", "%25").replace(" ", "%20").replace("&", "%26")+"&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
+
+            Log.e("TAG", "requestTransferRequestsummary: " + url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.d("TAG", "onResponse: " + response);
+                            try {
+                                if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                    Reusable_Functions.hDialog();
+                                    checkNetworkFalse = true;
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    return;
+
+                                } else if (response.length() == limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+
+                                        toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
+                                        subcategoryList.add(toDo_Modal);
+
+                                    }
+                                    offsetvalue = (limit * count) + limit;
+                                    count++;
+                                    requestTransferRequestsummary();
+
+                                } else if (response.length() < limit) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
+                                        subcategoryList.add(toDo_Modal);
+                                    }
+                                    count = 0;
+                                    limit = 100;
+                                    offsetvalue = 0;
+
+                                }
+                                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                 recyclerView.setOnFlingListener(null);
+                                 StockPullAdapter stockPullAdapter;
+                                 stockPullAdapter = new StockPullAdapter(subcategoryList,getActivity());
+                                 recyclerView.setAdapter(stockPullAdapter);
+                                 Reusable_Functions.hDialog();
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
