@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.Status;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -51,6 +52,8 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         setupViewPager(viewPager);
         tab = (TabLayout) findViewById(R.id.tabs_toDo);
         tab.setupWithViewPager(viewPager);
+        tab.setSelectedTabIndicatorColor(Color.parseColor("#e8112d"));
+
     }
 
     private void initialise() {
