@@ -600,7 +600,8 @@ public class StyleActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     collectionNM = (String) collectionAdapter.getItem(position);
-                                    collection.setText(collectionNM.trim());
+                                    collection.setText(collectionNM);
+                                    Log.e("collectionNM ", " "+collectionNM);
 
                                     collectionLayout.setVisibility(View.GONE);
                                     optionLayout.setVisibility(View.GONE);
@@ -610,6 +611,8 @@ public class StyleActivity extends AppCompatActivity {
                                     }
                                     if (collectionNM.equalsIgnoreCase("Select Collection")) {
                                         Log.e(" come ", "here");
+                                      //  collectionNM = selcollectionName;
+
                                     } else {
                                         if (Reusable_Functions.chkStatus(context)) {
                                             Reusable_Functions.sDialog(context, "Loading options data...");
@@ -624,10 +627,12 @@ public class StyleActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+                            Log.e("selcollectionName ", " "+selcollectionName);
+
                             if (selcollectionName == null || selcollectionName.equals(""))
                             {
                                 collection.setText("Select Collection");
-                                Log.e("Collection Text in if : ", " ");
+                                Log.e("Collection Text in if : first", " ");
                             }
                             else
                             {
@@ -706,17 +711,21 @@ public class StyleActivity extends AppCompatActivity {
                                     articleOptionList.add(articleOptions);
                                 }
                             }
+
                             Collections.sort(articleOptionList);
                             articleOptionList.add(0, "Select Option");
                             style.setEnabled(true);
                             SnapDashboardActivity._collectionitems = new ArrayList();
                             SnapDashboardActivity._collectionitems.addAll(articleOptionList);
+                            Log.e("seloptionName ", " "+seloptionName);
+
                             if (seloptionName == null || seloptionName.equals("")) {
                                 style.setText("Select Option");
                             } else {
                                 Log.e("seloptionName :", "" + seloptionName);
                                 style.setText(seloptionName);
                             }
+
                             optionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {

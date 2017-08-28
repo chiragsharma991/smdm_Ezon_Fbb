@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:text="@string/case_nm"
-                    android:textColor="@color/bg_store_code_text"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/stock_textsize_Title"
                     android:textStyle="bold"
 
@@ -144,7 +144,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="2dp"
                 android:text="Store Description"
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/stock_textsize_Title"
                 android:textStyle="bold"
 
