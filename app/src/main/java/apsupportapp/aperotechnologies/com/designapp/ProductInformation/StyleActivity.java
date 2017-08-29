@@ -545,7 +545,7 @@ public class StyleActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(StyleActivity.this, "Network connectivity fail", Toast.LENGTH_LONG).show();
+                        Toast.makeText(StyleActivity.this, ""+error, Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 }
@@ -577,7 +577,8 @@ public class StyleActivity extends AppCompatActivity {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No collection data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == collectionlimit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
                                     arrayList.add(collectionNM);
@@ -637,7 +638,8 @@ public class StyleActivity extends AppCompatActivity {
                             else
                             {
                                 Log.e("selcollectionNm: ", "" + selcollectionName);
-                                if (arrayList.contains(selcollectionName)) {
+                                if (arrayList.contains(selcollectionName))
+                                {
                                     Log.e("Collection Text in else : ", " ");
                                     collectionNM = selcollectionName;
                                     optionName = seloptionName;
@@ -645,7 +647,9 @@ public class StyleActivity extends AppCompatActivity {
                                     style.setText(seloptionName);
                                     style.setEnabled(true);
                                     articleOptionList.addAll(SnapDashboardActivity._collectionitems);
-                                } else {
+                                }
+                                else
+                                {
                                     collection.setText("Select Collection");
                                     Log.e("Collection Text in else of else: ", " ");
                                 }
@@ -767,7 +771,9 @@ public class StyleActivity extends AppCompatActivity {
             if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(edtsearchOption.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
-        } else if (collectionLayout.getVisibility() == View.VISIBLE) {
+        }
+        else if (collectionLayout.getVisibility() == View.VISIBLE)
+        {
             optionLayout.setVisibility(View.GONE);
             collectionLayout.setVisibility(View.GONE);
             stylemainlayout.setVisibility(View.VISIBLE);
@@ -775,7 +781,9 @@ public class StyleActivity extends AppCompatActivity {
             if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
-        } else {
+        }
+        else
+        {
             selcollectionName = null;
             seloptionName = null;
             SnapDashboardActivity._collectionitems = new ArrayList();

@@ -14,11 +14,8 @@
         <item name="tabIndicatorColor">@color/ezfbb_red</item>
         <item name="textAllCaps">false</item>
         <item name="android:textSize">15sp</item>
-<<<<<<< HEAD
+
         <item name="android:textColor">@color/ezfbb_red</item>
-=======
-        <item name="android:textColor">@color/ezfb_black</item>
->>>>>>> df265597bcbfafbb821e21cf584c8f111732cec2
         <item name="android:divider">@android:color/black</item>
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabSelectedTextColor">@color/ezfbb_red</item>
