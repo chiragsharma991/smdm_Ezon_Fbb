@@ -77,7 +77,7 @@ public class StyleActivity extends AppCompatActivity {
     ArrayList<String> arrayList, articleOptionList;
     String userId, bearertoken;
     View view;
-    String collectionNM, optionName;
+    String collectionNM, optionName, from;
     RequestQueue queue;
     Context context;
     ArrayList<StyleDetailsBean> styleDetailsBeenList;
@@ -95,6 +95,7 @@ public class StyleActivity extends AppCompatActivity {
     private ListView listCollection, listOption;
     ListAdapter collectionAdapter;
     ListAdapter1 optionAdapter;
+    String collect_name = "";
 
     private com.cipherlab.barcode.ReaderManager mReaderManager;
     private IntentFilter filter;
@@ -145,6 +146,7 @@ public class StyleActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             selcollectionName = getIntent().getExtras().getString("selCollectionname");
             seloptionName = getIntent().getExtras().getString("selOptionName");
+
         }
         collection = (TextView) findViewById(R.id.searchablespinnerlibrary);
         collection.setText("Select Collection");
@@ -602,7 +604,16 @@ public class StyleActivity extends AppCompatActivity {
                                     collectionNM = (String) collectionAdapter.getItem(position);
                                     collection.setText(collectionNM);
                                     Log.e("collectionNM ", " "+collectionNM);
+                                    Log.e("collect_name ", " "+collect_name);
 
+                                    if(!collect_name.equals("")) {
+                                        if (!collectionNM.equals(collect_name)) {
+                                            style.setText("Select Option");
+                                        } else {
+                                            style.setText(seloptionName);
+                                            style.setEnabled(true);
+                                        }
+                                    }
                                     collectionLayout.setVisibility(View.GONE);
                                     optionLayout.setVisibility(View.GONE);
                                     InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -637,14 +648,18 @@ public class StyleActivity extends AppCompatActivity {
                             else
                             {
                                 Log.e("selcollectionNm: ", "" + selcollectionName);
+                                Log.e("here in else : ", " ");
+
                                 if (arrayList.contains(selcollectionName)) {
                                     Log.e("Collection Text in else : ", " ");
                                     collectionNM = selcollectionName;
+                                    collect_name = collection.getText().toString();
                                     optionName = seloptionName;
                                     collection.setText(selcollectionName);
                                     style.setText(seloptionName);
-                                    style.setEnabled(true);
+                                        style.setEnabled(true);
                                     articleOptionList.addAll(SnapDashboardActivity._collectionitems);
+
                                 } else {
                                     collection.setText("Select Collection");
                                     Log.e("Collection Text in else of else: ", " ");
@@ -725,7 +740,14 @@ public class StyleActivity extends AppCompatActivity {
                                 Log.e("seloptionName :", "" + seloptionName);
                                 style.setText(seloptionName);
                             }
-
+                            if(!collect_name.equals("")) {
+                                if (!collectionNM.equals(collect_name)) {
+                                    style.setText("Select Option");
+                                } else {
+                                    style.setText(seloptionName);
+                                    style.setEnabled(true);
+                                }
+                            }
                             optionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
