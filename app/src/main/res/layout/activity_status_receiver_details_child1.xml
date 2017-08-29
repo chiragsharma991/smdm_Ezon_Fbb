@@ -36,7 +36,7 @@
                     android:typeface="normal"
                     android:id="@+id/status_receiver_detail_optionLevel"
                     android:textSize="@dimen/normallayout_storesize"
-                    android:textColor="@color/bg_store_code_text"/>
+                    android:textColor="@color/ezfb_black"/>
 
                 <!--First Linear layout row-->
                 <LinearLayout
@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:text=""
                             android:textSize="@dimen/normallayout_storesize"
-                            android:textColor="@color/bg_store_code_text"/>
+                            android:textColor="@color/ezfb_black"/>
 
 
                     </LinearLayout>
@@ -118,7 +118,7 @@
                             android:text=""
                             android:textSize="@dimen/normallayout_storesize"
                             android:singleLine="true"
-                            android:textColor="@color/txt_color"
+                            android:textColor="@color/ezfb_black"
                             />
 
                     </LinearLayout>
@@ -148,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:text=""
                             android:textSize="@dimen/normallayout_storesize"
-                            android:textColor="@color/txt_color"/>
+                            android:textColor="@color/ezfb_black"/>
 
 
                     </LinearLayout>
@@ -166,7 +166,7 @@
                             android:text=""
                             android:layout_marginLeft="10dp"
                             android:textSize="@dimen/normallayout_storesize"
-                            android:textColor="@color/txt_color"
+                            android:textColor="@color/ezfb_black"
                             android:id="@+id/status_receiver_detail_shortQty"/>
 
 
@@ -187,7 +187,7 @@
                             android:text=""
                             android:id="@+id/status_receiver_detail_avlQty"
                             android:textSize="@dimen/normallayout_storesize"
-                            android:textColor="@color/txt_color"/>
+                            android:textColor="@color/ezfb_black"/>
 
                     </RelativeLayout>
 
@@ -204,7 +204,7 @@
                             android:text=""
                             android:textSize="@dimen/normallayout_storesize"
                             android:singleLine="true"
-                            android:textColor="@color/txt_color"
+                            android:textColor="@color/ezfb_black"
                             />
 
                     </LinearLayout>

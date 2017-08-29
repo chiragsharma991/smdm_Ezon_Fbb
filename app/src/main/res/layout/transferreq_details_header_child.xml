@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="19"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"/>
 
             </LinearLayout>
@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="19"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"
                     />
 
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"
                     />
 
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"
                     />
 
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="19"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"
                     android:inputType="number"
                     android:singleLine="true"

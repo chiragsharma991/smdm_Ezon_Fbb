@@ -510,10 +510,10 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         String currentDateandTime = sdf.format(new Date());
 
         customerFeedback = "3";  // fixed for notified feedback
-        customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
-        customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerNumber = edt_customer_mobile_number.getText().toString();
+        customerRemarks = edt_remarks.getText().toString();
+        customerName = edt_first_name.getText().toString();
+        customerLastname = edt_last_name.getText().toString();
         customerExchangeDone = radioExchangeYes.isChecked() ? "YES" : "NO";
         customerProductVerified =  radioProductYes.isChecked() ? "YES" : "NO";
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";

@@ -410,12 +410,12 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
         String currentDateandTime = time.format(new Date());
 
         customerFeedback = "5";  // fixed for notified feedback
-        customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
-        customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerEmpname = edt_emp_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerStorename = edt_store_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerNumber = edt_customer_mobile_number.getText().toString();
+        customerRemarks = edt_remarks.getText().toString();
+        customerName = edt_first_name.getText().toString();
+        customerLastname = edt_last_name.getText().toString();
+        customerEmpname = edt_emp_name.getText().toString();
+        customerStorename = edt_store_name.getText().toString();
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
         customerArcDate = currentDateandTime;  //this will up to real time.
     }

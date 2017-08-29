@@ -298,7 +298,7 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Target Stock Exceptions", R.mipmap.targetstockexceptions));
                 apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions));
                 break;
-
+//
             case 4 :
                 apps.add(new App("Running Promo", R.mipmap.runningpromo));
                 apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo));

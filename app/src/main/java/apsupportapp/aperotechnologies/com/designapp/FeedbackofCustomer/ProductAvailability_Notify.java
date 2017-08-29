@@ -435,19 +435,19 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         String currentDateandTime = time.format(new Date());
 
         customerFeedback = "1";  // fixed for notified feedback
-        customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
-        customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerEAN = edt_ean_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerBrand = edt_brand_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerProduct = edt_product_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerSize = edt_size.getText().toString().replaceAll("\\s+", "").trim();
-        customerQty = edt_quantity.getText().toString().replaceAll("\\s+", "").trim();
-        customerColorOption1 = edt_color_option1.getText().toString().replaceAll("\\s+", "").trim();
-        customerColorOption2 = edt_color_option2.getText().toString().replaceAll("\\s+", "").trim();
-        customerFit = edt_fit.getText().toString().replaceAll("\\s+", "").trim();
-        customerStyle = edt_style.getText().toString().replaceAll("\\s+", "").trim();
+        customerNumber = edt_customer_mobile_number.getText().toString();
+        customerRemarks = edt_remarks.getText().toString();
+        customerName = edt_first_name.getText().toString();
+        customerLastname = edt_last_name.getText().toString();
+        customerEAN = edt_ean_number.getText().toString();
+        customerBrand = edt_brand_name.getText().toString();
+        customerProduct = edt_product_name.getText().toString();
+        customerSize = edt_size.getText().toString();
+        customerQty = edt_quantity.getText().toString();
+        customerColorOption1 = edt_color_option1.getText().toString();
+        customerColorOption2 = edt_color_option2.getText().toString();
+        customerFit = edt_fit.getText().toString();
+        customerStyle = edt_style.getText().toString();
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
         customerArcDate = currentDateandTime;  //this will up to real time.
     }

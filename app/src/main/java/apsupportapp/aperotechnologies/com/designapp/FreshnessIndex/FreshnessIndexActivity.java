@@ -2730,9 +2730,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
             }
         });
-
-
-
     }
 
 
@@ -2754,7 +2751,5 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
 
     }
-
-
 }
 

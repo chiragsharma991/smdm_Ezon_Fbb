@@ -41,7 +41,8 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof StockPullAdapter.Holder) {
+        if (holder instanceof StockPullAdapter.Holder)
+        {
             if (position < list.size()) {
 
                /* ((StockPullAdapter.Holder) holder).TransferStatus.setText(list.get(position).getTransferStatus());
@@ -72,15 +73,18 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onSnap(int position) {
+    public void onSnap(int position)
+    {
 
     }
 
-    private static class Holder extends RecyclerView.ViewHolder {
+    private static class Holder extends RecyclerView.ViewHolder
+    {
 
         TextView TransferStatus, SOH_Requested, QTY_Avi, NumberOfOption, SOH, GIT_Qty, FWD, McCodeDescribtion;
 
-        public Holder(View itemView) {
+        public Holder(View itemView)
+        {
             super(itemView);
             TransferStatus = (TextView) itemView.findViewById(R.id.stock_transfer_status);
             SOH_Requested = (TextView) itemView.findViewById(R.id.stock_sohRequested);
