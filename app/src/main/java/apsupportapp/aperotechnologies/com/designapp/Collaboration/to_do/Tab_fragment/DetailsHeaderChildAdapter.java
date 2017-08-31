@@ -154,6 +154,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
         private final TextView DetailChild_size, DetailChild_requiredQty, DetailChild_aviQty, DetailChild_git, DetailChild_soh;
         private CheckBox DetailChild_checkBox;
+
         public Holder(View itemView) {
             super(itemView);
             DetailChild_size = (TextView) itemView.findViewById(R.id.detailChild_size);

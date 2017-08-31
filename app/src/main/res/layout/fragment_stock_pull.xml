@@ -15,34 +15,52 @@
         android:layout_height="wrap_content">
 
 
-        <TextView
-            android:id="@+id/pva_noChart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="No Chart data available"
-            android:textSize="@dimen/largelayout_storesize"
-            android:visibility="gone" />
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bar_chart"
-            android:layout_marginTop="10dp"
+
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:nestedScrollingEnabled="true" />
+            android:layout_marginTop="10dp"
+            >
 
-        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/pva_progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_centerInParent="true"
-            android:background="#0000"
-            android:keepScreenOn="true"
-            android:padding="10dp"
-            android:theme="@style/ProgressBar"
-            android:visibility="gone">
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
 
-        </ProgressBar>
+            </com.github.mikephil.charting.charts.BarChart>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:id="@+id/progressBar"
+                android:clickable="true"
+
+                >
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/pva_progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:padding="10dp"
+                    android:theme="@style/ProgressBar"
+                    >
+
+                </ProgressBar>
+
+
+            </RelativeLayout>
+
+
+
+
+        </RelativeLayout>
 
 
     </RelativeLayout>

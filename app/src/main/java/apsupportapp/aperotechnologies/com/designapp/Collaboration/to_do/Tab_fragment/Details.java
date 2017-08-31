@@ -77,7 +77,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
@@ -98,14 +99,15 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             requestReceiversDetails();
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void requestReceiversChildDetails(final int position)
     {
-
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") + "&option=" + option.replaceAll(" ", "%20");
         Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -117,6 +119,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
+                                StockDetailsAdapter.Holder.view_border.setVisibility(View.GONE);
                                 DetailProcess.setVisibility(View.GONE);
 
                                 return;
@@ -139,6 +142,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 limit = 100;
                                 offsetvalue = 0;
                             }
+                            StockDetailsAdapter.Holder.view_border.setVisibility(View.VISIBLE);
 
                             HashmapList.put(position, ChildDetailList);
                             stockPullAdapter.notifyDataSetChanged();
@@ -149,6 +153,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
+                            StockDetailsAdapter.Holder.view_border.setVisibility(View.GONE);
+
                             DetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
@@ -160,6 +166,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
+                        StockDetailsAdapter.Holder.view_border.setVisibility(View.GONE);
                         DetailProcess.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
@@ -278,11 +285,11 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
     private void initalise() {
-        String data = getIntent().getExtras().getString("prodLevel3Desc");
-        String data1 = getIntent().getExtras().getString("MCCodeDesc");
+        String subcategory = getIntent().getExtras().getString("prodLevel3Desc");
+        String mc = getIntent().getExtras().getString("MCCodeDesc");
         Double data2 = getIntent().getExtras().getDouble("AvlQty");
-        MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values // MCCodeDesc = data1; - this is actual value
-        prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  //prodLevel3Desc = data; - this is actual value
+        MCCodeDesc = mc; //MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values //  - this is actual value
+        prodLevel3Desc = subcategory; // prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  // - this is actual value
         MCCode = String.valueOf(Math.round(data2));
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
         details_imageBtnBack = (RelativeLayout) findViewById(R.id.details_imageBtnBack);
@@ -297,11 +304,12 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
 
-    public void StartActivity(Context context, String data1, Double data2)
+    public void StartActivity(Context context, String subcategory,String mc ,Double data2)
     {
         Intent intent = new Intent(context, Details.class);
-     //   intent.putExtra("prodLevel3Desc",data);
-        intent.putExtra("MCCodeDesc", data1);
+        intent.putExtra("prodLevel3Desc",subcategory);
+        intent.putExtra("MCCodeDesc", mc);
+        Log.e( "StartActivity: ",""+subcategory + "\t" +mc );
         intent.putExtra("AvlQty", data2);
         context.startActivity(intent);
     }
