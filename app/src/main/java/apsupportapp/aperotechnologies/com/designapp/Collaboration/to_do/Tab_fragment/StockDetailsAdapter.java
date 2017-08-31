@@ -63,7 +63,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
         if(holder instanceof Holder) {
-            if(position < list.size()) {
+            if(position < list.size())
+            {
 
                 HandlePositionOnSet(holder,position);
 
@@ -74,7 +75,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((Holder)holder).Detail_AviQty.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((Holder)holder).Detail_headerCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View view)
+                    {
 
                         if(((CheckBox)view).isChecked())
                         {
@@ -103,14 +105,16 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 Toggle[position]=false;
                                 notifyDataSetChanged();
 
-                            }else
+                            }
+                            else
                             {
                                 Toggle[position]=true;
                                 if(HashMapSubChild.get(position).isEmpty())
                                 {
                                     onPressInterface.onPress(position);
 
-                                }else
+                                }
+                                else
                                 {
                                     notifyDataSetChanged();
 
@@ -180,7 +184,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public JSONArray OnSubmit(String MCCodeDesc,String prodLevel3Desc,String deviceId)
     {
         int count=0;  //count is for add one by one in Jsonarray.
-
         JSONArray jsonarray=new JSONArray();
         try
         {
@@ -191,7 +194,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     for (int j = 0; j <HashMapSubChild.get(i).size(); j++)
                     {
                         Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
-                        if(CheckedItems.contains(Tag)){
+                        if(CheckedItems.contains(Tag))
+                        {
                             JSONObject obj = new JSONObject();
                             obj.put("option",list.get(i).getLevel());
                             obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
