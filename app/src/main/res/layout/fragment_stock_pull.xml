@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,18 +8,52 @@
     <!-- TODO: Update blank fragment layout -->
 
 
+    <RelativeLayout
+        android:orientation="vertical"
+        android:id="@+id/relChartlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/pva_noChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="No Chart data available"
+            android:textSize="@dimen/largelayout_storesize"
+            android:visibility="gone" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bar_chart"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:nestedScrollingEnabled="true" />
+
+        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pva_progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:background="#0000"
+            android:keepScreenOn="true"
+            android:padding="10dp"
+            android:theme="@style/ProgressBar"
+            android:visibility="gone">
+
+        </ProgressBar>
+
+
+    </RelativeLayout>
+
 
     <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_below="@+id/relChartlayout"
         android:id="@+id/stockPull_list"
-        android:background="@color/bg_screen_color"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/activity_stockpullfragment_child"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         />
 
-</LinearLayout>
+</RelativeLayout>

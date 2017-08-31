@@ -52,7 +52,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private String bearertoken;
+    private String bearertoken,deviceId;
     Context context;
     private int count = 0;
     private int limit = 100;
@@ -62,8 +62,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     RelativeLayout details_imageBtnBack;
     private ToDo_Modal toDo_modal;
     private RecyclerView recyclerView;
-    private int levelOfOption = 1;  //  1 is for option and 2 is for size
-    private String MCCodeDesc = "";    // code and description
+    private int levelOfOption = 3;  //  3 is for option and 4 is for size
+    private String MCCodeDesc = "",prodLevel3Desc = "";    // code and description
     private String MCCode = "";    // code and description
     private String option = "";    // code and description
     private StockDetailsAdapter stockPullAdapter;
@@ -88,6 +88,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        deviceId = sharedPreferences.getString("device_id","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -105,7 +106,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     private void requestReceiversChildDetails(final int position) {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") + "&option=" + option.replaceAll(" ", "%20");
-        Log.e( "requestReceiversChildDetails: ", ""+url);
+        Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -184,7 +185,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
     private void requestReceiversDetails() {
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20");
+        Log.e("TAG", "requestReceiversDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -204,8 +206,11 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 count++;
                                 requestReceiversDetails();
 
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            }
+                            else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                     DetailsList.add(toDo_modal);
                                 }
@@ -214,7 +219,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 offsetvalue = 0;
 
                             }
-
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             MakeHashMap(DetailsList);
@@ -222,7 +226,9 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                             recyclerView.setAdapter(stockPullAdapter);
                             Reusable_Functions.hDialog();
 
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
@@ -271,10 +277,11 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
     private void initalise() {
-
+        String data = getIntent().getExtras().getString("prodLevel3Desc");
         String data1 = getIntent().getExtras().getString("MCCodeDesc");
         Double data2 = getIntent().getExtras().getDouble("AvlQty");
-        MCCodeDesc = data1;
+        MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values // MCCodeDesc = data1; - this is actual value
+        prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  //prodLevel3Desc = data; - this is actual value
         MCCode = String.valueOf(Math.round(data2));
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
         details_imageBtnBack = (RelativeLayout) findViewById(R.id.details_imageBtnBack);
@@ -289,8 +296,10 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
 
-    public void StartActivity(Context context, String data1, Double data2) {
+    public void StartActivity(Context context, String data1, Double data2)
+    {
         Intent intent = new Intent(context, Details.class);
+     //   intent.putExtra("prodLevel3Desc",data);
         intent.putExtra("MCCodeDesc", data1);
         intent.putExtra("AvlQty", data2);
         context.startActivity(intent);
@@ -299,17 +308,22 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.details_imageBtnBack:
                 onBackPressed();
                 break;
 
             case R.id.stock_detailSubmit:
-                if (!(DetailsList.size() == 0)) {
+                if (!(DetailsList.size() == 0))
+                {
                     JSONArray jsonArray = stockPullAdapter.OnSubmit(MCCodeDesc);
-                    if (jsonArray.length() == 0) {
+                    if (jsonArray.length() == 0)
+                    {
                         Toast.makeText(Details.this, "Please select at least one option.", Toast.LENGTH_SHORT).show();
-                    } else {
+                    }
+                    else
+                    {
                         requestReceiverSubmitAPI(context, jsonArray);
                     }
                 }
@@ -318,20 +332,20 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         super.onBackPressed();
         finish();
     }
 
 
-    private void requestReceiverSubmitAPI(final Context mcontext, JSONArray object) {
-
+    private void requestReceiverSubmitAPI(final Context mcontext, JSONArray object)
+    {
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
 
             String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId;//+"?recache="+recache
-            Log.e( "requestReceiverSubmitAPI: ",""+url  + object.toString());
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -393,16 +407,21 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
     @Override
-    public void onPress(int Position) {
-        MCCodeDesc = DetailsList.get(Position).getMccodeDesc();
+    public void onPress(int Position)
+    {
+        MCCodeDesc = "2257-Ladies Ethnic Kurta" ;
+        prodLevel3Desc = "BF011C-BF - Ladies ethnicwear";
         option = DetailsList.get(Position).getLevel();
-        levelOfOption = 2;
+        levelOfOption = 4; // 4 is for size
         ChildDetailList = new ArrayList<ToDo_Modal>();
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.sDialog(Details.this, "Loading....");
             DetailProcess.setVisibility(View.VISIBLE);
             requestReceiversChildDetails(Position);
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
     }

@@ -1413,8 +1413,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 barChart.getXAxis().setAxisMinValue(0);
                 barChart.getXAxis().setAxisMaximum(salesPvAAnalysisWeekArrayList.size());
                 barChart.groupBars(0, groupSpace, barSpace);
-                Legend l = barChart.getLegend();
-                l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+              //  Legend l = barChart.getLegend();
+              //  l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
 
                 barChart.setFitBars(true);
                 barChart.invalidate();

@@ -255,7 +255,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         } else if (id == R.id.aboutus) {
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
-           // finish();
+            finish();
             return true;
         }
 
@@ -292,7 +292,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             apps = getProduct(4);
             snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-
+//            apps = getProduct(5);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Key Product", apps));
             apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
             apps = getProduct(6);
@@ -474,7 +475,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                                 } else
                                 {
                                     String result=response.getString("status");
-                                  //  Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
                                     Reusable_Functions.hDialog();
                                 }
                             } catch (Exception e)

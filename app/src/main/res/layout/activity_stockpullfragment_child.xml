@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
     android:orientation="vertical"
-    android:padding="3dp"
-    >
+    app:cardBackgroundColor="@color/ezfb_White"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="false"
+    app:contentPadding="4dp">
 
     <!--starting from this-->
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/smdm_border"
-        app:contentPadding="1dp"
-        app:cardUseCompatPadding="true"
-        app:cardPreventCornerOverlap="false"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="0dp">
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:contentPadding="1dp"-->
+        <!--app:cardUseCompatPadding="true"-->
+        <!--app:cardPreventCornerOverlap="false"-->
+        <!--app:cardCornerRadius="5dp"-->
+        <!--app:cardElevation="0dp">-->
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentPadding="0dp"
-            app:cardUseCompatPadding="false"
-            app:cardPreventCornerOverlap="false"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="0dp">
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--app:contentPadding="0dp"-->
+            <!--app:cardUseCompatPadding="false"-->
+            <!--app:cardPreventCornerOverlap="false"-->
+            <!--app:cardCornerRadius="5dp"-->
+            <!--app:cardElevation="0dp">-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,7 +116,7 @@
                             android:id="@+id/stock_sohRequested"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="100"
+                            android:text="00"
                             android:textSize="@dimen/collaboration_stock_title_xlarge"
                             android:layout_marginTop="7dp"
                             android:singleLine="true"
@@ -123,21 +125,17 @@
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        >
+                        android:gravity="center">
 
                         <LinearLayout
                             android:layout_width="60dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-
-                            >
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -153,7 +151,7 @@
                                 android:id="@+id/stock_avi"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="98"
+                                android:text="00"
                                 android:layout_marginTop="7dp"
                                 android:textSize="@dimen/collaboration_stock_title_xlarge"
                                 android:singleLine="true"
@@ -163,12 +161,7 @@
 
                         </LinearLayout>
 
-
-
-
-
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -199,7 +192,7 @@
                                 android:id="@+id/stock_numberOfOption"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="03"
+                                android:text="00"
                                 android:layout_marginTop="7dp"
                                 android:textColor="@color/text_sales"
                                 android:textSize="@dimen/collaboration_stock_title_xlarge"
@@ -251,7 +244,7 @@
                             android:id="@+id/stock_soh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5"
+                            android:text="0"
                             android:textSize="@dimen/collaboration_stock_text"
                             android:singleLine="true"
                             android:textColor="@color/txt_color"
@@ -290,7 +283,7 @@
                                 android:id="@+id/stock_git"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2"
+                                android:text="0"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:singleLine="true"
                                 android:textColor="@color/txt_color"
@@ -337,7 +330,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="1.0"
+                                android:text="0"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:singleLine="true"
                                 android:textColor="@color/txt_color"
@@ -368,9 +361,9 @@
 
 
 
-        </android.support.v7.widget.CardView>
+        <!--</android.support.v7.widget.CardView>-->
 
-    </android.support.v7.widget.CardView>
+    <!--</android.support.v7.widget.CardView>-->
 
 
-</LinearLayout>
+</android.support.v7.widget.CardView>
