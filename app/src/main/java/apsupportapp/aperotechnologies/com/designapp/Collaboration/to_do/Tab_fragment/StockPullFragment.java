@@ -59,7 +59,8 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
 
 
-public class StockPullFragment extends Fragment {
+public class StockPullFragment extends Fragment
+{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -86,12 +87,14 @@ public class StockPullFragment extends Fragment {
     private BarChart barChart;
     private String selectprodLevel3Desc="";
 
-    public StockPullFragment() {
+    public StockPullFragment()
+    {
         // Required empty public constructor
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             if (checkNetworkFalse) {
@@ -103,7 +106,8 @@ public class StockPullFragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static StockPullFragment newInstance(String param1, String param2) {
+    public static StockPullFragment newInstance(String param1, String param2)
+    {
         StockPullFragment fragment = new StockPullFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -113,7 +117,8 @@ public class StockPullFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -122,14 +127,16 @@ public class StockPullFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
         this.context = context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         view = (ViewGroup) inflater.inflate(R.layout.fragment_stock_pull, container, false);
         ReceiverSummaryList = new ArrayList<>();
@@ -139,14 +146,15 @@ public class StockPullFragment extends Fragment {
         return view;
     }
 
-    private void initialise() {
+    private void initialise()
+    {
         barChart = (BarChart) view.findViewById(R.id.bar_chart);
         recyclerView = (RecyclerView) view.findViewById(R.id.stockPull_list);
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-
+            public void onItemClick(View view, int position)
+            {
                 new Details().StartActivity(context, ReceiverSummaryList.get(position).getLevel(),ReceiverSummaryList.get(position).getStkQtyAvl());
             }
         }));
@@ -181,7 +189,8 @@ public class StockPullFragment extends Fragment {
 
     }
 
-    private void requestTransferRequestsummary() {
+    private void requestTransferRequestsummary()
+    {
         if (Reusable_Functions.chkStatus(context)) {
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=1
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
@@ -192,14 +201,17 @@ public class StockPullFragment extends Fragment {
                         @Override
                         public void onResponse(JSONArray response) {
                             Log.d("TAG", "onResponse: " + response);
-                            try {
+                            try
+                            {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
 
-                                } else if (response.length() == limit) {
+                                }
+                                else if (response.length() == limit)
+                                {
                                     for (int i = 0; i < response.length(); i++) {
 
                                         toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
@@ -210,7 +222,9 @@ public class StockPullFragment extends Fragment {
                                     count++;
                                     requestTransferRequestsummary();
 
-                                } else if (response.length() < limit) {
+                                }
+                                else if (response.length() < limit)
+                                {
                                     for (int i = 0; i < response.length(); i++) {
                                         toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                         ReceiverSummaryList.add(toDo_Modal);
@@ -229,7 +243,8 @@ public class StockPullFragment extends Fragment {
                                 // recyclerView.setAdapter(stockPullAdapter);
                                 Reusable_Functions.hDialog();
 
-                            } catch (Exception e) {
+                            } catch (Exception e)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();

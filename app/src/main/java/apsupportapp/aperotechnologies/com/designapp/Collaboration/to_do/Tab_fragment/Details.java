@@ -103,7 +103,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         }
     }
 
-    private void requestReceiversChildDetails(final int position) {
+    private void requestReceiversChildDetails(final int position)
+    {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") + "&option=" + option.replaceAll(" ", "%20");
         Log.e("TAG", "requestReceiversChildDetails: "+url );
@@ -317,7 +318,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             case R.id.stock_detailSubmit:
                 if (!(DetailsList.size() == 0))
                 {
-                    JSONArray jsonArray = stockPullAdapter.OnSubmit(MCCodeDesc);
+                    JSONArray jsonArray = stockPullAdapter.OnSubmit(MCCodeDesc,prodLevel3Desc,deviceId);
                     if (jsonArray.length() == 0)
                     {
                         Toast.makeText(Details.this, "Please select at least one option.", Toast.LENGTH_SHORT).show();
@@ -346,6 +347,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
 
             String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId;//+"?recache="+recache
+            Log.e("requestReceiverSubmitAPI: ",""+url + "\t" + object.toString() );
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override

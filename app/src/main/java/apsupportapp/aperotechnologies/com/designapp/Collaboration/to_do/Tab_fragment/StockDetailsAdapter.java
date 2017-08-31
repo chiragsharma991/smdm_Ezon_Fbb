@@ -140,7 +140,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         {
             ((Holder)holder).Detail_headerCheck.setChecked(true);
 
-        }else
+        }
+        else
         {
             ((Holder)holder).Detail_headerCheck.setChecked(false);
 
@@ -149,11 +150,13 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return list.size();
     }
 
-    public static class Holder extends RecyclerView.ViewHolder {
+    public static class Holder extends RecyclerView.ViewHolder
+    {
 
         private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty;
         private TextView Detail_optionLevel;
@@ -174,7 +177,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public JSONArray OnSubmit(String MCCodeDesc)
+    public JSONArray OnSubmit(String MCCodeDesc,String prodLevel3Desc,String deviceId)
     {
         int count=0;  //count is for add one by one in Jsonarray.
 
@@ -193,6 +196,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             obj.put("option",list.get(i).getLevel());
                             obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
                             obj.put("prodLevel6Code",MCCodeDesc);
+                            obj.put("prodLevel3Code",prodLevel3Desc);
+                            obj.put("deviceId",deviceId);
                             jsonarray.put(count,obj);
                             count++;
                         }
@@ -202,8 +207,12 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 {
                     if(HeadercheckList[i]) {
                         JSONObject obj = new JSONObject();
+//                        obj.put("option",list.get(i).getLevel());
+//                        obj.put("prodLevel6Code",MCCodeDesc);
                         obj.put("option",list.get(i).getLevel());
                         obj.put("prodLevel6Code",MCCodeDesc);
+                        obj.put("prodLevel3Code",prodLevel3Desc);
+                        obj.put("deviceId",deviceId);
                         jsonarray.put(count,obj);
                         count++;
 
