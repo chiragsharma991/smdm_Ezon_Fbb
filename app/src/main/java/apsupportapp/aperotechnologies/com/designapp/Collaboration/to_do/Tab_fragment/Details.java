@@ -95,9 +95,10 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         queue = new RequestQueue(cache, network);
         queue.start();
 
-        if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.sDialog(context, "Loading data...");
+            DetailProcess.setVisibility(View.VISIBLE);
             requestReceiversDetails();
         }
         else
@@ -154,7 +155,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             StockDetailsAdapter.Holder.view_border.setVisibility(View.GONE);
-
                             DetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
@@ -171,7 +171,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -182,17 +181,15 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             }
         };
         int socketTimeout = 60000;//5 seconds
-
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
-
     }
 
 
-    private void requestReceiversDetails() {
-
+    private void requestReceiversDetails()
+    {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20");
         Log.e("TAG", "requestReceiversDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -202,10 +199,12 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                DetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
-                            } else if (response.length() == limit) {
+                            } else if (response.length() == limit)
+                            {
                                 for (int i = 0; i < response.length(); i++) {
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                     DetailsList.add(toDo_modal);
@@ -213,7 +212,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestReceiversDetails();
-
                             }
                             else if (response.length() < limit)
                             {
@@ -225,20 +223,20 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 count = 0;
                                 limit = 100;
                                 offsetvalue = 0;
-
                             }
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             MakeHashMap(DetailsList);
                             stockPullAdapter = new StockDetailsAdapter(DetailsList, HashmapList, context, DetailProcess);
                             recyclerView.setAdapter(stockPullAdapter);
+                            DetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
-
                         }
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            DetailProcess.setVisibility(View.GONE);
+                            Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
@@ -247,6 +245,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        DetailProcess.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -269,8 +268,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
-
-
     }
 
     private void MakeHashMap(ArrayList<ToDo_Modal> detailsList) {
@@ -281,7 +278,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             ArrayList<ToDo_Modal> listData = new ArrayList<ToDo_Modal>();
             HashmapList.put(i, listData);
         }
-
     }
 
     private void initalise() {
@@ -412,8 +408,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
 
         }
-
-
     }
 
     @Override
@@ -426,7 +420,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         ChildDetailList = new ArrayList<ToDo_Modal>();
         if (Reusable_Functions.chkStatus(context))
         {
-            Reusable_Functions.sDialog(Details.this, "Loading....");
+            Reusable_Functions.sDialog(Details.this, "Loading...");
             DetailProcess.setVisibility(View.VISIBLE);
             requestReceiversChildDetails(Position);
         }

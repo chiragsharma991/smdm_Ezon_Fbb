@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen_color"
+    android:background="@color/white"
     tools:context="apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,6 +19,7 @@
 
 
         <RelativeLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginTop="10dp"

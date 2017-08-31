@@ -106,8 +106,10 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser) {
-            if (Receiver_checkNetwkstatus) {
+        if(isVisibleToUser)
+        {
+            if (Receiver_checkNetwkstatus)
+            {
                 Toast.makeText(context, "No data found ", Toast.LENGTH_SHORT).show();
 
             }
@@ -145,13 +147,16 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
 
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
+    public void onButtonPressed(Uri uri)
+    {
+        if (mListener != null)
+        {
             mListener.onFragmentInteraction(uri);
         }
     }
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
         this.context = context;
     }

@@ -172,36 +172,10 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
 
 
-     /*   barChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h) {
-
-               // Log.e("TAG", "dataXtoPx: "+dataXtoPx+" xValue"+xValue+" dataIndex"+datadrawX );
-                final String item = barChart.getXAxis().getValueFormatter().getFormattedValue(e.getX(), barChart.getXAxis());
-                if(!item.equals("")){
-                    selectprodLevel3Desc=item;
-                }
-                Log.e("VAL SELECTED",
-                        "Value: " + e.getY() + ", xIndex: " + e.getX()
-                                + ", DataSet index: " + h.getDataSetIndex());
-              //  Log.e("TAG", "onValueSelected: " + selectprodLevel3Desc);
-               // Reusable_Functions.sDialog(context, "Loading.......");
-               // requestTransferRequestSubcategory(selectprodLevel3Desc);
-
-            }
-
-            @Override
-            public void onNothingSelected() {
-                Log.e("TAG", "onNothingSelected: ");
-
-
-            }
-        });*/
-
 
     private void MainMethod() {
         NetworkProcess();
-        Reusable_Functions.sDialog(context, "Loading.......");
+        Reusable_Functions.sDialog(context, "Loading...");
         requestTransferRequestsummary();
 
     }
