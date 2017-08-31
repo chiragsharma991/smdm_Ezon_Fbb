@@ -50,6 +50,7 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof ReceiverStatusDetailsAdapter.Holder) {
             if(position < rec_status_dtllist.size()) {
+                //receiverDetailProcess.setVisibility(View.GONE);
 
                 Log.e(TAG,"position"+position);
                 HandlePositionOnSet(holder,position);

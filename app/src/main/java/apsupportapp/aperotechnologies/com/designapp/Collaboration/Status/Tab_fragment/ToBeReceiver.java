@@ -388,7 +388,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             StatusActivity.StatusProcess.setVisibility(View.GONE);
-                            ReceiverAdapter .notifyDataSetChanged();
+                            ReceiverAdapter.notifyDataSetChanged();
                             e.printStackTrace();
                         }
                     }

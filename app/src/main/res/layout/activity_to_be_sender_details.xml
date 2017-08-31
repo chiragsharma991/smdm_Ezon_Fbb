@@ -160,6 +160,7 @@
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/statusDetail_list"
             android:scrollbars="vertical"
