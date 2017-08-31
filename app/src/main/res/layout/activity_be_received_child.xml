@@ -21,130 +21,122 @@
         card_view:cardElevation="3dp"
         card_view:cardUseCompatPadding="true">
 
-      <LinearLayout
-        android:id="@+id/linearClick"
-        android:background="@drawable/card_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp">
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="0dp"
-        app:cardCornerRadius="10dp"
-        app:cardPreventCornerOverlap="true">
-
         <LinearLayout
+            android:id="@+id/linearClick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="0dp"
-            android:background="@android:color/white">
+            android:layout_margin="4dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/header"
-                android:padding="3dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="C0001"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/collaboration_stock_title"
-                    android:id="@+id/status_caseNumber"
-                    android:layout_alignParentLeft="true"
-                    android:textColor="@color/ezfb_black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pending"
-                    android:textSize="@dimen/collaboration_stock_text"
-                    android:id="@+id/status_case"
-                    android:layout_alignParentRight="true"/>
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/smdm_border">
-
-            </View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:padding="3dp">
+                android:orientation="vertical"
+                android:padding="0dp"
+                android:background="@android:color/white">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="4814"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/collaboration_stock_text"
-                    android:id="@+id/status_storeCode"
-                    android:textColor="@color/smdm_default_color"/>
+                    android:id="@+id/header"
+                    android:padding="3dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Store Description"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/collaboration_stock_text"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C0001"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/collaboration_stock_title"
+                        android:id="@+id/status_caseNumber"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/ezfb_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pending"
+                        android:textSize="@dimen/collaboration_stock_text"
+                        android:id="@+id/status_case"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
                     android:layout_marginLeft="5dp"
-                    android:id="@+id/status_storedesc"
-                    android:textColor="@color/smdm_default_color"/>
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/smdm_border">
 
-            </LinearLayout>
-
-           <!--add layout views-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:padding="3dp">
+                </View>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:id="@+id/progressView">
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4814"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/collaboration_stock_text"
+                        android:id="@+id/status_storeCode"
+                        android:textColor="@color/ezfb_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Store Description"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/collaboration_stock_text"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/status_storedesc"
+                        android:textColor="@color/ezfb_black"/>
 
                 </LinearLayout>
 
+                <!--add layout views-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="3dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/progressView">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--below layout-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:layout_marginTop="2dp"
+                    android:visibility="gone"
+                    android:id="@+id/status_layout"
+                    android:background="@drawable/border2">
+
+                </RelativeLayout>
             </LinearLayout>
+            <!--ending border of card layout-->
 
-            <!--below layout-->
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:layout_marginTop="2dp"
-                android:visibility="gone"
-                android:id="@+id/status_layout"
-                android:background="@drawable/border2">
-
-            </RelativeLayout>
         </LinearLayout>
-        <!--ending border of card layout-->
-
-    </android.support.v7.widget.CardView>
-</LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

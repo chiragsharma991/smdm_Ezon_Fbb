@@ -8,6 +8,7 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
 
+
     <LinearLayout
         android:id="@+id/linear_head"
         android:layout_width="match_parent"
@@ -104,10 +105,17 @@
             android:padding="5dp"
             >
 
-            <RelativeLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+            <LinearLayout
                 android:id="@+id/rel_CaseLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="3.8"
                 android:layout_toLeftOf="@+id/rec_status_detailStoreCode">
 
                 <TextView
@@ -121,7 +129,16 @@
                     android:textStyle="bold"
 
                     />
-            </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                >
+
 
             <TextView
 
@@ -142,13 +159,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="2dp"
-                android:text="Store Description"
+                android:text=" Store Description"
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/stock_textsize_Title"
                 android:textStyle="bold"
 
                 />
-
+            </LinearLayout>
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -159,6 +177,7 @@
             android:layout_below="@+id/storeDesc"
             android:scrollbars="vertical"
             />
+
 
     </RelativeLayout>
 </RelativeLayout>

@@ -190,7 +190,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         storeCode = (TextView) findViewById(R.id.status_detailStoreCode);
         detailStoreDesc = (TextView)findViewById(R.id.detailStoreDesc);
         SenderDetailProcess = (ProgressBar)findViewById(R.id.senderDetailProcess);
-        SenderDetailProcess.setVisibility(View.GONE);
+//        SenderDetailProcess.setVisibility(View.VISIBLE);
         status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
@@ -321,7 +321,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
         if (Reusable_Functions.chkStatus(context))
         {
-            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading....");
+            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading...");
+            SenderDetailProcess.setVisibility(View.VISIBLE);
             requestStatusReceiversSubDetails(Position);
         }
         else

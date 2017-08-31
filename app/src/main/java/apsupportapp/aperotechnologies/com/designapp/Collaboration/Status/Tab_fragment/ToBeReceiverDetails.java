@@ -103,7 +103,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
         rec_storeCode = (TextView) findViewById(R.id.rec_status_detailStoreCode);
         rec_storeDesc = (TextView) findViewById(R.id.rec_status_detailStoreDesc);
         ReceiverDetailProcess = (ProgressBar) findViewById(R.id.receiverDetailProcess);
-        ReceiverDetailProcess.setVisibility(View.GONE);
+//        ReceiverDetailProcess.setVisibility(View.VISIBLE);
         status_receiverdetails_imageBtnBack = (RelativeLayout) findViewById(R.id.status_receiverdetails_imageBtnBack);
         status_receiverdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
