@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
@@ -12,8 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,7 +42,10 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.MPPointD;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -59,7 +65,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
 
 
-public class StockPullFragment extends Fragment {
+public class StockPullFragment extends Fragment implements OnChartGestureListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -85,10 +91,14 @@ public class StockPullFragment extends Fragment {
     private RecyclerView recyclerView;
     private BarChart barChart;
     private String selectprodLevel3Desc="";
+    private HashMap<Integer, String> mapValues;
+    private String dublicateSelectprodLevel3Desc="";
+    private RelativeLayout progressBar;
 
     public StockPullFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -142,24 +152,37 @@ public class StockPullFragment extends Fragment {
     private void initialise() {
         barChart = (BarChart) view.findViewById(R.id.bar_chart);
         recyclerView = (RecyclerView) view.findViewById(R.id.stockPull_list);
+        progressBar = (RelativeLayout) view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
-                new Details().StartActivity(context, ReceiverSummaryList.get(position).getMccodeDesc(), ReceiverSummaryList.get(position).getStkQtyAvl());
+               // new Details().StartActivity(context, ReceiverSummaryList.get(position).getMccodeDesc(), ReceiverSummaryList.get(position).getStkQtyAvl());
             }
         }));
-        barChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+        barChart.setOnChartGestureListener(this);
+    }
+
+
+
+     /*   barChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
+
+               // Log.e("TAG", "dataXtoPx: "+dataXtoPx+" xValue"+xValue+" dataIndex"+datadrawX );
                 final String item = barChart.getXAxis().getValueFormatter().getFormattedValue(e.getX(), barChart.getXAxis());
                 if(!item.equals("")){
                     selectprodLevel3Desc=item;
                 }
-                Log.e("TAG", "onValueSelected: " + selectprodLevel3Desc);
-                Reusable_Functions.sDialog(context, "Loading.......");
-                requestTransferRequestSubcategory(selectprodLevel3Desc);
+                Log.e("VAL SELECTED",
+                        "Value: " + e.getY() + ", xIndex: " + e.getX()
+                                + ", DataSet index: " + h.getDataSetIndex());
+              //  Log.e("TAG", "onValueSelected: " + selectprodLevel3Desc);
+               // Reusable_Functions.sDialog(context, "Loading.......");
+               // requestTransferRequestSubcategory(selectprodLevel3Desc);
 
             }
 
@@ -169,8 +192,8 @@ public class StockPullFragment extends Fragment {
 
 
             }
-        });
-    }
+        });*/
+
 
     private void MainMethod() {
         NetworkProcess();
@@ -178,6 +201,8 @@ public class StockPullFragment extends Fragment {
         requestTransferRequestsummary();
 
     }
+
+
 
     private void requestTransferRequestsummary() {
         if (Reusable_Functions.chkStatus(context)) {
@@ -288,6 +313,7 @@ public class StockPullFragment extends Fragment {
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.GONE);
                                     return;
 
                                 } else if (response.length() == limit) {
@@ -317,9 +343,12 @@ public class StockPullFragment extends Fragment {
                                  stockPullAdapter = new StockPullAdapter(subcategoryList,getActivity());
                                  recyclerView.setAdapter(stockPullAdapter);
                                  Reusable_Functions.hDialog();
+                                 progressBar.setVisibility(View.GONE);
+
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
 
@@ -331,6 +360,7 @@ public class StockPullFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             error.printStackTrace();
@@ -362,6 +392,7 @@ public class StockPullFragment extends Fragment {
 
         try {
             if (receiverSummaryList != null & receiverSummaryList.size() > 0) {
+                mapValues=new HashMap<>();
                 barChart.setDrawBarShadow(false);
                 barChart.setDrawValueAboveBar(true);
                 barChart.setMaxVisibleValueCount(50);
@@ -397,10 +428,13 @@ public class StockPullFragment extends Fragment {
                 String[] labels = new String[receiverSummaryList.size()];
 
 
-                for (int i = 0; i < receiverSummaryList.size(); i++) {
+
+
+                for (int i = 0; i <receiverSummaryList.size(); i++) {
                     yVals1.add(new BarEntry(i, (float) receiverSummaryList.get(i).getStkOnhandQtyRequested()));
                     yVals2.add(new BarEntry(i, (float) receiverSummaryList.get(i).getStkQtyAvl()));
                     labels[i] = receiverSummaryList.get(i).getLevel();
+                    mapValues.put(i,labels[i]);
                     Log.e("TAG", "labels: " + labels[i]);
 
                 }
@@ -476,6 +510,47 @@ public class StockPullFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+    @Override
+    public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+    }
+    @Override
+    public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+    }
+    @Override
+    public void onChartLongPressed(MotionEvent me) {
+    }
+    @Override
+    public void onChartDoubleTapped(MotionEvent me) {
+    }
+    @Override
+    public void onChartSingleTapped(MotionEvent me) {
+        float tappedX = me.getX();
+        float tappedY = me.getY();
+        MPPointD point = barChart.getTransformer(YAxis.AxisDependency.LEFT).getValuesByTouchPoint(tappedX, tappedY);
+        Log.e("onChartSingleTapped", "tapped at: " + (int)point.x + "," + (int)point.y);
+        String selectprodLevel3Desc=mapValues.get((int)point.x);
+        Log.e("TAG", "onChartSingleTapped: Values "+selectprodLevel3Desc );
+        // @parms: dublicateSelectprodLevel3Desc is stands for cancel recall Api.
+        if(!dublicateSelectprodLevel3Desc.equals(selectprodLevel3Desc)) {
+            progressBar.setVisibility(View.VISIBLE);
+            requestTransferRequestSubcategory(selectprodLevel3Desc);
+            dublicateSelectprodLevel3Desc=selectprodLevel3Desc;
+        }
+
+    }
+    @Override
+    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+    }
+    @Override
+    public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+    }
+    @Override
+    public void onChartTranslate(MotionEvent me, float dX, float dY) {
+    }
+
+
+
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
