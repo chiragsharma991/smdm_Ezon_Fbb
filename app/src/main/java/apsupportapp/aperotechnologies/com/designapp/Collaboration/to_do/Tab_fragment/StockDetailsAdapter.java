@@ -62,9 +62,10 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
 
-        if(holder instanceof Holder) {
-            if(position < list.size()) {
-
+        if(holder instanceof Holder)
+        {
+            if(position < list.size())
+            {
                 HandlePositionOnSet(holder,position);
 
                 ((Holder)holder).Detail_Soh.setText(""+Math.round(list.get(position).getStkOnhandQty()));
@@ -74,8 +75,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((Holder)holder).Detail_AviQty.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((Holder)holder).Detail_headerCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-
+                    public void onClick(View view)
+                    {
                         if(((CheckBox)view).isChecked())
                         {
                             //Header check is enable when view is open
@@ -90,8 +91,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             notifyItemChanged(position);
                         }
                     }
-
-
                 });
                 ((Holder)holder).Detail_optionLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -103,14 +102,16 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 Toggle[position]=false;
                                 notifyDataSetChanged();
 
-                            }else
+                            }
+                            else
                             {
                                 Toggle[position]=true;
                                 if(HashMapSubChild.get(position).isEmpty())
                                 {
                                     onPressInterface.onPress(position);
 
-                                }else
+                                }
+                                else
                                 {
                                     notifyDataSetChanged();
 
@@ -140,7 +141,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         {
             ((Holder)holder).Detail_headerCheck.setChecked(true);
 
-        }else
+        }
+        else
         {
             ((Holder)holder).Detail_headerCheck.setChecked(false);
 
@@ -149,17 +151,20 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return list.size();
     }
 
-    public static class Holder extends RecyclerView.ViewHolder {
+    public static class Holder extends RecyclerView.ViewHolder
+    {
 
         private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty;
         private TextView Detail_optionLevel;
         private LinearLayout Sizeslayout;
         private CheckBox Detail_headerCheck;
         protected RecyclerView detailsLinear;
+        public static View view_border;
         public Holder(View itemView)
         {
             super(itemView);
@@ -169,15 +174,15 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Detail_Git=(TextView)itemView.findViewById(R.id.detail_Git);
             Detail_AviQty=(TextView)itemView.findViewById(R.id.detail_AviQty);
             Sizeslayout=(LinearLayout)itemView.findViewById(R.id.detail_size);
+            view_border = (View)itemView.findViewById(R.id.view_border);
             detailsLinear=(RecyclerView)itemView.findViewById(R.id.details_headerChild);
             Detail_headerCheck=(CheckBox) itemView.findViewById(R.id.detail_headerCheck);
         }
     }
 
-    public JSONArray OnSubmit(String MCCodeDesc)
+    public JSONArray OnSubmit(String MCCodeDesc,String prodLevel3Desc,String deviceId)
     {
         int count=0;  //count is for add one by one in Jsonarray.
-
         JSONArray jsonarray=new JSONArray();
         try
         {
@@ -188,11 +193,14 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     for (int j = 0; j <HashMapSubChild.get(i).size(); j++)
                     {
                         Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
-                        if(CheckedItems.contains(Tag)){
+                        if(CheckedItems.contains(Tag))
+                        {
                             JSONObject obj = new JSONObject();
                             obj.put("option",list.get(i).getLevel());
                             obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
-                            obj.put("prodLevel6Code",MCCodeDesc);
+                            obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
+                            obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
+                            obj.put("deviceId",deviceId);
                             jsonarray.put(count,obj);
                             count++;
                         }
@@ -202,8 +210,13 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 {
                     if(HeadercheckList[i]) {
                         JSONObject obj = new JSONObject();
+//                        obj.put("option",list.get(i).getLevel());
+//                        obj.put("prodLevel6Code",MCCodeDesc);
                         obj.put("option",list.get(i).getLevel());
-                        obj.put("prodLevel6Code",MCCodeDesc);
+//                        obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
+                        obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
+                        obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
+                        obj.put("deviceId",deviceId);
                         jsonarray.put(count,obj);
                         count++;
 

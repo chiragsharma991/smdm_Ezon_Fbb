@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Initiated"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:layout_centerHorizontal="true"
                     android:textSize="@dimen/collaboration_stock_text"
                     />
@@ -87,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sender Acpt"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:layout_centerHorizontal="true"
                     android:textSize="@dimen/collaboration_stock_text"/>
 
@@ -132,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="STO"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:layout_centerHorizontal="true"
                     android:textSize="@dimen/collaboration_stock_text"
                     />
@@ -174,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="GRN"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:layout_centerHorizontal="true"
                     android:textSize="@dimen/collaboration_stock_text"/>
 

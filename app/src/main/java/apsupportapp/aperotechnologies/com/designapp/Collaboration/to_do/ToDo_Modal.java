@@ -6,37 +6,30 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do;
 
 public class ToDo_Modal {
 
+//    String storeCode;
+//    String storeDesc;
+//    String transferStatus;
+//    double stkOnhandQtyRequested;
+//    double stkQtyAvl;
+//    double stkOnhandQty;
+//    double stkGitQty;
+//    int noOfOptions;
+//    double fwdWeekCover;
+//    double sellThruUnits;
+//    String mccodeDesc;
+//    String level;
+//
     String storeCode;
     String storeDesc;
-    String transferStatus;
-    double stkOnhandQtyRequested;
-    double stkQtyAvl;
-    double stkOnhandQty;
-    double stkGitQty;
-    int noOfOptions;
-    double fwdWeekCover;
-    double sellThruUnits;
-    String mccodeDesc;
     String level;
 
-
-    public double getSellThruUnits() {
-        return sellThruUnits;
+    public double getStkOnhandQtyRequested() {
+        return stkOnhandQtyRequested;
     }
 
-    public void setSellThruUnits(double sellThruUnits) {
-        this.sellThruUnits = sellThruUnits;
+    public void setStkOnhandQtyRequested(double stkOnhandQtyRequested) {
+        this.stkOnhandQtyRequested = stkOnhandQtyRequested;
     }
-
-    public String getOption() {
-        return option;
-    }
-
-    public void setOption(String option) {
-        this.option = option;
-    }
-
-    String option;
 
     public String getStoreCode() {
         return storeCode;
@@ -54,20 +47,12 @@ public class ToDo_Modal {
         this.storeDesc = storeDesc;
     }
 
-    public double getStkOnhandQtyRequested() {
-        return stkOnhandQtyRequested;
+    public String getLevel() {
+        return level;
     }
 
-    public void setStkOnhandQtyRequested(double stkOnhandQtyRequested) {
-        this.stkOnhandQtyRequested = stkOnhandQtyRequested;
-    }
-
-    public String getTransferStatus() {
-        return transferStatus;
-    }
-
-    public void setTransferStatus(String transferStatus) {
-        this.transferStatus = transferStatus;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public double getStkQtyAvl() {
@@ -76,14 +61,6 @@ public class ToDo_Modal {
 
     public void setStkQtyAvl(double stkQtyAvl) {
         this.stkQtyAvl = stkQtyAvl;
-    }
-
-    public int getNoOfOptions() {
-        return noOfOptions;
-    }
-
-    public void setNoOfOptions(int noOfOptions) {
-        this.noOfOptions = noOfOptions;
     }
 
     public double getStkOnhandQty() {
@@ -102,6 +79,14 @@ public class ToDo_Modal {
         this.stkGitQty = stkGitQty;
     }
 
+    public double getSellThruUnits() {
+        return sellThruUnits;
+    }
+
+    public void setSellThruUnits(double sellThruUnits) {
+        this.sellThruUnits = sellThruUnits;
+    }
+
     public double getFwdWeekCover() {
         return fwdWeekCover;
     }
@@ -110,19 +95,14 @@ public class ToDo_Modal {
         this.fwdWeekCover = fwdWeekCover;
     }
 
-    public String getMccodeDesc() {
-        return mccodeDesc;
-    }
-
-    public void setMccodeDesc(String mccodeDesc) {
-        this.mccodeDesc = mccodeDesc;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
+    double stkOnhandQtyRequested;
+    double stkQtyAvl;
+    double stkOnhandQty;
+    double stkGitQty;
+    double sellThruUnits;
+    double fwdWeekCover;
 }
+
+
+
+

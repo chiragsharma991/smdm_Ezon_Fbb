@@ -43,8 +43,8 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         if (holder instanceof StockPullAdapter.Holder)
         {
-            if (position < list.size()) {
-
+            if (position < list.size())
+            {
                /* ((StockPullAdapter.Holder) holder).TransferStatus.setText(list.get(position).getTransferStatus());
                 ((StockPullAdapter.Holder) holder).SOH_Requested.setText("" + Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((StockPullAdapter.Holder) holder).QTY_Avi.setText("" + Math.round(list.get(position).getStkQtyAvl()));
@@ -94,7 +94,6 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             FWD = (TextView) itemView.findViewById(R.id.stock_fwc);
             McCodeDescribtion = (TextView) itemView.findViewById(R.id.stock_McCodeDesc);
             NumberOfOption = (TextView) itemView.findViewById(R.id.stock_numberOfOption);
-
         }
 
     }

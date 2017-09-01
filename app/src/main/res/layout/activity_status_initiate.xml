@@ -16,7 +16,7 @@
             android:textSize="@dimen/stock_textsize_normal"
             android:id="@+id/doc_number"
             android:layout_alignParentLeft="true"
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
 
             />
         <TextView
@@ -27,7 +27,7 @@
             android:id="@+id/status_docNumber"
             android:textSize="@dimen/stock_textsize_normal"
             android:layout_toRightOf="@+id/doc_number"
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
 
             />
         <TextView
@@ -37,7 +37,7 @@
             android:layout_below="@+id/linear"
             android:textSize="@dimen/stock_textsize_normal"
             android:layout_toLeftOf="@+id/status_qty"
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
 
             />
         <TextView
@@ -48,7 +48,7 @@
             android:layout_below="@+id/linear"
             android:id="@+id/status_qty"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
 
             />
         <TextView
@@ -59,7 +59,7 @@
             android:layout_below="@+id/linear"
             android:id="@+id/date"
             android:layout_toLeftOf="@+id/status_date"
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
 
             />
         <TextView
@@ -69,7 +69,7 @@
             android:textSize="@dimen/stock_textsize_normal"
             android:layout_below="@+id/linear"
             android:id="@+id/status_date"
-            android:textColor="@color/smdm_default_color"
+            android:textColor="@color/ezfb_black"
             android:layout_alignParentRight="true"
 
             />

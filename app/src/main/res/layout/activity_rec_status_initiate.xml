@@ -12,7 +12,7 @@
         android:textSize="@dimen/stock_textsize_normal"
         android:id="@+id/txt_doc_number"
         android:layout_alignParentLeft="true"
-        android:textColor="@color/smdm_default_color"
+        android:textColor="@color/ezfb_black"
 
         />
     <TextView
@@ -22,7 +22,7 @@
         android:id="@+id/rec_status_docNumber"
         android:textSize="@dimen/stock_textsize_normal"
         android:layout_toRightOf="@+id/txt_doc_number"
-        android:textColor="@color/smdm_default_color"
+        android:textColor="@color/ezfb_black"
 
         />
     <TextView
@@ -32,7 +32,7 @@
         android:text="QTY : "
         android:textSize="@dimen/stock_textsize_normal"
         android:layout_toLeftOf="@+id/rec_status_qty"
-        android:textColor="@color/smdm_default_color"
+        android:textColor="@color/ezfb_black"
 
         />
     <TextView
@@ -42,7 +42,7 @@
         android:textSize="@dimen/stock_textsize_normal"
         android:id="@+id/rec_status_qty"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/smdm_default_color"
+        android:textColor="@color/ezfb_black"
 
         />
     <TextView
@@ -52,7 +52,7 @@
         android:textSize="@dimen/stock_textsize_normal"
         android:id="@+id/txt_date"
         android:layout_toLeftOf="@+id/rec_status_date"
-        android:textColor="@color/smdm_default_color"
+        android:textColor="@color/ezfb_black"
 
         />
     <TextView
@@ -61,7 +61,7 @@
         android:text="02/05/2017"
         android:textSize="@dimen/stock_textsize_normal"
         android:id="@+id/rec_status_date"
-        android:textColor="@color/smdm_default_color"
+        android:textColor="@color/ezfb_black"
         android:layout_alignParentRight="true"
 
         />

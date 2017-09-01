@@ -96,7 +96,6 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         ReceiverSummaryList = new ArrayList<>();
         gson = new Gson();
         recache = "true";
-        Receiver_checkNetwkstatus = false;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         initialise();
         MainMethod();
@@ -106,8 +105,10 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser) {
-            if (Receiver_checkNetwkstatus) {
+        if(isVisibleToUser)
+        {
+            if (Receiver_checkNetwkstatus)
+            {
                 Toast.makeText(context, "No data found ", Toast.LENGTH_SHORT).show();
 
             }
@@ -145,13 +146,16 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
 
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
+    public void onButtonPressed(Uri uri)
+    {
+        if (mListener != null)
+        {
             mListener.onFragmentInteraction(uri);
         }
     }
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
         this.context = context;
     }
@@ -241,7 +245,8 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Receiver_checkNetwkstatus= true;
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                Receiver_checkNetwkstatus = true;
                                 return;
 
                             } else if (response.length() == limit) {
@@ -383,7 +388,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             StatusActivity.StatusProcess.setVisibility(View.GONE);
-                            ReceiverAdapter .notifyDataSetChanged();
+                            ReceiverAdapter.notifyDataSetChanged();
                             e.printStackTrace();
                         }
                     }

@@ -86,6 +86,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
+            SenderDetailProcess.setVisibility(View.VISIBLE);
             requestStatusReceiversDetails();
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
@@ -104,6 +105,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                SenderDetailProcess.setVisibility(View.GONE);
+
                                 Toast.makeText(ToBeSenderDetails.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -136,8 +139,12 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             statusSenderDetails = new StatusSenderDetailsAdapter(StatusDetailsList, context,SenderDetailProcess);
                             MakeHashMap(StatusDetailsList);
                             recyclerView.setAdapter(statusSenderDetails);
+                            SenderDetailProcess.setVisibility(View.GONE);
+
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
+                            SenderDetailProcess.setVisibility(View.GONE);
+
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
@@ -149,6 +156,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        SenderDetailProcess.setVisibility(View.GONE);
+
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -190,7 +199,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         storeCode = (TextView) findViewById(R.id.status_detailStoreCode);
         detailStoreDesc = (TextView)findViewById(R.id.detailStoreDesc);
         SenderDetailProcess = (ProgressBar)findViewById(R.id.senderDetailProcess);
-        SenderDetailProcess.setVisibility(View.GONE);
+//        SenderDetailProcess.setVisibility(View.VISIBLE);
         status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
@@ -321,7 +330,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
         if (Reusable_Functions.chkStatus(context))
         {
-            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading....");
+            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading...");
+            SenderDetailProcess.setVisibility(View.VISIBLE);
             requestStatusReceiversSubDetails(Position);
         }
         else

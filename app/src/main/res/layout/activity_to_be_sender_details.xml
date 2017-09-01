@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-                android:background="@color/bg_screen_color"
+    android:background="@color/white"
     tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
 
@@ -12,9 +12,8 @@
         android:id="@+id/linear_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@color/bg_screen_color"
+        android:background="@color/white"
         android:orientation="vertical">
 
 
@@ -29,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_header_height"
                 android:layout_alignParentTop="true"
-                android:background="?attr/colorPrimary"
+                android:background="@color/white"
                 segmentedgroup:contentInsetEnd="0dp"
                 segmentedgroup:contentInsetLeft="0dp"
                 segmentedgroup:contentInsetRight="0dp"
@@ -47,13 +46,13 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="0dp"
-                        android:background="@drawable/button_click_effect">
+                        android:background="@drawable/button_click">
 
                         <Button
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
-                            android:background="@mipmap/common_back_icon"
+                            android:background="@mipmap/ic_arrow_back_black"
                             android:clickable="false" />
 
                     </RelativeLayout>
@@ -66,7 +65,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/status_senderdetails_imageBtnBack"
                         android:text="Details"
-                        android:textColor="@color/divider_salescard1"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="@dimen/smdm_header_title_large" />
 
 
@@ -161,6 +160,7 @@
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/statusDetail_list"
             android:scrollbars="vertical"

@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -84,7 +85,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private String recache;
     private String mParam1;
     private String mParam2;
-
+    private String mc_name , subcategory_name;
     private OnFragmentInteractionListener mListener;
     private Context context;
     private ViewGroup view;
@@ -106,6 +107,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         if (isVisibleToUser) {
             if (checkNetworkFalse) {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "checkNetworkFalse: " );
 
             }
         }
@@ -157,9 +159,12 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position)
+            {
+                subcategory_name = ReceiverSummaryList.get(position).getLevel();
+                mc_name = subcategoryList.get(position).getLevel();
 
-               // new Details().StartActivity(context, ReceiverSummaryList.get(position).getMccodeDesc(), ReceiverSummaryList.get(position).getStkQtyAvl());
+                new Details().StartActivity(context, subcategory_name,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
             }
         }));
 
@@ -168,36 +173,10 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
 
 
-     /*   barChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h) {
-
-               // Log.e("TAG", "dataXtoPx: "+dataXtoPx+" xValue"+xValue+" dataIndex"+datadrawX );
-                final String item = barChart.getXAxis().getValueFormatter().getFormattedValue(e.getX(), barChart.getXAxis());
-                if(!item.equals("")){
-                    selectprodLevel3Desc=item;
-                }
-                Log.e("VAL SELECTED",
-                        "Value: " + e.getY() + ", xIndex: " + e.getX()
-                                + ", DataSet index: " + h.getDataSetIndex());
-              //  Log.e("TAG", "onValueSelected: " + selectprodLevel3Desc);
-               // Reusable_Functions.sDialog(context, "Loading.......");
-               // requestTransferRequestSubcategory(selectprodLevel3Desc);
-
-            }
-
-            @Override
-            public void onNothingSelected() {
-                Log.e("TAG", "onNothingSelected: ");
-
-
-            }
-        });*/
-
 
     private void MainMethod() {
         NetworkProcess();
-        Reusable_Functions.sDialog(context, "Loading.......");
+        Reusable_Functions.sDialog(context, "Loading...");
         requestTransferRequestsummary();
 
     }
@@ -220,6 +199,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    Log.e("TAG", "requestTransferRequestsummary: " );
+
                                     return;
 
                                 } else if (response.length() == limit) {
@@ -295,7 +276,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
     private void requestTransferRequestSubcategory(String prodLevel3Desc) {
         if (Reusable_Functions.chkStatus(context)) {
-            level=2;  // 2 for sub category.
+            level=2;  // 2 for MC
             subcategoryList=new ArrayList<>();
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level
@@ -308,11 +289,14 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                         @Override
                         public void onResponse(JSONArray response) {
                             Log.d("TAG", "onResponse: " + response);
-                            try {
+                            try
+                            {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    Log.e("TAG", "requestTransferRequestSubcategory: " );
+
                                     progressBar.setVisibility(View.GONE);
                                     return;
 
@@ -327,7 +311,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     count++;
                                     requestTransferRequestsummary();
 
-                                } else if (response.length() < limit) {
+                                }
+                                else if (response.length() < limit) {
                                     for (int i = 0; i < response.length(); i++) {
                                         toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                         subcategoryList.add(toDo_Modal);
@@ -547,10 +532,6 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     @Override
     public void onChartTranslate(MotionEvent me, float dX, float dY) {
     }
-
-
-
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
