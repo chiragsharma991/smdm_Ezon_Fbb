@@ -73,6 +73,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
+    private String TAG="StockPullFragment";
     private String bearertoken;
     private ToDo_Modal toDo_Modal;
     private int count = 0;
@@ -169,6 +170,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         }));
 
         barChart.setOnChartGestureListener(this);
+
     }
 
 
@@ -497,40 +499,57 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     }
     @Override
     public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+       // Log.e(TAG, "onChartGestureStart: ---" );
     }
     @Override
     public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+        //Log.e(TAG, "onChartGestureEnd: ---" );
+
     }
     @Override
     public void onChartLongPressed(MotionEvent me) {
+       // Log.e(TAG, "onChartLongPressed: ---" );
+
     }
     @Override
     public void onChartDoubleTapped(MotionEvent me) {
+       // Log.e(TAG, "onChartDoubleTapped: ---" );
+
     }
     @Override
     public void onChartSingleTapped(MotionEvent me) {
+        Log.e(TAG, "onChartSingleTapped: ---" );
+
         float tappedX = me.getX();
         float tappedY = me.getY();
         MPPointD point = barChart.getTransformer(YAxis.AxisDependency.LEFT).getValuesByTouchPoint(tappedX, tappedY);
-        Log.e("onChartSingleTapped", "tapped at: " + (int)point.x + "," + (int)point.y);
-        String selectprodLevel3Desc=mapValues.get((int)point.x);
-        Log.e("TAG", "onChartSingleTapped: Values "+selectprodLevel3Desc );
-        // @parms: dublicateSelectprodLevel3Desc is stands for cancel recall Api.
-        if(!dublicateSelectprodLevel3Desc.equals(selectprodLevel3Desc)) {
-            progressBar.setVisibility(View.VISIBLE);
-            requestTransferRequestSubcategory(selectprodLevel3Desc);
-            dublicateSelectprodLevel3Desc=selectprodLevel3Desc;
+        Log.e(TAG, "tapped at: " + point.x + "," + point.y);
+        if((int)point.x > 0 && (int)point.y > 0) {
+            String selectprodLevel3Desc = mapValues.get((int) point.x);
+            Log.e("TAG", "onChartSingleTapped: Values " + selectprodLevel3Desc);
+            // @parms: dublicateSelectprodLevel3Desc is stands for cancel recall Api.
+            if (!dublicateSelectprodLevel3Desc.equals(selectprodLevel3Desc)) {
+                progressBar.setVisibility(View.VISIBLE);
+                requestTransferRequestSubcategory(selectprodLevel3Desc);
+                dublicateSelectprodLevel3Desc = selectprodLevel3Desc;
+            }
         }
 
     }
     @Override
     public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+      //  Log.e(TAG, "onChartFling: ---" );
+
     }
     @Override
     public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+       // Log.e(TAG, "onChartScale: ---" );
+
     }
     @Override
     public void onChartTranslate(MotionEvent me, float dX, float dY) {
+      //  Log.e(TAG, "onChartTranslate: ---" );
+
     }
 
     public interface OnFragmentInteractionListener {
