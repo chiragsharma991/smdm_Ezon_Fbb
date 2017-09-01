@@ -252,15 +252,15 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         loc_listDataHeader.add("Store");
         if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
             prod_listDataHeader.add("Department");
-            prod_listDataHeader.add("Category");
+            prod_listDataHeader.add("Subdept");
             prod_listDataHeader.add("Class");
-            prod_listDataHeader.add("Brand");
+            prod_listDataHeader.add("Subclass");
         } else {
             prod_listDataHeader.add("Department");
-            prod_listDataHeader.add("Category");
+            prod_listDataHeader.add("Subdept");
             prod_listDataHeader.add("Class");
-            prod_listDataHeader.add("Brand");
-            prod_listDataHeader.add("Brand Class");
+            prod_listDataHeader.add("Subclass");
+            prod_listDataHeader.add("MC");
         }
 
         if (Reusable_Functions.chkStatus(EzoneSalesFilter.this)) {

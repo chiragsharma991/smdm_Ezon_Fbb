@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -141,6 +142,8 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
@@ -191,6 +194,8 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
@@ -257,6 +262,8 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                             dialogBuilder.setView(dialogView);
 
                             final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                             final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                             final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                             if(!remarks_text.equals("")){
@@ -306,6 +313,8 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                         dialogBuilder.setView(dialogView);
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                         final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                         if(!remarks_text.equals("")){

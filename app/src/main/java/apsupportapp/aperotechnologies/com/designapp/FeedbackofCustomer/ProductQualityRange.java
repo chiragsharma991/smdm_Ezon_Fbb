@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -156,6 +157,8 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
@@ -206,6 +209,8 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
@@ -272,6 +277,8 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
                             dialogBuilder.setView(dialogView);
 
                             final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                             final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                             final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                             if(!remarks_text.equals("")){
@@ -321,6 +328,8 @@ public class ProductQualityRange extends AppCompatActivity implements View.OnCli
                         dialogBuilder.setView(dialogView);
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                         final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                         if(!remarks_text.equals("")){
