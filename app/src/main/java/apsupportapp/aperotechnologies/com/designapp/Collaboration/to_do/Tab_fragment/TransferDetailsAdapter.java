@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fra
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.util.Pair;
@@ -17,6 +18,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cipherlab.barcode.ReaderManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,9 +46,9 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public OnScanBarcode onBarcodeScan;
     private Set<Pair<Integer, Integer>> CheckedItems ;
     String barcode,checkStr;
-    private static final String ACTION_SOFTSCANTRIGGER = "com.motorolasolutions.emdk.datawedge.api.ACTION_SOFTSCANTRIGGER";
-    private static final String EXTRA_PARAM = "com.motorolasolutions.emdk.datawedge.api.EXTRA_PARAMETER";
-    private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
+    private ReaderManager mReaderManager;
+    private IntentFilter filter;
+
 
     public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> sender_detailsList, Context context, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty, HashMap<Integer, ArrayList<Integer>> subchildCount, ProgressBar transferDetailProcess, HashMap<Integer, ArrayList<Integer>> headerScancount, TransferRequest_Details transferRequest_detailsClass, HashSet<Pair<Integer, Integer>> checkedItems)
     {
@@ -107,68 +111,15 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     @Override
                     public void onClick(View view) {
 
-                            if (isAMobileModel())
-                            {
+                            if (isAMobileModel()) {
 
-                            Intent intent_barcode = new Intent();
-                            intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
-                            intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
-                            context.sendBroadcast(intent_barcode);
-                            ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
-                            barcode = " ";
-                            android.os.Handler h = new android.os.Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
 
-                                    Intent i1 =((Activity) context).getIntent();
-                                    barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
-                                    if(!barcode.equals(" "))
-                                    {
-                                        Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                    }
-                                    else
-                                    {
-                                        View view=((Activity)context).findViewById(android.R.id.content);
-                                        Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
-                                    }
-                                }
-                            }, 1500);
 
                         } else if (!isAMobileModel()) {
 
                             onBarcodeScan.onScan(view, position, TransferDetailsAdapter.this);
                         }
 
-                        if (isAMobileModel()) {
-
-                            Intent intent_barcode = new Intent();
-                            intent_barcode.setAction(ACTION_SOFTSCANTRIGGER);
-                            intent_barcode.putExtra(EXTRA_PARAM, DWAPI_TOGGLE_SCANNING);
-                            context.sendBroadcast(intent_barcode);
-                            ((TransferDetailsAdapter.Holder)holder).et_trBarcode.setText(" ");
-                            barcode = " ";
-                            android.os.Handler h = new android.os.Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run()
-                                {
-                                    Intent i1 =((Activity) context).getIntent();
-                                    barcode =   ((TransferDetailsAdapter.Holder)holder).et_trBarcode.getText().toString();
-                                    if(!barcode.equals(" "))
-                                    {
-                                        Toast.makeText(context, "Barcode is : " + barcode, Toast.LENGTH_SHORT).show();
-                                    }
-                                    else
-                                    {
-                                        View view=((Activity)context).findViewById(android.R.id.content);
-                                        Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
-                                    }
-                                }
-                            }, 1500);
-
-                        } else if (!isAMobileModel())
-                        {
-                           onBarcodeScan.onScan(view,position, TransferDetailsAdapter.this);
-                        }
                     }
                 });
 

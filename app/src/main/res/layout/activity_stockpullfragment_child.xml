@@ -50,7 +50,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:textSize="@dimen/collaboration_stock_title"
-                        android:textColor="@color/bg_store_code_text"
+                        android:textColor="@color/ezfb_black"
                         android:text="2004-Knighthood Shift"
                         />
 
@@ -107,7 +107,7 @@
                             android:text="@string/short_qty"
                             android:gravity="left"
                             android:textSize="@dimen/collaboration_stock_text"
-                            android:textColor="@color/txt_color"
+                            android:textColor="@color/ezfbb_black"
 
                             />
 
@@ -146,7 +146,7 @@
                                 android:text="@string/avl_qty"
                                 android:gravity="center"
                                 android:textSize="@dimen/collaboration_stock_text"
-                                android:textColor="@color/txt_color"
+                                android:textColor="@color/ezfbb_black"
 
                                 />
 
@@ -158,7 +158,7 @@
                                 android:layout_marginTop="7dp"
                                 android:textSize="@dimen/collaboration_stock_title_xlarge"
                                 android:singleLine="true"
-                                android:textColor="@color/text_sales"
+                                android:textColor="@color/ezfb_black"
                                 />
 
 
@@ -192,7 +192,7 @@
                                 android:text="@string/coll_options"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:singleLine="true"
-                                android:textColor="@color/txt_color"
+                                android:textColor="@color/ezfbb_black"
 
                                 />
 
@@ -202,7 +202,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="00"
                                 android:layout_marginTop="7dp"
-                                android:textColor="@color/text_sales"
+                                android:textColor="@color/ezfb_black"
                                 android:textSize="@dimen/collaboration_stock_title_xlarge"
                                 android:singleLine="true"
                                 />
@@ -245,7 +245,7 @@
                             android:layout_height="wrap_content"
                             android:text="SOH : "
                             android:textSize="@dimen/collaboration_stock_text"
-                            android:textColor="@color/bg_store_code_text"
+                            android:textColor="@color/ezfbb_black"
                             />
 
                         <TextView
@@ -255,7 +255,7 @@
                             android:text="0"
                             android:textSize="@dimen/collaboration_stock_text"
                             android:singleLine="true"
-                            android:textColor="@color/txt_color"
+                            android:textColor="@color/ezfb_black"
                             />
 
 
@@ -284,7 +284,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="GIT : "
                                 android:textSize="@dimen/collaboration_stock_text"
-                                android:textColor="@color/bg_store_code_text"
+                                android:textColor="@color/ezfbb_black"
                                 />
 
                             <TextView
@@ -294,7 +294,7 @@
                                 android:text="0"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:singleLine="true"
-                                android:textColor="@color/txt_color"
+                                android:textColor="@color/ezfb_black"
                                 />
 
 
@@ -330,7 +330,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:text="FWC : "
                                 android:textSize="@dimen/collaboration_stock_text"
-                                android:textColor="@color/bg_store_code_text"
+                                android:textColor="@color/ezfbb_black"
                                 />
 
                             <TextView
@@ -341,7 +341,7 @@
                                 android:text="0"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:singleLine="true"
-                                android:textColor="@color/txt_color"
+                                android:textColor="@color/ezfb_black"
                                 />
 
                         </LinearLayout>

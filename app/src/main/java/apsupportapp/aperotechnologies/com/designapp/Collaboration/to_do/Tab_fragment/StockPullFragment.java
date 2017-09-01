@@ -107,6 +107,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         if (isVisibleToUser) {
             if (checkNetworkFalse) {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "checkNetworkFalse: " );
 
             }
         }
@@ -198,6 +199,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    Log.e("TAG", "requestTransferRequestsummary: " );
+
                                     return;
 
                                 } else if (response.length() == limit) {
@@ -292,6 +295,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     Reusable_Functions.hDialog();
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    Log.e("TAG", "requestTransferRequestSubcategory: " );
+
                                     progressBar.setVisibility(View.GONE);
                                     return;
 

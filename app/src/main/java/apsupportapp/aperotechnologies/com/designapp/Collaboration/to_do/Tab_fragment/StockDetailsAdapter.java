@@ -198,8 +198,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             JSONObject obj = new JSONObject();
                             obj.put("option",list.get(i).getLevel());
                             obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
-                            obj.put("prodLevel6Code",prodLevel3Desc);//MCCodeDesc
-                            obj.put("prodLevel3Code",MCCodeDesc);//prodLevel3Desc
+                            obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
+                            obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
                             obj.put("deviceId",deviceId);
                             jsonarray.put(count,obj);
                             count++;
@@ -213,8 +213,9 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                        obj.put("option",list.get(i).getLevel());
 //                        obj.put("prodLevel6Code",MCCodeDesc);
                         obj.put("option",list.get(i).getLevel());
-                        obj.put("prodLevel6Code",prodLevel3Desc);
-                        obj.put("prodLevel3Code",MCCodeDesc);
+//                        obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
+                        obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
+                        obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
                         obj.put("deviceId",deviceId);
                         jsonarray.put(count,obj);
                         count++;

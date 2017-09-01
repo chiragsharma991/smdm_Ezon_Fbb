@@ -61,7 +61,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private int offsetvalue = 0;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private boolean Sender_checkNetwkStatus = false;
+    private boolean checkNetworkFalse = false;
     private String bearertoken;
     private RequestQueue queue;
     private StatusModel statusModel;
@@ -102,7 +102,6 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         SenderSummaryList = new ArrayList<>();
         gson = new Gson();
         recache = "true";
-        Sender_checkNetwkStatus = false;
         initialise();
         MainMethod();
 
@@ -114,9 +113,8 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            if (Sender_checkNetwkStatus)
-            {
-                Toast.makeText(context, "No data found ", Toast.LENGTH_SHORT).show();
+            if (checkNetworkFalse) {
+                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -146,8 +144,10 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Sender_checkNetwkStatus = true;
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                checkNetworkFalse = true;
                                 return;
+
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {

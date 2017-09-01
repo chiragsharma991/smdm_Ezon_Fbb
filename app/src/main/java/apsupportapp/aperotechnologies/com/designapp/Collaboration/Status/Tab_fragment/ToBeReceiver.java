@@ -96,7 +96,6 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         ReceiverSummaryList = new ArrayList<>();
         gson = new Gson();
         recache = "true";
-        Receiver_checkNetwkstatus = false;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         initialise();
         MainMethod();
@@ -246,7 +245,8 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Receiver_checkNetwkstatus= true;
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                Receiver_checkNetwkstatus = true;
                                 return;
 
                             } else if (response.length() == limit) {

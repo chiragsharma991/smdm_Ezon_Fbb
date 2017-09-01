@@ -141,7 +141,7 @@ public class TransferRequestFragment extends Fragment {
     private void MainMethod()
     {
         NetworkProcess();
-        Reusable_Functions.sDialog(context, "Loading.......");
+        Reusable_Functions.sDialog(context, "Loading...");
         requestTransferRequestsummary();
 
     }
@@ -160,6 +160,7 @@ public class TransferRequestFragment extends Fragment {
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
+//                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     checkNetworkFalse=true;
                                     return;
                                 }
