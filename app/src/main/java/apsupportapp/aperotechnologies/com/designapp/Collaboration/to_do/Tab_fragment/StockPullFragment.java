@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -66,7 +68,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
 
 
-public class StockPullFragment extends Fragment implements OnChartGestureListener {
+public class StockPullFragment extends Fragment implements OnChartGestureListener  {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -95,7 +97,11 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private String selectprodLevel3Desc="";
     private HashMap<Integer, String> mapValues;
     private String dublicateSelectprodLevel3Desc="";
+    private boolean[] selectMc;
     private RelativeLayout progressBar;
+    private Button stock_fragmentSubmit;
+    private StockPullAdapter stockPullAdapter;
+
 
     public StockPullFragment() {
         // Required empty public constructor
@@ -155,28 +161,39 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private void initialise() {
         barChart = (BarChart) view.findViewById(R.id.bar_chart);
         recyclerView = (RecyclerView) view.findViewById(R.id.stockPull_list);
+        stock_fragmentSubmit = (Button)view.findViewById(R.id.stock_fragmentSubmit);
+        stock_fragmentSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                onSubmit();
+            }
+        });
         progressBar = (RelativeLayout) view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+      /*  recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position)
             {
                 subcategory_name = ReceiverSummaryList.get(position).getLevel();
                 mc_name = subcategoryList.get(position).getLevel();
-
+                Log.e( "onItemClick: ",""+subcategory_name + mc_name );
                 new Details().StartActivity(context, subcategory_name,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
             }
-        }));
+        }));*/
 
         barChart.setOnChartGestureListener(this);
+    }
+
+    private void onSubmit()
+    {
 
     }
 
 
-
-
-    private void MainMethod() {
+    private void MainMethod()
+    {
         NetworkProcess();
         Reusable_Functions.sDialog(context, "Loading...");
         requestTransferRequestsummary();
@@ -185,16 +202,20 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
 
 
-    private void requestTransferRequestsummary() {
-        if (Reusable_Functions.chkStatus(context)) {
+    private void requestTransferRequestsummary()
+    {
+        if (Reusable_Functions.chkStatus(context))
+        {
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=1
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
             Log.e("TAG", "requestTransferRequestsummary: " + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
 
-                    new Response.Listener<JSONArray>() {
+                    new Response.Listener<JSONArray>()
+                    {
                         @Override
-                        public void onResponse(JSONArray response) {
+                        public void onResponse(JSONArray response)
+                        {
                             Log.d("TAG", "onResponse: " + response);
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -234,17 +255,18 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                 // stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
                                 // recyclerView.setAdapter(stockPullAdapter);
                                 Reusable_Functions.hDialog();
-
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
-
                                 e.printStackTrace();
                             }
                         }
                     },
-                    new Response.ErrorListener() {
+                    new Response.ErrorListener()
+                    {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
@@ -253,7 +275,6 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                             error.printStackTrace();
                         }
                     }
-
             ) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -267,16 +288,17 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-
             Reusable_Functions.hDialog();
         }
 
     }
 
-
-    private void requestTransferRequestSubcategory(String prodLevel3Desc) {
+    private void requestTransferRequestSubcategory(String prodLevel3Desc)
+    {
         if (Reusable_Functions.chkStatus(context)) {
             level=2;  // 2 for MC
             subcategoryList=new ArrayList<>();
@@ -287,9 +309,11 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             Log.e("TAG", "requestTransferRequestsummary: " + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
 
-                    new Response.Listener<JSONArray>() {
+                    new Response.Listener<JSONArray>()
+                    {
                         @Override
-                        public void onResponse(JSONArray response) {
+                        public void onResponse(JSONArray response)
+                        {
                             Log.d("TAG", "onResponse: " + response);
                             try
                             {
@@ -324,18 +348,31 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     offsetvalue = 0;
 
                                 }
+                                selectMc=new boolean[subcategoryList.size()];
+                                for (int i = 0; i <subcategoryList.size() ; i++) {
+                                    selectMc[i]=false;
+                                }
                                  recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                  recyclerView.setOnFlingListener(null);
-                                 StockPullAdapter stockPullAdapter;
-                                 stockPullAdapter = new StockPullAdapter(subcategoryList,getActivity());
+                                 stockPullAdapter = new StockPullAdapter(subcategoryList,selectMc, getActivity(), new StockPullAdapter.OnItemClickListener() {
+                                     @Override
+                                     public void onItemClick(View view, int position) {
+                                         Log.e(TAG, "onItemClick: ----"+position );
+                                         subcategory_name = ReceiverSummaryList.get(position).getLevel();
+                                         mc_name = subcategoryList.get(position).getLevel();
+                                         Log.e( "onItemClick: ",""+subcategory_name + mc_name );
+                                         new Details().StartActivity(context, subcategory_name,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
+
+                                     }
+                                 });
                                  recyclerView.setAdapter(stockPullAdapter);
                                  Reusable_Functions.hDialog();
                                  progressBar.setVisibility(View.GONE);
 
-
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
                                 progressBar.setVisibility(View.GONE);
+                                Log.e(TAG, "onResponse: error-- "+e.getMessage() );
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
 
@@ -354,7 +391,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                         }
                     }
 
-            ) {
+            )
+            {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
@@ -414,29 +452,28 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                 List<BarEntry> yVals2 = new ArrayList<BarEntry>();
                 String[] labels = new String[receiverSummaryList.size()];
 
-
-
-
-                for (int i = 0; i <receiverSummaryList.size(); i++) {
+                for (int i = 0; i <receiverSummaryList.size(); i++)
+                {
                     yVals1.add(new BarEntry(i, (float) receiverSummaryList.get(i).getStkOnhandQtyRequested()));
                     yVals2.add(new BarEntry(i, (float) receiverSummaryList.get(i).getStkQtyAvl()));
                     labels[i] = receiverSummaryList.get(i).getLevel();
-                    mapValues.put(i,labels[i]);
-                    Log.e("TAG", "labels: " + labels[i]);
+                    mapValues.put(i,labels[i].trim());
+                    Log.e("TAG", "labels: " + labels[i].trim());
 
                 }
-
-
                 BarDataSet set1, set2;
 
-                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
+                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0)
+                {
                     set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
                     set2 = (BarDataSet) barChart.getData().getDataSetByIndex(1);
                     set1.setValues(yVals1);
                     set2.setValues(yVals2);
                     barChart.getData().notifyDataChanged();
                     barChart.notifyDataSetChanged();
-                } else {
+                }
+                else
+                {
                     // create 2 datasets with different types
                     set1 = new BarDataSet(yVals1, "Short Qty");
                     set1.setColor(Color.parseColor("#20b5d3"));
@@ -455,18 +492,25 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                 barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
                 barChart.getBarData().setBarWidth(barWidth);
                 barChart.getXAxis().setAxisMinValue(0);
-                barChart.getXAxis().setAxisMaximum(receiverSummaryList.size());
+                barChart.setVisibleXRangeMaximum(2); // allow 20 values to be displayed at once on the x-axis, not more
+                barChart.moveViewToX(10);
+                //barChart.getXAxis().setAxisMaximum(receiverSummaryList.size());
                 barChart.groupBars(0, groupSpace, barSpace);
-                barChart.setFitBars(true);
+                barChart.setPinchZoom(true);
+                barChart.setScaleEnabled(true);
+                // barChart.setFitBars(true);
                 barChart.invalidate();
                 barChart.animateXY(3000, 3000);
-
-            } else {
+            }
+            else
+            {
                 barChart.clear();
 
             }
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             barChart.clear();
             Log.e("TAG", "multidatasetBarGraph: catch error" + e.getMessage());
 
@@ -499,22 +543,15 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     }
     @Override
     public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-       // Log.e(TAG, "onChartGestureStart: ---" );
     }
     @Override
     public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-        //Log.e(TAG, "onChartGestureEnd: ---" );
-
     }
     @Override
     public void onChartLongPressed(MotionEvent me) {
-       // Log.e(TAG, "onChartLongPressed: ---" );
-
     }
     @Override
     public void onChartDoubleTapped(MotionEvent me) {
-       // Log.e(TAG, "onChartDoubleTapped: ---" );
-
     }
     @Override
     public void onChartSingleTapped(MotionEvent me) {
@@ -538,19 +575,15 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     }
     @Override
     public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-      //  Log.e(TAG, "onChartFling: ---" );
-
     }
     @Override
     public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-       // Log.e(TAG, "onChartScale: ---" );
-
     }
     @Override
     public void onChartTranslate(MotionEvent me, float dX, float dY) {
-      //  Log.e(TAG, "onChartTranslate: ---" );
-
     }
+
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

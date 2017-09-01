@@ -82,7 +82,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             //Header check is enable when view is open
                             HeadercheckList[position]=true;
                             visibleItems[position]=true;
-
                             notifyItemChanged(position);
                         }else
                         {

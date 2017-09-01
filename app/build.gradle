@@ -30,7 +30,7 @@ android {
     defaultConfig
             {
                 applicationId "apsupportapp.aperotechnologies.com.designapp"
-                minSdkVersion 16
+                minSdkVersion 17
                 targetSdkVersion 25
                 versionCode 100
                 versionName "2.0"

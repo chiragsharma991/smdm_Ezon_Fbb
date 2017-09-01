@@ -253,9 +253,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             notifManager.cancelAll();
             return true;
         } else if (id == R.id.aboutus) {
-//            Intent intent = new Intent(this, AboutUsActivity.class);
-//            startActivity(intent);
-            finish();
+            Intent intent = new Intent(this, AboutUsActivity.class);
+            startActivity(intent);
+//            finish();
             return true;
         }
 
@@ -295,15 +295,12 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             apps = getProduct(4);
             snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-
             apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
             apps = getProduct(6);
             snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
-
             apps = getProduct(7);
             snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
-
             apps = getProduct(8);
             snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
             apps = getProduct(9);
