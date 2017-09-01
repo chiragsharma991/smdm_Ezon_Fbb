@@ -93,7 +93,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Buy One Get One "
                                     android:textColor="@color/ezfb_black"
-                                    android:textSize="12sp" />
+                                    android:textSize="12sp"
+                                    />
 
                             </LinearLayout>
 

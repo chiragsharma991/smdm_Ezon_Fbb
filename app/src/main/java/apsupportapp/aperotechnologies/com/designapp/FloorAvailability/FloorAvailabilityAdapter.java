@@ -130,9 +130,9 @@ public class FloorAvailabilityAdapter extends BaseAdapter
                 }
             }
         });
-        holder.floor_SOH_U.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
-        holder.floor_NoofDays.setText(arrayList.get(position).getNoDaysPassed());
-        holder.floor_ReceiptDate.setText(arrayList.get(position).getFirstReceiptDate());
+       // holder.floor_SOH_U.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
+      //  holder.floor_NoofDays.setText(arrayList.get(position).getNoDaysPassed());
+       // holder.floor_ReceiptDate.setText(arrayList.get(position).getFirstReceiptDate());
         if(!arrayList.get(position).getProdImageURL().equals(""))
         {
             Glide.with(this.context)
