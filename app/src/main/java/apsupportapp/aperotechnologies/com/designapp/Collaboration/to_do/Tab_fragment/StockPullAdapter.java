@@ -6,7 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
@@ -25,8 +27,8 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private final ArrayList<ToDo_Modal> list;
     private static boolean check = false;
 
-
-    public StockPullAdapter(ArrayList<ToDo_Modal> list, Context context) {
+    public StockPullAdapter(ArrayList<ToDo_Modal> list, Context context)
+    {
         this.list = list;
         this.context = context;//
     }
@@ -62,6 +64,16 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                // ((StockPullAdapter.Holder) holder).GIT_Qty.setText("" + Math.round(list.get(position).getStkGitQty()));
                 ((StockPullAdapter.Holder) holder).FWD.setText("" + String.format("%.1f", list.get(position).getFwdWeekCover()));
                 ((StockPullAdapter.Holder) holder).McCodeDescribtion.setText(list.get(position).getLevel());
+                ((StockPullAdapter.Holder) holder).stock_mcCheck.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        if (((CheckBox) v).isChecked())
+                        {
+                          Toast.makeText(context,"clicked",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
             }
         }
@@ -80,9 +92,8 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private static class Holder extends RecyclerView.ViewHolder
     {
-
         TextView TransferStatus, SOH_Requested, QTY_Avi, NumberOfOption, SOH, GIT_Qty, FWD, McCodeDescribtion;
-
+        private CheckBox stock_mcCheck;
         public Holder(View itemView)
         {
             super(itemView);
@@ -94,6 +105,7 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             FWD = (TextView) itemView.findViewById(R.id.stock_fwc);
             McCodeDescribtion = (TextView) itemView.findViewById(R.id.stock_McCodeDesc);
             NumberOfOption = (TextView) itemView.findViewById(R.id.stock_numberOfOption);
+            stock_mcCheck = (CheckBox)itemView.findViewById(R.id. stock_mcCheck);
         }
 
     }

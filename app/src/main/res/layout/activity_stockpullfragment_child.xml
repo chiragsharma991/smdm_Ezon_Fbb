@@ -40,12 +40,20 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     >
+                    <CheckBox
+                        android:layout_alignBaseline="@+id/stock_McCodeDesc"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/stock_mcCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
 
                     <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/stock_mcCheck"
                         android:id="@+id/stock_McCodeDesc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:textStyle="bold"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"

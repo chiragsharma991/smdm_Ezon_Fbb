@@ -155,12 +155,12 @@
             android:id="@+id/stock_detailSubmit"
             android:background="@color/ezfb_Red"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:textAllCaps="false"
             android:layout_alignParentBottom="true"
             android:layout_margin="4dp"
             android:text="@string/submit"
-            android:textSize="@dimen/smdm_header_title_large"
+            android:textSize="18sp"
             android:textColor="@color/white"/>
 
 </RelativeLayout>

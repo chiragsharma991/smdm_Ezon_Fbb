@@ -241,7 +241,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             }
                             tr_recyclerView.setLayoutManager(new LinearLayoutManager(tr_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             tr_recyclerView.setOnFlingListener(null);
-
                             MakeChildScanList(Sender_DetailsList);   //child all list
                             MakeSubChildScanCount(Sender_DetailsList);  //only child scan count
                             MakeHeaderScanCount(Sender_DetailsList);  // Top Header scan count
