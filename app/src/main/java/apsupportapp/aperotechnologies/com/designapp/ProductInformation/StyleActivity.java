@@ -312,6 +312,8 @@ public class StyleActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void ExeSampleCode()
     {
 
@@ -819,4 +821,6 @@ public class StyleActivity extends AppCompatActivity {
 //            mReaderManager.Release();
 //        }
     }
+
+
 }

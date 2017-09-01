@@ -38,11 +38,25 @@
                 />
 
 
+            <android.support.v4.view.ViewPager
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/text_profile_video"
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="225dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+
+
+
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_horizentalView"
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:clipToPadding="false"
                 />
 

@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -81,6 +82,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
     private RequestQueue queue;
     private String remark, SelectedStoreCode;
     String remarks_text;
+    int max_char;
     private TextView incorrect_phone, incorrect_remark, storedescription;
     private feedbackInterface mCallback;
     private ScrollView scrollView;
@@ -181,6 +183,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
@@ -230,6 +234,28 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
+//                edt_remark_dialog.addTextChangedListener(new TextWatcher() {
+//                    @Override
+//                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                        if(count == 10){
+//                            Toast.makeText(context,"limit exceeds",Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void afterTextChanged(Editable s) {
+//
+//                    }
+//                });
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
@@ -295,6 +321,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                             dialogBuilder.setView(dialogView);
 
                             final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                             final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                             final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                             if(!remarks_text.equals("")){
@@ -343,6 +371,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                         dialogBuilder.setView(dialogView);
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                         final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                         if(!remarks_text.equals("")){
