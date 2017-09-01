@@ -35,6 +35,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -52,6 +53,8 @@ import com.github.mikephil.charting.utils.MPPointD;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,8 +62,10 @@ import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.ToDo_Modal;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.MyMarkerView;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
@@ -75,7 +80,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private String bearertoken;
+    private String bearertoken,device_Id;
     private ToDo_Modal toDo_Modal;
     private int count = 0;
     private int limit = 100;
@@ -87,7 +92,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private String recache;
     private String mParam1;
     private String mParam2;
-    private String mc_name , subcategory_name;
+    private String mc_name , subcategory_name,selected_subCategory;
     private OnFragmentInteractionListener mListener;
     private Context context;
     private ViewGroup view;
@@ -98,6 +103,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private String dublicateSelectprodLevel3Desc="";
     private RelativeLayout progressBar;
     private Button stock_fragmentSubmit;
+    StockPullAdapter stockPullAdapter;
 
 
     public StockPullFragment() {
@@ -156,6 +162,16 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     }
 
     private void initialise() {
+        gson = new Gson();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        userId = sharedPreferences.getString("userId", "");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
+        device_Id = sharedPreferences.getString("device_id","");
+        Log.e( "initialise: ", ""+device_Id);
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        Network network = new BasicNetwork(new HurlStack());
+        queue = new RequestQueue(cache, network);
+        queue.start();
         barChart = (BarChart) view.findViewById(R.id.bar_chart);
         recyclerView = (RecyclerView) view.findViewById(R.id.stockPull_list);
         stock_fragmentSubmit = (Button)view.findViewById(R.id.stock_fragmentSubmit);
@@ -173,7 +189,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             @Override
             public void onItemClick(View view, int position)
             {
-                subcategory_name = ReceiverSummaryList.get(position).getLevel();
+                subcategory_name = selected_subCategory;
                 mc_name = subcategoryList.get(position).getLevel();
                 Log.e( "onItemClick: ",""+subcategory_name + mc_name );
                 new Details().StartActivity(context, subcategory_name,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
@@ -185,13 +201,30 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
     private void onSubmit()
     {
+        if (!(subcategoryList.size() == 0))
+        {
+            Log.e( "onSubmit: ", ""+selected_subCategory + "\n"+To_Do.deviceId);
+            JSONArray jsonArray = new JSONArray();
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("option","");
+                obj.put("prodAttribute4","");
+                obj.put("prodLevel6Code",subcategoryList.get(0).getLevel());//MCCodeDesc
+                obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
+                obj.put("deviceId",device_Id);
+                jsonArray.put(obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
+                requestReceiverSubmitAPI(context, jsonArray);
+
+        }
     }
 
 
     private void MainMethod()
     {
-        NetworkProcess();
         Reusable_Functions.sDialog(context, "Loading...");
         requestTransferRequestsummary();
 
@@ -397,6 +430,74 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
     }
 
+
+    private void requestReceiverSubmitAPI(final Context mcontext, JSONArray object)
+    {
+        if (Reusable_Functions.chkStatus(mcontext)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(mcontext, "Submitting data…");
+
+            String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId;//+"?recache="+recache
+            Log.e("requestReceiverSubmitAPI: ",""+url + "\t" + object.toString() );
+            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response == null || response.equals("")) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(mcontext, "Sending data failed...", Toast.LENGTH_LONG).show();
+
+                                } else {
+                                    String result = response.getString("status");
+                                    Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(context, SnapDashboardActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    startActivity(intent);
+                                    Reusable_Functions.hDialog();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Reusable_Functions.hDialog();
+
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
+                            error.printStackTrace();
+                        }
+                    }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", bearertoken);
+                    return params;
+                }
+
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+            };
+            int socketTimeout = 60000;//5 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+
+        } else {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+
     public void multidatasetBarGraph(ArrayList<ToDo_Modal> receiverSummaryList) {
 
         try {
@@ -410,6 +511,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                 barChart.getDescription().setEnabled(false);
 
                 XAxis xl = barChart.getXAxis();
+
                 xl.setGranularity(1f);
                 xl.setCenterAxisLabels(true);
                 xl.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -441,8 +543,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                     yVals1.add(new BarEntry(i, (float) receiverSummaryList.get(i).getStkOnhandQtyRequested()));
                     yVals2.add(new BarEntry(i, (float) receiverSummaryList.get(i).getStkQtyAvl()));
                     labels[i] = receiverSummaryList.get(i).getLevel();
-                    mapValues.put(i,labels[i].trim());
-                    Log.e("TAG", "labels: " + labels[i].trim());
+                    mapValues.put(i,labels[i]);
+                    Log.e("TAG", "labels: " + labels[i]);
 
                 }
                 BarDataSet set1, set2;
@@ -473,18 +575,21 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                 barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
                 barChart.getBarData().setBarWidth(barWidth);
                 barChart.getXAxis().setAxisMinValue(0);
-                barChart.setVisibleXRangeMaximum(2); // allow 20 values to be displayed at once on the x-axis, not more
+                barChart.setVisibleXRange(0,2);
+                xl.setAxisMaximum(receiverSummaryList.size());
                 barChart.moveViewToX(10);
                 //barChart.getXAxis().setAxisMaximum(receiverSummaryList.size());
                 barChart.groupBars(0, groupSpace, barSpace);
+                barChart.setTouchEnabled(true);
                 barChart.setPinchZoom(true);
                 barChart.setScaleEnabled(true);
-                // barChart.setFitBars(true);
+                barChart.setFitBars(true);
                 barChart.invalidate();
                 barChart.animateXY(3000, 3000);
             }
             else
             {
+
                 barChart.clear();
 
             }
@@ -501,14 +606,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
     private void NetworkProcess()
     {
-        gson = new Gson();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        userId = sharedPreferences.getString("userId", "");
-        bearertoken = sharedPreferences.getString("bearerToken", "");
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        Network network = new BasicNetwork(new HurlStack());
-        queue = new RequestQueue(cache, network);
-        queue.start();
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -546,6 +644,9 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         MPPointD point = barChart.getTransformer(YAxis.AxisDependency.LEFT).getValuesByTouchPoint(tappedX, tappedY);
         Log.e("onChartSingleTapped", "tapped at: " + (int)point.x + "," + (int)point.y);
         String selectprodLevel3Desc=mapValues.get((int)point.x);
+        selected_subCategory = selectprodLevel3Desc;
+        Log.e("onChartSingleTapped: ",""+selected_subCategory );
+
         Log.e("TAG", "onChartSingleTapped: Values "+selectprodLevel3Desc );
         // @parms: dublicateSelectprodLevel3Desc is stands for cancel recall Api.
         if(!dublicateSelectprodLevel3Desc.equals(selectprodLevel3Desc))
