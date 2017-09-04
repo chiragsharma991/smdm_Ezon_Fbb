@@ -175,13 +175,23 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         queue = new RequestQueue(cache, network);
         queue.start();
         barChart = (BarChart) view.findViewById(R.id.bar_chart);
+        subcategoryList=new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.stockPull_list);
         stock_fragmentSubmit = (Button)view.findViewById(R.id.stock_fragmentSubmit);
         stock_fragmentSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                onSubmit();
+                if(subcategoryList.size() == 0)
+                {
+                    Toast.makeText(context,"No data for submission",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Log.e(TAG, "onClick: "+"clicked event");
+                    onSubmit();
+
+                }
             }
         });
         progressBar = (RelativeLayout) view.findViewById(R.id.progressBar);
@@ -195,30 +205,45 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     {
         if (!(subcategoryList.size() == 0))
         {
-            Log.e( "onSubmit: ", ""+selected_subCategory + "\n"+To_Do.deviceId);
+           // Log.e( "onSubmit: ", ""+selected_subCategory + "\n"+To_Do.deviceId);
             JSONArray jsonArray = new JSONArray();
             try {
-                for(int i = 0 ; i <selectMc.length; i++)
-                {
-                    if(selectMc[i]){
-                        JSONObject obj = new JSONObject();
+
+                    for(int i = 0 ; i <selectMc.length; i++)
+                    {
+                        if(selectMc[i]) {
+                            JSONObject obj = new JSONObject();
 //                        obj.put("option","");
 //                        obj.put("prodAttribute4","");
-                        obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
-                        obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
-                        obj.put("deviceId",device_Id);
-                        jsonArray.put(obj);
+                            obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
+                            obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
+                            obj.put("deviceId",device_Id);
+                            jsonArray.put(obj);
+                        }
                     }
-
+                if(jsonArray.length() != 0){
+                    requestReceiverSubmitAPI(context, jsonArray);
                 }
+                else{
+                    Toast.makeText(context, "Please select at least one option.", Toast.LENGTH_SHORT).show();
+                }
+
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            requestReceiverSubmitAPI(context, jsonArray);
 
         }
+    }
+
+    private  boolean allfalse (boolean[] values) {
+        for (boolean value : values) {
+            if (!value)
+                return false;
+        }
+        return true;
     }
 
 
@@ -330,7 +355,6 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     {
         if (Reusable_Functions.chkStatus(context)) {
             level=2;  // 2 for MC
-            subcategoryList=new ArrayList<>();
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level
                     +"&prodLevel3Desc="+prodLevel3Desc.replace("%", "%25").replace(" ", "%20").replace("&", "%26")+"&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
@@ -387,6 +411,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     @Override
                                     public void onItemClick(View view, int position) {
                                         Log.e(TAG, "onItemClick: ----"+position );
+                                        subcategory_name = ReceiverSummaryList.get(position).getLevel();
                                         mc_name = subcategoryList.get(position).getLevel();
                                         Log.e( "onItemClick: ",""+subcategory_name + mc_name );
                                         new Details().StartActivity(context, selected_subCategory,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
@@ -441,7 +466,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     }
 
 
-    private void requestReceiverSubmitAPI(final Context mcontext, JSONArray object)
+    private void requestReceiverSubmitAPI (final Context mcontext, JSONArray object)
     {
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();

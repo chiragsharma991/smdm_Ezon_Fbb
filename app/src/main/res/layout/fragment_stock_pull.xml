@@ -69,18 +69,21 @@
             android:scrollbars="vertical" />
     </RelativeLayout>
 
+
     <Button
-        android:id="@+id/stock_fragmentSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="4dp"
-        android:layout_marginTop="10dp"
         android:background="@color/ezfb_Red"
-        android:text="@string/submit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Submit"
+        android:id="@+id/stock_fragmentSubmit"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/smdm_header_title_large"
         android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        />
+
 
 
 </RelativeLayout>

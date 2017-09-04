@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentPadding="1dp"
-    app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="false"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="0dp"
-
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="3dp"
     >
 
     <!--starting from this-->
@@ -16,37 +13,31 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/smdm_border"
-        app:contentPadding="1dp"
+        app:contentPadding="0dp"
         app:cardUseCompatPadding="true"
         app:cardPreventCornerOverlap="false"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="0dp"
-
-
-        >
+        app:cardElevation="3dp">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentPadding="0dp"
+            app:cardBackgroundColor="@color/ezfb_White"
             app:cardUseCompatPadding="false"
             app:cardPreventCornerOverlap="false"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="0dp"
-            >
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="0dp"
-                >
+                android:padding="0dp">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    >
+                    android:padding="3dp">
+
 
                     <TextView
                         android:id="@+id/transferRequest_stockCode"
@@ -58,9 +49,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:textSize="@dimen/collaboration_stock_text"
-                        android:textColor="@color/ezfb_black"
-
-                        />
+                        android:textColor="@color/ezfb_black"/>
 
                     <TextView
                         android:id="@+id/transferRequest_stockDesc"
@@ -144,7 +133,7 @@
                             android:textSize="@dimen/collaboration_stock_title_xlarge"
                             android:layout_marginTop="7dp"
                             android:singleLine="true"
-                            android:textColor="@color/text_sales"
+                            android:textColor="@color/ezfb_black"
                             />
 
                     </LinearLayout>
@@ -176,11 +165,9 @@
                             android:textSize="@dimen/collaboration_stock_title_xlarge"
                             android:layout_marginTop="7dp"
                             android:singleLine="true"
-                            android:textColor="@color/pink"
-                            />
+                            android:textColor="@color/pink"/>
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -190,22 +177,19 @@
                         android:gravity="center"
                         >
 
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:gravity="left"
-                            >
+                            android:gravity="left">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/avl_qty"
                                 android:gravity="center"
                                 android:textSize="@dimen/collaboration_stock_text"
-                                android:textColor="@color/ezfb_black"
-
-                                />
+                                android:textColor="@color/ezfb_black"/>
 
                             <TextView
                                 android:id="@+id/stock_avi"
@@ -215,7 +199,7 @@
                                 android:layout_marginTop="7dp"
                                 android:textSize="@dimen/collaboration_stock_title_xlarge"
                                 android:singleLine="true"
-                                android:textColor="@color/text_sales"
+                                android:textColor="@color/ezfb_black"
                                 />
 
 
@@ -253,7 +237,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="03"
                                 android:layout_marginTop="7dp"
-                                android:textColor="@color/text_sales"
+                                android:textColor="@color/ezfb_black"
                                 android:textSize="@dimen/collaboration_stock_title_xlarge"
                                 android:singleLine="true"
                                 />
@@ -329,8 +313,8 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
+
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -338,7 +322,6 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-
-    </android.support.v7.widget.CardView>
-
 </android.support.v7.widget.CardView>
+
+</LinearLayout>
