@@ -385,7 +385,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                    Log.e("TAG", "requestTransferRequestSubcategory: " );
+                                    Log.e("TAG", "requestTransferRequestSubcategory: " ); //
                                     return;
 
                                 } else if (response.length() == limit) {
