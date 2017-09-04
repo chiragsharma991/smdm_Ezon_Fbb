@@ -62,9 +62,9 @@
 
 
                 <ImageButton
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1.7"
                     android:backgroundTint="@color/ezfb_White"
                     android:src="@mipmap/search_option_dropdown_arrow"

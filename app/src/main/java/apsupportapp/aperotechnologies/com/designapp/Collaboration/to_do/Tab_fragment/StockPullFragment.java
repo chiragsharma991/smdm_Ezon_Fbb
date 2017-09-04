@@ -195,15 +195,20 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         spinner_text.setText("Select Subcategory");
         recyclerView = (RecyclerView) view.findViewById(R.id.stockPull_list);
         stock_fragmentSubmit = (Button)view.findViewById(R.id.stock_fragmentSubmit);
+        subcategoryList=new ArrayList<>();
         stock_fragmentSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                try{
+                if(subcategoryList.size() == 0)
+                {
+                    Toast.makeText(context,"No data for submission",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Log.e(TAG, "onClick: "+"clicked event");
                     onSubmit();
 
-                }catch (Exception e){
-                    Log.e(TAG, "onClick: error"+e.getMessage() );
                 }
             }
         });
@@ -216,22 +221,22 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     {
         if (!(subcategoryList.size() == 0))
         {
-           // Log.e( "onSubmit: ", ""+selected_subCategory + "\n"+To_Do.deviceId);
+            // Log.e( "onSubmit: ", ""+selected_subCategory + "\n"+To_Do.deviceId);
             JSONArray jsonArray = new JSONArray();
             try {
 
-                    for(int i = 0 ; i <selectMc.length; i++)
-                    {
-                        if(selectMc[i]) {
-                            JSONObject obj = new JSONObject();
+                for(int i = 0 ; i <selectMc.length; i++)
+                {
+                    if(selectMc[i]) {
+                        JSONObject obj = new JSONObject();
 //                        obj.put("option","");
 //                        obj.put("prodAttribute4","");
-                            obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
-                            obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
-                            obj.put("deviceId",device_Id);
-                            jsonArray.put(obj);
-                        }
+                        obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
+                        obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
+                        obj.put("deviceId",device_Id);
+                        jsonArray.put(obj);
                     }
+                }
                 if(jsonArray.length() != 0){
                     requestReceiverSubmitAPI(context, jsonArray);
                 }
@@ -313,7 +318,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
                                 }
 
-                               // multidatasetBarGraph(ReceiverSummaryList);
+                                // multidatasetBarGraph(ReceiverSummaryList);
                                 // recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 // recyclerView.setOnFlingListener(null);
                                 // StockPullAdapter stockPullAdapter;
@@ -366,7 +371,6 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     {
         if (Reusable_Functions.chkStatus(context)) {
             level=2;  // 2 for MC
-            subcategoryList=new ArrayList<>();
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level
                     +"&prodLevel3Desc="+prodLevel3Desc.replace("%", "%25").replace(" ", "%20").replace("&", "%26")+"&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
@@ -385,7 +389,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                    Log.e("TAG", "requestTransferRequestSubcategory: " );
+                                    Log.e("TAG", "requestTransferRequestSubcategory: " ); //
                                     return;
 
                                 } else if (response.length() == limit) {
@@ -422,7 +426,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                         Log.e(TAG, "onItemClick: ----"+position );
                                         subcategory_name = ReceiverSummaryList.get(position).getLevel();
                                         mc_name = subcategoryList.get(position).getLevel();
-                                        Log.e( "onItemClick: ",""+subcategory_name + mc_name );
+                                        Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name );
                                         new Details().StartActivity(context, selected_subCategory,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
 
                                     }
@@ -706,8 +710,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     @Override
     public void onClick(View view) {
 
-            Log.e(TAG, "onClick: " );
-            if(ReceiverSummaryList.size()>0)
+        Log.e(TAG, "onClick: " );
+        if(ReceiverSummaryList.size()>0)
             commentDialog();
 
     }
@@ -730,6 +734,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                 Log.e("TAG", "onItemClick: "+position );
                 String value =  ReceiverSummaryList.get(position).getLevel();
                 spinner_text.setText(value);
+                selected_subCategory=value;
                 dialog.dismiss();
                 requestTransferRequestSubcategory(value);
 
