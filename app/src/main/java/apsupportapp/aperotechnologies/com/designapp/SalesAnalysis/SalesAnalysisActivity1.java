@@ -223,7 +223,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                             switch (txt_ez_header.getText().toString()) {
                                                 case "Department":
                                                     rel_ez_prev.setVisibility(View.VISIBLE);
-                                                    txt_ez_header.setText("Subdept");
+                                                    txt_ez_header.setText("Category");
                                                     ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
                                                     ez_fromWhere = "Category";
                                                     if (ez_linear_dots != null) {
@@ -289,7 +289,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                                                 case "Class":
                                                     rel_ez_next.setVisibility(View.INVISIBLE);
-                                                    txt_ez_header.setText("Subclass");
+                                                    txt_ez_header.setText("Brand");
                                                     ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
                                                     ez_fromWhere = "Brand";
                                                     if (ez_linear_dots != null)
@@ -761,7 +761,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
 
                     }
-                    else if (txt_ez_header.getText().toString().equals("Subdept"))
+                    else if (txt_ez_header.getText().toString().equals("Category"))
                     {
                         ezone_level = 2;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
@@ -771,7 +771,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         ezone_level = 3;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                     }
-                    else if (txt_ez_header.getText().toString().equals("Subclass"))
+                    else if (txt_ez_header.getText().toString().equals("Brand"))
                     {
                         ezone_level = 4;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
@@ -824,13 +824,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         ezone_level = 1;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
 
-                    } else if (txt_ez_header.getText().toString().equals("Subdept")) {
+                    } else if (txt_ez_header.getText().toString().equals("Category")) {
                         ezone_level = 2;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                     } else if (txt_ez_header.getText().toString().equals("Class")) {
                         ezone_level = 3;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    } else if (txt_ez_header.getText().toString().equals("Subclass")) {
+                    } else if (txt_ez_header.getText().toString().equals("Brand")) {
                         ezone_level = 4;
                         ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                     }
@@ -1252,7 +1252,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //                            }
 //                            break;
 
-                        case "Subclass":
+                        case "Brand":
                             rel_ez_next.setVisibility(View.VISIBLE);
                             if (ez_linear_dots != null) {
                                 ez_linear_dots.removeAllViews();
@@ -1290,8 +1290,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             }
                             ez_currentVmPos = ez_viewpager.getCurrentItem();
                             ez_linear_hierarchy.setVisibility(View.GONE);
-                            txt_ez_header.setText("Subdept");
-                            ez_fromWhere = "Subdept";
+                            txt_ez_header.setText("Category");
+                            ez_fromWhere = "Category";
                             ezone_level = 2;
                             val_hierarchy = " ";
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
@@ -1314,7 +1314,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             }
                             break;
-                        case "Subdept":
+                        case "Category":
                             rel_ez_prev.setVisibility(View.INVISIBLE);
                             if (ez_linear_dots != null) {
                                 ez_linear_dots.removeAllViews();
@@ -1426,13 +1426,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                         case "Department":
                             rel_ez_prev.setVisibility(View.VISIBLE);
-                            txt_ez_header.setText("Subdept");
+                            txt_ez_header.setText("Category");
                             if (ez_linear_dots != null) {
                                 ez_linear_dots.removeAllViews();
                             }
                             ez_currentVmPos = ez_viewpager.getCurrentItem();
                             ez_linear_hierarchy.setVisibility(View.GONE);
-                            ez_fromWhere = "Subdept";
+                            ez_fromWhere = "Category";
                             ezone_level = 2;
                             val_hierarchy = " ";
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
@@ -1456,7 +1456,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             }
                             break;
 
-                        case "Subdept":
+                        case "Category":
                             ez_fromWhere = "Class";
                             txt_ez_header.setText("Class");
                             ezone_level = 3;
@@ -1489,8 +1489,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                         case "Class":
                             rel_ez_next.setVisibility(View.INVISIBLE);
-                            txt_ez_header.setText("Subclass");
-                            ez_fromWhere = "Subclass";
+                            txt_ez_header.setText("Brand");
+                            ez_fromWhere = "Brand";
                             ezone_level = 4;
                             val_hierarchy = " ";
                             if (ez_linear_dots != null) {
@@ -1519,7 +1519,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             }
                             break;
 
-                        case "Subclass":
+                        case "Brand":
 //                            txt_ez_header.setText("Brand Class");
 //                            rel_ez_next.setVisibility(View.INVISIBLE);
 //                            if (ez_linear_dots != null) {
@@ -1955,7 +1955,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         onClickFlag = false;
                         progressBar1.setVisibility(View.GONE);
-                    } else if (response.length() == limit) {
+                    } else if (response.length() == limit)
+                    {
                         for (i = 0; i < response.length(); i++) {
                             salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                             salesAnalysisClassArrayList.add(salesAnalysisClass);

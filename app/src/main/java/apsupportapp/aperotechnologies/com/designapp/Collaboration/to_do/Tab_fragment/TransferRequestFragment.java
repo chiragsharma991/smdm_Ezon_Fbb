@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,7 @@ public class TransferRequestFragment extends Fragment {
     private String recache;
     private String mParam1;
     private String mParam2;
+    private String TAG="TransferRequestFragment";
     private StockPullFragment.OnFragmentInteractionListener mListener;
     private Context context;
     private ViewGroup view;
@@ -151,11 +153,14 @@ public class TransferRequestFragment extends Fragment {
         if (Reusable_Functions.chkStatus(context)) {
 
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendersummary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit +"&recache="+recache;
+            Log.e(TAG, "requestTransferRequestsummary: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response)
                         {
+                            Log.i(TAG, "requestTransferRequestsummary onResponse: "+response );
+
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {

@@ -1879,8 +1879,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     case "Department":
                         level = 2;
                         btnFIndexPrev.setVisibility(View.VISIBLE);
-                        txtFIndexClass.setText("Subdept");
-                        fromWhere = "Subdept";
+                        txtFIndexClass.setText("Category");
+                        fromWhere = "Category";
                         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
                         if (Reusable_Functions.chkStatus(context)) {
 
@@ -1893,7 +1893,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         }
                         break;
 
-                    case "Subdept":
+                    case "Category":
                         fromWhere = "Class";
                         txtFIndexClass.setText("Class");
                         level = 3;
@@ -1910,8 +1910,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         break;
 
                     case "Class":
-                        txtFIndexClass.setText("Subclass");
-                        fromWhere = "Subclass";
+                        txtFIndexClass.setText("Brand");
+                        fromWhere = "Brand";
                         level = 4;
                         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
                         if (Reusable_Functions.chkStatus(context)) {
@@ -1926,10 +1926,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                         break;
 
-                    case "Subclass":
+                    case "Brand":
                         btnFIndexNext.setVisibility(View.INVISIBLE);
-                        txtFIndexClass.setText("MC");
-                        fromWhere = "MC";
+                        txtFIndexClass.setText("Brand Class");
+                        fromWhere = "Brand Class";
                         level = 5;
                         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
                         if (Reusable_Functions.chkStatus(context)) {
@@ -1977,10 +1977,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 String url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZ/" + userId + "?level=" + level;
                 switch (txtFIndexClass.getText().toString())
                 {
-                    case "MC":
+                    case "Brand Class":
                         btnFIndexNext.setVisibility(View.VISIBLE);
-                        txtFIndexClass.setText("Subclass");
-                        fromWhere = "Subclass";
+                        txtFIndexClass.setText("Brand");
+                        fromWhere = "Brand";
                         level = 4;
                         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
 
@@ -1996,7 +1996,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         break;
 
 
-                    case "Subclass":
+                    case "Brand":
                         txtFIndexClass.setText("Class");
                         fromWhere = "Class";
                         level = 3;
@@ -2015,8 +2015,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
                     case "Class":
-                        txtFIndexClass.setText("Subdept");
-                        fromWhere = "Subdept";
+                        txtFIndexClass.setText("Category");
+                        fromWhere = "Category";
                         level = 2;
                         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
                         if (Reusable_Functions.chkStatus(context)) {
@@ -2031,7 +2031,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                         break;
 
-                    case "Subdept":
+                    case "Category":
                         btnFIndexPrev.setVisibility(View.INVISIBLE);
                         txtFIndexClass.setText("Department");
                         fromWhere = "Department";
