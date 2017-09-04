@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
 import android.content.Context;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,14 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -32,11 +28,16 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private final Context context;
     private final ArrayList<ToDo_Modal> list;
     private static boolean check = false;
+    private final boolean[] selectMc;
+    private OnItemClickListener mListener;
 
-    public StockPullAdapter(ArrayList<ToDo_Modal> list, Context context)
-    {
+
+    public StockPullAdapter(ArrayList<ToDo_Modal> list, boolean[] selectMc, Context context, OnItemClickListener mListener) {
+
         this.list = list;
         this.context = context;//
+        this.mListener = mListener;
+        this.selectMc = selectMc;
     }
 
     @Override
@@ -47,12 +48,11 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        if (holder instanceof StockPullAdapter.Holder)
-        {
-            if (position < list.size())
-            {
+        if (holder instanceof StockPullAdapter.Holder) {
+            if (position < list.size()) {
+
                /* ((StockPullAdapter.Holder) holder).TransferStatus.setText(list.get(position).getTransferStatus());
                 ((StockPullAdapter.Holder) holder).SOH_Requested.setText("" + Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((StockPullAdapter.Holder) holder).QTY_Avi.setText("" + Math.round(list.get(position).getStkQtyAvl()));
@@ -62,25 +62,36 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((StockPullAdapter.Holder) holder).FWD.setText("" + String.format("%.1f", list.get(position).getFwdWeekCover()));
                 ((StockPullAdapter.Holder) holder).McCodeDescribtion.setText(list.get(position).getMccodeDesc());*/
 
-              //  ((StockPullAdapter.Holder) holder).TransferStatus.setText(list.get(position).getTransferStatus());
+                //  ((StockPullAdapter.Holder) holder).TransferStatus.setText(list.get(position).getTransferStatus());
                 ((StockPullAdapter.Holder) holder).SOH_Requested.setText("" + Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((StockPullAdapter.Holder) holder).QTY_Avi.setText("" + Math.round(list.get(position).getStkQtyAvl()));
-               // ((StockPullAdapter.Holder) holder).NumberOfOption.setText("" + list.get(position).getNoOfOptions());
-               // ((StockPullAdapter.Holder) holder).SOH.setText("" + Math.round(list.get(position).getStkOnhandQty()));
-               // ((StockPullAdapter.Holder) holder).GIT_Qty.setText("" + Math.round(list.get(position).getStkGitQty()));
+                // ((StockPullAdapter.Holder) holder).NumberOfOption.setText("" + list.get(position).getNoOfOptions());
+                // ((StockPullAdapter.Holder) holder).SOH.setText("" + Math.round(list.get(position).getStkOnhandQty()));
+                // ((StockPullAdapter.Holder) holder).GIT_Qty.setText("" + Math.round(list.get(position).getStkGitQty()));
                 ((StockPullAdapter.Holder) holder).FWD.setText("" + String.format("%.1f", list.get(position).getFwdWeekCover()));
                 ((StockPullAdapter.Holder) holder).McCodeDescribtion.setText(list.get(position).getLevel());
-                ((StockPullAdapter.Holder) holder).stock_mcCheck.setOnClickListener(new View.OnClickListener() {
+                ((StockPullAdapter.Holder) holder).McCodeDescribtion.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v)
-                    {
-                        if (((CheckBox) v).isChecked())
-                        {
-                          Toast.makeText(context,"clicked",Toast.LENGTH_SHORT).show();
-                        }
+                    public void onClick(View view) {
+                        mListener.onItemClick(view,position);
                     }
                 });
 
+                ((StockPullAdapter.Holder) holder).stock_mcCheck.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(((CheckBox)view).isChecked())
+                        {
+                            selectMc[position] = true;
+                            notifyItemChanged(position);
+                        }else
+                        {
+                            selectMc[position] = false;
+                            notifyItemChanged(position);
+                        }
+                    }
+                });
+                ((StockPullAdapter.Holder) holder).stock_mcCheck.setChecked(selectMc[position]==true ? true :false);
             }
         }
     }
@@ -91,17 +102,16 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onSnap(int position)
-    {
+    public void onSnap(int position) {
 
     }
 
-    public static class Holder extends RecyclerView.ViewHolder
-    {
+
+    private static class Holder extends RecyclerView.ViewHolder {
         TextView TransferStatus, SOH_Requested, QTY_Avi, NumberOfOption, SOH, GIT_Qty, FWD, McCodeDescribtion;
         private CheckBox stock_mcCheck;
-        public Holder(View itemView)
-        {
+
+        public Holder(View itemView) {
             super(itemView);
             TransferStatus = (TextView) itemView.findViewById(R.id.stock_transfer_status);
             SOH_Requested = (TextView) itemView.findViewById(R.id.stock_sohRequested);
@@ -111,11 +121,17 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             FWD = (TextView) itemView.findViewById(R.id.stock_fwc);
             McCodeDescribtion = (TextView) itemView.findViewById(R.id.stock_McCodeDesc);
             NumberOfOption = (TextView) itemView.findViewById(R.id.stock_numberOfOption);
-            stock_mcCheck = (CheckBox)itemView.findViewById(R.id. stock_mcCheck);
+            stock_mcCheck = (CheckBox) itemView.findViewById(R.id.stock_mcCheck);
         }
 
     }
 
+
+    public interface OnItemClickListener {
+
+        public void onItemClick(View view, int position);
+
+    }
 
 
 }

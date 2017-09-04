@@ -104,6 +104,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private RelativeLayout progressBar;
     private Button stock_fragmentSubmit;
     StockPullAdapter stockPullAdapter;
+    private boolean[] selectMc;
+    private String TAG="StockPullFragment";
 
 
     public StockPullFragment() {
@@ -185,16 +187,6 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         progressBar = (RelativeLayout) view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position)
-            {
-                subcategory_name = selected_subCategory;
-                mc_name = subcategoryList.get(position).getLevel();
-                Log.e( "onItemClick: ",""+subcategory_name + mc_name );
-                new Details().StartActivity(context, subcategory_name,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
-            }
-        }));
 
         barChart.setOnChartGestureListener(this);
     }
@@ -205,19 +197,26 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         {
             Log.e( "onSubmit: ", ""+selected_subCategory + "\n"+To_Do.deviceId);
             JSONArray jsonArray = new JSONArray();
-            JSONObject obj = new JSONObject();
             try {
-                obj.put("option","");
-                obj.put("prodAttribute4","");
-                obj.put("prodLevel6Code",subcategoryList.get(0).getLevel());//MCCodeDesc
-                obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
-                obj.put("deviceId",device_Id);
-                jsonArray.put(obj);
+                for(int i = 0 ; i <selectMc.length; i++)
+                {
+                    if(selectMc[i]){
+                        JSONObject obj = new JSONObject();
+//                        obj.put("option","");
+//                        obj.put("prodAttribute4","");
+                        obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
+                        obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
+                        obj.put("deviceId",device_Id);
+                        jsonArray.put(obj);
+                    }
+
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-                requestReceiverSubmitAPI(context, jsonArray);
+            requestReceiverSubmitAPI(context, jsonArray);
 
         }
     }
@@ -378,14 +377,25 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     offsetvalue = 0;
 
                                 }
-                                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                                 recyclerView.setOnFlingListener(null);
-                                 StockPullAdapter stockPullAdapter;
-                                 stockPullAdapter = new StockPullAdapter(subcategoryList,getActivity());
-                                 recyclerView.setAdapter(stockPullAdapter);
-                                 Reusable_Functions.hDialog();
-                                 progressBar.setVisibility(View.GONE);
+                                selectMc=new boolean[subcategoryList.size()];
+                                for (int i = 0; i <subcategoryList.size() ; i++) {
+                                    selectMc[i]=false;
+                                }
+                                recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                recyclerView.setOnFlingListener(null);
+                                stockPullAdapter = new StockPullAdapter(subcategoryList,selectMc, getActivity(), new StockPullAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, int position) {
+                                        Log.e(TAG, "onItemClick: ----"+position );
+                                        mc_name = subcategoryList.get(position).getLevel();
+                                        Log.e( "onItemClick: ",""+subcategory_name + mc_name );
+                                        new Details().StartActivity(context, selected_subCategory,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
 
+                                    }
+                                });
+                                recyclerView.setAdapter(stockPullAdapter);
+                                Reusable_Functions.hDialog();
+                                progressBar.setVisibility(View.GONE);
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();

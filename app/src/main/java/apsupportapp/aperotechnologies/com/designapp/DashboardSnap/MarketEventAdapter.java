@@ -25,7 +25,8 @@ public class MarketEventAdapter extends RecyclerView.Adapter<MarketEventAdapter.
     private final ArrayList<String> eventUrlList;
     private onclickView clickView;
 
-    public MarketEventAdapter(ArrayList<String> eventUrlList, Context context, int preposition) {
+    public MarketEventAdapter(ArrayList<String> eventUrlList, Context context, int preposition)
+    {
         this.context = context;
         this.preposition = preposition;
         this.eventUrlList = eventUrlList;
@@ -35,16 +36,17 @@ public class MarketEventAdapter extends RecyclerView.Adapter<MarketEventAdapter.
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
 
         return new ViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.adapter_snap_child_footer_hrl, parent, false));
 
-
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position)
+    {
 
         Picasso.with(context).load(eventUrlList.get(position)).fit().centerInside()
                 .placeholder(R.color.grey)
@@ -59,15 +61,18 @@ public class MarketEventAdapter extends RecyclerView.Adapter<MarketEventAdapter.
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return eventUrlList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
 
         public ImageView Snap_child_imageView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView)
+        {
             super(itemView);
             Snap_child_imageView = (ImageView) itemView.findViewById(R.id.snap_child_imageView);
             itemView.setOnClickListener(this);
