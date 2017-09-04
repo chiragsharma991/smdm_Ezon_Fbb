@@ -234,7 +234,7 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent CustomerLookupActivity = new Intent(context,CustomerLookupActivity.class);
                     startActivity(CustomerLookupActivity);
                     break;
-                case 2:
+                case 30:
                     Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
                     startActivity(HourlyPerformence);
                     break;

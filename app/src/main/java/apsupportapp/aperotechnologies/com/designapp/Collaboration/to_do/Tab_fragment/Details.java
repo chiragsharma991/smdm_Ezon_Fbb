@@ -66,7 +66,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     private String MCCodeDesc = "",prodLevel3Desc = "";    // code and description
     private String MCCode = "";    // code and description
     private String option = "";    // code and description
-    private StockDetailsAdapter stockPullAdapter;
+    private StockDetailsAdapter stockDetailsAdapter;
 
 
     public HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
@@ -77,7 +77,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         getSupportActionBar().hide();
@@ -94,19 +95,21 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         queue = new RequestQueue(cache, network);
         queue.start();
 
-        if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.sDialog(context, "Loading data...");
+            DetailProcess.setVisibility(View.VISIBLE);
             requestReceiversDetails();
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void requestReceiversChildDetails(final int position)
     {
-
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") + "&option=" + option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20");
         Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -117,6 +120,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
+                                StockDetailsAdapter.Holder.view_border.setVisibility(View.GONE);
                                 DetailProcess.setVisibility(View.GONE);
 
                                 return;
@@ -139,9 +143,10 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 limit = 100;
                                 offsetvalue = 0;
                             }
+                            StockDetailsAdapter.Holder.view_border.setVisibility(View.VISIBLE);
 
                             HashmapList.put(position, ChildDetailList);
-                            stockPullAdapter.notifyDataSetChanged();
+                            stockDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             DetailProcess.setVisibility(View.GONE);
 
@@ -149,6 +154,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
+                            StockDetailsAdapter.Holder.view_border.setVisibility(View.GONE);
                             DetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
@@ -160,11 +166,11 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
+                        StockDetailsAdapter.Holder.view_border.setVisibility(View.GONE);
                         DetailProcess.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -175,17 +181,15 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             }
         };
         int socketTimeout = 60000;//5 seconds
-
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
-
     }
 
 
-    private void requestReceiversDetails() {
-
+    private void requestReceiversDetails()
+    {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20");
         Log.e("TAG", "requestReceiversDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -195,10 +199,12 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                DetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
-                            } else if (response.length() == limit) {
+                            } else if (response.length() == limit)
+                            {
                                 for (int i = 0; i < response.length(); i++) {
                                     toDo_modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                     DetailsList.add(toDo_modal);
@@ -206,7 +212,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestReceiversDetails();
-
                             }
                             else if (response.length() < limit)
                             {
@@ -218,20 +223,20 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 count = 0;
                                 limit = 100;
                                 offsetvalue = 0;
-
                             }
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             MakeHashMap(DetailsList);
-                            stockPullAdapter = new StockDetailsAdapter(DetailsList, HashmapList, context, DetailProcess);
-                            recyclerView.setAdapter(stockPullAdapter);
+                            stockDetailsAdapter = new StockDetailsAdapter(DetailsList, HashmapList, context, DetailProcess);
+                            recyclerView.setAdapter(stockDetailsAdapter);
+                            DetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
-
                         }
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            DetailProcess.setVisibility(View.GONE);
+                            Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
@@ -240,6 +245,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        DetailProcess.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -262,8 +268,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
         Reusable_Functions.hDialog();
-
-
     }
 
     private void MakeHashMap(ArrayList<ToDo_Modal> detailsList) {
@@ -274,15 +278,14 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             ArrayList<ToDo_Modal> listData = new ArrayList<ToDo_Modal>();
             HashmapList.put(i, listData);
         }
-
     }
 
     private void initalise() {
-        String data = getIntent().getExtras().getString("prodLevel3Desc");
-        String data1 = getIntent().getExtras().getString("MCCodeDesc");
+        String subcategory = getIntent().getExtras().getString("prodLevel3Desc");
+        String mc = getIntent().getExtras().getString("MCCodeDesc");
         Double data2 = getIntent().getExtras().getDouble("AvlQty");
-        MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values // MCCodeDesc = data1; - this is actual value
-        prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  //prodLevel3Desc = data; - this is actual value
+        MCCodeDesc = mc; //MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values //  - this is actual value
+        prodLevel3Desc = subcategory; // prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  // - this is actual value
         MCCode = String.valueOf(Math.round(data2));
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
         details_imageBtnBack = (RelativeLayout) findViewById(R.id.details_imageBtnBack);
@@ -297,11 +300,12 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
 
-    public void StartActivity(Context context, String data1, Double data2)
+    public void StartActivity(Context context, String subcategory,String mc ,Double data2)
     {
         Intent intent = new Intent(context, Details.class);
-     //   intent.putExtra("prodLevel3Desc",data);
-        intent.putExtra("MCCodeDesc", data1);
+        intent.putExtra("prodLevel3Desc",subcategory);
+        intent.putExtra("MCCodeDesc", mc);
+        Log.e( "StartActivity: ",""+subcategory + "\t" +mc );
         intent.putExtra("AvlQty", data2);
         context.startActivity(intent);
     }
@@ -318,7 +322,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             case R.id.stock_detailSubmit:
                 if (!(DetailsList.size() == 0))
                 {
-                    JSONArray jsonArray = stockPullAdapter.OnSubmit(MCCodeDesc,prodLevel3Desc,deviceId);
+                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc,prodLevel3Desc,deviceId);
                     if (jsonArray.length() == 0)
                     {
                         Toast.makeText(Details.this, "Please select at least one option.", Toast.LENGTH_SHORT).show();
@@ -404,21 +408,17 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
 
         }
-
-
     }
 
     @Override
     public void onPress(int Position)
     {
-        MCCodeDesc = "2257-Ladies Ethnic Kurta" ;
-        prodLevel3Desc = "BF011C-BF - Ladies ethnicwear";
         option = DetailsList.get(Position).getLevel();
         levelOfOption = 4; // 4 is for size
         ChildDetailList = new ArrayList<ToDo_Modal>();
         if (Reusable_Functions.chkStatus(context))
         {
-            Reusable_Functions.sDialog(Details.this, "Loading....");
+            Reusable_Functions.sDialog(Details.this, "Loading...");
             DetailProcess.setVisibility(View.VISIBLE);
             requestReceiversChildDetails(Position);
         }

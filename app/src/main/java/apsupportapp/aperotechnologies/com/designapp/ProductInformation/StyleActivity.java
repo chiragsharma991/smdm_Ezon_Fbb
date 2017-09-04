@@ -216,11 +216,7 @@ public class StyleActivity extends AppCompatActivity {
         imageBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selcollectionName = null;
-                seloptionName = null;
-                SnapDashboardActivity._collectionitems = new ArrayList();
-                finish();
-
+                onBackPressed();
             }
         });
 

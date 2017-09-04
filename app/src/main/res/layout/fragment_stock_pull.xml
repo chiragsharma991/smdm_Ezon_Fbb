@@ -2,58 +2,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen_color"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <RelativeLayout
-        android:orientation="vertical"
         android:id="@+id/relChartlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="210dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
 
-
-        <TextView
-            android:id="@+id/pva_noChart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="No Chart data available"
-            android:textSize="@dimen/largelayout_storesize"
-            android:visibility="gone" />
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bar_chart"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:nestedScrollingEnabled="true" />
+            android:layout_height="match_parent">
 
-        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/pva_progressBar"
+        </com.github.mikephil.charting.charts.BarChart>
+
+
+        <RelativeLayout
+            android:id="@+id/progressBar"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_centerInParent="true"
-            android:background="#0000"
-            android:keepScreenOn="true"
-            android:padding="10dp"
-            android:theme="@style/ProgressBar"
-            android:visibility="gone">
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:visibility="visible"
 
-        </ProgressBar>
+            >
+
+            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/pva_progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:background="#0000"
+                android:keepScreenOn="true"
+                android:padding="10dp"
+                android:theme="@style/ProgressBar">
+
+            </ProgressBar>
+
+
+        </RelativeLayout>
 
 
     </RelativeLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/relChartlayout"
-        android:id="@+id/stockPull_list"
-        android:scrollbars="vertical"
+    <RelativeLayout
+        android:id="@+id/list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/stock_fragmentSubmit"
+        android:layout_below="@+id/relChartlayout"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/stockPull_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+    </RelativeLayout>
+
+
+    <Button
+        android:background="@color/ezfb_Red"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Submit"
+        android:id="@+id/stock_fragmentSubmit"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/smdm_header_title_large"
+        android:textAllCaps="false"
         />
+
+
 
 </RelativeLayout>

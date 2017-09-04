@@ -61,7 +61,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private int offsetvalue = 0;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private boolean Sender_checkNetwkStatus = false;
+    private boolean checkNetworkFalse = false;
     private String bearertoken;
     private RequestQueue queue;
     private StatusModel statusModel;
@@ -102,7 +102,6 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         SenderSummaryList = new ArrayList<>();
         gson = new Gson();
         recache = "true";
-        Sender_checkNetwkStatus = false;
         initialise();
         MainMethod();
 
@@ -114,18 +113,19 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            if (Sender_checkNetwkStatus) {
-                Toast.makeText(context, "No data found ", Toast.LENGTH_SHORT).show();
+            if (checkNetworkFalse) {
+                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
             }
         }
     }
 
-    private void MainMethod() {
+    private void MainMethod()
+    {
         NetworkProcess();
 
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.sDialog(context, "Loading.......");
+            Reusable_Functions.sDialog(context, "Loading...");
             requestSenderCaseStatusSummary();
 
         } else {
@@ -134,7 +134,8 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         }
     }
 
-    private void requestSenderCaseStatusSummary() {
+    private void requestSenderCaseStatusSummary()
+    {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -143,8 +144,10 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Sender_checkNetwkStatus = true;
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                checkNetworkFalse = true;
                                 return;
+
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -172,7 +175,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
@@ -187,7 +190,6 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                         error.printStackTrace();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -204,7 +206,8 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
     }
 
-    private void MakeStatusHashMap(ArrayList<StatusModel> senderSummaryList) {
+    private void MakeStatusHashMap(ArrayList<StatusModel> senderSummaryList)
+    {
         initiatedStatusList = new HashMap<Integer, ArrayList<StatusModel>>();
         for (int i = 0; i < senderSummaryList.size(); i++) {
             ArrayList<StatusModel> list = new ArrayList<>();
@@ -376,7 +379,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         String senderStoreCode = sender_store_code;
         StatusDocList = new ArrayList<StatusModel>();
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.sDialog(context, "Loading....");
+            Reusable_Functions.sDialog(context, "Loading...");
 
             // this case is for last two sto and grn
 

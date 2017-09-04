@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,6 +31,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     String userId, bearertoken, storeDescription, geoLeveLDesc;
     SharedPreferences sharedPreferences;
     private TextView txtStoreCode,txtStoreName;
+    public static String deviceId;
 
 
     @Override
@@ -41,6 +43,8 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         bearertoken = sharedPreferences.getString("bearerToken", "");
         storeDescription = sharedPreferences.getString("storeDescription", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        deviceId = sharedPreferences.getString("device_id","");
+        Log.e( "onCreate: ",""+deviceId );
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);

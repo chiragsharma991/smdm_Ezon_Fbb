@@ -40,7 +40,8 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.details_header_child, parent, false);
         return new DetailsHeaderChildAdapter.Holder(v);
     }
@@ -154,6 +155,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
         private final TextView DetailChild_size, DetailChild_requiredQty, DetailChild_aviQty, DetailChild_git, DetailChild_soh;
         private CheckBox DetailChild_checkBox;
+
         public Holder(View itemView) {
             super(itemView);
             DetailChild_size = (TextView) itemView.findViewById(R.id.detailChild_size);

@@ -90,6 +90,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
+            ReceiverDetailProcess.setVisibility(View.VISIBLE);
             Reusable_Functions.sDialog(context, "Loading data...");
             requestReceiverStatusDetails();
         } else {
@@ -126,6 +127,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                ReceiverDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(ToBeReceiverDetails.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -152,9 +154,11 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                             rec_details_Adapter = new ReceiverStatusDetailsAdapter(Rec_Status_dtlList, context, ReceiverDetailProcess);
                             MakeHashMap(Rec_Status_dtlList);
                             rec_detail_recycleView.setAdapter(rec_details_Adapter);
+                            ReceiverDetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
 
                         } catch (Exception e) {
+                            ReceiverDetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
@@ -165,6 +169,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        ReceiverDetailProcess.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -225,7 +230,8 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
         option = Rec_Status_dtlList.get(position).getLevel();
 
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.sDialog(ToBeReceiverDetails.this, "Loading....");
+            Reusable_Functions.sDialog(ToBeReceiverDetails.this, "Loading...");
+            ReceiverDetailProcess.setVisibility(View.VISIBLE);
             requestReceiverStatusSubDetails(position);
 
         } else {
@@ -270,7 +276,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                             ReceiverDetailProcess.setVisibility(View.GONE);
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             ReceiverDetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();

@@ -255,7 +255,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         } else if (id == R.id.aboutus) {
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
-            finish();
+//            finish();
             return true;
         }
 
@@ -281,7 +281,10 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             // snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
 
 
-        } else {
+        } else
+        {
+            // In release build when required hide promo analysis and collabration as per requirement and customer engagement will start from 4 onwards
+            // In debug build unhide promo analysis and collabration and numbering will start from 4 onwards
             List<App> apps = getProduct(0);
             snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
             apps = getProduct(1);
@@ -292,25 +295,18 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             apps = getProduct(4);
             snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-//            apps = getProduct(5);
-//            snapAdapter.addSnap(new Snap(Gravity.START, "Key Product", apps));
             apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
             apps = getProduct(6);
             snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
-
             apps = getProduct(7);
             snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
-//            apps = getProduct(7);
-//            snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
             apps = getProduct(8);
             snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
             apps = getProduct(9);
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
             apps = getProduct(10);
             snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
-            //apps = getProduct(10);
-//            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
 
         }
         Recycler_verticalView.setAdapter(snapAdapter);
@@ -396,7 +392,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void checkPermission() {
+    private void checkPermission()
+    {
         boolean checkDeviceId = sharedPreferences.getString("device_id", "").equals("") ? true : false;   //true means you not get any device id.
 
         if (checkDeviceId) {
@@ -518,10 +515,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         }
     }
-
-
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
