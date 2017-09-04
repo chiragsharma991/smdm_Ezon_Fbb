@@ -437,6 +437,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                 //https://smdm.manthan.com/v1/display/inventorybestworstperformersEZ/1234?view=WTD&top=10&offset=0&limit=5&orderby=DESC&orderbycol=10
                 url = get_ez_url();
+                Log.e("url ezone ",""+url);
 
             } else {
 
@@ -448,6 +449,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
+
+                            Log.e("response ezone ",""+response);
+
                             BestInventListview.setVisibility(View.VISIBLE);
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {

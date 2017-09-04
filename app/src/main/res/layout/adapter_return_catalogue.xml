@@ -67,7 +67,8 @@
                 android:textStyle="bold"
                 android:visibility="gone"
                 android:layout_alignParentEnd="true"
-                android:text=""/>
+                android:text=""
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
 

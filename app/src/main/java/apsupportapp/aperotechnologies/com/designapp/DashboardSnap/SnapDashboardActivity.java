@@ -85,7 +85,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     public static RecyclerView Recycler_verticalView;
     private String TAG = "SnapDashboardActivity";
     private Context context;
-    private NestedScrollView nestedScrollview;
+    public static NestedScrollView nestedScrollview;
     RequestQueue queue;
     String userId, bearertoken, geoLeveLDesc,pushtoken;
     SharedPreferences sharedPreferences;

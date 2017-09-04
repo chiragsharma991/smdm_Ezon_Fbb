@@ -129,6 +129,8 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         holder.BestInvent_Sale.setText("" + (int) arrayList.get(position).getSaleTotQty());
 
 
+
+
         if(TAG.equals("BestPerformer_Ez_Inventory")){
 
             Log.e(TAG, "getProdImageUrl: "+arrayList.get(position).getProdImageUrl() );
@@ -152,11 +154,38 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
                         .into(holder.BestInvent_image_child);
 
             } else {
+                Log.e("here ezone else","");
 
-                holder.ProgressPicaso.setVisibility(View.GONE);
-                Glide.with(this.context).
-                        load(R.mipmap.noimageavailable).
-                        into(holder.BestInvent_image_child);
+                if(arrayList.get(position).getOption().equals("SAMSUNG G615F GXY J7 MAX 4GB/32GB-GOLD"))
+                {
+                    holder.ProgressPicaso.setVisibility(View.GONE);
+                    Glide.with(this.context).
+                            load(R.mipmap.samsung_j7_max_original).
+                            into(holder.BestInvent_image_child);
+                }
+                else if(arrayList.get(position).getOption().equals("AMAZON FIRE TVSTICK WITH VOICEREMOTE BLK-OTHERS"))
+                {
+                    holder.ProgressPicaso.setVisibility(View.GONE);
+                    Glide.with(this.context).
+                            load(R.mipmap.amazon_fire_tv_stick).
+                            into(holder.BestInvent_image_child);
+                }
+                else if(arrayList.get(position).getArticleDesc().equals("REDBANANA FIBREBRAIDED MINIUSBCABLE MXCL"))
+                {
+                    holder.ProgressPicaso.setVisibility(View.GONE);
+                    Glide.with(this.context).
+                            load(R.mipmap.red_banana_cable).
+                            into(holder.BestInvent_image_child);
+                }
+                else
+                {
+                    holder.ProgressPicaso.setVisibility(View.GONE);
+                    Glide.with(this.context).
+                            load(R.mipmap.noimageavailable).
+                            into(holder.BestInvent_image_child);
+
+                }
+
 
 
 
@@ -164,6 +193,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         }
         else{
 
+            Log.e("here else","");
             if (!arrayList.get(position).getProdImageURL().equals("")) {
 
                 Glide.with(this.context)
