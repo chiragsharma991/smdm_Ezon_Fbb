@@ -60,7 +60,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private SharedPreferences sharedPreferences;
     private String userId;
     private String bearertoken,storeDescription;
-    private String TAG = "Feedback";
+    private String TAG = "FEEDBACK";
     private RequestQueue queue;
     private int count = 0;
     private int limit = 10;
