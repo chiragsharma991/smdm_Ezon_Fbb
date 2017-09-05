@@ -305,7 +305,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         Intent intent = new Intent(context, Details.class);
         intent.putExtra("prodLevel3Desc",subcategory);
         intent.putExtra("MCCodeDesc", mc);
-        Log.e( "StartActivity: ",""+subcategory + "\t" +mc );
+        Log.e( "StartActivity: ",""+subcategory + "\t" +mc + data2 );
         intent.putExtra("AvlQty", data2);
         context.startActivity(intent);
     }
