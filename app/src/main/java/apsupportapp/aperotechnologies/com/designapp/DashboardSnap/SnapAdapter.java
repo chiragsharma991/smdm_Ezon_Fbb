@@ -141,7 +141,7 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
                 adapter = new MarketingImgAdapter(context, holder.pager, holder.lldots);
                 holder.pager.setAdapter(adapter);
 
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 2; i++) {
                     ImageView imgdot = new ImageView(context);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(25, 25);
                     layoutParams.setMargins(5, 5, 5, 5);
