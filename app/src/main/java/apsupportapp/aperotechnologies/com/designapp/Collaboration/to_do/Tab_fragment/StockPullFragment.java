@@ -8,18 +8,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -66,6 +76,7 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MyMarkerView;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
@@ -73,7 +84,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
 
 
-public class StockPullFragment extends Fragment implements OnChartGestureListener {
+public class StockPullFragment extends Fragment implements OnChartGestureListener, View.OnClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -106,6 +117,9 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     StockPullAdapter stockPullAdapter;
     private boolean[] selectMc;
     private String TAG="StockPullFragment";
+    private LinearLayout spinner;
+    private TextView spinner_text;
+    private AlertDialog dialog;
 
 
     public StockPullFragment() {
@@ -174,10 +188,14 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        barChart = (BarChart) view.findViewById(R.id.bar_chart);
-        subcategoryList=new ArrayList<>();
+        //barChart = (BarChart) view.findViewById(R.id.bar_chart);
+        spinner=(LinearLayout)view.findViewById(R.id.spinner);
+        spinner_text=(TextView)view.findViewById(R.id.spinner_text);
+        spinner_text.setOnClickListener(this);
+        spinner_text.setText("Select Subcategory");
         recyclerView = (RecyclerView) view.findViewById(R.id.stockPull_list);
         stock_fragmentSubmit = (Button)view.findViewById(R.id.stock_fragmentSubmit);
+        subcategoryList=new ArrayList<>();
         stock_fragmentSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -194,33 +212,31 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                 }
             }
         });
-        progressBar = (RelativeLayout) view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
-
-
-        barChart.setOnChartGestureListener(this);
+        //progressBar = (RelativeLayout) view.findViewById(R.id.progressBar);
+        //progressBar.setVisibility(View.GONE);
+        //barChart.setOnChartGestureListener(this);
     }
 
     private void onSubmit()
     {
         if (!(subcategoryList.size() == 0))
         {
-           // Log.e( "onSubmit: ", ""+selected_subCategory + "\n"+To_Do.deviceId);
+            // Log.e( "onSubmit: ", ""+selected_subCategory + "\n"+To_Do.deviceId);
             JSONArray jsonArray = new JSONArray();
             try {
 
-                    for(int i = 0 ; i <selectMc.length; i++)
-                    {
-                        if(selectMc[i]) {
-                            JSONObject obj = new JSONObject();
+                for(int i = 0 ; i <selectMc.length; i++)
+                {
+                    if(selectMc[i]) {
+                        JSONObject obj = new JSONObject();
 //                        obj.put("option","");
 //                        obj.put("prodAttribute4","");
-                            obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
-                            obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
-                            obj.put("deviceId",device_Id);
-                            jsonArray.put(obj);
-                        }
+                        obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
+                        obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
+                        obj.put("deviceId",device_Id);
+                        jsonArray.put(obj);
                     }
+                }
                 if(jsonArray.length() != 0){
                     requestReceiverSubmitAPI(context, jsonArray);
                 }
@@ -302,7 +318,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
                                 }
 
-                                multidatasetBarGraph(ReceiverSummaryList);
+                                // multidatasetBarGraph(ReceiverSummaryList);
                                 // recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 // recyclerView.setOnFlingListener(null);
                                 // StockPullAdapter stockPullAdapter;
@@ -371,12 +387,9 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                    Reusable_Functions.hDialog();
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                    Log.e("TAG", "requestTransferRequestSubcategory: " );
-
-                                    progressBar.setVisibility(View.GONE);
+                                    Log.e("TAG", "requestTransferRequestSubcategory: " ); //
                                     return;
 
                                 } else if (response.length() == limit) {
@@ -413,21 +426,15 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                         Log.e(TAG, "onItemClick: ----"+position );
                                         subcategory_name = ReceiverSummaryList.get(position).getLevel();
                                         mc_name = subcategoryList.get(position).getLevel();
-                                        Log.e( "onItemClick: ",""+subcategory_name + mc_name + ReceiverSummaryList.get(position).getStkQtyAvl());
+                                        Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name );
                                         new Details().StartActivity(context, selected_subCategory,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
 
                                     }
                                 });
                                 recyclerView.setAdapter(stockPullAdapter);
-                                Reusable_Functions.hDialog();
-                                progressBar.setVisibility(View.GONE);
 
                             } catch (Exception e) {
-                                Reusable_Functions.hDialog();
-                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-                                Reusable_Functions.hDialog();
-
                                 e.printStackTrace();
                             }
                         }
@@ -435,10 +442,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Reusable_Functions.hDialog();
-                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
                             error.printStackTrace();
                         }
                     }
@@ -459,8 +463,6 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             queue.add(postRequest);
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
-
-            Reusable_Functions.hDialog();
         }
 
     }
@@ -703,6 +705,86 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     @Override
     public void onChartTranslate(MotionEvent me, float dX, float dY)
     {
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        Log.e(TAG, "onClick: " );
+        if(ReceiverSummaryList.size()>0)
+            commentDialog();
+
+    }
+
+
+    private void commentDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+        LayoutInflater inflater =getActivity().getLayoutInflater();
+        View v = inflater.inflate(R.layout.subcategorylist, null);
+        ListView categoryList = (ListView) v.findViewById(R.id.categoryList);
+        final ArrayList<String> subCategoryList = new ArrayList<>();
+        CategoryAdapter adapter = new CategoryAdapter(context,ReceiverSummaryList);
+        categoryList.setAdapter(adapter);
+        categoryList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
+            {
+                Log.e("TAG", "onItemClick: "+position );
+                String value =  ReceiverSummaryList.get(position).getLevel();
+                spinner_text.setText(value);
+                selected_subCategory=value;
+                dialog.dismiss();
+                requestTransferRequestSubcategory(value);
+
+            }
+        });
+        builder.setView(v);
+        dialog = builder.create();
+        dialog.show();
+    }
+
+
+    // --------- Adapter-----------
+
+    private class CategoryAdapter extends BaseAdapter
+    {
+        private final Context context;
+        private final ArrayList<ToDo_Modal> receiverSummaryList;
+
+        public CategoryAdapter(Context context, ArrayList<ToDo_Modal> receiverSummaryList)
+        {
+            this.context=context;
+            this.receiverSummaryList=receiverSummaryList;
+        }
+
+        @Override
+        public int getCount() {
+            return receiverSummaryList.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return i;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup)
+        {
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View row;
+            row = inflater.inflate(R.layout.simple_list_item, null, false);
+            TextView title, detail;
+            title = (TextView) row.findViewById(R.id.storeList);
+            title.setText(receiverSummaryList.get(i).getLevel());
+            return (row);
+        }
     }
 
     public interface OnFragmentInteractionListener

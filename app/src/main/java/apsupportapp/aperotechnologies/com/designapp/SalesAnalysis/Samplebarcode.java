@@ -37,7 +37,7 @@ public class Samplebarcode extends AppCompatActivity {
     private IntentFilter filter;
 
     // ReaderManager is using to communicate with Barcode Reader Service
-    private com.cipherlab.barcode.ReaderManager mReaderManager;
+    private ReaderManager mReaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +70,9 @@ public class Samplebarcode extends AppCompatActivity {
         // Add com.cipherlab.barcode.GeneralString.Intent_READERSERVICE_CONNECTED for knowing apk is connected with Barcode Reader Service
         // ***************************************************//
         filter = new IntentFilter();
-        filter.addAction(com.cipherlab.barcode.GeneralString.Intent_SOFTTRIGGER_DATA);
-        filter.addAction(com.cipherlab.barcode.GeneralString.Intent_PASS_TO_APP);
-        filter.addAction(com.cipherlab.barcode.GeneralString.Intent_READERSERVICE_CONNECTED);
+        filter.addAction(GeneralString.Intent_SOFTTRIGGER_DATA);
+        filter.addAction(GeneralString.Intent_PASS_TO_APP);
+        filter.addAction(GeneralString.Intent_READERSERVICE_CONNECTED);
         registerReceiver(myDataReceiver, filter);
 
     }
@@ -108,7 +108,7 @@ public class Samplebarcode extends AppCompatActivity {
 			if (mReaderManager != null)
 			{
                 Log.e( "onClick: ", "------");
-                com.cipherlab.barcode.decoder.BcReaderType myReaderType =  mReaderManager.GetReaderType();
+                BcReaderType myReaderType =  mReaderManager.GetReaderType();
 				e1.setText(myReaderType.toString());
 			}
 
