@@ -135,13 +135,22 @@
                 android:textStyle="bold"
                 />
 
-
         </RelativeLayout>
 
-
+        <Button
+            android:layout_below="@+id/storeDesc"
+            android:id="@+id/btn_stock_selectAll"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:background="@android:color/transparent"
+            android:text="Select All"
+            android:textColor="@color/ezfbb_red" />
 
             <android.support.v7.widget.RecyclerView
-                android:layout_below="@+id/storeDesc"
+                android:layout_below="@+id/btn_stock_selectAll"
                 android:id="@+id/stockDetail_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

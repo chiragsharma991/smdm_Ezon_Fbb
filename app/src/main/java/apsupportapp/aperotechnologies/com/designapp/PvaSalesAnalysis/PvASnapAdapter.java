@@ -116,7 +116,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 {
                     if (fromWhere.equals("Department")) {
 
-                            department = productNameBean.getLevel();
+                        department = productNameBean.getLevel();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -124,7 +124,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     } else if (fromWhere.equals("Subdept"))
                     {
-                            department = productNameBean.getLevel();
+                        department = productNameBean.getLevel();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -132,7 +132,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     } else if (fromWhere.equals("Class"))
                     {
-                            department = productNameBean.getLevel();
+                        department = productNameBean.getLevel();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -140,7 +140,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
                     } else if (fromWhere.equals("Subclass")) {
-                            department = productNameBean.getLevel();
+                        department = productNameBean.getLevel();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -169,7 +169,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 {
                     if (fromWhere.equals("Department")) {
 
-                            department=productNameBean.getPlanDept();
+                        department=productNameBean.getPlanDept();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -177,7 +177,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     } else if (fromWhere.equals("Category")) {
 
-                            department=productNameBean.getPlanCategory();
+                        department=productNameBean.getPlanCategory();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -185,7 +185,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     } else if (fromWhere.equals("Class")) {
 
-                            department=productNameBean.getPlanClass();
+                        department=productNameBean.getPlanClass();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -195,7 +195,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     } else if (fromWhere.equals("Brand"))
                     {
 
-                            department=productNameBean.getBrandName();
+                        department=productNameBean.getBrandName();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -204,7 +204,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     } else if (fromWhere.equals("Brand Class"))
                     {
 
-                            department=productNameBean.getBrandplanClass();
+                        department=productNameBean.getBrandplanClass();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
@@ -243,44 +243,42 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             }
 
-            }
+        }
+
+    }
+
+    public  class PvAViewHolder extends RecyclerView.ViewHolder {
+
+
+        TextView txtPlanClass, txtPlanSales, txtNetSales, txtPvASales, txtPlan, txtAchieve;
+        RelativeLayout rel;
+
+
+        public PvAViewHolder(View itemView) {
+            super(itemView);
+
+            txtPlanClass = (TextView) itemView.findViewById(R.id.txtPlanClass);
+            txtPlanSales = (TextView) itemView.findViewById(R.id.txtPlanSales);
+            txtNetSales = (TextView) itemView.findViewById(R.id.txtNetSales);
+
+            rel = (RelativeLayout) itemView.findViewById(R.id.rel);
+            txtPlan = (TextView) itemView.findViewById(R.id.txtPlan);
+            txtAchieve = (TextView) itemView.findViewById(R.id.txtAchieve);
 
         }
 
-      public  class PvAViewHolder extends RecyclerView.ViewHolder {
+    }
 
+    public class ProgressViewHolder extends RecyclerView.ViewHolder {
 
-            TextView txtPlanClass, txtPlanSales, txtNetSales, txtPvASales, txtPlan, txtAchieve;
-            RelativeLayout rel;
+        TextView txtView;
 
+        public ProgressViewHolder(View footerView) {
+            super(footerView);
 
-            public PvAViewHolder(View itemView) {
-                super(itemView);
-
-                txtPlanClass = (TextView) itemView.findViewById(R.id.txtPlanClass);
-                txtPlanSales = (TextView) itemView.findViewById(R.id.txtPlanSales);
-                txtNetSales = (TextView) itemView.findViewById(R.id.txtNetSales);
-
-                rel = (RelativeLayout) itemView.findViewById(R.id.rel);
-                txtPlan = (TextView) itemView.findViewById(R.id.txtPlan);
-                txtAchieve = (TextView) itemView.findViewById(R.id.txtAchieve);
-
-            }
-
+            //  txtView = (TextView)footerView.findViewById(R.id.txtView);
         }
+    }
 
-       public class ProgressViewHolder extends RecyclerView.ViewHolder {
-
-            TextView txtView;
-
-            public ProgressViewHolder(View footerView) {
-                super(footerView);
-
-                //  txtView = (TextView)footerView.findViewById(R.id.txtView);
-            }
-        }
-
- }
-
-
+}
 

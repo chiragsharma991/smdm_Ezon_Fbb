@@ -268,9 +268,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             TransferDetailProcess.setVisibility(View.GONE);
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
-                          TransferDetailProcess.setVisibility(View.GONE);
-                          Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
+
                             e.printStackTrace();
                         }
                     }

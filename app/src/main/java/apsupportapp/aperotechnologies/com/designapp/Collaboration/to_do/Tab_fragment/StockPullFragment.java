@@ -319,6 +319,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     for (int i = 0; i < response.length(); i++) {
                                         toDo_Modal = gson.fromJson(response.get(i).toString(), ToDo_Modal.class);
                                         ReceiverSummaryList.add(toDo_Modal);
+                                        Log.e(TAG, "onResponse: "+ ReceiverSummaryList.get(i).getStkQtyAvl());
+
                                     }
                                     count = 0;
                                     limit = 100;
@@ -441,8 +443,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                         Log.e(TAG, "onItemClick: ----"+position );
                                         subcategory_name = ReceiverSummaryList.get(position).getLevel();
                                         mc_name = subcategoryList.get(position).getLevel();
-                                        Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name );
-                                        new Details().StartActivity(context, selected_subCategory,mc_name, ReceiverSummaryList.get(position).getStkQtyAvl());
+                                        Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name +"\t"+subcategoryList.get(position).getStkQtyAvl());
+                                        new Details().StartActivity(context, selected_subCategory,mc_name, subcategoryList.get(position).getStkQtyAvl());
 
                                     }
                                 });

@@ -122,22 +122,22 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 switch (fromwhere)
                 {
                     case "Department":
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-                    case "Category":
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                    case "Subdept":
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Class":
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-                    case "Brand":
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                    case "Subclass":
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
@@ -146,12 +146,12 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 //                        break;
                     case "Region":
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Store":
-                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
@@ -165,22 +165,22 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 float density = context.getResources().getDisplayMetrics().density;
                 int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
                 int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
-                ((EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setWidth(finalCalachieveVal);
+                ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setWidth(finalCalachieveVal);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
                 params.setMargins(finalCalplanVal, 0, 0, 0);
-                ((EzoneSalesViewHolder) viewHolder).txt_ez_sAchieve.setLayoutParams(params);
+                ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sAchieve.setLayoutParams(params);
 
                 if (achieveVal < 70)
                 {
-                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.RED);
+                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.RED);
                 }
                 else if (achieveVal > 90)
                 {
-                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.GREEN);//yellow
+                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.GREEN);//yellow
                 }
                 else
                 {
-                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
                 }
             }
         }
@@ -213,4 +213,3 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 }
-

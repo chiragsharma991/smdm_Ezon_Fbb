@@ -30,9 +30,8 @@ public class MarketingImgAdapter extends PagerAdapter implements ViewPager.OnPag
     ViewPager pager;
 
     int[] mResources = {
-            R.mipmap.mi_max2_buy_now_app,
+            R.mipmap.tkk_mobile_unit,
             R.mipmap.moto_e4_app,
-            R.mipmap.koryo_speaker_21_mb_app
 
     };
 
@@ -48,7 +47,7 @@ public class MarketingImgAdapter extends PagerAdapter implements ViewPager.OnPag
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override
