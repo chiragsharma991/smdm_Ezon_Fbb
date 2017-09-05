@@ -25,6 +25,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -112,7 +113,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private String selectprodLevel3Desc="";
     private HashMap<Integer, String> mapValues;
     private String dublicateSelectprodLevel3Desc="";
-    private RelativeLayout progressBar;
+    private ProgressBar progressBar;
     private Button stock_fragmentSubmit;
     StockPullAdapter stockPullAdapter;
     private boolean[] selectMc;
@@ -120,6 +121,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private LinearLayout spinner;
     private TextView spinner_text;
     private AlertDialog dialog;
+    private ImageButton dropdkown;
 
 
     public StockPullFragment() {
@@ -191,10 +193,16 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         //barChart = (BarChart) view.findViewById(R.id.bar_chart);
         spinner=(LinearLayout)view.findViewById(R.id.spinner);
         spinner_text=(TextView)view.findViewById(R.id.spinner_text);
-        spinner_text.setOnClickListener(this);
-        spinner_text.setText("Select Subcategory");
+        dropdkown=(ImageButton)view.findViewById(R.id.dropdkown);
+        progressBar=(ProgressBar)view.findViewById(R.id.progressBar);
+        spinner_text=(TextView)view.findViewById(R.id.spinner_text);
         recyclerView = (RecyclerView) view.findViewById(R.id.stockPull_list);
         stock_fragmentSubmit = (Button)view.findViewById(R.id.stock_fragmentSubmit);
+        dropdkown.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        spinner_text.setOnClickListener(this);
+        dropdkown.setOnClickListener(this);
+        spinner_text.setText("Select Subcategory");
         subcategoryList=new ArrayList<>();
         stock_fragmentSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -370,6 +378,9 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private void requestTransferRequestSubcategory(String prodLevel3Desc)
     {
         if (Reusable_Functions.chkStatus(context)) {
+            dropdkown.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+            subcategoryList=new ArrayList<>();
             level=2;  // 2 for MC
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level
@@ -390,6 +401,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     Log.e("TAG", "requestTransferRequestSubcategory: " ); //
+                                    dropdkown.setVisibility(View.VISIBLE);
+                                    progressBar.setVisibility(View.GONE);
                                     return;
 
                                 } else if (response.length() == limit) {
@@ -412,6 +425,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     count = 0;
                                     limit = 100;
                                     offsetvalue = 0;
+                                    dropdkown.setVisibility(View.VISIBLE);
+                                    progressBar.setVisibility(View.GONE);
 
                                 }
                                 selectMc=new boolean[subcategoryList.size()];
@@ -435,6 +450,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
                             } catch (Exception e) {
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                                dropdkown.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
                                 e.printStackTrace();
                             }
                         }
@@ -443,6 +460,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                            dropdkown.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
                             error.printStackTrace();
                         }
                     }
@@ -688,7 +707,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         // @parms: dublicateSelectprodLevel3Desc is stands for cancel recall Api.
         if(!dublicateSelectprodLevel3Desc.equals(selectprodLevel3Desc))
         {
-            progressBar.setVisibility(View.VISIBLE);
+           // progressBar.setVisibility(View.VISIBLE);
             requestTransferRequestSubcategory(selectprodLevel3Desc);
             dublicateSelectprodLevel3Desc=selectprodLevel3Desc;
         }

@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -70,6 +71,7 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
+import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
@@ -107,6 +109,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private Snackbar snackbar;
     private TextView RefreshTime;
     public static SnapAdapter snapAdapter;
+    private static boolean tokenProcess=false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -165,7 +168,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 Toast.makeText(SnapDashboardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
             }
         }
-        checkPermission();
+      //  checkPermission();
         setupAdapter();
 
         if( getIntent().getExtras() != null)
@@ -189,7 +192,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e(TAG, "onResume: SnapDashboardActivity" );
+        String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.e(TAG, "onResume: "+device_id+"and token "+TokenRefresh.pushToken);
+        if (!tokenProcess){
+            if(TokenRefresh.pushToken!=null && !device_id.equals("") && device_id !=null)
+                requestSubmitAPI(context,getObject());
+            Log.e(TAG, "onResume: !tokenProcess" );
+        }
+
 
     }
 
@@ -217,7 +227,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
         RefreshTime = (TextView) findViewById(R.id.refreshTime);
         nestedScrollview = (NestedScrollView) findViewById(R.id.nestedScrollview);
-
         Recycler_verticalView.setNestedScrollingEnabled(false);
         Recycler_verticalView.setLayoutManager(new LinearLayoutManager(this));
         Recycler_verticalView.setHasFixedSize(true);
@@ -230,6 +239,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         getMenuInflater().inflate(R.menu.dash_board, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -434,13 +444,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     }
 
     public JSONObject getObject() {
-        String token = sharedPreferences.getString("push_tokken", "");
-        String device_id = sharedPreferences.getString("device_id", "");
-        Log.e(TAG, " device_id "+device_id+" token "+token);
+        String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("deviceId", device_id);
-            jsonObject.put("pushToken", token);
+            jsonObject.put("pushToken",TokenRefresh.pushToken);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -455,9 +463,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     {
 
         if (Reusable_Functions.chkStatus(mcontext)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(mcontext, "Submitting data…");
-//https://smdm.manthan.com/v1/submit/deviceID/69
             String url = ConstsCore.web_url + "/v1/submit/deviceID/" + userId ;
             Log.e(TAG, "requestSubmitAPI: "+url );
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
@@ -466,14 +471,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                         public void onResponse(JSONObject response) {
                             try {
                                 if (response == null || response.equals("")) {
-                                    Reusable_Functions.hDialog();
-                                    Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
-
+                                    Log.e(TAG, "onResponse: null" );
                                 } else
                                 {
                                     String result=response.getString("status");
-                                    Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
-                                    Reusable_Functions.hDialog();
+                                    tokenProcess=true;
+                                    Log.e(TAG, "onResponse: sucess"+result );
+
                                 }
                             } catch (Exception e)
                             {
@@ -653,6 +657,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }, 3 * 1000);
         }
     }
+
+
+
 
 
 }

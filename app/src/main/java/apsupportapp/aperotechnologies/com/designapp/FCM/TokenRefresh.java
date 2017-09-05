@@ -14,6 +14,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 public class TokenRefresh extends FirebaseInstanceIdService {
 
     private SharedPreferences sharedPreferences;
+    public static String pushToken=null;
 
     @Override
     public void onTokenRefresh() {
@@ -25,6 +26,7 @@ public class TokenRefresh extends FirebaseInstanceIdService {
     }
 
     private void sendRegistrationToServer(String refreshedToken) {
+        pushToken=refreshedToken;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString("push_tokken",refreshedToken);

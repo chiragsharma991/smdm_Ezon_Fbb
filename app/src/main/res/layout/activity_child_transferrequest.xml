@@ -39,12 +39,22 @@
                     android:padding="3dp">
 
 
+                    <CheckBox
+                        android:layout_alignBaseline="@+id/transferRequest_stockCode"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/mcCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+
                     <TextView
                         android:id="@+id/transferRequest_stockCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_toRightOf="@+id/mcCheck"
                         android:text="2663"
+                        android:layout_marginRight="2dp"
                         android:textStyle="bold"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
@@ -81,6 +91,41 @@
                         android:textColor="@color/smdm_amber"
                         />
 
+               <!--     <CheckBox
+                        android:layout_alignBaseline="@+id/stock_McCodeDesc"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/stock_mcCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/stock_mcCheck"
+                        android:id="@+id/stock_McCodeDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:textSize="@dimen/collaboration_stock_title"
+                        android:textColor="@color/ezfb_black"
+                        android:text="2004-Knighthood Shift"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/stock_transfer_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pending"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/collaboration_stock_text"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/smdm_amber"
+                        />
+-->
 
                 </RelativeLayout>
 
