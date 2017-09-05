@@ -73,6 +73,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((Holder)holder).Detail_reqQty.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((Holder)holder).Detail_Git.setText(""+Math.round(list.get(position).getStkGitQty()));
                 ((Holder)holder).Detail_AviQty.setText(""+Math.round(list.get(position).getStkQtyAvl()));
+                ((Holder)holder).Detail_sellThru.setText(""+Math.round(list.get(position).getSellThruUnits()));
+
                 ((Holder)holder).Detail_headerCheck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view)
@@ -158,7 +160,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static class Holder extends RecyclerView.ViewHolder
     {
 
-        private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty;
+        private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty,Detail_sellThru;
         private TextView Detail_optionLevel;
         private LinearLayout Sizeslayout;
         private CheckBox Detail_headerCheck;
@@ -176,6 +178,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             view_border = (View)itemView.findViewById(R.id.view_border);
             detailsLinear=(RecyclerView)itemView.findViewById(R.id.details_headerChild);
             Detail_headerCheck=(CheckBox) itemView.findViewById(R.id.detail_headerCheck);
+            Detail_sellThru = (TextView)itemView.findViewById(R.id.detail_sellThru);
         }
     }
 

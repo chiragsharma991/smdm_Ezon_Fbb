@@ -56,6 +56,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_aviQty.setText("" + Math.round(list.get(PrePosition).get(position).getStkQtyAvl()));
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_git.setText("" + Math.round(list.get(PrePosition).get(position).getStkGitQty()));
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_soh.setText("" + Math.round(list.get(PrePosition).get(position).getStkOnhandQty()));
+        ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_sellThru.setText("" + Math.round(list.get(PrePosition).get(position).getSellThruUnits()));
         ((DetailsHeaderChildAdapter.Holder) holder).DetailChild_checkBox.setTag(Childtag);
 
         // if header is checked then all sub values will be checked.
@@ -153,7 +154,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
 
     private static class Holder extends RecyclerView.ViewHolder {
 
-        private final TextView DetailChild_size, DetailChild_requiredQty, DetailChild_aviQty, DetailChild_git, DetailChild_soh;
+        private final TextView DetailChild_size, DetailChild_requiredQty, DetailChild_aviQty, DetailChild_git, DetailChild_soh,DetailChild_sellThru;
         private CheckBox DetailChild_checkBox;
 
         public Holder(View itemView) {
@@ -164,6 +165,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
             DetailChild_git = (TextView) itemView.findViewById(R.id.detailChild_git);
             DetailChild_soh = (TextView) itemView.findViewById(R.id.detailChild_soh);
             DetailChild_checkBox = (CheckBox) itemView.findViewById(R.id.detailChild_checkBox);
+            DetailChild_sellThru = (TextView)itemView.findViewById(R.id.detailChild_sellThru);
 
         }
     }
