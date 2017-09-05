@@ -121,7 +121,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toLeftOf="@+id/txt_valtotalreqty"
             android:gravity="right"
-            android:text="@string/total_req_qty"
+            android:text="Total Req.Qty : "
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/ezfb_black"

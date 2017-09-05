@@ -66,7 +66,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     private String MCCodeDesc = "",prodLevel3Desc = "";    // code and description
     private String MCCode = "";    // code and description
     private String option = "";    // code and description
-    private StockDetailsAdapter stockPullAdapter;
+    private StockDetailsAdapter stockDetailsAdapter;
 
 
     public HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
@@ -109,7 +109,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
     private void requestReceiversChildDetails(final int position)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") + "&option=" + option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20");
         Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -146,7 +146,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                             StockDetailsAdapter.Holder.view_border.setVisibility(View.VISIBLE);
 
                             HashmapList.put(position, ChildDetailList);
-                            stockPullAdapter.notifyDataSetChanged();
+                            stockDetailsAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             DetailProcess.setVisibility(View.GONE);
 
@@ -227,8 +227,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             recyclerView.setOnFlingListener(null);
                             MakeHashMap(DetailsList);
-                            stockPullAdapter = new StockDetailsAdapter(DetailsList, HashmapList, context, DetailProcess);
-                            recyclerView.setAdapter(stockPullAdapter);
+                            stockDetailsAdapter = new StockDetailsAdapter(DetailsList, HashmapList, context, DetailProcess);
+                            recyclerView.setAdapter(stockDetailsAdapter);
                             DetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                         }
@@ -322,7 +322,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             case R.id.stock_detailSubmit:
                 if (!(DetailsList.size() == 0))
                 {
-                    JSONArray jsonArray = stockPullAdapter.OnSubmit(MCCodeDesc,prodLevel3Desc,deviceId);
+                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc,prodLevel3Desc,deviceId);
                     if (jsonArray.length() == 0)
                     {
                         Toast.makeText(Details.this, "Please select at least one option.", Toast.LENGTH_SHORT).show();
@@ -413,8 +413,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     @Override
     public void onPress(int Position)
     {
-        MCCodeDesc = "2257-Ladies Ethnic Kurta" ;
-        prodLevel3Desc = "BF011C-BF - Ladies ethnicwear";
         option = DetailsList.get(Position).getLevel();
         levelOfOption = 4; // 4 is for size
         ChildDetailList = new ArrayList<ToDo_Modal>();

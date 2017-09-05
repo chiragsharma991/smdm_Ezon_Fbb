@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cipherlab.barcode.GeneralString;
 import com.cipherlab.barcode.ReaderManager;
+import com.cipherlab.barcode.decoder.BcReaderType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer_Request_Model;
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
@@ -111,7 +116,15 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     @Override
                     public void onClick(View view) {
 
-                            if (isAMobileModel()) {
+                            if (isAMobileModel())
+                            {
+                                ExeSampleCode();
+                                mReaderManager = ReaderManager.InitInstance(context);
+                                filter = new IntentFilter();
+                                filter.addAction(GeneralString.Intent_SOFTTRIGGER_DATA);
+                                filter.addAction(GeneralString.Intent_PASS_TO_APP);
+                                filter.addAction(GeneralString.Intent_READERSERVICE_CONNECTED);
+                                ((Activity)context).registerReceiver(myDataReceiver, filter);
 
 
 
@@ -131,6 +144,74 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
+
+    private void ExeSampleCode()
+    {
+
+        if (mReaderManager != null) {
+            Log.e("onClick: ", "------");
+            BcReaderType myReaderType = mReaderManager.GetReaderType();
+            //  edit_barcode.setText(myReaderType.toString());
+        }
+        if(mReaderManager != null) {
+            // Enable/Disable barcode reader service
+            com.cipherlab.barcode.decoder.ClResult clRet = mReaderManager.SetActive(false);
+            boolean bRet = mReaderManager.GetActive();
+            clRet = mReaderManager.SetActive(true);
+            bRet = mReaderManager.GetActive();
+
+        }
+        if(mReaderManager != null)
+        {
+            //software trigger
+            Thread sThread = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    mReaderManager.SoftScanTrigger();
+                }
+            });
+            sThread.setPriority(Thread.MAX_PRIORITY);
+            sThread.start();
+
+        }
+
+    }
+
+    /// create a BroadcastReceiver for receiving intents from barcode reader service
+    private final BroadcastReceiver myDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, Intent intent) {
+            // Software trigger must receive this intent message
+            if (intent.getAction().equals(GeneralString.Intent_SOFTTRIGGER_DATA)) {
+
+
+                barcode = intent.getStringExtra(GeneralString.BcReaderData);
+                Log.e("onReceive: ", " " + barcode);
+                android.os.Handler h = new android.os.Handler();
+                h.postDelayed(new Runnable() {
+                    public void run() {
+                        Log.e("run: ", "" + barcode);
+                        if (!barcode.equals(" ")) {
+                            Toast.makeText(context, "Barcode scanned : " + barcode, Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Log.e("come", "here");
+                            View view =((Activity)context).findViewById(android.R.id.content);
+                            Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+                }, 1500);
+
+
+            }
+
+
+        }
+    };
+
+
+
     private void HandlePositionOnSet(RecyclerView.ViewHolder holder, int position) {
         if (Tr_HeaderToggle[position]) {
             ((TransferDetailsAdapter.Holder) holder).SizesLinLayout.setVisibility(View.VISIBLE);
@@ -142,7 +223,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private boolean isAMobileModel() {
         getDeviceInfo();
-        return Build.MODEL.contains("TC75");
+        return Build.MODEL.contains("RS31");
     }
 
     public String getDeviceInfo()
@@ -180,7 +261,10 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         private ImageView btn_scan;
         protected RecyclerView recycleview_transferreq_detailChild;
 
-        public Holder(View itemView) {
+        public Holder(View itemView)
+
+
+        {
             super(itemView);
             txt_caseNo = (TextView)itemView.findViewById(R.id.txt_caseNo);
             txt_optionval = (TextView)itemView.findViewById(R.id.detail_optionLevel);

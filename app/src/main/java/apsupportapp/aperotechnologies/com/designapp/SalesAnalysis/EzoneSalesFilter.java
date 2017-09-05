@@ -272,7 +272,9 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 ez_level_filter = 1;
                 requestEzoneRegion(offset, limit);
             }
-        } else {
+        }
+        else
+        {
             Toast.makeText(EzoneSalesFilter.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
@@ -704,7 +706,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     ez_deptList.add(plandept);
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(1).equals("Category")) {
+                                if (prod_listDataHeader.get(1).equals("Subdept")) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -839,7 +841,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
-                                if (prod_listDataHeader.get(3).equals("Brand")) {
+                                if (prod_listDataHeader.get(3).equals("Subclass")) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -908,11 +910,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     ez_brandList.add(brandName);
                                 }
                                 if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
-
                                     rel_ez_process_filter.setVisibility(View.GONE);
                                 } else {
                                     rel_ez_process_filter.setVisibility(View.GONE);
-                                    if (prod_listDataHeader.get(4).equals("Brand Class")) {
+                                    if (prod_listDataHeader.get(4).equals("MC")) {
                                         rel_ez_process_filter.setVisibility(View.VISIBLE);
                                         offset = 0;
                                         limit = 100;

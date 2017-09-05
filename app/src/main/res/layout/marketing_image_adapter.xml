@@ -14,39 +14,4 @@
         android:src="@mipmap/mi_max2_buy_now_app"
         android:adjustViewBounds="true"/>
 
-    <LinearLayout
-        android:id="@+id/ll_circle"
-        android:layout_below="@+id/image_market"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        >
-
-        <ImageView
-            android:id="@+id/img_first"
-            android:layout_width="5dp"
-            android:layout_height="5dp"
-            android:layout_gravity="center"
-            android:background="@mipmap/active_splash_screen_circle"
-            android:layout_marginRight="10dp"/>
-        <ImageView
-            android:id="@+id/img_second"
-            android:layout_width="5dp"
-            android:layout_height="5dp"
-            android:layout_gravity="center"
-            android:background="@mipmap/inactive_splash_screen_circle"/>
-        <ImageView
-            android:id="@+id/img_third"
-            android:layout_width="5dp"
-            android:layout_height="5dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:background="@mipmap/inactive_splash_screen_circle"/>
-    </LinearLayout>
-
-
-
 </LinearLayout>

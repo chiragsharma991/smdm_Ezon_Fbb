@@ -114,6 +114,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         if (Reusable_Functions.chkStatus(context))
         {
             TransferDetailProcess.setVisibility(View.VISIBLE);
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading data...");
+            TransferDetailProcess.setVisibility(View.VISIBLE);
+
             requestSenderDetails();
         }
         else
@@ -223,6 +227,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 TransferDetailProcess.setVisibility(View.GONE);
+                                Reusable_Functions.hDialog();
+                                TransferDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -255,10 +261,16 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             tr_recyclerView.setAdapter(transferDetailsAdapter);
                             TransferDetailProcess.setVisibility(View.GONE);
 
+                            TransferDetailProcess.setVisibility(View.GONE);
+                            Reusable_Functions.hDialog();
 
                         } catch (Exception e) {
                             TransferDetailProcess.setVisibility(View.GONE);
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
+                          TransferDetailProcess.setVisibility(View.GONE);
+                          Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
                     }
@@ -267,6 +279,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        TransferDetailProcess.setVisibility(View.GONE);
+                        Reusable_Functions.hDialog();
                         TransferDetailProcess.setVisibility(View.GONE);
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
