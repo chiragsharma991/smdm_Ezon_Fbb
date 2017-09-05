@@ -33,10 +33,10 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private  Context context;
     private  ArrayList<ToDo_Modal> list;
     private  boolean[] Toggle;
-    private  boolean[] HeadercheckList;  //list for check header
+    public  boolean[] HeadercheckList;  //list for check header
     public OnPress onPressInterface;
     private Set<Pair<Integer, Integer>> CheckedItems ;
-    private final boolean[] visibleItems;
+    public boolean[] visibleItems;
 
 
     public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess) {
@@ -163,7 +163,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty,Detail_sellThru;
         private TextView Detail_optionLevel;
         private LinearLayout Sizeslayout;
-        private CheckBox Detail_headerCheck;
+        public  CheckBox Detail_headerCheck;
         protected RecyclerView detailsLinear;
         public static View view_border;
         public Holder(View itemView)

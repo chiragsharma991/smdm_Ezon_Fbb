@@ -11,7 +11,7 @@
         android:id="@+id/image_market"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:src="@mipmap/mi_max2_buy_now_app"
+        android:src="@mipmap/tkk_mobile_unit"
         android:adjustViewBounds="true"/>
 
 </LinearLayout>

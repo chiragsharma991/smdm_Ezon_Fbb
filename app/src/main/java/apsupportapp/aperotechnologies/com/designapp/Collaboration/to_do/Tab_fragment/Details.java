@@ -47,6 +47,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
+
 public class Details extends AppCompatActivity implements OnPress, View.OnClickListener {
 
     private Gson gson;
@@ -67,6 +68,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     private double MCCode ;    // code and description
     private String option = "";    // code and description
     private StockDetailsAdapter stockDetailsAdapter;
+    Button btn_selectAll;
 
 
     public HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
@@ -280,14 +282,16 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         }
     }
 
-    private void initalise() {
+    private void initalise()
+    {
         String subcategory = getIntent().getExtras().getString("prodLevel3Desc");
         String mc = getIntent().getExtras().getString("MCCodeDesc");
         Double data2 = getIntent().getExtras().getDouble("AvlQty");
         MCCodeDesc = mc; //MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values //  - this is actual value
         prodLevel3Desc = subcategory; // prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  // - this is actual value
         MCCode = (Math.round(data2));
-        Log.e( "initalise: ",""+MCCode );
+        Log.e("initalise: "," " + MCCode);
+        btn_selectAll = (Button)findViewById(R.id.btn_stock_selectAll);
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
         details_imageBtnBack = (RelativeLayout) findViewById(R.id.details_imageBtnBack);
         btn_receiver_submit = (Button) findViewById(R.id.stock_detailSubmit);
@@ -295,9 +299,24 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         Todo_detailStoreAvlQty = (TextView) findViewById(R.id.todo_detailStoreAvlQty);
         DetailProcess = (ProgressBar) findViewById(R.id.detailProcess);
         Todo_detailStoreCode.setText(MCCodeDesc);
-        Todo_detailStoreAvlQty.setText(""+Math.round(MCCode));
+        Todo_detailStoreAvlQty.setText(" " + Math.round(MCCode));
         details_imageBtnBack.setOnClickListener(this);
         btn_receiver_submit.setOnClickListener(this);
+        btn_selectAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                for (int i = 0; i < DetailsList.size();i++)
+                {
+                    stockDetailsAdapter.HeadercheckList[i]= true;
+                    stockDetailsAdapter.visibleItems[i]=true;
+                }
+                stockDetailsAdapter.notifyDataSetChanged();
+
+
+            }
+        });
+
     }
 
 
@@ -311,25 +330,19 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         context.startActivity(intent);
     }
 
-
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.details_imageBtnBack:
                 onBackPressed();
                 break;
 
             case R.id.stock_detailSubmit:
-                if (!(DetailsList.size() == 0))
-                {
-                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc,prodLevel3Desc,deviceId);
-                    if (jsonArray.length() == 0)
-                    {
+                if (!(DetailsList.size() == 0)) {
+                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc, prodLevel3Desc, deviceId);
+                    if (jsonArray.length() == 0) {
                         Toast.makeText(Details.this, "Please select at least one option.", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
+                    } else {
                         requestReceiverSubmitAPI(context, jsonArray);
                     }
                 }
@@ -347,7 +360,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
     private void requestReceiverSubmitAPI(final Context mcontext, JSONArray object)
     {
-        if (Reusable_Functions.chkStatus(mcontext)) {
+        if (Reusable_Functions.chkStatus(mcontext))
+        {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
 
@@ -362,7 +376,9 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext, "Sending data failed...", Toast.LENGTH_LONG).show();
 
-                                } else {
+                                }
+                                else
+                                {
                                     String result = response.getString("status");
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Details.this, To_Do.class);
@@ -370,7 +386,9 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                     startActivity(intent);
                                     Reusable_Functions.hDialog();
                                 }
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e)
+                            {
                                 e.printStackTrace();
                                 Reusable_Functions.hDialog();
 
