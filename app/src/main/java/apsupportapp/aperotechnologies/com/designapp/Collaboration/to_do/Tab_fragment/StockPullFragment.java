@@ -384,7 +384,6 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             progressBar.setVisibility(View.VISIBLE);
             subcategoryList=new ArrayList<>();
             level=2;  // 2 for MC
-            prodLevel3Desc = prodLevel3Desc.replace("%", "%25");
             prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
 
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear

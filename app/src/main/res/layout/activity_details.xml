@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
+    tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
 
     <LinearLayout
@@ -31,8 +31,7 @@
                 segmentedgroup:contentInsetEnd="0dp"
                 segmentedgroup:contentInsetLeft="0dp"
                 segmentedgroup:contentInsetRight="0dp"
-                segmentedgroup:contentInsetStart="0dp"
-                >
+                segmentedgroup:contentInsetStart="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -52,7 +51,7 @@
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/ic_arrow_back_black"
-                            android:clickable="false"/>
+                            android:clickable="false" />
 
                     </RelativeLayout>
 
@@ -65,7 +64,7 @@
                         android:layout_toRightOf="@+id/details_imageBtnBack"
                         android:text="@string/details"
                         android:textColor="@color/ezfb_black"
-                        android:textSize="@dimen/smdm_header_title_large"/>
+                        android:textSize="@dimen/smdm_header_title_large" />
 
 
                     <ProgressBar
@@ -76,8 +75,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:indeterminateDrawable="@drawable/progress"
-                        android:visibility="gone"
-                        />
+                        android:visibility="gone" />
 
 
                 </RelativeLayout>
@@ -92,15 +90,14 @@
         android:id="@+id/listviewLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linear_head"
-        android:layout_above="@+id/stock_detailSubmit">
+        android:layout_above="@+id/stock_detailSubmit"
+        android:layout_below="@+id/linear_head">
 
         <RelativeLayout
             android:id="@+id/storeDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            >
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/todo_detailStoreCode"
@@ -110,8 +107,7 @@
                 android:text="Store Code"
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/collaboration_stock_storecode"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/todo_detailStoreAvlQty"
@@ -121,8 +117,7 @@
                 android:text="100"
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/collaboration_stock_storecode"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/detailStoreAvlQty"
@@ -132,57 +127,72 @@
                 android:text="Total Avl.Qty : "
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/collaboration_stock_storecode"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
-        <Button
-            android:layout_below="@+id/storeDesc"
-            android:id="@+id/btn_stock_selectAll"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="3dp"
-            android:background="@android:color/transparent"
-            android:text="Select All"
-            android:textColor="@color/ezfbb_red" />
+        <RelativeLayout
+            android:id="@+id/rel_buttons"
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_below="@+id/btn_stock_selectAll"
-                android:id="@+id/stockDetail_list"
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/storeDesc">
+
+            <Button
+                android:id="@+id/btn_stock_reset"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
                 android:layout_marginTop="3dp"
-                android:scrollbars="vertical"/>
+                android:background="@android:color/transparent"
+                android:text="Reset"
+                android:textColor="@color/ezfbb_red" />
+
+            <Button
+                android:id="@+id/btn_stock_selectAll"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:background="@android:color/transparent"
+                android:text="Select All"
+                android:textColor="@color/ezfbb_red" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/stockDetail_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rel_buttons"
+            android:layout_marginTop="3dp"
+            android:scrollbars="vertical" />
     </RelativeLayout>
 
 
-        <!--<Button-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:id="@+id/stock_detailSubmit"-->
-            <!--android:background="@color/ezfb_Red"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="35dp"-->
-            <!--android:textAllCaps="false"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_margin="4dp"-->
-            <!--android:text="@string/submit"-->
-            <!--android:textSize="18sp"-->
-            <!--android:textColor="@color/white"/>-->
+    <!--<Button-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:id="@+id/stock_detailSubmit"-->
+    <!--android:background="@color/ezfb_Red"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="35dp"-->
+    <!--android:textAllCaps="false"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_margin="4dp"-->
+    <!--android:text="@string/submit"-->
+    <!--android:textSize="18sp"-->
+    <!--android:textColor="@color/white"/>-->
     <Button
-        android:background="@color/ezfb_Red"
+        android:id="@+id/stock_detailSubmit"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="Submit"
-        android:id="@+id/stock_detailSubmit"
-        android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
         android:layout_marginBottom="60dp"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/smdm_header_title_large"
+        android:background="@color/ezfb_Red"
+        android:text="Submit"
         android:textAllCaps="false"
-        />
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/smdm_header_title_large" />
 
 </RelativeLayout>

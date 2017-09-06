@@ -43,6 +43,7 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
     int maxScanQty;
     String scanQty;
     private TransferDetailsAdapter transferDetailsAdapter;
+    private  boolean[] visibleItems,headerCheckList;
     public OnScanBarcode onBarcodeScan;
     String checkChildStr;
     private static final String ACTION_SOFTSCANTRIGGER = "com.motorolasolutions.emdk.datawedge.api.ACTION_SOFTSCANTRIGGER";
@@ -50,7 +51,8 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
     private static final String DWAPI_TOGGLE_SCANNING = "TOGGLE_SCANNING";
     private ArrayList<Integer> countList;
 
-    public TrDetailsHeaderChildAdapter(Context context, int position, TransferDetailsAdapter transferDetailsAdapter, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildScanqty, HashMap<Integer, ArrayList<Integer>> subchildCount, TransferRequest_Details transferRequest_detailsClass, Set<Pair<Integer, Integer>> checkedItems, HashMap<Integer, ArrayList<Integer>> headerScancount) {
+    public TrDetailsHeaderChildAdapter(Context context, int position, TransferDetailsAdapter transferDetailsAdapter, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildScanqty, HashMap<Integer, ArrayList<Integer>> subchildCount, TransferRequest_Details transferRequest_detailsClass, Set<Pair<Integer, Integer>> checkedItems, HashMap<Integer, ArrayList<Integer>> headerScancount,boolean[] visibleItems,boolean[] headerCheckList)
+    {
         this.list = subchildScanqty;         // sub child sizes list
         this.subchildCount = subchildCount;  //add sub scan qty.
         this.context = context;//
@@ -63,6 +65,8 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
         trDetailsHeaderChildAdapter = this;
         this.headerScancount = headerScancount;  //header scan qty.
         countList = new ArrayList<Integer>();
+        this.visibleItems = visibleItems;// to check if header is check then its all sizes are also checked
+        this.headerCheckList = headerCheckList;
     }
 
     @Override
@@ -98,11 +102,24 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
 
         ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_scanqty.setText("" + subchildCount.get(PrePosition).get(position));   //set count of sub child
         ((TrDetailsHeaderChildAdapter.Holder) holder).Tr_detailChild_checkBox.setTag(Childtag);
+        // if header is checked then all sub values will be checked.
+        if(visibleItems[PrePosition])
+        {
+            if (headerCheckList[PrePosition])
+            {
+                checkedItems.add(Childtag);
+            }
+            else
+            {
+                checkedItems.remove(Childtag);
+            }
+        }
         ((TrDetailsHeaderChildAdapter.Holder) holder).Tr_detailChild_checkBox.setChecked(checkedItems.contains(Childtag));
         ((TrDetailsHeaderChildAdapter.Holder) holder).Tr_detailChild_checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                visibleItems[PrePosition]=false;
                 final CheckBox cb = (CheckBox) view;
                 final Pair<Integer, Integer> tagFlag = (Pair<Integer, Integer>) view.getTag();
                 //this is check and uncheked method to remove and add flag ...
@@ -223,14 +240,53 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     private void CheckCondition(Pair<Integer, Integer> tagFlag) {
+
         checkedItems.add(tagFlag);
+        boolean[] CheckChild = new boolean[list.get(PrePosition).size()];
+        for (int i = 0; i < list.get(PrePosition).size(); i++)
+        {
+            Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition, i);
+            CheckChild[i] = checkedItems.contains(Tag) ? true : false;
+        }
+        //if all list are true from all list child then header check will be enable.
+        if (containsTrue(CheckChild)) {
+            headerCheckList[PrePosition] = true;
+        }
     }
 
     private void UnCheckCondition(Pair<Integer, Integer> tagFlag) {
+        boolean[] CheckChild = new boolean[list.get(PrePosition).size()];
+        for (int i = 0; i < list.get(PrePosition).size(); i++)
+        {
+            Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(PrePosition, i);
+            if (checkedItems.contains(Tag))
+            {
+                CheckChild[i] = true;
+            } else {
+                CheckChild[i] = false;
+            }
+        }
+        // if one list is false from all list child then header check will be disable.
+        if (containsTrue(CheckChild))
+        {
+            headerCheckList[PrePosition] = false;
+        }
         checkedItems.remove(tagFlag);
-
     }
 
+    public boolean containsTrue(boolean[] array) {
+
+        boolean AllItems = false;
+        for (boolean anArray : array) {
+            if (anArray) {
+                AllItems = true;
+            } else {
+                AllItems = false;
+                break;
+            }
+        }
+        return AllItems;
+    }
     @Override
     public int getItemCount() {
         return list.get(PrePosition).size();
