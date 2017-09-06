@@ -210,7 +210,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
                 else
                 {
-                    if(HeadercheckList[i]) {
+                    if(HeadercheckList[i])
+                    {
                         JSONObject obj = new JSONObject();
 //                        obj.put("option",list.get(i).getLevel());
 //                        obj.put("prodLevel6Code",MCCodeDesc);

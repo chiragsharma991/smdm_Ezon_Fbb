@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,6 +50,8 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public  boolean[] Tr_HeaderToggle;
     public OnPress onPressInterface;
     public OnScanBarcode onBarcodeScan;
+    public  boolean[] TransferDetails_HeadercheckList;  //list for check header
+
     private Set<Pair<Integer, Integer>> CheckedItems ;
     String barcode,checkStr;
     private ReaderManager mReaderManager;
@@ -62,6 +65,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         Tr_HeaderToggle= new boolean[list.size()];
         onPressInterface=(OnPress)context;
         onBarcodeScan = (OnScanBarcode)context;
+        TransferDetails_HeadercheckList = new boolean[list.size()];
         this.subchildqty=subchildqty;  //total sub child details
         this.subchildCount=subchildCount;  //only sub child scan qty
         this.transferDetailProcess=transferDetailProcess;
@@ -87,6 +91,24 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((TransferDetailsAdapter.Holder)holder).txt_reqtyval.setText(""+Math.round(list.get(position).getStkOnhandQtyRequested()));
                 ((TransferDetailsAdapter.Holder)holder).txt_avlqtyval.setText(""+Math.round(list.get(position).getStkQtyAvl()));
                 ((TransferDetailsAdapter.Holder)holder).txt_sohval.setText(""+Math.round(list.get(position).getStkOnhandQty()));
+                ((TransferDetailsAdapter.Holder)holder).transferdetail_checkBox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        if(((CheckBox)view).isChecked())
+                        {
+                            //Header check is enable when view is open
+                            TransferDetails_HeadercheckList[position]=true;
+                            notifyItemChanged(position);
+                        }else
+                        {
+                            TransferDetails_HeadercheckList[position]=false;
+                            notifyItemChanged(position);
+                        }
+                    }
+                });
+
+
                 ((TransferDetailsAdapter.Holder)holder).txt_optionval.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -219,6 +241,17 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         } else {
             ((TransferDetailsAdapter.Holder) holder).SizesLinLayout.setVisibility(View.GONE);
         }
+
+        if(TransferDetails_HeadercheckList[position])
+        {
+            ((TransferDetailsAdapter.Holder)holder).transferdetail_checkBox.setChecked(true);
+
+        }
+        else
+        {
+            ((TransferDetailsAdapter.Holder)holder).transferdetail_checkBox.setChecked(false);
+
+        }
     }
 
     private boolean isAMobileModel() {
@@ -260,6 +293,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         private RelativeLayout SizesLinLayout;
         private ImageView btn_scan;
         protected RecyclerView recycleview_transferreq_detailChild;
+        private CheckBox transferdetail_checkBox;
 
         public Holder(View itemView)
 
@@ -275,6 +309,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             btn_scan = (ImageView) itemView.findViewById(R.id.imageView_scan);
             recycleview_transferreq_detailChild = (RecyclerView)itemView.findViewById(R.id.details_headerChild);
             SizesLinLayout = (RelativeLayout)itemView.findViewById(R.id.detail_size);
+            transferdetail_checkBox = (CheckBox)itemView.findViewById(R.id.transferdetail_headerCheck);
 
         }
 

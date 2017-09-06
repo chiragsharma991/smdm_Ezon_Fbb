@@ -81,6 +81,7 @@ public class TransferRequestFragment extends Fragment {
     private CheckBox mcCheck;
     private boolean[] selectMc;
     private String TAG="TransferRequestFragment";
+    TransferRequestAdapter transferRequestAdapter;
 
     public TransferRequestFragment() {
         // Required empty public constructor
@@ -196,13 +197,16 @@ public class TransferRequestFragment extends Fragment {
                                 }
                                 senderSummary_recyclerView.setLayoutManager(new LinearLayoutManager(senderSummary_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 senderSummary_recyclerView.setOnFlingListener(null);
-                                TransferRequestAdapter transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), new TransferRequestAdapter.OnItemClickListener() {
+
+                                 transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), new TransferRequestAdapter.OnItemClickListener() {
                                     @Override
-                                    public void onItemClick(View view, int position) {
+                                    public void onItemClick(View view, int position)
+                                    {
                                         new TransferRequest_Details().StartActivity(SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getStkOnhandQtyRequested(),SenderSummaryList.get(position).getReqStoreCode(),context);
                                     }
                                 });
                                 senderSummary_recyclerView.setAdapter(transferRequestAdapter );
+
                                 Reusable_Functions.hDialog();
 
                             } catch (Exception e)

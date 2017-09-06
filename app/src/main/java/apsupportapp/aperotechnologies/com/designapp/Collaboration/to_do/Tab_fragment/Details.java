@@ -110,6 +110,13 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
     private void requestReceiversChildDetails(final int position)
     {
+        prodLevel3Desc = prodLevel3Desc.replace("%", "%25");
+        prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
+        MCCodeDesc = MCCodeDesc.replace("%", "%25");
+        MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
+        option = option.replace("%", "%25");
+        option = option.replace(" ", "%20").replace("&", "%26");
+
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20");
         Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -191,6 +198,10 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
     private void requestReceiversDetails()
     {
+        prodLevel3Desc = prodLevel3Desc.replace("%", "%25");
+        prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
+        MCCodeDesc = MCCodeDesc.replace("%", "%25");
+        MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20");
         Log.e("TAG", "requestReceiversDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

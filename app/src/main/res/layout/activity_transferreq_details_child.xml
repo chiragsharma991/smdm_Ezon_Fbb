@@ -24,6 +24,13 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+
+            <CheckBox
+                android:id="@+id/transferdetail_headerCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
             <TextView
                 android:id="@+id/detail_optionLevel"
                 android:layout_width="match_parent"

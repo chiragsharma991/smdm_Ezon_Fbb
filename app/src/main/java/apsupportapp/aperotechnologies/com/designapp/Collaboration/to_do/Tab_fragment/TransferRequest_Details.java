@@ -370,7 +370,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         context.startActivity(intent);
     }
 
-
     public void onPress(int position) {
 
         option = Sender_DetailsList.get(position).getLevel();
@@ -386,7 +385,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch (v.getId()) {
             case R.id.tr_details_imageBtnBack:
                 onBackPressed();
@@ -405,24 +405,47 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
         for (int i = 0; i <Sender_DetailsList.size(); i++)  //all list of details
         {
-            for (int j = 0; j <subchildqty.get(i).size() ; j++)  // all sizes of one option
+            if(!subchildqty.get(i).isEmpty())   //fst start with subchild if no one select in subchild then it will go header selection.
             {
-                Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);  //check if any check box is check another wise it will not proceed.
-                if(CheckedItems.contains(Tag))
+                for (int j = 0; j < subchildqty.get(i).size(); j++)  // all sizes of one option
                 {
-                    JSONObject obj = new JSONObject();
-                    try {
-                        obj.put("option",Sender_DetailsList.get(i).getLevel());
-                        obj.put("prodAttribute4",subchildqty.get(i).get(j).getLevel());
-                        obj.put("caseNo",detail_CaseNo);
-                        jsonarray.put(count,obj);
-                        count++;
+                    Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i, j);  //check if any check box is check another wise it will not proceed.
+                    if (CheckedItems.contains(Tag)) {
+                        JSONObject obj = new JSONObject();
+                        try {
+                            obj.put("option", Sender_DetailsList.get(i).getLevel());
+                            obj.put("prodAttribute4", subchildqty.get(i).get(j).getLevel());
+                            obj.put("caseNo", detail_CaseNo);
+                            jsonarray.put(count, obj);
+                            count++;
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-        }
+            }
+                else
+                {
+                    if(transferDetailsAdapter.TransferDetails_HeadercheckList[i])
+                    {
+                        JSONObject obj = new JSONObject();
+                        try
+                        {
+                            obj.put("option",Sender_DetailsList.get(i).getLevel());
+//                            obj.put("prodAttribute4","");
+                            obj.put("caseNo",detail_CaseNo);
+                            jsonarray.put(count,obj);
+                            count++;
+
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
         }
         if(jsonarray.length()==0)
         {
@@ -492,7 +515,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "onResponse: "+response);
+                        Log.e(TAG, "onResponse: "+response);
                         try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0)
@@ -683,6 +706,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             if(id ==0) {
                 url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
                 postofData=jsonarray.toString();
+                Log.e(TAG, "requestSenderSubmitAPI: " + postofData);
             }
             else if (id==1){
                 url = "https://mapi.futuregroup.in/fgapis/sap/STOCreateSRP/1.0?apikey=46a94bd1-04ea-466b-bcf0-59cb74abbd1b" ;

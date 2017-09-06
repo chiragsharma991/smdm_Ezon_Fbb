@@ -48,25 +48,25 @@
 
 
 
-                    <TextView
-                        android:id="@+id/transferRequest_stockCode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/mcCheck"
-                        android:text="2663"
-                        android:layout_marginRight="2dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:textSize="@dimen/collaboration_stock_text"
-                        android:textColor="@color/ezfb_black"/>
+                    <!--<TextView-->
+                        <!--android:id="@+id/transferRequest_stockCode"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_toRightOf="@+id/mcCheck"-->
+                        <!--android:text="2663"-->
+                        <!--android:layout_marginRight="2dp"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:layout_marginBottom="8dp"-->
+                        <!--android:textSize="@dimen/collaboration_stock_text"-->
+                        <!--android:textColor="@color/ezfb_black"/>-->
 
                     <TextView
                         android:id="@+id/transferRequest_stockDesc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="1.5dp"
-                        android:layout_toRightOf="@+id/transferRequest_stockCode"
+                        android:layout_toRightOf="@+id/mcCheck"
                         android:text="Malad"
                         android:textStyle="bold"
                         android:singleLine="true"

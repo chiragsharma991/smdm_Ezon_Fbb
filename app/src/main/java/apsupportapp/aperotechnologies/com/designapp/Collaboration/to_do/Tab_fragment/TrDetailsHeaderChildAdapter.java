@@ -116,7 +116,6 @@ public class TrDetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerVi
             }
         });
 
-
         maxScanQty = (int) Math.round(list.get(PrePosition).get(position).getStkOnhandQtyRequested());
         scanQty = ((TrDetailsHeaderChildAdapter.Holder) holder).tr_DetailChild_scanqty.getText().toString();
 

@@ -384,9 +384,12 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             progressBar.setVisibility(View.VISIBLE);
             subcategoryList=new ArrayList<>();
             level=2;  // 2 for MC
+            prodLevel3Desc = prodLevel3Desc.replace("%", "%25");
+            prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
+
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level
-                    +"&prodLevel3Desc="+prodLevel3Desc.replace("%", "%25").replace(" ", "%20").replace("&", "%26")+"&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
+                    +"&prodLevel3Desc="+prodLevel3Desc+"&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
 
             Log.e("TAG", "requestTransferRequestsummary: " + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

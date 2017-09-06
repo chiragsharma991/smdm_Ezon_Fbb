@@ -47,18 +47,19 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
-        if (holder instanceof TransferRequestAdapter.Holder) {
+        if (holder instanceof TransferRequestAdapter.Holder)
+        {
             if (position < sender_list.size()) {
 
-                ((TransferRequestAdapter.Holder) holder).transferRequest_stockCode.setText(sender_list.get(position).getReqStoreCode());
-                ((TransferRequestAdapter.Holder) holder).transferRequest_stockdesc.setText(sender_list.get(position).getReqStoreDesc());
+              //  ((TransferRequestAdapter.Holder) holder).transferRequest_stockCode.setText(sender_list.get(position).getReqStoreCode());
+                ((TransferRequestAdapter.Holder) holder).transferRequest_stockdesc.setText(sender_list.get(position).getReqStoreCode()+" "+sender_list.get(position).getReqStoreDesc());
                 ((TransferRequestAdapter.Holder) holder).transferRequest_case.setText(sender_list.get(position).getCaseNo());
                 ((TransferRequestAdapter.Holder) holder).transferRequest_reqty.setText("" + Math.round(sender_list.get(position).getStkOnhandQtyRequested()));
                 ((TransferRequestAdapter.Holder) holder).transferRequest_avlqty.setText("" + Math.round(sender_list.get(position).getStkQtyAvl()));
                 ((TransferRequestAdapter.Holder) holder).transferRequest_optreq.setText("" + Math.round(sender_list.get(position).getOptionCount()));
                 ((TransferRequestAdapter.Holder) holder).transferRequest_days.setText("No of Days : "+sender_list.get(position).getNoOfDays());
 
-                ((TransferRequestAdapter.Holder) holder).transferRequest_stockCode.setOnClickListener(new View.OnClickListener() {
+                ((TransferRequestAdapter.Holder) holder).transferRequest_stockdesc.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         mListener.onItemClick(view,position);
@@ -102,7 +103,7 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
 
         public Holder(View itemView) {
             super(itemView);
-            transferRequest_stockCode = (TextView) itemView.findViewById(R.id.transferRequest_stockCode);
+           // transferRequest_stockCode = (TextView) itemView.findViewById(R.id.transferRequest_stockCode);
             transferRequest_case = (TextView) itemView.findViewById(R.id.transferRequest_case);
             transferRequest_stockdesc = (TextView) itemView.findViewById(R.id.transferRequest_stockDesc);
             transferRequest_avlqty = (TextView) itemView.findViewById(R.id.stock_avi);
