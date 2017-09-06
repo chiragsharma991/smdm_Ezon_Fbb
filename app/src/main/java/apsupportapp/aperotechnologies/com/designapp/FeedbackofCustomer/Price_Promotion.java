@@ -77,7 +77,7 @@ public class Price_Promotion extends AppCompatActivity implements View.OnClickLi
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name, edt_brand_name, edt_product_name, edt_size;
     private EditText edt_color_option1, edt_color_option2, edt_fit, edt_style;
     private RadioGroup radioCallbacks;
-    private RadioButton radioYes, radioNo;
+    private RadioButton radioYes, radioNo; //
     private Button btn_submit, btn_cancel;
     private LinearLayout linear_toolbar;
     SharedPreferences sharedPreferences;
