@@ -25,7 +25,7 @@ public class TransferRequestAdapter  extends RecyclerView.Adapter<RecyclerView.V
     private final Context context;
     private final ArrayList<Transfer_Request_Model> sender_list;
     private final boolean[] selectMc;
-    private final OnItemClickListener mListener;
+    private OnItemClickListener mListener;
 
 
     public TransferRequestAdapter(ArrayList<Transfer_Request_Model> list, boolean[] selectMc, Context context, OnItemClickListener mListener) {
