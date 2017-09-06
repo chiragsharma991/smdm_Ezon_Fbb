@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -52,12 +53,12 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TransferRequestFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link TransferRequestFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TransferRequestFragment extends Fragment {
+public class TransferRequestFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Gson gson;
@@ -81,6 +82,7 @@ public class TransferRequestFragment extends Fragment {
     private CheckBox mcCheck;
     private boolean[] selectMc;
     private String TAG="TransferRequestFragment";
+    private Button submit;
     TransferRequestAdapter transferRequestAdapter;
 
     public TransferRequestFragment() {
@@ -143,6 +145,8 @@ public class TransferRequestFragment extends Fragment {
     private void initialise()
     {
         senderSummary_recyclerView=(RecyclerView)view.findViewById(R.id.transferRequest_list);
+        submit=(Button)view.findViewById(R.id.btn_submit);
+        submit.setOnClickListener(this);
     }
 
     private void MainMethod()
@@ -163,6 +167,7 @@ public class TransferRequestFragment extends Fragment {
                         @Override
                         public void onResponse(JSONArray response)
                         {
+                            Log.i(TAG, "onResponse: "+response );
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -270,7 +275,7 @@ public class TransferRequestFragment extends Fragment {
     }
 
 
-    public void onSubmit(View view){
+    public void onSubmit(){
 
         if (!(SenderSummaryList.size() == 0))
         {
@@ -281,14 +286,15 @@ public class TransferRequestFragment extends Fragment {
                 {
                     if(selectMc[i]) {
                         JSONObject obj = new JSONObject();
-                        obj.put("option",SenderSummaryList.get(i).getLevel());
+                        //obj.put("option",SenderSummaryList.get(i).getLevel());
                         obj.put("caseNo",SenderSummaryList.get(i).getCaseNo());
                         jsonArray.put(obj);
                     }
                 }
                 if(jsonArray.length() != 0){
                     Log.e(TAG, "onSubmit: json"+jsonArray.toString() );
-                  //  requestSenderSubmitAPI(context, jsonArray);
+                    if(jsonArray.length() > 1) Toast.makeText(context, "Please select single case for submission", Toast.LENGTH_SHORT).show();
+                    else requestSenderSubmitAPI(context, jsonArray,null,0);
                 }
                 else{
                     Toast.makeText(context, "Please select at least one option.", Toast.LENGTH_SHORT).show();
@@ -304,18 +310,34 @@ public class TransferRequestFragment extends Fragment {
         }
     }
 
-  /*  private void requestSenderSubmitAPI(final Context mcontext, JSONArray jsonarray)  // Sender Submit Api call
+
+    /**
+     *
+     * @param  id is for api call number.
+     */
+
+    private void requestSenderSubmitAPI(final Context mcontext, final JSONArray jsonarray , JSONObject jsonobject, final int id )  // Sender Submit Api call
     {
 
         if (Reusable_Functions.chkStatus(mcontext)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(mcontext, "Submitting data…");
+            //Reusable_Functions.hDialog();
+            String url = null;
+            String postofData= null;
 
-            String url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
+            if(id ==0) {
+                Reusable_Functions.sDialog(mcontext, "Submitting data…");
+                url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
+                postofData=jsonarray.toString();
+                Log.e(TAG, "requestSenderSubmitAPI: " + postofData);
+            }
+            else if (id==1){
+                url = "https://mapi.futuregroup.in/fgapis/sap/STOCreateSRP/1.0?apikey=46a94bd1-04ea-466b-bcf0-59cb74abbd1b" ;
+                postofData=jsonobject.toString();
 
+            }
             Log.e(TAG, "requestSenderSubmitAPI: "+url );
 
-            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url,jsonarray,
+            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url,postofData,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -327,13 +349,24 @@ public class TransferRequestFragment extends Fragment {
 
                                 } else
                                 {
-                                            String result=response.getString("status");
+                                    switch (id){
+                                        case 0:
+                                            String selectCase=jsonarray.getJSONObject(0).get("caseNo").toString();
+                                            requestforSap(selectCase);
+                                            break;
+                                        case 1:
+                                            // String result=response.getString("status");
                                             Reusable_Functions.hDialog();
-                                            Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();*//*
+                                            Log.e(TAG, "requestforSap: success ------" );
+                                            Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
+                                            break;
+                                    }
+
                                 }
                             } catch (Exception e)
                             {
                                 e.printStackTrace();
+                                Log.e(TAG, "catch error: "+e.getMessage() );
                                 Reusable_Functions.hDialog();
 
                             }
@@ -370,13 +403,76 @@ public class TransferRequestFragment extends Fragment {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
 
         }
-    }*/
+    }
+
+    private void requestforSap(String selectCase) {
+
+        String url = ConstsCore.web_url + "/v1/display/pulltransfersapsubmit/" + userId+"?caseNo="+selectCase;
+        Log.e(TAG, "requestforSap: "+url );
+        final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e(TAG, "onResponse: "+response);
+                        try
+                        {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                return;
+
+                            } else{
+                                //Reusable_Functions.hDialog();
+                                requestSenderSubmitAPI(context,null,response,1);
+                            }
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Log.e(TAG, "onResponse: error"+e.getMessage() );
+                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Log.e(TAG, "onErrorResponse: "+ error.getMessage() );
+                        Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+
+    }
+
+
 
     @Override
     public void onDetach()
     {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        onSubmit();
     }
 
     public interface OnFragmentInteractionListener {

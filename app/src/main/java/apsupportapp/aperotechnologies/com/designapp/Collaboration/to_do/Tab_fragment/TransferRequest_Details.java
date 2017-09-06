@@ -128,8 +128,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestReceiversChildDetails(final int position)
     {
-        option = option.replace(" ", "%20").replace("&", "%26");
-
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20") +"&caseNo="+detail_CaseNo+"&reqStoreCode="+detl_reqStoreCode+"&recache="+recache;
         Log.e(TAG, "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -224,7 +222,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestSenderDetails: "+response );
+                        Log.i(TAG, "requestSenderDetails: "+response );
                         try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -389,8 +387,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     @Override
     public void onClick(View v)
     {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.tr_details_imageBtnBack:
                 onBackPressed();
                 break;
@@ -415,17 +412,14 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i, j);  //check if any check box is check another wise it will not proceed.
                     if (CheckedItems.contains(Tag)) {
                         JSONObject obj = new JSONObject();
-                        try
-                        {
+                        try {
                             obj.put("option", Sender_DetailsList.get(i).getLevel());
                             obj.put("prodAttribute4", subchildqty.get(i).get(j).getLevel());
                             obj.put("caseNo", detail_CaseNo);
                             jsonarray.put(count, obj);
                             count++;
 
-                        }
-                        catch (JSONException e)
-                        {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -439,7 +433,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         try
                         {
                             obj.put("option",Sender_DetailsList.get(i).getLevel());
-                            obj.put("prodAttribute4","");
+//                            obj.put("prodAttribute4","");
                             obj.put("caseNo",detail_CaseNo);
                             jsonarray.put(count,obj);
                             count++;
@@ -455,10 +449,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         }
         if(jsonarray.length()==0)
         {
-            Toast.makeText(context,"Please select at least one option.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Please select at least one size.",Toast.LENGTH_SHORT).show();
 
-        }
-        else
+        }else
         {
             requestSenderSubmitAPI(context,jsonarray,null,0);
         }
@@ -578,6 +571,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                         addQty.add(count);
                                     }
                                 }
+
                                 subchildcount.put(0,addQty);//0 is pre position
                                 addtotalIn_headerScanqty(0);
                                 transferDetailsAdapter.notifyDataSetChanged();
@@ -642,9 +636,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
-                            }
-                            else
-                            {
+                            } else{
                                 //Reusable_Functions.hDialog();
                                 requestSenderSubmitAPI(context,null,response,1);
                             }
@@ -682,7 +674,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-        Reusable_Functions.hDialog();
 
     }
 
@@ -705,21 +696,18 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private void requestSenderSubmitAPI(final Context mcontext, JSONArray jsonarray ,JSONObject jsonobject, final int id )  // Sender Submit Api call
     {
 
-        if (Reusable_Functions.chkStatus(mcontext))
-        {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(mcontext, "Submitting data…");
+        if (Reusable_Functions.chkStatus(mcontext)) {
             String url = null;
             String postofData= null;
 
-            if(id ==0)
-            {
+            if(id ==0) {
+                Reusable_Functions.sDialog(mcontext, "Submitting data…");
                 url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
                 postofData=jsonarray.toString();
                 Log.e(TAG, "requestSenderSubmitAPI: " + postofData);
+
             }
-            else if (id==1)
-            {
+            else if (id==1){
                 url = "https://mapi.futuregroup.in/fgapis/sap/STOCreateSRP/1.0?apikey=46a94bd1-04ea-466b-bcf0-59cb74abbd1b" ;
                 postofData=jsonobject.toString();
 
@@ -729,8 +717,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url,postofData,
                     new Response.Listener<JSONObject>() {
                         @Override
-                        public void onResponse(JSONObject response)
-                        {
+                        public void onResponse(JSONObject response) {
                             Log.e(TAG, "requestSenderSubmitAPI onResponse: "+response);
                             try {
                                 if (response == null || response.equals("")) {
@@ -744,11 +731,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                             requestforSap();
                                             break;
                                         case 1:
-                                            //String result=response.getString("status");
+                                            // String result=response.getString("status");
                                             Reusable_Functions.hDialog();
                                             Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
-                                            /*String result=response.getString("status");
-                                            Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();*/
+//                                            String result=response.getString("status");
+//                                            Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(TransferRequest_Details.this,To_Do.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                             startActivity(intent);
@@ -790,10 +777,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
 
-        }
-        else
+        } else
         {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
         }
     }
 }

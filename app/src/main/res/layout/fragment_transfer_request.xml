@@ -24,6 +24,7 @@
 
 
     <Button
+        android:id="@+id/btn_submit"
         android:background="@color/ezfb_Red"
         android:layout_width="match_parent"
         android:layout_height="40dp"

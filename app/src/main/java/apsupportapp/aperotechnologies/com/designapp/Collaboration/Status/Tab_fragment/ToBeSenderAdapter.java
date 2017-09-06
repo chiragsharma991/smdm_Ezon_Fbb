@@ -134,12 +134,16 @@ public class ToBeSenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     Status_date.setText(initiatedStatusList.get(position).get(0).getReceiver_requested_date());
                 }
 
-            } else if (trackId[position] == 2) {
-                if (senderAcpStatusList.get(position).isEmpty()) {
+            } else if (trackId[position] == 2)
+            {
+                if (senderAcpStatusList.get(position).isEmpty())
+                {
                     Status_docNumber.setText("N/A");
                     Status_qty.setText("N/A");
                     Status_date.setText("N/A");
-                } else {
+                }
+                else
+                {
                     Status_docNumber.setText("" + senderAcpStatusList.get(position).get(0).getDocNo());
                     Status_qty.setText("" + Math.round(senderAcpStatusList.get(position).get(0).getStkOnhandQtyRequested()));
                     Status_date.setText(senderAcpStatusList.get(position).get(0).getReceiver_requested_date());
