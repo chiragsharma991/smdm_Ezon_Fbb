@@ -66,7 +66,7 @@ public class StockPullAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((Holder) holder).SOH_Requested.setText("" + Math.round(list.get(position).getStkOnhandQtyRequested()));
                 Log.e("", "onBindViewHolder: "+list.get(position).getStkQtyAvl());
                 ((Holder) holder).QTY_Avi.setText("" + Math.round(list.get(position).getStkQtyAvl()));
-                // ((StockPullAdapter.Holder) holder).NumberOfOption.setText("" + list.get(position).getNoOfOptions());
+                ((Holder) holder).NumberOfOption.setText("" +String.format("%.1f", list.get(position).getSellThruUnits()));
                 // ((StockPullAdapter.Holder) holder).SOH.setText("" + Math.round(list.get(position).getStkOnhandQty()));
                 // ((StockPullAdapter.Holder) holder).GIT_Qty.setText("" + Math.round(list.get(position).getStkGitQty()));
                 ((Holder) holder).FWD.setText("" + String.format("%.1f", list.get(position).getFwdWeekCover()));

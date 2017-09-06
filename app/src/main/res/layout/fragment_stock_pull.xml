@@ -65,10 +65,25 @@
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/dropdkown"
+                    android:visibility="visible"
                     android:layout_weight="1.7"
-                    android:backgroundTint="@color/ezfb_White"
+                    android:background="?attr/selectableItemBackground"
                     android:src="@mipmap/search_option_dropdown_arrow"
                     />
+
+                <ProgressBar
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.7"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:visibility="gone"
+                    />
+
+
 
 
             </LinearLayout>

@@ -197,7 +197,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/coll_options"
+                                android:text="Sell Thru%"
                                 android:textSize="@dimen/collaboration_stock_text"
                                 android:singleLine="true"
                                 android:textColor="@color/ezfbb_black"

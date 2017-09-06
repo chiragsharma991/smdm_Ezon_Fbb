@@ -1,17 +1,21 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,13 +31,18 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer_Request_Model;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -69,6 +78,9 @@ public class TransferRequestFragment extends Fragment {
     private Context context;
     private ViewGroup view;
     private RecyclerView senderSummary_recyclerView;
+    private CheckBox mcCheck;
+    private boolean[] selectMc;
+    private String TAG="TransferRequestFragment";
 
     public TransferRequestFragment() {
         // Required empty public constructor
@@ -130,12 +142,6 @@ public class TransferRequestFragment extends Fragment {
     private void initialise()
     {
         senderSummary_recyclerView=(RecyclerView)view.findViewById(R.id.transferRequest_list);
-        senderSummary_recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                new TransferRequest_Details().StartActivity(SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getStkOnhandQtyRequested(),SenderSummaryList.get(position).getReqStoreCode(),context);
-            }
-        }));
     }
 
     private void MainMethod()
@@ -184,9 +190,18 @@ public class TransferRequestFragment extends Fragment {
                                         SenderSummaryList.add(transfer_request_model);
                                     }
                                 }
+                                selectMc=new boolean[SenderSummaryList.size()];
+                                for (int i = 0; i <SenderSummaryList.size() ; i++) {
+                                    selectMc[i]=false;
+                                }
                                 senderSummary_recyclerView.setLayoutManager(new LinearLayoutManager(senderSummary_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 senderSummary_recyclerView.setOnFlingListener(null);
-                                TransferRequestAdapter transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,getActivity());
+                                TransferRequestAdapter transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), new TransferRequestAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, int position) {
+                                        new TransferRequest_Details().StartActivity(SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getStkOnhandQtyRequested(),SenderSummaryList.get(position).getReqStoreCode(),context);
+                                    }
+                                });
                                 senderSummary_recyclerView.setAdapter(transferRequestAdapter );
                                 Reusable_Functions.hDialog();
 
@@ -249,6 +264,109 @@ public class TransferRequestFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+
+    public void onSubmit(View view){
+
+        if (!(SenderSummaryList.size() == 0))
+        {
+            JSONArray jsonArray = new JSONArray();
+            try {
+
+                for(int i = 0 ; i <selectMc.length; i++)
+                {
+                    if(selectMc[i]) {
+                        JSONObject obj = new JSONObject();
+                        obj.put("option",SenderSummaryList.get(i).getLevel());
+                        obj.put("caseNo",SenderSummaryList.get(i).getCaseNo());
+                        jsonArray.put(obj);
+                    }
+                }
+                if(jsonArray.length() != 0){
+                    Log.e(TAG, "onSubmit: json"+jsonArray.toString() );
+                  //  requestSenderSubmitAPI(context, jsonArray);
+                }
+                else{
+                    Toast.makeText(context, "Please select at least one option.", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+  /*  private void requestSenderSubmitAPI(final Context mcontext, JSONArray jsonarray)  // Sender Submit Api call
+    {
+
+        if (Reusable_Functions.chkStatus(mcontext)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(mcontext, "Submitting data…");
+
+            String url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
+
+            Log.e(TAG, "requestSenderSubmitAPI: "+url );
+
+            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url,jsonarray,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.e(TAG, "requestSenderSubmitAPI onResponse: "+response);
+                            try {
+                                if (response == null || response.equals("")) {
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
+
+                                } else
+                                {
+                                            String result=response.getString("status");
+                                            Reusable_Functions.hDialog();
+                                            Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();*//*
+                                }
+                            } catch (Exception e)
+                            {
+                                e.printStackTrace();
+                                Reusable_Functions.hDialog();
+
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
+                            error.printStackTrace();
+                        }
+                    }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", bearertoken);
+                    return params;
+                }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+            };
+            int socketTimeout = 60000;//5 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+        } else
+        {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
+        }
+    }*/
 
     @Override
     public void onDetach()
