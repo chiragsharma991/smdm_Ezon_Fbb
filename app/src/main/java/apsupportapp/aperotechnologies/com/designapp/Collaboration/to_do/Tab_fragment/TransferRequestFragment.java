@@ -357,6 +357,10 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                         case 1:
                                             // String result=response.getString("status");
                                             Reusable_Functions.hDialog();
+                                            for (int i = 0; i <SenderSummaryList.size() ; i++) {
+                                                selectMc[i]=false;
+                                            }
+                                            transferRequestAdapter.notifyDataSetChanged();
                                             Log.e(TAG, "requestforSap: success ------" );
                                             Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
                                             break;

@@ -734,8 +734,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                             // String result=response.getString("status");
                                             Reusable_Functions.hDialog();
                                             Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
-                                            String result=response.getString("status");
-                                            Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
+                                         //   String result=response.getString("status");
+                                         //   Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(TransferRequest_Details.this,To_Do.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                             startActivity(intent);
