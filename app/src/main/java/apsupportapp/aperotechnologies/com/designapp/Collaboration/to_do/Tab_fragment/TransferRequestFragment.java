@@ -293,7 +293,8 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                 }
                 if(jsonArray.length() != 0){
                     Log.e(TAG, "onSubmit: json"+jsonArray.toString() );
-                    requestSenderSubmitAPI(context, jsonArray,null,0);
+                    if(jsonArray.length() > 1) Toast.makeText(context, "Please select single case for submission", Toast.LENGTH_SHORT).show();
+                    else requestSenderSubmitAPI(context, jsonArray,null,0);
                 }
                 else{
                     Toast.makeText(context, "Please select at least one option.", Toast.LENGTH_SHORT).show();
@@ -315,16 +316,16 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
      * @param  id is for api call number.
      */
 
-    private void requestSenderSubmitAPI(final Context mcontext, JSONArray jsonarray ,JSONObject jsonobject, final int id )  // Sender Submit Api call
+    private void requestSenderSubmitAPI(final Context mcontext, final JSONArray jsonarray , JSONObject jsonobject, final int id )  // Sender Submit Api call
     {
 
         if (Reusable_Functions.chkStatus(mcontext)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(mcontext, "Submitting data…");
+            //Reusable_Functions.hDialog();
             String url = null;
             String postofData= null;
 
             if(id ==0) {
+                Reusable_Functions.sDialog(mcontext, "Submitting data…");
                 url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
                 postofData=jsonarray.toString();
                 Log.e(TAG, "requestSenderSubmitAPI: " + postofData);
@@ -350,12 +351,14 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                 {
                                     switch (id){
                                         case 0:
-                                            requestforSap();
+                                            String selectCase=jsonarray.getJSONObject(0).get("caseNo").toString();
+                                            requestforSap(selectCase);
                                             break;
                                         case 1:
+                                            // String result=response.getString("status");
                                             Reusable_Functions.hDialog();
-                                            String result=response.getString("status");
-                                            Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
+                                            Log.e(TAG, "requestforSap: success ------" );
+                                            Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
                                             break;
                                     }
 
@@ -363,6 +366,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                             } catch (Exception e)
                             {
                                 e.printStackTrace();
+                                Log.e(TAG, "catch error: "+e.getMessage() );
                                 Reusable_Functions.hDialog();
 
                             }
@@ -401,9 +405,9 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    private void requestforSap() {
+    private void requestforSap(String selectCase) {
 
-        String url = ConstsCore.web_url + "/v1/display/pulltransfersapsubmit/" + userId+"?caseNo="+"1";
+        String url = ConstsCore.web_url + "/v1/display/pulltransfersapsubmit/" + userId+"?caseNo="+selectCase;
         Log.e(TAG, "requestforSap: "+url );
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
@@ -427,7 +431,6 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                             Reusable_Functions.hDialog();
                             Log.e(TAG, "onResponse: error"+e.getMessage() );
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
-                            Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
                     }
@@ -439,7 +442,6 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                         Reusable_Functions.hDialog();
                         Log.e(TAG, "onErrorResponse: "+ error.getMessage() );
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
-                        Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
@@ -456,7 +458,6 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
-        Reusable_Functions.hDialog();
 
     }
 
