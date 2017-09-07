@@ -50,7 +50,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private ArrayList<StatusModel> StatusDetailsList,StatusDetailChild;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private String bearertoken;
+    private String bearertoken,storedesc;
     private RequestQueue queue;
     private int count = 0;
     private int limit = 100;
@@ -79,6 +79,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storedesc = sharedPreferences.getString("storeDescription", "");
+        str_storeCode = storedesc.trim().substring(0,4);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -207,10 +209,10 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
-        str_storeCode= getIntent().getExtras().getString("CODE");
+        String data = getIntent().getExtras().getString("CODE");
         String str_desc = getIntent().getExtras().getString("storeDesc");
         storeCase.setText(" " +"Case#"+data1);
-        storeCode.setText(str_storeCode);
+        storeCode.setText(data);
         detailStoreDesc.setText(str_desc);
         caseNo=data1;
 

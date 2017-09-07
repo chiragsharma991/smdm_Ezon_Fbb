@@ -201,6 +201,8 @@ public class LoginActivity1 extends AppCompatActivity
                                 userId = response.getString("userId");
                                 String bearerToken = response.getString("bearerToken");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
+                                String geoLevel2Code = response.getString("geoLevel2Code");
+                                Log.e("Ezone login", "onResponse: "+geoLevel2Code);
 
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", username);
@@ -208,6 +210,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("userId", userId);
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
+                                editor.putString("geoLevel2Code",geoLevel2Code);
                                 editor.putString("device_id", "");
                                 //editor.putString("push_tokken", "");
                                 editor.apply();
@@ -297,6 +300,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 String userId = response.getString("userId");
                                 String bearerToken = response.getString("bearerToken");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
+                                String geoLevel2Code = response.getString("geoLevel2Code");
                                 requestLoginFBBAPI(bearerToken, userId);
                             }
                             else
@@ -307,7 +311,8 @@ public class LoginActivity1 extends AppCompatActivity
                                 String password = response.getString("password");
                                 userId = response.getString("userId");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
-                                Log.e("geoLeveLDesc :", "" + geoLeveLDesc);
+                                String geoLevel2Code = response.getString("geoLevel2Code");
+                                Log.e("geoLeveLDesc :", "" + geoLeveLDesc + geoLevel2Code);
                                 String bearerToken = response.getString("bearerToken");
                                 userId = userId + "-" + SelectedStoreCode;
 
@@ -317,6 +322,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("userId", userId);
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
+                                editor.putString("geoLevel2Code",geoLevel2Code);
                                 editor.putString("storeDescription",storeDescription);
                                 Log.e("onResponse---: ","store desc"+storeDescription);
                                 editor.putString("device_id", "");
@@ -377,7 +383,7 @@ public class LoginActivity1 extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("onResponse: ",""+response);
+
                         try {
                             if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
@@ -394,7 +400,6 @@ public class LoginActivity1 extends AppCompatActivity
                                 String value = storelist_data.get(0);
                                 SelectedStoreCode = value.trim().substring(0, 4);
                                 storeDescription = value.trim();
-                                Log.e("onResponse: Response is 1 ", ""+storeDescription);
                                 firstLogin = true;
                                 requestLoginWithStoreAPI();
                             } else {
@@ -494,8 +499,6 @@ public class LoginActivity1 extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
 
-                Log.e("TAG", "onItemClick: "+position );
-                //   view.setBackgroundColor(Color.parseColor("#e8112d"));
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 dialog.dismiss();
@@ -505,7 +508,6 @@ public class LoginActivity1 extends AppCompatActivity
                     String value =  storelist_data.get(position);
                     SelectedStoreCode = value.trim().substring(0, 4);
                     storeDescription = value.trim();
-                    Log.e("TAG", "store des: "+storeDescription );
                     firstLogin = true;
                     requestLoginWithStoreAPI();
                 }
@@ -544,7 +546,6 @@ public class LoginActivity1 extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        Log.e("LOGIN", "onDestroy: " );
         Reusable_Functions.hDialog();
         super.onDestroy();
 
