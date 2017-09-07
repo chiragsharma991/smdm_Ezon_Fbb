@@ -1,0 +1,324 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:gravity="top"
+    android:layout_marginTop="15dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/rel_ez_netsales"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext3">
+
+            <TextView
+                android:id="@+id/txt_ez_NetSales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:text="@string/net_sales"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_ez_NetSalesVal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="25dp"
+                android:text="12345"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/txt_ez_NetSalesImage"
+                android:layout_width="19dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/txt_ez_NetSales"
+                android:background="@android:color/holo_green_dark" />
+
+            <RelativeLayout
+                android:id="@+id/rel_ez_NetSalesNmPrec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/txt_ez_NetSalesVal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/txt_ez_NetSalesName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="sdfdgfg"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/txt_ez_NetSalesPerc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/txt_ez_NetSalesName"
+                    android:text=""
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_ez_plansales"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext3">
+
+
+            <TextView
+                android:id="@+id/txt_ez_PlanSales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:text="@string/plan_sales"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/txt_ez_PlanSalesVal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="25dp"
+                android:text="12345"
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/txt_ez_PlanSalesImage"
+                android:layout_width="19dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/txt_ez_PlanSales"
+                android:background="@android:color/holo_green_dark" />
+
+            <RelativeLayout
+                android:id="@+id/rel_ez_PlanSalesNmPrec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/txt_ez_PlanSalesVal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/txt_ez_PlanSalesName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="tftfy"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/txt_ez_PlanSalesPerc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/txt_ez_PlanSalesName"
+                    android:text=""
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="13sp" />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/rel_ez_netsalesu"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext3">
+
+            <TextView
+                android:id="@+id/txt_ez_NetSalesU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:text="@string/net_sales_u"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/txt_ez_NetSalesUVal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="25dp"
+                android:text="1123"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="17sp" />
+
+
+            <ImageView
+                android:id="@+id/txt_ez_NetSalesUImage"
+                android:layout_width="19dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/txt_ez_NetSalesU"
+                android:background="@android:color/holo_green_dark" />
+
+
+            <RelativeLayout
+                android:id="@+id/rel_ez_NetSalesUNmPrec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/txt_ez_NetSalesUVal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/txt_ez_NetSalesUName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="Wowow"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/txt_ez_NetSalesUPerc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/txt_ez_NetSalesUName"
+                    android:text=""
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="13sp" />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_ez_sohu"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext3">
+
+            <TextView
+                android:id="@+id/txt_ez_SoHU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:text="@string/soh_u"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_ez_SoHUVal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="25dp"
+                android:text="11223"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="17sp" />
+
+
+            <RelativeLayout
+                android:id="@+id/rel_ez_MarginPerc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/txt_ez_SoHUVal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/txt_ez_MarginName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="Margin"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/txt_ez_MarginPerc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/txt_ez_MarginName"
+                    android:text=""
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="13sp" />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

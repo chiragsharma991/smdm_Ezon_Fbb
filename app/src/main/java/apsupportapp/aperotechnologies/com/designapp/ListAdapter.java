@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ListAdapter extends BaseAdapter implements Filterable {
+public class ListAdapter extends BaseAdapter implements Filterable
+{
     private List mStringList;
     private List mStringFilterList;
     private LayoutInflater mInflater;
@@ -48,14 +49,18 @@ public class ListAdapter extends BaseAdapter implements Filterable {
 
     //Get a View that displays the data at the specified position in the data set.
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         Holder viewHolder;
-        if (convertView == null) {
+        if (convertView == null)
+        {
             viewHolder = new Holder();
             convertView = mInflater.inflate(R.layout.activity_subdept_listview, null);
             viewHolder.nameTv = (TextView) convertView.findViewById(R.id.textView);
             convertView.setTag(viewHolder);
-        } else {
+        }
+        else
+        {
             viewHolder = (Holder) convertView.getTag();
         }
 
@@ -71,7 +76,8 @@ public class ListAdapter extends BaseAdapter implements Filterable {
     @Override
     public Filter getFilter() {
 
-        if (valueFilter == null) {
+        if (valueFilter == null)
+        {
             valueFilter = new ValueFilter();
         }
         return valueFilter;
@@ -82,9 +88,11 @@ public class ListAdapter extends BaseAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            if (constraint != null && constraint.length() > 0) {
+            if (constraint != null && constraint.length() > 0)
+            {
                 List filterList = new ArrayList<String>();
-                for (int i = 0; i < mStringFilterList.size(); i++) {
+                for (int i = 0; i < mStringFilterList.size(); i++)
+                {
                     if (mStringFilterList.get(i).toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         filterList.add(mStringFilterList.get(i));
                     }
@@ -92,7 +100,9 @@ public class ListAdapter extends BaseAdapter implements Filterable {
                 results.count = filterList.size();
                 results.values = filterList;
 
-            } else {
+            }
+            else
+            {
                 results.count = mStringFilterList.size();
                 results.values = mStringFilterList;
             }
@@ -103,8 +113,8 @@ public class ListAdapter extends BaseAdapter implements Filterable {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint,
-                                      FilterResults results) {
-
+                                      FilterResults results)
+        {
             mStringList = (ArrayList<String>) results.values;
             notifyDataSetChanged();
         }

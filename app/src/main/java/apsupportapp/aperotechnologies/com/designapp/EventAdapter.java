@@ -8,15 +8,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import apsupportapp.aperotechnologies.com.designapp.R;
 
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+
 
 public class EventAdapter extends BaseAdapter{
-    DashBoardActivity dashBoardActivity;
+    SnapDashboardActivity dashBoardActivity;
     ArrayList<String> eventUrlList;
-    public EventAdapter(DashBoardActivity dashBoardActivity, ArrayList<String> eventUrlList) {
+    public EventAdapter(SnapDashboardActivity dashBoardActivity, ArrayList<String> eventUrlList) {
         this.dashBoardActivity=dashBoardActivity;
         this.eventUrlList=eventUrlList;
 

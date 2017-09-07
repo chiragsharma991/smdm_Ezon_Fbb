@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                android:background="@color/bg_screen_color"
-                android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ezfb_White">
 
     <RelativeLayout
         android:id="@+id/planskuactual_rel"
@@ -15,10 +17,11 @@
             android:id="@+id/innerrelLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="0dp">
+            android:layout_marginTop="8dp">
+
             <RelativeLayout
                 android:id="@+id/innerrellay"
                 android:layout_width="match_parent"
@@ -30,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/store"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
@@ -40,8 +43,9 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
-                    android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/normallayout_storesize" />
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -50,87 +54,107 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
-                    android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/normallayout_storesize" />
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
             <TextView
-                android:layout_below="@id/innerrellay"
                 android:id="@+id/opt_name_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/innerrellay"
                 android:text="@string/plan_option"
-                android:textColor ="@color/colorPrimary"
+                android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/normallayout_storesize" />
 
 
             <TextView
-                android:layout_below="@id/innerrellay"
                 android:id="@+id/opt_name_val"
-                android:layout_toRightOf="@+id/opt_name_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/innerrellay"
                 android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@+id/opt_name_txt"
                 android:hint=""
-                android:textColor="@color/bg_store_code_text"
-                android:textSize="@dimen/normallayout_storesize" />
+                android:textColor="@color/ezfb_black"
+                android:textSize="@dimen/normallayout_storesize"
+                android:textStyle="bold" />
 
-            <info.hoang8f.android.segmented.SegmentedGroup
-                android:id="@+id/segmentedGrpSku"
-                android:layout_below="@+id/opt_name_txt"
+            <!--
+                        <info.hoang8f.android.segmented.SegmentedGroup
+                            android:id="@+id/segmentedGrpSku"
+                            android:layout_below="@+id/opt_name_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            segmentedgroup:sc_border_width="1dp"
+                            segmentedgroup:sc_corner_radius="14dp"
+                            segmentedgroup:sc_tint_color="@color/colorPrimary">
+
+                            <RadioButton
+                                android:id="@+id/planactual_skubtnWTD"
+                                style="@style/RadioButton"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:text="WTD" />
+
+                            <RadioButton
+                                android:id="@+id/planactual_skubtnLW"
+                                style="@style/RadioButton"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:text="LW" />
+
+
+                        </info.hoang8f.android.segmented.SegmentedGroup>
+            -->
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabview"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/opt_name_txt"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                segmentedgroup:sc_border_width="1dp"
-                segmentedgroup:sc_corner_radius="14dp"
-                segmentedgroup:sc_tint_color="@color/colorPrimary">
+                android:layout_marginTop="0dp"
+                app:tabIndicatorColor="@color/ezfb_Red"
+                app:tabSelectedTextColor="@color/ezfb_Red"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                app:tabTextColor="@color/ezfb_Red">
 
-                <RadioButton
-                    android:id="@+id/planactual_skubtnWTD"
-                    style="@style/RadioButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:text="WTD" />
+            </android.support.design.widget.TabLayout>
 
-                <RadioButton
-                    android:id="@+id/planactual_skubtnLW"
-                    style="@style/RadioButton"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:text="LW" />
-
-
-            </info.hoang8f.android.segmented.SegmentedGroup>
 
             <RelativeLayout
                 android:id="@+id/colorRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_below="@+id/segmentedGrpSku"
+                android:layout_below="@+id/tabview"
                 android:layout_marginTop="8dp">
 
                 <Button
                     android:id="@+id/txtSkuGreen"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="70dp"
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="70dp"
+                    android:background="@color/smdm_green"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"
-                    android:background="@color/smdm_green"
                     android:text=""
                     android:textColor="#000000"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
 
                 <Button
@@ -144,7 +168,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#000000"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
 
                 <Button
@@ -158,19 +182,60 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#000000"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </RelativeLayout>
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/planactual_skurelLayout"
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/innerrelLayout"
+            android:layout_marginRight="5dp"
+            android:id="@+id/table_area"
+            android:layout_marginLeft="5dp"
+            app:cardUseCompatPadding="false"
+            app:contentPaddingLeft="3dp"
+            app:contentPaddingRight="3dp"
+            app:cardBackgroundColor="@color/ezfb_White"
+            app:cardElevation="3dp"
             android:layout_marginTop="8dp"
-            android:background="@color/bg_screen_color"
+            android:layout_marginBottom="3dp"
+
+            >
+
+            <!--second layout starting    -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+
+
+                <RelativeLayout
+                    android:background="@color/ezfb_White"
+                    android:id="@+id/planactual_skurelLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    >
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+ <!--       <RelativeLayout
+            android:id="@+id/planactual_skurelLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/innerrelLayout">
-        </RelativeLayout>
+            android:layout_below="@+id/innerrelLayout"
+            android:layout_marginTop="8dp"
+            android:background="@color/bg_screen_color"></RelativeLayout>-->
     </RelativeLayout>
 
 </RelativeLayout>

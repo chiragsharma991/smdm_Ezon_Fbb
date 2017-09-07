@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/bg_screen_color"
+    android:background="@color/white"
     android:orientation="vertical">
 
 
@@ -13,15 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_header_height"
         android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:contentInsetStart="0dp"
+        android:background="@color/white"
+        android:contentInsetEnd="0dp"
         android:contentInsetLeft="0dp"
         android:contentInsetRight="0dp"
-        android:contentInsetEnd="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
         app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp">
+        app:contentInsetStart="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,53 +29,51 @@
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:layout_marginLeft="0dp"
                 android:id="@+id/imageBtnSFilterBack"
-                android:background="@drawable/button_red_effect"
                 android:layout_width="@dimen/header_clickable_width"
                 android:layout_height="@dimen/header_clickable_height"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true">
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="0dp"
+                android:background="@drawable/button_click">
 
                 <Button
-                    android:clickable="false"
-                    android:background="@mipmap/common_back_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"/>
+                    android:layout_width="@dimen/arrow_back_icon_width"
+                    android:layout_height="@dimen/arrow_back_icon_height"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/ic_arrow_back_black"
+                    android:clickable="false"/>
 
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/prod_filter"
-                android:textSize="20sp"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/imageBtnSFilterBack"
                 android:layout_marginLeft="20dp"
-                android:textColor="#ffffff"
-                android:id="@+id/toolbar_title" />
-
+                android:layout_toRightOf="@+id/imageBtnSFilterBack"
+                android:text="@string/prod_filter"
+                android:textColor="#000000"
+                android:textSize="20sp"/>
 
 
             <RelativeLayout
                 android:id="@+id/imageBtnSalesFilterDone"
-                android:background="@drawable/button_red_effect"
                 android:layout_width="@dimen/header_clickable_width"
                 android:layout_height="@dimen/header_clickable_height"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
+                android:layout_centerVertical="true"
+                android:background="@drawable/button_click">
 
                 <Button
-                    android:clickable="false"
-                    android:background="@mipmap/filter_done"
-                    android:layout_width="24dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"/>
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/iconcheck"
+                    android:clickable="false"/>
 
             </RelativeLayout>
-
 
 
         </RelativeLayout>
@@ -83,9 +81,9 @@
 
     <RelativeLayout
         android:id="@+id/relSearch"
-        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
         android:layout_marginTop="10dp">
 
 
@@ -102,46 +100,47 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:singleLine="true"
-            android:textCursorDrawable="@drawable/color_cursor" />
+            android:textCursorDrawable="@drawable/color_cursor"/>
+
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@+id/relSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/relSearch"
         android:layout_marginTop="15dp">
 
         <ExpandableListView
 
+            android:id="@+id/expandableListView_subdept"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/expandableListView_subdept"
-            android:divider="@color/smdm_divider_Black"
             android:childDivider="@color/smdm_divider_Black"
+            android:divider="@color/smdm_divider_Black"
 
             />
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/process_filter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/process_filter"
         android:layout_below="@+id/toolbar"
         android:visibility="gone"
         >
 
         <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:padding="10dp"
-                     android:id="@+id/progressBar"
-                     android:layout_centerInParent="true"
-                     android:background="#0000"
-                     android:keepScreenOn="true"
-                     android:theme="@color/colorPrimary"
-            >
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#0000"
+            android:keepScreenOn="true"
+            android:padding="10dp"
+            android:theme="@color/colorPrimary">
 
         </ProgressBar>
 

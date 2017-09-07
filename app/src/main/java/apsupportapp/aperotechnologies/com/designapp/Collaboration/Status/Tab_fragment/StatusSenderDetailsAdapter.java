@@ -45,6 +45,7 @@ public class StatusSenderDetailsAdapter extends RecyclerView.Adapter<RecyclerVie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof StatusSenderDetailsAdapter.Holder) {
             if (position < list.size()) {
+              //  senderDetailProcess.setVisibility(View.GONE);
 
                 HandlePositionOnSet(holder, position);
                 ((StatusSenderDetailsAdapter.Holder) holder).OptionLevel.setText(list.get(position).getLevel());

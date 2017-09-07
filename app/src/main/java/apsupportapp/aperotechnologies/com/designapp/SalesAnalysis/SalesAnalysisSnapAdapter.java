@@ -4,6 +4,7 @@ package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,15 +94,19 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     @Override
-    public void onSnap(int position) {
+    public void onSnap(int position)
+    {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.child_sales_listview, parent, false);
             return new SalesViewHolder(v);
-        } else if (viewType == VIEW_PROG) {
+        }
+        else if (viewType == VIEW_PROG)
+        {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_footer, parent, false);
             return new ProgressViewHolder(v);
@@ -115,41 +120,39 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
 
         if (viewHolder instanceof SalesViewHolder) {
-            if (position < mSnaps.size()) {
-
+            if (position < mSnaps.size())
+            {
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
 
-                switch (fromwhere) {
+                switch (fromwhere)
+                {
                     case "Department":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-                    case "Subdept":
+                    case "Category":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Class":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-                    case "Subclass":
+                    case "Brand":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-                    case "MC":
+                    case "Brand Class":
 
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
-                        ((SalesViewHolder) viewHolder).txtPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
                         break;
                 }
+
+                ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc
                 int planVal = 100; // planned value from API
@@ -168,6 +171,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
                 if (achieveVal < 70) {
+
                     ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.RED);
                 } else if (achieveVal > 90) {
                     ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.GREEN);//yellow
@@ -181,26 +185,22 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public class SalesViewHolder extends RecyclerView.ViewHolder {
 
-
         TextView nameTv;
         RelativeLayout rel;
         RelativeLayout innerrel, relValue;
         TextView txtPlan, txtValue, txtPvAValue;
         TextView txtAchieve;
 
-        public SalesViewHolder(View itemView) {
+        public SalesViewHolder(View itemView)
+        {
             super(itemView);
-
             nameTv = (TextView) itemView.findViewById(R.id.txtVal);
             rel = (RelativeLayout) itemView.findViewById(R.id.rel);
             innerrel = (RelativeLayout) itemView.findViewById(R.id.innerrellay);
             txtPlan = (TextView) itemView.findViewById(R.id.txtPlan);
             txtAchieve = (TextView) itemView.findViewById(R.id.txtAchieve);
             txtPvAValue = (TextView) itemView.findViewById(R.id.txtPvAValue);
-
         }
-
-
     }
 
     public class ProgressViewHolder extends RecyclerView.ViewHolder {

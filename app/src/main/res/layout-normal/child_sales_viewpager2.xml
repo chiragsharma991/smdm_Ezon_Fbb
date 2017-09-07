@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="top"
-    android:background="@color/bg_screen_color"
+    android:layout_marginTop="15dp"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -22,21 +23,16 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_edittext3">
 
-
-
             <TextView
                 android:id="@+id/txtSOH2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:gravity="left"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:layout_marginLeft="8dp"
                 android:text="@string/soh_u"
                 android:textSize="12sp" />
-
-
-
 
             <TextView
                 android:id="@+id/txtSOHUVal2"
@@ -44,9 +40,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp" />
 
 
@@ -68,11 +64,11 @@
                 android:id="@+id/txtGIT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
                 android:text="@string/git_u"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
 
 
@@ -84,9 +80,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp"
                  />
 
@@ -115,11 +111,11 @@
                 android:id="@+id/txtROS2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
                 android:text="@string/ros_u"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
 
             <TextView
@@ -128,9 +124,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp"
                />
          </RelativeLayout>
@@ -151,11 +147,11 @@
                 android:id="@+id/txtFwdWkCover2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:gravity="left"
                 android:layout_marginLeft="8dp"
                 android:text="@string/fwd_wk_cover"
-                android:textColor="@color/smdm_default_color"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="12sp" />
 
 
@@ -165,9 +161,9 @@
                  android:layout_height="wrap_content"
                  android:layout_alignParentLeft="true"
                  android:layout_marginLeft="8dp"
-                 android:layout_marginTop="35dp"
+                 android:layout_marginTop="25dp"
                  android:text=""
-                android:textColor="@color/bg_store_code_text"
+                android:textColor="@color/ezfbb_black"
                 android:textSize="17sp"
                 />
 

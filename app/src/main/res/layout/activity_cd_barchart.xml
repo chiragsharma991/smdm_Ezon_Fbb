@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".CustomerEngagement.CustDetailBarChart">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_cd_barchart"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:contentInsetEnd="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rel_one"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <RelativeLayout
+                    android:id="@+id/rel_back"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/button_click">
+
+                    <Button
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/ic_arrow_back_black"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txt_cdb_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="19sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel_one"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/lin_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:weightSum="1">
+
+                    <ImageButton
+                        android:id="@+id/imgBtn_cdb_mobile"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="4dp"
+                        android:background="@mipmap/iconphone" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:background="@android:color/transparent" />
+
+                    <TextView
+                        android:id="@+id/txt_cdb_mobileNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:hint=""
+                        android:textColor="@color/ezfbb_black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/imgBtn_cdb_email"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="4dp"
+                        android:background="@mipmap/iconmail" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:background="@android:color/transparent" />
+
+                    <TextView
+                        android:id="@+id/txt_cdb_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:hint=""
+                        android:singleLine="true"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_cd_barchart">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_barChart1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="false"
+                app:contentPadding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/lin_barchart_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_cd_pref_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Preferred Categories"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="19sp" />
+
+
+                    <com.github.mikephil.charting.charts.HorizontalBarChart
+                        android:id="@+id/hbarchart_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="15dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--<View-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:id="@+id/view1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@color/smdm_divider_Black" />-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_barChart2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="false"
+                app:contentPadding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/lin_barchart_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_cd_pref_brands"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Preferred Brands"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="19sp" />
+
+                    <com.github.mikephil.charting.charts.HorizontalBarChart
+                        android:id="@+id/hbarchart_brands"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="15dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--<View-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:id="@+id/view2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@color/smdm_divider_Black" />-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_barChart3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="false"
+                app:contentPadding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/lin_barchart_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_cd_visit_prefernce1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Visit Preference Month Start or End "
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="19sp" />
+
+
+                    <com.github.mikephil.charting.charts.HorizontalBarChart
+                        android:id="@+id/hbarchart_month"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="15dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!--<View-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:id="@+id/view3"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="2dp"-->
+            <!--android:background="@color/smdm_divider_Black" />-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_barChart4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="false"
+                app:contentPadding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/lin_barchart_four"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_cd_visit_prefernce2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Visit Preference Weekday or Weekend"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="19sp" />
+
+
+                    <com.github.mikephil.charting.charts.HorizontalBarChart
+                        android:id="@+id/hbarchart_week"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

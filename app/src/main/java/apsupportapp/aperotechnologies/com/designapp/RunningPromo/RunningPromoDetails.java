@@ -201,7 +201,8 @@ public class RunningPromoDetails extends AppCompatActivity {
         }
     }
 
-    private void addTexttoTable() {
+    private void addTexttoTable()
+    {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearTable);
         for (int i = 0; i < promoList.size(); i++) {
             NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));

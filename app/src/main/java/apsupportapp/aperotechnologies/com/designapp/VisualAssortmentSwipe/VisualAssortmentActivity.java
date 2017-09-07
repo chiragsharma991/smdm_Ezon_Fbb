@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.Spanned;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -39,6 +40,8 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +51,8 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
 
+import static apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.SwipeDeckAdapter.relbuy;
+
 public class VisualAssortmentActivity extends AppCompatActivity {
 
     private static final String TAG = "VisualAssortmentActivity";
@@ -56,9 +61,9 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     private Context context ;
     ArrayList<VisualAssort> visualassortmentlist;
     SwipeDeckAdapter adapter;
-    String likeDislikeFlg ;
+    static String likeDislikeFlg ;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken;
+    String userId, bearertoken,storeCode;
     RadioButton visualAssort_PendingChk,visualAssort_CompletedChk;
     LinearLayout visualAssort_Pending,visualAssort_Completed;
     RequestQueue queue;
@@ -73,6 +78,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     static Button btnCommentDone;
     public static EditText edtTextSets, edtTextComment;
     static TextView txtSize;
+    private TextView txtStoreCode,txtStoreName;
     private LinearLayout SwipeLayout;
     public String selectedString="";
     boolean flag = false;
@@ -92,7 +98,10 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         Visual_Assortment_Activity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId","");
+//        userId = userId.substring(0,userId.length()-5);
+//        Log.e("userId",""+userId);
         bearertoken = sharedPreferences.getString("bearerToken","");
+        storeCode = sharedPreferences.getString("storeDescription","");
         reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
@@ -112,7 +121,10 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             }
         });
 
-
+        txtStoreCode = (TextView)findViewById(R.id.txtStoreCode);
+        txtStoreCode.setText(storeCode.trim().substring(0,4));
+        txtStoreName = (TextView)findViewById(R.id.txtStoreName);
+        txtStoreName.setText(storeCode.substring(5));
         imgBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         visualsort = (RelativeLayout)findViewById(R.id.visualsort);
         SwipeLayout = (LinearLayout)findViewById(R.id.swipeLayout);
@@ -291,6 +303,10 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             count = 0;
             recache = "true";
             likeDislikeFlg = "Pending";
+            btnCommentDone.setVisibility(View.VISIBLE);
+            btnBuyDone.setVisibility(View.VISIBLE);
+            edtTextSets.setEnabled(true);
+            edtTextComment.setEnabled(true);
             if (postRequest != null) {
                 postRequest.cancel();
             }
@@ -314,118 +330,156 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
         cardStack.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override
-            public void cardSwipedLeft(int position) {
-
-                //dislike
-                VisualAssort visualAssort1 = visualassortmentlist.get(position);
-                String articleOption = visualAssort1.getArticleOption();
-                String checkLikedislike = visualAssort1.getLikeDislikeFlg();
-                if(checkLikedislike == null)
+            public void cardSwipedLeft(int position)
+            {
+                if(likeDislikeFlg.equals("Pending"))
                 {
-                    checkLikedislike = "";
-                }
-                String checkFeedback = visualAssort1.getFeedback();
-                if(checkFeedback == null)
-                {
-                    checkFeedback = "";
-                }
-                int checkSizeSet = visualAssort1.getSizeSet();
-
-                JSONObject obj = new JSONObject();
-                try
-                {
-                    obj.put("articleOption",articleOption);
-                    obj.put("likeDislikeFlg","0");
-                    obj.put("feedback", checkFeedback);
-                    obj.put("sizeSet", checkSizeSet);
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-
-
-                if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
-                {
-
-                    //GO FOR POST METHOD
-                    if(postRequest != null)
-                    {
-                        postRequest.cancel();
+                    //dislike
+                    VisualAssort visualAssort1 = visualassortmentlist.get(position);
+                    String articleOption = visualAssort1.getArticleOption();
+                    String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                    if (checkLikedislike == null) {
+                        checkLikedislike = "";
                     }
-                    VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
-                    visualAssort1.setLikeDislikeFlg("0");
+                    String checkFeedback = visualAssort1.getFeedback();
+                    if (checkFeedback == null) {
+                        checkFeedback = "";
+                    }
+                    int checkSizeSet = visualAssort1.getSizeSet();
+
+                    JSONObject obj = new JSONObject();
+                    try {
+                        obj.put("articleOption", articleOption);
+                        obj.put("likeDislikeFlg", "0");
+                        obj.put("feedback", checkFeedback);
+                        obj.put("sizeSet", checkSizeSet);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
+                    {
+
+                        //GO FOR POST METHOD
+                        if (postRequest != null)
+                        {
+                            postRequest.cancel();
+                        }
+                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+                        visualAssort1.setLikeDislikeFlg("0");
+                    }
+                    else
+                    {
+                        //GO FOR PUT METHOD
+                        if (postRequest != null)
+                        {
+                            postRequest.cancel();
+                        }
+                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+                        visualAssort1.setLikeDislikeFlg("0");
+                    }
                 }
                 else
                 {
-                    //GO FOR PUT METHOD
-                    if(postRequest != null)
-                    {
-                        postRequest.cancel();
-                    }
-                    VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-                    visualAssort1.setLikeDislikeFlg("0");
-
+                    Log.e("came ","here");
                 }
             }
 
             @Override
-            public void cardSwipedRight(int position) {
-
-                //like
-                VisualAssort visualAssort1 = visualassortmentlist.get(position);
-                String articleOption = visualAssort1.getArticleOption();
-                String checkLikedislike = visualAssort1.getLikeDislikeFlg();
-                if(checkLikedislike == null)
+            public void cardSwipedRight(int position)
+            {
+                if(likeDislikeFlg.equals("Pending"))
                 {
-                    checkLikedislike = "";
-                }
-                String checkFeedback = visualAssort1.getFeedback();
-                if(checkFeedback == null)
-                {
-                    checkFeedback = "";
-                }
-                int checkSizeSet = visualAssort1.getSizeSet();
-
-                JSONObject obj = new JSONObject();
-                try
-                {
-                    obj.put("articleOption",articleOption);
-                    obj.put("likeDislikeFlg","1");
-                    obj.put("feedback", checkFeedback);
-                    obj.put("sizeSet", checkSizeSet);
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-
-                if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
-                {
-
-                    //GO FOR POST METHOD
-                    if(postRequest != null)
+                    //like
+                    VisualAssort visualAssort1 = visualassortmentlist.get(position);
+                    if(VisualAssortmentActivity.layoutBuy.getVisibility()==View.VISIBLE)
                     {
-                        postRequest.cancel();
+                        Log.e("edit Text visible","=====");
+
+                            Reusable_Functions.sDialog(context, "Loading..");
+                            String articleOption = visualAssort1.getArticleOption();
+                            String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                            if (checkLikedislike == null)
+                            {
+                                checkLikedislike = "";
+                            }
+                            String checkFeedback = visualAssort1.getFeedback();
+                            if (checkFeedback == null)
+                            {
+                                checkFeedback = "";
+                            }
+
+                            JSONObject obj = new JSONObject();
+                            try {
+                                obj.put("articleOption", articleOption);
+                                obj.put("likeDislikeFlg", "1");
+                                obj.put("feedback", checkFeedback);
+                                obj.put("sizeSet", Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+                            VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+                            relbuy.setEnabled(false);
+                            visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+                            visualAssort1.setLikeDislikeFlg("1");
+                            edtTextSets.setText("");
+
                     }
-                    VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
-                    visualAssort1.setLikeDislikeFlg("1");
+                    else
+                    {
+                        Log.e("edit Text invisible","=====");
+                        relbuy.setEnabled(true);
+                        String articleOption = visualAssort1.getArticleOption();
+                        String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+                        if (checkLikedislike == null) {
+                            checkLikedislike = "";
+                        }
+                        String checkFeedback = visualAssort1.getFeedback();
+                        if (checkFeedback == null) {
+                            checkFeedback = "";
+                        }
+                        int checkSizeSet = visualAssort1.getSizeSet();
+
+                        JSONObject obj = new JSONObject();
+                        try
+                        {
+                            obj.put("articleOption", articleOption);
+                            obj.put("likeDislikeFlg", "1");
+                            obj.put("feedback", checkFeedback);
+                            obj.put("sizeSet", checkSizeSet);
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        if (checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals(""))) {
+
+                            //GO FOR POST METHOD
+                            if (postRequest != null) {
+                                postRequest.cancel();
+                            }
+                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+                            visualAssort1.setLikeDislikeFlg("1");
+                        } else {
+                            //GO FOR PUT METHOD
+                            if (postRequest != null) {
+                                postRequest.cancel();
+                            }
+                            VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+                            visualAssort1.setLikeDislikeFlg("1");
+                        }
+                    }
                 }
                 else
                 {
-                    //GO FOR PUT METHOD
-                    if(postRequest != null)
-                    {
-                        postRequest.cancel();
-                    }
-                    VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-                    visualAssort1.setLikeDislikeFlg("1");
-
+                    Log.e("Completed","-------");
                 }
             }
 
             @Override
-            public void cardsDepleted() {
+            public void cardsDepleted()
+            {
                 Toast.makeText(context, "No more data", Toast.LENGTH_LONG).show();
             }
 
@@ -462,19 +516,25 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 limit = 100;
                 count = 0;
                 recache = "true";
+                visualassortmentlist = new ArrayList<VisualAssort>();
                 cardStack.setVisibility(View.GONE);
                 likeDislikeFlg = "Completed";
+                btnCommentDone.setVisibility(View.INVISIBLE);
+                btnBuyDone.setVisibility(View.INVISIBLE);
+                edtTextComment.setEnabled(false);
+                edtTextSets.setEnabled(false);
                 requestdisplayVisualAssortment(selectedString);
                 visualAssortSortLayout.setVisibility(View.GONE);
             }
             else
             {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();                visualAssortSortLayout.setVisibility(View.GONE);
+                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 visualAssortSortLayout.setVisibility(View.GONE);
             }
         }
     }
-    private void visualAssort_pendingFunction() {
+    private void visualAssort_pendingFunction()
+    {
         if (visualAssort_PendingChk.isChecked()) {
             visualAssort_CompletedChk.setChecked(false);
             visualAssort_PendingChk.setChecked(true);
@@ -493,6 +553,11 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 recache = "true";
                 cardStack.setVisibility(View.GONE);
                 likeDislikeFlg = "Pending";
+                visualassortmentlist = new ArrayList<VisualAssort>();
+                btnCommentDone.setVisibility(View.VISIBLE);
+                btnBuyDone.setVisibility(View.VISIBLE);
+                edtTextSets.setEnabled(true);
+                edtTextComment.setEnabled(true);
                 requestdisplayVisualAssortment(selectedString);
                 visualAssortSortLayout.setVisibility(View.GONE);
             }
@@ -522,14 +587,16 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg +"&recache="+ recache;
         }
 
-
+      Log.e("visual assort url :",""+url);
       postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("va response :",""+response);
                        try
                         {
-                           if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            int i;
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
@@ -540,7 +607,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
                             else if (response.length() == limit)
                             {
-                                for (int i = 0; i < response.length(); i++)
+                                for (i= 0; i < response.length(); i++)
                                 {
                                     visualAssort = gson.fromJson(response.get(i).toString(), VisualAssort.class);
                                     visualassortmentlist.add(visualAssort);
@@ -557,6 +624,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 {
                                     adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
                                     cardStack.setAdapter(adapter);
+
                                     adapter.notifyDataSetChanged();
                                     cardStack.setVisibility(View.VISIBLE);
                                     Reusable_Functions.hDialog();
@@ -564,7 +632,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                             }
                             else if (response.length() < limit)
                             {
-                                for (int i = 0; i < response.length(); i++)
+                                for ( i = 0; i < response.length(); i++)
                                 {
                                     visualAssort = gson.fromJson(response.get(i).toString(), VisualAssort.class);
                                     visualassortmentlist.add(visualAssort);
@@ -580,6 +648,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 {
                                     adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
                                     cardStack.setAdapter(adapter);
+
                                     adapter.notifyDataSetChanged();
                                     cardStack.setVisibility(View.VISIBLE);
                                     Reusable_Functions.hDialog();
@@ -628,6 +697,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
     public void onBackClick()
     {
+        likeDislikeFlg = "";
+        likeDislikeFlg = "Pending";
         InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if(inputManager != null)
         {
@@ -638,19 +709,15 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         {
             reloverlay.setVisibility(View.GONE);
         }
-        else if(VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE)
+         if(VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE)
         {
             VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
         }
-        else if(VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE)
+        if(VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE)
         {
             VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
         }
-        else
-        {
-
-           finish();
-        }
+       finish();
     }
 
 

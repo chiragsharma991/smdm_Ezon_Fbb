@@ -5,6 +5,7 @@ package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,15 +72,15 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     public static String text1 = "", text2 = "", text3 = "", text4 = "", text5 = "";
 
     SalesFilterExpandableList listAdapter;
-    Boolean flag = false;
+
     int mGroupPosition = 0;
     int mChildPosition = 0;
     public static Boolean l1 = false, l2 = false, l3 = false, l4 = false, l5 = false;
     public static int level;
 
 
-    public SalesFilterExpandableList(Context context, ArrayList<String> listDataGroup, HashMap<String, List<String>> listDataChild, ExpandableListView expandableListView, SalesFilterExpandableList listAdapter) {
-
+    public SalesFilterExpandableList(Context context, ArrayList<String> listDataGroup, HashMap<String, List<String>> listDataChild, ExpandableListView expandableListView, SalesFilterExpandableList listAdapter)
+    {
         mContext = context;
         this.mListDataGroup = listDataGroup;
         this.mListDataChild = listDataChild;
@@ -93,8 +94,6 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         salesList = new ArrayList<>();
         this.dublicate_listDataChild = new HashMap<String, List<String>>();
         this.dublicate_listDataChild.putAll(mListDataChild);
-
-        flag = false;
 
         salesFilterActivity = new SalesFilterActivity();
     }
@@ -216,24 +215,24 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                                                TextView txtView = (TextView) rel.getChildAt(0);
                                                txtClickedVal = txtView.getText().toString();
                                                level = groupPosition + 2;
-                                               if (!cb.isChecked()) {
-
+                                               if (!cb.isChecked())
+                                               {
                                                    salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(true);
                                                    salesFilterActivity.processbar.setVisibility(View.VISIBLE);
-                                                   if (groupPosition == 4) {
-                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
-                                                       cb.setChecked(true);
+                                                   if (groupPosition == 4)
+                                                   {
+//                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
+//                                                       cb.setChecked(true);
                                                        salesFilterActivity.processbar.setVisibility(View.GONE);
                                                    }
                                                    BuildUP(level);
-
-                                               } else if(cb.isChecked())
+                                               }
+                                               else if(cb.isChecked())
                                                {
                                                    salesList.remove(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(false);
                                                    removeBuildUP(level);
-
                                                }
 
                                            }
@@ -242,9 +241,11 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    private void removeBuildUP(int level) {
+    private void removeBuildUP(int level)
+    {
 
-        if (level == 2) {
+        if (level == 2)
+        {
             myList1.remove(txtClickedVal.trim());
             String[] array = (String[]) myList1.toArray(new String[0]);
             String str1 = Arrays.toString(array);
@@ -253,20 +254,26 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             str1 = str1.replace(", ",",");
             text1 = str1;
 
-            if (myList1.size() == 0) {
+            if (myList1.size() == 0)
+            {
                 salesList.clear();
                 mListDataChild.putAll(dublicate_listDataChild);
-                for (int k = level - 1; k < mListDataGroup.size(); k++) {
+                for (int k = level - 1; k < mListDataGroup.size(); k++)
+                {
                     SalesFilterActivity.pfilter_list.collapseGroup(k);
                 }
-                for (int k = level - 1; k < mListDataGroup.size(); k++) {
+                for (int k = level - 1; k < mListDataGroup.size(); k++)
+                {
                     SalesFilterActivity.pfilter_list.expandGroup(k);
                 }
-            } else {
+            }
+            else
+            {
                 requestCategoryAPI(level, text1);
             }
         }
-        if (level == 3) {
+        if (level == 3)
+        {
 
             myList2.remove(myList2.indexOf(txtClickedVal.trim()));
 
@@ -277,55 +284,64 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             str1 = str1.replace(", ",",");
 
             text2 = str1;
-            if (myList2.size() == 0) {
-                if (myList1.size() == 0) {
+            if (myList2.size() == 0)
+            {
+                if (myList1.size() == 0)
+                {
                     mListDataChild.putAll(dublicate_listDataChild);
-                    for (int k = level - 1; k < mListDataGroup.size(); k++) {
+                    for (int k = level - 1; k < mListDataGroup.size(); k++)
+                    {
                         SalesFilterActivity.pfilter_list.collapseGroup(k);
                     }
-                    for (int k = level - 1; k < mListDataGroup.size(); k++) {
+                    for (int k = level - 1; k < mListDataGroup.size(); k++)
+                    {
                         SalesFilterActivity.pfilter_list.expandGroup(k);
                     }
-                } else {
+                }
+                else
+                {
                     level = 2;
                     requestCategoryAPI(level, text1);
                 }
-            } else {
+            } else
+            {
                 requestCategoryAPI(level, text2);
             }
 
         }
-        if (level == 4) {
-
-
+        if (level == 4)
+        {
             myList3.remove(myList3.indexOf(txtClickedVal.trim()));
-
             String[] array = (String[]) myList3.toArray(new String[0]);
-
             String str1 = Arrays.toString(array);
             str1 = str1.replace("[", "");
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ",",");
             text3 = str1;
-            if (myList3.size() == 0) {
-                if (myList2.size() == 0) {
-
+            if (myList3.size() == 0)
+            {
+                if (myList2.size() == 0)
+                {
                     mListDataChild.putAll(dublicate_listDataChild);
-                    for (int k = level - 1; k < mListDataGroup.size(); k++) {
+                    for (int k = level - 1; k < mListDataGroup.size(); k++)
+                    {
                         SalesFilterActivity.pfilter_list.collapseGroup(k);
                     }
-                    for (int k = level - 1; k < mListDataGroup.size(); k++) {
+                    for (int k = level - 1; k < mListDataGroup.size(); k++)
+                    {
                         SalesFilterActivity.pfilter_list.expandGroup(k);
                     }
-
-                } else {
+                }
+                else
+                {
                     level = 3;
                     requestCategoryAPI(level, text2);
                 }
-            } else {
+            }
+            else
+            {
                 requestCategoryAPI(level, text3);
             }
-
         }
         if (level == 5)
         {
@@ -336,27 +352,33 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ",",");
             text4 = str1;
-            if (myList4.size() == 0) {
-                if (myList3.size() == 0) {
+            if (myList4.size() == 0)
+            {
+                if (myList3.size() == 0)
+                {
                     mListDataChild.putAll(dublicate_listDataChild);
-                    for (int k = level - 1; k < mListDataGroup.size(); k++) {
+                    for (int k = level - 1; k < mListDataGroup.size(); k++)
+                    {
                         SalesFilterActivity.pfilter_list.collapseGroup(k);
                     }
-                    for (int k = level - 1; k < mListDataGroup.size(); k++) {
+                    for (int k = level - 1; k < mListDataGroup.size(); k++)
+                    {
                         SalesFilterActivity.pfilter_list.expandGroup(k);
                     }
-
-                } else {
+                }
+                else
+                {
                     level = 4;
                     requestCategoryAPI(level, text3);
                 }
 
-            } else {
+            } else
+            {
                 requestCategoryAPI(level, text4);
             }
         }
-        if (level == 6) {
-
+        if (level == 6)
+        {
             myList5.remove(myList5.indexOf(txtClickedVal.trim()));
             String[] array = (String[]) myList5.toArray(new String[0]);
             String str1 = Arrays.toString(array);
@@ -364,48 +386,45 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ",",");
             text5 = str1;
-
         }
     }
 
-    private void BuildUP(int level) {
-
-        if (level == 2) {
-            if (!l1) {
-
+    private void BuildUP(int level)
+    {
+        if (level == 2)
+        {
+            if (!l1)
+            {
                 myList1.add(txtClickedVal.trim());
                 l1 = true;
                 l2 = false;
                 l3 = false;
                 l4 = false;
                 l5 = false;
-
                 String[] array = (String[]) myList1.toArray(new String[0]);
-
                 String str_dept = Arrays.toString(array);
                 str_dept = str_dept.replace("[", "");
                 str_dept = str_dept.replace("]", "");
                 str_dept = str_dept.replace(", ",",");
                 text1 = str_dept;
                 requestCategoryAPI(level, text1);
-
-            } else {
-
+            }
+            else
+            {
                 myList1.add(txtClickedVal.trim());
                 String[] array = (String[]) myList1.toArray(new String[0]);
-
                 String str_dept = Arrays.toString(array);
-
                 str_dept = str_dept.replace("[", "");
                 str_dept = str_dept.replace("]", "");
                 str_dept = str_dept.replace(", ",",");
                 text1 = str_dept;
                 requestCategoryAPI(level, text1);
-
             }
         }
-        if (level == 3) {
-            if (!l2) {
+        if (level == 3)
+        {
+            if (!l2)
+            {
                 myList2.add(txtClickedVal.trim());
                 l1 = false;
                 l2 = true;
@@ -413,16 +432,15 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 l4 = false;
                 l5 = false;
                 String[] array = (String[]) myList2.toArray(new String[0]);
-
                 String str_cate = Arrays.toString(array);
                 str_cate = str_cate.replace("[", "");
                 str_cate = str_cate.replace("]", "");
                 str_cate = str_cate.replace(", ",",");
                 text2 = str_cate;
                 requestCategoryAPI(level, text2);
-
-            } else {
-
+            }
+            else
+            {
                 myList2.add(txtClickedVal.trim());
                 String[] array = (String[]) myList2.toArray(new String[0]);
                 String str_cate = Arrays.toString(array);
@@ -433,10 +451,11 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 requestCategoryAPI(level, text2);
             }
         }
-        if (level == 4) {
-            if (!l3) {
+        if (level == 4)
+        {
+            if (!l3)
+            {
                 myList3.add(txtClickedVal.trim());
-
                 l1 = false;
                 l2 = false;
                 l3 = true;
@@ -447,12 +466,11 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 str_class = str_class.replace("[", "");
                 str_class = str_class.replace("]", "");
                 str_class = str_class.replace(", ",",");
-
                 text3 = str_class;
                 requestCategoryAPI(level, text3);
-
-            } else {
-
+            }
+            else
+            {
                 myList3.add(txtClickedVal.trim());
                 String[] array = (String[]) myList3.toArray(new String[0]);
                 String str_class = Arrays.toString(array);
@@ -464,8 +482,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             }
         }
         if (level == 5) {
-            if (!l4) {
-
+            if (!l4)
+            {
                 myList4.add(txtClickedVal.trim());
                 l1 = false;
                 l2 = false;
@@ -479,9 +497,9 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 str_brand = str_brand.replace(", ",",");
                 text4 = str_brand;
                 requestCategoryAPI(level, text4);
-
-            } else {
-
+            }
+            else
+            {
                 myList4.add(txtClickedVal.trim());
                 String[] array = (String[]) myList4.toArray(new String[0]);
                 String str_brand = Arrays.toString(array);
@@ -490,11 +508,12 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 str_brand = str_brand.replace(", ",",");
                 text4 = str_brand;
                 requestCategoryAPI(level, text4);
-
             }
         }
-        if (level == 6) {
-            if (!l5 ) {
+        if (level == 6)
+        {
+            if (!l5 )
+            {
                 myList5.add(txtClickedVal.trim());
                 l1 = false;
                 l2 = false;
@@ -502,24 +521,21 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 l4 = false;
                 l5 = true;
                 String[] array = (String[]) myList5.toArray(new String[0]);
-
                 String str_brndcls = Arrays.toString(array);
                 str_brndcls = str_brndcls.replace("[", "");
                 str_brndcls = str_brndcls.replace("]", "");
                 str_brndcls = str_brndcls.replace(", ",",");
                 text5 = str_brndcls;
-
-            } else {
-
+            }
+            else
+            {
                 myList5.add(txtClickedVal.trim());
                 String[] array = (String[]) myList5.toArray(new String[0]);
-
                 String str_brandcls = Arrays.toString(array);
                 str_brandcls = str_brandcls.replace("[", "");
                 str_brandcls = str_brandcls.replace("]", "");
                 str_brandcls = str_brandcls.replace(", ",",");
                 text5 = str_brandcls;
-
             }
         }
     }
@@ -530,10 +546,9 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     }
 
 
-    public void filterData(String query) {
-
-
-        String charText = query.toLowerCase(Locale.getDefault());
+    public void filterData(String query)
+    {
+       String charText = query.toLowerCase(Locale.getDefault());
         mListDataChild.clear();
         if (charText.length() == 0) {
             mListDataChild.putAll(dublicate_listDataChild);
@@ -544,16 +559,18 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             SalesFilterActivity.pfilter_list.collapseGroup(3);
             SalesFilterActivity.pfilter_list.collapseGroup(4);
 
-        } else {
+        }
+        else
+        {
             for (int j = 0; j < 5; j++) {
                 List<String> arrayList = new ArrayList<String>();
 
                 for (int k = 0; k < dublicate_listDataChild.get(mListDataGroup.get(j)).size(); k++)
 
                 {
-                    if (dublicate_listDataChild.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText)) {
+                    if (dublicate_listDataChild.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText))
+                    {
                         arrayList.add(dublicate_listDataChild.get(mListDataGroup.get(j)).get(k));
-
                     }
                 }
 
@@ -564,7 +581,6 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
                 SalesFilterActivity.pfilter_list.expandGroup(2);
                 SalesFilterActivity.pfilter_list.expandGroup(3);
                 SalesFilterActivity.pfilter_list.expandGroup(4);
-
             }
             notifyDataSetChanged();
         }
@@ -582,8 +598,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     }
 
 
-    public void requestCategoryAPI(int level1, final String dept) {
-
+    public void requestCategoryAPI(int level1, final String dept)
+    {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -609,11 +625,12 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
             category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&brand=" + dept.replaceAll("&", "%26").replace(" ","%20");
 
         }
+        Log.e("search url:",""+category_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, category_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Log.e("response :",""+response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
 

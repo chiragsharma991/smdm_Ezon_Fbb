@@ -28,6 +28,16 @@ public class SalesAnalysisListDisplay {
      double wowNetSalesUnitsGrowthPct;
      double planSaleNetVal;
      double pvaAchieved;
+
+    public double getPvaAchived() {
+        return pvaAchived;
+    }
+
+    public void setPvaAchived(double pvaAchived) {
+        this.pvaAchived = pvaAchived;
+    }
+
+    double pvaAchived;
      double stkOnhandQty;
      double stkGitQty;
      double  ros;
@@ -39,6 +49,17 @@ public class SalesAnalysisListDisplay {
      double rgm;
      double marginPct;
      double velocity;
+     String level;
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+
 
     public void setStoreCode(String storeCode) {
         this.storeCode = storeCode;

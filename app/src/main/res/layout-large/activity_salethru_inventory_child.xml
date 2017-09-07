@@ -1,355 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-                android:background="@color/bg_screen_color"
     android:orientation="vertical">
 
 
     <RelativeLayout
-        android:id="@+id/bst_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
 
-        <RelativeLayout
-            android:id="@+id/bst_Rel_image_child"
-            android:layout_width="wrap_content"
+        >
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/bst_cardView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            app:cardBackgroundColor="@color/ezfb_White"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="5dp"
 
             >
 
-            <ImageView
-                android:id="@+id/bestInvent_image_child"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="0dp"
-                android:scaleType="fitXY"
-
-                />
-
-            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:id="@+id/progressPicaso"
-                android:layout_centerInParent="true"
-                android:background="#0000"
-                android:keepScreenOn="true"
-                android:theme="@style/ProgressBar"
-                >
-
-            </ProgressBar>
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/relativeTwo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_toRightOf="@+id/bst_Rel_image_child"
-            android:gravity="center_horizontal">
-
-            <!--Buy one-->
-
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp">
 
-                <LinearLayout
+                >
+
+                <RelativeLayout
+                    android:id="@+id/bst_Rel_image_child"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/bestInvent_image_child"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="0dp"
+                        android:scaleType="fitXY" />
+
+                    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/progressPicaso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="#0000"
+                        android:keepScreenOn="true"
+                        android:padding="10dp"
+                        android:theme="@style/ProgressBar">
+
+                    </ProgressBar>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeTwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-                    <!---->
+                    android:layout_marginTop="0dp"
+                    android:layout_toRightOf="@+id/bst_Rel_image_child"
+                    android:gravity="center_horizontal">
 
-                    <TextView
-                        android:id="@+id/bestInvent_option"
+                    <!--Buy one-->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
-                        android:text="Buy One Get One"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textSize="@dimen/smdm_inflator_title_large"
-                        android:textStyle="bold"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
 
-                        />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                    <RelativeLayout
-                        android:id="@+id/top_fav"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.8">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.2"
+                                android:orientation="horizontal"
 
-
-
-
-                        <ToggleButton
-                            android:id="@+id/toggle_bestInvent_fav"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/toggleswitch"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:textOff=""
-                            android:textOn=""
-
-                            />
+                                >
 
 
-                    </RelativeLayout>
+                                <TextView
+                                    android:id="@+id/bestInvent_option"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Buy One Get One "
+                                    android:textColor="@color/ezfb_black"
+                                    android:textSize="@dimen/smdm_inflator_subtitle_large" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.8"
+                                android:gravity="center_horizontal|top"
+                                android:orientation="horizontal">
+
+                                <ToggleButton
+                                    android:id="@+id/top_fav"
+                                    android:layout_width="@dimen/icon_width"
+                                    android:layout_height="@dimen/icon_height"
+                                    android:background="@drawable/toggleswitch"
+                                    android:focusable="false"
+                                    android:focusableInTouchMode="false"
+                                    android:textOff=""
+                                    android:textOn="" />
 
 
-                </LinearLayout>
+                            </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/bst_lineOne_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/smdm_inflater_divider"
-                    android:layout_alignStart="@+id/bst_head_child"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard" />
+                        </LinearLayout>
 
 
-                <!--Promo sales-->
+                        <!--sales layout-->
+
+                        <LinearLayout
+                            android:layout_width="252dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="0dp"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:id="@+id/relative1"
+                                    android:layout_width="70dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/txt_sale_soh"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="SOH"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+
+                                        />
+
+                                    <TextView
+                                        android:layout_below="@+id/txt_sale_soh"
+                                        android:id="@+id/bestInvent_SOH"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
+                                <View
+                                    android:layout_marginRight="20dp"
+                                    android:layout_toRightOf="@+id/relative1"
+                                    android:id="@+id/sale_view1"
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
+
+                                <RelativeLayout
+                                    android:layout_toRightOf="@+id/sale_view1"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/txt_sales"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="Sales"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large" />
+
+                                    <TextView
+                                        android:layout_below="@+id/txt_sales"
+                                        android:id="@+id/bestInvent_Sale"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
+
+                                </RelativeLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="SOH(U)"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        android:id="@+id/textView6"
-                        />
+                            </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:text=":"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
+                            <TextView
+                                android:layout_marginRight="20dp"
+                                android:id="@+id/bst_lineOne_child"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/smdm_inflater_divider"
+                                android:layout_alignStart="@+id/bst_head_child"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/ezfb_black" />
 
-                    <TextView
-                        android:id="@+id/bestInvent_SOH"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:text="100"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
+                            <RelativeLayout
 
-                </LinearLayout>
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp">
 
 
-                <!--Promo Sales(U)-->
+                                <RelativeLayout
+                                    android:id="@+id/relative2"
+                                    android:layout_width="70dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                                    <TextView
+                                        android:id="@+id/txt_sale_thru"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="Sell thru %"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:text="Sales(U)"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        android:id="@+id/textView7" />
+                                    <TextView
+                                        android:layout_below="@+id/txt_sale_thru"
+                                        android:id="@+id/bestInvent_sellThru"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:text=":"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
 
-                    <TextView
-                        android:id="@+id/bestInvent_Sale"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:text="100"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
+                                </RelativeLayout>
 
-                </LinearLayout>
+                                <View
+                                    android:layout_marginRight="20dp"
+                                    android:layout_toRightOf="@+id/relative2"
+                                    android:id="@+id/sale_view2"
+                                    android:layout_width="1dp"
+                                    android:background="@color/ezfb_black"
+                                    android:layout_height="match_parent"></View>
 
-                <!--GIT(U)-->
+                                <RelativeLayout
+                                    android:layout_toRightOf="@+id/sale_view2"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                                    <TextView
+                                        android:id="@+id/txt_zonal_sale"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="Zonal sell thru%"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="Sell thru % (U)"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
+                                    <TextView
+                                        android:layout_below="@+id/txt_zonal_sale"
+                                        android:id="@+id/bestInvent_zonalSell"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:singleLine="true"
+                                        android:text="100"
+                                        android:textColor="@color/ezfb_black"
+                                        android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                        android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:text=":"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
+                                </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/bestInvent_sellThru"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:text="100"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
 
-                </LinearLayout>
+                            </RelativeLayout>
 
-                <!--Sell Threw%-->
+                        </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    </LinearLayout>
+                </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="Zonal sell\nthru % (U)"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
-                        android:text=":"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
+            </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/bestInvent_zonalSell"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:text="100"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
 
-                </LinearLayout>
-                <!--ROS(U)-->
+        </android.support.v7.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    android:weightSum="1">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="Wks on floor"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:text=":"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-                    <TextView
-                        android:id="@+id/bestInvent_wks"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.4"
-                        android:singleLine="true"
-                        android:text="NA"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
 
-                </LinearLayout>
-
-                <!--Table layout-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-
-                    >
-                </LinearLayout>
-
-            </LinearLayout>
-        </RelativeLayout>
     </RelativeLayout>
+
+
 </RelativeLayout>

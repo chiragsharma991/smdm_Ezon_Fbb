@@ -7,10 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <!--
-    <Protected-broadcast android:name="android.location.BOOT_COMPLETED" />
-    <Protected-broadcast android:name="android.location.USER_PRESENT" />
-    -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -21,7 +20,7 @@
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,20 +28,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginActivity1"
             android:screenOrientation="portrait"
             android:theme="@style/Login"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".DashBoardActivity"
-            android:label="@string/title_activity_dash_board"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
+        <!-- <activity -->
+        <!-- android:name=".DashBoardActivity" -->
+        <!-- android:label="@string/title_activity_dash_board" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:windowSoftInputMode="stateHidden" /> -->
         <activity
             android:name=".AboutUsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+        <service
+            android:name=".FCM.TokenRefresh">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".FCM.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".ProductInformation.StyleActivity"
             android:screenOrientation="portrait"
@@ -108,8 +121,7 @@
         <activity
             android:name=".ExpiringPromo.ExpiringPromoActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".UpcomingPromo.UpcomingPromo"
             android:screenOrientation="portrait"
@@ -118,10 +130,14 @@
             android:name=".BestPerformersPromo.BestPerformerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <!--<activity-->
-            <!--android:name=".WorstPerformersPromo.WorstPerformerActivity"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:windowSoftInputMode="stateHidden" />-->
+        <!-- <activity -->
+        <!-- android:name=".WorstPerformersPromo.WorstPerformerActivity" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:windowSoftInputMode="stateHidden" /> -->
+        <!-- <activity -->
+        <!-- android:name=".WorstPerformersPromo.WorstPerformerActivity" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:windowSoftInputMode="stateHidden" /> -->
         <activity
             android:name=".FreshnessIndex.FreshnessIndexActivity"
             android:screenOrientation="portrait"
@@ -150,7 +166,6 @@
             android:name=".BestPerformersInventory.BestPerformerInventory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".FloorAvailability.FloorAvailabilityActivity"
             android:screenOrientation="portrait"
@@ -201,9 +216,7 @@
         <activity
             android:name=".Collaboration.to_do.To_Do"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Collaboration.Status.StatusActivity"
             android:screenOrientation="portrait"
@@ -213,7 +226,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Collaboration.Status.Tab_fragment.ToBeSenderDetails"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Collaboration.Status.Tab_fragment.ToBeReceiverDetails"
             android:screenOrientation="portrait" />
@@ -231,23 +244,82 @@
             android:name=".StoreInspection.InspectionHistoryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".SeasonCatalogue.mpm_activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".StoreInspection.InspectionDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".SalesAnalysis.EzoneSalesFilter"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CustomerEngagement.CustomerLookupActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".HourlyPerformence.HourlyPerformence"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CustomerEngagement.CustomerDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CustomerEngagement.CustDetailBarChart"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".DashboardSnap.SnapDashboardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+        <activity
+            android:name=".FeedbackofCustomer.ProductAvailability_Notify"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".FeedbackofCustomer.PolicyExchangeRefund"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".FeedbackofCustomer.Price_Promotion"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".FeedbackofCustomer.ProductQualityRange"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".FeedbackofCustomer.OurStoreServices"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".FeedbackofCustomer.SupervisiorStaff"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_notify_HO" />
+        <activity android:name=".FeedbackofCustomer.PolicyExchangeHO.PolicyExchangeRefund_HO" />
+        <activity android:name=".FeedbackofCustomer.OurStoreServicesHO.OurStoreServices_HO" />
+        <activity android:name=".FeedbackofCustomer.PricePromotionHO.PricePromotion_HO" />
+        <activity android:name=".FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_HO" />
+        <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.SupervisorStaff_HO" />
+        <activity android:name=".FeedbackofCustomer.AvailabilityAndNotifyHO.Callback_ProductAvailability" />
+        <activity android:name=".FeedbackofCustomer.OurStoreServicesHO.Callback_OurStoreServices" />
+        <activity android:name=".FeedbackofCustomer.PolicyExchangeHO.Callback_PolicyExchange" />
+        <activity android:name=".FeedbackofCustomer.PricePromotionHO.Callback_PricePromotion" />
+        <activity android:name=".FeedbackofCustomer.ProductQualityRangeHO.Callback_ProductQualityRange" />
+        <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff" />
+        <activity android:name=".BORIS.MobileScreenActivity" />
+        <activity android:name=".BORIS.ReturnCatalogueActivity" />
+        <activity android:name=".BORIS.ReturnDetailActivity"></activity>
 
-        <activity android:name=".MPM.mpm_activity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden"
-                  android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".StoreInspection.InspectionDetailsActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".EzoneDashBoradActivity"
-                  android:screenOrientation="portrait"></activity>
-
-        <activity android:name=".Ezone_Freshness_Activity"
-                  android:screenOrientation="portrait"></activity>
-        <activity android:name=".Ezone_Sales_Activity"
-                  android:screenOrientation="portrait"></activity>
+        <activity android:name=".SalesAnalysis.Samplebarcode"/>
     </application>
 
 </manifest>

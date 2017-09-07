@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1.1"
-    android:background="@color/bg_screen_color"
+    android:background="@color/ezfb_activity_background"
     android:orientation="vertical">
 
     <LinearLayout
@@ -19,36 +19,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="2.1">
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginLeft="5dp"
                     android:text="Store description"
-                    android:textColor="@color/bg_store_code_text"
-                    android:textSize="@dimen/collaboration_stock_storecode"/>
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="15sp"/>
 
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/cardview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@android:color/white">
+                  >
 
                     <RelativeLayout
+                        android:layout_marginTop="8dp"
                         android:id="@+id/relativeLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
                         <ProgressBar
                             android:id="@+id/visualprogressPicaso"
@@ -69,9 +70,6 @@
                             tools:ignore="ContentDescription"
                             />
 
-
-
-
                     </RelativeLayout>
 
                 </android.support.v7.widget.CardView>
@@ -85,7 +83,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_marginBottom="3dp"
                 >
@@ -132,15 +130,11 @@
                         android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/stock_textsize_large"/>
 
-
-
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:orientation="vertical"
-                        android:layout_below="@+id/txtColor"
-                        >
+                        android:layout_below="@+id/txtColor">
 
                         <TextView
                             android:id="@+id/txtFabric"
@@ -204,7 +198,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:weightSum="4"
             >
             <RelativeLayout
@@ -219,7 +213,6 @@
                     android:layout_width="30dp"
                     android:layout_height="28dp"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/like_unselected"
                     android:clickable="false"
                     tools:ignore="ContentDescription"/>
 
@@ -247,14 +240,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/button_red_effect">
+                android:background="@drawable/button_click_effect">
 
                 <ImageButton
                     android:id="@+id/imgbtnbuy"
                     android:layout_width="20dp"
                     android:layout_height="28dp"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/order_set"
                     android:clickable="false"
                     tools:ignore="ContentDescription"/>
             </RelativeLayout>
@@ -264,14 +256,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/button_red_effect">
+                android:background="@drawable/button_click_effect">
 
                 <ImageButton
                     android:id="@+id/imgbtncomment"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/comment"
                     android:clickable="false"
                     tools:ignore="ContentDescription"/>
             </RelativeLayout>

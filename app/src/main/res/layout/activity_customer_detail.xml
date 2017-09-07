@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".CustomerEngagement.CustomerDetailActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_cust_detail"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:contentInsetEnd="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rel_one"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <RelativeLayout
+                    android:id="@+id/rel_cust_detl_back"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/button_click">
+
+                    <Button
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/ic_arrow_back_black"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txt_cust_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="19sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel_one"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/lin_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:weightSum="1">
+
+                    <ImageButton
+                        android:id="@+id/imgBtn_mobile"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="4dp"
+                        android:background="@mipmap/iconphone" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:background="@android:color/transparent" />
+
+                    <TextView
+                        android:id="@+id/txt_cust_mobileNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:hint=""
+                        android:textColor="@color/ezfbb_black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/imgBtn_email"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="4dp"
+                        android:background="@mipmap/iconmail" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:background="@android:color/transparent" />
+
+                    <TextView
+                        android:id="@+id/txt_cust_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:hint=""
+                        android:singleLine="true"
+                        android:textColor="@color/ezfbb_black"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:id="@+id/nested_scrollView"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--android:layout_below="@+id/toolbar_cust_detail"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_cust_detail"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_last_visit_spent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="3dp">
+
+            <LinearLayout
+                android:id="@+id/lin_visit_spent"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <RelativeLayout
+                        android:id="@+id/rel1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/txt_cd_last_visit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Last Visit"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/txt_cd_last_visit_Val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_cd_last_visit"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint=""
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rel2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/txt_cd_tot_visit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Tot Visit"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/txt_cd_tot_visit_Val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_cd_tot_visit"
+                            android:layout_marginTop="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint=""
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rel3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/txt_cd_last_spent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Last Spent"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="13sp" />
+
+
+                        <TextView
+                            android:id="@+id/txt_cd_last_spent_Val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_cd_last_spent"
+                            android:layout_marginTop="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint=""
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rel4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/txt_cd_tot_spent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Tot Spent"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/txt_cd_tot_spent_Val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_cd_tot_spent"
+                            android:layout_marginTop="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint=""
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <!--<View-->
+        <!--android:id="@+id/view1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="@color/smdm_divider_Black" />-->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_pieChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="3dp">
+
+            <RelativeLayout
+                android:id="@+id/rel_piechart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/lin_visit_spent"
+                android:background="@color/white">
+
+                <Button
+                    android:id="@+id/btn_cd_reset"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:text="Reset"
+                    android:textColor="@color/ezfbb_red" />
+
+                <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/cust_piechart"
+                    android:layout_width="195dp"
+                    android:layout_height="195dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toLeftOf="@+id/btn_cd_more"
+                    android:layout_toRightOf="@+id/btn_cd_reset"
+                    android:fitsSystemWindows="true"
+                    android:gravity="center|center_vertical"
+                    android:nestedScrollingEnabled="true"
+                    app:egInnerPadding="50"
+                    app:egInnerPaddingOutline="50"
+                    app:egLegendTextSize="18sp"
+                    app:egUseCustomInnerValue="true"
+                    app:egUseInnerPadding="true"
+                    app:egUsePieRotation="true"
+                    app:egValueTextColor="@color/smdm_default_color"
+                    app:egValueTextSize="22sp" />
+
+                <Button
+                    android:id="@+id/btn_cd_more"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:text="More >>"
+                    android:textColor="@color/ezfbb_red" />
+
+
+                <TextView
+                    android:id="@+id/txt_pie_ach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/cust_piechart"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Sales Contr%"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/linear_legend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_pie_ach"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="vertical"></LinearLayout>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <!--<View-->
+        <!--android:id="@+id/view2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="@color/smdm_divider_Black" />-->
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="3dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs_custDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="true"
+                    app:tabGravity="fill"
+                    app:tabSelectedTextColor="@color/ezfb_Red"
+                    app:tabTextColor="@color/ezfbb_red"
+                    app:tabIndicatorColor="@color/ezfbb_red"
+                    app:tabMode="fixed" />
+
+                <android.support.v4.view.ViewPager
+
+                    android:id="@+id/viewpager_custDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tabs_custDetails"
+                    android:nestedScrollingEnabled="true" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+    <!--</android.support.v4.widget.NestedScrollView>-->
+</RelativeLayout>

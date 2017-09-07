@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="230dp"
             android:layout_toLeftOf="@+id/txtNetSales"
-            android:textColor="@color/txt_color" />
+            android:textColor="@color/ezfbb_black" />
 
         <TextView
             android:padding="2dp"
@@ -36,7 +36,7 @@
             android:layout_marginRight="160dp"
             android:layout_toLeftOf="@+id/txtNetSales"
             android:text="1234567"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfbb_black"
             android:textSize="@dimen/normallayout_textsize" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_marginRight="90dp"
             android:layout_toLeftOf="@+id/rel"
             android:text="1234567"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/ezfbb_black"
             android:textSize="@dimen/normallayout_textsize" />
 
 

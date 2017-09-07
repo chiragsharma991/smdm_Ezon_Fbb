@@ -1,13 +1,16 @@
+
 package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,16 +37,18 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-
 
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -55,9 +60,10 @@ public class Style_Fragment extends Fragment {
     TableLayout tableC;
     TableLayout tableD;
 
-    TextView txtSales, txtGit, txtFwdWeekCover, txtSalesUnit, txtSalesThruUnit, txtRos, txtSOh, txtarticleOption;
+    TextView txtarticleOption, txtStoreCode, txtStoreName, txttwSalesUnit, txtlwSales, txtytdSales, txtSoh, txtGit, txtSales, txtFwdWeekCover,
+            txtsalesThruUnit, txtROS;
     View view;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     HorizontalScrollView horizontalScrollViewB;
     HorizontalScrollView horizontalScrollViewD;
     ArrayList<StyleDetailsBean> styleDetailsBeanList;
@@ -78,20 +84,20 @@ public class Style_Fragment extends Fragment {
     String articleCode, articleOption;
     int offsetvalue = 0, limit = 100;
     int count = 0;
-    String TA="StyleActivity";
+    String TA = "StyleActivity";
 
     // set the header titles
     String headers[] =
-    {
-            "             Color            ",
-            "   Size   ",
-            "    TW Sales\n\t\t\t(U)    ",
-            "  SOH\n\t\t\t(U)    ",
-            "    FWC   "
-    };
+            {
+                    "Color               " ,
+                    "    Size    ",
+                    "    TW Sales   ",
+                    "   SOH   ",
+                    "     FWC   "
+            };
 
     int headerCellsWidth[] = new int[headers.length];
-    private String TAG="StyleActivity";
+    private String TAG = "StyleActivity";
     private LinearLayout LinearTable;
     private RelativeLayout Style_loadingBar;
 
@@ -101,6 +107,8 @@ public class Style_Fragment extends Fragment {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
+
         Bundle bundle = getActivity().getIntent().getExtras();
         articleCode = bundle.getString("articleCode");
         articleOption = bundle.getString("articleOption");
@@ -112,15 +120,12 @@ public class Style_Fragment extends Fragment {
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
-        if (Reusable_Functions.chkStatus(context))
-        {
+        Log.e(TAG, "onCreate: ");
+        if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             requestStyleSizeDetailsAPI();
             requestStyleColorDetailsAPI(offsetvalue, limit);
-        }
-        else
-        {
+        } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
             Style_loadingBar.setVisibility(View.GONE);
         }
@@ -141,8 +146,7 @@ public class Style_Fragment extends Fragment {
 
                             } else if (response.length() == limit) {
 
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
                                     String color = styleDetails.getString("color");
                                     String size = styleDetails.getString("size");
@@ -168,8 +172,7 @@ public class Style_Fragment extends Fragment {
 
                             } else if (response.length() < limit) {
 
-                                for (int i = 0; i < response.length(); i++)
-                                {
+                                for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
                                     String color = styleDetails.getString("color");
                                     String size = styleDetails.getString("size");
@@ -194,7 +197,7 @@ public class Style_Fragment extends Fragment {
                                 getTableRowHeaderCellWidth();
                                 generateTableC_AndTable_B();
                                 resizeBodyTableRowHeight();
-                               // createTable();
+                                // createTable();
                                 Style_loadingBar.setVisibility(View.GONE);
 
                                 // Reusable_Functions.hDialog();
@@ -229,12 +232,11 @@ public class Style_Fragment extends Fragment {
         queue.add(postRequest);
     }
 
-    private void createTable()
-    {
-        int sumTW=0,sumSOH=0;
+    private void createTable() {
+        int sumTW = 0, sumSOH = 0;
         for (int i = 0; i < styleColorBeanList.size(); i++) {
 
-            LayoutInflater layoutInflater = (LayoutInflater)getActivity()
+            LayoutInflater layoutInflater = (LayoutInflater) getActivity()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.activity_stylefragment_child, null);
             TextView StyleColorName = (TextView) view.findViewById(R.id.styleColorName);
@@ -243,21 +245,21 @@ public class Style_Fragment extends Fragment {
             TextView StyleSOH = (TextView) view.findViewById(R.id.styleSOH);
             TextView StyleTW = (TextView) view.findViewById(R.id.styleTW);
             StyleColorName.setText(styleColorBeanList.get(i).getColor());
-            StyleFwd.setText(String.format("%.1f",styleColorBeanList.get(i).getFwdWeekCover()));
+            StyleFwd.setText(String.format("%.1f", styleColorBeanList.get(i).getFwdWeekCover()));
             StyleSize.setText(styleColorBeanList.get(i).getSize());
-            StyleSOH.setText(""+styleColorBeanList.get(i).getStkOnhandQty());
-            StyleTW.setText(""+styleColorBeanList.get(i).getTwSaleTotQty());
-            sumTW+=styleColorBeanList.get(i).getTwSaleTotQty();
-            sumSOH+=styleColorBeanList.get(i).getStkOnhandQty();
+            StyleSOH.setText("" + styleColorBeanList.get(i).getStkOnhandQty());
+            StyleTW.setText("" + styleColorBeanList.get(i).getTwSaleTotQty());
+            sumTW += styleColorBeanList.get(i).getTwSaleTotQty();
+            sumSOH += styleColorBeanList.get(i).getStkOnhandQty();
             LinearTable.addView(view);
         }
-        LayoutInflater layoutInflater = (LayoutInflater)getActivity()
+        LayoutInflater layoutInflater = (LayoutInflater) getActivity()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
         view = layoutInflater.inflate(R.layout.activity_style_totalchild, null);
         TextView StyleTW_total = (TextView) view.findViewById(R.id.styleTW_total);
         TextView StyleSOH_total = (TextView) view.findViewById(R.id.styleSOH_total);
-        StyleTW_total.setText(""+sumTW);
-        StyleSOH_total.setText(""+sumSOH);
+        StyleTW_total.setText("" + sumTW);
+        StyleSOH_total.setText("" + sumSOH);
 
         LinearTable.addView(view);
         Reusable_Functions.hDialog();
@@ -271,6 +273,7 @@ public class Style_Fragment extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "onResponse: " + response);
                         try {
                             if (response.equals("") || response == null) {
                                 Reusable_Functions.hDialog();
@@ -280,24 +283,31 @@ public class Style_Fragment extends Fragment {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
-                                    int Sales = styleDetails.getInt("twSaleNetVal");
-                                    int twSaleTotQty = styleDetails.getInt("twSaleTotQty");
+                                    String storeCode = styleDetails.getString("storeCode");
+                                    String storeDesc = styleDetails.getString("storeDesc");
+                                    double twSaleTotQty = styleDetails.getDouble("twSaleTotQty");
+                                    double twSaleNetVal = styleDetails.getDouble("twSaleNetVal");
+                                    double lwSaleTotQty = styleDetails.getDouble("lwSaleTotQty");
+                                    double lwSaleNetVal = styleDetails.getDouble("lwSaleNetVal");
+                                    double ytdSaleNetVal = styleDetails.getDouble("ytdSaleNetVal");
+                                    double ytdSaleTotQty = styleDetails.getDouble("ytdSaleTotQty");
                                     double fwdWeekCover = styleDetails.getDouble("fwdWeekCover");
-                                    int stkGitQty = styleDetails.getInt("stkGitQty");
-
+                                    double stkGitQty = styleDetails.getDouble("stkGitQty");
                                     double sellThruUnitsRcpt = styleDetails.getDouble("sellThruUnitsRcpt");
                                     double ros = styleDetails.getDouble("ros");
+                                    double stkOnhandQty = styleDetails.getDouble("stkOnhandQty");
 
-                                    int stkOnhandQty = styleDetails.getInt("stkOnhandQty");
-
-                                    txtSales.setText(": "+"\u20B9" + Sales);
-                                    txtSalesUnit.setText(": " + twSaleTotQty);
-                                    txtFwdWeekCover.setText(": " + String.format("%.1f", fwdWeekCover));
-                                    txtGit.setText(": " + stkGitQty);
-                                    txtSalesThruUnit.setText(": " + String.format("%.1f", sellThruUnitsRcpt) + "%");
-                                    txtRos.setText(": " + String.format("%.1f", ros));
-                                    txtSOh.setText(": " + stkOnhandQty);
+                                    //  txtSales.setText(": "+"\u20B9" + Sales);
                                     txtarticleOption.setText("" + articleOption);
+                                    txttwSalesUnit.setText(" " + Math.round(twSaleTotQty));
+                                    txtlwSales.setText("" + Math.round(lwSaleTotQty));
+                                    txtytdSales.setText("" + Math.round(ytdSaleTotQty));
+                                    txtSoh.setText("" + Math.round(stkOnhandQty));
+                                    txtGit.setText("" + Math.round(stkGitQty));
+                                    txtSales.setText("" + Math.round(twSaleNetVal));
+                                    txtFwdWeekCover.setText("" + String.format("%.1f",fwdWeekCover));
+                                    txtsalesThruUnit.setText("" +  String.format("%.1f",sellThruUnitsRcpt)+"%");
+                                    txtROS.setText("" + String.format("%.1f",ros));
                                 }
                             }
                         } catch (Exception e) {
@@ -318,7 +328,7 @@ public class Style_Fragment extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " +bearertoken);
+                params.put("Authorization", "Bearer " + bearertoken);
                 return params;
             }
         };
@@ -330,21 +340,28 @@ public class Style_Fragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.style_fragment, container, false);
+        view = inflater.inflate(R.layout.fragment_style, container, false);
         context = view.getContext();
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relativeLayout.setBackgroundColor(Color.parseColor("#f8f6f6"));  //dfdedf
         Style_loadingBar = (RelativeLayout) view.findViewById(R.id.style_loadingBar);
         txtarticleOption = (TextView) view.findViewById(R.id.txtarticleOption);
         //style size text
-        txtSales = (TextView) view.findViewById(R.id.txtSales);
-        txtSalesUnit = (TextView) view.findViewById(R.id.txtSalesUnit);
         LinearTable = (LinearLayout) view.findViewById(R.id.linearTable);
-        txtFwdWeekCover = (TextView) view.findViewById(R.id.txtFwdCover);
+        txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
+        txtStoreName = (TextView) view.findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreName.setText(storeDescription.substring(5));
+        txttwSalesUnit = (TextView) view.findViewById(R.id.txttwSalesUnit);
+        txtlwSales = (TextView) view.findViewById(R.id.txtlwSales);
+        txtytdSales = (TextView) view.findViewById(R.id.txtytdSales);
+        txtSoh = (TextView) view.findViewById(R.id.txtSoh);
         txtGit = (TextView) view.findViewById(R.id.txtGit);
-        txtSalesThruUnit = (TextView) view.findViewById(R.id.txtSalesThruUnit);
-        txtRos = (TextView) view.findViewById(R.id.txtRos);
-        txtSOh = (TextView) view.findViewById(R.id.txtSOh);
+        txtSales = (TextView) view.findViewById(R.id.txtSales);
+        txtFwdWeekCover = (TextView) view.findViewById(R.id.txtFwdWeekCover);
+        txtsalesThruUnit = (TextView) view.findViewById(R.id.txtsalesThruUnit);
+        txtROS = (TextView) view.findViewById(R.id.txtROS);
+
 
         initComponents();
         setComponentsId();
@@ -363,6 +380,7 @@ public class Style_Fragment extends Fragment {
         addComponentToMainLayout();
         return view;
     }
+
     // initalized components
     private void initComponents() {
 
@@ -380,6 +398,7 @@ public class Style_Fragment extends Fragment {
         tableA.setBackgroundColor(Color.GREEN);
         horizontalScrollViewB.setBackgroundColor(Color.LTGRAY);
     }
+
     // set essential component IDs
     @SuppressWarnings("ResourceType")
     private void setComponentsId() {
@@ -436,14 +455,13 @@ public class Style_Fragment extends Fragment {
     TableRow componentATableRow() {
 
         TableRow componentATableRow = new TableRow(this.context);
-        componentATableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT);
+                TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
         TextView textView = this.headerTextView(headers[0]);
-        textView.setBackgroundColor(Color.parseColor("#2277b1"));
-        textView.setTextColor(Color.parseColor("#ffffff"));
-        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+        textView.setBackgroundColor(Color.parseColor("#ffffff"));
+        textView.setTextColor(Color.parseColor("#000000"));
         componentATableRow.addView(textView);
 
         return componentATableRow;
@@ -453,17 +471,16 @@ public class Style_Fragment extends Fragment {
     TableRow componentBTableRow() {
 
         TableRow componentBTableRow = new TableRow(this.context);
-componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         int headerFieldCount = headers.length;
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);
+                TableRow.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(2, 0, 0, 0);
 
         for (int x = 0; x < (headerFieldCount - 1); x++) {
             TextView textView = this.headerTextView(this.headers[x + 1]);
-            textView.setBackgroundColor(Color.parseColor("#2277b1"));
-            textView.setTextColor(Color.parseColor("#ffffff"));
+            textView.setBackgroundColor(Color.parseColor("#ffffff"));
+            textView.setTextColor(Color.parseColor("#000000"));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
         }
@@ -475,10 +492,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
     private void generateTableC_AndTable_B() {
 
 
-       for (int k = 0; k < styleColorBeanList.size(); k++) {
+        for (int k = 0; k < styleColorBeanList.size(); k++) {
             if (k == 0 && styleColorBeanList.size() == 1) {
                 TableRow tableRowForTableC = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
                 this.tableC.addView(tableRowForTableC);
 
                 final int finalK = k;
@@ -506,15 +522,12 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 fwdweekTotal = fwdweekTotal + styleColorBeanList.get(k).getFwdWeekCover();
 
                 TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
-                taleRowForTableD.setBackgroundColor(Color.parseColor("#dfdedf"));
                 this.tableD.addView(taleRowForTableD);
 
                 TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                 this.tableC.addView(tableRowForTableC1);
 
                 TableRow taleRowForTableD1 = this.taleRowForTableDtotal();
-                taleRowForTableD1.setBackgroundColor(Color.parseColor("#dfdedf"));
                 this.tableD.addView(taleRowForTableD1);
 
                 salesUnitTotal = 0;
@@ -559,7 +572,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim()) && k == styleColorBeanList.size() - 1) {
 
                     TableRow tableRowForTableC = this.tableRowForTableC("");
-                    tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC);
 
                     TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
@@ -572,11 +584,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
 
 
                     TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                    tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC1);
 
                     TableRow taleRowForTableD2 = this.taleRowForTableDtotal();
-                    taleRowForTableD2.setBackgroundColor(Color.parseColor("#2277b1"));
                     this.tableD.addView(taleRowForTableD2);
 
                     salesUnitTotal = 0;
@@ -586,11 +596,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 //If current color not equal to previous color & last entry in array, then add total for previous, current row & total for current row
                 else if (!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim()) && k == styleColorBeanList.size() - 1) {
                     TableRow tableRowForTableC = this.tableRowForTableCSpace();
-                    tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC);
 
                     TableRow tableRowForTableD = this.taleRowForTableDtotal();
-                    tableRowForTableD.setBackgroundColor(Color.parseColor("#2277b1"));
                     this.tableD.addView(tableRowForTableD);
 
                     salesUnitTotal = 0;
@@ -598,7 +606,6 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                     fwdweekTotal = 0;
 
                     TableRow tableRowForTableC1 = this.tableRowForTableC(styleColorBeanList.get(k).getColor());
-                    tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC1);
 
                     final int finalK = k;
@@ -631,11 +638,11 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
 
 
                     TableRow tableRowForTableC2 = this.tableRowForTableCSpace();
-                    tableRowForTableC2.setBackgroundColor(Color.parseColor("#dfdedf"));
+                    tableRowForTableC2.setBackgroundColor(Color.parseColor("#ffffff"));
                     this.tableC.addView(tableRowForTableC2);
 
                     TableRow tableRowForTableD2 = this.taleRowForTableDtotal();
-                    tableRowForTableD2.setBackgroundColor(Color.parseColor("#2277b1"));
+                    tableRowForTableD2.setBackgroundColor(Color.parseColor("#ffffff"));
                     this.tableD.addView(tableRowForTableD2);
 
                     salesUnitTotal = 0;
@@ -645,7 +652,7 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 //If current color equal to previous color & last entry in array, then add the row
                 else if (styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim())) {
                     TableRow tableRowForTableC = this.tableRowForTableC("");
-                    tableRowForTableC.setBackgroundColor(Color.parseColor("#dfdedf"));
+                    tableRowForTableC.setBackgroundColor(Color.parseColor("#ffffff"));
                     this.tableC.addView(tableRowForTableC);
 
                     TableRow taleRowForTableD = this.taleRowForTableD(styleColorBeanList.get(k));
@@ -662,12 +669,10 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
                 else if (!styleColorBeanList.get(k).getColor().trim().equals(styleColorBeanList.get(k - 1).getColor().trim())) {
 
                     TableRow tableRowForTableC1 = this.tableRowForTableCSpace();
-                    tableRowForTableC1.setBackgroundColor(Color.parseColor("#dfdedf"));
                     this.tableC.addView(tableRowForTableC1);
 
 
                     TableRow taleRowForTableD = this.taleRowForTableDtotal();
-                    taleRowForTableD.setBackgroundColor(Color.parseColor("#2277b1"));
                     this.tableD.addView(taleRowForTableD);
 
                     salesUnitTotal = 0;
@@ -709,13 +714,14 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         }
     }
 
-    private TableRow tableRowForTableCSpace() {
+    private TableRow tableRowForTableCSpace()
+    {
         TableRow.LayoutParams params = new TableRow.LayoutParams(this.headerCellsWidth[0], TableRow.LayoutParams.MATCH_PARENT);
         params.setMargins(0, 2, 0, 0);
 
         TableRow tableRowForTableC = new TableRow(this.context);
         TextView textView = this.bodyTextView("     ");
-        textView.setBackgroundColor(Color.parseColor("#ffffff"));
+        textView.setBackgroundColor(Color.parseColor("#f8f6f6"));
         tableRowForTableC.addView(textView, params);
 
         return tableRowForTableC;
@@ -728,9 +734,10 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
         TableRow tableRowForTableC = new TableRow(this.context);
 
         TextView textView = this.bodyTextView(styleDetails);
+        textView.setBackgroundColor(Color.parseColor("#ffffff"));
+        textView.setTextColor(Color.parseColor("#000000"));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         tableRowForTableC.addView(textView, params);
-
         return tableRowForTableC;
 
     }
@@ -746,9 +753,10 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
             params.setMargins(2, 2, 0, 0);
 
             TextView textViewB = this.bodyTextView(info[x]);
-            textViewB.setBackgroundColor(Color.parseColor("#2277b1"));
+            textViewB.setBackgroundColor(Color.parseColor("#f8f6f6"));
             taleRowForTableD.addView(textViewB, params);
-            textViewB.setTextColor(Color.parseColor("#ffffff"));
+            textViewB.setTextColor(Color.parseColor("#000000"));
+            textViewB.setTypeface(Typeface.DEFAULT_BOLD);
             salesUnitTotal = 0;
             sohTotal = 0;
             fwdweekTotal = 0;
@@ -778,6 +786,9 @@ componentBTableRow.setBackgroundColor(Color.parseColor("#2277b1"));
             params.setMargins(2, 2, 0, 0);
 
             TextView textViewB = this.bodyTextView(info[x]);
+            textViewB.setBackgroundColor(Color.parseColor("#ffffff"));
+            textViewB.setTextColor(Color.parseColor("#000000"));
+            textViewB.setTypeface(Typeface.DEFAULT_BOLD);
             taleRowForTableD.addView(textViewB, params);
         }
 

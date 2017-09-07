@@ -1,224 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/bg_screen_color"
-                android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical"
+
+
+    >
+
+    <!--    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/view"
+            android:layout_marginTop="10dp"
+            >
+
+        </View>-->
 
 
     <RelativeLayout
-        android:id="@+id/stock_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:padding="5dp">
+        android:layout_alignParentTop="true">
 
-        <RelativeLayout
-            android:id="@+id/stock_Rel_image_child"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            >
-
-            <ImageView
-                android:id="@+id/stock_image_child"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="0dp"
-                android:scaleType="fitXY"
-
-                />
-
-            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-                         android:id="@+id/imgLoader_stockAge"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_centerInParent="true"
-                         android:background="#0000"
-                         android:keepScreenOn="true"
-                         android:padding="10dp"
-                         android:theme="@style/ProgressBar"
-                >
-
-            </ProgressBar>
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/bst_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/stock_Rel_image_child"
-            android:layout_marginTop="0dp"
-            android:layout_toRightOf="@+id/stock_Rel_image_child"
-            android:gravity="center_horizontal">
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            app:cardBackgroundColor="@color/ezfb_White"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="5dp">
 
-            <!--Buy one-->
-
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:id="@+id/stock_Rel_image_child"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-                    <!---->
 
-                    <TextView
-                        android:id="@+id/stock_option"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
-                        android:text="Buy One Get One"
-                        android:textColor="@color/bg_store_code_text"
-                        android:textSize="@dimen/smdm_inflator_title_large"
-                        android:textStyle="bold"
+                    >
 
+                    <ImageView
+                        android:id="@+id/stock_image_child"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="0dp"
+                        android:scaleType="fitXY"
 
                         />
 
-                    <RelativeLayout
-                        android:id="@+id/stock_fav"
+                    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/imgLoader_stockAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="#0000"
+                        android:keepScreenOn="true"
+                        android:padding="10dp"
+                        android:theme="@style/ProgressBar">
+
+                    </ProgressBar>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:layout_toRightOf="@+id/stock_Rel_image_child"
+                    android:gravity="center_horizontal">
+
+                    <!--Buy one-->
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
 
                         >
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                        <ToggleButton
-                            android:id="@+id/toggle_stock_fav"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/toggleswitch"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:textOff=""
-                            android:textOn=""
+                            <!---->
 
-                            />
-
-
-                    </RelativeLayout>
-
-
-                </LinearLayout>
+                            <TextView
+                                android:layout_marginBottom="10dp"
+                                android:id="@+id/stock_option"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.2"
+                                android:text="Buy One Get One"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="@dimen/smdm_inflator_subtitle_large"
 
 
-                <TextView
-                    android:id="@+id/bst_lineOne_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/smdm_inflater_divider"
-                    android:layout_alignStart="@+id/bst_head_child"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/divider_salescard"/>
+                                />
+
+                            <RelativeLayout
+                                android:id="@+id/stock_fav"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.8"
+
+                                >
 
 
-                <!--Promo sales-->
+                                <ToggleButton
+                                    android:id="@+id/toggle_stock_fav"
+                                    android:layout_width="38dp"
+                                    android:layout_height="39dp"
+                                    android:layout_centerInParent="true"
+                                    android:background="@drawable/toggleswitch"
+                                    android:focusable="false"
+                                    android:focusableInTouchMode="false"
+                                    android:textOff=""
+                                    android:textOn=""
+
+                                    />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:singleLine="true"
-                        android:text="Ageing"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.1"
-                        android:text=":"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:id="@+id/stock_ageing"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:singleLine="true"
-                        android:text="100"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                </LinearLayout>
+                            </RelativeLayout>
 
 
-                <!--Promo Sales(U)-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="SOH(U)"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.1"
-                        android:textColor="@color/smdm_default_color"
-                        android:text=":"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                    <TextView
-                        android:id="@+id/stock_SOH_U"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:singleLine="true"
-                        android:textColor="@color/smdm_default_color"
-                        android:text="100"
-                        android:textSize="@dimen/smdm_inflator_subtitle_large"
-                        />
-
-                </LinearLayout>
+                        </LinearLayout>
 
 
+                        <!--      <TextView
+                                  android:id="@+id/bst_lineOne_child"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="@dimen/smdm_inflater_divider"
+                                  android:layout_alignStart="@+id/bst_head_child"
+                                  android:layout_marginTop="10dp"
+                                  android:background="@color/divider_salescard" />-->
 
-            </LinearLayout>
+
+                        <!--Promo sales-->
 
 
-        </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="0dp"
+                            android:orientation="vertical">
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp">
+
+                                    <LinearLayout
+                                        android:id="@+id/linear_ageing"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:text="Ageing"
+                                            android:textColor="@color/ezfb_black"
+                                            android:textSize="@dimen/smdm_inflator_subtitle_large"
+
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/stock_ageing"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="3dp"
+                                            android:singleLine="true"
+                                            android:text=""
+                                            android:textColor="@color/ezfb_black"
+                                            android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                    <View
+                                        android:id="@+id/view"
+                                        android:layout_width="1dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginLeft="25dp"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_toRightOf="@+id/linear_ageing"
+                                        android:background="@color/ezfb_black"></View>
+
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="25dp"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_toRightOf="@+id/view"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:text="SOH(U)"
+                                            android:textColor="@color/ezfb_black"
+                                            android:textSize="@dimen/smdm_inflator_subtitle_large" />
+
+                                        <TextView
+                                            android:id="@+id/stock_SOH_U"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="3dp"
+                                            android:singleLine="true"
+                                            android:text=""
+                                            android:textColor="@color/ezfb_black"
+                                            android:textSize="@dimen/smdm_inflator_subtitle_large"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
     </RelativeLayout>
 

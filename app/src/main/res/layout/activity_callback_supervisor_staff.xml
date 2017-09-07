@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_callback__supervisor_staff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff">
+
+    <LinearLayout
+        android:id="@+id/linear_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_header_height"
+            android:layout_alignParentTop="true"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <RelativeLayout
+                    android:background="@drawable/button_click"
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/imageBtnBack1"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/ic_arrow_back_black"
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/callback_product_availability"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="19sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageBtnBack1"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/toolbar_title" />
+
+                <RelativeLayout
+                    android:background="@drawable/button_click"
+                    android:id="@+id/btn_More"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp">
+
+                    <Button
+                        android:clickable="false"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/supervisor_staff"
+                        android:layout_alignParentBottom="true"
+                        android:id="@+id/button3" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_store"
+        android:layout_below="@+id/linear_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tstoreCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store"
+            android:textColor="@color/ezfbb_black"
+            android:textSize="@dimen/normallayout_storesize" />
+
+        <TextView
+            android:id="@+id/txtStoreCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/tstoreCode"
+            android:hint=""
+            android:textColor="@color/ezfbb_black"
+            android:textSize="@dimen/normallayout_storesize"
+            />
+
+        <TextView
+            android:id="@+id/txtStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/txtStoreCode"
+            android:hint=""
+            android:textColor="@color/ezfbb_black"
+            android:textSize="@dimen/normallayout_storesize" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_marginTop="5dp"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_store">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <LinearLayout
+                android:id="@+id/lin_cust_mobno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <TextView
+                    android:id="@+id/txt_number"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Customer mobile number "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_mobile_number"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:inputType="phone"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_remarks"
+                android:layout_below="@+id/lin_cust_mobno"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_remarks_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remarks : "/>
+
+                <TextView
+                    android:id="@+id/txt_remarks"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:singleLine="false"
+                    android:maxLines="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_cust_name"
+                android:layout_below="@+id/lin_remarks"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_cust_name"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:inputType="textCapWords"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_emp_name"
+                android:layout_below="@+id/lin_cust_name"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_employee_name_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Employee Name "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_employee_name"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:inputType="textCapWords"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_store_name"
+                android:layout_below="@+id/lin_emp_name"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_store_name_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Store Name "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_store_name"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:inputType="textCapWords"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_callback"
+                android:layout_below="@+id/lin_store_name"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_callback_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Do You want a call back ? "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_callback"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_feedback_date"
+                android:layout_below="@+id/lin_callback"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="@color/ezfb_black"
+                    android:text="Feedback creation date "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_feedback_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textColor="@color/ezfb_black"
+                    android:text=""/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_email"
+                android:layout_below="@+id/lin_feedback_date"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_email_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="Email Triggered to CSD "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_email"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_sms"
+                android:layout_below="@+id/lin_email"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txt_sms_title"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:text="SMS sent to customer "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textAllCaps="false"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_sms"
+                    android:textSize="13sp"
+                    android:textColor="@color/ezfb_black"
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:clickable="true"
+                android:id="@+id/processBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:visibility="visible">
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/ez_filter_progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:padding="10dp">
+
+                </ProgressBar>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

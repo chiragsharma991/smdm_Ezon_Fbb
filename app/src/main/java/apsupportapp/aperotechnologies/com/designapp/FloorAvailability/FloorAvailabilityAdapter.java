@@ -105,7 +105,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter
             holder.ProgressPicaso = (ProgressBar) convertView.findViewById(R.id.imageLoader_floor);
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.floor_image_child = (ImageView) convertView.findViewById(R.id.floor_image_child);
-            holder.floor_fav = (RelativeLayout) convertView.findViewById(R.id.floor_fav);
+//            holder.floor_fav = (RelativeLayout) convertView.findViewById(R.id.floor_fav);
             convertView.setTag(holder);
         }
         else
@@ -130,9 +130,9 @@ public class FloorAvailabilityAdapter extends BaseAdapter
                 }
             }
         });
-        holder.floor_SOH_U.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
-        holder.floor_NoofDays.setText(arrayList.get(position).getNoDaysPassed());
-        holder.floor_ReceiptDate.setText(arrayList.get(position).getFirstReceiptDate());
+       // holder.floor_SOH_U.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
+      //  holder.floor_NoofDays.setText(arrayList.get(position).getNoDaysPassed());
+       // holder.floor_ReceiptDate.setText(arrayList.get(position).getFirstReceiptDate());
         if(!arrayList.get(position).getProdImageURL().equals(""))
         {
             Glide.with(this.context)
@@ -155,7 +155,7 @@ public class FloorAvailabilityAdapter extends BaseAdapter
         {
             holder.ProgressPicaso.setVisibility(View.GONE);
             Glide.with(this.context).
-                    load(R.mipmap.placeholder).
+                    load(R.mipmap.noimageavailable).
                     into(holder.floor_image_child);
         }
         // ---------------------click listener -------------------------

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:layout_marginTop="2dp"
+
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/hrl_root_Name"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:layout_gravity="center_vertical"
+                android:textStyle="normal"
+                android:textSize="@dimen/normallayout_textsize"
+                android:textColor="@color/ezfb_black"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+
+
+            >
+            <!--<RelativeLayout-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:id="@+id/rel_ez_outer"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+
+                <!--<RelativeLayout-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:id="@+id/rel_ez_inner"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--android:layout_width="80dp"-->
+                    <!--android:layout_height="10dp">-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/hrl_salesarch_Name"
+                        android:layout_height="wrap_content"
+                        android:text="PvA%"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/normallayout_textsize"
+                        android:textColor="@color/ezfb_black"
+
+                        />
+
+
+                <!--</RelativeLayout>-->
+
+
+
+
+            <!--</RelativeLayout>-->
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:textStyle="normal"
+                android:id="@+id/hrl_root_netsales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Net Sales"
+                android:textSize="@dimen/normallayout_textsize"
+                android:textColor="@color/ezfb_black"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:id="@+id/hrl_root_plansales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/normallayout_textsize"
+                android:textColor="@color/ezfb_black"
+                android:textStyle="normal"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="2dp"
+        android:background="@color/border_round_edittext" />
+
+
+
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="5dp"
+         android:visibility="invisible"
+
+         />
+ -->
+
+
+
+</LinearLayout>

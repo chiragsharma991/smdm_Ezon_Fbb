@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/ezfb_White"
     android:orientation="vertical"
-    tools:context="apsupportapp.aperotechnologies.com.designapp.LoginActivity">
+    tools:context="apsupportapp.aperotechnologies.com.designapp.LoginActivity1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,14 +18,37 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageView
+
+
+            <!--  <ImageView
+                  android:layout_width="match_parent"
+                  android:layout_height="70dp"
+                  android:layout_marginLeft="40dp"
+                  android:layout_marginRight="40dp"
+                  android:layout_marginTop="150dp"
+                  android:src="@mipmap/engage247_logo1"
+                  tools:ignore="ContentDescription" />-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:layout_marginTop="150dp"
+                android:orientation="vertical"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="150dp"
-                android:src="@mipmap/engage247_logo1"
-                tools:ignore="ContentDescription" />
+                android:gravity="center_vertical|center_horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:text="Engage 24x7"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/ezfb_Red"
+                    />
+
+            </LinearLayout>
+
+
 
             <EditText
                 android:id="@+id/edtUserName"
@@ -33,13 +57,13 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="60dp"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="@string/username"
                 android:textAllCaps="true"
                 android:maxLines="1"
                 android:inputType="text"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
+                android:textColor="@color/ezfb_black"
+                android:textColorHint="@color/ezfb_black"
                 android:textCursorDrawable="@drawable/cursor_color" />
 
             <EditText
@@ -49,12 +73,12 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
+                android:textColor="@color/ezfb_black"
+                android:textColorHint="@color/ezfb_black"
                 android:textCursorDrawable="@drawable/cursor_color" />
 
             <LinearLayout
@@ -71,12 +95,14 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    app:buttonTint="@color/ezfb_Red"
                     android:text="@string/loggedin"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/ezfb_black" />
 
             </LinearLayout>
 
             <Button
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -84,15 +110,12 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="25dp"
                 android:text="LOG IN"
-                android:textColor="#000000"
-                android:backgroundTint="@drawable/ripple_effect"
+                android:textColor="@color/ezfb_White"
+                app:backgroundTint="@color/ezfb_Red"
+
                 />
         </LinearLayout>
 
-
-
     </ScrollView>
-
-
 
 </LinearLayout>

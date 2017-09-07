@@ -60,14 +60,15 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
     private ArrayList<StyleDetailsBean> optionList;
     private StyleDetailsBean styleDetailsBean;
     private Gson gson;
-    private String TAG = "BestPerfomerInventory";
+    private String TAG ;
     private int offset, limit;
 
 
-    public BestPerformerInventoryAdapter(ArrayList<RunningPromoListDisplay> arrayList, Context context) {
+    public BestPerformerInventoryAdapter(ArrayList<RunningPromoListDisplay> arrayList, Context context, String TAG) {
 
         this.arrayList = arrayList;
         this.context = context;
+        this.TAG = TAG;
         mInflater = LayoutInflater.from(context);
         gson = new Gson();
         optionList = new ArrayList<StyleDetailsBean>();
@@ -121,59 +122,126 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
         holder.BestInvent_SOH.setText("" + Math.round(arrayList.get(position).getStkOnhandQty()));
         holder.BestInvent_option.setText(arrayList.get(position).getOption());
-
-
-        //Option Click event to get detail information
-        holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Reusable_Functions.chkStatus(context)) {
-                    Reusable_Functions.hDialog();
-                    Reusable_Functions.sDialog(context, "Loading  data...");
-                    Log.e("select item", arrayList.get(position).getOption());
-                    requestOptionDetailsAPI(arrayList.get(position).getOption());
-                } else {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
         holder.BestInvent_sellThru.setText("" + Math.round(arrayList.get(position).getSellThruUnits()));
         holder.BestInvent_FWC.setText("" + Math.round(arrayList.get(position).getFwdWeekCover()));
         holder.BestInvent_RosU.setText("" + Math.round(arrayList.get(position).getRos()));
         holder.BestInvent_GIT.setText("" + (int) arrayList.get(position).getStkGitQty());
         holder.BestInvent_Sale.setText("" + (int) arrayList.get(position).getSaleTotQty());
-        BestPerformerInventory.BestInvent_txtStoreCode.setText(arrayList.get(position).getStoreCode());
-        BestPerformerInventory.BestInvent_txtStoreName.setText(arrayList.get(position).getStoreDesc());
 
-        if (!arrayList.get(position).getProdImageURL().equals("")) {
 
-            Glide.with(this.context)
-                    .load(arrayList.get(position).getProdImageURL())
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            holder.ProgressPicaso.setVisibility(View.GONE);
-                            return false;
-                        }
 
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            holder.ProgressPicaso.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(holder.BestInvent_image_child);
 
-        } else {
+        if(TAG.equals("BestPerformer_Ez_Inventory")){
 
-            holder.ProgressPicaso.setVisibility(View.GONE);
-            Glide.with(this.context).
-                    load(R.mipmap.placeholder).
-                    into(holder.BestInvent_image_child);
+            Log.e(TAG, "getProdImageUrl: "+arrayList.get(position).getProdImageUrl() );
+            if (arrayList.get(position).getProdImageUrl()!=null) {
+
+                Glide.with(this.context)
+                        .load(arrayList.get(position).getProdImageURL())
+                        .listener(new RequestListener<String, GlideDrawable>() {
+                            @Override
+                            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                holder.ProgressPicaso.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                holder.ProgressPicaso.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .into(holder.BestInvent_image_child);
+
+            } else {
+                Log.e("here ezone else","");
+
+                if(arrayList.get(position).getOption().equals("SAMSUNG G615F GXY J7 MAX 4GB/32GB-GOLD"))
+                {
+                    holder.ProgressPicaso.setVisibility(View.GONE);
+                    Glide.with(this.context).
+                            load(R.mipmap.samsung_j7_max_original).
+                            into(holder.BestInvent_image_child);
+                }
+                else if(arrayList.get(position).getOption().equals("AMAZON FIRE TVSTICK WITH VOICEREMOTE BLK-OTHERS"))
+                {
+                    holder.ProgressPicaso.setVisibility(View.GONE);
+                    Glide.with(this.context).
+                            load(R.mipmap.amazon_fire_tv_stick).
+                            into(holder.BestInvent_image_child);
+                }
+                else if(arrayList.get(position).getArticleDesc().equals("REDBANANA FIBREBRAIDED MINIUSBCABLE MXCL"))
+                {
+                    holder.ProgressPicaso.setVisibility(View.GONE);
+                    Glide.with(this.context).
+                            load(R.mipmap.red_banana_cable).
+                            into(holder.BestInvent_image_child);
+                }
+                else
+                {
+                    holder.ProgressPicaso.setVisibility(View.GONE);
+                    Glide.with(this.context).
+                            load(R.mipmap.noimageavailable).
+                            into(holder.BestInvent_image_child);
+
+                }
+
+
 
 
         }
+        }
+        else{
+
+            Log.e("here else","");
+            if (!arrayList.get(position).getProdImageURL().equals("")) {
+
+                Glide.with(this.context)
+                        .load(arrayList.get(position).getProdImageURL())
+                        .listener(new RequestListener<String, GlideDrawable>() {
+                            @Override
+                            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                holder.ProgressPicaso.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                holder.ProgressPicaso.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .into(holder.BestInvent_image_child);
+
+            } else {
+
+                holder.ProgressPicaso.setVisibility(View.GONE);
+                Glide.with(this.context).
+                        load(R.mipmap.noimageavailable).
+                        into(holder.BestInvent_image_child);
+
+
+            }
+
+
+            Log.e(TAG, "getView: Detail calling" );
+            //Option Click event to get detail information
+            holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading  data...");
+                        Log.e("select item", arrayList.get(position).getOption());
+                        requestOptionDetailsAPI(arrayList.get(position).getOption());
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+
+
 
         // ---------------------click listener -------------------------
 

@@ -1,0 +1,161 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="top"
+    android:layout_marginTop="15dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <RelativeLayout
+            android:id="@+id/rel_ez_soh"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext3">
+
+            <TextView
+                android:id="@+id/txt_ez_SOH2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:textColor="@color/ezfbb_black"
+                android:layout_marginLeft="8dp"
+                android:text="@string/soh_u"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_ez_SOHUVal2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="25dp"
+                android:text="123454"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_ez_git"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext3">
+
+            <TextView
+                android:id="@+id/txt_ez_GIT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:layout_marginLeft="8dp"
+                android:text="@string/git_u"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="12sp" />
+
+           <TextView
+                android:id="@+id/txt_ez_GITVal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="25dp"
+                android:text="1234"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="17sp"
+                 />
+
+          </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <RelativeLayout
+            android:id="@+id/rel_ez_ROS"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext3">
+
+            <TextView
+                android:id="@+id/txt_ez_ROS2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:layout_marginLeft="8dp"
+                android:text="@string/ros_u"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_ez_ROSVal2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="25dp"
+                android:text="1234"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="17sp"
+               />
+         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_ez_fwdwkcover"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext3">
+
+            <TextView
+                android:id="@+id/txt_ez_FwdWkCover2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:layout_marginLeft="8dp"
+                android:text="@string/fwd_wk_cover"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="12sp" />
+
+             <TextView
+                android:id="@+id/txt_ez_FwdWkCoverVal2"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="8dp"
+                 android:layout_marginTop="25dp"
+                 android:text="1234"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="17sp"
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

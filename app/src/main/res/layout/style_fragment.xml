@@ -300,7 +300,7 @@
         android:layout_height="match_parent"
         android:background="@color/bg_screen_color"
         android:id="@+id/style_loadingBar"
-        android:visibility="visible"
+        android:visibility="gone"
         >
 
         <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen_color"
+    android:background="@color/white"
     tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
-
-
-
-    <LinearLayout
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:background="@color/bg_screen_color"
+        android:background="@color/white"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,15 +24,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_header_height"
                 android:layout_alignParentTop="true"
-                android:background="?attr/colorPrimary"
+                android:background="@color/white"
                 android:contentInsetEnd="0dp"
                 android:contentInsetLeft="0dp"
                 android:contentInsetRight="0dp"
                 android:contentInsetStart="0dp"
-                segmentedgroup:contentInsetEnd="0dp"
-                segmentedgroup:contentInsetLeft="0dp"
-                segmentedgroup:contentInsetRight="0dp"
-                segmentedgroup:contentInsetStart="0dp">
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -49,13 +45,13 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="0dp"
-                        android:background="@drawable/button_red_effect">
+                        android:background="@drawable/button_click">
 
                         <Button
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/arrow_back_icon_width"
+                            android:layout_height="@dimen/arrow_back_icon_height"
                             android:layout_centerInParent="true"
-                            android:background="@mipmap/common_back_icon"
+                            android:background="@mipmap/ic_arrow_back_black"
                             android:clickable="false" />
 
                     </RelativeLayout>
@@ -68,9 +64,8 @@
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/imageBtnBack"
                         android:text="@string/sales_title"
-                        android:textColor="#ffffff"
+                        android:textColor="@color/ezfbb_black"
                         android:textSize="20sp" />
-
 
                     <RelativeLayout
                         android:id="@+id/imgfilter"
@@ -79,13 +74,13 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="0dp"
-                        android:background="@drawable/button_red_effect">
+                        android:background="@drawable/button_click">
 
                         <Button
-                            android:layout_width="19dp"
-                            android:layout_height="19dp"
+                            android:layout_width="@dimen/icon_width"
+                            android:layout_height="@dimen/icon_height"
                             android:layout_centerInParent="true"
-                            android:background="@mipmap/filter_icon_nav"
+                            android:background="@mipmap/iconfilter"
                             android:clickable="false" />
 
                     </RelativeLayout>
@@ -94,21 +89,18 @@
             </android.support.v7.widget.Toolbar>
 
             <RelativeLayout
+                android:id="@+id/relStoreLayout"
                 android:layout_width="match_parent"
-                android:background="@color/bg_screen_color"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp">
-
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/tstoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/store"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="@dimen/normallayout_storesize" />
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -118,7 +110,8 @@
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -128,11 +121,23 @@
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
                     android:textColor="@color/bg_store_code_text"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/normallayout_storesize"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
         </LinearLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabview_sales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/ezfb_Red"
+            app:tabSelectedTextColor="@color/ezfb_Red"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
+
 
         <info.hoang8f.android.segmented.SegmentedGroup
             android:id="@+id/segmentedGrp"
@@ -142,6 +147,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:weightSum="4"
             segmentedgroup:sc_border_width="1dp"
             segmentedgroup:sc_corner_radius="14dp"
@@ -188,29 +194,24 @@
         <LinearLayout
             android:id="@+id/llayoutSalesAnalysis"
             android:layout_width="match_parent"
-            android:background="@color/bg_screen_color"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
+                android:layout_height="wrap_content">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="210dp">
-
+                    android:layout_height="180dp">
 
                 </android.support.v4.view.ViewPager>
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/progressBar1"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
                     android:background="#0000"
                     android:keepScreenOn="true"
@@ -223,31 +224,26 @@
             </RelativeLayout>
 
             <android.support.design.widget.TabLayout
+                android:id="@+id/dotTab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dotTab"
                 segmentedgroup:tabBackground="@drawable/tab_selection"
                 segmentedgroup:tabGravity="center"
-                segmentedgroup:tabIndicatorHeight="0dp"
-                >
+                segmentedgroup:tabIndicatorHeight="0dp">
 
             </android.support.design.widget.TabLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/lldots"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="2dp"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:visibility="gone"></LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llhierarchy"
-                android:background="@color/bg_screen_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -258,25 +254,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:textColor="@color/txt_color"
-                    android:textSize="12sp" />
-
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="@dimen/normallayout_textsize" />
 
             </LinearLayout>
 
-
             <RelativeLayout
+                android:background="@color/white"
                 android:id="@+id/relTablelayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/llhierarchy"
                 android:layout_marginTop="8dp">
-
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/smdm_divider_Black" />
+                <!--<View-->
+                <!--android:id="@+id/view1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dip"-->
+                <!--android:background="@color/smdm_divider_Black" />-->
 
                 <LinearLayout
                     android:id="@+id/linear"
@@ -285,21 +279,16 @@
                     android:layout_below="@+id/view1"
                     android:orientation="vertical">
 
-
                     <RelativeLayout
                         android:id="@+id/llheader"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@color/smdm_divider_Black_light">
-
+                        android:background="@color/ezfb_activity_background">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="10dp"
-                            >
-
+                            android:layout_alignParentLeft="true">
 
                             <RelativeLayout
                                 android:id="@+id/prevplanclass"
@@ -323,8 +312,9 @@
                                 android:layout_toRightOf="@+id/prevplanclass"
                                 android:gravity="center"
                                 android:text="Department"
-                                android:textColor="@color/bg_store_code_text"
-                                android:textSize="13sp" />
+                                android:textColor="@color/ezfbb_black"
+                                android:textSize="@dimen/normallayout_textsize"
+                                android:textStyle="normal" />
 
                             <RelativeLayout
                                 android:id="@+id/nextplanclass"
@@ -338,98 +328,90 @@
                                     android:layout_centerInParent="true"
                                     android:background="@mipmap/next_arrow"
                                     android:clickable="false" />
+
                             </RelativeLayout>
+
                         </RelativeLayout>
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="110dp"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
                             android:gravity="center_vertical|center"
-                            android:text="PvA Sales%"
-                            android:textColor="@color/bg_store_code_text"
-                            android:textSize="13sp" />
+                            android:text="Ach%"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
 
                     </RelativeLayout>
 
-                    <RelativeLayout
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:weightSum="2"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@color/bg_screen_color">
+                        android:layout_height="30dp">
 
-                        <EditText
-                            android:id="@+id/etListText"
-                            android:layout_width="250dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="190dp"
-                            android:background="@drawable/border"
-                            android:editable="false"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
+                        <TextView
+                            android:layout_marginLeft="1dp"
+                            android:background="@drawable/edttext_border"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
 
-                        <EditText
-                            android:id="@+id/etPvAValue"
-                            android:layout_width="150dp"
-                            android:layout_height="30dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="270dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_toLeftOf="@+id/txtVal"
-                            android:background="@drawable/border"
-                            android:editable="false"
-                            android:gravity="center"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
+                        <LinearLayout
 
 
-                        <EditText
-                            android:id="@+id/txtVal"
-                            android:layout_width="120dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:background="@drawable/border"
-                            android:editable="false"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
 
-                    </RelativeLayout>
+                            android:background="@drawable/edttext_border"
+                            android:weightSum="1"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
+                            <TextView
+                                android:layout_weight="0.5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="0.5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/listView_SalesAnalysis"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:divider="@null"
                         android:dividerHeight="0dp"
                         android:smoothScrollbar="true" />
 
-                    <View
-                        android:id="@+id/view3"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dip"
 
-                        />
 
 
                 </LinearLayout>
             </RelativeLayout>
 
+
         </LinearLayout>
 
+
     </LinearLayout>
+
 
     <RelativeLayout
         android:id="@+id/style_loadingBar"
@@ -451,3 +433,5 @@
     </RelativeLayout>
 
 </RelativeLayout>
+
+

@@ -14,6 +14,9 @@ public class SalesAnalysisViewPagerValue {
     double wowNetSalesUnitsGrowthPct;
     double planSaleNetVal;
     double pvaAchieved;
+
+
+    double pvaAchived;
     double stkOnhandQty;
     double stkGitQty;
     double ros;
@@ -37,6 +40,7 @@ public class SalesAnalysisViewPagerValue {
     double rgm;
     double marginPct;
     double velocity;
+    double yoyNetSalesUnitsGrowthPct;
 
     public double getYoyNetSalesUnitsGrowthPct() {
         return yoyNetSalesUnitsGrowthPct;
@@ -46,7 +50,14 @@ public class SalesAnalysisViewPagerValue {
         this.yoyNetSalesUnitsGrowthPct = yoyNetSalesUnitsGrowthPct;
     }
 
-    double yoyNetSalesUnitsGrowthPct;
+
+    public double getPvaAchived() {
+        return pvaAchived;
+    }
+
+    public void setPvaAchived(double pvaAchived) {
+        this.pvaAchived = pvaAchived;
+    }
 
 
     public String getStoreCode() {

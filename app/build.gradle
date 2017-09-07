@@ -1,6 +1,7 @@
 buildscript
         {
-            repositories {
+            repositories
+            {
                 maven { url 'https://maven.fabric.io/public' }
             }
 
@@ -15,7 +16,12 @@ apply plugin: 'io.fabric'
 
 repositories
         {
-            maven { url 'https://maven.fabric.io/public' }
+            maven
+                {
+                    url 'https://maven.fabric.io/public'
+
+                }
+            maven { url 'https://dl.bintray.com/sj/maven/' }
         }
 
 android {
@@ -26,8 +32,8 @@ android {
                 applicationId "apsupportapp.aperotechnologies.com.designapp"
                 minSdkVersion 17
                 targetSdkVersion 25
-                versionCode 37
-                versionName "1.6"
+                versionCode 108
+                versionName "2.0"
             }
     buildTypes
             {
@@ -48,18 +54,18 @@ dependencies
             //compile 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
             compile files('libs/picasso-2.5.2.jar')
             compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar')
-                    {
+            {
                         transitive = true;
-                    }
+            }
             //compile 'me.sudar:zxing-orient:2.1.1@aar'
             compile files('libs/gson-2.3.1.jar')
             compile project(':gravitysnaphelper')
-
             compile 'com.github.bumptech.glide:glide:3.5.2'
             compile 'com.android.support:appcompat-v7:25.1.1'
             compile 'com.android.support:design:25.1.1'
             compile 'com.android.support:support-v4:25.1.1'
             compile 'com.mcxiaoke.volley:library:1.0.+'
+            compile 'com.numetriclabz.numandroidcharts:numandroidcharts:1.0.12'
             compile 'com.thefinestartist:ytpa:1.2.1'
             compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
             compile 'com.google.zxing:core:3.2.1'
@@ -70,8 +76,10 @@ dependencies
             compile 'com.daimajia.androidanimations:library:2.2@aar'
             compile 'com.daprlabs.aaron:cardstack:0.3.0'
             compile 'com.android.support:recyclerview-v7:25.1.1'
-            //  compile 'com.google.android.gms:play-services-appindexing:9.8.0'
-            // compile 'com.google.firebase:firebase-core:10.2.0'
+            compile 'com.github.blackfizz:eazegraph:1.2.2@aar'
+            //compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+            //compile 'com.google.firebase:firebase-core:10.2.0'
+            compile 'com.google.firebase:firebase-messaging:10.2.1'
             testCompile 'junit:junit:4.12'
             compile 'testfairy:testfairy-android-sdk:1.+@aar'
             compile 'com.android.support.constraint:constraint-layout:1.0.2'

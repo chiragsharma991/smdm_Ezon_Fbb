@@ -1,12 +1,17 @@
 package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -18,7 +23,9 @@ import java.util.Locale;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
-public class Details_Fragment extends Fragment {
+public class Details_Fragment extends Fragment implements View.OnClickListener{
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     StyleDetailsBean styleDetailsBean;
@@ -28,22 +35,31 @@ public class Details_Fragment extends Fragment {
             txtROS, txtBenefit, txtArticleOption,txtStoreDesc, txtStoreCode;
     ImageView imgPromo, imgKeyProduct, imgProfile;
     ProgressBar progressBar;
-    public Details_Fragment() {
+    LinearLayout linear_prodDetails;
+    Button btn_cd_more,btn_cd_less;
+    private String storeDescription;
+    SharedPreferences sharedPreferences;
+    public Details_Fragment()
+    {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         Intent i = getActivity().getIntent();
         styleDetailsBean = (StyleDetailsBean) i.getSerializableExtra("styleDetailsBean");
         Bundle bundle = getActivity().getIntent().getExtras();
         articleOption = bundle.getString("articleOption");
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+        storeDescription = sharedPreferences.getString("storeDescription","");
+        Log.e( "onCreate: ",""+storeDescription );
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.details_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
         txtStoreCode =(TextView)view.findViewById(R.id.txtStoreCode);
         txtStoreDesc =(TextView)view.findViewById(R.id.txtStoreName);
         txtArticleOption = (TextView) view.findViewById(R.id.txtArticle);
@@ -77,15 +93,23 @@ public class Details_Fragment extends Fragment {
         imgKeyProduct = (ImageView) view.findViewById(R.id.imgKeyProduct);
         imgProfile = (ImageView) view.findViewById(R.id.imgProfile);
 
+        linear_prodDetails = (LinearLayout)view.findViewById(R.id.linear_prodDetails) ;
+        btn_cd_more = (Button)view.findViewById(R.id.btn_cd_more);
+        btn_cd_more.setOnClickListener(this);
+        btn_cd_less = (Button)view.findViewById(R.id.btn_cd_less);
+        btn_cd_less.setOnClickListener(this);
+
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
         if(!styleDetailsBean.getProductImageURL().equals(""))
         {
-            Glide.
-                    with(getActivity())
+            Glide.with(getActivity())
                     .load(styleDetailsBean.getProductImageURL())
-                    .listener(new RequestListener<String, GlideDrawable>() {
+                    .placeholder(null)
+                    .listener(new RequestListener<String, GlideDrawable>()
+                    {
                         @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource)
+                        {
                            progressBar.setVisibility(View.GONE);
                             return false;
                         }
@@ -98,30 +122,34 @@ public class Details_Fragment extends Fragment {
                     })
                     .into(imgProfile);
 
-        }else {
+        }
+        else
+        {
             progressBar.setVisibility(View.GONE);
-
-            Glide.with(getActivity()).
-                    load(R.mipmap.placeholder).
-                    into(imgProfile);
+            Glide.with(getActivity())
+                    .load(R.mipmap.noimageavailable)
+                    .into(imgProfile);
         }
 
-        if (styleDetailsBean.getPromoFlg().equals("N") || styleDetailsBean.getPromoFlg().equals("")) {
+        if (styleDetailsBean.getPromoFlg().equals("N") || styleDetailsBean.getPromoFlg().equals(""))
+        {
             imgPromo.setImageResource(R.mipmap.option_detail_indicator_red);
-
-        } else if(styleDetailsBean.getPromoFlg().equals("Y")) {
+        }
+        else if(styleDetailsBean.getPromoFlg().equals("Y"))
+        {
             imgPromo.setImageResource(R.mipmap.option_detail_indicator_green);
         }
 
-        if (styleDetailsBean.getKeyProductFlg().equals("N") || styleDetailsBean.getKeyProductFlg().equals("")) {
+        if (styleDetailsBean.getKeyProductFlg().equals("N") || styleDetailsBean.getKeyProductFlg().equals(""))
+        {
             imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_red);
-
-        } else if (styleDetailsBean.getKeyProductFlg().equals("Y")) {
-            imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_green);
-
         }
-        txtStoreCode.setText(styleDetailsBean.getStoreCode());
-        txtStoreDesc.setText(styleDetailsBean.getStoreDesc());
+        else if (styleDetailsBean.getKeyProductFlg().equals("Y"))
+        {
+            imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_green);
+        }
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreDesc.setText(storeDescription.substring(5));
         txtProductName.setText(styleDetailsBean.getProductName());
         txtCollcetion.setText(styleDetailsBean.getCollectionName());
         txtFabric.setText(styleDetailsBean.getProductFabricDesc());
@@ -129,30 +157,52 @@ public class Details_Fragment extends Fragment {
         txtFinish.setText(styleDetailsBean.getProductFinishDesc());
         txtSeason.setText(styleDetailsBean.getSeasonName());
 
-        if (styleDetailsBean.getFirstReceiptDate().equals("")) {
+        if (styleDetailsBean.getFirstReceiptDate().equals(""))
+        {
             txtfirstReceiteDate.setText("NA");
-        } else {
+        }
+        else
+        {
             txtfirstReceiteDate.setText(styleDetailsBean.getFirstReceiptDate());
         }
 
-        if (styleDetailsBean.getLastReceiptDate().equals("")) {
+        if (styleDetailsBean.getLastReceiptDate().equals(""))
+        {
             txtlastReceiteDate.setText("NA");
-        } else {
+        }
+        else
+        {
             txtlastReceiteDate.setText(styleDetailsBean.getLastReceiptDate());
         }
         txtFwdWeekCover.setText("" + String.format("%.1f", styleDetailsBean.getFwdWeekCover()));
         txtTwSalesUnit.setText("" + styleDetailsBean.getTwSaleTotQty());
         txtLwSalesUnit.setText("" + styleDetailsBean.getLwSaleTotQty());
         txtYtdSalesUnit.setText("" + styleDetailsBean.getYtdSaleTotQty());
-
         txtSOH.setText("" + styleDetailsBean.getStkOnhandQty());
         txtGIT.setText("" + styleDetailsBean.getStkGitQty());
         txtBaseStock.setText("" + styleDetailsBean.getTargetStock());
-
         txtPrice.setText("₹" +format.format(Math.round(styleDetailsBean.getUnitGrossPrice())));
         txtsalesThruUnit.setText("" + String.format("%.1f", styleDetailsBean.getSellThruUnitsRcpt()) + "%");
         txtROS.setText("" + String.format("%.1f", styleDetailsBean.getRos()));
-
         return view;
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.btn_cd_more :
+                linear_prodDetails.setVisibility(View.VISIBLE);
+                btn_cd_less.setVisibility(View.VISIBLE);
+                btn_cd_more.setVisibility(View.GONE);
+                break;
+            case R.id.btn_cd_less :
+                btn_cd_less.setVisibility(View.GONE);
+                linear_prodDetails.setVisibility(View.GONE);
+                btn_cd_more.setVisibility(View.VISIBLE);
+                break;
+
+        }
     }
 }

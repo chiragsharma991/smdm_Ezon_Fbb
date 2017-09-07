@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
@@ -45,16 +47,16 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class SaleThruInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class SaleThruInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
 
-    static TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
+    TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
     RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
             quickFilter_baseLayout, BestQfDoneLayout, BestQuickFilterBorder, SwitchRelay;
     RunningPromoListDisplay BestInventSizeListDisplay;
     private SharedPreferences sharedPreferences;
     CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming;
     RadioButton CheckWTD, CheckL4W, CheckSTD;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -85,6 +87,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     public static Activity saleThru;
     private boolean from_filter = false;
     private String selectedString = "";
+    private TabLayout Tabview;
 
 
     @Override
@@ -104,10 +107,13 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        BestInvent_txtStoreName.setText(storeDescription.substring(5));
         BestInventListview.setTag("FOOTER");
 
         Reusable_Functions.hDialog();
@@ -161,6 +167,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                     url = ConstsCore.web_url + "/v1/display/sellthruexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
                 }
             }
+            Log.e("TAG", "requestRunningPromoApi: "+url );
 
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
@@ -315,11 +322,11 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
         BestInventListview = (ListView) findViewById(R.id.bestInvent_ListView);
 
-        BestInvent_segmented = (SegmentedGroup) findViewById(R.id.bestInvent_segmented);
+       // BestInvent_segmented = (SegmentedGroup) findViewById(R.id.bestInvent_segmented);
         BestInvent_quickFilter = (RelativeLayout) findViewById(R.id.bestInvent_quickFilter);
 
-        BestInvent_core = (RadioButton) findViewById(R.id.bestInvent_core);
-        BestInvent_fashion = (RadioButton) findViewById(R.id.bestInvent_fashion);
+      //  BestInvent_core = (RadioButton) findViewById(R.id.bestInvent_core);
+      //  BestInvent_fashion = (RadioButton) findViewById(R.id.bestInvent_fashion);
         // BestInvent_fashion.toggle();
         Bst_sortInventory = (RelativeLayout) findViewById(R.id.bst_sortInventory);
         BaseLayoutInventory = (RelativeLayout) findViewById(R.id.baseLayoutInventory);
@@ -346,8 +353,12 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         CheckWTD = (RadioButton) findViewById(R.id.checkWTD);
         CheckL4W = (RadioButton) findViewById(R.id.checkL4W);
         CheckSTD = (RadioButton) findViewById(R.id.checkSTD);
+        Tabview = (TabLayout) findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("Fashion"));
+        Tabview.addTab(Tabview.newTab().setText("Core"));
 
-        BestInvent_segmented.setOnCheckedChangeListener(this);
+        Tabview.setOnTabSelectedListener(this);
+        // BestInvent_segmented.setOnCheckedChangeListener(this);
         BestInvent_BtnBack.setOnClickListener(this);
         BestInvent_imgfilter.setOnClickListener(this);
         BestInvent_quickFilter.setOnClickListener(this);
@@ -372,13 +383,17 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     }
 
     public void retainSegmentVal() {
-        filter_toggleClick = true;
+
         if (corefashion.equals("Fashion")) {
-            BestInvent_fashion.toggle();
+          //  BestInvent_fashion.toggle();
             coreSelection = false;
+            Tabview.getTabAt(0).select();
+
         } else {
-            BestInvent_core.toggle();
+          //  BestInvent_core.toggle();
+            filter_toggleClick = true;   //toggle will apply whenever you change position that time it will forcefully call anotherwise it will not.
             coreSelection = true;
+            Tabview.getTabAt(1).select();
         }
         maintainquickFilterVal();
     }
@@ -806,10 +821,19 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+
+
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+        int checkedId= Tabview.getSelectedTabPosition();
+        Log.e("TAB", "onTabSelected: "+filter_toggleClick );
+
         if (filter_toggleClick == false) {
             switch (checkedId) {
-                case R.id.bestInvent_core:
-                    if (BestInvent_core.isChecked()) {
+                case 1 :   //core selection
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
@@ -823,10 +847,10 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
-                    }
+
                     break;
-                case R.id.bestInvent_fashion:
-                    if (BestInvent_fashion.isChecked()) {
+                case 0 :  // fashion selection
+
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
@@ -841,12 +865,21 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
 
                         }
-                    }
+
                     break;
             }
         } else {
             filter_toggleClick = false;
         }
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
 
     }
 }

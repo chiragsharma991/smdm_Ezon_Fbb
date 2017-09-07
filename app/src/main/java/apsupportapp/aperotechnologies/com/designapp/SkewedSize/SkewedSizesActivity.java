@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -44,9 +45,10 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
+import uk.co.senab.photoview.log.LoggerDefault;
 
 
-public class SkewedSizesActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class SkewedSizesActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
 
     TextView Skewed_txtStoreCode, Skewed_txtStoreName;
     RelativeLayout Skewed_BtnBack, sk_imgfilter, sk_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout;
@@ -54,7 +56,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private SharedPreferences sharedPreferences;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     RadioButton Skewed_checkWTD, Skewed_checkL4W, Skewed_checkSTD;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -83,6 +85,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     public static Activity SkewedSizes;
     private boolean from_filter = false, filter_toggleClick = false;
     private String selectedString = "";
+    private TabLayout Tabview;
 
 
     @Override
@@ -98,11 +101,14 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        Skewed_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        Skewed_txtStoreName.setText(storeDescription.substring(5));
         SkewedSizeListview.setTag("FOOTER");
         Reusable_Functions.sDialog(this, "Loading.......");
         if (getIntent().getStringExtra("selectedDept") == null) {
@@ -114,6 +120,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             from_filter = true;
             filter_toggleClick = true;
         }
+        Log.e("TAG", "Selected string: "+selectedString+" "+from_filter );
         retainValuesFilter();
         requestRunningPromoApi(selectedString);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
@@ -123,16 +130,19 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void
-
     retainValuesFilter() {
-        filter_toggleClick = true;
+      //  filter_toggleClick = true;
         if (corefashion.equals("Fashion")) {
-            Skewed_core.toggle();
+          //  Skewed_core.toggle();
             coreSelection = false;
+            Tabview.getTabAt(0).select();
+
 
         } else {
-            Skewed_fashion.toggle();
+          //  Skewed_fashion.toggle();
             coreSelection = true;
+            Tabview.getTabAt(1).select();
+
 
         }
         quickFilterValCheckClick();
@@ -143,6 +153,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
         if (Reusable_Functions.chkStatus(context)) {
 
+            Log.e("TAG", "From filter: "+from_filter );
             String url;
             if (from_filter) {
                 if (coreSelection) {
@@ -209,8 +220,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                                     SkewedSizeAdapter = new SkewedSizeAdapter(SkewedSizeList, context, getResources());
                                     SkewedSizeListview.setAdapter(SkewedSizeAdapter);
                                 }
-                                Skewed_txtStoreCode.setText(SkewedSizeList.get(0).getStoreCode());
-                                Skewed_txtStoreName.setText(SkewedSizeList.get(0).getStoreDescription());
+
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
                                 footer.setVisibility(View.GONE);
@@ -297,10 +307,10 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         Skewed_BtnBack = (RelativeLayout) findViewById(R.id.skewed_BtnBack);
         sk_imgfilter = (RelativeLayout) findViewById(R.id.sk_imgfilter);
         SkewedSizeListview = (ListView) findViewById(R.id.skewedListView);
-        Skewed_segmented = (SegmentedGroup) findViewById(R.id.skewed_segmented);
+        //Skewed_segmented = (SegmentedGroup) findViewById(R.id.skewed_segmented);
         sk_quickFilter = (RelativeLayout) findViewById(R.id.sk_quickFilter);
-        Skewed_core = (RadioButton) findViewById(R.id.skewed_core);
-        Skewed_fashion = (RadioButton) findViewById(R.id.skewed_fashion);
+       // Skewed_core = (RadioButton) findViewById(R.id.skewed_core);
+       // Skewed_fashion = (RadioButton) findViewById(R.id.skewed_fashion);
         quickFilterPopup = (RelativeLayout) findViewById(R.id.quickFilterPopup);
         quickFilter_baseLayout = (RelativeLayout) findViewById(R.id.quickFilter_baseLayout);
         qfDoneLayout = (RelativeLayout) findViewById(R.id.qfDoneLayout);
@@ -313,7 +323,12 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         Skewed_checkWTD = (RadioButton) findViewById(R.id.skewed_checkWTD);
         Skewed_checkL4W = (RadioButton) findViewById(R.id.skewed_checkL4W);
         Skewed_checkSTD = (RadioButton) findViewById(R.id.skewed_checkSTD);
-        Skewed_segmented.setOnCheckedChangeListener(this);
+        Tabview = (TabLayout) findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("Fashion"));
+        Tabview.addTab(Tabview.newTab().setText("Core"));
+
+        Tabview.setOnTabSelectedListener(this);
+     //   Skewed_segmented.setOnCheckedChangeListener(this);
         Skewed_BtnBack.setOnClickListener(this);
         sk_imgfilter.setOnClickListener(this);
         sk_quickFilter.setOnClickListener(this);
@@ -358,6 +373,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.qfDoneLayout:
+
+                from_filter = false;
 
                 if (Reusable_Functions.chkStatus(context)) {
                     if (Skewed_checkWTD.isChecked()) {
@@ -459,6 +476,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
     private void quickFilterValCheckClick() {
 
+
         if (qfButton.equals("OFF") && checkTimeValueIs == null) {
             checkCurrent.setChecked(true);
             checkUpcoming.setChecked(false);
@@ -469,6 +487,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             Skewed_checkSTD.setChecked(true);
         } else {
             switch (qfButton) {
+
                 case "checkCurrent":
                     checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);
@@ -607,7 +626,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         //change core fashion according to chnage in xml layout
-
+/*
         if (!filter_toggleClick) {
             switch (checkedId) {
                 case R.id.skewed_core:
@@ -654,9 +673,73 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             }
         } else {
             filter_toggleClick = false;
-        }
+        }*/
 
     }
 
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        int checkedId= Tabview.getSelectedTabPosition();
+        Log.e("TAB", "onTabSelected: "+checkedId );
+
+        if (!filter_toggleClick)   // from filter is use when you retain tab button that time it will call .
+        {
+            from_filter = false;
+
+            switch (checkedId) {
+
+            case 1 :   //core selection
+                limit = 10;
+                offsetvalue = 0;
+                top = 10;
+                corefashion = "Core";
+                SkewedSizeList.clear();
+                SkewedSizeListview.setVisibility(View.GONE);
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.sDialog(this, "Loading.......");
+                    coreSelection = true;
+                    requestRunningPromoApi(selectedString);
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    Reusable_Functions.hDialog();
+                    SkewedSizeListview.setVisibility(View.GONE);
+
+                }
+                break;
+
+            case 0 :  // fashion selection
+                limit = 10;
+                offsetvalue = 0;
+                top = 10;
+                corefashion = "Fashion";
+                SkewedSizeList.clear();
+                SkewedSizeListview.setVisibility(View.GONE);
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.sDialog(this, "Loading.......");
+                    coreSelection = false;
+                    requestRunningPromoApi(selectedString);
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    Reusable_Functions.hDialog();
+                    SkewedSizeListview.setVisibility(View.GONE);
+                }
+                break;
+
+
+        }
+        }else{  filter_toggleClick = false;
+        }
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 }

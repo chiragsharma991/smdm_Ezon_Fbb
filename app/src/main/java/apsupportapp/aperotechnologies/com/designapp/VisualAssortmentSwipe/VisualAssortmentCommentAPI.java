@@ -29,8 +29,8 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
 public class VisualAssortmentCommentAPI {
-     RequestQueue queue;
-    Gson gson;
+    RequestQueue queue;
+     Gson gson;
 
     // Api for post method
     public static void requestSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context) {
@@ -40,15 +40,19 @@ public class VisualAssortmentCommentAPI {
         RequestQueue queue = null;
         if (queue != null) {
             queue.stop();
-        } else if(queue == null){
+        } else if(queue == null)
+        {
             queue = new RequestQueue(cache, network);
             queue.start();
         }
-        String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId;
+       // userId = userId.substring(0,userId.length()-5);
+        String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId ;
+        Log.e("post url :",""+url +"\n"+obj);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.e("post response :",""+response);
                         try {
                             if (response == null || response.equals("")) {
                                 Reusable_Functions.hDialog();
@@ -94,11 +98,14 @@ public class VisualAssortmentCommentAPI {
             queue = new RequestQueue(cache, network);
             queue.start();
         }
+       // userId = userId.substring(0,userId.length()-5);
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId;
+        Log.e("put request :",""+url + "\n"+obj);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.e("put response :",""+response);
                         try {
                             if (response == null || response.equals("")) {
                                 Reusable_Functions.hDialog();
@@ -139,7 +146,6 @@ public class VisualAssortmentCommentAPI {
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         String formatted = format1.format(cal.getTime());
         System.out.println(formatted);
-
-        return formatted;
+       return formatted;
     }
 }

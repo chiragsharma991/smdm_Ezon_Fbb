@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -35,7 +36,7 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
     static String productName = "";
     RequestQueue queue;
     public static CustomViewPager plan_pager;
-
+    public static TextView txtStoreCode,txtStoreDesc;
 
 
     @Override
@@ -54,7 +55,8 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
 
         btnFilter = (RelativeLayout) findViewById(R.id.planactual_BtnFilter);
         btnFilter.setOnClickListener(this);
-
+        txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         tabLayout = (TabLayout) findViewById(R.id.planactual_tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Product Name "));
         tabLayout.addTab(tabLayout.newTab().setText("Option"));
@@ -66,13 +68,20 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabSelected(TabLayout.Tab tab)
+            {
 
                 plan_pager.setCurrentItem(tab.getPosition());
 
-                if (plan_pager.getCurrentItem() == 1 && KeyProductPlanActivity.productName.equals("")) {
+                if (plan_pager.getCurrentItem() == 1 && KeyProductPlanActivity.productName.equals(""))
+                {
                     View view=findViewById(android.R.id.content);
                     Snackbar.make(view, "Please select product to view options", Snackbar.LENGTH_LONG).show();
+                }
+                if(plan_pager.getCurrentItem() == 1 && !KeyProductPlanActivity.productName.equals(""))
+                {
+                    Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
+                    Plan_Option_Fragment.optionview.addView(Plan_Option_Fragment.optrel);
                 }
 
                 if (plan_pager.getCurrentItem() == 0 && !KeyProductPlanActivity.productName.equals(""))
@@ -85,11 +94,11 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
                    Plan_Option_Fragment.optionview.removeView(Plan_Option_Fragment.optrel);
                    KeyProductPlanActivity.productName = "";
                    LinearLayout layout = (LinearLayout)plan_pager.getParent();
-                   TabLayout tab1 = (TabLayout) layout.getChildAt(1);
-                    if(tab1.getTabCount() == 2)
-                    {
-                        tab1.removeTabAt(1);
-                    }
+//                   TabLayout tab1 = (TabLayout) layout.getChildAt(1);
+//                    if(tab1.getTabCount() == 2)
+//                    {
+//                        tab1.removeTabAt(1);
+//                    }
                }
            }
 
@@ -101,14 +110,11 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
-
-
     }
 
-    public void communicateToFragment2(String productName, String segClick) {
 
-
+    public void communicateToFragment2(String productName, String segClick)
+    {
         KeyProductPlanActivity.productName = productName;
         Plan_Option_Fragment fragment = (Plan_Option_Fragment) adapter.getFragment(1);
         if (fragment != null) {
@@ -116,28 +122,24 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         }
     }
 
-
-
     @Override
-    public void communicateToFragment3(String level,String optsegmentclick) {
-
+    public void communicateToFragment3(String level,String optsegmentclick)
+    {
         Plan_SKU_Fragment fragment = ( Plan_SKU_Fragment) adapter.getFragment(2);
-        if (fragment != null) {
+        if (fragment != null)
+        {
             fragment.fragment_Communication(level,optsegmentclick);
         }
     }
 
-
-
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.planactual_BtnBack:
-
-
-
                onBackPressed();
-                break;
+               break;
             case R.id.planactual_BtnFilter:
                 Intent intent1 = new Intent(KeyProductPlanActivity.this,KeyProductFilterActivity.class);
                 startActivity(intent1);
@@ -146,17 +148,14 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         }
     }
 
-
-
-
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
        KeyProductPlanActivity.productName = "";
-
        KeyProdFilterAdapter.checkedValue = new ArrayList<String>();
-        Plan_Product.prodsegClick = "";
-        Plan_Product.prodsegClick = "WTD";
-        finish();
+       Plan_Product.prodsegClick = "";
+       Plan_Product.prodsegClick = "WTD";
+       finish();
     }
 }
 

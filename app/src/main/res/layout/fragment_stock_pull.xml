@@ -1,25 +1,167 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context="apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
 
+    <RelativeLayout
+        android:id="@+id/relChartlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/stockPull_list"
-        android:background="@color/bg_screen_color"
-        android:scrollbars="vertical"
+        <android.support.v7.widget.CardView
+            android:id="@+id/bst_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            app:cardUseCompatPadding="false"
+            app:contentPadding="5dp"
+            app:cardBackgroundColor="@color/ezfb_White"
+            app:cardElevation="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/spinner"
+                android:weightSum="2"
+                >
+                <TextView
+                    android:layout_weight="0.3"
+                    android:id="@+id/spinner_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:clickable="true"
+                    android:gravity="left|center"
+                    android:padding="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="1dp"
+                    android:layout_height="55dp"
+                    android:background="@color/smdm_divider_Black"
+                    >
+
+                </View>
+
+
+                <ImageButton
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/dropdkown"
+                    android:visibility="visible"
+                    android:layout_weight="1.7"
+                    android:background="?attr/selectableItemBackground"
+                    android:src="@mipmap/search_option_dropdown_arrow"
+                    />
+
+                <ProgressBar
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.7"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:visibility="gone"
+                    />
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </android.support.v7.widget.CardView>
+
+  <!--      <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.github.mikephil.charting.charts.BarChart>
+
+
+        <RelativeLayout
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:visibility="visible"
+
+            >
+
+            <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/pva_progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:background="#0000"
+                android:keepScreenOn="true"
+                android:padding="10dp"
+                android:theme="@style/ProgressBar">
+
+            </ProgressBar>
+
+
+        </RelativeLayout>-->
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/activity_stockpullfragment_child"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:layout_above="@+id/stock_fragmentSubmit"
+        android:layout_below="@+id/relChartlayout"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/stockPull_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+    </RelativeLayout>
+
+
+    <Button
+        android:background="@color/ezfb_Red"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Submit"
+        android:id="@+id/stock_fragmentSubmit"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/smdm_header_title_large"
+        android:textAllCaps="false"
         />
 
-</LinearLayout>
+
+
+</RelativeLayout>

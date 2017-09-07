@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -51,14 +52,14 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * Created by pamrutkar on 07/12/16.
  */
 
-public class FloorAvailabilityActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class FloorAvailabilityActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
 
     TextView floor_txtStoreCode, floor_txtStoreName;
     RelativeLayout floor_BtnBack, floor_BtnFilter, floor_quickFilter, quickFilterPopup;
     RelativeLayout quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     FloorAvailabilityDetails floorAvailabilityDetails;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken;
+    String userId, bearertoken,storeDescription;
     private static String seasongroup = "Current";
     private int count = 0;
     private boolean coreSelection = false;
@@ -83,6 +84,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private boolean from_filter = false;
     private String selectedString = "";
     private boolean toggleClick = false;
+    private TabLayout Tabview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,10 +98,13 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        floor_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        floor_txtStoreName.setText(storeDescription.substring(5));
         floorListView.setTag("FOOTER");
         floorListView.setVisibility(View.VISIBLE);
 
@@ -146,6 +151,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                     url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
                 }
             }
+            Log.e("TAG", "requestFloorAvailabilityApi: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -277,9 +283,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         quickFilter_BorderLayout = (RelativeLayout) findViewById(R.id.quickFilter_BorderLayout);
         floorListView = (ListView) findViewById(R.id.floorListView);
 
-        floor_segmented = (SegmentedGroup) findViewById(R.id.floor_segmented);
-        floor_core = (RadioButton) findViewById(R.id.floor_core);
-        floor_fashion = (RadioButton) findViewById(R.id.floor_fashion);
+     //   floor_segmented = (SegmentedGroup) findViewById(R.id.floor_segmented);
+      //  floor_core = (RadioButton) findViewById(R.id.floor_core);
+      //  floor_fashion = (RadioButton) findViewById(R.id.floor_fashion);
 
         Toggle_floor_fav = (ToggleButton) findViewById(R.id.toggle_floor_fav);
 
@@ -287,14 +293,18 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
         checkOld = (CheckBox) findViewById(R.id.checkOld);
         checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+        Tabview = (TabLayout) findViewById(R.id.tabview);
+        Tabview.addTab(Tabview.newTab().setText("Fashion"));
+        Tabview.addTab(Tabview.newTab().setText("Core"));
 
+        Tabview.setOnTabSelectedListener(this);
         checkCurrent.setOnClickListener(this);
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
 
         qfDoneLayout.setOnClickListener(this);
-        floor_segmented.setOnCheckedChangeListener(this);
+     //   floor_segmented.setOnCheckedChangeListener(this);
         floor_BtnBack.setOnClickListener(this);
         floor_BtnFilter.setOnClickListener(this);
         floor_quickFilter.setOnClickListener(this);
@@ -303,15 +313,19 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     }
 
     private void RetainFromMain_filter() {
-        toggleClick = true;
 
         if (corefashion.equals("Fashion")) {
-            floor_fashion.toggle();
+            //floor_fashion.toggle();
             coreSelection = false;
+            Tabview.getTabAt(0).select();
+
 
         } else {
-            floor_core.toggle();
+          // floor_core.toggle();
+            toggleClick = true;   //toggle will apply whenever you change position that time it will forcefully call anotherwise it will not.
             coreSelection = true;
+            Tabview.getTabAt(1).select();
+
         }
         baseclick();
     }
@@ -512,11 +526,29 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        seasongroup = null;
+        corefashion = null;
+        floorcheckSeasonGpVal = null;
+        seasongroup = "Current";
+        corefashion = "Fashion";
+        finish();
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+        int checkedId= Tabview.getSelectedTabPosition();
+        Log.e("TAB", "onTabSelected: "+toggleClick );
+
         if (toggleClick == false) {
             switch (checkedId) {
-                case R.id.floor_core:
-                    if (floor_core.isChecked()) {
-
+                case 1 :   //core selection
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
@@ -534,10 +566,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             floorListView.setVisibility(View.GONE);
 
                         }
-                    }
+
                     break;
-                case R.id.floor_fashion:
-                    if (floor_fashion.isChecked()) {
+                case 0 :  // fashion selection
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
@@ -555,7 +586,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                             floorListView.setVisibility(View.GONE);
 
                         }
-                    }
+
                     break;
             }
         } else {
@@ -563,15 +594,13 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         }
     }
 
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        seasongroup = null;
-        corefashion = null;
-        floorcheckSeasonGpVal = null;
-        seasongroup = "Current";
-        corefashion = "Fashion";
-        finish();
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }

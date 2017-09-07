@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,10 @@ public class SwipeDeckAdapter extends BaseAdapter {
     private Context context;
     SwipeDeck cardStack;
     View layoutView;
-    static RelativeLayout rellike, reldislike, relbuy, relcomment;
+    static RelativeLayout rellike, reldislike,
+
+
+    relbuy, relcomment;
     static ImageButton btnlike, btndislike, btnbuy, btncomment;
     ArrayList<VisualAssort> visualassortmentlist;
     ImageView img_VisualAssortment;
@@ -110,7 +114,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
 
         LayoutInflater inflater = LayoutInflater.from(context);
-        layoutView = inflater.inflate(R.layout.fragment_visualassortment, parent, false);
+        layoutView = inflater.inflate(R.layout.fragment_visual_assort, parent, false);
         rellike = (RelativeLayout) layoutView.findViewById(R.id.imgrellike);
         reldislike = (RelativeLayout) layoutView.findViewById(R.id.imgreldislike);
         relbuy = (RelativeLayout) layoutView.findViewById(R.id.imgrelbuy);
@@ -141,22 +145,24 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v)
             {
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
                     requestOptionDetailsAPI(visualAssort.getArticleOption());
-                } else {
+                } else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
             }
         });
-        txtSeason.setText("Season : " + visualAssort.getSeasonName());
-        txtColor.setText("Color : " + visualAssort.getColor());
-        txtFabric.setText("Fabric : " + visualAssort.getProductFabricDesc());
-        txtFit.setText("Fit : " + visualAssort.getProductFitDesc());
-        txtCollection.setText("Collection : " + visualAssort.getCollectionName());
+        txtSeason.setText("" + visualAssort.getSeasonName());
+        txtColor.setText(" " + visualAssort.getColor());
+        txtFabric.setText("" + visualAssort.getProductFabricDesc());
+        txtFit.setText("" + visualAssort.getProductFitDesc());
+        txtCollection.setText("" + visualAssort.getCollectionName());
         txtAmount.setText("\u20B9 " + visualAssort.getUnitGrossPrice());
-        txtSizeRatio.setText("Size Ratio : " + visualAssort.getSize());
+        txtSizeRatio.setText(" " + visualAssort.getSize());
 
         if(!visualAssort.getProdImageURL().equals(""))
         {
@@ -190,82 +196,93 @@ public class SwipeDeckAdapter extends BaseAdapter {
         }
 
         if (visualAssort.getLikeDislikeFlg() == null) {
-            btnlike.setBackgroundResource(R.mipmap.like_selected);
-            btndislike.setBackgroundResource(R.mipmap.dislike_selected);
+            btnlike.setBackgroundResource(R.mipmap.likeunselected);
+            btndislike.setBackgroundResource(R.mipmap.dislikeunselected);
         } else if (visualAssort.getLikeDislikeFlg().equals("1")) {
-            btnlike.setBackgroundResource(R.mipmap.like_unselected);
-            rellike.setBackgroundColor(Color.parseColor("#2277b1"));
-            btndislike.setBackgroundResource(R.mipmap.dislike_selected);
+            btnlike.setBackgroundResource(R.mipmap.likeunselected);
+            rellike.setBackgroundColor(Color.parseColor("#ffffff"));
+            btndislike.setBackgroundResource(R.mipmap.dislikeselected);
         } else if (visualAssort.getLikeDislikeFlg().equals("0")) {
-            btnlike.setBackgroundResource(R.mipmap.like_selected);
-            btndislike.setBackgroundResource(R.mipmap.dislike_unselected);
-            reldislike.setBackgroundColor(Color.parseColor("#2277b1"));
+            btnlike.setBackgroundResource(R.mipmap.likeselected);
+            btndislike.setBackgroundResource(R.mipmap.dislikeunselected);
+            reldislike.setBackgroundColor(Color.parseColor("#ffffff"));
         } else {
-            btnlike.setBackgroundResource(R.mipmap.like_selected);
-            btndislike.setBackgroundResource(R.mipmap.dislike_selected);
+            btnlike.setBackgroundResource(R.mipmap.likeunselected);
+            btndislike.setBackgroundResource(R.mipmap.dislikeunselected);
         }
 
 
         rellike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(VisualAssortmentActivity.likeDislikeFlg.equals("Pending")) {
 
-                if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE) {
-                    VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
+                    if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE) {
+                        VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
+                    }
+
+                    if (VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE) {
+                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+                    }
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (inputManager != null) {
+                        inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                        inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+
+                    RelativeLayout rel1 = (RelativeLayout) v;
+                    LinearLayout parent = (LinearLayout) rel1.getParent();
+                    RelativeLayout rel2 = (RelativeLayout) parent.getChildAt(1);
+
+                    ImageButton btn1 = (ImageButton) rel1.getChildAt(0);
+                    btn1.setBackgroundResource(R.mipmap.likeunselected);
+                    rel1.setBackgroundColor(Color.parseColor("#ffffff"));
+                    ImageButton btn2 = (ImageButton) rel2.getChildAt(0);
+                    btn2.setBackgroundResource(R.mipmap.dislikeselected);
+                    rel2.setBackgroundColor(Color.parseColor("#ffffff"));
+                    cardStack.swipeTopCardRight(180);
                 }
-
-                if (VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE) {
-                    VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+                else
+                {
+                    Log.e("like click disabled","-------");
                 }
-                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (inputManager != null) {
-                    inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                }
-
-                RelativeLayout rel1 = (RelativeLayout) v;
-                LinearLayout parent = (LinearLayout) rel1.getParent();
-                RelativeLayout rel2 = (RelativeLayout) parent.getChildAt(1);
-
-                ImageButton btn1 = (ImageButton) rel1.getChildAt(0);
-                btn1.setBackgroundResource(R.mipmap.like_unselected);
-                rel1.setBackgroundColor(Color.parseColor("#2277b1"));
-                ImageButton btn2 = (ImageButton) rel2.getChildAt(0);
-                btn2.setBackgroundResource(R.mipmap.dislike_selected);
-                rel2.setBackgroundColor(Color.parseColor("#2277b1"));
-                cardStack.swipeTopCardRight(180);
-
             }
         });
 
         reldislike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                 if(VisualAssortmentActivity.likeDislikeFlg.equals("Pending"))
+                 {
+                     if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE) {
+                         VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
+                     }
 
-                if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE) {
-                    VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
-                }
+                     if (VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE) {
+                         VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+                     }
+                     InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                     if (inputManager != null) {
+                         inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                         inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                     }
 
-                if (VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE) {
-                    VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
-                }
-                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (inputManager != null) {
-                    inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                }
+                     RelativeLayout rel2 = (RelativeLayout) v;
+                     LinearLayout parent = (LinearLayout) rel2.getParent();
+                     RelativeLayout rel1 = (RelativeLayout) parent.getChildAt(0);
 
-                RelativeLayout rel2 = (RelativeLayout) v;
-                LinearLayout parent = (LinearLayout) rel2.getParent();
-                RelativeLayout rel1 = (RelativeLayout) parent.getChildAt(0);
-
-                ImageButton btn1 = (ImageButton) rel1.getChildAt(0);
-                btn1.setBackgroundResource(R.mipmap.like_selected);
-                rel1.setBackgroundColor(Color.parseColor("#2277b1"));
-                ImageButton btn2 = (ImageButton) rel2.getChildAt(0);
-                btn2.setBackgroundResource(R.mipmap.dislike_unselected);
-                rel2.setBackgroundColor(Color.parseColor("#2277b1"));
-                cardStack.swipeTopCardLeft(180);
+                     ImageButton btn1 = (ImageButton) rel1.getChildAt(0);
+                     btn1.setBackgroundResource(R.mipmap.likeselected);
+                     rel1.setBackgroundColor(Color.parseColor("#ffffff"));
+                     ImageButton btn2 = (ImageButton) rel2.getChildAt(0);
+                     btn2.setBackgroundResource(R.mipmap.dislikeunselected);
+                     rel2.setBackgroundColor(Color.parseColor("#ffffff"));
+                     cardStack.swipeTopCardLeft(180);
+                 }
+                else
+                 {
+                     Log.e("Click disabled","----");
+                 }
 
             }
         });
@@ -274,12 +291,12 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                v.setBackgroundResource(R.drawable.button_red_effect);
+                v.setBackgroundResource(R.drawable.button_click);
                 int position = (int) v.getTag();
 
                 VisualAssort visualAssort1 = visualassortmentlist.get(position);
                 VisualAssortmentActivity.txtSize.setText(visualAssort1.getSize());
-                VisualAssortmentActivity.edtTextSets.setText(String.valueOf(visualAssort1.getSizeSet()));
+                VisualAssortmentActivity.edtTextSets.setText("");
                 pos = position;
 
                 if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE) {
@@ -298,71 +315,75 @@ public class SwipeDeckAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                int position = pos;
-
-                VisualAssort visualAssort1 = visualassortmentlist.get(position);
-
-                if (VisualAssortmentActivity.edtTextSets.getText().toString().equals("0")) {
+//                int position = pos;
+//
+//                VisualAssort visualAssort1 = visualassortmentlist.get(position);
+//
+                if (VisualAssortmentActivity.edtTextSets.getText().toString().equals(""))
+                {
                     Toast.makeText(context, "Enter some value", Toast.LENGTH_SHORT).show();
-                } else {
-                    Reusable_Functions.sDialog(context, "Loading..");
-                    String articleOption = visualAssort1.getArticleOption();
-                    String checkLikedislike = visualAssort1.getLikeDislikeFlg();
-                    if(checkLikedislike == null)
-                    {
-                        checkLikedislike = "";
-                    }
-                    String checkFeedback = visualAssort1.getFeedback();
-                    if(checkFeedback == null)
-                    {
-                        checkFeedback = "";
-                    }
-                    int checkSizeSet = visualAssort1.getSizeSet();
-
-                    JSONObject obj = new JSONObject();
-                    try {
-                        obj.put("articleOption", articleOption);
-                        obj.put("likeDislikeFlg", checkLikedislike);
-                        obj.put("feedback", checkFeedback);
-                        obj.put("sizeSet", Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
-                    {
-
-                        //GO FOR POST METHOD
-                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
-                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
-                        relbuy.setEnabled(false);
-                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-                    }
-                    else
-                    {
-                        //GO FOR PUT METHOD
-                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
-                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
-                        relbuy.setEnabled(false);
-                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-                    }
                 }
-
-                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (inputManager != null) {
+                else
+                {
+                    cardStack.swipeTopCardRight(180);
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (inputManager != null) {
                     inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
                 }
+//                    Reusable_Functions.sDialog(context, "Loading..");
+//                    String articleOption = visualAssort1.getArticleOption();
+//                    String checkLikedislike = visualAssort1.getLikeDislikeFlg();
+//                    if(checkLikedislike == null)
+//                    {
+//                        checkLikedislike = "";
+//                    }
+//                    String checkFeedback = visualAssort1.getFeedback();
+//                    if(checkFeedback == null)
+//                    {
+//                        checkFeedback = "";
+//                    }
+//                    int checkSizeSet = visualAssort1.getSizeSet();
+//
+//                    JSONObject obj = new JSONObject();
+//                    try {
+//                        obj.put("articleOption", articleOption);
+//                        obj.put("likeDislikeFlg", checkLikedislike);
+//                        obj.put("feedback", checkFeedback);
+//                        obj.put("sizeSet", Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//
+//                    if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
+//                    {
+//
+//                        //GO FOR POST METHOD
+//                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+//                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+//                        relbuy.setEnabled(false);
+//                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+//                    }
+//                    else
+//                    {
+//                        //GO FOR PUT METHOD
+//                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+//                        VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
+//                        relbuy.setEnabled(false);
+//                        visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+//                    }
+//                }
+//
+//
             }
-
         });
-
 
         relcomment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                v.setBackgroundResource(R.drawable.button_red_effect);
+                v.setBackgroundResource(R.drawable.button_click);
 
                 int position = (int) v.getTag();
 
@@ -389,9 +410,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
 
                 int position = pos;
-
                 VisualAssort visualAssort1 = visualassortmentlist.get(position);
-
                 if (VisualAssortmentActivity.edtTextComment.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Enter some value", Toast.LENGTH_SHORT).show();
                 } else {
@@ -414,14 +433,12 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         obj.put("likeDislikeFlg", checkLikedislike);
                         obj.put("feedback", VisualAssortmentActivity.edtTextComment.getText().toString().trim());
                         obj.put("sizeSet", checkSizeSet);
-                    } catch (JSONException e) {
+                    }
+                    catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                     if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
                     {
-
                         //GO FOR POST METHOD
                         VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
                         VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
@@ -435,7 +452,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
                         relcomment.setEnabled(false);
                         visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
-
                     }
 
                 }

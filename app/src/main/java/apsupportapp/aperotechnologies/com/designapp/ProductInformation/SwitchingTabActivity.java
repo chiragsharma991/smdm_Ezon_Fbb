@@ -2,6 +2,7 @@ package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
-import apsupportapp.aperotechnologies.com.designapp.DashBoardActivity;
+
+
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.KeyProductActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -28,12 +31,14 @@ public class SwitchingTabActivity extends AppCompatActivity {
     public static ViewPager viewPager;
     public static TabLayout tabLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_switching_tab);
+        setContentView(R.layout.activity_switch_tab);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().hide();
+        getSupportActionBar().setElevation(0);
         switchingTabActivity = this;
         backButton = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         imageBtnHomePage = (RelativeLayout) findViewById(R.id.imageBtnHomePage);
@@ -50,7 +55,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SwitchingTabActivity.this, DashBoardActivity.class);
+                Intent intent = new Intent(SwitchingTabActivity.this, SnapDashboardActivity.class);
                 startActivity(intent);
                 finish();
                 if(getIntent().getStringExtra("checkFrom").equals("bestInventory"))
@@ -62,8 +67,11 @@ public class SwitchingTabActivity extends AppCompatActivity {
             }
         });
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Details"));
+
+        tabLayout.addTab(tabLayout.newTab().setText("Option"));
         tabLayout.addTab(tabLayout.newTab().setText("Style Size"));
+        tabLayout.setTabTextColors(Color.parseColor("#e8112d"),Color.parseColor("#e8112d"));
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         viewPager = (ViewPager) findViewById(R.id.pager);
         final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());

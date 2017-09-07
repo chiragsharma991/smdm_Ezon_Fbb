@@ -20,7 +20,7 @@
                 android:id="@+id/sznchildRelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <RelativeLayout
                     android:id="@+id/storesales"
@@ -148,8 +148,8 @@
             <RelativeLayout
                 android:id="@+id/rankRelLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible">
+                 android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/pvaSalesRelLayout"

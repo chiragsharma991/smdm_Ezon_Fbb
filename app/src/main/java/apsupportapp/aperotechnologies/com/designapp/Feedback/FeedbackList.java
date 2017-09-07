@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -54,7 +55,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private String bearertoken;
+    private String bearertoken,storeDescription;
     private String TAG = "FeedbackList";
     private RequestQueue queue;
     private int count = 0;
@@ -67,10 +68,11 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
     private Button Pricing, Fitting, Colours, Prints, Styling, Fabric_quality, Garment_quality;
-    private TextView Feedback_option;
+    private TextView Feedback_option,txtStoreCode,txtStoreName;
     private AlertDialog dialog;
     private LinearLayout firstView;
-    private RelativeLayout secondView, FeedbackNext, FeedbackPre;
+    private RelativeLayout secondView,FeedbackPre_layout,FeedbackNext_layout;
+    private Button FeedbackNext, FeedbackPre;
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
     private ArrayList<String> optionList;
@@ -81,15 +83,16 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback_list);
         getSupportActionBar().hide();//
-        initalise();
         gson = new Gson();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        initalise();
         feedbackListData = new ArrayList<>();
 
         if (Reusable_Functions.chkStatus(context)) {
@@ -116,10 +119,15 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         Feedback_BtnBack = (RelativeLayout) findViewById(R.id.feedbackList_BtnBack);
         Feedback_image = (ImageView) findViewById(R.id.feedbackList_image);
         Feedback_option = (TextView) findViewById(R.id.feedbackList_option);
+        txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        txtStoreName = (TextView) findViewById(R.id.txtStoreName);
         ImageLoader_feedback = (ProgressBar) findViewById(R.id.imageLoader_feedbackList);
-        FeedbackNext = (RelativeLayout) findViewById(R.id.feedbackList_next);
-        FeedbackPre = (RelativeLayout) findViewById(R.id.feedbackList_pre);
-        FeedbackPre.setVisibility(View.GONE);
+        FeedbackNext = (Button) findViewById(R.id.feedbackList_next);
+        FeedbackPre = (Button) findViewById(R.id.feedbackList_pre);
+
+        FeedbackPre_layout = (RelativeLayout) findViewById(R.id.feedbackList_pre_layout);
+        FeedbackNext_layout = (RelativeLayout) findViewById(R.id.feedbackList_next_layout);
+        FeedbackPre_layout.setVisibility(View.GONE);
 
         //all relative layout for add views
         Fitting_relative = (RelativeLayout) findViewById(R.id.fitting_relative);
@@ -143,11 +151,13 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
             //https://smdm.manthan.com/v1/display/worstperformerfeedback/displayreports/4813
             String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
 
+            Log.e(TAG, "requestFeedbackApi: "+url);
 
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
+                            Log.d(TAG, "onResponse: "+response );
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -177,12 +187,13 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                                     count = 0;
                                     limit = 10;
                                     offsetvalue = 0;
-                                }
-                                Reusable_Functions.hDialog();
-                                for (int i = 0; i < optionList.size(); i++) {
+                                    Reusable_Functions.hDialog();
+                                    for (int i = 0; i < optionList.size(); i++) {
 
-                                    feedbackReport(i, 0);
+                                        feedbackReport(i, 0);
+                                    }
                                 }
+
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
@@ -245,14 +256,14 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
 
                         feedbackReport(i, nextCount);
                     }
-                    FeedbackPre.setVisibility(View.VISIBLE);
+                    FeedbackPre_layout.setVisibility(View.VISIBLE);
 
                 } else {
                     for (int i = 0; i < optionList.size(); i++) {
 
                         feedbackReport(i, nextCount);
                     }
-                    FeedbackNext.setVisibility(View.GONE);
+                    FeedbackNext_layout.setVisibility(View.GONE);
                 }
                 break;
             case R.id.feedbackList_pre:
@@ -262,14 +273,14 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
 
                         feedbackReport(i, nextCount);
                     }
-                    FeedbackNext.setVisibility(View.VISIBLE);
+                    FeedbackNext_layout.setVisibility(View.VISIBLE);
 
                 } else {
                     for (int i = 0; i < optionList.size(); i++) {
 
                         feedbackReport(i, nextCount);
                     }
-                    FeedbackPre.setVisibility(View.GONE);
+                    FeedbackPre_layout.setVisibility(View.GONE);
                 }
 
                 break;
@@ -295,6 +306,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         // set image per list
 
         Feedback_option.setText(feedbackListData.get(Listposition).getOption());
+        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        txtStoreName.setText(storeDescription.substring(5));
         ImageLoader_feedback.setVisibility(View.VISIBLE);
         if (!feedbackListData.get(Listposition).getProdImageUrl().equals("")) {
             Glide.
@@ -318,7 +331,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         } else {
             ImageLoader_feedback.setVisibility(View.GONE);
             Glide.with(context).
-                    load(R.drawable.placeholder).
+                    load(R.mipmap.noimageavailable).
                     into(Feedback_image);
         }
 
@@ -394,7 +407,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
 
         final TextView textView1 = new TextView(context);
         textView1.setText("" + optionList.get(position));
-        textView1.setTextColor(Color.parseColor("#404040"));
+        textView1.setTextColor(Color.parseColor("#000000"));
         final RelativeLayout.LayoutParams params1 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -440,7 +453,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         } else if (position == 6) {
             textView2.setText("" + String.format("%.1f", +feedbackListData.get(Listposition).getGarmentQualityCntPer()) + "%");
         }
-        textView2.setTextColor(Color.parseColor("#404040"));
+        textView2.setTextColor(Color.parseColor("#000000"));
+        textView2.setTypeface(Typeface.DEFAULT_BOLD);
         final RelativeLayout.LayoutParams params2 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);

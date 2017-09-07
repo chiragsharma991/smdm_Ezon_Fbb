@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+
 
 public class AboutUsActivity extends AppCompatActivity {
 
     RelativeLayout btnBack;
-    TextView txtversioncode;
+    TextView txtversioname,txtversioncode;
     Context context;
 
     @Override
@@ -23,6 +25,7 @@ public class AboutUsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.about_us);
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
+        txtversioname = (TextView) findViewById(R.id.versioname);
         txtversioncode = (TextView) findViewById(R.id.versioncode);
         context = this;
         PackageInfo pInfo = null;
@@ -33,22 +36,22 @@ public class AboutUsActivity extends AppCompatActivity {
         }
 
         String version = pInfo.versionName;
-        txtversioncode.setText("Version "+version);
+        int versionCode = pInfo.versionCode;
+        txtversioname.setText("VersionName "+version);
+        txtversioncode.setText("VersionCode "+versionCode);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
     }
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(AboutUsActivity.this, DashBoardActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(AboutUsActivity.this, SnapDashboardActivity.class);
+//        startActivity(intent);
         finish();
 
     }

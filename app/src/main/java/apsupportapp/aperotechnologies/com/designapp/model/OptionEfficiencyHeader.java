@@ -10,6 +10,7 @@ public class OptionEfficiencyHeader {
     int optionCount;
     double fullSizeOption;
 
+
     public double getFullSizeCount() {
         return fullSizeCount;
     }
@@ -105,6 +106,8 @@ public class OptionEfficiencyHeader {
     double fullCutCount;
     double stkOnhandQty;
     double stkOnhandQtyCount;
+    double sohCountFullSize;
+
 
     public double getSohCountFullSize() {
         return sohCountFullSize;
@@ -114,6 +117,5 @@ public class OptionEfficiencyHeader {
         this.sohCountFullSize = sohCountFullSize;
     }
 
-    double sohCountFullSize;
 
 }

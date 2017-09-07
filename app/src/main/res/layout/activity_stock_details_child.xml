@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:padding="3dp"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:layout_marginBottom="3dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/ezfb_White"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="false"
+    app:contentPadding="5dp">
 
-            >
     <LinearLayout
         android:id="@+id/lin_trCard"
-        android:background="@drawable/card_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:orientation="vertical"
-        >
+        android:padding="3dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            >
+            android:orientation="horizontal">
+
             <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/detail_headerCheck"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/detail_optionLevel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Test"
-                android:textStyle="bold"
-                android:textSize="@dimen/smdm_store_title_normal"
-                android:id="@+id/detail_optionLevel"
                 android:singleLine="true"
-                android:textColor="@color/bg_store_code_text"
-                />
+                android:text="Test"
+                android:textColor="@color/ezfb_black"
+                android:textSize="@dimen/smdm_store_title_normal"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -49,41 +49,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:weightSum="5.9"
-                >
+                android:weightSum="6.9">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.95"
                     android:gravity="left|center_vertical"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <CheckBox
-                        android:visibility="invisible"
                         android:id="@+id/detailChild_checkBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        />
+                        android:visibility="invisible" />
 
                     <TextView
-                        android:visibility="invisible"
                         android:id="@+id/detailChild_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Small"
                         android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/normallayout_storesize"
-                        />
+                        android:visibility="invisible" />
 
 
                 </LinearLayout>
@@ -93,16 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.01"
                     android:gravity="left|center_vertical"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="54"
-                        android:textColor="@color/smdm_default_color"
-                        android:textSize="@dimen/normallayout_storesize"
-                        android:visibility="invisible"
-                        />
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -110,8 +96,15 @@
                         android:text="54"
                         android:textColor="@color/smdm_default_color"
                         android:textSize="@dimen/normallayout_storesize"
-                        android:visibility="invisible"
-                        />
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="54"
+                        android:textColor="@color/smdm_default_color"
+                        android:textSize="@dimen/normallayout_storesize"
+                        android:visibility="invisible" />
 
                 </LinearLayout>
 
@@ -119,33 +112,87 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.9" >
+                    android:layout_weight=".96">
 
                     <TextView
                         android:id="@+id/txt"
-                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:text="@string/short_qty"
-                        android:textStyle="bold"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="@dimen/normallayout_storesize"
-                        android:textColor="@color/bg_store_code_text"
-                        />
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_below="@+id/txt"
+                        android:id="@+id/detail_reqQty"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="15"
-                        android:gravity="center_horizontal"
+                        android:layout_below="@+id/txt"
                         android:layout_marginTop="7dp"
+                        android:gravity="center_horizontal"
+                        android:text="15"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/normallayout_storesize" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.03">
+
+                    <TextView
+                        android:id="@+id/txt1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/soh"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="@dimen/normallayout_storesize"
-                        android:id="@+id/detail_reqQty"
-                        android:textColor="@color/smdm_default_color"
-                        />
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/detail_Soh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt1"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="7dp"
+                        android:text="19"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/normallayout_storesize" />
 
 
+                </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.04">
+
+                    <TextView
+                        android:id="@+id/txt2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/git"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/normallayout_storesize"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/detail_Git"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="7dp"
+                        android:gravity="center"
+                        android:text="50"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/normallayout_storesize" />
 
 
                 </RelativeLayout>
@@ -156,96 +203,59 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/txt1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/soh"
-                        android:textSize="@dimen/normallayout_storesize"
-                        android:textStyle="bold"
-                        android:textColor="@color/bg_store_code_text"/>
-
-                    <TextView
-                        android:layout_below="@+id/txt1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="19"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="7dp"
-                        android:textSize="@dimen/normallayout_storesize"
-                        android:id="@+id/detail_Soh"
-                        android:textColor="@color/smdm_default_color"
-                        />
-
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.03"
-                    >
-
-                    <TextView
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/txt2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/git"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/normallayout_storesize"
-                        android:textColor="@color/bg_store_code_text"/>
-
-                    <TextView
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/txt2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="50"
-                        android:gravity="center"
-                        android:layout_marginTop="7dp"
-                        android:textSize="@dimen/normallayout_storesize"
-                        android:id="@+id/detail_Git"
-                        android:textColor="@color/smdm_default_color"/>
-
-
-
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    >
-                    <TextView
                         android:id="@+id/txt3"
-                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/avl_qty"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/normallayout_storesize"
+                        android:layout_centerHorizontal="true"
                         android:singleLine="true"
-                        android:textColor="@color/bg_store_code_text"
-                        />
+                        android:text="@string/avl_qty"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/normallayout_storesize"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_below="@+id/txt3"
+                        android:id="@+id/detail_AviQty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="14"
+                        android:layout_below="@+id/txt3"
                         android:layout_centerHorizontal="true"
-                        android:textSize="@dimen/normallayout_storesize"
-                        android:id="@+id/detail_AviQty"
                         android:layout_marginTop="7dp"
-                        android:textColor="@color/smdm_default_color"
-                        />
+                        android:text="14"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/normallayout_storesize" />
 
 
                 </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9">
+
+                    <TextView
+                        android:id="@+id/txt4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:singleLine="true"
+                        android:text="Sell Thru%"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/normallayout_storesize"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/detail_sellThru"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt4"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="7dp"
+                        android:text="14"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/normallayout_storesize" />
+
+
+                </RelativeLayout>
+
 
             </LinearLayout>
 
@@ -254,33 +264,32 @@
         <!--Hidden part-->
 
         <LinearLayout
+            android:id="@+id/detail_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/detail_size"
             android:orientation="vertical"
             android:visibility="visible">
 
             <View
+                android:id="@+id/view_border"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/smdm_border">
 
             </View>
 
-            <android.support.v7.widget.RecyclerView
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/details_headerChild"
-                android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                />
+                android:scrollbars="vertical"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
 
         </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
 
 
-</LinearLayout>
+</android.support.v7.widget.CardView>

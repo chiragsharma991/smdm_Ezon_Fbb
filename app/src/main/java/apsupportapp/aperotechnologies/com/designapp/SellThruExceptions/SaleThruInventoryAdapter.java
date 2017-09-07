@@ -109,7 +109,7 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
             holder.BestInvent_Sale = (TextView) convertView.findViewById(R.id.bestInvent_Sale);
             holder.bestInvent_zonalSell = (TextView) convertView.findViewById(R.id.bestInvent_zonalSell);
-            holder.bestInvent_wks = (TextView) convertView.findViewById(R.id.bestInvent_wks);
+           // holder.bestInvent_wks = (TextView) convertView.findViewById(R.id.bestInvent_wks);
             holder.BestInvent_option = (TextView) convertView.findViewById(R.id.bestInvent_option);
             holder.BestInvent_image_child = (ImageView) convertView.findViewById(R.id.bestInvent_image_child);
             convertView.setTag(holder);
@@ -140,8 +140,6 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
             }
         });
 
-        SaleThruInventory.BestInvent_txtStoreCode.setText(arrayList.get(position).getStoreCode());
-        SaleThruInventory.BestInvent_txtStoreName.setText(arrayList.get(position).getStoreDesc());
 
         if (!arrayList.get(position).getProdImageURL().equals("")) {
 
@@ -166,7 +164,7 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
             holder.ProgressPicaso.setVisibility(View.GONE);
 
             Glide.with(this.context).
-                    load(R.mipmap.placeholder).
+                    load(R.mipmap.noimageavailable).
                     into(holder.BestInvent_image_child);
 
 
@@ -246,16 +244,11 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
     }
 
 
-    private class Holder {
-
+    private class Holder
+    {
         TextView BestInvent_SOH, BestInvent_sellThru,
                 BestInvent_Sale, bestInvent_zonalSell, bestInvent_thru, bestInvent_wks, BestInvent_option;
-
         ImageView BestInvent_image_child;
-
-
         public ProgressBar ProgressPicaso;
     }
-
-
 }

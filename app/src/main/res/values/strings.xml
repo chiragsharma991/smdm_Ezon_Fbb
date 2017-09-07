@@ -4,7 +4,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="pie_chart_val">\n 8,11,235</string>
     <string name="action_settings">Logout</string>
     <string name="title_activity_switching_tab">Option</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -66,6 +66,7 @@
 
     <!--Inspection Module-->
     <string name="inspection_history">Inspection History</string>
+    <string name="hourly_performer">Hourly Performance</string>
     <string name="inspection_begin">Begin Inspection</string>
     <string name="insp_criteria_1">Fashion Quotient(display looks fashionable)</string>
     <string name="insp_criteria_2">Merchandise Display(by size/ full size sets)</string>
@@ -99,7 +100,7 @@
     <string name="total_avl_qty">Total Avl.Qty : </string>
     <string name="total_req_qty">Total Req.Qty : </string>
 
-     <!--Feedback Module-->
+    <!--Feedback Module-->
     <string name="feedback">Feedback</string>
     <string name="f_next">Next</string>
     <string name="f_previous">Previous</string>
@@ -115,19 +116,19 @@
     <string name="sales_title">Sales</string>
     <string name="net_sales">Net Sales</string>
     <string name="plan_sales">Plan Sales</string>
-    <string name="net_sales_u">Net Sales(U)</string>
-    <string name="soh_u">SOH(U)</string>
+    <string name="net_sales_u">Sales Units</string>
+    <string name="soh_u">SOH Units</string>
     <string name="zonal">ZONAL</string>
     <string name="national">NATIONAL</string>
     <string name="yoy_sales_grw">YOY Sales Grw %</string>
     <string name="pva">PvA%</string>
     <string name="yoy">YoY%</string>
-    <string name="sell_thru">Sell Thru(U)%</string>
+    <string name="sell_thru">Sell Thru%</string>
     <string name="mixsales">MixSales%</string>
     <string name="rank">Rank</string>
-    <string name="git_u">GIT(U)</string>
-    <string name="ros_u">ROS(U)</string>
-    <string name="fwd_wk_cover">Fwd Wk Cover</string>
+    <string name="git_u">GIT Units</string>
+    <string name="ros_u">ROS Units</string>
+    <string name="fwd_wk_cover">FWC</string>
     <string name="pva_sales">PvA Sales%</string>
     <string name="pva_title">Sales PvA</string>
 
@@ -144,13 +145,21 @@
     <string name="fit">Fit</string>
     <string name="size_ratio">Size Ratio : </string>
     <string name="collection">Collection</string>
-    <string name="options_report">Options Report</string>
+    <string name="options_report">Visual Assortment Report</string>
 
     <!--Freshness Index-->
     <string name="fi_title">Freshness Index</string>
 
-    <string name="oe_title">Option Efficiency</string>
+    <!--Customer Feedback-->
+    <string name="cf_title">Product Availability and Notify Me</string>
 
+    <!--Customer Loyalty-->
+    <string name="cust_loyalty">Customer Engagement</string>
+    <string name="hourly_perform">Hourly Performance</string>
+    <string name="cust_lookup">Customer Plan Engagement</string>
+    <string name="actual_customer">Customers</string>
+    <string name="plan_customers">Plan Customers</string>
+    <string name="oe_title">Option Efficiency</string>
     <string-array name="colour_name">
         <item>Blue</item>
         <item>Green</item>
@@ -163,6 +172,38 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="permission_camera_rationale">This App needs to access Camera to present you with the Demo.</string>
     <string name="prod_name">Product Name : </string>
+
+    <!--Ezone Module-->
+
+    <string name="ezone_sales_header">Sales</string>
+    <string name="ezone_inventory_header">Inventory</string>
+    <string name="ezone_best_worst">Best/Worst Performers</string>
+    <string name="ezone_assortment_analysis">Assortment Analysis</string>
+    <string name="ezone_filter_location">Location</string>
+    <string name="ezone_filter_product">Product</string>
+
+    <string name="product_availability">Product Availability &amp; Notify Me. </string>
+    <string name="supervisor_staff">Supervisor &amp; Staff </string>
+    <string name="store_services">Our Store Services </string>
+    <string name="price_promotion">Price &amp; Promotion </string>
+    <string name="policy_exchange">Policy - Exchange, Refund</string>
+    <string name="product_quality_range">Product Quality &amp; Range</string>
+
+    <string name="callback_product_availability">Callback Required from CSD </string>
+    <string name="callback_text_color">Colour (Option 1 &amp; Option 2) </string>
+
+
+    <!--Customer feedback-->
+
+    <string name="customer_feedback_number">Please enter a mobile number</string>
+    <string name="customer_feedback_digit">Please enter 10 digit mobile number</string>
+    <string name="customer_feedback_remarks">Please enter remarks</string>
+
+    <!--BORIS-->
+
+    <!--<string name="boris_enter_mobile">Enter Customer's Mobile No.</string>-->
+    <string name="boris_return_cat">Return Catalogue</string>
+    <string name="boris_return_detail">Return Detail</string>
 
 
 </resources>

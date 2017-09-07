@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,6 +29,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.crashlytics.android.Crashlytics;
+
+import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import io.fabric.sdk.android.Fabric;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -41,6 +46,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("TAG", "onCreate: splash-- " );
         Fabric.with(this, new Crashlytics());
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -58,7 +64,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (progressbar != null) {
                     progressbar.setVisibility(View.VISIBLE);
                     progressbar.setIndeterminate(true);
-                    progressbar.getIndeterminateDrawable().setColorFilter(0xFFFFFFFF, android.graphics.PorterDuff.Mode.MULTIPLY);
+                    progressbar.getIndeterminateDrawable().setColorFilter(new LightingColorFilter(Color.parseColor("#e8112d"), R.color.ezfb_Red));
                 }
             } else {
                 progressbar.setVisibility(View.GONE);
@@ -75,7 +81,7 @@ public class SplashActivity extends AppCompatActivity {
                             requestLoginAPI();
                         }
                     } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
-                        Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                        Intent i = new Intent(SplashActivity.this, LoginActivity1.class);
                         startActivity(i);
                         finish();
                     }
@@ -130,10 +136,12 @@ public class SplashActivity extends AppCompatActivity {
                                 Reusable_Functions.hDialog();
                             }
                             String bearerToken = response.getString("bearerToken");
+                            String geoLeveLDesc = response.getString("geoLeveLDesc");
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("bearerToken", bearerToken);
+                            editor.putString("geoLeveLDesc",geoLeveLDesc);
                             editor.apply();
-                            Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
+                            Intent i = new Intent(SplashActivity.this, SnapDashboardActivity.class);
                             i.putExtra("from", "splash");
                             startActivity(i);
                             progressbar.setVisibility(View.GONE);

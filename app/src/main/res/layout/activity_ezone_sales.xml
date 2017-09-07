@@ -1,7 +1,399 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
-</LinearLayout>
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+               >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:background="@color/white"
+                android:contentInsetEnd="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/rel_ez_back"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="0dp"
+                        android:background="@drawable/button_click">
+
+                        <Button
+                            android:layout_width="@dimen/arrow_back_icon_width"
+                            android:layout_height="@dimen/arrow_back_icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/ic_arrow_back_black"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/rel_ez_back"
+                        android:text="@string/ezone_sales_header"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="20sp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rel_ez_filter"
+                        android:layout_toLeftOf="@+id/rel_ez_sort"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click">
+
+                        <Button
+                            android:layout_width="@dimen/icon_width"
+                            android:layout_height="@dimen/icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/iconfilter"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rel_ez_sort"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click">
+
+                        <Button
+                            android:layout_width="@dimen/icon_width"
+                            android:layout_height="@dimen/icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/iconmore"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+
+        </LinearLayout>
+
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabview_ezone_sales"
+            app:tabIndicatorColor="@color/ezfb_Red"
+            app:tabTextColor="@color/ezfb_Red"
+            app:tabSelectedTextColor="@color/ezfb_Red"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+        </android.support.design.widget.TabLayout>
+
+       <info.hoang8f.android.segmented.SegmentedGroup
+            android:visibility="gone"
+            android:id="@+id/ez_segmentedGrp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="14dp"
+            segmentedgroup:sc_tint_color="@color/colorPrimary">
+
+            <RadioButton
+                android:id="@+id/btn_ez_Ld"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="LD" />
+
+            <RadioButton
+                android:id="@+id/btn_ez_Wtd"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="WTD" />
+
+            <RadioButton
+                android:id="@+id/btn_ez_Mtd"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="MTD" />
+
+            <RadioButton
+                android:id="@+id/btn_ez_Ytd"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="YTD" />
+
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+        <LinearLayout
+            android:id="@+id/linear_ez_sales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/ez_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_alignParentStart="true">
+
+                </android.support.v4.view.ViewPager>
+
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                             android:layout_width="match_parent"
+                             android:layout_height="60dp"
+                             android:padding="10dp"
+                             android:id="@+id/ez_progressBar"
+                             android:visibility="gone"
+                             android:background="#0000"
+                             android:keepScreenOn="true"
+                             android:theme="@style/ProgressBar"
+                             android:layout_centerInParent="true">
+
+                </ProgressBar>
+
+
+
+            </RelativeLayout>
+
+            <android.support.design.widget.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ez_dotTab"
+                segmentedgroup:tabBackground="@drawable/tab_selection"
+                segmentedgroup:tabGravity="center"
+                segmentedgroup:tabIndicatorHeight="0dp"
+                >
+
+            </android.support.design.widget.TabLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ez_linear_dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/ez_linear_hierarchy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_margin="5dp"
+                    android:id="@+id/ez_txt_hierarchy_nm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="@dimen/normallayout_textsize" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:background="@color/white"
+                android:id="@+id/rel_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ez_linear_hierarchy"
+                >
+
+
+                <LinearLayout
+                    android:layout_below="@+id/view1"
+                    android:id="@+id/ez_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/ez_linear_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@color/ezfb_activity_background">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_alignParentLeft="true"
+                            >
+
+                            <RelativeLayout
+                                android:id="@+id/rel_ez_prev"
+                                android:layout_width="20dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentLeft="true">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:background="@mipmap/back_arrow"
+                                    android:clickable="false" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/txt_ez_header"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_toRightOf="@+id/rel_ez_prev"
+                                android:gravity="center"
+                                android:text="Department"
+                                android:textColor="@color/ezfbb_black"
+                                android:textSize="@dimen/normallayout_textsize"
+                                android:textStyle="normal" />
+
+                            <RelativeLayout
+                                android:id="@+id/rel_ez_next"
+                                android:layout_width="20dp"
+                                android:layout_height="40dp"
+                                android:layout_toRightOf="@+id/txt_ez_header">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerInParent="true"
+                                    android:background="@mipmap/next_arrow"
+                                    android:clickable="false" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="110dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical|center"
+                            android:text="Ach%"
+                            android:textColor="@color/ezfbb_black"
+                            android:textSize="@dimen/normallayout_textsize"
+                            android:textStyle="normal" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+
+                        <TextView
+                            android:layout_marginLeft="1dp"
+                            android:background="@drawable/edttext_border"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+
+
+
+                            android:background="@drawable/edttext_border"
+                            android:weightSum="1"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_weight="0.5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="0.5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="42dp"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclevw_ez_sales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@null"
+                        android:dividerHeight="0dp"
+                        android:smoothScrollbar="true" />
+
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dip"
+                        />
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/activity_ez_viewby"></include>
+
+</RelativeLayout>
+
+
