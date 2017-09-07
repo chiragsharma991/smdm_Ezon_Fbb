@@ -53,7 +53,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OnFragmentInteractionListener} interface
+ * {@link TransferRequestFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link TransferRequestFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -357,6 +357,10 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                         case 1:
                                             // String result=response.getString("status");
                                             Reusable_Functions.hDialog();
+                                            for (int i = 0; i <SenderSummaryList.size() ; i++) {
+                                                selectMc[i]=false;
+                                            }
+                                            transferRequestAdapter.notifyDataSetChanged();
                                             Log.e(TAG, "requestforSap: success ------" );
                                             Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
                                             break;

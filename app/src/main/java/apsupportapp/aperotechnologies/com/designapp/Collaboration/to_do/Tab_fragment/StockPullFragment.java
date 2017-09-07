@@ -509,12 +509,16 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     Toast.makeText(mcontext, "Sending data failed...", Toast.LENGTH_LONG).show();
 
                                 } else {
-                                    String result = response.getString("status");
-                                    Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(context, SnapDashboardActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                    startActivity(intent);
                                     Reusable_Functions.hDialog();
+                                    String result = response.getString("status");
+                                    for (int i = 0; i <subcategoryList.size() ; i++) {
+                                        selectMc[i]=false;
+                                    }
+                                    stockPullAdapter.notifyDataSetChanged();
+                                    Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
+                                 /*   Intent intent = new Intent(context, SnapDashboardActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    startActivity(intent);*/
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

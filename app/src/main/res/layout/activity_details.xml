@@ -110,6 +110,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:visibility="invisible"
                 android:id="@+id/todo_detailStoreAvlQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,6 +121,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/detailStoreAvlQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

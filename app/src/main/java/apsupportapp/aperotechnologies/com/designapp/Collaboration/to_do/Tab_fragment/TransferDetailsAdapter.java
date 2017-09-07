@@ -49,7 +49,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private ArrayList<Transfer_Request_Model> list;
     public  boolean[] Tr_HeaderToggle;
     public OnPress onPressInterface;
-    public OnScanBarcode onBarcodeScan;
+    public OnScanBarcode onBarcodeScan,onPassData;
     public  boolean[] TransferDetails_HeadercheckList;  //list for check header
     public boolean[] visibleItems;
 
@@ -67,6 +67,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         Tr_HeaderToggle= new boolean[list.size()];
         onPressInterface=(OnPress)context;
         onBarcodeScan = (OnScanBarcode)context;
+        onPassData = (OnScanBarcode)context;
         TransferDetails_HeadercheckList = new boolean[list.size()];
         this.subchildqty=subchildqty;  //total sub child details
         this.subchildCount=subchildCount;  //only sub child scan qty
@@ -216,13 +217,14 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                 barcode = intent.getStringExtra(GeneralString.BcReaderData);
                 Log.e("onReceive: ", " " + barcode);
-                android.os.Handler h = new android.os.Handler();
-                h.postDelayed(new Runnable() {
-                    public void run() {
-                        Log.e("run: ", "" + barcode);
+//                android.os.Handler h = new android.os.Handler();
+//                h.postDelayed(new Runnable() {
+//                    public void run() {
+//                        Log.e("run: ", "" + barcode);
                         if (!barcode.equals(" ")) {
                             Toast.makeText(context, "Barcode scanned : " + barcode, Toast.LENGTH_SHORT).show();
-                            transferRequestDetails.requestScanDetailsAPI(barcode);
+                             onPassData.passData(barcode,(Activity)context);
+                            // transferRequestDetails.requestScanDetailsAPI(barcode);
                         }
                         else
                         {
@@ -230,8 +232,8 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             View view =((Activity)context).findViewById(android.R.id.content);
                             Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
                         }
-                    }
-                }, 1500);
+//                    }
+//                }, 1500);
 
 
             }
@@ -304,8 +306,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         private CheckBox transferdetail_checkBox;
 
         public Holder(View itemView)
-
-
         {
             super(itemView);
             txt_caseNo = (TextView)itemView.findViewById(R.id.txt_caseNo);
