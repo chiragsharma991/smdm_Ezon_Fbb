@@ -67,7 +67,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     private double MCCode ;    // code and description
     private String option = "";    // code and description
     private StockDetailsAdapter stockDetailsAdapter;
-    Button btn_selectAll;
+    Button btn_selectAll,btn_reset;
 
 
     public HashMap<Integer, ArrayList<ToDo_Modal>> HashmapList;
@@ -110,11 +110,9 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
     private void requestReceiversChildDetails(final int position)
     {
-        prodLevel3Desc = prodLevel3Desc.replace("%", "%25");
+
         prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
-        MCCodeDesc = MCCodeDesc.replace("%", "%25");
         MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
-        option = option.replace("%", "%25");
         option = option.replace(" ", "%20").replace("&", "%26");
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20");
@@ -198,9 +196,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
     private void requestReceiversDetails()
     {
-        prodLevel3Desc = prodLevel3Desc.replace("%", "%25");
+
         prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
-        MCCodeDesc = MCCodeDesc.replace("%", "%25");
         MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20");
         Log.e("TAG", "requestReceiversDetails: "+url );
@@ -302,6 +299,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         MCCode = (Math.round(data2));
         Log.e("initalise: "," " + MCCode);
         btn_selectAll = (Button)findViewById(R.id.btn_stock_selectAll);
+        btn_reset = (Button)findViewById(R.id.btn_stock_reset);
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
         details_imageBtnBack = (RelativeLayout) findViewById(R.id.details_imageBtnBack);
         btn_receiver_submit = (Button) findViewById(R.id.stock_detailSubmit);
@@ -324,6 +322,17 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                 stockDetailsAdapter.notifyDataSetChanged();
 
 
+            }
+        });
+        btn_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i <DetailsList.size();i++)
+                {
+                    stockDetailsAdapter.HeadercheckList[i] = false;
+                    stockDetailsAdapter.visibleItems[i] = true;
+                }
+                stockDetailsAdapter.notifyDataSetChanged();
             }
         });
 

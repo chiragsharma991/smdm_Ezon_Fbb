@@ -507,7 +507,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     }
 
 
-     private void requestScanDetailsAPI(String contents) {
+     public void requestScanDetailsAPI(String contents) {
 
          String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber="+contents +"&recache=" + recache;
          Log.e(TAG, "requestScanDetailsAPI: "+url );

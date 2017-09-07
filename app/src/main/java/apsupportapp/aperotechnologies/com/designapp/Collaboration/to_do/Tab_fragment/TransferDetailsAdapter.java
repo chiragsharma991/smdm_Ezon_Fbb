@@ -51,11 +51,13 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public OnPress onPressInterface;
     public OnScanBarcode onBarcodeScan;
     public  boolean[] TransferDetails_HeadercheckList;  //list for check header
+    public boolean[] visibleItems;
 
     private Set<Pair<Integer, Integer>> CheckedItems ;
     String barcode,checkStr;
     private ReaderManager mReaderManager;
     private IntentFilter filter;
+    TransferRequest_Details transferRequestDetails;
 
 
     public TransferDetailsAdapter(ArrayList<Transfer_Request_Model> sender_detailsList, Context context, HashMap<Integer, ArrayList<Transfer_Request_Model>> subchildqty, HashMap<Integer, ArrayList<Integer>> subchildCount, ProgressBar transferDetailProcess, HashMap<Integer, ArrayList<Integer>> headerScancount, TransferRequest_Details transferRequest_detailsClass, HashSet<Pair<Integer, Integer>> checkedItems)
@@ -71,6 +73,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.transferDetailProcess=transferDetailProcess;
         this.headerScancount=headerScancount;
         CheckedItems=checkedItems;
+        visibleItems=new boolean[list.size()];
         this.transferRequest_detailsClass=transferRequest_detailsClass;
         checkStr = "";
     }
@@ -99,10 +102,13 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         {
                             //Header check is enable when view is open
                             TransferDetails_HeadercheckList[position]=true;
+                            visibleItems[position]=true;
                             notifyItemChanged(position);
                         }else
                         {
                             TransferDetails_HeadercheckList[position]=false;
+                            visibleItems[position]=true;
+
                             notifyItemChanged(position);
                         }
                     }
@@ -159,7 +165,7 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 });
 
                 ((TransferDetailsAdapter.Holder) holder).txt_scanqtyVal.setText(""+headerScancount.get(position).get(0));  // header total scan qty
-                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(context,position,TransferDetailsAdapter.this,subchildqty,subchildCount,transferRequest_detailsClass,CheckedItems,headerScancount);
+                TrDetailsHeaderChildAdapter detailsHeaderChildAdapter=new TrDetailsHeaderChildAdapter(context,position,TransferDetailsAdapter.this,subchildqty,subchildCount,transferRequest_detailsClass,CheckedItems,headerScancount,visibleItems,TransferDetails_HeadercheckList);
                 ((TransferDetailsAdapter.Holder)holder).recycleview_transferreq_detailChild.setAdapter(detailsHeaderChildAdapter);
                 detailsHeaderChildAdapter.notifyDataSetChanged();
             }
@@ -216,8 +222,10 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         Log.e("run: ", "" + barcode);
                         if (!barcode.equals(" ")) {
                             Toast.makeText(context, "Barcode scanned : " + barcode, Toast.LENGTH_SHORT).show();
-
-                        } else {
+                            transferRequestDetails.requestScanDetailsAPI(barcode);
+                        }
+                        else
+                        {
                             Log.e("come", "here");
                             View view =((Activity)context).findViewById(android.R.id.content);
                             Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();

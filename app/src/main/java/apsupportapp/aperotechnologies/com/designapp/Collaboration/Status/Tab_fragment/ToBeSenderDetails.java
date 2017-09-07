@@ -63,7 +63,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private TextView storeCode,storeCase,detailStoreDesc;
     public static HashMap<Integer, ArrayList<StatusModel>> StatusHashmapChildList;
     private String option="";
-    private String recache;
+    private String recache , str_storeCode;
     private ProgressBar SenderDetailProcess;
 
     @Override
@@ -97,7 +97,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     private void requestStatusReceiversDetails()
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&recache="+recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+str_storeCode+"&caseNo="+caseNo+"&recache="+recache;
         Log.e("url ",""+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -207,10 +207,10 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
-        String data2 = getIntent().getExtras().getString("CODE");
+        str_storeCode= getIntent().getExtras().getString("CODE");
         String str_desc = getIntent().getExtras().getString("storeDesc");
         storeCase.setText(" " +"Case#"+data1);
-        storeCode.setText(data2);
+        storeCode.setText(str_storeCode);
         detailStoreDesc.setText(str_desc);
         caseNo=data1;
 
@@ -228,7 +228,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     private void requestStatusReceiversSubDetails(final int position)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+str_storeCode+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

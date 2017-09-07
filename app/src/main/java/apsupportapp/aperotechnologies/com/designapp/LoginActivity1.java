@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -201,15 +202,16 @@ public class LoginActivity1 extends AppCompatActivity
                                 userId = response.getString("userId");
                                 String bearerToken = response.getString("bearerToken");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
+                                String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
 
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("username", username);
+                                editor.putString("SharedPreferencesusername", username);
                                 editor.putString("password", password);
                                 editor.putString("userId", userId);
                                 editor.putString("bearerToken", bearerToken);
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
-                                editor.putString("device_id", "");
-                                //editor.putString("push_tokken", "");
+                                editor.putString("device_id",device_id);
                                 editor.apply();
                                 if (log_flag)
                                 {
@@ -310,6 +312,8 @@ public class LoginActivity1 extends AppCompatActivity
                                 Log.e("geoLeveLDesc :", "" + geoLeveLDesc);
                                 String bearerToken = response.getString("bearerToken");
                                 userId = userId + "-" + SelectedStoreCode;
+                                String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
 
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", username);
@@ -319,8 +323,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
                                 editor.putString("storeDescription",storeDescription);
                                 Log.e("onResponse---: ","store desc"+storeDescription);
-                                editor.putString("device_id", "");
-                                //editor.putString("push_tokken", "");
+                                editor.putString("device_id",device_id);
                                 editor.apply();
                                 if (log_flag)
                                 {

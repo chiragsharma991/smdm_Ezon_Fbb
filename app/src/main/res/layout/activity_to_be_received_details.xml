@@ -8,7 +8,6 @@
     tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
 
-
     <LinearLayout
         android:id="@+id/linear_head"
         android:layout_width="match_parent"
@@ -21,8 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -33,8 +31,7 @@
                 segmentedgroup:contentInsetEnd="0dp"
                 segmentedgroup:contentInsetLeft="0dp"
                 segmentedgroup:contentInsetRight="0dp"
-                segmentedgroup:contentInsetStart="0dp"
-                >
+                segmentedgroup:contentInsetStart="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -54,7 +51,7 @@
                             android:layout_height="20dp"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/ic_arrow_back_black"
-                            android:clickable="false"/>
+                            android:clickable="false" />
 
                     </RelativeLayout>
 
@@ -67,18 +64,17 @@
                         android:layout_toRightOf="@+id/status_receiverdetails_imageBtnBack"
                         android:text="Details"
                         android:textColor="@color/ezfb_black"
-                        android:textSize="@dimen/smdm_header_title_large"/>
+                        android:textSize="@dimen/smdm_header_title_large" />
 
                     <ProgressBar
+                        android:id="@+id/receiverDetailProcess"
                         android:layout_width="20dp"
                         android:layout_height="40dp"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
-                        android:id="@+id/receiverDetailProcess"
-                        android:visibility="gone"
                         android:indeterminateDrawable="@drawable/progress"
-                        />
+                        android:visibility="gone" />
 
 
                 </RelativeLayout>
@@ -94,79 +90,77 @@
         android:id="@+id/listviewLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linear_head"
         android:layout_alignParentBottom="true"
-        >
+        android:layout_below="@+id/linear_head">
 
         <RelativeLayout
             android:id="@+id/storeDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            >
+            android:padding="5dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/rel_CaseLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3.8"
-                android:layout_toLeftOf="@+id/rec_status_detailStoreCode">
-
-                <TextView
-                    android:id="@+id/rec_status_detailStoreCase"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/rel_CaseLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="@string/case_nm"
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="@dimen/stock_textsize_Title"
-                    android:textStyle="bold"
+                   >
 
-                    />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/rec_status_detailStoreCase"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Case"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/stock_textsize_Title"
+                        android:textStyle="bold"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                >
+                        />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_below="@+id/rel_CaseLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
+                    <TextView
+                        android:gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sender Store : "
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/stock_textsize_Title"
+                        android:textStyle="bold"/>
 
-                android:id="@+id/rec_status_detailStoreCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/rec_status_detailStoreDesc"
-                android:text="Store Code "
-                android:textColor="@color/ezfb_black"
-                android:textSize="@dimen/stock_textsize_Title"
-                android:textStyle="bold"
+                    <TextView
+                        android:id="@+id/rec_status_detailStoreCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Store Code "
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/stock_textsize_Title"
+                        android:textStyle="bold"
 
-                />
+                        />
 
-            <TextView
-                android:id="@+id/rec_status_detailStoreDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="2dp"
-                android:text=" Store Description"
-                android:textColor="@color/ezfb_black"
-                android:textSize="@dimen/stock_textsize_Title"
-                android:textStyle="bold"
+                    <TextView
+                        android:id="@+id/rec_status_detailStoreDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:text=" Store Description"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="@dimen/stock_textsize_Title"
+                        android:textStyle="bold"
 
-                />
-            </LinearLayout>
-            </LinearLayout>
+                        />
+                </LinearLayout>
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -175,8 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/storeDesc"
-            android:scrollbars="vertical"
-            />
+            android:scrollbars="vertical" />
 
 
     </RelativeLayout>

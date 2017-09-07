@@ -111,7 +111,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
         int data1 = getIntent().getExtras().getInt("CASE");
         senderStoreCode = getIntent().getExtras().getString("CODE");
         String storeDesc = getIntent().getExtras().getString("storeDesc");
-        rec_storeCase.setText(" " + "Case#" + data1);
+        rec_storeCase.setText("Case#" + data1);
         rec_storeCode.setText(senderStoreCode);
         rec_storeDesc.setText(storeDesc);
         caseNo = data1;
