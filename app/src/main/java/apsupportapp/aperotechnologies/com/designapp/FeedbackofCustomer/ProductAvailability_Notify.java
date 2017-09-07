@@ -467,7 +467,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         userId = sharedPreferences.getString("userId", "");
         Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
-       // SelectedStoreCode = store.trim().substring(0, 4);
+        SelectedStoreCode = store.trim().substring(0, 4);
 
         Log.e("store"," "+store);
         storedescription.setText(store);
@@ -592,7 +592,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode", SelectedStoreCode);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -641,7 +641,8 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "productavailability");
+           // SelectedStoreCode = "2663";
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "productavailability",SelectedStoreCode);
             cancelData();
             Intent dashboard = new Intent(context, SnapDashboardActivity.class);
             dashboard.putExtra("from","feedback");

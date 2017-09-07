@@ -40,7 +40,7 @@
 
 
                     <CheckBox
-                        android:layout_alignBaseline="@+id/transferRequest_stockCode"
+                        android:layout_alignBaseline="@+id/transferRequest_stockDesc"
                         android:layout_alignParentLeft="true"
                         android:id="@+id/mcCheck"
                         android:layout_width="wrap_content"

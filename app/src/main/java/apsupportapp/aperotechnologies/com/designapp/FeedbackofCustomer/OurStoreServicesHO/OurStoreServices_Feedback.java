@@ -563,7 +563,7 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack,  context, "ourstoreservices");
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack,  context, "ourstoreservices",SelectedStoreCode);
             cancelData();
             Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
             dashboard.putExtra("from","feedback");

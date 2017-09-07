@@ -491,7 +491,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         user_trim = userId.substring(0,2);
         store = sharedPreferences.getString("storeDescription", "");
-//        SelectedStoreCode = store.trim().substring(0, 4);
+        SelectedStoreCode = store.trim().substring(0, 4);
 
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
@@ -667,7 +667,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode", SelectedStoreCode);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -709,7 +709,8 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "policyexchange");
+           // SelectedStoreCode = "2663";
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "policyexchange",SelectedStoreCode);
 
             cancelData();
             Intent dashboard = new Intent(context, SnapDashboardActivity.class);

@@ -435,12 +435,12 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString("device_id", deviceId);
         edit.apply();
-
         requestSubmitAPI(context,getObject());
 
     }
 
-    public JSONObject getObject() {
+    public JSONObject getObject()
+    {
         String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         JSONObject jsonObject = new JSONObject();
         try {
