@@ -2304,9 +2304,9 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 for (int i = 0; i < response.length(); i++) {
 
                                     salesAnalysisViewPagerValue = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
-                                    arrayList.add(salesAnalysisViewPagerValue);
-                                }
-                                onItemClickFlag = false;
+                                arrayList.add(salesAnalysisViewPagerValue);
+                            }
+                            onItemClickFlag = false;
                             }
                             requestSalesListDisplayAPI();
 
