@@ -315,7 +315,6 @@ public class LoginActivity1 extends AppCompatActivity
                                 Log.e("geoLeveLDesc :", "" + geoLeveLDesc + geoLevel2Code);
                                 String bearerToken = response.getString("bearerToken");
                                 userId = userId + "-" + SelectedStoreCode;
-
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", username);
                                 editor.putString("password", password);

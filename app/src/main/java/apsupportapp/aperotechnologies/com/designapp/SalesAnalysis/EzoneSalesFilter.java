@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -72,7 +74,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     static EzoneFilterLocationAdapter locatn_list_adapter;
     int offset = 0, limit = 100, count = 0;
     public int ez_level_filter = 1, ez_prod_level = 1;
-    String userId, bearertoken;
+    String userId, bearertoken, geoLevel2Code;
     public int ezone_filter_level = 1;
     private Intent intent;
     SharedPreferences sharedPreferences;
@@ -86,6 +88,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     // git 09-06-17
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +98,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         context = this;
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -272,9 +276,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 ez_level_filter = 1;
                 requestEzoneRegion(offset, limit);
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(EzoneSalesFilter.this, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
@@ -334,13 +336,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Send selected hierarchy level to selected activity
-                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
-                {
+                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
                     selectbuild();
 
-                }
-                else
-                {
+                } else {
                     selectbuild();
                     if (EzoneFilterProductAdapter.brandcls_text.length() != 0) {
                         String brandcls = EzoneFilterProductAdapter.brandcls_text.replace("%", "%25");
@@ -466,7 +465,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             Toast.makeText(context, "Please select value...", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")  ||  getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
                 callFilterLevelSales();
 
 
@@ -543,7 +542,15 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
     //------------------------------------API Declaration--------------------------------------//
     private void requestEzoneRegion(int offset1, int limit1) {
-        String region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
+        String region_url = "";
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            // with geolevel2code field
+            region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter + "&geoLevel2code=" + geoLevel2Code;
+        } else {
+            //without geolevel2code field
+            region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
+
+        }
         Log.e("region url :", "" + region_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, region_url,
                 new Response.Listener<JSONArray>() {
@@ -553,6 +560,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 Toast.makeText(EzoneSalesFilter.this, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
@@ -580,7 +588,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     requestEzoneStore(offset, limit);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
+                            Reusable_Functions.hDialog();
+                            rel_ez_process_filter.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
@@ -589,6 +600,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }
@@ -610,7 +622,16 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     }
 
     private void requestEzoneStore(int offsetval, int limitval) {
-        String store_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
+        String store_url = "";
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            // with geolevel2code field
+            store_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter + "&geoLevel2Code=" + geoLevel2Code;
+
+        } else {
+            //without geolevel2code field
+            store_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
+
+        }
         Log.e("store url :", "" + store_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, store_url,
                 new Response.Listener<JSONArray>() {
@@ -620,6 +641,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 Toast.makeText(EzoneSalesFilter.this, "no data found ", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
@@ -647,7 +669,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     requestEzoneDepartment(offset, limit);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
+                            Reusable_Functions.hDialog();
+                            rel_ez_process_filter.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
@@ -656,7 +681,9 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -677,8 +704,19 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     }
 
     // Department List
-    public void requestEzoneDepartment(int offsetvalue1, int limit1) {
-        String dept_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
+    public void requestEzoneDepartment(int offsetvalue1, int limit1)
+    {
+        String dept_url = "";
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            //with geolevel2code field
+            dept_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code;
+        }
+        else
+        {
+            //without geolevel2code field
+            dept_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
+
+        }
         Log.e("dept_url :", "" + dept_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, dept_url,
                 new Response.Listener<JSONArray>() {
@@ -688,6 +726,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in department", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
@@ -715,14 +754,19 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     requestEzoneCategory(offset, limit);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
+                            Reusable_Functions.hDialog();
+                            rel_ez_process_filter.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -743,10 +787,21 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     }
 
     //Category List
-    public void requestEzoneCategory(int offsetvalue1, int limit1) {
-        String categry_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("categry_url :", "" + categry_url);
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, categry_url,
+    public void requestEzoneCategory(int offsetvalue1, int limit1)
+    {
+        String category_url = "";
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            //with geolevel2code field
+            category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level + "&geoLevel2Code="+geoLevel2Code;
+        }
+        else
+        {
+            //without geolevel2code field
+            category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level ;
+
+        }
+        Log.e("categry_url :", "" + category_url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, category_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -754,6 +809,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in Category", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
@@ -782,14 +838,19 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     requestEzonePlanClass(offset, limit);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
+                            Reusable_Functions.hDialog();
+                            rel_ez_process_filter.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -811,9 +872,20 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     }
 
     //Plan Class List
-    public void requestEzonePlanClass(int offsetvalue1, int limit1) {
-        String class_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("class_url :", "" + class_url);
+    public void requestEzonePlanClass(int offsetvalue1, int limit1)
+    {
+        String class_url = "";
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            //with geolevel2code field
+            class_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code;
+        }
+        else
+        {
+            //without geolevel2code field
+            class_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
+
+        }
+            Log.e("class_url :", "" + class_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, class_url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -822,8 +894,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in class", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
+                            }
+                            else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
@@ -850,14 +924,19 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     requestEzoneBrand(offset, limit);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
+                            Reusable_Functions.hDialog();
+                            rel_ez_process_filter.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -879,9 +958,20 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
 
     //Brand Name List
-    public void requestEzoneBrand(int offsetvalue1, int limit1) {
-        String brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("brand_url :", "" + brand_url);
+    public void requestEzoneBrand(int offsetvalue1, int limit1)
+    {
+        String brand_url = "";
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            //with geolevel2code field
+            brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+"&geoLevel2Code="+geoLevel2Code;
+        }
+        else
+        {
+            //without geolevel2code field
+            brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
+
+        }
+            Log.e("brand_url :", "" + brand_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, brand_url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -890,8 +980,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in Brand", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
+                            }
+                            else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
@@ -924,6 +1016,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 }
                             }
                         } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            rel_ez_process_filter.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
@@ -931,6 +1025,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -954,8 +1049,17 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     //Brand Plan Class List
     public void requestEzoneBrandPlanClass(int offsetvalue1, int limit1) {
 
-        String mc_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
-        Log.e("mc_url :", "" + mc_url);
+        String mc_url = "";
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            //with geolevel2code field
+            mc_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code;
+        }
+        else
+        {
+            //without geoLevel2code field
+            mc_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
+        }
+            Log.e("mc_url :", "" + mc_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, mc_url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -964,6 +1068,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                rel_ez_process_filter.setVisibility(View.GONE);
                                 Toast.makeText(EzoneSalesFilter.this, "no data found in mc", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
@@ -990,6 +1095,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 rel_ez_process_filter.setVisibility(View.GONE);
                             }
                         } catch (Exception e) {
+                            rel_ez_process_filter.setVisibility(View.GONE);
+                            Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
                     }
@@ -998,6 +1105,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
+                        rel_ez_process_filter.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }

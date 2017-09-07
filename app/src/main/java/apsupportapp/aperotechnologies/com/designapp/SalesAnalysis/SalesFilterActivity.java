@@ -65,7 +65,7 @@ public class SalesFilterActivity extends Activity {
     HashMap<String, List<String>> listDataChild;
     int offsetvalue = 0, limit = 100, count = 0;
     public static int level_filter = 1;
-    String userId, bearertoken;
+    String userId, bearertoken,geoLevel2Code;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
     Context context;
@@ -87,6 +87,7 @@ public class SalesFilterActivity extends Activity {
         context = this;
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -392,7 +393,7 @@ public class SalesFilterActivity extends Activity {
     // Department List
     public void requestDeptAPI(int offsetvalue1, int limit1)
     {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter +"&geoLevel2Code="+geoLevel2Code;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -400,7 +401,8 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in department", Toast.LENGTH_LONG).show();
+                                processbar.setVisibility(View.GONE);
+                                Toast.makeText(SalesFilterActivity.this, "no data found in department", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
@@ -475,7 +477,7 @@ public class SalesFilterActivity extends Activity {
     //Category List
     public void requestCategoryAPI(int offsetvalue1, int limit1)
     {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter +"&geoLevel2Code="+geoLevel2Code;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -483,7 +485,9 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in Category", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Category", Toast.LENGTH_SHORT).show();
+                                processbar.setVisibility(View.GONE);
+
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -562,7 +566,7 @@ public class SalesFilterActivity extends Activity {
     public void requestPlanClassAPI(int offsetvalue1, int limit1)
     {
 
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter +"&geoLevel2Code="+geoLevel2Code;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -570,7 +574,9 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in class", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in class", Toast.LENGTH_SHORT).show();
+                                processbar.setVisibility(View.GONE);
+
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++)
@@ -650,7 +656,7 @@ public class SalesFilterActivity extends Activity {
     //Brand Name List
     public void requestBrandNameAPI(int offsetvalue1, int limit1)
     {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter +"&geoLevel2Code="+geoLevel2Code;
         Log.e(TAG, "requestBrandNameAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -661,7 +667,9 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand", Toast.LENGTH_SHORT).show();
+                                processbar.setVisibility(View.GONE);
+
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -744,7 +752,7 @@ public class SalesFilterActivity extends Activity {
     //Brand Plan Class List
     public void requestBrandPlanClassAPI(int offsetvalue1, int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter +"&geoLevel2Code="+geoLevel2Code;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -753,7 +761,9 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand Class", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand Class", Toast.LENGTH_SHORT).show();
+                                processbar.setVisibility(View.GONE);
+
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++)
@@ -790,6 +800,7 @@ public class SalesFilterActivity extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        processbar.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
