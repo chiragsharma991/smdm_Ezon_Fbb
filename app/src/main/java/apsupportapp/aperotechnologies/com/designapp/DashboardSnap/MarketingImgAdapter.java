@@ -67,7 +67,7 @@ public class MarketingImgAdapter extends PagerAdapter implements ViewPager.OnPag
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return (view == object);
+        return view == (object);
     }
 
     @Override

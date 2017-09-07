@@ -30,9 +30,10 @@ import java.util.Map;
 public class ApiEmail {
 
     public static RequestQueue queue;
+    public static String url;
 
 
-    public static void req_email_API(String userId, Context context, final String bearertoken) {
+    public static void req_email_API(String userId, Context context, final String bearertoken, String from) {
 
         final JSONObject[] jObj = {null};
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -40,7 +41,51 @@ public class ApiEmail {
         queue = new RequestQueue(cache, network);
         queue.start();
         final Gson gson = new Gson();
-        String url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=EMAIL_TYPE_1";
+        if(from.equals("ourstoreservices"))
+        {
+             String sapmle_url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=Our Store Services";
+             url = sapmle_url.replaceAll(" ", "%20");
+        }
+        else if(from.equals("productavailability"))
+        {
+            String sapmle_url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=Product Availability & Notify Me";
+            url = sapmle_url.replaceAll(" ", "%20");
+         //   url = sample.replaceAll("&", "%26");
+
+        }
+        else if(from.equals("policyexchange"))
+        {
+            String sapmle_url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=Policy- Exchange, Refund";
+            url = sapmle_url.replaceAll(" ", "%20");
+//            String sample2 = sapme1.replaceAll(" ", "%2D");
+//            url = sample2.replaceAll(" ", "%2C");
+
+        }
+        else if(from.equals("pricepromotion"))
+        {
+            String sapmle_url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=Price & Promotions";
+            String sample = sapmle_url.replaceAll(" ", "%20");
+            url = sample.replaceAll("&", "%26");
+
+
+        }
+        else if(from.equals("productquality"))
+        {
+            url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=ProductQualityRange";
+            //url = sapmle_url.replaceAll(" ", "%20");
+        }
+        else if(from.equals("supervisorstaff"))
+        {
+            String sapmle_url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=Supervisor & Staff";
+            String sample = sapmle_url.replaceAll(" ", "%20");
+            url = sample.replaceAll("&", "%26");
+
+        }
+        else
+        {
+            url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=EMAIL_TYPE_1";
+        }
+       // String url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=EMAIL_TYPE_1";
         Log.e("email url ",""+url);
 
         StringRequest emailrequest = new StringRequest(Request.Method.GET, url,
