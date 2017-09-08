@@ -860,7 +860,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                Toast.makeText(EzoneSalesFilter.this, "no data found in Category", Toast.LENGTH_LONG).show();
+                                Toast.makeText(EzoneSalesFilter.this, "no data found in subdept", Toast.LENGTH_LONG).show();
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -1061,7 +1061,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                Toast.makeText(EzoneSalesFilter.this, "no data found in Brand", Toast.LENGTH_LONG).show();
+                                Toast.makeText(EzoneSalesFilter.this, "no data found in subclass", Toast.LENGTH_LONG).show();
                             }
                             else if (response.length() == limit) {
 

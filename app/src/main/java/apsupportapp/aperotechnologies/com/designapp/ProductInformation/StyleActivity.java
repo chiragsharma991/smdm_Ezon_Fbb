@@ -598,6 +598,7 @@ public class StyleActivity extends AppCompatActivity {
                             }
                             Collections.sort(arrayList);
                             arrayList.add(0, "Select Collection");
+
                             collectionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -658,6 +658,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //        etListText = (EditText) findViewById(R.id.etListText);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        Log.e( "initialize_fbb_ui: ", ""+storeDescription.trim().substring(0,4));
         txtStoreCode.setText(storeDescription.trim().substring(0,4));
         txtStoreDesc.setText(storeDescription.substring(5));
         //hierarchy header
