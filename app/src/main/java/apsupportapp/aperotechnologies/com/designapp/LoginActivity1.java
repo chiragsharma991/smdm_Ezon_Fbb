@@ -81,7 +81,7 @@ public class LoginActivity1 extends AppCompatActivity
     SharedPreferences sharedPreferences;
     private ArrayList<String> storelist_data;
     private StoreListAdapter spinnerArrayAdapter;
-    private String SelectedStoreCode, userId,storeDescription;
+    private String SelectedStoreCode, userId,storeDescription,geoLevel2Code;
     private boolean firstLogin = false;
     private AlertDialog dialog;
     private Snackbar snackbar;
@@ -201,7 +201,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 userId = response.getString("userId");
                                 String bearerToken = response.getString("bearerToken");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
-                                String geoLevel2Code = response.getString("geoLevel2Code");
+                                geoLevel2Code = response.getString("geoLevel2Code");
                                 Log.e("Ezone login", "onResponse: "+geoLevel2Code);
 
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -300,7 +300,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 String userId = response.getString("userId");
                                 String bearerToken = response.getString("bearerToken");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
-                                String geoLevel2Code = response.getString("geoLevel2Code");
+                                geoLevel2Code = response.getString("geoLevel2Code");
                                 requestLoginFBBAPI(bearerToken, userId);
                             }
                             else
@@ -311,7 +311,7 @@ public class LoginActivity1 extends AppCompatActivity
                                 String password = response.getString("password");
                                 userId = response.getString("userId");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
-                                String geoLevel2Code = response.getString("geoLevel2Code");
+                                 geoLevel2Code = response.getString("geoLevel2Code");
                                 Log.e("geoLeveLDesc :", "" + geoLeveLDesc + geoLevel2Code);
                                 String bearerToken = response.getString("bearerToken");
                                 userId = userId + "-" + SelectedStoreCode;
@@ -377,7 +377,8 @@ public class LoginActivity1 extends AppCompatActivity
     // APi for store code list
     private void requestLoginFBBAPI(final String bearerToken, String userId)
     {
-        String url = ConstsCore.web_url + "/v1/login/userstores/" + userId; //ConstsCore.web_url+ + "/v1/login/userId";
+        String url = ConstsCore.web_url + "/v1/login/userstores/" + userId +"?geoLevel2Code="+geoLevel2Code; //ConstsCore.web_url+ + "/v1/login/userId";
+        Log.e("Login", "requestLoginFBBAPI: "+url);
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

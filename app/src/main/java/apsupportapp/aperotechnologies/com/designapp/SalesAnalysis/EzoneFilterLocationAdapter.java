@@ -49,6 +49,7 @@ import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSa
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.explv_ez_prod;
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.locatn_list_adapter;
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.rel_ez_process_filter;
+import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.str_checkFrom;
 
 /**
  * Created by pamrutkar on 08/06/17.
@@ -324,14 +325,25 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
     private void requestLocationHierarchy(int level ,String txtClickedVal) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
+        String geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
         String loc_search_url = " ";
+//        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis"))
+//        {
+//            //with geoLevel2Code param
+            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20")+"&geoLevel2Code="+geoLevel2Code;
 
-        loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20");
+//        }
+//        else
+//        {
+//            //without geoLevel2Code param
+//            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20");
+//
+//        }
 
         Log.e("search url:", "" + loc_search_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, loc_search_url,

@@ -1944,7 +1944,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     //Api to display class level values(Api 1.20)
     private void requestSalesListDisplayAPI() {
         String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+geoLevel2Code;
-        Log.e("url sales :", "" + url);
+        Log.e("url sales in fbb:", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -2118,9 +2118,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     }
 
     //Api 1.19 for view pager values on store level like wtd , lw
-    private void requestSalesViewPagerValueAPI() {
-
+    private void requestSalesViewPagerValueAPI()
+    {
         String url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code;
+        Log.e("Sales Analysis", "requestSalesViewPagerValueAPI: "+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2216,6 +2217,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
             url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
         }
+        Log.e("Sales Analysis", "requestSalesPagerOnScrollAPI: "+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2294,7 +2296,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     private void requestSalesCategoryList(final String deptName) {
         String salespvacategory_listurl;
         salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
-
+        Log.e("Sales Anlysis", "requestSalesCategoryList: "+salespvacategory_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvacategory_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -3853,7 +3855,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
 
     // Api for display All value - Api SalesheaderEz
-    private void requestEzoneSalesHeaderAPI() {
+    private void requestEzoneSalesHeaderAPI()
+    {
         String url = ConstsCore.web_url + "/v1/display/salesheaderEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
         Log.e("Ezone Header url :", "" + url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,

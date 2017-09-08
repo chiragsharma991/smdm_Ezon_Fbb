@@ -139,7 +139,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        if (geoLeveLDesc.equals("E ZONE")) {
+        if (geoLeveLDesc.equals("E ZONE"))
+        {
             setContentView(R.layout.activity_ezone_pva);
             Log.e(TAG, "----Wellcome in Ezone----");
             getSupportActionBar().hide();
