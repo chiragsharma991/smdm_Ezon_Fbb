@@ -16,12 +16,9 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import static apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiEmail.req_email_API;
 
 /**

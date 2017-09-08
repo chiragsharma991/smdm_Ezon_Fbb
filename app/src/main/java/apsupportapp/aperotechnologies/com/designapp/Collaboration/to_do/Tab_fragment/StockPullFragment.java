@@ -204,6 +204,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         dropdkown.setOnClickListener(this);
         spinner_text.setText("Select Subcategory");
         subcategoryList=new ArrayList<>();
+
+
         stock_fragmentSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)

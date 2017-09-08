@@ -505,6 +505,7 @@ public class SalesFilterActivity extends Activity {
 //            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
 //
 //        }
+        Log.e(TAG, "requestCategoryAPI: "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -748,7 +749,8 @@ public class SalesFilterActivity extends Activity {
                                 process_flag_brand = true;
                                 processbar.setVisibility(View.GONE);
 
-                                if (listDataHeader.get(4).equals("Brand Class")) {
+                                if (listDataHeader.get(4).equals("Brand Class"))
+                                {
                                     processbar.setVisibility(View.VISIBLE);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -767,9 +769,10 @@ public class SalesFilterActivity extends Activity {
                         }
                         finally
                         {
-                            if(response.equals("") || response == null || response.length()==0) {
-
-                                if (listDataHeader.get(4).equals("Brand Class")) {
+                            if(response.equals("") || response == null || response.length()==0)
+                            {
+                                if (listDataHeader.get(4).equals("Brand Class"))
+                                {
                                     processbar.setVisibility(View.VISIBLE);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -782,7 +785,8 @@ public class SalesFilterActivity extends Activity {
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         processbar.setVisibility(View.GONE);
@@ -819,7 +823,7 @@ public class SalesFilterActivity extends Activity {
 //            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter ;
 //
 //        }
-        Log.e(TAG, "requestBrandPlanClassAPI: "+url );
+        Log.e(TAG, "requestBrandPlanClassAPI: "+ url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -830,7 +834,8 @@ public class SalesFilterActivity extends Activity {
                                 Toast.makeText(SalesFilterActivity.this, "no data found in Brand Class", Toast.LENGTH_SHORT).show();
                                 processbar.setVisibility(View.GONE);
 
-                            } else if (response.length() == limit) {
+                            } else if (response.length() == limit)
+                            {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++)
                                 {
@@ -871,8 +876,8 @@ public class SalesFilterActivity extends Activity {
                         error.printStackTrace();
                     }
                 }
-
-        ) {
+        )
+        {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();

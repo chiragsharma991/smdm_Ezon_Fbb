@@ -109,7 +109,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private Snackbar snackbar;
     private TextView RefreshTime;
     public static SnapAdapter snapAdapter;
-    private static boolean tokenProcess=false;
+    public static boolean tokenProcess=false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
