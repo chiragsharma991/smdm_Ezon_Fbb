@@ -172,14 +172,17 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             String url;
 
             if (!feedbackReport) {
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+               // url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             } else {
 
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit;
+              //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
+            Log.e( TAG, "requestFeedbackApi: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -648,7 +651,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
-            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId + "?geoLevel2Code="+ geoLevel2Code ;//+"?recache="+recache
+            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId ;//+"?recache="+recache
+           // String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId + "?geoLevel2Code="+ geoLevel2Code ;//+"?recache="+recache
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
