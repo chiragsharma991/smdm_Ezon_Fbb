@@ -145,7 +145,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
     private void initialise()
     {
         senderSummary_recyclerView=(RecyclerView)view.findViewById(R.id.transferRequest_list);
-        submit=(Button)view.findViewById(R.id.submit);
+        submit=(Button)view.findViewById(R.id.btn_submit);
         submit.setOnClickListener(this);
     }
 

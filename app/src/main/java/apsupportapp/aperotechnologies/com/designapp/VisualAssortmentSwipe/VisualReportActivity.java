@@ -69,6 +69,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     PieDataSet dataSet;
     PieData pieData;
     String recache;
+    private String geoLevel2Code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -112,13 +114,13 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
 
         } else
         {
-            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show() ;
         }
     }
 
     private void requestVisualReportAPI() {
 
-      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache ;//+"&offset=" + offset + "&limit=" + limit ;
+      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "&geoLevel2Code="+ geoLevel2Code + "?recache="+ recache ;//+"&offset=" + offset + "&limit=" + limit ;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

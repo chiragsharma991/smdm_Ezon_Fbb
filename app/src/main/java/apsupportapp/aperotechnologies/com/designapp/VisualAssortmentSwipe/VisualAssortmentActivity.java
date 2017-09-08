@@ -86,6 +86,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     public static Activity Visual_Assortment_Activity;
     String recache = "";
     int maxCharactes ;
+    private String geoLevel2Code;
 
 
     @Override
@@ -102,6 +103,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 //        Log.e("userId",""+userId);
         bearertoken = sharedPreferences.getString("bearerToken","");
         storeCode = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code", "");
         reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
@@ -580,11 +582,11 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
         String url;
         if (vassort_from_filter) {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString +"&recache="+ recache;
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString + "&geoLevel2Code="+geoLevel2Code+"&recache="+ recache;
         }
         else
         {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg +"&recache="+ recache;
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&geoLevel2Code="+geoLevel2Code + "&recache="+ recache;
         }
 
       Log.e("visual assort url :",""+url);

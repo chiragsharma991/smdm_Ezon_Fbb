@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
+import android.content.Context;
 import android.view.View;
 
 /**
@@ -9,5 +10,6 @@ import android.view.View;
 public interface OnScanBarcode {
 
     void onScan(View view, int position, TransferDetailsAdapter transferDetailsAdapter);
+    void passData(String barcode,Context context);
 
 }

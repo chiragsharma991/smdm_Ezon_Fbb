@@ -113,7 +113,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
         if (Reusable_Functions.chkStatus(context))
         {
-            TransferDetailProcess.setVisibility(View.VISIBLE);
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
             TransferDetailProcess.setVisibility(View.VISIBLE);
@@ -476,6 +475,24 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         transferDetailsAdapter.notifyDataSetChanged();
 
     }
+
+    @Override
+    public void passData(String barcode,Context context)
+    {
+        Log.e(TAG, "passData: "+barcode);
+
+        if (Reusable_Functions.chkStatus(context))
+        {
+            Reusable_Functions.sDialog(context, "Loading data...");
+            TransferDetailProcess.setVisibility(View.VISIBLE);
+            requestScanDetailsAPI(barcode,context);
+        }
+        else
+        {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -493,7 +510,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading  data...");
-                        requestScanDetailsAPI(result.getContents());
+                        TransferDetailProcess.setVisibility(View.VISIBLE);
+                        requestScanDetailsAPI(result.getContents(),context);
 
                     } else {
                         Toast.makeText(TransferRequest_Details.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -507,9 +525,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     }
 
 
-     public void requestScanDetailsAPI(String contents) {
+     public void requestScanDetailsAPI(String contents,final Context context) {
 
-         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber="+contents +"&recache=" + recache;
+         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber="+contents ;
          Log.e(TAG, "requestScanDetailsAPI: "+url );
          final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -521,7 +539,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             if (response.equals("") || response == null || response.length() == 0 && count == 0)
                             {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
+                                TransferDetailProcess.setVisibility(View.GONE);
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
                             } else if (response.length() == limit) {
@@ -532,7 +551,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestSenderDetails();
 
                             }
                             else if (response.length() < limit)
@@ -583,11 +601,14 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                 }
                             }
                             Reusable_Functions.hDialog();
+                            TransferDetailProcess.setVisibility(View.GONE);
+
 
                         } catch (Exception e) {
-                            Reusable_Functions.hDialog();
+
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
+                            TransferDetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
@@ -596,9 +617,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
+                        TransferDetailProcess.setVisibility(View.GONE);
                         error.printStackTrace();
                     }
                 }
@@ -751,9 +772,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             }
                         }
                     },
-                    new Response.ErrorListener() {
+                    new Response.ErrorListener()
+                    {
                         @Override
-                        public void onErrorResponse(VolleyError error) {
+                        public void onErrorResponse(VolleyError error)
+                        {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
                             error.printStackTrace();
@@ -761,7 +784,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     }
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() throws AuthFailureError
+                {
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", bearertoken);
                     return params;

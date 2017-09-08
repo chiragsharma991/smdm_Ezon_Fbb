@@ -29,7 +29,7 @@ public class ApiSMS {
     public static RequestQueue queue;
     static String url;
 
-    public static void req_sms_API(final String userId, String customerNumber, final String bearertoken, String callback, final Context context) {
+    public static void req_sms_API(final String userId, String customerNumber, final String bearertoken, String callback, final Context context, final String from,final String storecode ) {
 
         final JSONObject[] jObj = {null};
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -55,7 +55,7 @@ public class ApiSMS {
                     public void onResponse(String response) {
 
                         Log.e("sms api ", " " + response.toString());
-                        req_email_API(userId, context, bearertoken);
+                        req_email_API(userId, context, bearertoken, from,storecode);
                         // Reusable_Functions.displayToast(context, response.toString());
                     }
                 },
