@@ -151,7 +151,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         if (Reusable_Functions.chkStatus(context)) {
 
             //https://smdm.manthan.com/v1/display/worstperformerfeedback/displayreports/4813
-            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
+            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId  + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
+          //  String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
 
             Log.e(TAG, "requestFeedbackApi: "+url);
 
