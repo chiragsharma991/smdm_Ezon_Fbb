@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,12 +14,10 @@ import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,8 +63,6 @@ import java.util.Timer;
 import java.util.UUID;
 
 import apsupportapp.aperotechnologies.com.designapp.AboutUsActivity;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.TransferRequest_Details;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
@@ -75,7 +70,6 @@ import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
-import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;

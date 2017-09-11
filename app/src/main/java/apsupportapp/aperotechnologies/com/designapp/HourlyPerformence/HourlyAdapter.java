@@ -6,14 +6,12 @@ package apsupportapp.aperotechnologies.com.designapp.HourlyPerformence;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.text.NumberFormat;

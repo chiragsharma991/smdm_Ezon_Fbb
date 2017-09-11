@@ -1,6 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Utils;
 
-import android.app.Notification;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,9 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.R;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
-
 /**
  * Created by csuthar on 21/08/17.
  */

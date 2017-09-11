@@ -7,15 +7,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import apsupportapp.aperotechnologies.com.designapp.BORIS.MobileScreenActivity;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookupActivity;
-
-import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_notify_HO;
@@ -33,13 +28,11 @@ import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvail
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.Samplebarcode;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_activity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
@@ -47,7 +40,6 @@ import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActiv
 import apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionBeginActivity;
 import apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionHistoryActivity;
 import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
-import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualReportActivity;
 

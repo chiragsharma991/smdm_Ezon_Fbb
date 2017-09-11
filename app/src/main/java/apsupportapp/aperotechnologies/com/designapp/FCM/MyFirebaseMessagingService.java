@@ -1,20 +1,10 @@
 package apsupportapp.aperotechnologies.com.designapp.FCM;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -23,9 +13,6 @@ import org.json.JSONObject;
 
 import java.net.URL;
 
-import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
-import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
-import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Utils.NotificationBuild;
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 

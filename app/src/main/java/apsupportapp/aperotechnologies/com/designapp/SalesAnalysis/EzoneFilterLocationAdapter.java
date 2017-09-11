@@ -45,11 +45,8 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.explv_ez_locatn;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.explv_ez_prod;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.locatn_list_adapter;
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.rel_ez_process_filter;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.str_checkFrom;
+
 
 /**
  * Created by pamrutkar on 08/06/17.

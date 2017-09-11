@@ -8,13 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-import static apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity.nestedScrollview;
 
 /**
  * Created by rkanawade on 01/09/17.

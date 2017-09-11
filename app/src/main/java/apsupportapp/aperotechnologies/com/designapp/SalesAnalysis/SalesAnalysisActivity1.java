@@ -44,7 +44,6 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
 import org.json.JSONArray;
 
@@ -52,7 +51,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
+
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
 import apsupportapp.aperotechnologies.com.designapp.R;

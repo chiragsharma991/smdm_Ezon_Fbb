@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.FCM;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;

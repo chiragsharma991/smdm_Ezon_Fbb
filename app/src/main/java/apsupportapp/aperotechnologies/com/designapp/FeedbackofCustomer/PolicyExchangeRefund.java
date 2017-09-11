@@ -11,7 +11,6 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -46,8 +45,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -63,7 +60,7 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
-import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SwitchingActivity;
+
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiPostRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpPostResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;

@@ -65,7 +65,8 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
-public class StyleActivity extends AppCompatActivity {
+public class StyleActivity extends AppCompatActivity
+{
     Button btnBarcode;
     RelativeLayout imageBtnBack;
     TextView collection, style;
@@ -133,7 +134,7 @@ public class StyleActivity extends AppCompatActivity {
         optionLayout = (LinearLayout) findViewById(R.id.optionLayout);
         edtsearchCollection = (EditText) findViewById(R.id.searchCollection);
         edtsearchOption = (EditText) findViewById(R.id.searchOption);
-        edit_barcode = (EditText) findViewById(R.id.editBarcode);
+//        edit_barcode = (EditText) findViewById(R.id.editBarcode);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         String submit = "Submit";
         btnSubmit.setText(submit);
@@ -171,7 +172,8 @@ public class StyleActivity extends AppCompatActivity {
                 optionLayout.setVisibility(View.GONE);
             }
         });
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        btnSubmit.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 if (collection.getText().toString().trim().equals("Select Collection")) {
@@ -291,7 +293,8 @@ public class StyleActivity extends AppCompatActivity {
 
         });
 
-        listOption.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listOption.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -407,7 +410,6 @@ public class StyleActivity extends AppCompatActivity {
         }
     }
 
-
     /// create a BroadcastReceiver for receiving intents from barcode reader service
     private final BroadcastReceiver myDataReceiver = new BroadcastReceiver() {
         @Override
@@ -432,15 +434,14 @@ public class StyleActivity extends AppCompatActivity {
                             }
                         }
                     }, 1500);
-
-
             }
-
-
-        }
+       }
     };
 
-    public String getDeviceInfo() {
+    public String getDeviceInfo()
+
+
+    {
         String manufacturer = Build.MANUFACTURER;
         String model = Build.MODEL;
         if (model.startsWith(manufacturer)) {
@@ -462,11 +463,15 @@ public class StyleActivity extends AppCompatActivity {
         }
     }
 
-    private void requestStyleDetailsAPI(String content, String check) {
+    private void requestStyleDetailsAPI(String content, String check)
+    {
         String url = " ";
-        if (check.equals("optionname")) {
+        if (check.equals("optionname"))
+        {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + content.replaceAll(" ", "%20").replaceAll("&", "%26");
-        } else if (check.equals("barcode")) {
+        }
+        else if (check.equals("barcode"))
+        {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
 
@@ -605,7 +610,8 @@ public class StyleActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     collectionNM = (String) collectionAdapter.getItem(position);
-                                    collection.setText(collectionNM);
+                                    selcollectionName = collectionNM;
+                                    collection.setText(selcollectionName);
                                     Log.e("collectionNM ", " "+collectionNM);
                                     Log.e("collect_name ", " "+collect_name);
 
@@ -721,8 +727,10 @@ public class StyleActivity extends AppCompatActivity {
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                            } else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");
                                     String articleOptions = jsonResponse.getString("articleOptions");
