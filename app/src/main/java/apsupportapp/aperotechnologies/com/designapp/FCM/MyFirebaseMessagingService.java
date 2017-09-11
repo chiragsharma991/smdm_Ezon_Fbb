@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
@@ -66,7 +67,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
             Log.e("TAG", "Data Payload: --" + remoteMessage.getData().toString());
 
             try {
-                JSONObject json = new JSONObject(remoteMessage.getData().toString());
+                Map<String, String> params = remoteMessage.getData();
+                JSONObject json = new JSONObject(params);
                 handleDataMessage(json);
             } catch (Exception e) {
                 Log.e("TAG", "Exception: " + e.getMessage());
@@ -76,7 +78,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
 
     private void handleDataMessage(JSONObject json) {
         try {
-
             String title = json.getString("title");
             String message = json.getString("message");
             sendNotification(title,message);

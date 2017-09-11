@@ -193,7 +193,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     protected void onResume() {
         super.onResume();
         String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        Log.e(TAG, "onResume: "+device_id+"and token "+TokenRefresh.pushToken);
+        Log.e(TAG, "onResume: device id: "+device_id+"  and token: "+TokenRefresh.pushToken);
         if (!tokenProcess){
             if(TokenRefresh.pushToken!=null && !device_id.equals("") && device_id !=null)
                 requestSubmitAPI(context,getObject());
@@ -466,14 +466,15 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            Log.e(TAG, "onResponse: from token"+response );
                             try {
                                 if (response == null || response.equals("")) {
-                                    Log.e(TAG, "onResponse: null" );
+                                    Log.e(TAG, "onResponse token: null" );
                                 } else
                                 {
                                     String result=response.getString("status");
                                     tokenProcess=true;
-                                    Log.e(TAG, "onResponse: sucess"+result );
+                                    Log.e(TAG, "onResponse token: success "+result );
 
                                 }
                             } catch (Exception e)
