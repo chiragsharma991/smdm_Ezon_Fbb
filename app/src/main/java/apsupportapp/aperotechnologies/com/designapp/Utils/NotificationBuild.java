@@ -31,9 +31,9 @@ public class NotificationBuild extends AppCompatActivity {
         if (userId != null && !userId.equals("")) {
             intent = new Intent(context, SnapDashboardActivity.class);
         } else {
-            intent = new Intent(context, LoginActivity1.class);
+            intent = new Intent(context, SnapDashboardActivity.class);
         }
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  //FLAG_ACTIVITY_SINGLE_TOP for unrefresh
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //FLAG_ACTIVITY_SINGLE_TOP for unrefresh
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);

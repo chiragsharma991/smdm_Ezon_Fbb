@@ -114,7 +114,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         statusbar();
         m_config = MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userId = sharedPreferences.getString("userId", "");
+        userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
@@ -125,6 +125,12 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
+        if(userId.equals("")){
+            Intent intent = new Intent(this, LoginActivity1.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
         setContentView(R.layout.activity_snap_dashboard);
         initalise();
         eventUrlList = new ArrayList<>();
