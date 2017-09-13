@@ -2079,7 +2079,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                 } catch (Exception e) {
                     Reusable_Functions.hDialog();
-                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                    Log.e("", "onResponse: " +e.getMessage());
+                    Toast.makeText(context, "no data found"+e.getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar1.setVisibility(View.GONE);
                     onClickFlag = false;
                     e.printStackTrace();

@@ -515,7 +515,6 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         }
     }
 
-
     public void getDetails() {
 
         SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss"); // kk for 24 hours & hh for 12 hours

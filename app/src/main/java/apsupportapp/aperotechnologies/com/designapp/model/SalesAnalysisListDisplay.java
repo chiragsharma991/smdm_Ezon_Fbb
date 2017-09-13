@@ -24,7 +24,7 @@ public class SalesAnalysisListDisplay {
      String brandplanClass;
      double saleNetVal;
      double wowNetSalesGrowthPct;
-     int saleTotQty;
+     double saleTotQty;
      double wowNetSalesUnitsGrowthPct;
      double planSaleNetVal;
      double pvaAchieved;
@@ -225,7 +225,7 @@ public class SalesAnalysisListDisplay {
         this.saleTotQty = saleTotQty;
     }
 
-    public int getSaleTotQty() {
+    public double getSaleTotQty() {
         return saleTotQty;
     }
 

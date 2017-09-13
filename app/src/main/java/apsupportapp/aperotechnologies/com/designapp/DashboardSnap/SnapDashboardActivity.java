@@ -297,20 +297,20 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
             apps = getProduct(3);
             snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
-//            apps = getProduct(4);
-//            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
             apps = getProduct(4);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
             apps = getProduct(5);
-            snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
+            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
             apps = getProduct(6);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
+            snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
             apps = getProduct(7);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+            snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
             apps = getProduct(8);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+            apps = getProduct(9);
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
-//            apps = getProduct(10);
-//            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
+            apps = getProduct(10);
+            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
 
         }
         Recycler_verticalView.setAdapter(snapAdapter);
@@ -452,8 +452,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void requestSubmitAPI(final Context mcontext, JSONObject object)  // Sender Submit Api call
     {
-
-        if (Reusable_Functions.chkStatus(mcontext)) {
+        if (Reusable_Functions.chkStatus(mcontext))
+        {
             String url = ConstsCore.web_url + "/v1/submit/deviceID/" + userId ;
             Log.e(TAG, "requestSubmitAPI: "+url );
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
