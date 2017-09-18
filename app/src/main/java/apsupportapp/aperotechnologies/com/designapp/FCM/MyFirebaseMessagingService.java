@@ -63,33 +63,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         }
     }
 
-    private void handleDataMessage(JSONObject json) {
+    private void handleDataMessage(JSONObject json)
+    {
         try {
             String title = json.getString("title");
             String message = json.getString("message");
             sendNotification(title,message);
 
 
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             Log.e("TAG", "JSONException: "+e.getMessage() );
             e.printStackTrace();
         }
 
     }
 
-    private void sendNotification(final String title, String message) {
-
+    private void sendNotification(final String title, String message)
+    {
         this.title=title;
         this.message=message;
         UiTask task=new UiTask(this);
         task.execute();
-
-
     }
 
-    public  class UiTask extends AsyncTask<URL, Integer, Long>{
-
-
+    public  class UiTask extends AsyncTask<URL, Integer, Long>
+    {
         private final Context context;
 
         public UiTask(Context context) {
@@ -102,7 +101,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
         }
 
         @Override
-        protected void onPostExecute(Long aLong) {
+        protected void onPostExecute(Long aLong)
+        {
             new NotificationBuild(title,message,context);
 
         }

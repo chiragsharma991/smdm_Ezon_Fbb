@@ -23,9 +23,8 @@ import java.util.Locale;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
-public class Details_Fragment extends Fragment implements View.OnClickListener{
-
-
+public class Details_Fragment extends Fragment implements View.OnClickListener
+{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     StyleDetailsBean styleDetailsBean;
@@ -79,26 +78,21 @@ public class Details_Fragment extends Fragment implements View.OnClickListener{
         txtTwSalesUnit = (TextView) view.findViewById(R.id.txtTwSalesUnit);
         txtLwSalesUnit = (TextView) view.findViewById(R.id.txtLwSalesUnit);
         txtYtdSalesUnit = (TextView) view.findViewById(R.id.txtYtdSalesUnit);
-
         txtSOH = (TextView) view.findViewById(R.id.txtSOH);
         txtGIT = (TextView) view.findViewById(R.id.txtGIT);
         txtBaseStock = (TextView) view.findViewById(R.id.txtBaseStock);
-
         txtPrice = (TextView) view.findViewById(R.id.txtPrice);
         txtsalesThruUnit = (TextView) view.findViewById(R.id.txtsalesThruUnit);
         txtROS = (TextView) view.findViewById(R.id.txtROS);
-
         txtBenefit = (TextView) view.findViewById(R.id.txtBenefit);
         imgPromo = (ImageView) view.findViewById(R.id.imgPromo);
         imgKeyProduct = (ImageView) view.findViewById(R.id.imgKeyProduct);
         imgProfile = (ImageView) view.findViewById(R.id.imgProfile);
-
         linear_prodDetails = (LinearLayout)view.findViewById(R.id.linear_prodDetails) ;
         btn_cd_more = (Button)view.findViewById(R.id.btn_cd_more);
         btn_cd_more.setOnClickListener(this);
         btn_cd_less = (Button)view.findViewById(R.id.btn_cd_less);
         btn_cd_less.setOnClickListener(this);
-
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
         if(!styleDetailsBean.getProductImageURL().equals(""))
         {

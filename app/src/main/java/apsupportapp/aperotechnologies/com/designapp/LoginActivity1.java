@@ -86,18 +86,16 @@ public class LoginActivity1 extends AppCompatActivity
     private Snackbar snackbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
         context = this;
         m_config = MySingleton.getInstance(this);
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
         edtUserName = (EditText) findViewById(R.id.edtUserName);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtUserName.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
@@ -107,17 +105,16 @@ public class LoginActivity1 extends AppCompatActivity
         chkKeepMeLogin.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 log_flag = ((CheckBox) v).isChecked();
 
             }
         });
-
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
@@ -139,7 +136,8 @@ public class LoginActivity1 extends AppCompatActivity
                 }
                 else
                 {
-                    if (Reusable_Functions.chkStatus(context)) {
+                    if (Reusable_Functions.chkStatus(context))
+                    {
                         Reusable_Functions.progressDialog = new ProgressDialog(context);
                         if(!Reusable_Functions.progressDialog.isShowing())
                         {
@@ -148,7 +146,9 @@ public class LoginActivity1 extends AppCompatActivity
                         }
                         Reusable_Functions.progressDialog.setMessage("Authenticating User...");
                         requestLoginAPI();
-                    } else {
+                    }
+                    else
+                    {
                         Toast.makeText(LoginActivity1.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -156,7 +156,8 @@ public class LoginActivity1 extends AppCompatActivity
         });
     }//onCreate
 
-    private void checkToken() {
+    private void checkToken()
+    {
         if (LocalNotificationReceiver.logoutAlarm) {
             View view = findViewById(android.R.id.content);
             snackbar = Snackbar.make(view, "Session has been Log out Please Retry", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
@@ -175,9 +176,9 @@ public class LoginActivity1 extends AppCompatActivity
         }
     }
 
-    private void requestLoginAPI() {
+    private void requestLoginAPI()
+    {
         String url = ConstsCore.web_url + "/v1/login"; //ConstsCore.web_url+ + "/v1/login/userId";
-
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -191,7 +192,6 @@ public class LoginActivity1 extends AppCompatActivity
                             if (response.getString("geoLeveLDesc").equals("E ZONE"))
                             {
                                 Log.e("Ezone login....", "");
-
                                 Long notificationTime = System.currentTimeMillis() + 1800000; //30 minutes
                                 Log.e("notificationTime", "onResponse: " + notificationTime);
                                 setLocalnotification(context, notificationTime);
@@ -202,7 +202,6 @@ public class LoginActivity1 extends AppCompatActivity
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
                                 geoLevel2Code = response.getString("geoLevel2Code");
                                 Log.e("Ezone login", "onResponse: "+geoLevel2Code);
-
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", username);
                                 editor.putString("password", password);
@@ -239,7 +238,9 @@ public class LoginActivity1 extends AppCompatActivity
                                     SelectedStoreCode = uname;
                                     firstLogin = false;
                                     requestLoginWithStoreAPI();
-                                } else {
+                                }
+                                else
+                                {
                                     Toast.makeText(LoginActivity1.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -273,6 +274,7 @@ public class LoginActivity1 extends AppCompatActivity
         queue.add(postRequest);
 
     }
+
     // Login with store code list
     private void requestLoginWithStoreAPI()
     {
@@ -290,10 +292,10 @@ public class LoginActivity1 extends AppCompatActivity
                                 Toast.makeText(LoginActivity1.this, "Invalid user", Toast.LENGTH_LONG).show();
                                 return;
                             }
-
                             // when store code fetched it will go second condition.
                             if (!firstLogin)
                             {
+                                Log.e("if conditon", "onResponse:  "+response.length());
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");
                                 String userId = response.getString("userId");
@@ -304,16 +306,18 @@ public class LoginActivity1 extends AppCompatActivity
                             }
                             else
                             {
+                                Log.e("else condition", "onResponse:  "+response.length());
+
                                 Long notificationTime = System.currentTimeMillis() + 18000000; //300 minutes
                                 setLocalnotification(context, notificationTime);
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");
                                 userId = response.getString("userId");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
-                                 geoLevel2Code = response.getString("geoLevel2Code");
+                                geoLevel2Code = response.getString("geoLevel2Code");
                                 Log.e("geoLeveLDesc :", "" + geoLeveLDesc + geoLevel2Code);
                                 String bearerToken = response.getString("bearerToken");
-                                userId = userId + "-" + SelectedStoreCode;
+                               // userId = userId + "-" + SelectedStoreCode;
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", username);
                                 editor.putString("password", password);
@@ -342,7 +346,8 @@ public class LoginActivity1 extends AppCompatActivity
                                 startActivity(intent);
                                 finish();
                             }
-                        } catch (Exception e)
+                        }
+                        catch (Exception e)
                         {
                             Toast.makeText(context, "data failed...." + e.getMessage(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
@@ -377,14 +382,15 @@ public class LoginActivity1 extends AppCompatActivity
     private void requestLoginFBBAPI(final String bearerToken, String userId)
     {
         String url = ConstsCore.web_url + "/v1/login/userstores/" + userId +"?geoLevel2Code="+geoLevel2Code; //ConstsCore.web_url+ + "/v1/login/userId";
-        Log.e("Login", "requestLoginFBBAPI: "+url);
+        Log.e("Login", "requestLoginFBBAPI: " + url);
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
                         try {
-                            if (response.equals("") || response == null) {
+                            if (response.equals("") || response == null)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(LoginActivity1.this, "Invalid user", Toast.LENGTH_LONG).show();
                                 return;
@@ -404,7 +410,9 @@ public class LoginActivity1 extends AppCompatActivity
                             } else {
                                 commentDialog();
                             }
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
@@ -436,7 +444,8 @@ public class LoginActivity1 extends AppCompatActivity
 
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         finish();
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -444,7 +453,8 @@ public class LoginActivity1 extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void setLocalnotification(Context cont, Long notificationTime) {
+    public void setLocalnotification(Context cont, Long notificationTime)
+    {
         AlarmManager alarmManager = (AlarmManager) cont.getSystemService(Context.ALARM_SERVICE);
         Intent notificationIntent = new Intent(cont, LocalNotificationReceiver.class);
 
@@ -456,7 +466,8 @@ public class LoginActivity1 extends AppCompatActivity
             alarmManager.set(AlarmManager.RTC_WAKEUP, notificationTime, broadcast);
     }
 
-    private void commentDialog() {
+    private void commentDialog()
+    {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
         // Get the layout inflater
@@ -486,7 +497,8 @@ public class LoginActivity1 extends AppCompatActivity
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(Editable editable)
+            {
 
             }
         });
@@ -569,12 +581,14 @@ public class LoginActivity1 extends AppCompatActivity
         }
 
         @Override
-        public Object getItem(int i) {
+        public Object getItem(int i)
+        {
             return i;
         }
 
         @Override
-        public long getItemId(int i) {
+        public long getItemId(int i)
+        {
             return i;
         }
 
@@ -587,7 +601,6 @@ public class LoginActivity1 extends AppCompatActivity
             TextView title, detail;
             title = (TextView) row.findViewById(R.id.storeList);
             title.setText(storelist_data.get(i));
-
             return (row);
         }
     }

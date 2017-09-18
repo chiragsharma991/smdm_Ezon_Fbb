@@ -18,7 +18,8 @@ public class TokenRefresh extends FirebaseInstanceIdService {
     public static String pushToken=null;
 
     @Override
-    public void onTokenRefresh() {
+    public void onTokenRefresh()
+    {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.e("TAG", "Refreshed token:------ " + refreshedToken);

@@ -49,6 +49,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -66,6 +67,8 @@ import apsupportapp.aperotechnologies.com.designapp.AboutUsActivity;
 import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
+import apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService;
+import apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken;
 import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
@@ -76,7 +79,8 @@ import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisA
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
-public class SnapDashboardActivity extends SwitchingActivity implements onclickView {
+public class SnapDashboardActivity extends SwitchingActivity implements onclickView
+{
 
     public static RecyclerView Recycler_verticalView;
     private String TAG = "SnapDashboardActivity";
@@ -118,6 +122,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
+      //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//        Log.e("SnapDashboard", "Refreshed token:------ " + refreshedToken);
         Log.e(TAG,"userId :--"+ userId);
         Log.e(TAG,"pushtoken :--"+ pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
@@ -150,7 +156,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         //-------------------------------------------------------------//
 
-        else {
+        else
+        {
             Log.e("TAG", "FBB login");
             loginFromFbb = true;
             _collectionitems = new ArrayList();
@@ -185,29 +192,26 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
             }
         }
-
-
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        Log.e(TAG, "onResume: device id: "+device_id+"  and token: "+TokenRefresh.pushToken);
+        Log.e(TAG, "onResume: device id: "+device_id+"  and token: "+ FirebaseInstanceId.getInstance().getToken());
         if (!tokenProcess){
             if(TokenRefresh.pushToken!=null && !device_id.equals("") && device_id !=null)
                 requestSubmitAPI(context,getObject());
             Log.e(TAG, "onResume: !tokenProcess" );
         }
-
-
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
+    protected void onNewIntent(Intent intent)
+    {
         super.onNewIntent(intent);
         Log.e(TAG, "onNewIntent: " );
-
     }
 
     private void statusbar()
@@ -303,20 +307,20 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
             apps = getProduct(3);
             snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+//            apps = getProduct(4);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
             apps = getProduct(4);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-            apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
-            apps = getProduct(6);
+            apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
-            apps = getProduct(7);
+            apps = getProduct(6);
             snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
-            apps = getProduct(8);
+            apps = getProduct(7);
             snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
-            apps = getProduct(9);
+            apps = getProduct(8);
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
-            apps = getProduct(10);
-            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
+//            apps = getProduct(10);
+//            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
 
         }
         Recycler_verticalView.setAdapter(snapAdapter);
