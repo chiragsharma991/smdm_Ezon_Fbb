@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".TestDB"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -42,17 +42,14 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <service
-            android:name=".FCM.TokenRefresh">
+        <service android:name=".FCM.TokenRefresh">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <service
-            android:name=".FCM.MyFirebaseMessagingService">
+        <service android:name=".FCM.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
@@ -276,8 +273,7 @@
         <activity
             android:name=".DashboardSnap.SnapDashboardActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FeedbackofCustomer.ProductAvailability_Notify"
             android:screenOrientation="portrait"
@@ -316,10 +312,9 @@
         <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff" />
         <activity android:name=".BORIS.MobileScreenActivity" />
         <activity android:name=".BORIS.ReturnCatalogueActivity" />
-        <activity android:name=".BORIS.ReturnDetailActivity"></activity>
-
-
-        <activity android:name=".SalesAnalysis.Samplebarcode"/>
+        <activity android:name=".BORIS.ReturnDetailActivity" />
+        <activity android:name=".SalesAnalysis.Samplebarcode" />
+        <activity android:name=".SplashActivity"></activity>
     </application>
 
 </manifest>
