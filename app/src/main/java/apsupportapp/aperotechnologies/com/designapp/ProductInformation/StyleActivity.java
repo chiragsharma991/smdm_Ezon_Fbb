@@ -85,15 +85,15 @@ public class StyleActivity extends AppCompatActivity
     int collectionoffset = 0, collectionlimit = 100, collectioncount = 0;
     SharedPreferences sharedPreferences;
     Button btnSubmit;
-    EditText edtsearchCollection, edtsearchOption, edit_barcode,editsearchStore;
-    public static String selcollectionName = null, seloptionName = null;
+    EditText edtsearchCollection, edtsearchOption, edit_barcode,edtsearchStore;
+    public static String selcollectionName = null, seloptionName = null , selStoreName =  null;
     LinearLayout stylemainlayout;
     LinearLayout collectionLayout, optionLayout,storeLayout;
     private ListView listCollection, listOption,listStore;
     ListAdapter collectionAdapter,storeAdapter;
     ListAdapter1 optionAdapter;
 
-    String collect_name = "";
+    String collect_name = "",geoLevel2Code,lobId;
 
     private ReaderManager mReaderManager;
     private IntentFilter filter;
@@ -110,6 +110,8 @@ public class StyleActivity extends AppCompatActivity
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept", "");
+        lobId = sharedPreferences.getString("lobId", "");
         context = this;
         m_config = MySingleton.getInstance(context);
         styleDetailsBeenList = new ArrayList<>();
@@ -117,6 +119,7 @@ public class StyleActivity extends AppCompatActivity
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+
         collectionList = new ArrayList<String>();
         arrayList = new ArrayList<String>();
         list = new ArrayList<>();
@@ -125,7 +128,7 @@ public class StyleActivity extends AppCompatActivity
         stylemainlayout.setVisibility(View.VISIBLE);
         collectionLayout = (LinearLayout) findViewById(R.id.collectionLayout);
         optionLayout = (LinearLayout) findViewById(R.id.optionLayout);
-        editsearchStore = (EditText)findViewById(R.id.searchStore);
+        edtsearchStore = (EditText)findViewById(R.id.searchStore);
         edtsearchCollection = (EditText) findViewById(R.id.searchCollection);
         edtsearchOption = (EditText) findViewById(R.id.searchOption);
 
@@ -592,7 +595,7 @@ public class StyleActivity extends AppCompatActivity
 
     private void requestProductStoreSelection()
     {
-        String url = ConstsCore.web_url + "/v1/display/productinfostoreselection/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
+        String url = ConstsCore.web_url + "/v1/display/productinfostoreselection/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId;
         Log.e("", "requestProductStoreSelection: "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -629,13 +632,13 @@ public class StyleActivity extends AppCompatActivity
                             storeList.add(0, "Select Store");
                             storeAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
-                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                            listStore.setOnItemClickListener(new AdapterView.OnItemClickListener()
                             {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                                 {
                                     store_name = (String) storeAdapter.getItem(position);
-                                    //selcollectionName = collectionNM;
+                                    selStoreName = store_name;
                                     txt_store.setText(store_name);
                                     Log.e("store_name ", " "+store_name);
 
@@ -655,9 +658,9 @@ public class StyleActivity extends AppCompatActivity
                                     collectionLayout.setVisibility(View.GONE);
                                     InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                     if (inputManager != null) {
-                                        inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                                        inputManager.hideSoftInputFromWindow(edtsearchStore.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                                     }
-                                    if (collectionNM.equalsIgnoreCase("Select Collection"))
+                                    if (store_name.equalsIgnoreCase("Select Store"))
                                     {
                                         Log.e(" come ", "here");
                                         //  collectionNM = selcollectionName;
@@ -669,8 +672,8 @@ public class StyleActivity extends AppCompatActivity
                                             offsetvalue = 0;
                                             limit = 100;
                                             count = 0;
-                                            articleOptionList.clear();
-                                            requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
+                                            collectionList.clear();
+                                            requestCollectionAPI(offsetvalue,collectionlimit);
                                         }
                                         else
                                         {

@@ -88,7 +88,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private Context context;
     public static NestedScrollView nestedScrollview;
     RequestQueue queue;
-    String userId, bearertoken, geoLeveLDesc,pushtoken;
+    String userId, bearertoken, geoLeveLDesc,pushtoken,geoLevel2Code,lobid;
     SharedPreferences sharedPreferences;
     ArrayList<String> arrayList, eventUrlList;
     MySingleton m_config;
@@ -123,6 +123,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
+        geoLevel2Code = getIntent().getStringExtra("cocept");
+        lobid = getIntent().getStringExtra("lobid");
       //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 //        Log.e("SnapDashboard", "Refreshed token:------ " + refreshedToken);
         Log.e(TAG,"userId :--"+ userId);
@@ -133,7 +135,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         queue.start();
         gson = new Gson();
         if(userId.equals("")){
-            Intent intent = new Intent(this, LoginActivity1.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();

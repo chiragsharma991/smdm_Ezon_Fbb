@@ -280,8 +280,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     loginStoreArray.add(login_storeList);
 
                                 }
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
+                                editor.putString("lobId", loginStoreArray.get(0).getLobId());
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
-                                if(response.length() == 1 && login_storeList.getIsMultiStore().equals("NO")) // for single store save storecode
+                                if(response.length() == 1 ) // for single response save storecode
                                 {
                                     if (Reusable_Functions.chkStatus(context))
                                     {
@@ -294,7 +297,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                     }
                                 }
-                                else // for multiple store save concept (geoLevelDesc)
+                                else // for multiple response save concept (geoLevelDesc)
                                 {
                                     Log.e(TAG, "requestUserStore - in else: " );
                                     if (Reusable_Functions.chkStatus(context))
