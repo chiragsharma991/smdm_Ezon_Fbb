@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.FCM;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -19,7 +18,8 @@ public class TokenRefresh extends FirebaseInstanceIdService {
     public static String pushToken=null;
 
     @Override
-    public void onTokenRefresh() {
+    public void onTokenRefresh()
+    {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.e("TAG", "Refreshed token:------ " + refreshedToken);

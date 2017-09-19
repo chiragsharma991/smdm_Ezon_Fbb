@@ -44,7 +44,6 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
 import org.json.JSONArray;
 
@@ -52,7 +51,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
+
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -658,6 +657,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //        etListText = (EditText) findViewById(R.id.etListText);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        Log.e( "initialize_fbb_ui: ", ""+storeDescription.trim().substring(0,4));
         txtStoreCode.setText(storeDescription.trim().substring(0,4));
         txtStoreDesc.setText(storeDescription.substring(5));
         //hierarchy header
@@ -2079,7 +2079,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                 } catch (Exception e) {
                     Reusable_Functions.hDialog();
-                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                    Log.e("", "onResponse: " +e.getMessage());
+                    Toast.makeText(context, "no data found"+e.getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar1.setVisibility(View.GONE);
                     onClickFlag = false;
                     e.printStackTrace();

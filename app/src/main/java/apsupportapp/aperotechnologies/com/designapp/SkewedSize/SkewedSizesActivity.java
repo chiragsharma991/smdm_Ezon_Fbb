@@ -45,7 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
-import uk.co.senab.photoview.log.LoggerDefault;
+
 
 
 public class SkewedSizesActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {

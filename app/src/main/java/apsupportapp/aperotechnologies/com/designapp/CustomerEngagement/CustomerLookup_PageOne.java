@@ -8,14 +8,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
+
 import android.util.Log;
-import android.view.Gravity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +40,11 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.Entry;
+
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
+
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -110,12 +106,14 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     int firstVisibleItem = 0;
     MySingleton m_config;
 
-    public CustomerLookup_PageOne() {
+    public CustomerLookup_PageOne()
+    {
 
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             if (checkNetworkFalse) {
@@ -126,7 +124,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
@@ -138,7 +137,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         root = (ViewGroup) inflater.inflate(R.layout.fragment_custlookup_pageone, null);
         context = root.getContext();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -171,7 +171,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
         this.context = context;
         try {
@@ -181,7 +182,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
     }
 
-    private void initialise() {
+    private void initialise()
+    {
         customerDetailsList = new ArrayList<CustomerDetail>();
         planengagementArrayList = new ArrayList<CustomerEngagementDetail>();
         actualengagementArrayList = new ArrayList<CustomerEngagementDetail>();
@@ -198,30 +200,27 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         txt_switch_name = (TextView) root.findViewById(R.id.txt_switch_name);
         sales_cust_switch = (Switch) root.findViewById(R.id.salescustswitch);
         sales_cust_switch.setOnCheckedChangeListener(this);
-//        txt_cust_NetSalesName = (TextView) root.findViewById(R.id.txt_cust_NetSalesName);
-//        txt_cust_NetSalesPerc = (TextView) root.findViewById(R.id.txt_cust_NetSalesPerc);
         pieChart_band = (PieChart) root.findViewById(R.id.pieChart_band);
         pieChart_lifestage = (PieChart) root.findViewById(R.id.pieChart_lifestage);
         linearLayout = (LinearLayout) root.findViewById(R.id.linear_band_legend);
         linearLayout1 = (LinearLayout)root.findViewById(R.id.linear_lifestage_legend);
         txt_band_ach = (TextView)root.findViewById(R.id.txt_band_ach);
         txt_lifestage_ach = (TextView)root.findViewById(R.id.txt_lifestage_ach);
-
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        switch (buttonView.getId()) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+    {
+        switch (buttonView.getId())
+        {
             case R.id.salescustswitch:
                 SalesCustToggle();
                 break;
-
-
         }
     }
 
-
-    private void requestCustomerLoyaltySummary() {
+    private void requestCustomerLoyaltySummary()
+    {
         String url = ConstsCore.web_url + "/v1/display/customerloyaltysummary/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache;
         Log.e("cust summary url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
@@ -298,7 +297,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         queue.add(postRequest);
     }
 
-    private void colorconditionForSales() {
+    private void colorconditionForSales()
+    {
         if (array_custLoyaltySummaries.get(0).getSalesAch() < 80) {
             txt_cust_NetSalesPerc.setTextColor(Color.parseColor("#fe0000"));
 
@@ -310,7 +310,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
     }
 
-    private void requestCustomerPlanEngagement() {
+    private void requestCustomerPlanEngagement()
+    {
         int level = 1;
         String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level;//+ "&offset=" + offsetval + "&limit=" + limit;
 
@@ -321,29 +322,21 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                 Log.e("response :", "" + response);
                 try {
                     int i = 0;
-                    if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                    if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                    {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
                     }
-//                    else if (response.length() == limit) {
-//                        for (i = 0; i < response.length(); i++) {
-//                            customerEngagementDetail = gson.fromJson(response.get(i).toString(), CustomerEngagementDetail.class);
-//                            engagementDetailArrayList.add(customerEngagementDetail);
-//                        }
-//
-//                        offsetval = (limit * count) + limit;
-//                        count++;
-//                        requestCustomerPlanEngagement();
-                    // }
-//                else if (response.length() < limit) {
-                    for (i = 0; i < response.length(); i++) {
+                    for (i = 0; i < response.length(); i++)
+                    {
                         customerEngagementDetail = gson.fromJson(response.get(i).toString(), CustomerEngagementDetail.class);
                         planengagementArrayList.add(customerEngagementDetail);
                     }
                     callBandSalesPieChart();
 
-                    if (Reusable_Functions.chkStatus(context)) {
+                    if (Reusable_Functions.chkStatus(context))
+                    {
                         Reusable_Functions.sDialog(context, "Loading...");
                         offsetval = 0;
                         limit = 10;
@@ -388,7 +381,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
     private void SalesCustToggle() {
-        if (!bandcustToggle) {
+        if (!bandcustToggle)
+        {
             if (sales_cust_switch.isChecked()) {
                 linearLayout.removeAllViewsInLayout();
                 pieChart_band.invalidate();
@@ -413,13 +407,16 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                 callBandSalesPieChart();
                 callLSalesPieChart();
             }
-        } else {
+        }
+        else
+        {
             bandcustToggle = false;
         }
     }
 
 
-    private void requestLifeStage() {
+    private void requestLifeStage()
+    {
         int level = 2;
         String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level;//+ "&offset=" + offsetval + "&limit=" + limit;
 
@@ -434,22 +431,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                     }
-                    //  else if (response.length() == limit) {
                     for (i = 0; i < response.length(); i++) {
                         customerEngagementDetail = gson.fromJson(response.get(i).toString(), CustomerEngagementDetail.class);
                         actualengagementArrayList.add(customerEngagementDetail);
                     }
-
-//                        offsetval = (limit * count) + limit;
-//                        count++;
-//                        requestCustomerPlanEngagement();
-//                    } else if (response.length() < limit) {
-//                        for (i = 0; i < response.length(); i++) {
-//                            customerEngagementDetail = gson.fromJson(response.get(i).toString(), CustomerEngagementDetail.class);
-//                            engagementDetailArrayList.add(customerEngagementDetail);
-//                        }
-//                    }
-
                     callLSalesPieChart();
 
                 } catch (Exception e) {
@@ -483,7 +468,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     }
 
     // Pie chart for Band Sales
-    private void callBandSalesPieChart() {
+    private void callBandSalesPieChart()
+    {
         entries = new ArrayList<PieEntry>();
         for (int i = 0; i < planengagementArrayList.size(); i++) {
             entries.add(new PieEntry((float) planengagementArrayList.get(i).getSalesAch(), planengagementArrayList.get(i).getLevel()));
@@ -614,7 +600,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         {
             LayoutInflater layoutInflater = (LayoutInflater) context.getApplicationContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
-            if(i==0){
+            if(i==0)
+            {
                 ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_header_legend, null);
                 linearLayout.addView(view);
             }

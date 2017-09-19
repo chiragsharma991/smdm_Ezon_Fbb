@@ -42,7 +42,6 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity.str_CheckFrom;
 
 
 public class SalesFilterExpandableList extends BaseExpandableListAdapter {

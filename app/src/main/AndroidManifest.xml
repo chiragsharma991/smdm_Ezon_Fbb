@@ -16,9 +16,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+      >
         <activity
-            android:name=".TestDB"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,8 +28,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+           <service android:name=".FCM.TokenRefresh">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:name=".FCM.ContCreateTokenService" />
+        <service android:name=".FCM.FetchNewRefreshToken" />
+        <!--<service-->
+        <service
+            android:name=".FCM.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".LoginActivity1"
+            android:screenOrientation="portrait"
+            android:theme="@style/Login"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Login"
             android:windowSoftInputMode="stateHidden" />
@@ -42,16 +65,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <service android:name=".FCM.TokenRefresh">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-        <service android:name=".FCM.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+
 
         <activity
             android:name=".ProductInformation.StyleActivity"
@@ -273,7 +287,8 @@
         <activity
             android:name=".DashboardSnap.SnapDashboardActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".FeedbackofCustomer.ProductAvailability_Notify"
             android:screenOrientation="portrait"
@@ -312,9 +327,10 @@
         <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff" />
         <activity android:name=".BORIS.MobileScreenActivity" />
         <activity android:name=".BORIS.ReturnCatalogueActivity" />
-        <activity android:name=".BORIS.ReturnDetailActivity" />
-        <activity android:name=".SalesAnalysis.Samplebarcode" />
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".BORIS.ReturnDetailActivity"></activity>
+
+
+        <activity android:name=".SalesAnalysis.Samplebarcode"/>
     </application>
 
 </manifest>

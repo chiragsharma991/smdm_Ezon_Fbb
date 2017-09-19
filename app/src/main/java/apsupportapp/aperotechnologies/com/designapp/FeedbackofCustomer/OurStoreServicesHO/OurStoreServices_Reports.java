@@ -66,8 +66,6 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServicesHO.OurStoreServices_Reports.card_ourstore;
 import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServicesHO.OurStoreServices_Reports.relFIndexTablelayout_store;
 import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.OurStoreServicesHO.OurStoreServices_Reports.text_no_data_store;
-import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.PolicyExchange_Reports.card_policyExchange;
-import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.PolicyExchange_Reports.relFIndexTablelayout;
 
 /**
  * Created by rkanawade on 25/07/17.

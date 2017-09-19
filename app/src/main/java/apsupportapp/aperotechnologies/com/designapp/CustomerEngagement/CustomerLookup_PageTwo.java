@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +39,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
+
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
@@ -49,7 +49,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;

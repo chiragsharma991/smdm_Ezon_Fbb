@@ -22,8 +22,6 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 

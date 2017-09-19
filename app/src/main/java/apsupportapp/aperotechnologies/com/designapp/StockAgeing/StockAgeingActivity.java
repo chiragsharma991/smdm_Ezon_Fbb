@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;

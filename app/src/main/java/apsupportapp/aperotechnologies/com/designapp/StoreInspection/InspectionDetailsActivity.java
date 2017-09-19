@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -254,7 +255,8 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     private void requestInspectionDetails(final int inspectn_id)
     {
             String url = ConstsCore.web_url + "/v1/display/storeinspection/" + userId+"?inspectionId="+inspectn_id;
-            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+        Log.e("", "requestInspectionDetails: "+url );
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response)

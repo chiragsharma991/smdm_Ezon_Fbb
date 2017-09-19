@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,12 +14,10 @@ import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -52,6 +49,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -66,23 +64,25 @@ import java.util.Timer;
 import java.util.UUID;
 
 import apsupportapp.aperotechnologies.com.designapp.AboutUsActivity;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.TransferRequest_Details;
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
+import apsupportapp.aperotechnologies.com.designapp.DB_operation.DatabaseHandler;
+import apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService;
+import apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken;
 import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
+import apsupportapp.aperotechnologies.com.designapp.Login.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
-import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 
-public class SnapDashboardActivity extends SwitchingActivity implements onclickView {
+public class SnapDashboardActivity extends SwitchingActivity implements onclickView
+{
 
     public static RecyclerView Recycler_verticalView;
     private String TAG = "SnapDashboardActivity";
@@ -110,6 +110,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private TextView RefreshTime;
     public static SnapAdapter snapAdapter;
     public static boolean tokenProcess=false;
+    private DatabaseHandler db;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -124,6 +125,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
+      //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//        Log.e("SnapDashboard", "Refreshed token:------ " + refreshedToken);
         Log.e(TAG,"userId :--"+ userId);
         Log.e(TAG,"pushtoken :--"+ pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
@@ -156,7 +159,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         //-------------------------------------------------------------//
 
-        else {
+        else
+        {
             Log.e("TAG", "FBB login");
             loginFromFbb = true;
             _collectionitems = new ArrayList();
@@ -191,29 +195,26 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
             }
         }
-
-
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        Log.e(TAG, "onResume: device id: "+device_id+"  and token: "+TokenRefresh.pushToken);
+        Log.e(TAG, "onResume: device id: "+device_id+"  and token: "+ FirebaseInstanceId.getInstance().getToken());
         if (!tokenProcess){
             if(TokenRefresh.pushToken!=null && !device_id.equals("") && device_id !=null)
                 requestSubmitAPI(context,getObject());
             Log.e(TAG, "onResume: !tokenProcess" );
         }
-
-
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
+    protected void onNewIntent(Intent intent)
+    {
         super.onNewIntent(intent);
         Log.e(TAG, "onNewIntent: " );
-
     }
 
     private void statusbar()
@@ -228,6 +229,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void initalise()
     {
+        db = new DatabaseHandler(context);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
@@ -259,10 +261,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.commit();
+            db.deleteAllData();
             SalesFilterActivity.level_filter = 1;
             //  SalesAnalysisActivity1.selectedsegValue = null;
             SalesAnalysisActivity1.level = 1;
-            Intent intent = new Intent(this, LoginActivity1.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
             NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -281,7 +284,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void setupAdapter() {
         Log.e(TAG, "setupAdapter: " );
-
         snapAdapter = new SnapAdapter(context, eventUrlList);
 
         if (geoLeveLDesc.equals("E ZONE")) {
@@ -464,8 +466,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void requestSubmitAPI(final Context mcontext, JSONObject object)  // Sender Submit Api call
     {
-
-        if (Reusable_Functions.chkStatus(mcontext)) {
+        if (Reusable_Functions.chkStatus(mcontext))
+        {
             String url = ConstsCore.web_url + "/v1/submit/deviceID/" + userId ;
             Log.e(TAG, "requestSubmitAPI: "+url );
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),

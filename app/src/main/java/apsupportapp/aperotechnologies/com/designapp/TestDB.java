@@ -77,7 +77,7 @@ public class TestDB extends AppCompatActivity {
         model.setAttribute3(geo_level2_desc);
         model.setAttribute4(Lname);
         model.setAttribute5(Lid);
-        db.db_AddData(model);
+        //db.db_AddData(model);
 
 
 
