@@ -71,6 +71,7 @@ import apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService;
 import apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken;
 import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
+import apsupportapp.aperotechnologies.com.designapp.Login.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -260,7 +261,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             SalesFilterActivity.level_filter = 1;
             //  SalesAnalysisActivity1.selectedsegValue = null;
             SalesAnalysisActivity1.level = 1;
-            Intent intent = new Intent(this, LoginActivity1.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
             NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -321,23 +322,22 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
 //            apps = getProduct(10);
 //            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
-
         }
         Recycler_verticalView.setAdapter(snapAdapter);
     }
 
 
     @Override
-    public void onclickView(int group_position, int child_position) {
+    public void onclickView(int group_position, int child_position)
+    {
         Log.e(TAG, "group_position: " + group_position + "child_position" + child_position);
         int value = Integer.parseInt("" + group_position + "" + child_position);
         moveTo(value, context);
-
-
     }
 
 
-    private void RefreshTimeAPI() {
+    private void RefreshTimeAPI()
+    {
         String url = ConstsCore.web_url + "/v1/display/etlstatus/" + userId;
         Log.e("Refreshtime Url :", "" + url);
         etlStatusList = new ArrayList<EtlStatus>();
@@ -412,10 +412,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         if (checkDeviceId) {
 
-            if (Reusable_Functions.checkPermission(android.Manifest.permission.READ_PHONE_STATE, this)) {
+            if (Reusable_Functions.checkPermission(android.Manifest.permission.READ_PHONE_STATE, this))
+            {
                 Log.e("TAG", ":check permission is okk");
                 getDeviceId();
-            } else {
+            }
+            else
+            {
                 Log.e("TAG", ":check permission calling");
                 requestPermissions (new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
             }
@@ -447,11 +450,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     {
         String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         JSONObject jsonObject = new JSONObject();
-        try {
+        try
+        {
             jsonObject.put("deviceId", device_id);
             jsonObject.put("pushToken",TokenRefresh.pushToken);
 
-        } catch (JSONException e) {
+        } catch (JSONException e)
+        {
             e.printStackTrace();
         }
         Log.e(TAG, "jsonobject: "+jsonObject.toString());
@@ -523,7 +528,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Constants.REQUEST_PERMISSION_WRITE_STORAGE) {
             Log.e("TAG", "onRequestPermissionsResult: " + grantResults[0]);

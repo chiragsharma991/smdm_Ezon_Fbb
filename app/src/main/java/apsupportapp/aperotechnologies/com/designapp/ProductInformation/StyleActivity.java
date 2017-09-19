@@ -69,12 +69,12 @@ public class StyleActivity extends AppCompatActivity
 {
     Button btnBarcode;
     RelativeLayout imageBtnBack;
-    TextView collection, style;
+    TextView collection, style,txt_store;
     List<String> collectionList, list;
-    ArrayList<String> arrayList, articleOptionList;
+    ArrayList<String> arrayList, articleOptionList,storeList;
     String userId, bearertoken;
     View view;
-    String collectionNM, optionName, from;
+    String collectionNM, optionName, from,store_name;
     RequestQueue queue;
     Context context;
     ArrayList<StyleDetailsBean> styleDetailsBeenList;
@@ -85,13 +85,14 @@ public class StyleActivity extends AppCompatActivity
     int collectionoffset = 0, collectionlimit = 100, collectioncount = 0;
     SharedPreferences sharedPreferences;
     Button btnSubmit;
-    EditText edtsearchCollection, edtsearchOption, edit_barcode;
+    EditText edtsearchCollection, edtsearchOption, edit_barcode,editsearchStore;
     public static String selcollectionName = null, seloptionName = null;
     LinearLayout stylemainlayout;
-    LinearLayout collectionLayout, optionLayout;
-    private ListView listCollection, listOption;
-    ListAdapter collectionAdapter;
+    LinearLayout collectionLayout, optionLayout,storeLayout;
+    private ListView listCollection, listOption,listStore;
+    ListAdapter collectionAdapter,storeAdapter;
     ListAdapter1 optionAdapter;
+
     String collect_name = "";
 
     private ReaderManager mReaderManager;
@@ -120,23 +121,14 @@ public class StyleActivity extends AppCompatActivity
         arrayList = new ArrayList<String>();
         list = new ArrayList<>();
         articleOptionList = new ArrayList<>();
-        if (Reusable_Functions.chkStatus(context))
-        {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading collection data...");
-            requestCollectionAPI(collectionoffset, collectionlimit);
-        }
-        else
-        {
-            Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
-        }
-
         stylemainlayout = (LinearLayout) findViewById(R.id.stylemainlayout);
         stylemainlayout.setVisibility(View.VISIBLE);
         collectionLayout = (LinearLayout) findViewById(R.id.collectionLayout);
         optionLayout = (LinearLayout) findViewById(R.id.optionLayout);
+        editsearchStore = (EditText)findViewById(R.id.searchStore);
         edtsearchCollection = (EditText) findViewById(R.id.searchCollection);
         edtsearchOption = (EditText) findViewById(R.id.searchOption);
+
 //        edit_barcode = (EditText) findViewById(R.id.editBarcode);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         String submit = "Submit";
@@ -148,6 +140,10 @@ public class StyleActivity extends AppCompatActivity
             selcollectionName = getIntent().getExtras().getString("selCollectionname");
             seloptionName = getIntent().getExtras().getString("selOptionName");
         }
+        txt_store = (TextView)findViewById(R.id.searchablespinnerlibraryStore);
+        txt_store.setText("Select Store");
+        storeLayout = (LinearLayout)findViewById(R.id.storeLayout);
+        listStore = (ListView)findViewById(R.id.listStore);
         collection = (TextView) findViewById(R.id.searchablespinnerlibrary);
         collection.setText("Select Collection");
         listCollection = (ListView) findViewById(R.id.listCollection);
@@ -159,6 +155,19 @@ public class StyleActivity extends AppCompatActivity
         style = (TextView) findViewById(R.id.searchablespinnerlibrary1);
         style.setText("Select Option");
         style.setEnabled(false);
+        if (Reusable_Functions.chkStatus(context))
+        {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading collection data...");
+            collectionoffset = 0;
+            collectionlimit = 100;
+           // requestProductStoreSelection();
+            requestCollectionAPI(collectionoffset, collectionlimit);
+        }
+        else
+        {
+            Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+        }
         listOption = (ListView) findViewById(R.id.listOption);
         optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
         listOption.setAdapter(optionAdapter);
@@ -297,7 +306,8 @@ public class StyleActivity extends AppCompatActivity
         listOption.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
                 optionName = (String) optionAdapter.getItem(position);
                 //seloptionName = optionName;
                 Log.e("", "onItemClick: "+seloptionName);
@@ -311,8 +321,6 @@ public class StyleActivity extends AppCompatActivity
                 }
             }
         });
-
-
     }
 
     private void ExeSampleCode()
@@ -422,7 +430,8 @@ public class StyleActivity extends AppCompatActivity
                     h.postDelayed(new Runnable() {
                         public void run() {
                             Log.e("run: ", "" + barcode);
-                            if (!barcode.equals(" ")) {
+                            if (!barcode.equals(" "))
+                            {
                                 Toast.makeText(StyleActivity.this, "Barcode scanned : " + barcode, Toast.LENGTH_SHORT).show();
                                 TimeUP();
                             } else {
@@ -441,9 +450,12 @@ public class StyleActivity extends AppCompatActivity
     {
         String manufacturer = Build.MANUFACTURER;
         String model = Build.MODEL;
-        if (model.startsWith(manufacturer)) {
+        if (model.startsWith(manufacturer))
+        {
             return capitalize(model);
-        } else {
+        }
+        else
+        {
             return capitalize(manufacturer) + " " + model;
         }
     }
@@ -482,7 +494,9 @@ public class StyleActivity extends AppCompatActivity
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No data found", Toast.LENGTH_LONG).show();
-                            } else {
+                            }
+                            else
+                            {
                                 Reusable_Functions.hDialog();
                                 JSONObject styleDetails = response.getJSONObject(0);
                                 String storeCode = styleDetails.getString("storeCode");
@@ -544,7 +558,9 @@ public class StyleActivity extends AppCompatActivity
                                 startActivity(intent);
                                 finish();
                             }
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e)
+                        {
                             e.printStackTrace();
                         }
                     }
@@ -572,6 +588,129 @@ public class StyleActivity extends AppCompatActivity
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
     }
+
+
+    private void requestProductStoreSelection()
+    {
+        String url = ConstsCore.web_url + "/v1/display/productinfostoreselection/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit;
+        Log.e("", "requestProductStoreSelection: "+url);
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && collectioncount == 0)
+                            {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(StyleActivity.this, "No store data found", Toast.LENGTH_LONG).show();
+                            }
+                            else if (response.length() == collectionlimit)
+                            {
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject storeName = response.getJSONObject(i);
+                                    store_name = storeName.getString("store");
+                                    storeList.add(store_name);
+
+
+                                }
+                                collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
+                                collectioncount++;
+                                requestProductStoreSelection();
+                            }
+                            else if (response.length() < collectionlimit)
+                            {
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject storeName = response.getJSONObject(i);
+                                    store_name = storeName.getString("store");
+                                    storeList.add(store_name);
+                                }
+                            }
+                            Collections.sort(storeList);
+                            storeList.add(0, "Select Store");
+                            storeAdapter.notifyDataSetChanged();
+                            Reusable_Functions.hDialog();
+                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                            {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                {
+                                    store_name = (String) storeAdapter.getItem(position);
+                                    //selcollectionName = collectionNM;
+                                    txt_store.setText(store_name);
+                                    Log.e("store_name ", " "+store_name);
+
+//                                    if(!collect_name.equals(""))
+//                                    {
+//                                        if (!collectionNM.equals(collect_name))
+//                                        {
+//                                            style.setText("Select Option");
+//                                        }
+//                                        else
+//                                        {
+//                                            style.setText(seloptionName);
+//                                            style.setEnabled(true);
+//                                        }
+//                                    }
+                                    storeLayout.setVisibility(View.GONE);
+                                    collectionLayout.setVisibility(View.GONE);
+                                    InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    if (inputManager != null) {
+                                        inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                                    }
+                                    if (collectionNM.equalsIgnoreCase("Select Collection"))
+                                    {
+                                        Log.e(" come ", "here");
+                                        //  collectionNM = selcollectionName;
+                                    }
+                                    else
+                                    {
+                                        if (Reusable_Functions.chkStatus(context)) {
+                                            Reusable_Functions.sDialog(context, "Loading collection data...");
+                                            offsetvalue = 0;
+                                            limit = 100;
+                                            count = 0;
+                                            articleOptionList.clear();
+                                            requestArticleOptionsAPI(collectionNM, offsetvalue, limit);
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }
+                            });
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            Reusable_Functions.hDialog();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
 
     private void requestCollectionAPI(int offsetvalue1, final int limit1)
     {
@@ -610,9 +749,11 @@ public class StyleActivity extends AppCompatActivity
                             arrayList.add(0, "Select Collection");
                             collectionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
-                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                            {
                                 @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                {
                                     collectionNM = (String) collectionAdapter.getItem(position);
                                     selcollectionName = collectionNM;
                                     collection.setText(selcollectionName);
@@ -621,9 +762,12 @@ public class StyleActivity extends AppCompatActivity
 
                                     if(!collect_name.equals(""))
                                     {
-                                        if (!collectionNM.equals(collect_name)) {
+                                        if (!collectionNM.equals(collect_name))
+                                        {
                                             style.setText("Select Option");
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             style.setText(seloptionName);
                                             style.setEnabled(true);
                                         }
@@ -675,7 +819,7 @@ public class StyleActivity extends AppCompatActivity
                                     optionName = seloptionName;
                                     collection.setText(selcollectionName);
                                     style.setText(seloptionName);
-                                        style.setEnabled(true);
+                                    style.setEnabled(true);
                                     articleOptionList.addAll(SnapDashboardActivity._collectionitems);
                                 }
                                 else
@@ -692,16 +836,19 @@ public class StyleActivity extends AppCompatActivity
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
         ) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
