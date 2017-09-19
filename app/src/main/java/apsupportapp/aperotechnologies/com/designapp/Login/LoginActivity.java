@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sharedPreferences;
     private String TAG = "LoginActivity";
     private ArrayList<Login_StoreList> loginStoreArray;
-    private String SelectedStoreCode, userId, storeDescription, geoLevel2Code;
+    private String userId;
     private boolean firstLogin = false;
     private Login_StoreList login_storeList;
     private Snackbar snackbar;
@@ -267,6 +267,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onResponse(JSONArray response)
                     {
                         Log.e(TAG, "requestUserStore -***- onResponse: "+response);
+                        Log.e(TAG, "requestUserStore - onResponse: "+response.length());
                         try
                         {
                             if (response.equals("") || response == null)
@@ -355,7 +356,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void requestUserStoreConcept()
     {
 
-        String url = ConstsCore.web_url + "/v1/login/userstoreorconcept/" + userId +"?geoLevel2Code="+login_storeList.getGeoLevel2Code()+"&lobId="+login_storeList.getLobId(); //ConstsCore.web_url+ + "/v1/login/userId";
+        String url = ConstsCore.web_url + "/v1/login/userstoreorconcept/" + userId +"?geoLevel2Code="+loginStoreArray.get(0).getGeoLevel2Code()+"&lobId="+loginStoreArray.get(0).getLobId(); //ConstsCore.web_url+ + "/v1/login/userId";
         Log.e("Login", "requestUserStoreConcept: " + url);
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
@@ -363,7 +364,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e(TAG, "requestUserStoreConcept - onResponse: "+response);
+                       // Log.e(TAG, "requestUserStoreConcept - onResponse: "+response);
                         try {
                             if (response.equals("") || response == null)
                             {
@@ -387,6 +388,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Reusable_Functions.hDialog();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
+                            String kpi_id = loginStoreArray.get(0).getKpiId();
+                            String[] kpiIdArray = kpi_id.split(",");
+                            intent.putExtra("kpiId", kpiIdArray);
+                            //Log.e(TAG, "onResponse: "+kpiIdArray.length + kpiIdArray[i]);
                             intent.putExtra("BACKTO", "login");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
