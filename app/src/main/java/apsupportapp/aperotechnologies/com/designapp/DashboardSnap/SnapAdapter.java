@@ -133,11 +133,11 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         {
             preposition = position;
             holder.snap_parentTitle.setText("Marketing Events");
-            currentPage = holder.pager.getCurrentItem();
+
             holder.lldots.setOrientation(LinearLayout.HORIZONTAL);
 
             if (geoLeveLDesc.equals("E ZONE")) {
-
+                currentPage = holder.pager.getCurrentItem();
                 adapter = new MarketingImgAdapter(context, holder.pager, holder.lldots);
                 holder.pager.setAdapter(adapter);
 
@@ -166,7 +166,6 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
                 holder.pager.setClipChildren(false);
             }
             else {
-
                 preposition = position;
                 holder.snap_parentTitle.setText("Marketing Events");
                 holder.Recycler_horizentalView.setVisibility(View.GONE);

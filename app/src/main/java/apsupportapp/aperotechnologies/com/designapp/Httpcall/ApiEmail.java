@@ -49,7 +49,6 @@ public class ApiEmail {
         } else if (from.equals("productavailability")) {
             String productavailability = "Product Availability & Notify Me";
             productavailability = productavailability.replace(" ", "%20").replace("&", "%26");
-
             url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&emailtype=" + productavailability;
 
         } else if (from.equals("policyexchange")) {

@@ -32,6 +32,7 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Superviso
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.FGStoreActivity;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.Samplebarcode;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_activity;
@@ -207,7 +208,10 @@ public class SwitchingActivity extends AppCompatActivity
 //                    startActivity(MobileScreenActivity);
 //                    break;
 
-
+                case 90:
+                    Intent FGStoreActivity = new Intent(context, FGStoreActivity.class);
+                    startActivity(FGStoreActivity);
+                    break;
 
 
             }
@@ -335,6 +339,9 @@ public class SwitchingActivity extends AppCompatActivity
                 break;
             case 8 :
                 apps.add(new App("Customer Engagement", R.mipmap.customerengagement));
+                break;
+            case 9 :
+                apps.add(new App("Service Opportunity Audit", R.mipmap.customerengagement));
                 break;
              // hide boris module for release build
 //            case 10 :
