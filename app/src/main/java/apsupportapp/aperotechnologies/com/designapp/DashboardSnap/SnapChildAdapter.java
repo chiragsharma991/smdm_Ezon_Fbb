@@ -25,6 +25,7 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
     private boolean mPager;
     private onclickView clickView;
     public String TAG = "SnapChildAdapter";
+    private String sutitle="";
 
     public SnapChildAdapter(boolean horizontal, boolean pager, List<App> apps, Context context, int preposition) {
         mHorizontal = horizontal;
@@ -49,8 +50,17 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         App app = mApps.get(position);
+        sutitle=app.getName();
+        Log.e(TAG, "sutitle: "+sutitle );
+
         holder.Snap_child_imageView.setImageResource(app.getDrawable());
         holder.Snap_child_subtitle.setText(app.getName());
+        holder.Snap_child_imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, "onClick: "+mApps.get(position).getName() );
+            }
+        });
 
     }
 
@@ -64,13 +74,13 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
         return mApps.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
 
         public ImageView Snap_child_imageView;
         public TextView Snap_child_subtitle;
         LinearLayout linear_snap;
 
-        public ViewHolder(View itemView)
+        public ViewHolder(final View itemView)
         {
             super(itemView);
 
@@ -93,15 +103,16 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
                 linear_snap.setLayoutParams(parms);
             }
 
-            itemView.setOnClickListener(this);
+            itemView.setTag("001");
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickView.onclickView(preposition,getAdapterPosition(),sutitle);
+                    Log.e("TAG","click pre="+preposition+" and adp position="+getAdapterPosition()+" and tag "+ sutitle);
+                }
+            });
         }
 
-        @Override
-        public void onClick(View v)
-        {
-            Log.e("TAG","click"+getAdapterPosition());
-            clickView.onclickView(preposition,getAdapterPosition());
-        }
     }
 
 }

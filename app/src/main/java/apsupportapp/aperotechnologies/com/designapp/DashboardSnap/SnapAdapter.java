@@ -122,7 +122,7 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         }
         else
         {
-            preposition = position;
+         /*   preposition = position;
             holder.snap_parentTitle.setText("Marketing Events");
             currentPage = holder.pager.getCurrentItem();
             holder.lldots.setOrientation(LinearLayout.HORIZONTAL);
@@ -170,7 +170,7 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
 //                new GravitySnapHelper(Gravity.START, false, this).attachToRecyclerView(holder.Recycler_horizentalView);
 //                holder.Recycler_horizentalView.setAdapter(new MarketEventAdapter(eventUrlList,context, preposition) );
 
-            }
+            }*/
 
         }
     }

@@ -6,11 +6,22 @@ package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 public class App {
 
     private int mDrawable;
+    private String kpiId;
     private String mName;
 
-    public App(String name, int drawable) {
+
+
+
+    public App(String name, int drawable, String kpiId) {
         mName = name;
         mDrawable = drawable;
+
+        this.kpiId = kpiId;
+
+    }
+
+    public String getKpiId() {
+        return kpiId;
     }
 
 

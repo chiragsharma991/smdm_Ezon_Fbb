@@ -82,7 +82,7 @@ public class MarketEventAdapter extends RecyclerView.Adapter<MarketEventAdapter.
         public void onClick(View v) {
 
             Log.e("TAG", "click" + getAdapterPosition());
-            clickView.onclickView(preposition, getAdapterPosition());
+            clickView.onclickView(preposition, getAdapterPosition(),"");
         }
     }
 

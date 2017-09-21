@@ -284,6 +284,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     loginStoreArray.add(login_storeList);
                                 }
                                 //database storeage
+                                db.deleteAllData();
                                 db.db_AddData(loginStoreArray);
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
                                 if(response.length() == 1 && login_storeList.getIsMultiStore().equals("NO")) // for single store save storecode
