@@ -162,8 +162,8 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
                 holder.snap_parentTitle.setText("Marketing Events");
                 holder.Recycler_horizentalView.setVisibility(View.GONE);
              //   holder.ll_circle.setVisibility(View.GONE);
-                holder.pager.setVisibility(View.GONE);
-                holder.lldots.setVisibility(View.GONE);
+//                holder.pager.setVisibility(View.GONE);
+//                holder.lldots.setVisibility(View.GONE);
 //                holder.Recycler_horizentalView.setLayoutManager(new LinearLayoutManager(holder
 //                        .Recycler_horizentalView.getContext(), LinearLayoutManager.HORIZONTAL, false));
 //                holder.Recycler_horizentalView.setOnFlingListener(null);

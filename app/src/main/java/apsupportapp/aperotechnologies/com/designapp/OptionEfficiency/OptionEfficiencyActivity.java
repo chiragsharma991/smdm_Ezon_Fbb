@@ -135,7 +135,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription", "");
+//        storeDescription = sharedPreferences.getString("storeDescription", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -736,8 +736,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void initializeUI() {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
-        txtStoreDesc.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
+//        txtStoreDesc.setText(storeDescription.substring(5));
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         txtNoChart = (TextView) findViewById(R.id.noChartOption);
         oe_txtHeaderClass = (TextView) findViewById(R.id.oe_txtHeaderClass);

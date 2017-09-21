@@ -258,7 +258,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void requestUserStore()
     {
-        String url = ConstsCore.web_url + "/v1/login/userstoresNew/" + userId +"?geoLevel2Code="+login_storeList.getGeoLevel2Code()+"&recache="+recache; //ConstsCore.web_url+ + "/v1/login/userId";
+        String url = ConstsCore.web_url + "/v1/login/userstoresNew/" + userId ;//+"?geoLevel2Code="+login_storeList.getGeoLevel2Code()+"&recache="+recache; //ConstsCore.web_url+ + "/v1/login/userId";
         Log.e("Login", "requestUserStore: " + url);
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
@@ -287,8 +287,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 db.db_AddData(loginStoreArray);
                                 //default concept and lobid
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("concept", loginStoreArray.get(1).getGeoLevel2Code());
-                                editor.putString("lobid", loginStoreArray.get(1).getLobId());
+                                editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
+                                editor.putString("lobid", loginStoreArray.get(0).getLobId());
                                 editor.apply();
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
                                 if(response.length() == 1 ) // for single response save storecode
@@ -393,7 +393,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Reusable_Functions.hDialog();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
-                            String kpi_id = loginStoreArray.get(1).getKpiId();
+                            String kpi_id = loginStoreArray.get(0).getKpiId();
                             String[] kpiIdArray = kpi_id.split(",");
                             intent.putExtra("kpiId", kpiIdArray);
                             //Log.e(TAG, "onResponse: "+kpiIdArray.length + kpiIdArray[i]);

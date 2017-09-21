@@ -135,7 +135,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -324,9 +324,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
-        String code = storeDescription.substring(0,4);
-        txtStoreCode.setText(code);
-        txtStoreDesc.setText(storeDescription.substring(5));
+//        String code = storeDescription.substring(0,4);
+//        txtStoreCode.setText(code);
+//        txtStoreDesc.setText(storeDescription.substring(5));
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
         txtNoChart = (TextView) findViewById(R.id.noChart);

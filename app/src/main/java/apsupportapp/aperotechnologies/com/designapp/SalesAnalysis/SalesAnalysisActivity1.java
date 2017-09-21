@@ -2067,7 +2067,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             analysisArrayList.clear();
                             llhierarchy.setVisibility(View.GONE);
                             requestSalesViewPagerValueAPI();
-                        } else {
+                        }
+                        else
+                        {
                             llhierarchy.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
