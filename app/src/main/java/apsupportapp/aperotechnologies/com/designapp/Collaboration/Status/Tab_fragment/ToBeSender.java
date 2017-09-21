@@ -61,7 +61,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private int limit = 100;
     private int offsetvalue = 0;
     private SharedPreferences sharedPreferences;
-    private String userId;
+    private String userId,storedescription,selectedStorecode;
     private boolean checkNetworkFalse = false;
     private String bearertoken;
     private RequestQueue queue;
@@ -240,6 +240,8 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storedescription = sharedPreferences.getString("storeDescription", "");
+        selectedStorecode = storedescription.trim().substring(0,4);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -255,17 +257,17 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         String url = "";
         if (Case == 1) //initiated status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + senderStoreCode + "&recache=" + recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + selectedStorecode + "&recache=" + recache;
         } else if (Case == 2) //Sender Acpt Status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + senderStoreCode + "&recache=" + recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + selectedStorecode + "&recache=" + recache;
 
         } else if (Case == 3) // STO status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + senderStoreCode + "&recache=" + recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + selectedStorecode + "&recache=" + recache;
         } else if (Case == 4) //GRN status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + senderStoreCode + "&recache=" + recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + selectedStorecode + "&recache=" + recache;
         }
         Log.e(TAG, "requestSenderCaseStatus: " + url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

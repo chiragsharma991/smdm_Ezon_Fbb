@@ -88,7 +88,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     LinearLayout lldots, llhierarchy, llayoutSalesAnalysis;
     RecyclerView listView_SalesAnalysis;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken, geoLeveLDesc,storeDescription;
+    String userId, bearertoken, geoLeveLDesc,storeDescription,geoLevel2Code;
     EditText etListText;
     RadioButton btnWTD, btnL4W, btnLW, btnYTD;
     public static String selectedsegValue = "WTD";
@@ -104,7 +104,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     TabLayout Tabview;
     // Ezone Elements Declaration
     public static String ez_segment_val = "LD";
-
     SegmentedGroup ez_segmentgrp;
     RelativeLayout rel_ez_back, rel_ez_sort, rel_ez_filter, rel_ez_next, rel_ez_prev, rel_ez_viewBy;
     RadioButton btn_ez_LD, btn_ez_WTD, btn_ez_MTD, btn_ez_YTD, rb_ez_viewBy_ProductChk, rb_ez_viewBy_LocatnChk;
