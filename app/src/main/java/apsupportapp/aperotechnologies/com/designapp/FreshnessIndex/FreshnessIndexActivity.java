@@ -324,7 +324,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+        String code = storeDescription.substring(0,4);
+        txtStoreCode.setText(code);
         txtStoreDesc.setText(storeDescription.substring(5));
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);

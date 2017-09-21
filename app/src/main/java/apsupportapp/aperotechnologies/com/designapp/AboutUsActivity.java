@@ -1,7 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -10,7 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+
 
 
 public class AboutUsActivity extends AppCompatActivity {

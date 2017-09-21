@@ -10,8 +10,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,16 +20,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
-
 import java.util.ArrayList;
-
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
-
-import static apsupportapp.aperotechnologies.com.designapp.R.id.pager;
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesPagerAdapter.currentPage;
 
 public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> implements GravitySnapHelper.SnapListener {
@@ -133,11 +124,11 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         {
             preposition = position;
             holder.snap_parentTitle.setText("Marketing Events");
-
+           // currentPage = holder.pager.getCurrentItem();
             holder.lldots.setOrientation(LinearLayout.HORIZONTAL);
 
             if (geoLeveLDesc.equals("E ZONE")) {
-                currentPage = holder.pager.getCurrentItem();
+
                 adapter = new MarketingImgAdapter(context, holder.pager, holder.lldots);
                 holder.pager.setAdapter(adapter);
 
@@ -166,11 +157,12 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
                 holder.pager.setClipChildren(false);
             }
             else {
+
                 preposition = position;
                 holder.snap_parentTitle.setText("Marketing Events");
                 holder.Recycler_horizentalView.setVisibility(View.GONE);
              //   holder.ll_circle.setVisibility(View.GONE);
-                holder.pager.setVisibility(View.GONE);
+              //  holder.pager.setVisibility(View.GONE);
                 holder.lldots.setVisibility(View.GONE);
 //                holder.Recycler_horizentalView.setLayoutManager(new LinearLayoutManager(holder
 //                        .Recycler_horizentalView.getContext(), LinearLayoutManager.HORIZONTAL, false));

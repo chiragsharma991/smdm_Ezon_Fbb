@@ -40,7 +40,6 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +62,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     SwipeDeckAdapter adapter;
     static String likeDislikeFlg ;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken,storeCode;
+    String userId, bearertoken,storeCode,geoLevel2Code, lobId;
     RadioButton visualAssort_PendingChk,visualAssort_CompletedChk;
     LinearLayout visualAssort_Pending,visualAssort_Completed;
     RequestQueue queue;
@@ -98,10 +97,14 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         Visual_Assortment_Activity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+
 //        userId = userId.substring(0,userId.length()-5);
 //        Log.e("userId",""+userId);
         bearertoken = sharedPreferences.getString("bearerToken","");
-        storeCode = sharedPreferences.getString("storeDescription","");
+       // storeCode = sharedPreferences.getString("storeDescription","");
+        storeCode = getIntent().getExtras().getString("storeCode");
         reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
@@ -122,7 +125,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         });
 
         txtStoreCode = (TextView)findViewById(R.id.txtStoreCode);
-        txtStoreCode.setText(storeCode.trim().substring(0,4));
+//        txtStoreCode.setText(storeCode.trim().substring(0,4));
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
         txtStoreName.setText(storeCode.substring(5));
         imgBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
@@ -365,7 +368,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         {
                             postRequest.cancel();
                         }
-                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code);
                         visualAssort1.setLikeDislikeFlg("0");
                     }
                     else
@@ -375,7 +378,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         {
                             postRequest.cancel();
                         }
-                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context, geoLevel2Code);
                         visualAssort1.setLikeDislikeFlg("0");
                     }
                 }
@@ -418,7 +421,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code);
                             VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
                             relbuy.setEnabled(false);
                             visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
@@ -459,14 +462,14 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                             if (postRequest != null) {
                                 postRequest.cancel();
                             }
-                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context,geoLevel2Code);
                             visualAssort1.setLikeDislikeFlg("1");
                         } else {
                             //GO FOR PUT METHOD
                             if (postRequest != null) {
                                 postRequest.cancel();
                             }
-                            VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+                            VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context,geoLevel2Code);
                             visualAssort1.setLikeDislikeFlg("1");
                         }
                     }
@@ -497,19 +500,19 @@ public class VisualAssortmentActivity extends AppCompatActivity {
  }
 
     private void visualAssort_CompletedFunction() {
-        if (visualAssort_CompletedChk.isChecked()) {
-
+        if (visualAssort_CompletedChk.isChecked())
+        {
             visualAssort_CompletedChk.setChecked(true);
             visualAssort_PendingChk.setChecked(false);
             visualAssortSortLayout.setVisibility(View.GONE);
-
-
-        } else if (!visualAssort_CompletedChk.isChecked()) {
+        }
+        else if (!visualAssort_CompletedChk.isChecked())
+        {
             visualAssort_CompletedChk.setChecked(true);
             visualAssort_PendingChk.setChecked(false);
 
-            if (Reusable_Functions.chkStatus(context)) {
-
+            if (Reusable_Functions.chkStatus(context))
+            {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Loading data...");
                 offsetvalue = 0;
@@ -535,11 +538,14 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     }
     private void visualAssort_pendingFunction()
     {
-        if (visualAssort_PendingChk.isChecked()) {
+        if (visualAssort_PendingChk.isChecked())
+        {
             visualAssort_CompletedChk.setChecked(false);
             visualAssort_PendingChk.setChecked(true);
             visualAssortSortLayout.setVisibility(View.GONE);
-        } else if (!visualAssort_PendingChk.isChecked()) {
+        }
+        else if (!visualAssort_PendingChk.isChecked())
+        {
             visualAssort_CompletedChk.setChecked(false);
             visualAssort_PendingChk.setChecked(true);
 
@@ -579,12 +585,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     private void requestdisplayVisualAssortment(String selectedString) {
 
         String url;
-        if (vassort_from_filter) {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString +"&recache="+ recache;
+        if (vassort_from_filter)
+        {
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
         }
         else
         {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg +"&recache="+ recache;
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
         }
 
       Log.e("visual assort url :",""+url);
@@ -748,7 +755,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             return "";
         }
 
-        private boolean isInRange(int a, int b, int c) {
+        private boolean isInRange(int a, int b, int c)
+        {
             return b > a ? c >= a && c <= b : c >= b && c <= a;
         }
     }

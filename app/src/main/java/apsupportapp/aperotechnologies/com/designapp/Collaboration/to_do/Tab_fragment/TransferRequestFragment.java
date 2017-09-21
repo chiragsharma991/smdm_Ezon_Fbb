@@ -1,13 +1,11 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,11 +41,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Transfer_Request_Model;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 /**

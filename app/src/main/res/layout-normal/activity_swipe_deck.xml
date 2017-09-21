@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:visibility="visible"
-    android:background="@color/ezfb_activity_background"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
