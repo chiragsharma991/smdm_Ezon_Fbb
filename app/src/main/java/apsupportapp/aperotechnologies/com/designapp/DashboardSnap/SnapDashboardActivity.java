@@ -585,7 +585,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "Event Response: " + response.length());
+                        Log.e(TAG, "Event Response: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {

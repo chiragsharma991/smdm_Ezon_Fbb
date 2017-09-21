@@ -4,9 +4,14 @@ package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
  * Created by csuthar on 07/07/17.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +33,7 @@ import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RunningPromoSnapAdapter;
 
@@ -38,7 +44,7 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
 
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
-    private final Context context;
+    private  Context context;
     private final ArrayList<String> eventUrlList;
     private int preposition;
     private final int VIEW_ITEM = 1;
@@ -131,13 +137,12 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         }
         else
         {
+
             preposition = position;
             holder.snap_parentTitle.setText("Marketing Events");
-            currentPage = holder.pager.getCurrentItem();
             holder.lldots.setOrientation(LinearLayout.HORIZONTAL);
-
             if (geoLeveLDesc.equals("E ZONE")) {
-
+                holder.pager.setVisibility(View.VISIBLE);
                 adapter = new MarketingImgAdapter(context, holder.pager, holder.lldots);
                 holder.pager.setAdapter(adapter);
 
@@ -153,36 +158,42 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
                 final int currentItem = holder.pager.getCurrentItem();
                 ImageView img = (ImageView) holder.lldots.getChildAt(currentItem);
                 img.setImageResource(R.mipmap.dots_selected);
-
-
-                //Necessary or the pager will only have one extra page to show
-                // make this at least however many pages you can see
                 holder.pager.setOffscreenPageLimit(adapter.getCount());
-                //A little space between pages
                 holder.pager.setPageMargin(15);
-
-                //If hardware acceleration is enabled, you should also remove
-                // clipping on the pager for its children.
                 holder.pager.setClipChildren(false);
             }
             else {
 
-                preposition = position;
-                holder.snap_parentTitle.setText("Marketing Events");
-                holder.Recycler_horizentalView.setVisibility(View.GONE);
-             //   holder.ll_circle.setVisibility(View.GONE);
-                holder.pager.setVisibility(View.GONE);
-                holder.lldots.setVisibility(View.GONE);
-//                holder.Recycler_horizentalView.setLayoutManager(new LinearLayoutManager(holder
-//                        .Recycler_horizentalView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-//                holder.Recycler_horizentalView.setOnFlingListener(null);
-//                new GravitySnapHelper(Gravity.START, false, this).attachToRecyclerView(holder.Recycler_horizentalView);
-//                holder.Recycler_horizentalView.setAdapter(new MarketEventAdapter(eventUrlList,context, preposition) );
+                if(eventUrlList.size()>0 && eventUrlList !=null){
+
+                    holder.lldots.setVisibility(eventUrlList.size() ==1 ?View.GONE :View.VISIBLE);
+                    holder.pager.setVisibility(View.VISIBLE);
+                    MarketEventAdapter eventAdapter = new MarketEventAdapter(eventUrlList, context, preposition,holder.pager, holder.lldots);
+                    holder.pager.setAdapter(eventAdapter);
+
+                    for (int i = 0; i < eventUrlList.size(); i++) {
+                        ImageView imgdot = new ImageView(context);
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(25, 25);
+                        layoutParams.setMargins(5, 5, 5, 5);
+                        imgdot.setLayoutParams(layoutParams);
+                        imgdot.setImageResource(R.mipmap.dots_unselected);
+                        holder.lldots.addView(imgdot);
+
+                    }
+                    int currentItem = holder.pager.getCurrentItem();
+                    ImageView img = (ImageView) holder.lldots.getChildAt(currentItem);
+                    img.setImageResource(R.mipmap.dots_selected);
+                    holder.pager.setOffscreenPageLimit(eventAdapter.getCount());
+                    holder.pager.setPageMargin(15);
+                    holder.pager.setClipChildren(false);
+                }
+
 
             }
 
         }
     }
+
 
     @Override
     public int getItemCount() {
@@ -199,7 +210,7 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         public TextView snap_parentTitle;
         public RecyclerView Recycler_horizentalView;
         public LinearLayout lldots;
-        public static ViewPager pager;
+        public ViewPager pager;
 
 
         public ViewHolder(View itemView)
