@@ -443,11 +443,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
 
     @Override
-    public void onclickView(int group_position, int child_position , String tag)
+    public void onclickView(int group_position, int child_position , String kpiID)
     {
-        Log.e(TAG, "group_position: " + group_position + "child_position" + child_position+" tag is"+tag);
+        Log.e(TAG, "group_position: " + group_position + "child_position" + child_position+" tag is"+kpiID);
         int value = Integer.parseInt("" + group_position + "" + child_position);
-     //   moveTo(value, context);
+        moveTo(kpiID, context);
     }
 
 

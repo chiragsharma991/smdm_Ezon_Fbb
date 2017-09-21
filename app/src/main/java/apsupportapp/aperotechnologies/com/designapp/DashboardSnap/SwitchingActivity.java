@@ -56,159 +56,196 @@ public class SwitchingActivity extends AppCompatActivity
 
 {
     boolean loginFromFbb;
-    public void moveTo(int value, Context context){
+    public void moveTo(String value, Context context){
 
         if(loginFromFbb)
         {
+          /* Mapping
+        001 - Product Info
+        002 - Visual Assortment
+        003 - Visual Assortment Report
+        004 - Sales
+        005 - Sales PvA
+        006 - Freshness Index
+        007 - Option Efficiency
+        008 - Skewed Sizes
+        009 - Best/Worst performers
+        010 - Stock Ageing
+        011 - Floor availability
+        012 - Target stock exception
+        013 - Sell Thru exception
+        014 - Running promo
+        015 - Upcoming promo
+        016 - Expiring promo
+        017 - Best/worst promo
+        018 - Key products PvA
+        019 - Key products hourly
+        020 - Collaboration to do
+        021 - Collaboration status
+        022 - Feedback
+        023 - Feedback list
+        024 - Store inspection new
+        025 - Store inspection history
+        026 - Season catalogue
+        027 - Customer loyalty
+        028 - Hourly performance
+        029 - BORIS
+        030 - Customer Feedback : Product Availability & Notify
+        031 - Customer Feedback : Policy Exchange,Refund
+        032 - Customer Feedback : Price & Promotion
+        033 - Customer Feedback : Product Quality & Range
+        034 - Customer Feedback : Our Store Services
+        035 - Customer Feedback : Supervisor & Staff*/
+
+
             switch (value) {
 
-                case 0:
+                case "001":
                     Intent StyleActivity = new Intent(context, StyleActivity.class);
                     startActivity(StyleActivity);
                     break;
-                case 10:
+                case "002":
                     Intent VisualAssortmentActivity = new Intent(context, VisualAssortmentActivity.class);
                     startActivity(VisualAssortmentActivity);
                     break;
-                case 11:
+                case "003":
                     Intent VisualReportActivity = new Intent(context, VisualReportActivity.class);
                     startActivity(VisualReportActivity);
                     break;
-                case 20:
+                case "004":
                     Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
                     startActivity(SalesAnalysisActivity1);
                     break;
-                case 21:
+                case "005":
                     Intent SalesPvAActivity = new Intent(context, SalesPvAActivity.class);
                     startActivity(SalesPvAActivity);
                     break;
-                case 22:
+                case "018":
                     Intent KeyProductPlanActivity = new Intent(context, KeyProductPlanActivity.class);
                     startActivity(KeyProductPlanActivity);
                     break;
-                case 23:
+                case "028":
                     Intent HourlyPerformence = new Intent(context, HourlyPerformence.class);
                     startActivity(HourlyPerformence);
                     break;
-                case 30:
+                case "006":
                     Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
                     startActivity(FreshnessIndexActivity);
                     break;
-                case 31:
+                case "007":
                     Intent OptionEfficiencyActivity = new Intent(context, OptionEfficiencyActivity.class);
                     startActivity(OptionEfficiencyActivity);
                     break;
-                case 32:
+                case "008":
                     Intent SkewedSizesActivity = new Intent(context, SkewedSizesActivity.class);
                     startActivity(SkewedSizesActivity);
                     break;
-                case 33:
+                case "009":
                     Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);
                     startActivity(BestPerformerInventory);
                     break;
-                case 34:
+                case "010":
                     Intent StockAgeingActivity = new Intent(context, StockAgeingActivity.class);
                     startActivity(StockAgeingActivity);
                     break;
-                case 35:
+                case "011":
                     Intent FloorAvailabilityActivity = new Intent(context, FloorAvailabilityActivity.class);
                     startActivity(FloorAvailabilityActivity);
                     break;
-                case 36:
+                case "012":
                     Intent TargetStockExceptionActivity = new Intent(context, TargetStockExceptionActivity.class);
                     startActivity(TargetStockExceptionActivity);
                     break;
-                case 37:
+                case "013":
                     Intent SaleThruInventory = new Intent(context, SaleThruInventory.class);
                     startActivity(SaleThruInventory);
                     break;
-                // Hide promo for release build
-//                case 40:
-//                    Intent RunningPromoActivity = new Intent(context, RunningPromoActivity.class);
-//                    startActivity(RunningPromoActivity);
-//                    break;
-//                case 41:
-//                    Intent UpcomingPromo = new Intent(context, UpcomingPromo.class);
-//                    startActivity(UpcomingPromo);
-//                    break;
-//                case 42:
-//                    Intent ExpiringPromoActivity = new Intent(context, ExpiringPromoActivity.class);
-//                    startActivity(ExpiringPromoActivity);
-//                    break;
-//                case 43:
-//                    Intent BestPerformerActivity = new Intent(context, BestPerformerActivity.class);
-//                    startActivity(BestPerformerActivity);
-//                    break;
 
-                case 40:
+                case "014":
+                    Intent RunningPromoActivity = new Intent(context, RunningPromoActivity.class);
+                    startActivity(RunningPromoActivity);
+                    break;
+                case "015":
+                    Intent UpcomingPromo = new Intent(context, UpcomingPromo.class);
+                    startActivity(UpcomingPromo);
+                    break;
+                case "016":
+                    Intent ExpiringPromoActivity = new Intent(context, ExpiringPromoActivity.class);
+                    startActivity(ExpiringPromoActivity);
+                    break;
+                case "017":
+                    Intent BestPerformerActivity = new Intent(context, BestPerformerActivity.class);
+                    startActivity(BestPerformerActivity);
+                    break;
+
+                case "020":
                     Intent To_Do = new Intent(context, To_Do.class);
                     startActivity(To_Do);
                     break;
-                case 41:
+                case "021":
                     Intent StatusActivity = new Intent(context, StatusActivity.class);
                     startActivity(StatusActivity);
                     break;
-                case 50:
+                case "030":
                     Intent ProductAvailability_Notify = new Intent(context, ProductAvailability_notify_HO.class);
                     startActivity(ProductAvailability_Notify);
                     break;
 
-                case 51:
+                case "031":
                     Intent PolicyExchangeRefund = new Intent(context, PolicyExchangeRefund_HO.class);
                     startActivity(PolicyExchangeRefund);
                     break;
-                case 52:
+                case "032":
                     Intent Price_Promotion = new Intent(context, PricePromotion_HO.class);
                     startActivity(Price_Promotion);
                     break;
-                case 53:
+                case "033":
                     Intent ProductQualityRange = new Intent(context, ProductQualityRange_HO.class);
                     startActivity(ProductQualityRange);
                     break;
-                case 54:
+                case "034":
                     Intent OurStoreServices = new Intent(context, OurStoreServices_HO.class);
                     startActivity(OurStoreServices);
                     break;
-                case 55:
+                case "035":
                     Intent SupervisiorStaff = new Intent(context, SupervisorStaff_HO.class);
                     startActivity(SupervisiorStaff);
                     break;
-                case 60:
+                case "022":
                     Intent Feedback = new Intent(context, Feedback.class);
                     startActivity(Feedback);
                     break;
-                case 61:
+                case "023":
                     Intent FeedbackList = new Intent(context, FeedbackList.class);
                     startActivity(FeedbackList);
                     break;
-                case 62:
+                case "024":
                     Intent InspectionBeginActivity = new Intent(context, InspectionBeginActivity.class);
                     startActivity(InspectionBeginActivity);
                     break;
-                case 63:
+                case "025":
                     Intent InspectionHistoryActivity = new Intent(context, InspectionHistoryActivity.class);
                     startActivity(InspectionHistoryActivity);
                     break;
-                case 70:
+                case "026":
                     Intent mpm_activity = new Intent(context, mpm_activity.class);
                     startActivity(mpm_activity);
                     break;
-                case 80:
+                case "027":
                     Intent CustomerLookupActivity = new Intent(context, CustomerLookupActivity.class);
                     startActivity(CustomerLookupActivity);
                     break;
-                // hide boris module for release build
-//                case 100:
-//                    Intent MobileScreenActivity = new Intent(context, MobileScreenActivity.class);
-//                    startActivity(MobileScreenActivity);
-//                    break;
+                case "029":
+                    Intent MobileScreenActivity = new Intent(context, MobileScreenActivity.class);
+                    startActivity(MobileScreenActivity);
+                    break;
             }
         }
         else{
 
             switch (value){
 
-                case 0:
+              /*  case 0:
                     Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
                     startActivity(SalesAnalysisActivity1);
                     break;
@@ -255,7 +292,7 @@ public class SwitchingActivity extends AppCompatActivity
                 case 45:
                     Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
                     startActivity(SupervisiorStaff);
-                    break;
+                    break;*/
 
             }
     }
@@ -265,42 +302,7 @@ public class SwitchingActivity extends AppCompatActivity
     protected List<App> getProduct(int i) {
         List<App> apps = new ArrayList<>();
 
-        /* Mapping
-        001 - Product Info
-        002 - Visual Assortment
-        003 - Visual Assortment Report
-        004 - Sales
-        005 - Sales PvA
-        006 - Freshness Index
-        007 - Option Efficiency
-        008 - Skewed Sizes
-        009 - Best/Worst performers
-        010 - Stock Ageing
-        011 - Floor availability
-        012 - Target stock exception
-        013 - Sell Thru exception
-        014 - Running promo
-        015 - Upcoming promo
-        016 - Expiring promo
-        017 - Best/worst promo
-        018 - Key products PvA
-        019 - Key products hourly
-        020 - Collaboration to do
-        021 - Collaboration status
-        022 - Feedback
-        023 - Feedback list
-        024 - Store inspection new
-        025 - Store inspection history
-        026 - Season catalogue
-        027 - Customer loyalty
-        028 - Hourly performance
-        029 - BORIS
-        030 - Customer Feedback : Product Availability & Notify
-        031 - Customer Feedback : Policy Exchange,Refund
-        032 - Customer Feedback : Price & Promotion
-        033 - Customer Feedback : Product Quality & Range
-        034 - Customer Feedback : Our Store Services
-        035 - Customer Feedback : Supervisor & Staff*/
+
 
         switch (i){
             case 0 :
