@@ -9,10 +9,9 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
+
+
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +57,7 @@ public class Reusable_Functions  {
             progressDialog.setCancelable(false);
             if (!progressDialog.isShowing())
             {
-                progressDialog.show();
+               progressDialog.show();
 
             }
         }

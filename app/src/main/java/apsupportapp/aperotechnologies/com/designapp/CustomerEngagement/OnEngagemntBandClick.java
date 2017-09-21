@@ -2,8 +2,6 @@ package apsupportapp.aperotechnologies.com.designapp.CustomerEngagement;
 
 import android.content.Context;
 
-import java.util.ArrayList;
-
 /**
  * Created by pamrutkar on 20/06/17.
  */

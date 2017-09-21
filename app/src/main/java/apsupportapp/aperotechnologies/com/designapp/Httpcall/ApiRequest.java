@@ -63,8 +63,6 @@ public class ApiRequest  {
         this.mpm_modelClass=mpm_modelClass;
         gson=new Gson();
         setApi(context);
-
-
     }
 
     // this constructer is useful for fragment

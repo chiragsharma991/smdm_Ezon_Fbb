@@ -10,7 +10,7 @@ public class SalesAnalysisViewPagerValue {
     String storeDesc;
     double saleNetVal;
     double wowNetSalesGrowthPct;
-    int saleTotQty;
+    double saleTotQty;
     double wowNetSalesUnitsGrowthPct;
     double planSaleNetVal;
     double pvaAchieved;
@@ -93,7 +93,7 @@ public class SalesAnalysisViewPagerValue {
         this.wowNetSalesGrowthPct = wowNetSalesGrowthPct;
     }
 
-    public int getSaleTotQty() {
+    public double getSaleTotQty() {
         return saleTotQty;
     }
 

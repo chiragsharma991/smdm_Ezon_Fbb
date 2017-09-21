@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonObjectRequest;
+
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
@@ -41,49 +41,60 @@ public class ApiEmail {
         queue = new RequestQueue(cache, network);
         queue.start();
         final Gson gson = new Gson();
-        if (from.equals("ourstoreservices")) {
-            String ourstoreservices = "Our Store Services";
-            ourstoreservices = ourstoreservices.replace(" ", "%20").replace("&", "%26");
-            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&emailtype=" + ourstoreservices;
+        if (from.equals("ourstoreservices"))
+        {
+           // String ourstoreservices = "Our Store Services";
+           // ourstoreservices = ourstoreservices.replace(" ", "%20").replace("&", "%26");
+            int ourstoreservices = 8;
+            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&templateId=" + ourstoreservices;
 
-        } else if (from.equals("productavailability")) {
-            String productavailability = "Product Availability & Notify Me";
-            productavailability = productavailability.replace(" ", "%20").replace("&", "%26");
+        } else if (from.equals("productavailability"))
+        {
+//            String productavailability = "Product Availability & Notify Me";
+//            productavailability = productavailability.replace(" ", "%20").replace("&", "%26");
+              int productavailability = 3;
+            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&templateId=" + productavailability;
 
-            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&emailtype=" + productavailability;
+        } else if (from.equals("policyexchange"))
+        {
+//            String policyexchange = "Policy- Exchange, Refund";
+//            policyexchange = policyexchange.replace(" ", "%20");
+            int policyexchange = 5;
+            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&templateId=" + policyexchange;
 
-        } else if (from.equals("policyexchange")) {
-            String policyexchange = "Policy- Exchange, Refund";
-            policyexchange = policyexchange.replace(" ", "%20");
-            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&emailtype=" + policyexchange;
-
-        } else if (from.equals("pricepromotion")) {
-            String pricepromotion = "Price & Promotions";
-            pricepromotion = pricepromotion.replace(" ", "%20").replace("&", "%26");
-            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&emailtype=" + pricepromotion;
-
-
-        } else if (from.equals("productquality")) {
-            String productquality = "ProductQualityRange";
-            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&emailtype=" + productquality;
-
-        } else if (from.equals("supervisorstaff")) {
-            String supervisorstaff = "Supervisor & Staff";
-            supervisorstaff = supervisorstaff.replace(" ", "%20").replace("&", "%26");
-            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&emailtype=" + supervisorstaff;
+        }
+        else if (from.equals("pricepromotion")) {
+//            String pricepromotion = "Price & Promotions";
+//            pricepromotion = pricepromotion.replace(" ", "%20").replace("&", "%26");
+            int pricepromotion = 6;
+            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&templateId=" + pricepromotion;
 
 
-        } else {
-            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=2663&emailtype=EMAIL_TYPE_1";
+        } else if (from.equals("productquality"))
+        {
+//            String productquality = "ProductQualityRange";
+            int productquality = 4;
+            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&templateId=" + productquality;
+
+        } else if (from.equals("supervisorstaff"))
+        {
+//            String supervisorstaff = "Supervisor & Staff";
+//            supervisorstaff = supervisorstaff.replace(" ", "%20").replace("&", "%26");
+            int supervisorstaff = 7;
+            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode=" + storecode + "&templateId=" + supervisorstaff;
+
+        }
+        else
+        {
+            url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode="+storecode+ "&emailtype=EMAIL_TYPE_1";
         }
         // String url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=EMAIL_TYPE_1";
         Log.e("email url ", "" + url);
-
         StringRequest emailrequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {
-
+                    public void onResponse(String response)
+                    {
                         Log.e("email api ", " " + response.toString());
                         //  Reusable_Functions.displayToast(context, response.toString());
                     }
@@ -116,8 +127,5 @@ public class ApiEmail {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         emailrequest.setRetryPolicy(policy);
         queue.add(emailrequest);
-
-
     }
-
 }

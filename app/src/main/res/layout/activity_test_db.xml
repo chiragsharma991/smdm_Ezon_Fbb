@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/lob_name"
+        android:layout_marginTop="80dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="17dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.42"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/lob_name"
+        android:id="@+id/lob_id"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
+
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:text="Add"
+        android:onClick="addEvent"
+        app:layout_constraintTop_toBottomOf="@+id/lob_id"
+        android:id="@+id/button4"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+    <Button
+        android:layout_width="222dp"
+        android:layout_height="60dp"
+        android:text="Count"
+        android:onClick="onCount"
+        android:id="@+id/button6"
+        app:layout_constraintTop_toBottomOf="@+id/button4"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp" />
+    <Button 
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:text="Delete"
+        android:onClick="onDelete"
+        android:id="@+id/button5"
+        app:layout_constraintTop_toBottomOf="@+id/button6"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:text="Get All List"
+        android:onClick="onAllList"
+        android:id="@+id/button7"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+    <Button
+        android:layout_width="218dp"
+        android:layout_height="57dp"
+        android:text="Update"
+        android:onClick="onUpdate"
+        android:id="@+id/button8"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="826dp"
+        android:id="@+id/guideline"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="142dp"
+        app:layout_constraintGuide_percent="0.23600973" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="601dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline2"
+        app:layout_constraintGuide_begin="268dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="268dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="826dp"
+        android:id="@+id/guideline3"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.76885647"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="462dp" />
+
+
+</android.support.constraint.ConstraintLayout>
+

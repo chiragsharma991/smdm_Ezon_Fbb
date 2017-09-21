@@ -76,6 +76,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
     private ArrayList<String> optionList;
+    private String geoLevel2Code;
 
 
     @Override
@@ -88,6 +89,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code", "");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -149,7 +151,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         if (Reusable_Functions.chkStatus(context)) {
 
             //https://smdm.manthan.com/v1/display/worstperformerfeedback/displayreports/4813
-            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
+            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId  + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
+          //  String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
 
             Log.e(TAG, "requestFeedbackApi: "+url);
 

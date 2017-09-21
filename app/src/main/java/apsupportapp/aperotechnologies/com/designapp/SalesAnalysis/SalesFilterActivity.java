@@ -65,7 +65,7 @@ public class SalesFilterActivity extends Activity {
     HashMap<String, List<String>> listDataChild;
     int offsetvalue = 0, limit = 100, count = 0;
     public static int level_filter = 1;
-    String userId, bearertoken;
+    String userId, bearertoken,geoLevel2Code;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
     Context context;
@@ -77,6 +77,7 @@ public class SalesFilterActivity extends Activity {
     public static List<Integer> groupImages;
     public static RelativeLayout processbar;
     private Intent intent;
+    static String str_CheckFrom;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -87,10 +88,12 @@ public class SalesFilterActivity extends Activity {
         context = this;
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        str_CheckFrom = getIntent().getStringExtra("checkfrom");
         SalesFilterExpandableList.text1 = "";
         SalesFilterExpandableList.text2 = "";
         SalesFilterExpandableList.text3 = "";
@@ -184,10 +187,9 @@ public class SalesFilterActivity extends Activity {
                     String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
                     String Department;
 
-                    if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+                    if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
                         Department = "department=" + updateDept;
-                    } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-                        Department = "department=" + updateDept;
+
                     } else {
                         Department = "dept=" + updateDept;
                     }
@@ -392,15 +394,27 @@ public class SalesFilterActivity extends Activity {
     // Department List
     public void requestDeptAPI(int offsetvalue1, int limit1)
     {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+        String url = "";
+//        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
+//           //with geoLevel2Code field
+            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+//        }
+//        else
+//        {
+//            //without geolevel2Code param
+//            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
+//
+//        }
+        Log.e(TAG, "requestDeptAPI: "+url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in department", Toast.LENGTH_LONG).show();
+                                processbar.setVisibility(View.GONE);
+                                Toast.makeText(SalesFilterActivity.this, "no data found in department", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
@@ -438,21 +452,26 @@ public class SalesFilterActivity extends Activity {
                         }
                         finally
                         {
-                            if (listDataHeader.get(1).equals("Category")) {
-                                processbar.setVisibility(View.VISIBLE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                process_flag_cat = false;
-                                level_filter = 2;
-                                requestCategoryAPI(offsetvalue, limit);
+                            if(response.equals("") || response == null || response.length()==0) {
+
+                                if (listDataHeader.get(1).equals("Category")) {
+                                    processbar.setVisibility(View.VISIBLE);
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    process_flag_cat = false;
+                                    level_filter = 2;
+                                    requestCategoryAPI(offsetvalue, limit);
+                                }
                             }
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        processbar.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -475,7 +494,18 @@ public class SalesFilterActivity extends Activity {
     //Category List
     public void requestCategoryAPI(int offsetvalue1, int limit1)
     {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
+        String url = "";
+//        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
+//            //with geoLevel2Code field
+            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+//        }
+//        else
+//        {
+//            //without geoLevel2Code
+//            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+//
+//        }
+        Log.e(TAG, "requestCategoryAPI: "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -483,7 +513,9 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in Category", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Category", Toast.LENGTH_SHORT).show();
+                                processbar.setVisibility(View.GONE);
+
                             } else if (response.length() == limit) {
 
                                 Reusable_Functions.hDialog();
@@ -523,14 +555,17 @@ public class SalesFilterActivity extends Activity {
                         }
                         finally
                         {
-                            if (listDataHeader.get(2).equals("Class")) {
-                                processbar.setVisibility(View.VISIBLE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                process_flag_class = false;
-                                level_filter = 3;
-                                requestPlanClassAPI(offsetvalue, limit);
+                            if(response.equals("") || response == null || response.length()==0) {
+
+                                if (listDataHeader.get(2).equals("Class")) {
+                                    processbar.setVisibility(View.VISIBLE);
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    process_flag_class = false;
+                                    level_filter = 3;
+                                    requestPlanClassAPI(offsetvalue, limit);
+                                }
                             }
                         }
                     }
@@ -538,6 +573,7 @@ public class SalesFilterActivity extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        processbar.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
@@ -561,16 +597,27 @@ public class SalesFilterActivity extends Activity {
     //Plan Class List
     public void requestPlanClassAPI(int offsetvalue1, int limit1)
     {
-
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+        String url = "";
+//        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
+//             //with geoLevel2code param
+                url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+//            }
+//            else
+//            {
+//                // without geoLevel2Code param
+//                url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter ;
+//            }
+            Log.e(TAG, "requestPlanClassAPI: "+url);
+            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in class", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in class", Toast.LENGTH_SHORT).show();
+                                processbar.setVisibility(View.GONE);
+
                             } else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++)
@@ -612,107 +659,17 @@ public class SalesFilterActivity extends Activity {
                         }
                         finally
                         {
-                            if (listDataHeader.get(3).equals("Brand")) {
-                                processbar.setVisibility(View.VISIBLE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                process_flag_brand = false;
-                                level_filter = 4;
-                                requestBrandNameAPI(offsetvalue, limit);
-                            }
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        error.printStackTrace();
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
+                            if(response.equals("") || response == null || response.length()==0) {
 
-
-    //Brand Name List
-    public void requestBrandNameAPI(int offsetvalue1, int limit1)
-    {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
-        Log.e(TAG, "requestBrandNameAPI: "+url );
-        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: "+response );
-
-                        try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
-
-                                Reusable_Functions.hDialog();
-                                for (int i = 0; i < response.length(); i++) {
-                                    JSONObject productName1 = response.getJSONObject(i);
-
-                                    String brandName = productName1.getString("brandName");
-                                    subBrandnm.add(brandName);
-                                }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-                                requestBrandNameAPI(offsetvalue, limit);
-
-                            } else if (response.length() < limit)
-                            {
-                                for (int i = 0; i < response.length(); i++)
-                                {
-                                    JSONObject productName1 = response.getJSONObject(i);
-                                    String brandName = productName1.getString("brandName");
-                                    subBrandnm.add(brandName);
-                                }
-                                process_flag_brand = true;
-                                processbar.setVisibility(View.GONE);
-
-                                if (listDataHeader.get(4).equals("Brand Class")) {
+                                if (listDataHeader.get(3).equals("Brand")) {
                                     processbar.setVisibility(View.VISIBLE);
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
-                                    process_flag_mc = false;
-                                    level_filter = 5;
-                                    requestBrandPlanClassAPI(offsetvalue, limit);
+                                    process_flag_brand = false;
+                                    level_filter = 4;
+                                    requestBrandNameAPI(offsetvalue, limit);
                                 }
-
-                            }
-                        } catch (Exception e)
-                        {
-                            Log.e(TAG, "onResponse4----: " +e);
-                            processbar.setVisibility(View.GONE);
-                            e.printStackTrace();
-                        }
-                        finally
-                        {
-                            if (listDataHeader.get(4).equals("Brand Class")) {
-                                processbar.setVisibility(View.VISIBLE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                process_flag_mc = false;
-                                level_filter = 5;
-                                requestBrandPlanClassAPI(offsetvalue, limit);
                             }
                         }
                     }
@@ -741,11 +698,132 @@ public class SalesFilterActivity extends Activity {
     }
 
 
+    //Brand Name List
+    public void requestBrandNameAPI(int offsetvalue1, int limit1)
+    {
+        String url = "";
+//        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
+//            //with geoLevel2Code param
+            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+//        }
+//        else
+//        {
+//            //without geoLevel2Code param
+//            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter ;
+//
+//        }
+        Log.e(TAG, "requestBrandNameAPI: "+url );
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e(TAG, "onResponse: "+response );
+
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Reusable_Functions.hDialog();
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand", Toast.LENGTH_SHORT).show();
+                                processbar.setVisibility(View.GONE);
+
+                            } else if (response.length() == limit) {
+
+                                Reusable_Functions.hDialog();
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+
+                                    String brandName = productName1.getString("brandName");
+                                    subBrandnm.add(brandName);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                requestBrandNameAPI(offsetvalue, limit);
+
+                            } else if (response.length() < limit)
+                            {
+                                for (int i = 0; i < response.length(); i++)
+                                {
+                                    JSONObject productName1 = response.getJSONObject(i);
+                                    String brandName = productName1.getString("brandName");
+                                    subBrandnm.add(brandName);
+                                }
+                                process_flag_brand = true;
+                                processbar.setVisibility(View.GONE);
+
+                                if (listDataHeader.get(4).equals("Brand Class"))
+                                {
+                                    processbar.setVisibility(View.VISIBLE);
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    process_flag_mc = false;
+                                    level_filter = 5;
+                                    requestBrandPlanClassAPI(offsetvalue, limit);
+                                }
+
+                            }
+                        } catch (Exception e)
+                        {
+                            Log.e(TAG, "onResponse4----: " +e);
+                            processbar.setVisibility(View.GONE);
+                            e.printStackTrace();
+                        }
+                        finally
+                        {
+                            if(response.equals("") || response == null || response.length()==0)
+                            {
+                                if (listDataHeader.get(4).equals("Brand Class"))
+                                {
+                                    processbar.setVisibility(View.VISIBLE);
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    process_flag_mc = false;
+                                    level_filter = 5;
+                                    requestBrandPlanClassAPI(offsetvalue, limit);
+                                }
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        processbar.setVisibility(View.GONE);
+                        Reusable_Functions.hDialog();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
     //Brand Plan Class List
     public void requestBrandPlanClassAPI(int offsetvalue1, int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter;
-
+        String url = "";
+//        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
+            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+//        }
+//        else
+//        {
+//            //without geoLevel2code param
+//            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter ;
+//
+//        }
+        Log.e(TAG, "requestBrandPlanClassAPI: "+ url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -753,8 +831,11 @@ public class SalesFilterActivity extends Activity {
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand Class", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
+                                Toast.makeText(SalesFilterActivity.this, "no data found in Brand Class", Toast.LENGTH_SHORT).show();
+                                processbar.setVisibility(View.GONE);
+
+                            } else if (response.length() == limit)
+                            {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++)
                                 {
@@ -790,12 +871,13 @@ public class SalesFilterActivity extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        processbar.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
-
-        ) {
+        )
+        {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();

@@ -68,7 +68,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
     ImageView img_VisualAssortment;
     TextView txtName, txtSeason, txtColor, txtFabric, txtFit, txtCollection, txtSizeRatio, txtAmount;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken;
+    String userId, bearertoken,geoLevel2Code;
     ProgressBar visualprogressPicaso;
     int pos;
     static LinearLayout fragmentLayout;
@@ -86,6 +86,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
         pos = 0;
         optionList = new ArrayList<StyleDetailsBean>();
         gson = new Gson();
@@ -440,7 +441,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
                     {
                         //GO FOR POST METHOD
-                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context);
+                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code);
                         VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
                         relcomment.setEnabled(false);
                         visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
@@ -448,7 +449,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     else
                     {
                         //GO FOR PUT METHOD
-                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context);
+                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context, geoLevel2Code);
                         VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
                         relcomment.setEnabled(false);
                         visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());

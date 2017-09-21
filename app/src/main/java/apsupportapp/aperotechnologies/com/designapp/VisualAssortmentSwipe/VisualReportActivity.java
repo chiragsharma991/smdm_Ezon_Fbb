@@ -26,17 +26,12 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.gson.Gson;
 import org.json.JSONArray;
-import java.text.DecimalFormat;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +52,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     PieChart pieChart;
     RequestQueue queue;
     Context context;
-    String userId, bearertoken, TAG = "VisualReport",storeDescription;
+    String userId, bearertoken, TAG = "VisualReport",storeDescription,geoLevel2Code;
     SharedPreferences sharedPreferences;
     Gson gson;
     int offset  = 0,limit = 10,count = 0;
@@ -80,6 +75,8 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -118,8 +115,8 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
 
     private void requestVisualReportAPI() {
 
-      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache ;//+"&offset=" + offset + "&limit=" + limit ;
-
+      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache +"&geoLevel2Code="+geoLevel2Code;//+"&offset=" + offset + "&limit=" + limit ;
+        Log.e(TAG, "requestVisualReportAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

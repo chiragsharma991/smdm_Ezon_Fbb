@@ -244,7 +244,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         int filterLevel;
         filterLevel = prod_level;
 
-        if (str_checkFrom.equals("ezoneSales"))
+        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis"))
         {
             Log.e("removeBuildUP: ","Sales" );
             removeDataforSales(filterLevel);
@@ -458,7 +458,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
     private void BuildUP(int prod_level) {
         int filterLevel;
         filterLevel = prod_level;
-        if (str_checkFrom.equals("ezoneSales"))
+        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis"))
         {
             Log.e("BuildUP: ","Sales" );
             buildUpdataSales(filterLevel);
@@ -714,7 +714,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             mListDataChild.putAll(dublicate_listDataChild2);
             //Collapse Group
 
-            if (str_checkFrom.equals("ezoneSales")) {
+            if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
                 EzoneSalesFilter.explv_ez_prod.collapseGroup(0);
                 EzoneSalesFilter.explv_ez_prod.collapseGroup(1);
                 EzoneSalesFilter.explv_ez_prod.collapseGroup(2);
@@ -729,7 +729,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
 
         } else {
 
-            if (str_checkFrom.equals("ezoneSales")) {
+            if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
 
                 for (int j = 0; j < 4; j++) {
                     List<String> arrayList1 = new ArrayList<String>();
@@ -786,42 +786,43 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
     private void requestProductHierarchyAPI(final int prod_level, String str) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
+        String geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
         String search_url = " ";
-        if (str_checkFrom.equals("ezoneSales")) {
+        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
             if (prod_level == 2) {
                 Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20");
+                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
 
             } else if (prod_level == 3) {
 
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20");
+                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
 
             } else if (prod_level == 4) {
 
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20");
+                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
             }
         } else {
-            if (prod_level == 2) {
+            if (prod_level == 2)
+            {
                 Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20");
+                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
 
             } else if (prod_level == 3) {
 
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20");
+                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
 
             } else if (prod_level == 4) {
 
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20");
+                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
             } else if (prod_level == 5) {
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20");
+                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
             }
         }
-
         Log.e("search url:", "" + search_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, search_url,
                 new Response.Listener<JSONArray>() {
@@ -847,7 +848,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                     List<String> drillDownList = new ArrayList<String>();
                                     JSONArray jsonArray = response.getJSONArray(i);
                                     for (int j = 0; j < jsonArray.length(); j++) {
-                                        if (str_checkFrom.equals("ezoneSales")) {
+                                        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
                                             if (i == 1) {
                                                 String listValueCategory = jsonArray.getJSONObject(j).getString("planCategory");
                                                 drillDownList.add(listValueCategory);
@@ -858,7 +859,9 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                                 String listValueBrand = jsonArray.getJSONObject(j).getString("brandName");
                                                 drillDownList.add(listValueBrand);
                                             }
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             if (i == 1) {
                                                 String listValueCategory = jsonArray.getJSONObject(j).getString("planCategory");
                                                 drillDownList.add(listValueCategory);

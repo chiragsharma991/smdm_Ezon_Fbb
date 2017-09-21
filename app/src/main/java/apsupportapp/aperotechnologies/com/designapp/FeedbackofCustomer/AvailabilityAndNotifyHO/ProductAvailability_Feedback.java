@@ -27,29 +27,16 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiPostRequest;
@@ -196,7 +183,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
                 final AlertDialog alertDialog = dialogBuilder.create();
 
-                rel_edt.setOnClickListener(new View.OnClickListener() {
+                rel_edt.setOnClickListener(new View.OnClickListener()
+                {
                     @Override
                     public void onClick(View v) {
                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -204,7 +192,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                     }
                 });
 
-                btn_submit.setOnClickListener(new View.OnClickListener() {
+                btn_submit.setOnClickListener(
+                        new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -526,7 +515,6 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         }
     }
 
-
     public void getDetails() {
 
         SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss"); // kk for 24 hours & hh for 12 hours
@@ -627,15 +615,13 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
     }
 
 
-    public interface feedbackInterface {
-
-        void onTrigger(int position);
-
+    public interface feedbackInterface
+    {
+       void onTrigger(int position);
     }
 
-
-    public void clearData() {
-
+    public void clearData()
+    {
         edt_customer_mobile_number.getText().clear();
         edt_remarks.getText().clear();
         edt_first_name.getText().clear();
@@ -651,9 +637,5 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         edt_style.getText().clear();
         radioYes.setChecked(false);
         edt_customer_mobile_number.requestFocus();
-
-
     }
-
-
 }

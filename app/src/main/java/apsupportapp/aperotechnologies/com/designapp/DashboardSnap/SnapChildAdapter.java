@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,8 +16,6 @@ import java.util.List;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-import static java.security.AccessController.getContext;
-
 public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.ViewHolder> {
 
     private final Context context;
@@ -28,6 +25,7 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
     private boolean mPager;
     private onclickView clickView;
     public String TAG = "SnapChildAdapter";
+    private String sutitle="";
 
     public SnapChildAdapter(boolean horizontal, boolean pager, List<App> apps, Context context, int preposition) {
         mHorizontal = horizontal;
@@ -52,8 +50,17 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         App app = mApps.get(position);
+        sutitle=app.getName();
+
         holder.Snap_child_imageView.setImageResource(app.getDrawable());
         holder.Snap_child_subtitle.setText(app.getName());
+        holder.Snap_child_imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickView.onclickView(preposition,position,mApps.get(position).getKpiId());
+
+            }
+        });
 
     }
 
@@ -67,13 +74,13 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
         return mApps.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
 
         public ImageView Snap_child_imageView;
         public TextView Snap_child_subtitle;
         LinearLayout linear_snap;
 
-        public ViewHolder(View itemView)
+        public ViewHolder(final View itemView)
         {
             super(itemView);
 
@@ -95,16 +102,8 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
                 LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams((int) update_width,LinearLayout.LayoutParams.WRAP_CONTENT);
                 linear_snap.setLayoutParams(parms);
             }
-
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v)
-        {
-            Log.e("TAG","click"+getAdapterPosition());
-            clickView.onclickView(preposition,getAdapterPosition());
-        }
     }
 
 }
