@@ -124,7 +124,7 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         {
             preposition = position;
             holder.snap_parentTitle.setText("Marketing Events");
-            currentPage = holder.pager.getCurrentItem();
+           // currentPage = holder.pager.getCurrentItem();
             holder.lldots.setOrientation(LinearLayout.HORIZONTAL);
 
             if (geoLeveLDesc.equals("E ZONE")) {

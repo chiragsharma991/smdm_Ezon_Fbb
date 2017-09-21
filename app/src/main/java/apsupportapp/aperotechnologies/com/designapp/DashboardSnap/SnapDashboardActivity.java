@@ -56,7 +56,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +69,7 @@ import apsupportapp.aperotechnologies.com.designapp.AboutUsActivity;
 import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
+import apsupportapp.aperotechnologies.com.designapp.DB_operation.DatabaseHandler;
 import apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService;
 import apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken;
 import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
@@ -109,7 +112,18 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private TextView RefreshTime;
     public static SnapAdapter snapAdapter;
     public static boolean tokenProcess=false;
+    private DatabaseHandler db;
 
+  /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
+            020. 021,  022, 023, 026, 027, 028*/
+
+   /* Product Info,
+   Visual Asst,  Visual Assrt Report,
+    Sales, Sales PVA, Freshness Index, Option Eff,
+    Skewed Size, Best/Worst Per, Stock Ageing,
+    Floor Avl, Target Stock Exc, Sell Thru Exc,
+    Running Promo, Upcoming Promo, Expiring Promo, Best/Worst Promo, Key Product PVA, Stock Transfer, Stock Transfer Status, Best Worst Feedback, Best Worst Feedback List, Season Catalogue, Customer Eng, Hourly Performance
+*/
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +137,10 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
-        geoLevel2Code = getIntent().getStringExtra("cocept");
+        geoLevel2Code = getIntent().getStringExtra("concept");
         lobid = getIntent().getStringExtra("lobid");
+        String[] kpiIdArray=getIntent().getStringArrayExtra("kpiId");
+        Log.e(TAG, "onCreate: kpi id"+kpiIdArray.length );
       //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 //        Log.e("SnapDashboard", "Refreshed token:------ " + refreshedToken);
         Log.e(TAG,"userId :--"+ userId);
@@ -179,7 +195,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
         }
       //  checkPermission();
-        setupAdapter();
+        Arrays.asList(kpiIdArray);
+        setupAdapter(Arrays.asList(kpiIdArray));
 
         if( getIntent().getExtras() != null)
         {
@@ -229,6 +246,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void initalise()
     {
+        db = new DatabaseHandler(context);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
@@ -260,6 +278,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.commit();
+            db.deleteAllData();
             SalesFilterActivity.level_filter = 1;
             //  SalesAnalysisActivity1.selectedsegValue = null;
             SalesAnalysisActivity1.level = 1;
@@ -280,48 +299,103 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     }
 
 
-    private void setupAdapter() {
-        Log.e(TAG, "setupAdapter: " );
+    private void setupAdapter(List<String> kpiIdArray) {
+
 
         snapAdapter = new SnapAdapter(context, eventUrlList);
 
         if (geoLeveLDesc.equals("E ZONE")) {
-            List<App> apps = getProduct(21);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
-            apps = getProduct(22);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
-            //apps = getProduct(23);
-            //snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
-            //apps = getProduct(24);
-            //snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
-            // apps = getProduct(25);
-            // snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
+            for (int i = 0; i <kpiIdArray.size(); i++) {
+                switch (kpiIdArray.get(i)){
+                    case "004":
+                        List<App> apps = getProduct(21);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+                        break;
+                    case "006":
+                        apps = getProduct(22);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+                        break;
 
+                   default:
+                       break;
+
+
+                }
+
+            }
 
         } else
         {
+
+
+  /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
+            020. 021,  022, 023, 026, 027, 028*/
+
+   /* Product Info,
+   Visual Asst,  Visual Assrt Report,
+    Sales, Sales PVA, Freshness Index, Option Eff,
+    Skewed Size, Best/Worst Per, Stock Ageing,
+    Floor Avl, Target Stock Exc, Sell Thru Exc,
+    Running Promo, Upcoming Promo, Expiring Promo, Best/Worst Promo, Key Product PVA, Stock Transfer, Stock Transfer Status, Best Worst Feedback, Best Worst Feedback List, Season Catalogue, Customer Eng, Hourly Performance
+*/
+
+
+            for (int i = 0; i <kpiIdArray.size(); i++) {
+                switch (kpiIdArray.get(i)){
+                    case "001":
+                        List<App> apps = getProduct(0);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
+                        break;
+                    case "002":
+                        apps = getProduct(1);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
+                        break;
+                    case "004":
+                        apps = getProduct(2);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+                        break;
+                    case "006":
+                        apps = getProduct(3);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+                        break;
+                    case "026":
+                        apps = getProduct(7);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+                        break;
+                    case "027":
+                        apps = getProduct(8);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+                        break;
+                    case "022":
+                        apps = getProduct(6);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
+                        break;
+                    case "020":
+                        apps = getProduct(4);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+                        break;
+
+                    default:
+                        break;
+
+
+                }
+
+            }
+
             // In release build when required hide promo analysis and collabration as per requirement and customer engagement will start from 4 onwards
             // In debug build unhide promo analysis and collabration and numbering will start from 4 onwards
-            List<App> apps = getProduct(0);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
-            apps = getProduct(1);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
-            apps = getProduct(2);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
-            apps = getProduct(3);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+
+
+
+
 //            apps = getProduct(4);
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-            apps = getProduct(4);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
-            apps = getProduct(5);
-            snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
-            apps = getProduct(6);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
-            apps = getProduct(7);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
-            apps = getProduct(8);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+
+       //     apps = getProduct(5);
+        //    snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
+
+
 //            apps = getProduct(10);
 //            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
         }

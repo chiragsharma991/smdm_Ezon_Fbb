@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.DB_operation.DatabaseHandler;
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.LocalNotificationReceiver;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Login_StoreList login_storeList;
     private Snackbar snackbar;
     Gson gson;
+    private DatabaseHandler db;
 
 
     @Override
@@ -108,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void initialise()
     {
+        db = new DatabaseHandler(context);
         edtUserName = (EditText) findViewById(R.id.edtUserName);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtUserName.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
@@ -205,8 +208,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             userId = login_storeList.getUserId();
                             editor.putString("bearerToken", login_storeList.getBearerToken());
                             bearToken =  login_storeList.getBearerToken();
-                            editor.putString("geoLeveLDesc", login_storeList.getGeoLeveLDesc());
-                            editor.putString("geoLevel2Code",login_storeList.getGeoLevel2Code());
+//                            editor.putString("geoLeveLDesc", login_storeList.getGeoLeveLDesc());
+//                            editor.putString("geoLevel2Code",login_storeList.getGeoLevel2Code());
                             editor.putString("device_id", "");
                             editor.apply();
                             if (Reusable_Functions.chkStatus(context))
@@ -263,7 +266,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e(TAG, "requestUserStore - onResponse: "+response.length());
+//                        Log.e(TAG, "requestUserStore -***- onResponse: "+response);
+//                        Log.e(TAG, "requestUserStore - onResponse: "+response.length());
                         try
                         {
                             if (response.equals("") || response == null)
@@ -278,11 +282,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 {
                                     login_storeList = gson.fromJson(response.get(i).toString(),Login_StoreList.class);
                                     loginStoreArray.add(login_storeList);
-
                                 }
+                                //database storeage
+                                db.db_AddData(loginStoreArray);
+                                //default concept and lobid
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
-                                editor.putString("lobId", loginStoreArray.get(0).getLobId());
+                                editor.putString("concept", loginStoreArray.get(1).getGeoLevel2Code());
+                                editor.putString("lobid", loginStoreArray.get(1).getLobId());
+                                editor.apply();
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
                                 if(response.length() == 1 ) // for single response save storecode
                                 {
@@ -312,6 +319,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                 }
                                 Reusable_Functions.hDialog();
+
+
+
                             }
                         }
                         catch (Exception e)
@@ -383,7 +393,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Reusable_Functions.hDialog();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
-                            String kpi_id = loginStoreArray.get(0).getKpiId();
+                            String kpi_id = loginStoreArray.get(1).getKpiId();
                             String[] kpiIdArray = kpi_id.split(",");
                             intent.putExtra("kpiId", kpiIdArray);
                             //Log.e(TAG, "onResponse: "+kpiIdArray.length + kpiIdArray[i]);
