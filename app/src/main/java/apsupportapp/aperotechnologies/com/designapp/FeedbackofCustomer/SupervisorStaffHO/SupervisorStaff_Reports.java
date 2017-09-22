@@ -81,7 +81,7 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
     private TabLayout Tabview;
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
-    private String userId, store, bearertoken, geoLeveLDesc;
+    private String userId, store, bearertoken, geoLeveLDesc, storeCode, store_code;
     private String TAG = "PricePromotion_Reports";
     private String view_params = "LD";
     private SupervisiorStaff_ReportAdapter adapter=null;
@@ -98,6 +98,10 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
     private int runningId;
     private String callback_header="Callback Required from CSD";
 
+    public SupervisorStaff_Reports(String storeCode) {
+
+        this.storeCode = storeCode;
+    }
 
 
     @Override
@@ -188,27 +192,27 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
             case 0:
                 card_supervisor.setVisibility(View.GONE);
                 relFIndexTablelayout_supervisor.setVisibility(View.GONE);
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true"; //Pie chart Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummaryNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&storeCode=" +store_code; //Pie chart Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:
                 card_supervisor.setVisibility(View.GONE);
                 relFIndexTablelayout_supervisor.setVisibility(View.GONE);
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
             case 2:  // this is for only change list
                 card_supervisor.setVisibility(View.GONE);
                 relFIndexTablelayout_supervisor.setVisibility(View.GONE);
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             case 3:  // this is for only change list
                 card_supervisor.setVisibility(View.GONE);
                 relFIndexTablelayout_supervisor.setVisibility(View.GONE);
                 Log.e("here","case 2");
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 ApiRequestNew_supervisor api_request_new = new ApiRequestNew_supervisor(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             default:
@@ -412,9 +416,11 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
         userId = sharedPreferences.getString("userId", "");
         //  userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
         store = sharedPreferences.getString("storeDescription", "");
+        store_code = storeCode.substring(0, 4);
+
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        storedesc.setText(store);
+        storedesc.setText(storeCode);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);

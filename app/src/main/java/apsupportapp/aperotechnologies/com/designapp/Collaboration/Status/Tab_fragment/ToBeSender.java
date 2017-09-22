@@ -241,7 +241,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         storedescription = sharedPreferences.getString("storeDescription", "");
-        selectedStorecode = storedescription.trim().substring(0,4);
+//        selectedStorecode = storedescription.trim().substring(0,4);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);

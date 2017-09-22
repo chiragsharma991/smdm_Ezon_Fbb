@@ -1155,7 +1155,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                           Log.e("requestSalesListDisplayAPI "," "+response);
                         try {
                             int i;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1509,6 +1509,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     @Override
                     public void onResponse(JSONArray response) {
                         // Log.e(TAG, "onResponse: "+response);
+                        Log.e("requestPvAChartAPI "," "+response);
                         try {
 
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1586,7 +1587,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: " + response);
+                        Log.e(TAG, "requestSalesWeekChart: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1763,7 +1764,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: " + response);
+                        Log.e(TAG, "requestSalesPvACategoryList: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1880,6 +1881,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1977,6 +1979,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -2070,6 +2073,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -2181,6 +2186,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -2287,6 +2294,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e(TAG, "requestSalesViewPagerValueAPI: " + response);
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -2359,6 +2368,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     @Override
                     public void onResponse(JSONArray response)
                     {
+                        Log.e(TAG, "requestSalesSelectedFilterVal: " + response);
+
                         if(geoLeveLDesc.equals("E ZONE"))
                         {
                             if (level == 2) {

@@ -14,10 +14,12 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Availabil
 public class ProductAvailability_ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     int mNumOfTabs;
+    String storeCode;
 
-    public ProductAvailability_ViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public ProductAvailability_ViewPagerAdapter(FragmentManager fm, int NumOfTabs , String storeCode) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        this.storeCode = storeCode;
     }
 
     @Override
@@ -25,10 +27,10 @@ public class ProductAvailability_ViewPagerAdapter extends FragmentStatePagerAdap
 
         switch (position) {
             case 0:
-                ProductAvailability_Reports tab1 = new ProductAvailability_Reports();
+                ProductAvailability_Reports tab1 = new ProductAvailability_Reports(storeCode);
                 return tab1;
             case 1:
-                ProductAvailability_Feedback tab2 = new ProductAvailability_Feedback();
+                ProductAvailability_Feedback tab2 = new ProductAvailability_Feedback(storeCode);
                 return tab2;
             default:
                 return null;

@@ -130,7 +130,7 @@ public class Callback_PricePromotion extends AppCompatActivity implements HttpRe
             // case 0 and 1 will follow like first update list and after pie chart
             case 0://
                 //https://smdm.manthan.com/v1/display/feedbackdisplaydetail/69-2669?feedbackKey=1&view=LD&attribute14=YES&attribute1=7506556384&feedbackdate=2017-07-01 10:06:55
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params +
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params +
                         "&recache=true"+"&attribute14="+attribute14+"&attribute1="+attribute1+"&feedbackdate="+feedbackdate.replaceAll(" ", "%20").replaceAll("&", "%26"); //Callback  Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 1 is id for new api response
                 break;

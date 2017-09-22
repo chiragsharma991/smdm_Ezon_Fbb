@@ -21,6 +21,7 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
     private Context context;
     private String TAG="ProductAvlHO";
     private ViewPager viewPager;
+    private String storeCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,10 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
         getSupportActionBar().setElevation(0);
         context = this;
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+        if(getIntent().getExtras().getString("from") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+        }
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Reports"));
@@ -47,7 +52,7 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         final ProductAvailability_ViewPagerAdapter adapter = new ProductAvailability_ViewPagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
+                (getSupportFragmentManager(), tabLayout.getTabCount(), storeCode);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

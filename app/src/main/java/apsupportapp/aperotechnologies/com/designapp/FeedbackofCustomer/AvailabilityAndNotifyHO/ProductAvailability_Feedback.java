@@ -65,7 +65,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
     private String TAG = "ProductAvailability";
     private TextInputLayout layout_customer_mobile_number, layout_remarks;
     private SharedPreferences sharedPreferences;
-    private String userId, bearertoken, geoLeveLDesc, store;
+    private String userId, bearertoken, geoLeveLDesc, store, storeCode, store_code;
     private RequestQueue queue;
     private String remark, SelectedStoreCode;
     String remarks_text;
@@ -77,6 +77,11 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
             customerBrand, customerProduct, customerSize, customerQty, customerColorOption1, customerColorOption2,
             customerFit, customerStyle, customerCallBack, customerArcDate;
     private boolean prefocus = false;  // enable focus automatically when submit button click at first time
+
+    public ProductAvailability_Feedback(String storeCode) {
+
+        this.storeCode = storeCode;
+    }
 
 
     @Override
@@ -100,12 +105,13 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
-        store = sharedPreferences.getString("storeDescription", "");
-        Log.e(TAG, "Storedesc: " + store);
-        SelectedStoreCode = store.trim().substring(0, 4);
-        Log.e(TAG, "SelectedStoreCode: " + SelectedStoreCode);
+       // store = sharedPreferences.getString("storeDescription", "");
+        store_code = storeCode.substring(0, 4);
+     //   Log.e(TAG, "Storedesc: " + store);
+    //    SelectedStoreCode = store.trim().substring(0, 4);
+    //    Log.e(TAG, "SelectedStoreCode: " + SelectedStoreCode);
 
-        storedescription.setText(store);
+        storedescription.setText(storeCode);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
 
@@ -579,7 +585,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
             case 0:   //total values
 
-                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
+                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId + "&storeCode=" +store_code;
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
 
                 break;
