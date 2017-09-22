@@ -56,10 +56,10 @@ public class TestDB extends AppCompatActivity {
     }
 
     public void onAllList(View view){
-        ArrayList<TestModel>list= (ArrayList<TestModel>) db.db_GetAllContacts();
-        for (TestModel model : list){
-            Log.e(TAG, "onAllList: Lname is "+model.getAttribute4()+" Lid is "+model.getAttribute5() );
-        }
+//        ArrayList<TestModel>list= (ArrayList<TestModel>) db.db_GetAllContacts();
+//        for (TestModel model : list){
+//            Log.e(TAG, "onAllList: Lname is "+model.getAttribute4()+" Lid is "+model.getAttribute5() );
+//        }
 
     }
 
