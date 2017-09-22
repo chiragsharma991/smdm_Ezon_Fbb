@@ -56,7 +56,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private SharedPreferences sharedPreferences;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     RadioButton Skewed_checkWTD, Skewed_checkL4W, Skewed_checkSTD;
-    String userId, bearertoken,storeDescription;
+    String userId, bearertoken,storeDescription,geoLevel2Code,lobId;
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -101,6 +101,8 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -160,22 +162,22 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
                     //core selection without season params
 
-                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                    url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&geoLevel2Code=" +geoLevel2Code + "&lobId="+ lobId;
                 } else {
 
                     // fashion select with season params
 
-                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                    url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             } else {
                 if (coreSelection) {
 
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                    url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&geoLevel2Code=" +geoLevel2Code + "&lobId="+ lobId;
                 } else {
 
                     // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                    url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             }
             Log.e("url:",""+url);

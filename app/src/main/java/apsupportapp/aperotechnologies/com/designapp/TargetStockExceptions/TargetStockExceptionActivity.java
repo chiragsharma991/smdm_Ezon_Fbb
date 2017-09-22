@@ -56,7 +56,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     RelativeLayout target_BtnBack, target_BtnFilter, target_quickFilter, quickFilterPopup, quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     FloorAvailabilityDetails targetStockDetails;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken, seasongroup = "Current",storeDescription;
+    String userId, bearertoken, seasongroup = "Current",storeDescription,geoLevel2Code,lobId;
     String TAG = "TargetStockExceptionActivity";
     int count = 0;
     int limit = 10;
@@ -64,7 +64,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     int top = 10;
     static  int level = 1;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
-
     RadioButton checkDept, checkCategory, checkPlanClass, checkWTD, checkL4W, checkYTD,checkSubClass,checkMc;
     Context context = this;
     private RequestQueue queue;
@@ -84,7 +83,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     int checkTargetROSVal = 7;
     private SeekBar TargetSeek;
     private TextView targetMax;
-    private int setValue=7;
+    private int setValue = 7;
     private boolean coreSelection = false;
     private TabLayout Tabview;
 
@@ -99,6 +98,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -136,13 +137,13 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             if (coreSelection) {
 
                 //core selection without season params
-
-                url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+                url = ConstsCore.web_url + "/v1/display/targetstockexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
-                url = ConstsCore.web_url + "/v1/display/targetstockexceptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal;
+                url = ConstsCore.web_url + "/v1/display/targetstockexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&level=" + level + "&view=" + view + "&targetros=" + checkTargetROSVal+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             }
+            Log.e(TAG, "requestTargetStockExcepApi: "+url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override

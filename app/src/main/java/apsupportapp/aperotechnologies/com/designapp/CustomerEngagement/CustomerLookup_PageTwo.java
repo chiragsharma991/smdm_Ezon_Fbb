@@ -78,7 +78,7 @@ public class CustomerLookup_PageTwo extends Fragment
     ViewGroup root;
     Context context;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT";
+    String  bearertoken, geoLeveLDesc, engagementFor = "EVENT",geoLevel2Code,lobId;
     RequestQueue queue;
     Gson gson;
     private boolean checkNetworkFalse = false;
@@ -88,7 +88,7 @@ public class CustomerLookup_PageTwo extends Fragment
     private int totalItemCount = 0;  // this is total item present in listview
     int firstVisibleItem = 0;
     MySingleton m_config;
-    String updated_userId;
+    String userId;
     public static boolean band_Click;
     public static boolean flag = false ;
     int offset = 0, count = 0, limit = 100;
@@ -102,10 +102,11 @@ public class CustomerLookup_PageTwo extends Fragment
         m_config = MySingleton.getInstance(getActivity());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
-        updated_userId = userId.substring(0, userId.length() - 5);
-        Log.e("update_userId", "" + updated_userId);
+        Log.e("update_userId", "" + userId);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+       geoLevel2Code = sharedPreferences.getString("concept","");
+       lobId = sharedPreferences.getString("lobid","");
         arr_count = 0;
         Cache cache = new DiskBasedCache(getActivity().getApplicationContext().getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -327,7 +328,7 @@ public class CustomerLookup_PageTwo extends Fragment
 
     private void requestCustomerDetail()
     {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + updated_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e("detail url :", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

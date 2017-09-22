@@ -57,7 +57,7 @@ public class Reusable_Functions  {
             progressDialog.setCancelable(false);
             if (!progressDialog.isShowing())
             {
-                progressDialog.show();
+               progressDialog.show();
 
             }
         }

@@ -86,7 +86,7 @@ public class StyleActivity extends AppCompatActivity
     SharedPreferences sharedPreferences;
     Button btnSubmit;
     EditText edtsearchCollection, edtsearchOption, edit_barcode,edtsearchStore;
-    public static String selcollectionName = null, seloptionName = null , selStoreName =  null;
+    public static String selcollectionName = null, seloptionName = null, selStoreName = null;
     LinearLayout stylemainlayout;
     LinearLayout collectionLayout, optionLayout,storeLayout;
     private ListView listCollection, listOption,listStore;
@@ -123,6 +123,9 @@ public class StyleActivity extends AppCompatActivity
         collectionList = new ArrayList<String>();
         arrayList = new ArrayList<String>();
         list = new ArrayList<>();
+//        seloptionName = null;
+//        selStoreName = null;
+//        selcollectionName = null;
         articleOptionList = new ArrayList<>();
         stylemainlayout = (LinearLayout) findViewById(R.id.stylemainlayout);
         stylemainlayout.setVisibility(View.VISIBLE);
@@ -140,9 +143,10 @@ public class StyleActivity extends AppCompatActivity
         imageBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         if (getIntent().getExtras() != null)
         {
+           // selStoreName = getIntent().getExtras().getString("selStoreName");
             selcollectionName = getIntent().getExtras().getString("selCollectionname");
             seloptionName = getIntent().getExtras().getString("selOptionName");
-        }
+       }
         txt_store = (TextView)findViewById(R.id.searchablespinnerlibraryStore);
         txt_store.setText("Select Store");
         storeLayout = (LinearLayout)findViewById(R.id.storeLayout);
@@ -167,7 +171,7 @@ public class StyleActivity extends AppCompatActivity
             collectionoffset = 0;
             collectionlimit = 100;
            requestProductStoreSelection();
-           // requestCollectionAPI(collectionoffset, collectionlimit);
+
         }
         else
         {
@@ -346,7 +350,9 @@ public class StyleActivity extends AppCompatActivity
                 }
             }
         });
+
     }
+
 
     private void ExeSampleCode()
     {
@@ -500,7 +506,7 @@ public class StyleActivity extends AppCompatActivity
         }
     }
 
-    private void requestStyleDetailsAPI(String content, String check, String store_name)
+    private void requestStyleDetailsAPI(String content, String check, final String store_name)
     {
         String url = " ";
         if (check.equals("optionname"))
@@ -583,6 +589,7 @@ public class StyleActivity extends AppCompatActivity
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
+                              //  intent.putExtra("selStoreName",store_name);
                                 startActivity(intent);
                                 finish();
                             }
@@ -657,6 +664,7 @@ public class StyleActivity extends AppCompatActivity
                             storeList.add(0, "Select Store");
                             storeAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+
                             listStore.setOnItemClickListener(new AdapterView.OnItemClickListener()
                             {
                                 @Override
@@ -712,8 +720,7 @@ public class StyleActivity extends AppCompatActivity
                             if (selStoreName == null || selStoreName.equals(""))
                             {
                                 txt_store.setText("Select Store");
-//                                collection.setText("Select Collection");
-//                                style.setText("Select Option");
+
                             }
                             else
                             {
@@ -725,7 +732,6 @@ public class StyleActivity extends AppCompatActivity
                                     store_nm = txt_store.getText().toString();
                                     txt_store.setText(selStoreName);
                                     collection.setText(selcollectionName);
-//                                    collection.setEnabled(true);
                                     style.setText(seloptionName);
                                     style.setEnabled(true);
 
@@ -813,7 +819,7 @@ public class StyleActivity extends AppCompatActivity
                                 {
                                     collectionNM = (String) collectionAdapter.getItem(position);
                                     selcollectionName = collectionNM;
-                                    collection.setText(collectionNM);
+                                    collection.setText(selcollectionName);
                                     Log.e("collect_name ", " "+collect_name);
 
                                     if(!collect_name.equals(""))
@@ -872,7 +878,6 @@ public class StyleActivity extends AppCompatActivity
                                 store_nm = txt_store.getText().toString();
                                 txt_store.setText(selStoreName);
                                 collection.setText("Select Collection");
-//                                    collection.setEnabled(true);
                                 style.setText("Select Option");
                                 style.setEnabled(true);
 
@@ -1074,15 +1079,14 @@ public class StyleActivity extends AppCompatActivity
                 inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
-
-        else
-        {
+        else {
             selStoreName = null;
             selcollectionName = null;
             seloptionName = null;
             SnapDashboardActivity._collectionitems = new ArrayList();
+            finish();
         }
-        finish();
+
     }
 
     @Override

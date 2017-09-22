@@ -59,7 +59,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     RelativeLayout quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     FloorAvailabilityDetails floorAvailabilityDetails;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken,storeDescription;
+    String userId, bearertoken,storeDescription,geoLevel2Code,lobId;
     private static String seasongroup = "Current";
     private int count = 0;
     private boolean coreSelection = false;
@@ -98,6 +98,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -137,18 +140,18 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             if (from_filter) {
                 if (coreSelection) {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion;
+                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 } else {
                     //fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             } else {
                 if (coreSelection) {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
+                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 } else {
                     // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             }
             Log.e("TAG", "requestFloorAvailabilityApi: "+url );
