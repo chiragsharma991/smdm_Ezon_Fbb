@@ -1,0 +1,21 @@
+[{
+  "header" : "Billing experience",
+  "code" :  "1",
+  "smiley" : "0"
+
+},
+  {
+    "header" : "Products are fashionable",
+    "code" :  "2",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Range of product/ Price",
+    "code" :  "3",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Staff helpfulness and product knowledge",
+    "code" :  "4",
+    "smiley" : "0"
+  }]

@@ -1,6 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.Utils;
 
-import android.app.Notification;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,9 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.R;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
-
 /**
  * Created by csuthar on 21/08/17.
  */
@@ -34,9 +31,9 @@ public class NotificationBuild extends AppCompatActivity {
         if (userId != null && !userId.equals("")) {
             intent = new Intent(context, SnapDashboardActivity.class);
         } else {
-            intent = new Intent(context, LoginActivity1.class);
+            intent = new Intent(context, SnapDashboardActivity.class);
         }
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  //FLAG_ACTIVITY_SINGLE_TOP for unrefresh
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //FLAG_ACTIVITY_SINGLE_TOP for unrefresh
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);

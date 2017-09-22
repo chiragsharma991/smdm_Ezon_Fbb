@@ -3,7 +3,6 @@ package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,22 +121,22 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 switch (fromwhere)
                 {
                     case "Department":
-                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Subdept":
-                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Class":
-                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Subclass":
-                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
@@ -146,12 +145,12 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 //                        break;
                     case "Region":
-                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
                     case "Store":
-                        ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                        ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
@@ -165,22 +164,22 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 float density = context.getResources().getDisplayMetrics().density;
                 int finalCalplanVal = (int) (density * calplanVal); //converting value from px to dp
                 int finalCalachieveVal = (int) (density * calachieveVal); //converting value from px to dp
-                ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setWidth(finalCalachieveVal);
+                ((EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setWidth(finalCalachieveVal);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(3, 24);
                 params.setMargins(finalCalplanVal, 0, 0, 0);
-                ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sAchieve.setLayoutParams(params);
+                ((EzoneSalesViewHolder) viewHolder).txt_ez_sAchieve.setLayoutParams(params);
 
                 if (achieveVal < 70)
                 {
-                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.RED);
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.RED);
                 }
                 else if (achieveVal > 90)
                 {
-                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.GREEN);//yellow
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.GREEN);//yellow
                 }
                 else
                 {
-                    ((EzoneSalesAdapter.EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPlan.setBackgroundColor(Color.parseColor("#ff7e00"));
                 }
             }
         }

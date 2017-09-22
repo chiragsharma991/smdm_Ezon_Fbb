@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -114,7 +113,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
         m_config = MySingleton.getInstance(context);
     }
 
@@ -124,8 +123,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         context = view.getContext();
         txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) view.findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreDesc.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreDesc.setText(storeDescription.substring(5));
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);

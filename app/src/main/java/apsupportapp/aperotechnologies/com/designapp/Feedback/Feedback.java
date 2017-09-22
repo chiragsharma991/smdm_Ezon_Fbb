@@ -85,6 +85,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private Feedback_model feedback_model_report;
     private String selectCategory;
     private String storecode, storeDes;
+    private String geoLevel2Code;
 
 
     @Override
@@ -97,7 +98,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("geoLevel2Code", "");
         Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -171,13 +173,16 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
             if (!feedbackReport) {
                 url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+               // url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             } else {
 
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&offset=" + offsetvalue + "&limit=" + limit;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit;
+              //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
+            Log.e( TAG, "requestFeedbackApi: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -333,8 +338,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void nextList(int position) {
         Feedback_option.setText(feedbackList.get(position).getOption());
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreName.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreName.setText(storeDescription.substring(5));
         storecode = feedbackList.get(position).getStoreCode();
         storeDes = feedbackList.get(position).getStoreDesc();
         ImageLoader_feedback.setVisibility(View.VISIBLE);
@@ -646,7 +651,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
-            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId;//+"?recache="+recache
+            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId ;//+"?recache="+recache
+           // String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId + "?geoLevel2Code="+ geoLevel2Code ;//+"?recache="+recache
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override

@@ -8,6 +8,7 @@ public class Overallratings {
 
     String header;
     String code;
+    String smiley;
 
     public String getHeader() {
         return header;
@@ -23,5 +24,14 @@ public class Overallratings {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+
+    public String getSmiley() {
+        return smiley;
+    }
+
+    public void setSmiley(String smiley) {
+        this.smiley = smiley;
     }
 }

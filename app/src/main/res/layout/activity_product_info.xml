@@ -142,6 +142,26 @@
                 android:background="#000000" />
 
             <TextView
+                android:id="@+id/searchablespinnerlibraryStore"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:clickable="true"
+                android:drawableRight="@mipmap/search_option_dropdown_arrow"
+                android:gravity="left|center"
+                android:layout_marginRight="70dp"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textColor="@color/ezfbb_black"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="0dp"
+                android:background="@color/ezfbb_red"></View>
+
+
+            <TextView
                 android:id="@+id/searchablespinnerlibrary"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
@@ -235,6 +255,60 @@
 
             <ListView
                 android:id="@+id/listCollection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/storeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:background="@color/ezfbb_activity_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="Select Store"
+                android:textColor="@color/bg_store_code_text"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/searchStore"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/ezfbb_activity_background"
+                android:drawableLeft="@mipmap/key_product_search_icon"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/ezfbb_black"
+                android:hint="Search"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:textColor="#666666"
+                android:textCursorDrawable="@null" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/smdm_divider_Black" />
+
+            <ListView
+                android:id="@+id/listStore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

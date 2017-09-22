@@ -1,0 +1,158 @@
+<RelativeLayout
+    android:id="@+id/rel_layout_header_smiley"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TextView
+        android:id="@+id/header_smiley"
+        android:textSize="14sp"
+        android:text="Text"
+        android:maxLines="1"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/lin_smileys"
+        android:layout_below="@+id/header_smiley"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="5">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_1_unselected"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@mipmap/improvementemojiunselected" />
+
+            <ImageView
+                android:id="@+id/img_1_selected"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@mipmap/improvementemojiselected"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/img_2_unselected"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@mipmap/okayemojiunselected"
+
+                />
+
+            <ImageView
+                android:id="@+id/img_2_selected"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@mipmap/okayemojiselected"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+
+            <ImageView
+                android:id="@+id/img_3_unselected"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@mipmap/improvementemojiunselected"
+
+                />
+
+            <ImageView
+                android:id="@+id/img_3_selected"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:gravity="left"
+                android:background="@mipmap/improvementemojiselected"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+
+            <ImageView
+                android:id="@+id/img_4_unselected"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@mipmap/goodemojiunselected"
+
+                />
+
+            <ImageView
+                android:id="@+id/img_4_selected"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@mipmap/goodemojiselected"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+
+            <ImageView
+                android:id="@+id/img_5_unselected"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@mipmap/improvementemojiunselected"
+
+                />
+
+            <ImageView
+                android:id="@+id/img_5_selected"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@mipmap/improvementemojiselected"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

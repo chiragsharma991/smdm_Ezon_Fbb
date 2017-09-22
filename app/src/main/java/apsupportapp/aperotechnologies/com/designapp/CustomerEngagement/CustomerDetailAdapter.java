@@ -19,10 +19,10 @@ import java.util.Locale;
 
 
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+
 
 import static apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookup_PageOne.customerDetailsList;
-import static apsupportapp.aperotechnologies.com.designapp.R.id.cust_progressBar;
+
 
 
 /**

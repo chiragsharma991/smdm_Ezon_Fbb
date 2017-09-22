@@ -43,6 +43,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 
+
 public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 
     // Define activity context
@@ -602,28 +603,63 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
+        String geoLevel2Code = sharedPreferences.getString("concept","");
+        String lobId = sharedPreferences.getString("lobid","");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
         String category_url = " ";
-        if (level1 == 2) {
-
-           category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&dept=" + dept.replaceAll("&", "%26").replace(" ","%20");
-
+        if (level1 == 2)
+        {
+//         if(str_CheckFrom.equals("SalesAnalysis") || str_CheckFrom.equals("pvaAnalysis"))
+//         {
+//             //with geoLevel2Code param
+             category_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + level1 + "&dept=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+//         }
+//            else
+//         {
+//             //without geoLevel2Code param
+//             category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&dept=" + dept.replaceAll("&", "%26").replace(" ", "%20") ;
+//
+//         }
         } else if (level1 == 3) {
-
-            category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&category=" + dept.replaceAll("&", "%26").replace(" ","%20");
-
-        } else if (level1 == 4) {
-
-            category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&class=" + dept.replaceAll("&", "%26").replace(" ","%20");
-
+//            if(str_CheckFrom.equals("SalesAnalysis") || str_CheckFrom.equals("pvaAnalysis"))
+//            {
+//                //with geoLevel2Code param
+             category_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + level1 + "&category=" + dept.replaceAll("&", "%26").replace(" ","%20")   + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+//            }
+//            else
+//            {
+//                //without geoLevel2Code param
+//                category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&category=" + dept.replaceAll("&", "%26").replace(" ","%20")  ;
+//
+//            }
+        } else if (level1 == 4)
+        {
+//            if(str_CheckFrom.equals("SalesAnalysis") || str_CheckFrom.equals("pvaAnalysis")) {
+//                //with geoLevel2Code param
+                category_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + level1 + "&class=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+//            }
+//            else
+//            {
+//                //without geoLevel2code param
+//                category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&class=" + dept.replaceAll("&", "%26").replace(" ", "%20") ;
+//
+//            }
         } else if (level1 == 5) {
 
-            category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&brand=" + dept.replaceAll("&", "%26").replace(" ","%20");
-
+//            if(str_CheckFrom.equals("SalesAnalysis") || str_CheckFrom.equals("pvaAnalysis")) {
+//                //with geoLevel2Code param
+                category_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + level1 + "&brand=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+//            }
+//            else
+//            {
+//                //without geoLevel2Code param
+//                category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&brand=" + dept.replaceAll("&", "%26").replace(" ", "%20") ;
+//
+//            }
         }
         Log.e("search url:",""+category_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, category_url,

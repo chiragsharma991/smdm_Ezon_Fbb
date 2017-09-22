@@ -92,7 +92,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private RadioButton BestInvent_core, BestInvent_fashion;
     private ToggleButton Toggle_bestInvent_fav;
     private static String corefashion = "Fashion";
-    private static String orderbycol = "8";
+    private static String orderbycol = "sellThruUnits";
     private int level;
     private RelativeLayout Bst_sortInventory;
     private LinearLayout BstInventory_salesU, BstInventory_salesThru, BstInventory_Fwd, BstInventory_coverNsell;
@@ -124,7 +124,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
         if (geoLeveLDesc.equals("E ZONE")) {
             setContentView(R.layout.activity_best_performer_ez_inventory);
             getSupportActionBar().hide();
@@ -325,25 +325,25 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void sortRetain() {
         switch (orderbycol.toString()) {
-            case "7":
+            case "saleTotQty":
                 BstInventory_salesU_chk.setChecked(true);
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
                 break;
-            case "10":
+            case "sellThruUnits":
                 BstInventory_salesU_chk.setChecked(false);
                 BstInventory_salesThru_chk.setChecked(true);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
                 break;
-            case "11":
+            case "fwdWeekCover":
                 BstInventory_salesU_chk.setChecked(false);
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(true);
                 BstInventory_coverNsell_chk.setChecked(false);
                 break;
-            case "11,10":
+            case "fwdWeekCover,sellThruUnits":
                 BstInventory_salesU_chk.setChecked(false);
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
@@ -652,8 +652,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
         BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
-        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        BestInvent_txtStoreName.setText(storeDescription.substring(5));
+//        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        BestInvent_txtStoreName.setText(storeDescription.substring(5));
         rel_store_layout.setVisibility(View.VISIBLE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
         BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
@@ -896,7 +896,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BestInventList.clear();
                 BestInventListview.setVisibility(View.GONE);
                 if (Reusable_Functions.chkStatus(context)) {
-                    Reusable_Functions.sDialog(this, "Loading.......");
+                    Reusable_Functions.sDialog(this, "Loading...");
                     requestRunningPromoApi(selectedString);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -916,7 +916,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BestInventList.clear();
                 BestInventListview.setVisibility(View.GONE);
                 if (Reusable_Functions.chkStatus(context)) {
-                    Reusable_Functions.sDialog(this, "Loading.......");
+                    Reusable_Functions.sDialog(this, "Loading...");
                     requestRunningPromoApi(selectedString);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -946,9 +946,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(true);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "9";
+                orderbycol = "fwdWeekCover";
                 BestInventList.clear();
-                Reusable_Functions.sDialog(this, "Loading.......");
+                Reusable_Functions.sDialog(this, "Loading...");
                 popPromo = 10;
                 limit = 10;
                 offsetvalue = 0;
@@ -977,9 +977,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(true);
-                orderbycol = "9,8";
+                orderbycol = "fwdWeekCover,sellThruUnits";
                 BestInventList.clear();
-                Reusable_Functions.sDialog(this, "Loading.......");
+                Reusable_Functions.sDialog(this, "Loading...");
                 popPromo = 10;
                 limit = 10;
                 offsetvalue = 0;
@@ -1009,9 +1009,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(true);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "8";
+                orderbycol = "sellThruUnits";
                 BestInventList.clear();
-                Reusable_Functions.sDialog(this, "Loading.......");
+                Reusable_Functions.sDialog(this, "Loading...");
                 popPromo = 10;
                 limit = 10;
                 offsetvalue = 0;
@@ -1040,7 +1040,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(false);
-                orderbycol = "5";
+                orderbycol = "saleTotQty";
                 BestInventList.clear();
                 Reusable_Functions.sDialog(this, "Loading...");
                 popPromo = 10;
@@ -1086,7 +1086,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             top = 10;
             seasonGroup = "Previous";
             BestInventList.clear();
-            Reusable_Functions.sDialog(this, "Loading.......");
+            Reusable_Functions.sDialog(this, "Loading...");
             requestRunningPromoApi(selectedString);
 
         } else {
@@ -1103,7 +1103,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             corefashion = "Core";
             seasonGroup = "Old";
             BestInventList.clear();
-            Reusable_Functions.sDialog(this, "Loading.......");
+            Reusable_Functions.sDialog(this, "Loading...");
             requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1118,7 +1118,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             top = 10;
             seasonGroup = "All";
             BestInventList.clear();
-            Reusable_Functions.sDialog(this, "Loading.......");
+            Reusable_Functions.sDialog(this, "Loading...");
             requestRunningPromoApi(selectedString);
 
         } else {
@@ -1136,7 +1136,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             corefashion = "Core";
             seasonGroup = "Upcoming";
             BestInventList.clear();
-            Reusable_Functions.sDialog(this, "Loading.......");
+            Reusable_Functions.sDialog(this, "Loading...");
             requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1162,7 +1162,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         title = null;
         orderby = "DESC";
         view = "STD";
-        orderbycol = "8";
+        orderbycol = "sellThruUnits";
         preValue = 1;
         corefashion = "Fashion";
         seasonGroup = "Current";
@@ -1219,7 +1219,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         BestInventList.clear();
 
                         if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.sDialog(this, "Loading.......");
+                            Reusable_Functions.sDialog(this, "Loading...");
                             coreSelection = false;
                             requestRunningPromoApi(selectedString);
                         } else {
@@ -1561,7 +1561,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         BestInventList.clear();
 
                         if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.sDialog(this, "Loading.......");
+                            Reusable_Functions.sDialog(this, "Loading...");
                             coreSelection = false;
                             requestRunningPromoApi(selectedString);
                         } else {

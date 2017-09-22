@@ -4,10 +4,9 @@ package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
  * Created by pamrutkar on 22/08/17.
  */
 
-import android.app.Activity;
 
-import android.R.integer;
-import android.app.Activity;
+
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +18,7 @@ import android.view.View;
         import android.view.View.OnClickListener;
         import android.widget.Button;
         import android.widget.EditText;
-        import android.widget.Toast;
+
 
 import com.cipherlab.barcode.GeneralString;
 import com.cipherlab.barcode.ReaderManager;

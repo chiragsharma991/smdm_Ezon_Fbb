@@ -31,6 +31,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.crashlytics.android.Crashlytics;
 
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
+import apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService;
+import apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken;
+import apsupportapp.aperotechnologies.com.designapp.Login.LoginActivity;
 import io.fabric.sdk.android.Fabric;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -53,11 +56,11 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
       //  TestFairy.begin(this, "a83cce4a55db17b7603166d893edca31f89b6427");
-
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
         context = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
+        startService(new Intent(this, FetchNewRefreshToken.class));
+        startService(new Intent(this, ContCreateTokenService.class));
         if (sharedPreferences.getBoolean("log_flag", false) == true) {
             if (Reusable_Functions.chkStatus(context))
             {
@@ -66,7 +69,9 @@ public class SplashActivity extends AppCompatActivity {
                     progressbar.setIndeterminate(true);
                     progressbar.getIndeterminateDrawable().setColorFilter(new LightingColorFilter(Color.parseColor("#e8112d"), R.color.ezfb_Red));
                 }
-            } else {
+            }
+            else
+            {
                 progressbar.setVisibility(View.GONE);
                 checkNetwork();
             }
@@ -81,7 +86,7 @@ public class SplashActivity extends AppCompatActivity {
                             requestLoginAPI();
                         }
                     } else if (sharedPreferences.getBoolean("log_flag", false) == false) {
-                        Intent i = new Intent(SplashActivity.this, LoginActivity1.class);
+                        Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(i);
                         finish();
                     }
@@ -98,13 +103,15 @@ public class SplashActivity extends AppCompatActivity {
         View v=findViewById(android.R.id.content);
         snackbar = Snackbar.make(v,"Check your network ", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
 
                     if(Reusable_Functions.chkStatus(context))
                     {
                         progressbar.setVisibility(View.VISIBLE);
                         requestLoginAPI();
-                    }else
+                    }
+                    else
                     {
                         checkNetwork();
                     }
@@ -115,7 +122,8 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private void requestLoginAPI() {
+    private void requestLoginAPI()
+    {
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
@@ -154,7 +162,8 @@ public class SplashActivity extends AppCompatActivity {
                         }
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();

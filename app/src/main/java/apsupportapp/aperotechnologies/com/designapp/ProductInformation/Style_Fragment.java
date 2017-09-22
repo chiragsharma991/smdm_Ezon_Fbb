@@ -63,7 +63,7 @@ public class Style_Fragment extends Fragment {
     TextView txtarticleOption, txtStoreCode, txtStoreName, txttwSalesUnit, txtlwSales, txtytdSales, txtSoh, txtGit, txtSales, txtFwdWeekCover,
             txtsalesThruUnit, txtROS;
     View view;
-    String userId, bearertoken,storeDescription;
+    String userId, bearertoken,storeDescription,geoLevel2Code,lobId;
     HorizontalScrollView horizontalScrollViewB;
     HorizontalScrollView horizontalScrollViewD;
     ArrayList<StyleDetailsBean> styleDetailsBeanList;
@@ -107,7 +107,9 @@ public class Style_Fragment extends Fragment {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("concept", "");
+        lobId = sharedPreferences.getString("lobid", "");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
 
         Bundle bundle = getActivity().getIntent().getExtras();
         articleCode = bundle.getString("articleCode");
@@ -133,7 +135,7 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/sizes/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId ;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -267,7 +269,7 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleSizeDetailsAPI() {
 
-        String url = ConstsCore.web_url + "/v1/display/styles/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26");
+        String url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId ;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -296,7 +298,8 @@ public class Style_Fragment extends Fragment {
                                     double sellThruUnitsRcpt = styleDetails.getDouble("sellThruUnitsRcpt");
                                     double ros = styleDetails.getDouble("ros");
                                     double stkOnhandQty = styleDetails.getDouble("stkOnhandQty");
-
+                                     txtStoreCode.setText(storeCode);
+                                    txtStoreName.setText(storeDesc);
                                     //  txtSales.setText(": "+"\u20B9" + Sales);
                                     txtarticleOption.setText("" + articleOption);
                                     txttwSalesUnit.setText(" " + Math.round(twSaleTotQty));
@@ -350,8 +353,8 @@ public class Style_Fragment extends Fragment {
         LinearTable = (LinearLayout) view.findViewById(R.id.linearTable);
         txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView) view.findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreName.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreName.setText(storeDescription.substring(5));
         txttwSalesUnit = (TextView) view.findViewById(R.id.txttwSalesUnit);
         txtlwSales = (TextView) view.findViewById(R.id.txtlwSales);
         txtytdSales = (TextView) view.findViewById(R.id.txtytdSales);
