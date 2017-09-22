@@ -74,10 +74,10 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         StatusProcess = (ProgressBar) findViewById(R.id.statusProcess);
         storedescription = (TextView) findViewById(R.id.txtStoreCode);
         StatusProcess.setVisibility(View.GONE);
-        store = sharedPreferences.getString("storeDescription", "");
+     //   store = sharedPreferences.getString("storeDescription", "");
 //        SelectedStoreCode = store.trim().substring(0, 4);
-        Log.e("store"," "+store);
-        storedescription.setText(store);
+   //     Log.e("store"," "+store);
+   //     storedescription.setText(store);
         status_imageBtnBack.setOnClickListener(this);
     }
 

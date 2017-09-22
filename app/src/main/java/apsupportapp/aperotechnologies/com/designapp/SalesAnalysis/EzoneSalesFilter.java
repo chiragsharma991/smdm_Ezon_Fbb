@@ -746,7 +746,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         String dept_url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
 //            //with geolevel2code field
-            dept_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code;
+            dept_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
 //        }
 //        else
 //        {
@@ -843,7 +843,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         String category_url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
 //            //with geolevel2code field
-            category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level + "&geoLevel2Code="+geoLevel2Code;
+            category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level + "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
 //        }
 //        else
 //        {
@@ -943,7 +943,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         String class_url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
 //            //with geolevel2code field
-            class_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code;
+            class_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
 //        }
 //        else
 //        {
@@ -1044,7 +1044,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         String brand_url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
 //            //with geolevel2code field
-            brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+"&geoLevel2Code="+geoLevel2Code;
+            brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
 //        }
 //        else
 //        {
@@ -1154,7 +1154,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         String mc_url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
 //            //with geolevel2code field
-            mc_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code;
+            mc_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
 //        }
 //        else
 //        {

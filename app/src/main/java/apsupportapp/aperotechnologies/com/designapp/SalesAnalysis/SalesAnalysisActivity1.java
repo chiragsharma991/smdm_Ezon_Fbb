@@ -2069,9 +2069,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             analysisArrayList.clear();
                             llhierarchy.setVisibility(View.GONE);
                             requestSalesViewPagerValueAPI();
-                        }
-                        else
-                        {
+                        } else {
                             llhierarchy.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -2958,7 +2956,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
     // Api calling functionality for E-zone module...
     private void requestEzoneSalesDetailAPI() {
-        String url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        String url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Ezone Detail Url ", "" + url);
         //  String url £= ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
@@ -3131,7 +3129,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
     private void requestEzoneFilterSelectedVal(final String filterSelectedString,final int filter_level) {
 
-        String ezone_filter_url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + filter_level + filterSelectedString + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        String ezone_filter_url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + filter_level + filterSelectedString + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("ezone filter url :", "" + ezone_filter_url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ezone_filter_url,
                 new Response.Listener<JSONArray>() {
@@ -3336,7 +3334,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     private void requestEzoneSalesCategoryList(final String ez_sclickedVal)
     {
         String ez_scategory_listurl;
-        ez_scategory_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&department=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
+        ez_scategory_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&department=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Ezone Category list url :", "" + ez_scategory_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_scategory_listurl,
                 new Response.Listener<JSONArray>() {
@@ -3445,7 +3443,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // Api - Ezone Plan class
     private void requestEzoneSalesPlanClassList(final String ez_sclickedVal) {
         String ez_splanclass_listurl;
-        ez_splanclass_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&category=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        ez_splanclass_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&category=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Ezone planclass url :", "" + ez_splanclass_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_splanclass_listurl,
                 new Response.Listener<JSONArray>() {
@@ -3557,7 +3555,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     private void requestEzoneSalesBrandList(final String ez_sclickedVal)
     {
         String ez_sbrand_listurl;
-        ez_sbrand_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&class=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        ez_sbrand_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&class=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Ezone Brand List :", "" + ez_sbrand_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sbrand_listurl,
                 new Response.Listener<JSONArray>() {
@@ -3663,7 +3661,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // Api - Ezone Sales Brand Plan List
     private void requestEzoneSalesBrandPlanList(final String ez_sclickedVal) {
         String ez_sbrandplan_listurl;
-        ez_sbrandplan_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brand=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        ez_sbrandplan_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brand=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Ezone BrandPlan List :", "" + ez_sbrandplan_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sbrandplan_listurl,
                 new Response.Listener<JSONArray>() {
@@ -3765,7 +3763,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // Api - Ezone Sales Store List
     private void requestEzoneSalesStoreList(final String ez_sclickedVal) {
         String ez_sstore_listurl;
-        ez_sstore_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&region=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        ez_sstore_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&region=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Ezone Store List :", "" + ez_sstore_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sstore_listurl,
                 new Response.Listener<JSONArray>() {
@@ -3866,7 +3864,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // Api for display All value - Api SalesheaderEz
     private void requestEzoneSalesHeaderAPI()
     {
-        String url = ConstsCore.web_url + "/v1/display/salesheaderEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        String url = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Ezone Header url :", "" + url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -3954,21 +3952,21 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         ez_sale_first_item = ez_sale_first_item.replace(" ", "%20").replace("&", "%26");
 
         if (txt_ez_header.getText().toString().equals("Department")) {
-            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&department=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&department=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code+ "&lobId="+ lobId;
         } else if (txt_ez_header.getText().toString().equals("Subdept")) {
-            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&category=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&category=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code+ "&lobId="+ lobId;
         } else if (txt_ez_header.getText().toString().equals("Class")) {
-            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&class=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&class=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code+ "&lobId="+ lobId;
         } else if (txt_ez_header.getText().toString().equals("Subclass")) {
-            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brand=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brand=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code+ "&lobId="+ lobId;
         }
 //        else if (txt_ez_header.getText().toString().equals("Brand Class")) {
 //            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brandclass=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
 //        }
         else if (txt_ez_header.getText().toString().equals("Region")) {
-            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&region=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&region=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code+ "&lobId="+ lobId;
         } else if (txt_ez_header.getText().toString().equals("Store")) {
-            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&store=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&store=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code+ "&lobId="+ lobId;
         }
         Log.e("Ezone On Scroll Api :", "" + url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
