@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -50,9 +51,11 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -63,9 +66,12 @@ import java.util.Timer;
 import java.util.UUID;
 
 import apsupportapp.aperotechnologies.com.designapp.AboutUsActivity;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.TransferRequest_Details;
+import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.Constants;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
+import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
@@ -81,9 +87,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     public static RecyclerView Recycler_verticalView;
     private String TAG = "SnapDashboardActivity";
     private Context context;
-    private NestedScrollView nestedScrollview;
+    public static NestedScrollView nestedScrollview;
     RequestQueue queue;
-    String userId, bearertoken, geoLeveLDesc;
+    String userId, bearertoken, geoLeveLDesc,pushtoken;
     SharedPreferences sharedPreferences;
     ArrayList<String> arrayList, eventUrlList;
     MySingleton m_config;
@@ -103,20 +109,23 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private Snackbar snackbar;
     private TextView RefreshTime;
     public static SnapAdapter snapAdapter;
+    private static boolean tokenProcess=false;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e(TAG, "onCreate: SnapDashboardActivity" );
         super.onCreate(savedInstanceState);
         context = this;
         statusbar();
-        Log.e(TAG, "Oncreate: SnapDashboard..");
         m_config = MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        Log.e("geoLeveLDesc :", "" + geoLeveLDesc);
+        pushtoken = sharedPreferences.getString("push_tokken", "");
+        Log.e(TAG,"userId :--"+ userId);
+        Log.e(TAG,"pushtoken :--"+ pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -159,7 +168,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 Toast.makeText(SnapDashboardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
             }
         }
-        checkPermission();
+      //  checkPermission();
         setupAdapter();
 
         if( getIntent().getExtras() != null)
@@ -180,6 +189,27 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.e(TAG, "onResume: "+device_id+"and token "+TokenRefresh.pushToken);
+        if (!tokenProcess){
+            if(TokenRefresh.pushToken!=null && !device_id.equals("") && device_id !=null)
+                requestSubmitAPI(context,getObject());
+            Log.e(TAG, "onResume: !tokenProcess" );
+        }
+
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e(TAG, "onNewIntent: " );
+
+    }
+
     private void statusbar()
     {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -197,7 +227,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
         RefreshTime = (TextView) findViewById(R.id.refreshTime);
         nestedScrollview = (NestedScrollView) findViewById(R.id.nestedScrollview);
-
         Recycler_verticalView.setNestedScrollingEnabled(false);
         Recycler_verticalView.setLayoutManager(new LinearLayoutManager(this));
         Recycler_verticalView.setHasFixedSize(true);
@@ -210,6 +239,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         getMenuInflater().inflate(R.menu.dash_board, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -235,7 +265,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         } else if (id == R.id.aboutus) {
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
-            finish();
+//            finish();
             return true;
         }
 
@@ -257,11 +287,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             //snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
             //apps = getProduct(24);
             //snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
-           // apps = getProduct(25);
-           // snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
+            // apps = getProduct(25);
+            // snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
 
 
-        } else {
+        } else
+        {
+            // In release build when required hide promo analysis and collabration as per requirement and customer engagement will start from 4 onwards
+            // In debug build unhide promo analysis and collabration and numbering will start from 4 onwards
             List<App> apps = getProduct(0);
             snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
             apps = getProduct(1);
@@ -270,27 +303,23 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
             apps = getProduct(3);
             snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+//            apps = getProduct(4);
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
             apps = getProduct(4);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-//            apps = getProduct(5);
-//            snapAdapter.addSnap(new Snap(Gravity.START, "Key Product", apps));
-            apps = getProduct(5);
             snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+            apps = getProduct(5);
+            snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
             apps = getProduct(6);
-            snapAdapter.addSnap(new Snap(Gravity.START, "Feedback", apps));
-//            apps = getProduct(7);
-//            snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
+            snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
             apps = getProduct(7);
             snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
             apps = getProduct(8);
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
 //            apps = getProduct(10);
-//            snapAdapter.addSnap(new Snap(Gravity.START, "Hourly Performance", apps));
-            apps = getProduct(9);
-            snapAdapter.addSnap(new Snap(Gravity.START,"Feedback of Customer",apps));
+//            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
 
         }
-       Recycler_verticalView.setAdapter(snapAdapter);
+        Recycler_verticalView.setAdapter(snapAdapter);
     }
 
 
@@ -373,20 +402,18 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void checkPermission() {
+    private void checkPermission()
+    {
         boolean checkDeviceId = sharedPreferences.getString("device_id", "").equals("") ? true : false;   //true means you not get any device id.
 
         if (checkDeviceId) {
 
-
             if (Reusable_Functions.checkPermission(android.Manifest.permission.READ_PHONE_STATE, this)) {
                 Log.e("TAG", ":check permission is okk");
                 getDeviceId();
-
-
             } else {
                 Log.e("TAG", ":check permission calling");
-                requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
+                requestPermissions (new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
             }
         }
     }
@@ -408,8 +435,86 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString("device_id", deviceId);
         edit.apply();
+        requestSubmitAPI(context,getObject());
+
+    }
+
+    public JSONObject getObject()
+    {
+        String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("deviceId", device_id);
+            jsonObject.put("pushToken",TokenRefresh.pushToken);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e(TAG, "jsonobject: "+jsonObject.toString());
+
+        return jsonObject;
+    }
 
 
+    private void requestSubmitAPI(final Context mcontext, JSONObject object)  // Sender Submit Api call
+    {
+
+        if (Reusable_Functions.chkStatus(mcontext)) {
+            String url = ConstsCore.web_url + "/v1/submit/deviceID/" + userId ;
+            Log.e(TAG, "requestSubmitAPI: "+url );
+            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response == null || response.equals("")) {
+                                    Log.e(TAG, "onResponse: null" );
+                                } else
+                                {
+                                    String result=response.getString("status");
+                                    tokenProcess=true;
+                                    Log.e(TAG, "onResponse: sucess"+result );
+
+                                }
+                            } catch (Exception e)
+                            {
+                                e.printStackTrace();
+                                Reusable_Functions.hDialog();
+
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
+                            error.printStackTrace();
+                        }
+                    }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", bearertoken);
+                    return params;
+                }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+            };
+            int socketTimeout = 60000;//5 seconds
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+
+        } else
+        {
+            Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override
@@ -549,6 +654,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }, 3 * 1000);
         }
     }
+
+
+
 
 
 }

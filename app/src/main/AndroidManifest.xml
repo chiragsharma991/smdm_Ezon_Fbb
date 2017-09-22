@@ -41,6 +41,21 @@
             android:name=".AboutUsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+        <service
+            android:name=".FCM.TokenRefresh">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".FCM.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".ProductInformation.StyleActivity"
             android:screenOrientation="portrait"
@@ -151,7 +166,6 @@
             android:name=".BestPerformersInventory.BestPerformerInventory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".FloorAvailability.FloorAvailabilityActivity"
             android:screenOrientation="portrait"
@@ -230,7 +244,6 @@
             android:name=".StoreInspection.InspectionHistoryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".SeasonCatalogue.mpm_activity"
             android:screenOrientation="portrait"
@@ -263,7 +276,8 @@
         <activity
             android:name=".DashboardSnap.SnapDashboardActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".FeedbackofCustomer.ProductAvailability_Notify"
             android:screenOrientation="portrait"
@@ -299,7 +313,13 @@
         <activity android:name=".FeedbackofCustomer.PolicyExchangeHO.Callback_PolicyExchange" />
         <activity android:name=".FeedbackofCustomer.PricePromotionHO.Callback_PricePromotion" />
         <activity android:name=".FeedbackofCustomer.ProductQualityRangeHO.Callback_ProductQualityRange" />
-        <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff"></activity>
+        <activity android:name=".FeedbackofCustomer.SupervisorStaffHO.Callback_SupervisorStaff" />
+        <activity android:name=".BORIS.MobileScreenActivity" />
+        <activity android:name=".BORIS.ReturnCatalogueActivity" />
+        <activity android:name=".BORIS.ReturnDetailActivity"></activity>
+
+
+        <activity android:name=".SalesAnalysis.Samplebarcode"/>
     </application>
 
 </manifest>

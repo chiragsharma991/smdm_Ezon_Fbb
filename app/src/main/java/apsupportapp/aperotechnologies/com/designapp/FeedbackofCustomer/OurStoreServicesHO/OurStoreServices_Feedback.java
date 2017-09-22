@@ -13,6 +13,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -146,6 +147,8 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
@@ -196,6 +199,8 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
@@ -261,6 +266,8 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
                             dialogBuilder.setView(dialogView);
 
                             final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                             final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                             final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                             if(!remarks_text.equals("")){
@@ -310,6 +317,8 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
                         dialogBuilder.setView(dialogView);
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                         final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                         if(!remarks_text.equals("")){
@@ -397,11 +406,11 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         String currentDateandTime = time.format(new Date());
 
         customerFeedback = "6";  // fixed for notified feedback
-        customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
-        customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerStoreName = edt_store_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerNumber = edt_customer_mobile_number.getText().toString();
+        customerRemarks = edt_remarks.getText().toString();
+        customerName = edt_first_name.getText().toString();
+        customerLastname = edt_last_name.getText().toString();
+        customerStoreName = edt_store_name.getText().toString();
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
       //  customerArcDate = currentDateandTime;  //this will up to real time.
     }
@@ -554,7 +563,7 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, context);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack,  context, "ourstoreservices",SelectedStoreCode);
             cancelData();
             Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
             dashboard.putExtra("from","feedback");

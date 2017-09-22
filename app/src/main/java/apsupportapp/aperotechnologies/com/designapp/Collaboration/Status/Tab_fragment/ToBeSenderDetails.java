@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -49,7 +50,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private ArrayList<StatusModel> StatusDetailsList,StatusDetailChild;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private String bearertoken;
+    private String bearertoken,storedesc;
     private RequestQueue queue;
     private int count = 0;
     private int limit = 100;
@@ -62,7 +63,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private TextView storeCode,storeCase,detailStoreDesc;
     public static HashMap<Integer, ArrayList<StatusModel>> StatusHashmapChildList;
     private String option="";
-    private String recache;
+    private String recache , str_storeCode;
     private ProgressBar SenderDetailProcess;
 
     @Override
@@ -78,6 +79,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        storedesc = sharedPreferences.getString("storeDescription", "");
+        str_storeCode = storedesc.trim().substring(0,4);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -86,6 +89,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading data...");
+            SenderDetailProcess.setVisibility(View.VISIBLE);
             requestStatusReceiversDetails();
         } else {
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
@@ -95,15 +99,20 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     private void requestStatusReceiversDetails()
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&recache="+recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+str_storeCode+"&caseNo="+caseNo+"&recache="+recache;
+        Log.e("url ",""+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
+                        Log.e("response details ",""+response);
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                SenderDetailProcess.setVisibility(View.GONE);
+
                                 Toast.makeText(ToBeSenderDetails.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -136,8 +145,12 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                             statusSenderDetails = new StatusSenderDetailsAdapter(StatusDetailsList, context,SenderDetailProcess);
                             MakeHashMap(StatusDetailsList);
                             recyclerView.setAdapter(statusSenderDetails);
+                            SenderDetailProcess.setVisibility(View.GONE);
+
                             Reusable_Functions.hDialog();
                         } catch (Exception e) {
+                            SenderDetailProcess.setVisibility(View.GONE);
+
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
@@ -149,6 +162,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        SenderDetailProcess.setVisibility(View.GONE);
+
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -190,14 +205,14 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         storeCode = (TextView) findViewById(R.id.status_detailStoreCode);
         detailStoreDesc = (TextView)findViewById(R.id.detailStoreDesc);
         SenderDetailProcess = (ProgressBar)findViewById(R.id.senderDetailProcess);
-        SenderDetailProcess.setVisibility(View.GONE);
+//        SenderDetailProcess.setVisibility(View.VISIBLE);
         status_senderdetails_imageBtnBack = (RelativeLayout)findViewById(R.id.status_senderdetails_imageBtnBack);
         status_senderdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
-        String data2 = getIntent().getExtras().getString("CODE");
+        String data = getIntent().getExtras().getString("CODE");
         String str_desc = getIntent().getExtras().getString("storeDesc");
         storeCase.setText(" " +"Case#"+data1);
-        storeCode.setText(data2);
+        storeCode.setText(data);
         detailStoreDesc.setText(str_desc);
         caseNo=data1;
 
@@ -215,13 +230,15 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
     private void requestStatusReceiversSubDetails(final int position)
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+userId+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+str_storeCode+"&caseNo="+caseNo+"&option="+option.replaceAll(" ", "%20")+"&recache="+recache;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                       try {
+                        Log.e("response subdetails ",""+response);
+
+                        try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 SenderDetailProcess.setVisibility(View.GONE);
@@ -321,7 +338,8 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
 
         if (Reusable_Functions.chkStatus(context))
         {
-            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading....");
+            Reusable_Functions.sDialog(ToBeSenderDetails.this, "Loading...");
+            SenderDetailProcess.setVisibility(View.VISIBLE);
             requestStatusReceiversSubDetails(Position);
         }
         else

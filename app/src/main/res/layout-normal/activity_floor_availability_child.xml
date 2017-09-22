@@ -93,7 +93,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Buy One Get One "
                                     android:textColor="@color/ezfb_black"
-                                    android:textSize="12sp" />
+                                    android:textSize="12sp"
+                                    />
 
                             </LinearLayout>
 
@@ -170,8 +171,8 @@
                                     android:id="@+id/view"
                                     android:layout_width="1dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
                                     android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="30dp"
                                     android:layout_toRightOf="@+id/linear_sohU"
                                     android:background="@color/smdm_divider_Black"></View>
 
@@ -208,8 +209,8 @@
                                     android:id="@+id/view1"
                                     android:layout_width="1dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
                                     android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="30dp"
                                     android:layout_toRightOf="@+id/linear_dayspassed"
                                     android:background="@color/smdm_divider_Black"></View>
 
@@ -220,7 +221,8 @@
                                     android:layout_marginLeft="5dp"
                                     android:layout_toEndOf="@+id/view1"
                                     android:layout_weight="1"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:layout_toRightOf="@+id/view1">
 
                                     <TextView
                                         android:layout_width="wrap_content"

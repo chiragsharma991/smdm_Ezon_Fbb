@@ -127,7 +127,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
             convertView.setTag(groupViewHolder);
 
         } else {
-            groupViewHolder = (EzoneFilterLocationAdapter.GroupViewHolder) convertView.getTag();
+            groupViewHolder = (GroupViewHolder) convertView.getTag();
         }
 
         groupViewHolder.mGroupText.setText(groupText);
@@ -186,7 +186,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
             childViewHolder.mCheckBox.setTag(groupPosition);
             convertView.setTag(R.layout.sfilter_list_item, childViewHolder);
         } else {
-            childViewHolder = (EzoneFilterLocationAdapter.ChildViewHolder) convertView
+            childViewHolder = (ChildViewHolder) convertView
                     .getTag(R.layout.sfilter_list_item);
         }
 

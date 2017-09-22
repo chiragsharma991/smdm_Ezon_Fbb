@@ -8,6 +8,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.BORIS.MobileScreenActivity;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
@@ -32,6 +33,7 @@ import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvail
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.Samplebarcode;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_activity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity;
@@ -124,33 +126,56 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent SaleThruInventory = new Intent(context,SaleThruInventory.class);
                     startActivity(SaleThruInventory);
                     break;
-                case 40:
-                    Intent RunningPromoActivity = new Intent(context,RunningPromoActivity.class);
-                    startActivity(RunningPromoActivity);
-                    break;
-                case 41:
-                    Intent UpcomingPromo = new Intent(context,UpcomingPromo.class);
-                    startActivity(UpcomingPromo);
-                    break;
-                case 42:
-                    Intent ExpiringPromoActivity = new Intent(context,ExpiringPromoActivity.class);
-                    startActivity(ExpiringPromoActivity);
-                    break;
-                case 43:
-                    Intent BestPerformerActivity = new Intent(context,BestPerformerActivity.class);
-                    startActivity(BestPerformerActivity);
-                    break;
-//                case 51:
-//                    Intent KeyProductActivity = new Intent(context,KeyProductActivity.class);
-//                    startActivity(KeyProductActivity);
+                   // Hide promo for release build
+//                case 40:
+//                    Intent RunningPromoActivity = new Intent(context,RunningPromoActivity.class);
+//                    startActivity(RunningPromoActivity);
 //                    break;
-                case 50:
+//                case 41:
+//                    Intent UpcomingPromo = new Intent(context,UpcomingPromo.class);
+//                    startActivity(UpcomingPromo);
+//                    break;
+//                case 42:
+//                    Intent ExpiringPromoActivity = new Intent(context,ExpiringPromoActivity.class);
+//                    startActivity(ExpiringPromoActivity);
+//                    break;
+//                case 43:
+//                    Intent BestPerformerActivity = new Intent(context,BestPerformerActivity.class);
+//                    startActivity(BestPerformerActivity);
+//                    break;
+
+                case 40:
                     Intent To_Do = new Intent(context,To_Do.class);
                     startActivity(To_Do);
                     break;
-                case 51:
+                case 41:
                     Intent StatusActivity = new Intent(context,StatusActivity.class);
                     startActivity(StatusActivity);
+                    break;
+                case 50:
+                    Intent ProductAvailability_Notify= new Intent(context,ProductAvailability_notify_HO.class);
+                    startActivity(ProductAvailability_Notify);
+                    break;
+
+                case 51:
+                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund_HO.class);
+                    startActivity(PolicyExchangeRefund);
+                    break;
+                case 52:
+                    Intent Price_Promotion = new Intent(context, PricePromotion_HO.class);
+                    startActivity(Price_Promotion);
+                    break;
+                case 53:
+                    Intent ProductQualityRange = new Intent(context, ProductQualityRange_HO.class);
+                    startActivity(ProductQualityRange);
+                    break;
+                case 54:
+                    Intent OurStoreServices = new Intent(context,OurStoreServices_HO.class);
+                    startActivity(OurStoreServices);
+                    break;
+                case 55:
+                    Intent SupervisiorStaff = new Intent(context, SupervisorStaff_HO.class);
+                    startActivity(SupervisiorStaff);
                     break;
                 case 60:
                     Intent Feedback = new Intent(context,Feedback.class);
@@ -176,39 +201,13 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent CustomerLookupActivity = new Intent(context,CustomerLookupActivity.class);
                     startActivity(CustomerLookupActivity);
                     break;
-
-
-//                case 110:
-//                    Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
-//                    startActivity(HourlyPerformence);
+                // hide boris module for release build
+//                case 90:
+//                    Intent MobileScreenActivity = new Intent(context,MobileScreenActivity.class);
+//                    startActivity(MobileScreenActivity);
 //                    break;
-//                case 120:
-//
-                case 90:
-                    Intent ProductAvailability_Notify= new Intent(context,ProductAvailability_notify_HO.class);
-                    startActivity(ProductAvailability_Notify);
-                    break;
 
-                case 91:
-                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund_HO.class);
-                    startActivity(PolicyExchangeRefund);
-                    break;
-                case 92:
-                    Intent Price_Promotion = new Intent(context, PricePromotion_HO.class);
-                    startActivity(Price_Promotion);
-                    break;
-                case 93:
-                    Intent ProductQualityRange = new Intent(context, ProductQualityRange_HO.class);
-                    startActivity(ProductQualityRange);
-                    break;
-                case 94:
-                    Intent OurStoreServices = new Intent(context,OurStoreServices_HO.class);
-                    startActivity(OurStoreServices);
-                    break;
-                case 95:
-                    Intent SupervisiorStaff = new Intent(context, SupervisorStaff_HO.class);
-                    startActivity(SupervisiorStaff);
-                    break;
+
 
 
             }
@@ -301,21 +300,30 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Target Stock Exceptions", R.mipmap.targetstockexceptions));
                 apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions));
                 break;
+               //hide promo for release build
+//            case 4 :
+//                apps.add(new App("Running Promo", R.mipmap.runningpromo));
+//                apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo));
+//                apps.add(new App("Expiring Promo", R.mipmap.expiringpromo));
+//                apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers));
+//                break;
+
 
             case 4 :
-                apps.add(new App("Running Promo", R.mipmap.runningpromo));
-                apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo));
-                apps.add(new App("Expiring Promo", R.mipmap.expiringpromo));
-                apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers));
-                break;
-
-//            case 5 :
-//                apps.add(new App("Hourly Info", R.mipmap.hourlyperformance));
-//                break;
-            case 5 :
                 apps.add(new App("To Do", R.mipmap.stocktransfer));
                 apps.add(new App("Status", R.mipmap.stocktransfer));
                 break;
+
+            case 5:
+                apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability));
+                apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn));
+                apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion));
+                apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange));
+                apps.add(new App("Our Store Services",R.mipmap.ourstoreservices));
+                apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff));
+                break;
+
+
             case 6 :
                 apps.add(new App("Best Worst Performer", R.mipmap.feedback));
                 apps.add(new App("Best Worst Performer List", R.mipmap.feedbacklist));
@@ -328,16 +336,11 @@ public class SwitchingActivity extends AppCompatActivity
             case 8 :
                 apps.add(new App("Customer Engagement", R.mipmap.customerengagement));
                 break;
-//            case 9 :
+             // hide boris module for release build
+//            case 10 :
+//                apps.add(new App("Boris",R.mipmap.customerengagement));
 //                break;
-            case 9 :
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn));
-                apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion));
-                apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange));
-                apps.add(new App("Our Store Services",R.mipmap.ourstoreservices));
-                apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff));
-                break;
+
 
             // switch for ezone user
             case 21 :

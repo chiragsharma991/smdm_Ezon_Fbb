@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -90,6 +91,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
+            ReceiverDetailProcess.setVisibility(View.VISIBLE);
             Reusable_Functions.sDialog(context, "Loading data...");
             requestReceiverStatusDetails();
         } else {
@@ -103,13 +105,13 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
         rec_storeCode = (TextView) findViewById(R.id.rec_status_detailStoreCode);
         rec_storeDesc = (TextView) findViewById(R.id.rec_status_detailStoreDesc);
         ReceiverDetailProcess = (ProgressBar) findViewById(R.id.receiverDetailProcess);
-        ReceiverDetailProcess.setVisibility(View.GONE);
+//        ReceiverDetailProcess.setVisibility(View.VISIBLE);
         status_receiverdetails_imageBtnBack = (RelativeLayout) findViewById(R.id.status_receiverdetails_imageBtnBack);
         status_receiverdetails_imageBtnBack.setOnClickListener(this);
         int data1 = getIntent().getExtras().getInt("CASE");
         senderStoreCode = getIntent().getExtras().getString("CODE");
         String storeDesc = getIntent().getExtras().getString("storeDesc");
-        rec_storeCase.setText(" " + "Case#" + data1);
+        rec_storeCase.setText("Case#" + data1);
         rec_storeCode.setText(senderStoreCode);
         rec_storeDesc.setText(storeDesc);
         caseNo = data1;
@@ -123,9 +125,12 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("response details receiver",""+response);
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
+                                ReceiverDetailProcess.setVisibility(View.GONE);
                                 Toast.makeText(ToBeReceiverDetails.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -152,9 +157,11 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                             rec_details_Adapter = new ReceiverStatusDetailsAdapter(Rec_Status_dtlList, context, ReceiverDetailProcess);
                             MakeHashMap(Rec_Status_dtlList);
                             rec_detail_recycleView.setAdapter(rec_details_Adapter);
+                            ReceiverDetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
 
                         } catch (Exception e) {
+                            ReceiverDetailProcess.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
@@ -165,6 +172,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        ReceiverDetailProcess.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -225,7 +233,8 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
         option = Rec_Status_dtlList.get(position).getLevel();
 
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.sDialog(ToBeReceiverDetails.this, "Loading....");
+            Reusable_Functions.sDialog(ToBeReceiverDetails.this, "Loading...");
+            ReceiverDetailProcess.setVisibility(View.VISIBLE);
             requestReceiverStatusSubDetails(position);
 
         } else {
@@ -240,6 +249,8 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("response subdetails receiver",""+response);
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -270,7 +281,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
                             ReceiverDetailProcess.setVisibility(View.GONE);
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             ReceiverDetailProcess.setVisibility(View.GONE);
                             e.printStackTrace();

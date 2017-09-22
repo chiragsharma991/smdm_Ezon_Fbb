@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -148,6 +149,8 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
@@ -198,6 +201,8 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
@@ -264,6 +269,8 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
                             dialogBuilder.setView(dialogView);
 
                             final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                             final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                             final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                             if(!remarks_text.equals("")){
@@ -313,6 +320,8 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
                         dialogBuilder.setView(dialogView);
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                         final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                         if(!remarks_text.equals("")){
@@ -410,12 +419,12 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
         String currentDateandTime = time.format(new Date());
 
         customerFeedback = "5";  // fixed for notified feedback
-        customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
-        customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerEmpname = edt_emp_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerStorename = edt_store_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerNumber = edt_customer_mobile_number.getText().toString();
+        customerRemarks = edt_remarks.getText().toString();
+        customerName = edt_first_name.getText().toString();
+        customerLastname = edt_last_name.getText().toString();
+        customerEmpname = edt_emp_name.getText().toString();
+        customerStorename = edt_store_name.getText().toString();
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
         customerArcDate = currentDateandTime;  //this will up to real time.
     }
@@ -426,7 +435,7 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
         userId = sharedPreferences.getString("userId", "");
         Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
-       // SelectedStoreCode = store.trim().substring(0, 4);
+        SelectedStoreCode = store.trim().substring(0, 4);
         Log.e("store"," "+store);
         storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -535,7 +544,7 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode",SelectedStoreCode);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -580,7 +589,8 @@ public class SupervisiorStaff extends AppCompatActivity implements View.OnClickL
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, context);
+           // SelectedStoreCode="2663";
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "supervisorstaff",SelectedStoreCode);
             cancelData();
             Intent dashboard = new Intent(context, SnapDashboardActivity.class);
             dashboard.putExtra("from","feedback");

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:weightSum="5.9"
+            android:weightSum="6.9"
             >
 
             <LinearLayout
@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Small"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"/>
 
 
@@ -61,7 +61,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.96"
                 >
 
                 <TextView
@@ -70,17 +70,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="54"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"/>
-
-
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                >
+                android:layout_weight="1.03">
 
                 <TextView
                     android:layout_centerHorizontal="true"
@@ -88,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"/>
 
 
@@ -97,8 +94,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.03"
-              >
+                android:layout_weight="1.04">
 
                 <TextView
                     android:layout_centerHorizontal="true"
@@ -106,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"/>
 
             </RelativeLayout>
@@ -123,7 +119,23 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text="01"
-                    android:textColor="@color/smdm_default_color"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="@dimen/normallayout_storesize"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9">
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/detailChild_sellThru"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="01"
+                    android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/normallayout_storesize"/>
 
             </RelativeLayout>

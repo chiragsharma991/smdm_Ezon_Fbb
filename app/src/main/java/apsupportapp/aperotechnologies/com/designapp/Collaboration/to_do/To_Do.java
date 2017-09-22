@@ -3,16 +3,21 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.TransferRequestFragment;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -23,14 +28,29 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     private ViewPager viewPager;
     private TabLayout tab;
     RelativeLayout ToDo_imageBtnBack;
+    String userId, bearertoken, storeDescription, geoLeveLDesc;
+    SharedPreferences sharedPreferences;
+    private TextView txtStoreCode,txtStoreName;
+    public static String deviceId;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        userId = sharedPreferences.getString("userId", "");
+        bearertoken = sharedPreferences.getString("bearerToken", "");
+        storeDescription = sharedPreferences.getString("storeDescription", "");
+        geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        deviceId = sharedPreferences.getString("device_id","");
+        Log.e( "onCreate: ",""+deviceId );
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
+        txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
+        txtStoreName = (TextView)findViewById(R.id.txtStoreName);
+        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
+        txtStoreName.setText(storeDescription.substring(5));
         ToDo_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();

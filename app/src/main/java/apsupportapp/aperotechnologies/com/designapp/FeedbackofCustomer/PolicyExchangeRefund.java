@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -167,6 +168,8 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
@@ -217,6 +220,8 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
@@ -283,6 +288,8 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                             dialogBuilder.setView(dialogView);
 
                             final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                             final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                             final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                             if(!remarks_text.equals("")){
@@ -332,6 +339,8 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                         dialogBuilder.setView(dialogView);
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                         final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                         if(!remarks_text.equals("")){
@@ -465,14 +474,12 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         String currentDateandTime = sdf.format(new Date());
 
         customerFeedback = "3";  // fixed for notified feedback
-        customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
-        customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
+        customerNumber = edt_customer_mobile_number.getText().toString();
+        customerRemarks = edt_remarks.getText().toString();
+        customerName = edt_first_name.getText().toString();
+        customerLastname = edt_last_name.getText().toString();
         customerExchangeDone = radioExchangeYes.isChecked() ? "YES" : "NO";
-        Log.e("----","customerExchangeDone"+customerExchangeDone.toString());
         customerProductVerified =  radioProductYes.isChecked() ? "YES" : "NO";
-        Log.e("----","customerExchangeDone"+customerProductVerified.toString());
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
 
         // customerArcDate = currentDateandTime;  //this will up to real time.
@@ -484,7 +491,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         user_trim = userId.substring(0,2);
         store = sharedPreferences.getString("storeDescription", "");
-//        SelectedStoreCode = store.trim().substring(0, 4);
+        SelectedStoreCode = store.trim().substring(0, 4);
 
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
@@ -660,7 +667,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", "2663");
+            jsonObject.put("storeCode", SelectedStoreCode);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -702,7 +709,8 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, context);
+           // SelectedStoreCode = "2663";
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "policyexchange",SelectedStoreCode);
 
             cancelData();
             Intent dashboard = new Intent(context, SnapDashboardActivity.class);

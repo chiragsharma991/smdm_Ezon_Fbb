@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -81,6 +82,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
     private RequestQueue queue;
     private String remark, SelectedStoreCode;
     String remarks_text;
+    int max_char;
     private TextView incorrect_phone, incorrect_remark, storedescription;
     private feedbackInterface mCallback;
     private ScrollView scrollView;
@@ -181,6 +183,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
@@ -230,6 +234,28 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                 dialogBuilder.setView(dialogView);
 
                 final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
+//                edt_remark_dialog.addTextChangedListener(new TextWatcher() {
+//                    @Override
+//                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                        if(count == 10){
+//                            Toast.makeText(context,"limit exceeds",Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void afterTextChanged(Editable s) {
+//
+//                    }
+//                });
+
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
@@ -295,6 +321,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                             dialogBuilder.setView(dialogView);
 
                             final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                            edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                             final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                             final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                             if(!remarks_text.equals("")){
@@ -343,6 +371,8 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
                         dialogBuilder.setView(dialogView);
 
                         final EditText edt_remark_dialog = (EditText) dialogView.findViewById(R.id.edt_remark_dialog);
+                        edt_remark_dialog.setFilters(new InputFilter[] { new InputFilter.LengthFilter(500)});
+
                         final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                         final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                         if(!remarks_text.equals("")){
@@ -504,19 +534,20 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
 
         customerFeedback = "1";  // fixed for notified feedback
         customerNumber = edt_customer_mobile_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerRemarks = edt_remarks.getText().toString().replaceAll("\\s+", "").trim();
-        customerName = edt_first_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerLastname = edt_last_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerEAN = edt_ean_number.getText().toString().replaceAll("\\s+", "").trim();
-        customerBrand = edt_brand_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerProduct = edt_product_name.getText().toString().replaceAll("\\s+", "").trim();
-        customerSize = edt_size.getText().toString().replaceAll("\\s+", "").trim();
-        customerQty = edt_quantity.getText().toString().replaceAll("\\s+", "").trim();
-        customerColorOption1 = edt_color_option1.getText().toString().replaceAll("\\s+", "").trim();
-        customerColorOption2 = edt_color_option2.getText().toString().replaceAll("\\s+", "").trim();
-        customerFit = edt_fit.getText().toString().replaceAll("\\s+", "").trim();
-        customerStyle = edt_style.getText().toString().replaceAll("\\s+", "").trim();
+        customerRemarks = edt_remarks.getText().toString();
+        customerName = edt_first_name.getText().toString();
+        customerLastname = edt_last_name.getText().toString();
+        customerEAN = edt_ean_number.getText().toString();
+        customerBrand = edt_brand_name.getText().toString();
+        customerProduct = edt_product_name.getText().toString();
+        customerSize = edt_size.getText().toString();
+        customerQty = edt_quantity.getText().toString();
+        customerColorOption1 = edt_color_option1.getText().toString();
+        customerColorOption2 = edt_color_option2.getText().toString();
+        customerFit = edt_fit.getText().toString();
+        customerStyle = edt_style.getText().toString();
         customerCallBack = radioYes.isChecked() ? "YES" : "NO";
+        Log.e("customerCallBack ",""+customerCallBack);
        // customerArcDate = "2017-07-15 10:06:55";  //this will up to real time.
     }
 
@@ -580,7 +611,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, context);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "productavailability", SelectedStoreCode);
             clearData();
             Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
             dashboard.putExtra("from","feedback");
@@ -618,7 +649,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         edt_color_option2.getText().clear();
         edt_fit.getText().clear();
         edt_style.getText().clear();
-        radioYes.setChecked(true);
+        radioYes.setChecked(false);
         edt_customer_mobile_number.requestFocus();
 
 

@@ -18,14 +18,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -36,12 +44,16 @@ import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.Adapter.ProductQuality_ReportAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
@@ -50,6 +62,11 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.PolicyExchange_Reports.card_policyExchange;
+import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.PolicyExchange_Reports.relFIndexTablelayout;
+import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_Reports.card_quality;
+import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_Reports.relFIndexTablelayout_quality;
+import static apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_Reports.text_no_data_quality;
 
 /**
  * Created by rkanawade on 25/07/17.
@@ -74,9 +91,11 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
     private String attribute14 = "YES";
     private String feedbackKey = "2";
     private boolean ActivityCreated = false;
-    private CardView card;
+    public static CardView card_quality;
+    public static RelativeLayout relFIndexTablelayout_quality;
     private ProgressBar processbar_view;
     private LinearLayout addleggend;
+    public static TextView text_no_data_quality;
     private float totalFeedbackCount, callbackFeedbackCount, nocallbackFeedbackCount;
     private int runningId;
     private String callback_header="Callback Required from CSD";
@@ -121,13 +140,15 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
 
     private void initialiseUI() {
         listview = (RecyclerView) v.findViewById(R.id.listView);
-        card = (CardView) v.findViewById(R.id.cf_cardView);
+        card_quality = (CardView) v.findViewById(R.id.cf_cardView);
+        relFIndexTablelayout_quality = (RelativeLayout) v.findViewById(R.id.relFIndexTablelayout_quality);
         storedesc = (TextView) v.findViewById(R.id.txtStoreCode);
         processbar_view = (ProgressBar) v.findViewById(R.id.processbar);
         processbar_view.setVisibility(View.GONE);
         pieChart = (PieChart) v.findViewById(R.id.cf_pieChart);
         addleggend = (LinearLayout) v.findViewById(R.id.addleggend);
         pieChart.setOnChartValueSelectedListener(this);
+        text_no_data_quality =(TextView) v.findViewById(R.id.text_no_data_quality);
         title =(TextView) v.findViewById(R.id.cf_text);
         Tabview = (TabLayout) v.findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Yesterday"));
@@ -135,6 +156,9 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
         Tabview.addTab(Tabview.newTab().setText("Last Month"));
         Tabview.setOnTabSelectedListener(this);
         MainMethod();
+        text_no_data_quality.setVisibility(View.GONE);
+        card_quality.setVisibility(View.GONE);
+        relFIndexTablelayout_quality.setVisibility(View.GONE);
         Apicallback(0, true, "Feedback with callback");
 
     }
@@ -162,17 +186,30 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
         switch (id) {
             // case 0 and 1 will follow like first update list and after pie chart
             case 0:
+                card_quality.setVisibility(View.GONE);
+                relFIndexTablelayout_quality.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummary/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true"; //Pie chart Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:
+                card_quality.setVisibility(View.GONE);
+                relFIndexTablelayout_quality.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
             case 2:  // this is for only change list
+                card_quality.setVisibility(View.GONE);
+                relFIndexTablelayout_quality.setVisibility(View.GONE);
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
+                break;
+            case 3:  // this is for only change list
+                card_quality.setVisibility(View.GONE);
+                relFIndexTablelayout_quality.setVisibility(View.GONE);
+                Log.e("here","case 2");
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetail/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14; //Details list Api
+                ApiRequestNew_quality api_request_new = new ApiRequestNew_quality(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             default:
                 break;
@@ -187,6 +224,9 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
         switch (id) {
             // case 0 and 1 will follow like first api call and set view in case 0;
             case 0:
+                card_quality.setVisibility(View.VISIBLE);
+                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                text_no_data_quality.setVisibility(View.GONE);
                 Log.e(TAG, "callback list log: " );
                 callbacklist = new ArrayList<>();
                 callbacklist.addAll(list);
@@ -195,6 +235,9 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
                 processbar_view.setVisibility(View.GONE);
                 break;
             case 1:
+//                card_quality.setVisibility(View.VISIBLE);
+//                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                text_no_data_quality.setVisibility(View.GONE);
                 Log.e(TAG, "Pie chart list log: " );
                 piechartList = new ArrayList<>();
                 piechartList.addAll(list);
@@ -204,6 +247,9 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
                 break;
 
             case 2:  // only for update listview
+                card_quality.setVisibility(View.VISIBLE);
+                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                text_no_data_quality.setVisibility(View.GONE);
                 callbacklist = new ArrayList<>();
                 callbacklist.addAll(list);
                 setlistView(callbacklist);
@@ -266,6 +312,9 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
             case "Feedback with Callback":
                 if (attribute14.equals("NO"))
                     attribute14 = "YES";
+                text_no_data_quality.setVisibility(View.GONE);
+                card_quality.setVisibility(View.VISIBLE);
+                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
                 Apicallback(0, false, "Feedback with callback");
                 processbar_view.setVisibility(View.VISIBLE);
                 break;
@@ -273,6 +322,9 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
             case "Feedback":
                 if (attribute14.equals("YES"))
                     attribute14 = "NO";
+                text_no_data_quality.setVisibility(View.GONE);
+                card_quality.setVisibility(View.VISIBLE);
+                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
                 Apicallback(0, false, "Feedback");
                 processbar_view.setVisibility(View.VISIBLE);
 
@@ -331,6 +383,21 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
     public void nodatafound() {
         Log.e(TAG, "response: null");
         Reusable_Functions.hDialog();
+        if (attribute14.equals("YES")) {
+            Log.e("","inside if no data found");
+            attribute14 = "NO";
+            title.setText("No Callback Required");
+//            card_quality.setVisibility(View.VISIBLE);
+//            relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+            Apicallback(3, false, "Feedback");
+        }else{
+            Log.e("","inside else no data found");
+            attribute14 = "YES";
+            title.setText("Callback Required from CSD");
+//            card_quality.setVisibility(View.VISIBLE);
+//            relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+            Apicallback(3, false, "Feedback with callback");
+        }
         processbar_view.setVisibility(View.GONE);
         try {
 
@@ -380,15 +447,60 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
         switch (checkedId) {
             case 0: // Yesterday
                 view_params = "LD";
-                Apicallback(0, true, "Feedback with callback");
+                if (attribute14.equals("NO")) {
+                    attribute14 = "YES";
+                    text_no_data_quality.setVisibility(View.GONE);
+                    title.setText("Callback Required from CSD");
+//                    card_quality.setVisibility(View.VISIBLE);
+//                    relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                    Apicallback(0, true, "Feedback with callback");
+                }
+                else if(attribute14.equals("YES")){
+                    attribute14 = "NO";
+                    text_no_data_quality.setVisibility(View.GONE);
+                    title.setText("No Callback Required");
+//                    card_quality.setVisibility(View.VISIBLE);
+//                    relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                    Apicallback(0, true, "Feedback with callback");
+                }
                 break;
             case 1: // Last Week
                 view_params = "LW";
-                Apicallback(0, true, "Feedback with callback");
+                if (attribute14.equals("NO")) {
+                    attribute14 = "YES";
+                    text_no_data_quality.setVisibility(View.GONE);
+                    title.setText("Callback Required from CSD");
+//                    card_quality.setVisibility(View.VISIBLE);
+//                    relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                    Apicallback(0, true, "Feedback with callback");
+                }
+                else if(attribute14.equals("YES")){
+                    attribute14 = "NO";
+                    text_no_data_quality.setVisibility(View.GONE);
+                    title.setText("No Callback Required");
+//                    card_quality.setVisibility(View.VISIBLE);
+//                    relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                    Apicallback(0, true, "Feedback with callback");
+                }
                 break;
             case 2: // Last Month
                 view_params = "LM";
-                Apicallback(0, true, "Feedback with callback");
+//                if (attribute14.equals("NO")) {
+//                    attribute14 = "YES";
+                    text_no_data_quality.setVisibility(View.GONE);
+                    title.setText("Callback Required from CSD");
+//                    card_quality.setVisibility(View.VISIBLE);
+//                    relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                    Apicallback(0, true, "Feedback with callback");
+//                }
+//                else if(attribute14.equals("YES")){
+//                    attribute14 = "NO";
+//                    text_no_data_quality.setVisibility(View.GONE);
+//                    title.setText("No Callback Required");
+//                    card_quality.setVisibility(View.VISIBLE);
+//                    relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+//                    Apicallback(0, true, "Feedback with callback");
+//                }
                 break;
             default:
                 break;
@@ -430,6 +542,9 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
                         case 0:
                             if (attribute14.equals("NO")){
                                 attribute14 = "YES";
+                                text_no_data_quality.setVisibility(View.GONE);
+                                card_quality.setVisibility(View.VISIBLE);
+                                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
                                 Apicallback(2, false, "Feedback with callback");
                                 title.setText("Callback Required from CSD");
                                 callback_header = title.getText().toString();
@@ -440,6 +555,9 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
                         case 1:
                             if (attribute14.equals("YES")){
                                 attribute14 = "NO";
+                                text_no_data_quality.setVisibility(View.GONE);
+                                card_quality.setVisibility(View.VISIBLE);
+                                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
                                 Apicallback(2, false, "Feedback");
                                 title.setText("No Callback Required");
                                 callback_header = title.getText().toString();
@@ -476,4 +594,185 @@ public class ProductQualityRange_Reports extends Fragment implements TabLayout.O
         void onTrigger(int position);
 
     }
+}
+
+class ApiRequestNew_quality {
+
+    private final RequestQueue queue;
+    private final int id;
+    private int limit=100;
+    private int offsetvalue=0;
+    private final ArrayList<mpm_model> list;
+    private mpm_model mpm_modelClass;
+    private HttpResponse ResposeInterface;
+    private Context context;
+    private String bearertoken;
+    private String Url;
+    private String TAG;
+    private String data;
+    private int count = 0;
+    private Gson gson;
+    public static JsonArrayRequest getRequest;
+
+    public ApiRequestNew_quality(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id)
+    {
+        ResposeInterface= (HttpResponse)context;
+        this.context=context;
+        bearertoken=token;
+        this.Url=Url;
+        this.TAG=TAG;
+        this.queue=queue;
+        this.id=id;
+        this.list=new ArrayList<>();
+        this.mpm_modelClass=mpm_modelClass;
+        gson=new Gson();
+        setApi(context);
+
+
+    }
+
+    public ApiRequestNew_quality(Context context, String token, String Url, String TAG, RequestQueue queue, mpm_model mpm_modelClass, int id, HttpResponse httpResponse, String data) {
+        ResposeInterface= (HttpResponse)httpResponse;
+        this.context=context;
+        bearertoken=token;
+        this.Url=Url;
+        this.TAG=TAG;
+        this.queue=queue;
+        this.id=id;
+        this.data = data;
+        this.list=new ArrayList<>();
+        this.mpm_modelClass=mpm_modelClass;
+        gson=new Gson();
+        setApi(context);
+    }
+
+    public void setApi(final Context context) {
+
+        /*    Reusable_Functions.progressDialog = new ProgressDialog(context);
+        if(!Reusable_Functions.progressDialog.isShowing())
+        {
+            Reusable_Functions.progressDialog.show();
+            Reusable_Functions.progressDialog.setCancelable(false);
+            Reusable_Functions.progressDialog.setMessage("Loading...");
+
+
+        }*/
+
+        String URL = "";
+        if(TAG.equals("customerFeedbackReport")){
+
+            URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
+
+        }
+        else{
+
+            URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
+
+        }
+        Log.e(TAG, " new final_setApi: URL "+URL );
+        getRequest = new JsonArrayRequest(Request.Method.GET, URL,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public  void onResponse(JSONArray response) {
+                        Log.e(TAG, "onResponse: "+response );
+
+                        try {
+
+                            if (response.equals("") || response == null || response.length() == 0 ) {
+                                Reusable_Functions.hDialog();
+
+
+//                                Toast.makeText(context, "inside null response",Toast.LENGTH_SHORT).show();
+                                card_quality.setVisibility(View.GONE);
+                                relFIndexTablelayout_quality.setVisibility(View.GONE);
+                                text_no_data_quality.setVisibility(View.VISIBLE);
+
+                                // return;
+
+                            }
+                            else if (response.length() == limit) {
+                                card_quality.setVisibility(View.VISIBLE);
+                                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                                text_no_data_quality.setVisibility(View.GONE);
+                                Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
+
+                                Log.e(TAG, "promo eql limit");
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
+                                    list.add(mpm_modelClass);
+
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                //
+
+                                setApi(context);
+
+                            } else if (response.length() < limit) {
+                                card_quality.setVisibility(View.VISIBLE);
+                                relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                                text_no_data_quality.setVisibility(View.GONE);
+                                Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
+
+                                Log.e(TAG, "promo /= limit");
+                                for (int i = 0; i < response.length(); i++)
+                                {
+                                    mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
+                                    list.add(mpm_modelClass);
+                                }
+                                ResposeInterface.response(list,id);
+                                count = 0;
+                                limit = 100;
+                                offsetvalue = 0;
+                                //  Reusable_Functions.hDialog();
+                            }
+                        } catch (Exception e) {
+
+                            ResposeInterface.nodatafound();
+                            card_quality.setVisibility(View.VISIBLE);
+                            relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                            text_no_data_quality.setVisibility(View.GONE);
+
+                            Log.e(TAG, "onResponse catch: "+e.getMessage() );
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG, "onErrorResponse : "+error.getMessage() );
+                        card_quality.setVisibility(View.VISIBLE);
+                        relFIndexTablelayout_quality.setVisibility(View.VISIBLE);
+                        text_no_data_quality.setVisibility(View.GONE);
+
+
+                        ResposeInterface.nodatafound();
+
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Server not found..."+error.getMessage() );
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 30000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        getRequest.setRetryPolicy(policy);
+        queue.add(getRequest);
+    }
+
+
+
 }

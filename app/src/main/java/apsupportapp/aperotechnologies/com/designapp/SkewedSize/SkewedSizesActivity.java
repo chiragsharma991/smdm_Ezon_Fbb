@@ -34,7 +34,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.google.android.gms.playlog.internal.LogEvent;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import java.util.ArrayList;

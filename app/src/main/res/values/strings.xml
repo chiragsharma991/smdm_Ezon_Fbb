@@ -199,5 +199,11 @@
     <string name="customer_feedback_digit">Please enter 10 digit mobile number</string>
     <string name="customer_feedback_remarks">Please enter remarks</string>
 
+    <!--BORIS-->
+
+    <!--<string name="boris_enter_mobile">Enter Customer's Mobile No.</string>-->
+    <string name="boris_return_cat">Return Catalogue</string>
+    <string name="boris_return_detail">Return Detail</string>
+
 
 </resources>

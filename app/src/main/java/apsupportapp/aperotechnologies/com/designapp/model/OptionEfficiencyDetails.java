@@ -11,17 +11,50 @@ public class OptionEfficiencyDetails {
     String planDept;
     int optionCount;
     double optionCountByStore;
-    double stkOnhandQty;
-    double stkOnhandQtyCount;
-    double fullSizeCount;
-    double fullCutCount;
-    double partCutCount;
+
     String planCategory;
     String planClass;
     String brandName;
     String brandplanClass;
     String seasongroup;
+
+    double fullSizeCount;
+
+    public double getPartCutOption() {
+        return partCutOption;
+    }
+
+    public void setPartCutOption(double partCutOption) {
+        this.partCutOption = partCutOption;
+    }
+
+    public double getFullCutOption() {
+        return fullCutOption;
+    }
+
+    public void setFullCutOption(double fullCutOption) {
+        this.fullCutOption = fullCutOption;
+    }
+
+    public double getFullSizeOption() {
+        return fullSizeOption;
+    }
+
+    public void setFullSizeOption(double fullSizeOption) {
+        this.fullSizeOption = fullSizeOption;
+    }
+
+    double partCutOption;
+    double partCutCount;
+    double fullCutOption;
+    double fullCutCount;
+    double stkOnhandQty;
+    double stkOnhandQtyCount;
     double sohCountFullSize;
+
+
+    double fullSizeOption;
+
 
     public double getSohCountFullSize() {
         return sohCountFullSize;
