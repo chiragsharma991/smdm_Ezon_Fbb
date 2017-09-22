@@ -207,7 +207,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
         }
       //  checkPermission();
-        Arrays.asList(kpiIdArray);
+       // Arrays.asList(kpiIdArray);
+
+
         setupAdapter(Arrays.asList(kpiIdArray));
 
         if( getIntent().getExtras() != null)
@@ -389,14 +391,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     lobchecked[0]=false;
                     lobchecked[1]=true;
                 }
-              /*  for (int i = 0; i <lobData.size() ; i++) {
+            /*    for (int i = 0; i < lobchecked.length ; i++) {
                     if(position==i) {
                         lobchecked[position]=true;
-                        Log.i(TAG, "onItemlobList: true"+position);
+                       // Log.i(TAG, "onItemlobList: true"+position);
 
                     }else{
                         lobchecked[position]=false;
-                        Log.i(TAG, "onItemlobList: false"+position);
+                       // Log.i(TAG, "onItemlobList: false"+position);
 
                     }
                 }*/
@@ -448,7 +450,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 }
 
                 if(selectconcept==null || selectLob== null){
-                    Reusable_Functions.showSnackbar(viewpart,"Please select both entries");
+                    Reusable_Functions.showSnackbarError(context,viewpart,"Please select both entries");
                     //dialog.dismiss();
                     return;
                 }
@@ -466,7 +468,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     }
                 }
                 dialog.dismiss();
-                Reusable_Functions.showSnackbar(viewpart,"Mapping failed please try again");
+                Reusable_Functions.showSnackbarError(context,viewpart,"Mapping failed please try again");
 
             }
         });
@@ -596,10 +598,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                         snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
                         break;
 
-                    case "028":
+                    // hourly has been shifted in sales module
+                /*    case "028":
                         apps = getProduct(9);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Hourly performance", apps));
-                        break;
+                        break;*/
 
                     case "029":
                         apps = getProduct(10);

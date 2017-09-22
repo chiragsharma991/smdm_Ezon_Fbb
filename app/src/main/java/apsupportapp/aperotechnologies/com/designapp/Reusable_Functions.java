@@ -86,11 +86,23 @@ public class Reusable_Functions  {
         Snackbar.make(view, msg, Snackbar.LENGTH_LONG).show();
     }
 
-    public static void showSnackbarError(View view, String msg){
+    public static void showSnackbarError(Context context,View view, String msg){
+        Snackbar snack = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
+        view = snack.getView();
+
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTextColor(Color.parseColor("#ffffff"));
+        view.setBackgroundColor(ContextCompat.getColor(context, R.color.ezfbb_red));
+        snack.show();    }
+
+    public static void showSnackbarSuccess(Context context,View view, String msg){
         Snackbar snack = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
         view = snack.getView();
         TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(Color.parseColor("#ff0000"));
+        tv.setTextColor(Color.parseColor("#ffffff"));
+        view.setBackgroundColor(ContextCompat.getColor(context, R.color.smdm_actionbar));
+
+
         snack.show();    }
 
     public static void ViewVisible (View view)

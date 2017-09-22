@@ -52,7 +52,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     PieChart pieChart;
     RequestQueue queue;
     Context context;
-    String userId, bearertoken, TAG = "VisualReport",storeDescription,geoLevel2Code;
+    String userId, bearertoken, TAG = "VisualReport",storeDescription,geoLevel2Code, lobId;
     SharedPreferences sharedPreferences;
     Gson gson;
     int offset  = 0,limit = 10,count = 0;
@@ -76,6 +76,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         bearertoken = sharedPreferences.getString("bearerToken", "");
         storeDescription = sharedPreferences.getString("storeDescription","");
         geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+        lobId = sharedPreferences.getString("lobid","");
 
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -84,8 +85,8 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         gson = new Gson();
         txtStoreCode = (TextView)findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreName.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreName.setText(storeDescription.substring(5));
         visualreport_imageBtnBack = (RelativeLayout)findViewById(R.id.visualreport_imageBtnBack);
         vr_likeVal = (TextView)findViewById(R.id.vr_likesVal);
         vr_dislikeVal = (TextView)findViewById(R.id.vr_dislikesVal);
@@ -115,7 +116,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
 
     private void requestVisualReportAPI() {
 
-      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache +"&geoLevel2Code="+geoLevel2Code;//+"&offset=" + offset + "&limit=" + limit ;
+      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache +"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;//+"&offset=" + offset + "&limit=" + limit ;
         Log.e(TAG, "requestVisualReportAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

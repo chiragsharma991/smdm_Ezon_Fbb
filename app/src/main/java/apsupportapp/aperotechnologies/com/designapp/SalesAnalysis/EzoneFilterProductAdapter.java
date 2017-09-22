@@ -786,7 +786,8 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
     private void requestProductHierarchyAPI(final int prod_level, String str) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
-        String geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+        String geoLevel2Code = sharedPreferences.getString("concept","");
+        String lobId = sharedPreferences.getString("lobid","");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -796,31 +797,31 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
             if (prod_level == 2) {
                 Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
             } else if (prod_level == 3) {
 
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
             } else if (prod_level == 4) {
 
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
             }
         } else {
             if (prod_level == 2)
             {
                 Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
             } else if (prod_level == 3) {
 
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
             } else if (prod_level == 4) {
 
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
             } else if (prod_level == 5) {
-                search_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
             }
         }
         Log.e("search url:", "" + search_url);

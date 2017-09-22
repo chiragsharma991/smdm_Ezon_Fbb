@@ -76,7 +76,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     Gson gson;
     String option_seg_clk = "WTD";
     int planlevel = 2;
-    String userId, bearertoken,achColor,storeDescription;
+    String userId, bearertoken,achColor,storeDescription,geoLevel2Code,lobId;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
     RequestQueue queue;
@@ -118,7 +118,9 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -131,8 +133,8 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
 
         txtStoreCode = (TextView) optionview.findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) optionview.findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreDesc.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreDesc.setText(storeDescription.substring(5));
         Cache cache = new DiskBasedCache(getActivity().getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -775,7 +777,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     }
 
     private void requestPlanOptionAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
         Log.e("TAG", "requestPlanOption: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -899,7 +901,7 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     }
 
     private void requestPlanOptionAchColorAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26")+"&achColor="+achColor+
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26")+"&achColor="+achColor+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+
                 "&offset=" + offsetvalue + "&limit=" + limit;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

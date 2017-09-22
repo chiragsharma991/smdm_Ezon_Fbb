@@ -90,7 +90,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     JsonArrayRequest postRequest;
     RequestQueue queue;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT", e_bandnm;
+    String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT", e_bandnm,geoLevel2Code,lobId;
     Gson gson;
     String update_userId;
     private boolean checkNetworkFalse = false;
@@ -130,9 +130,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         super.onCreate(savedInstanceState);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
-        update_userId = userId.substring(0, userId.length() - 5);
+       // update_userId = userId.substring(0, userId.length() - 5);
         Log.e("update_userId", "" + update_userId);
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
         m_config = MySingleton.getInstance(context);
     }
 
@@ -221,7 +223,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
     private void requestCustomerLoyaltySummary()
     {
-        String url = ConstsCore.web_url + "/v1/display/customerloyaltysummary/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/customerloyaltysummary/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e("cust summary url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
@@ -313,7 +315,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private void requestCustomerPlanEngagement()
     {
         int level = 1;
-        String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level;//+ "&offset=" + offsetval + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;//+ "&offset=" + offsetval + "&limit=" + limit;
 
         Log.e("cust summary url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
@@ -418,7 +420,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private void requestLifeStage()
     {
         int level = 2;
-        String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + update_userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level;//+ "&offset=" + offsetval + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;//+ "&offset=" + offsetval + "&limit=" + limit;
 
         Log.e("cust summary url 1", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
@@ -831,12 +833,12 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         String url = "";
         if(bandClick)
         {
-            url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
         }
         else
         {
-            url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit;
+            url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
         }Log.e("detail url 1:", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,

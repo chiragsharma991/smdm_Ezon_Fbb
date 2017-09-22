@@ -84,7 +84,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     String checkAgeingVal = null;
     private boolean coreSelection = false;
     private boolean from_filter = false;
-    private String selectedString = "";
+    private String selectedString = "", geoLevel2Code, lobId;
     public static Activity stockAgeing;
     private boolean toggleClick = false;
     private TabLayout Tabview;
@@ -102,13 +102,15 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        stock_txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        stock_txtStoreName.setText(storeDescription.substring(5));
+//        stock_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        stock_txtStoreName.setText(storeDescription.substring(5));
         StockAgListView.setTag("FOOTER");
         StockAgListView.setVisibility(View.VISIBLE);
         if (Reusable_Functions.chkStatus(context)) {
@@ -201,18 +203,18 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             if (from_filter) {
                 if (coreSelection) {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion;
+                    url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                 } else {
                     // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                 }
             } else {
                 if (coreSelection) {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
+                    url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                 } else {
                     // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                 }
             }
             Log.e("TAG", "requestStockAgeingApi: "+url );

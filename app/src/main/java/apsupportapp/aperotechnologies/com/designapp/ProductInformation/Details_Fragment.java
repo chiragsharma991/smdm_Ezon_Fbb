@@ -52,7 +52,7 @@ public class Details_Fragment extends Fragment implements View.OnClickListener
         Bundle bundle = getActivity().getIntent().getExtras();
         articleOption = bundle.getString("articleOption");
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
-        storeDescription = sharedPreferences.getString("storeDescription","");
+     //   storeDescription = sharedPreferences.getString("storeDescription","");
         Log.e( "onCreate: ",""+storeDescription );
     }
 
@@ -142,8 +142,10 @@ public class Details_Fragment extends Fragment implements View.OnClickListener
         {
             imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_green);
         }
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreDesc.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreDesc.setText(storeDescription.substring(5));
+        txtStoreCode.setText(styleDetailsBean.getStoreCode());
+        txtStoreDesc.setText(styleDetailsBean.getStoreDesc());
         txtProductName.setText(styleDetailsBean.getProductName());
         txtCollcetion.setText(styleDetailsBean.getCollectionName());
         txtFabric.setText(styleDetailsBean.getProductFabricDesc());

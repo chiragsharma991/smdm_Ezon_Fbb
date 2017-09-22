@@ -62,7 +62,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     SwipeDeckAdapter adapter;
     static String likeDislikeFlg ;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken,storeCode,geoLevel2Code;
+    String userId, bearertoken,storeCode,geoLevel2Code, lobId;
     RadioButton visualAssort_PendingChk,visualAssort_CompletedChk;
     LinearLayout visualAssort_Pending,visualAssort_Completed;
     RequestQueue queue;
@@ -97,11 +97,14 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         Visual_Assortment_Activity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId","");
-        geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+
 //        userId = userId.substring(0,userId.length()-5);
 //        Log.e("userId",""+userId);
         bearertoken = sharedPreferences.getString("bearerToken","");
-        storeCode = sharedPreferences.getString("storeDescription","");
+       // storeCode = sharedPreferences.getString("storeDescription","");
+        storeCode = getIntent().getExtras().getString("storeCode");
         reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
@@ -122,7 +125,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         });
 
         txtStoreCode = (TextView)findViewById(R.id.txtStoreCode);
-        txtStoreCode.setText(storeCode.trim().substring(0,4));
+//        txtStoreCode.setText(storeCode.trim().substring(0,4));
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
         txtStoreName.setText(storeCode.substring(5));
         imgBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
@@ -584,11 +587,11 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         String url;
         if (vassort_from_filter)
         {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
         }
         else
         {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
         }
 
       Log.e("visual assort url :",""+url);

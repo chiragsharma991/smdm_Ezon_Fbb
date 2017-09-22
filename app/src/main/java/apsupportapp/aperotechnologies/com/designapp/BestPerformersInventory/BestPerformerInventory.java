@@ -106,7 +106,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private boolean coreSelection = false;
     public static Activity bestperoformer;
     private boolean from_filter = false;
-    private String selectedString = "";
+    private String selectedString = "", geoLevel2Code, lobId;
     private boolean toggleClick = true;
     private boolean worstToggle = false;
     private RelativeLayout FreshnessIndex_Ez_moreVertical;
@@ -124,7 +124,9 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
         if (geoLeveLDesc.equals("E ZONE")) {
             setContentView(R.layout.activity_best_performer_ez_inventory);
             getSupportActionBar().hide();
@@ -623,24 +625,24 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                 //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             }
         } else {
             if (coreSelection) {
 
                 //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformers/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             }
         }
         return url;
@@ -652,8 +654,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
         BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
-        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        BestInvent_txtStoreName.setText(storeDescription.substring(5));
+//        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        BestInvent_txtStoreName.setText(storeDescription.substring(5));
         rel_store_layout.setVisibility(View.VISIBLE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
         BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
@@ -1391,24 +1393,24 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                 //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             }
         } else {
             if (coreSelection) {
 
                 //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&level=" + level;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&level=" + level;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             }
         }
         return url;

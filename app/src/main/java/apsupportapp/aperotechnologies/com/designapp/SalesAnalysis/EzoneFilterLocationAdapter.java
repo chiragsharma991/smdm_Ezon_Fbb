@@ -322,7 +322,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
     private void requestLocationHierarchy(int level ,String txtClickedVal) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
-        String geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+        String geoLevel2Code = sharedPreferences.getString("concept","");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -332,7 +332,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 //        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis"))
 //        {
 //            //with geoLevel2Code param
-            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20")+"&geoLevel2Code="+geoLevel2Code;
+            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZNew/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20")+"&geoLevel2Code="+geoLevel2Code;
 
 //        }
 //        else

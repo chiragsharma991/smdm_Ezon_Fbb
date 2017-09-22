@@ -74,7 +74,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     CustomerRecomdtn customerRecomdtn;
     SharedPreferences sharedPreferences;
     private RelativeLayout rel_cust_detl_back;
-    private String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT", update_userId, recache = "true", businessCcb;
+    private String userId, bearertoken, geoLeveLDesc, engagementFor = "EVENT", update_userId, recache = "true", businessCcb,geoLevel2Code,lobId;
     Gson gson;
     private int offset = 0, limit = 10, count = 0;
     static ArrayList<CustomerDetail> customerDetailsarray;
@@ -99,10 +99,12 @@ public class CustomerDetailActivity extends AppCompatActivity {
         Log.e("unique_Customer", "" + unique_Customer);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
-        update_userId = userId.substring(0, userId.length() - 5);
+      //  update_userId = userId.substring(0, userId.length() - 5);
         Log.e("update_userId", "" + update_userId);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -242,7 +244,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     }
 
     private void requestCustomerDetailsAPI() {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e("cust details  url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
@@ -304,7 +306,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
     private void requestResetCustomerDetailAPI()
     {
-        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e("cust details  url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
@@ -382,7 +384,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
     }
 
     private void requestCustomerRecomdtn() {
-        String url = ConstsCore.web_url + "/v1/display/customerreco/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/customerreco/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e("cust summary url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
@@ -554,13 +556,13 @@ public class CustomerDetailActivity extends AppCompatActivity {
     {
         String url = "";
         if (businessCcb.equals("Food")) {
-            url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         } else if (businessCcb.equals("Fashion")) {
-            url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         } else if (businessCcb.equals("Home")) {
-            url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         } else if (businessCcb.equals("Electronics")) {
-            url = ConstsCore.web_url + "/v1/display/customercontribution/" + update_userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb;
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
         Log.e("pie on focus ", "" + url);
 

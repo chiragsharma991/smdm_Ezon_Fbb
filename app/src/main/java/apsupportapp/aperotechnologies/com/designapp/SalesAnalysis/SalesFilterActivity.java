@@ -65,7 +65,7 @@ public class SalesFilterActivity extends Activity {
     HashMap<String, List<String>> listDataChild;
     int offsetvalue = 0, limit = 100, count = 0;
     public static int level_filter = 1;
-    String userId, bearertoken,geoLevel2Code;
+    String userId, bearertoken,geoLevel2Code, lobId;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
     Context context;
@@ -88,7 +88,8 @@ public class SalesFilterActivity extends Activity {
         context = this;
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -397,7 +398,7 @@ public class SalesFilterActivity extends Activity {
         String url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
 //           //with geoLevel2Code field
-            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //        }
 //        else
 //        {
@@ -497,7 +498,7 @@ public class SalesFilterActivity extends Activity {
         String url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
 //            //with geoLevel2Code field
-            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //        }
 //        else
 //        {
@@ -600,7 +601,7 @@ public class SalesFilterActivity extends Activity {
         String url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
 //             //with geoLevel2code param
-                url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+                url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //            }
 //            else
 //            {
@@ -704,7 +705,7 @@ public class SalesFilterActivity extends Activity {
         String url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
 //            //with geoLevel2Code param
-            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //        }
 //        else
 //        {
@@ -815,7 +816,7 @@ public class SalesFilterActivity extends Activity {
 
         String url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis") || (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))) {
-            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + level_filter + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //        }
 //        else
 //        {

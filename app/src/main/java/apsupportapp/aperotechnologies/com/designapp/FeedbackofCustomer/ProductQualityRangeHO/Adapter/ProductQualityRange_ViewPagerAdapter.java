@@ -14,10 +14,12 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQu
 public class ProductQualityRange_ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     int mNumOfTabs;
+    String storeCode;
 
-    public ProductQualityRange_ViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public ProductQualityRange_ViewPagerAdapter(FragmentManager fm, int NumOfTabs, String storeCode) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        this.storeCode = storeCode;
     }
 
     @Override
@@ -25,10 +27,10 @@ public class ProductQualityRange_ViewPagerAdapter extends FragmentStatePagerAdap
 
         switch (position) {
             case 0:
-                ProductQualityRange_Reports tab1 = new ProductQualityRange_Reports();
+                ProductQualityRange_Reports tab1 = new ProductQualityRange_Reports(storeCode);
                 return tab1;
             case 1:
-                ProductQualityRange_Feedback tab2 = new ProductQualityRange_Feedback();
+                ProductQualityRange_Feedback tab2 = new ProductQualityRange_Feedback(storeCode);
                 return tab2;
             default:
                 return null;

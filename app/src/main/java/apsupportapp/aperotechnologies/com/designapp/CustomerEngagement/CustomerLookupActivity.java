@@ -36,7 +36,7 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     static LinearLayout ez_linear_dots;
     Context context;
     RequestQueue queue;
-    String userId, bearertoken,geoLeveLDesc;
+    String userId, bearertoken,geoLeveLDesc,geoLevel2Code,lobId;
     SharedPreferences sharedPreferences;
     Gson gson;
     MySingleton m_config;
@@ -58,6 +58,8 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken","");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
 
         if (geoLeveLDesc.equals("E ZONE"))
         {

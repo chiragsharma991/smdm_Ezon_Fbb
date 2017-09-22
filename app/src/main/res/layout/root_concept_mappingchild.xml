@@ -41,7 +41,6 @@
                 android:id="@+id/radio_chk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@android:color/black"
                 android:focusable="true"
                 android:layout_marginRight="5dp"
                 android:checked="true"

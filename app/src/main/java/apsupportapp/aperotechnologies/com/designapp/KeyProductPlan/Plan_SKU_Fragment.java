@@ -75,7 +75,7 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
     Gson gson;
     String sku_seg_clk = "WTD";
     int planlevel = 3;
-    String userId, bearertoken,storeDescription;
+    String userId, bearertoken,storeDescription,geoLevel2Code,lobId;
     ScrollView scrollViewC;
     ScrollView scrollViewD;
     RequestQueue queue;
@@ -119,7 +119,9 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
 
     }
 
@@ -133,8 +135,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
         optionName = "";
         txtStoreCode = (TextView) skuview.findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) skuview.findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreDesc.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreDesc.setText(storeDescription.substring(5));
         txtSkuGreen =(Button)skuview.findViewById(R.id.txtSkuGreen);
         txtSkuRed =(Button)skuview.findViewById(R.id.txtSkuRed);
         txtSkuAmber =(Button)skuview.findViewById(R.id.txtSkuAmber);
@@ -747,7 +749,7 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
     }
 
     private void requestPlanSkuAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + sku_seg_clk + "&level=" + planlevel +"&option=" + optionName.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + sku_seg_clk + "&level=" + planlevel +"&option=" + optionName.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e("TAG", "requestPlan_SKU: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -867,7 +869,7 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
     }
 
     private void requestPlanSkuAchColorAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + sku_seg_clk + "&level=" + planlevel +"&option=" + optionName.replaceAll(" ", "%20").replaceAll("&", "%26")+ "&achColor="+ achColor +"&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + sku_seg_clk + "&level=" + planlevel +"&option=" + optionName.replaceAll(" ", "%20").replaceAll("&", "%26")+ "&achColor="+ achColor +"&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

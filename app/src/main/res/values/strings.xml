@@ -206,5 +206,6 @@
     <string name="boris_return_cat">Return Catalogue</string>
     <string name="boris_return_detail">Return Detail</string>
 
+    <string name="fg_store_audit">FG store Audit</string>
 
 </resources>

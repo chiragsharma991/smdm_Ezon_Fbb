@@ -87,12 +87,17 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
     private View v;
     private String remarks_text;
     ArrayAdapter<String> adp3;
-    private String remark, user_trim, SelectedStoreCode;
+    private String remark, user_trim, SelectedStoreCode, storeCode, store_code;
     private String userId, bearertoken, geoLeveLDesc, store;
     private String customerFeedback, customerNumber, customerRemarks, customerName, customerLastname,
             customerCallBack, customerExchangeDone, customerProductVerified, exchangeReason, customerArcDate;
     private TextView incorrect_phone, incorrect_remark, storedescription;
     SharedPreferences sharedPreferences;
+
+    public PolicyExchange_Feedback(String storeCode) {
+
+        this.storeCode = storeCode;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -529,9 +534,10 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         userId = sharedPreferences.getString("userId", "");
         user_trim = userId.substring(0,2);
         Log.e("user_trim ",""+user_trim);
-        store = sharedPreferences.getString("storeDescription", "");
-        SelectedStoreCode = store.trim().substring(0, 4);
-        storedescription.setText(store);
+     //   store = sharedPreferences.getString("storeDescription", "");
+        store_code = storeCode.substring(0, 4);
+      //  SelectedStoreCode = store.trim().substring(0, 4);
+        storedescription.setText(storeCode);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         //  editor.putString("storeDescription",storeDescription);
@@ -702,7 +708,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
             case 0:   //total values
 
-                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
+                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId + "&storeCode=" +store_code;
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
 
                 break;

@@ -49,8 +49,8 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
-        txtStoreName.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
+//        txtStoreName.setText(storeDescription.substring(5));
         ToDo_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();
