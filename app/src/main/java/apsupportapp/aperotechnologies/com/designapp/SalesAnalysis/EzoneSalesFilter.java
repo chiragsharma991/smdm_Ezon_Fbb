@@ -74,7 +74,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     static EzoneFilterLocationAdapter locatn_list_adapter;
     int offset = 0, limit = 100, count = 0;
     public int ez_level_filter = 1, ez_prod_level = 1;
-    String userId, bearertoken, geoLevel2Code;
+    String userId, bearertoken, geoLevel2Code, lobId;
     public int ezone_filter_level = 1;
     private Intent intent;
     SharedPreferences sharedPreferences;
@@ -98,7 +98,8 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         context = this;
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        geoLevel2Code = sharedPreferences.getString("geoLevel2Code", "");
+        geoLevel2Code = sharedPreferences.getString("concept", "");
+        lobId = sharedPreferences.getString("lobid","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -550,7 +551,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         String region_url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
 //            // with geolevel2code field
-            region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter + "&geoLevel2code=" + geoLevel2Code;
+            region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZNew/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter + "&geoLevel2code=" + geoLevel2Code+ "&lobId="+ lobId;
 //        } else {
 //            //without geolevel2code field
 //            region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
@@ -644,7 +645,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         String store_url = "";
 //        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
 //            // with geolevel2code field
-            store_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter + "&geoLevel2Code=" + geoLevel2Code;
+            store_url = ConstsCore.web_url + "/v1/display/storehierarchyEZNew/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
 //        } else {
 //            //without geolevel2code field

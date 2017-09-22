@@ -87,7 +87,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     LinearLayout lldots, llhierarchy, llayoutSalesAnalysis;
     RecyclerView listView_SalesAnalysis;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken, geoLeveLDesc,storeDescription,geoLevel2Code;
+    String userId, bearertoken, geoLeveLDesc,storeDescription,geoLevel2Code, lobId;
     EditText etListText;
     RadioButton btnWTD, btnL4W, btnLW, btnYTD;
     public static String selectedsegValue = "WTD";
@@ -129,7 +129,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         storeDescription = sharedPreferences.getString("storeDescription","");
-        geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+        Log.e("lobId "," "+lobId);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -657,9 +659,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //        etListText = (EditText) findViewById(R.id.etListText);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
-        Log.e( "initialize_fbb_ui: ", ""+storeDescription.trim().substring(0,4));
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreDesc.setText(storeDescription.substring(5));
+//        Log.e( "initialize_fbb_ui: ", ""+storeDescription.trim().substring(0,4));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreDesc.setText(storeDescription.substring(5));
         //hierarchy header
         txthDeptName = (TextView) findViewById(R.id.txthDeptName);
         btnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
@@ -1943,7 +1945,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // Api Calling for fashion at bb part.......
     //Api to display class level values(Api 1.20)
     private void requestSalesListDisplayAPI() {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+geoLevel2Code;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e("url sales in fbb:", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
@@ -2123,7 +2125,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     //Api 1.19 for view pager values on store level like wtd , lw
     private void requestSalesViewPagerValueAPI()
     {
-        String url = ConstsCore.web_url + "/v1/display/salesanalysisbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code;
+        String url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Sales Analysis", "requestSalesViewPagerValueAPI: "+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -2210,15 +2212,15 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         saleFirstVisibleItem = saleFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
 
         if (txtheaderplanclass.getText().toString().equals("Department")) {
-            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         } else if (txtheaderplanclass.getText().toString().equals("Category")) {
-            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         } else if (txtheaderplanclass.getText().toString().equals("Class")) {
-            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&class=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&class=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
-            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brand=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brand=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
-            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         }
         Log.e("Sales Analysis", "requestSalesPagerOnScrollAPI: "+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -2298,7 +2300,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // hierarchy api calling for Category , class ,Brand , Brand Class
     private void requestSalesCategoryList(final String deptName) {
         String salespvacategory_listurl;
-        salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code;
+        salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         Log.e("Sales Anlysis", "requestSalesCategoryList: "+salespvacategory_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvacategory_listurl,
                 new Response.Listener<JSONArray>() {
@@ -2426,7 +2428,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     private void requestSalesPlanClassListAPI(final String category)
     {
         String salespva_planclass_listurl = "";
-        salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+        Log.e("salespva_planclass_listurl "," "+salespva_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2549,7 +2552,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
     private void requestSalesBrandListAPI(final String planclass) {
         String salespva_brand_listurl;
-        salespva_brand_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        salespva_brand_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+        Log.e("salespva_brand_listurl "," "+salespva_brand_listurl);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2671,7 +2676,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
         String salespva_brandplan_listurl;
 
-        salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+        Log.e("salespva_brandplan_listurl "," "+salespva_brandplan_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2773,7 +2779,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
 
     private void requestSalesSelectedFilterVal(final String str) {
-        String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + SalesFilterActivity.level_filter + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code;
+        String salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + SalesFilterActivity.level_filter + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override

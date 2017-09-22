@@ -98,13 +98,13 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
+//        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        floor_txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        floor_txtStoreName.setText(storeDescription.substring(5));
+//        floor_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        floor_txtStoreName.setText(storeDescription.substring(5));
         floorListView.setTag("FOOTER");
         floorListView.setVisibility(View.VISIBLE);
 

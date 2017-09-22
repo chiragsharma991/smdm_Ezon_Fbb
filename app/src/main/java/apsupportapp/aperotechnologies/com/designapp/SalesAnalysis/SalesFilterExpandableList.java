@@ -603,7 +603,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
-        String geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+        String geoLevel2Code = sharedPreferences.getString("concept","");
+        String lobId = sharedPreferences.getString("lobid","");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
         Cache cache = new DiskBasedCache(mContext.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -615,7 +616,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 //         if(str_CheckFrom.equals("SalesAnalysis") || str_CheckFrom.equals("pvaAnalysis"))
 //         {
 //             //with geoLevel2Code param
-             category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&dept=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code;
+             category_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + level1 + "&dept=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //         }
 //            else
 //         {
@@ -627,7 +628,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 //            if(str_CheckFrom.equals("SalesAnalysis") || str_CheckFrom.equals("pvaAnalysis"))
 //            {
 //                //with geoLevel2Code param
-             category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&category=" + dept.replaceAll("&", "%26").replace(" ","%20")   + "&geoLevel2Code=" + geoLevel2Code;
+             category_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + level1 + "&category=" + dept.replaceAll("&", "%26").replace(" ","%20")   + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //            }
 //            else
 //            {
@@ -639,7 +640,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         {
 //            if(str_CheckFrom.equals("SalesAnalysis") || str_CheckFrom.equals("pvaAnalysis")) {
 //                //with geoLevel2Code param
-                category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&class=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code;
+                category_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + level1 + "&class=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //            }
 //            else
 //            {
@@ -651,7 +652,7 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
 
 //            if(str_CheckFrom.equals("SalesAnalysis") || str_CheckFrom.equals("pvaAnalysis")) {
 //                //with geoLevel2Code param
-                category_url = ConstsCore.web_url + "/v1/display/globalsearch/" + userId + "?level=" + level1 + "&brand=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code;
+                category_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + level1 + "&brand=" + dept.replaceAll("&", "%26").replace(" ", "%20") + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 //            }
 //            else
 //            {

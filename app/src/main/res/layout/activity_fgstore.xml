@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_fgstore"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.FGStoreActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <android.support.v7.widget.Toolbar
+            android:background="@color/white"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_header_height"
+            android:layout_alignParentTop="true"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:background="@drawable/button_click"
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/imageBtnBack1"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/ic_arrow_back_black"
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fg_store_audit"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageBtnBack1"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="@dimen/smdm_header_title_normal"
+                    android:id="@+id/toolbar_title" />
+
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_marginTop="5dp"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linear_toolbar"
+        android:fillViewport="true">
+
+
+    <RelativeLayout
+        android:id="@+id/rel_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_details"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="0dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:id="@+id/rel_white_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp">
+
+
+            <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_name"
+            android:background="@drawable/edittext_border"
+            app:hintTextAppearance="@style/CustomTextAppearance"
+            android:layout_width="match_parent"
+            android:textColorHint="@color/hinttextcolor"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom"
+            android:clipToPadding="false" >
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:maxLines="1"
+                android:textSize="13sp"
+                android:textColor="#000000"
+                android:inputType="textPersonName"
+                android:maxLength="10"
+                android:paddingLeft="2dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/input_dateofVisit"
+                android:hint="Name of Auditor : " />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/txt_incorrect_name"
+            android:layout_below="@+id/input_name"
+            android:visibility="gone"
+            android:textColor="@color/ezfbb_red"
+            android:textSize="10sp"
+            android:gravity="right"
+            android:letterSpacing="0.1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/lin_dateday"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_below="@+id/txt_incorrect_name"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_dateofVisit"
+                android:background="@drawable/edittext_border"
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/hinttextcolor"
+                android:layout_height="44dp"
+                android:gravity="bottom"
+                android:clipToPadding="false"
+               >
+
+                <EditText
+                    android:id="@+id/edt_dateofVisit"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    android:textColor="#000000"
+                    android:inputType="textPersonName"
+                    android:maxLength="10"
+                    android:paddingLeft="2dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="2dp"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@+id/input_dayofweek"
+                    android:hint="Date of Visit : " />
+
+            </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txt_incorrect_date"
+                    android:layout_below="@+id/input_dateofVisit"
+                    android:visibility="gone"
+                    android:textColor="@color/ezfbb_red"
+                    android:textSize="10sp"
+                    android:gravity="right"
+                    android:letterSpacing="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_dayofweek"
+                android:background="@drawable/edittext_border"
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/hinttextcolor"
+                android:layout_height="44dp"
+                android:gravity="bottom"
+                android:clipToPadding="false"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/edt_dayofweek"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    android:textColor="#000000"
+                    android:inputType="textPersonName"
+                    android:maxLength="10"
+                    android:paddingLeft="2dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="2dp"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@+id/edt_remarks"
+                    android:hint="Day of week : " />
+
+            </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txt_incorrect_day"
+                    android:layout_below="@+id/input_dayofweek"
+                    android:visibility="gone"
+                    android:textColor="@color/ezfbb_red"
+                    android:textSize="10sp"
+                    android:gravity="right"
+                    android:letterSpacing="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_timeofVisit"
+            android:layout_below="@+id/lin_dateday"
+            android:background="@drawable/edittext_border"
+            app:hintTextAppearance="@style/CustomTextAppearance"
+            android:layout_width="match_parent"
+            android:textColorHint="@color/hinttextcolor"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom"
+            android:clipToPadding="false" >
+
+            <EditText
+                android:id="@+id/edt_timeofVisit"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:maxLines="1"
+                android:textSize="13sp"
+                android:textColor="#000000"
+                android:inputType="textPersonName"
+                android:maxLength="10"
+                android:paddingLeft="2dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/input_dateofVisit"
+                android:hint="Time of Visit : " />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_auditorType"
+            android:layout_below="@+id/input_timeofVisit"
+            android:background="@drawable/edittext_border"
+            app:hintTextAppearance="@style/CustomTextAppearance"
+            android:layout_width="match_parent"
+            android:textColorHint="@color/hinttextcolor"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom"
+            android:clipToPadding="false" >
+
+            <EditText
+                android:id="@+id/edt_auditorType"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:maxLines="1"
+                android:textSize="13sp"
+                android:textColor="#000000"
+                android:inputType="textPersonName"
+                android:maxLength="10"
+                android:paddingLeft="2dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:imeOptions="actionDone"
+                android:hint="Auditor Type : " />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txt_store_format"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_auditorType"
+            android:layout_marginTop="10dp"
+            android:text="Store format : "
+            android:textColor="@color/hinttextcolor"
+            android:textSize="14sp"/>
+
+        <Spinner
+            android:id="@+id/spinner_store_format"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:visibility="visible"
+            android:paddingLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/txt_store_format"
+            android:layout_marginRight="10dp">
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/txt_store_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner_store_format"
+            android:layout_marginTop="10dp"
+            android:text="Store Name : "
+            android:textColor="@color/hinttextcolor"
+            android:textSize="14sp"/>
+
+        <Spinner
+            android:id="@+id/spinner_store_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:visibility="visible"
+            android:paddingLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/txt_store_name"
+            android:layout_marginRight="10dp">
+
+        </Spinner>
+
+        <RelativeLayout
+            android:id="@+id/rel_ratingbar"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/spinner_store_name">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Overall rating of the visit experience"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="6dp"
+                android:textSize="14sp"/>
+
+
+        </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rel_ratingbar"
+                    android:text="Overall rating of Shopping Attributes"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="6dp"
+                    android:textSize="14sp"/>
+
+            </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
