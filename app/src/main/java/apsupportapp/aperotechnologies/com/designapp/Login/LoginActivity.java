@@ -292,7 +292,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("lobid", loginStoreArray.get(1).getLobId());
                                 editor.putString("kpi_id",loginStoreArray.get(1).getKpiId());
                                 editor.apply();
-                                Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
+                               // Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
                                 if(response.length() == 1 ) // for single response save storecode
                                 {
                                     if (Reusable_Functions.chkStatus(context))
