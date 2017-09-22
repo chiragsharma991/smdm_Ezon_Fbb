@@ -269,6 +269,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".SalesAnalysis.SalesAnalysisFilter"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".CustomerEngagement.CustomerLookupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />

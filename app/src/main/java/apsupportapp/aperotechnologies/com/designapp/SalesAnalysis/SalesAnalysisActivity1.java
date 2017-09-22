@@ -42,6 +42,8 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
 
@@ -707,6 +709,116 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         relLayoutSales = (RelativeLayout) findViewById(R.id.relTablelayout);
         listView_SalesAnalysis = (RecyclerView) findViewById(R.id.listView_SalesAnalysis);
         salesadapter = new SalesAnalysisSnapAdapter();
+
+
+        final RelativeLayout rel_overlay = (RelativeLayout) findViewById(R.id.rel_overlay);
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+
+        rel_overlay.setOnClickListener(null);
+
+        menuMultipleActions.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
+            @Override
+            public void onMenuExpanded() {
+                rel_overlay.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onMenuCollapsed() {
+                rel_overlay.setVisibility(View.GONE);
+            }
+        });
+
+        final FloatingActionButton action_department = (FloatingActionButton) findViewById(R.id.action_department);
+        action_department.setSize(FloatingActionButton.SIZE_MINI);
+        action_department.setColorNormalResId(R.color.pink);
+        action_department.setColorPressedResId(R.color.ezfb_Red);
+        action_department.setIcon(R.drawable.ic_fab_star);
+        action_department.setStrokeVisible(false);
+
+
+        action_department.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                menuMultipleActions.collapse();
+            }
+        });
+
+        final FloatingActionButton action_category = (FloatingActionButton) findViewById(R.id.action_category);
+        action_category.setSize(FloatingActionButton.SIZE_MINI);
+        action_category.setColorNormalResId(R.color.pink);
+        action_category.setColorPressedResId(R.color.ezfb_Red);
+        action_category.setIcon(R.drawable.ic_fab_star);
+        action_category.setStrokeVisible(false);
+
+        action_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                menuMultipleActions.collapse();
+
+            }
+        });
+
+        final FloatingActionButton action_class = (FloatingActionButton) findViewById(R.id.action_class);
+        action_class.setSize(FloatingActionButton.SIZE_MINI);
+        action_class.setColorNormalResId(R.color.pink);
+        action_class.setColorPressedResId(R.color.ezfb_Red);
+        action_class.setIcon(R.drawable.ic_fab_star);
+        action_class.setStrokeVisible(false);
+
+        action_class.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                menuMultipleActions.collapse();
+            }
+        });
+
+        final FloatingActionButton action_brand = (FloatingActionButton) findViewById(R.id.action_brand);
+        action_brand.setSize(FloatingActionButton.SIZE_MINI);
+        action_brand.setColorNormalResId(R.color.pink);
+        action_brand.setColorPressedResId(R.color.ezfb_Red);
+        action_brand.setIcon(R.drawable.ic_fab_star);
+        action_brand.setStrokeVisible(false);
+
+        action_brand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                menuMultipleActions.collapse();
+            }
+        });
+
+        final FloatingActionButton action_brandclass = (FloatingActionButton) findViewById(R.id.action_brandclass);
+        action_brandclass.setSize(FloatingActionButton.SIZE_MINI);
+        action_brandclass.setColorNormalResId(R.color.pink);
+        action_brandclass.setColorPressedResId(R.color.ezfb_Red);
+        action_brandclass.setIcon(R.drawable.ic_fab_star);
+        action_brandclass.setStrokeVisible(false);
+
+        action_brandclass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                menuMultipleActions.collapse();
+            }
+        });
+
+        final FloatingActionButton action_location = (FloatingActionButton) findViewById(R.id.action_location);
+        action_location.setSize(FloatingActionButton.SIZE_MINI);
+        action_location.setColorNormalResId(R.color.pink);
+        action_location.setColorPressedResId(R.color.ezfb_Red);
+        action_location.setIcon(R.drawable.ic_fab_star);
+        action_location.setStrokeVisible(false);
+
+        action_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                menuMultipleActions.collapse();
+            }
+        });
     }
 
     // Retain values for segment click
@@ -1204,7 +1316,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 }
                 break;
             case R.id.imgfilter:
-                Intent intent = new Intent(SalesAnalysisActivity1.this, SalesFilterActivity.class);
+//                Intent intent = new Intent(SalesAnalysisActivity1.this, SalesFilterActivity.class);
+//                intent.putExtra("checkfrom", "SalesAnalysis");
+//                startActivity(intent);
+                Intent intent = new Intent(SalesAnalysisActivity1.this, SalesAnalysisFilter.class);
                 intent.putExtra("checkfrom", "SalesAnalysis");
                 startActivity(intent);
                 break;
