@@ -97,7 +97,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     SegmentedGroup segmented3;
     private static int level = 1;
     FreshnessIndexDetails freshnessIndexDetails;
-
     public static FreshnessIndexDetails freshnessIndexDetail;
     public FreshnessIndex_Ez_Model freshnessIndex_Ez_Model;
     RelativeLayout freshnessIndex_imageBtnBack, freshnessIndex_imgfilter, FreshnessIndex_Ez_moreVertical;
@@ -123,7 +122,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private static int preValue=1, postValue;  //this is for radio button
     private RadioButton product_radiobtn, location_radiobtn;
     private boolean from_filter;
-    private String selectedString, geoLevel2Code, lobId;
+    private String selectedString, geoLevel2Code, lobId, isMultiStore, value;
     private int selectedlevel;
     private TabLayout Tabview;
 
@@ -138,6 +137,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -326,8 +327,19 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     {
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreDesc.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreDesc.setText(value);
+        }
 //        String code = storeDescription.substring(0,4);
-//        txtStoreCode.setText(code);
+//
 //        txtStoreDesc.setText(storeDescription.substring(5));
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
@@ -463,6 +475,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -529,10 +542,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
@@ -633,9 +647,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
@@ -734,9 +749,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
@@ -833,9 +849,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
@@ -1033,10 +1050,11 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 llfreshnessIndex.setVisibility(View.VISIBLE);
                                 OnItemClick = false;
@@ -1234,11 +1252,12 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.e(TAG, "onResponse: All"+response );
+                        Reusable_Functions.hDialog();
+
 
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 OnItemClick = false;
                                 llfreshnessIndex.setVisibility(View.GONE);
@@ -1386,6 +1405,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
 
                         if (SalesFilterActivity.level_filter == 2) {
                             txtFIndexClass.setText("Category");
@@ -1419,7 +1439,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 fIndexFirstVisibleItem="All";
                                 processBar.setVisibility(View.GONE);

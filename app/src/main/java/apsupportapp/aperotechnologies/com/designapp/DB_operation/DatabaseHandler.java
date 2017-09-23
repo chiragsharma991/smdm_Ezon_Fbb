@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -123,22 +122,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return data;
     }
 
-    public List<TestModel> db_GetAllContacts() {
-        List<TestModel> dataList = new ArrayList<TestModel>();
+    public List<Login_StoreList> db_GetAllContacts() {
+        List<Login_StoreList> dataList = new ArrayList<Login_StoreList>();
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                TestModel data = new TestModel();
-                data.setId(cursor.getInt(0));
-                data.setAttribute1(cursor.getString(1));
-                data.setAttribute2(cursor.getString(2));
-                data.setAttribute3(cursor.getString(3));
-                data.setAttribute4(cursor.getString(4));
-                data.setAttribute5(cursor.getInt(5));
+                Login_StoreList data = new Login_StoreList();
+                data.setGeoLevel2Code(cursor.getString(1));
+                data.setKpiId(cursor.getString(2));
+                data.setLobId(cursor.getString(3));
+                data.setLobName(cursor.getString(4));
                 // Adding contact to list
                 dataList.add(data);
+               // Log.i(TAG, "cursor GetAllContacts: "+cursor.moveToNext() );
             } while (cursor.moveToNext());
         }
         return dataList;

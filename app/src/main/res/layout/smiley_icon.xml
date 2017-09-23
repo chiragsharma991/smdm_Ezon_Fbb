@@ -1,0 +1,24 @@
+
+<RelativeLayout
+    android:id="@+id/rel_smiley"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ImageView
+        android:id="@+id/img_1_unselected"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@mipmap/improvementemojiunselected" />
+
+    <ImageView
+        android:id="@+id/img_1_selected"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>
+
+

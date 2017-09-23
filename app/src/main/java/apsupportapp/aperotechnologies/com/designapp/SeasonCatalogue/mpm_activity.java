@@ -70,6 +70,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_mpm_activity);
+      Log.e("here in season","");
       context = this;
       checkCollapsing();
       intialise();
@@ -101,7 +102,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       Pdf_zoom_btn = (RelativeLayout) findViewById(R.id.pdf_zoom_btn);
       Bottom_listItem = (LinearLayout) findViewById(R.id.bottom_listItem);
       BaseLayout = (LinearLayout) findViewById(R.id.baseLayout);
-      BaseLayout.setVisibility(View.GONE);
+      BaseLayout.setVisibility(View.VISIBLE);
       Bottom_listItem.setVisibility(View.VISIBLE);
       WebViewProcess.setVisibility(View.GONE);
       WebViewProcess.setOnClickListener(this);

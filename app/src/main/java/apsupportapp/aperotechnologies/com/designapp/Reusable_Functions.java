@@ -6,11 +6,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -57,7 +59,7 @@ public class Reusable_Functions  {
             progressDialog.setCancelable(false);
             if (!progressDialog.isShowing())
             {
-                progressDialog.show();
+               progressDialog.show();
 
             }
         }
@@ -79,6 +81,29 @@ public class Reusable_Functions  {
         toast.show();
 
     }
+
+    public static void showSnackbar(View view, String msg){
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG).show();
+    }
+
+    public static void showSnackbarError(Context context,View view, String msg){
+        Snackbar snack = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
+        view = snack.getView();
+
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTextColor(Color.parseColor("#ffffff"));
+        view.setBackgroundColor(ContextCompat.getColor(context, R.color.ezfbb_red));
+        snack.show();    }
+
+    public static void showSnackbarSuccess(Context context,View view, String msg){
+        Snackbar snack = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
+        view = snack.getView();
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTextColor(Color.parseColor("#ffffff"));
+        view.setBackgroundColor(ContextCompat.getColor(context, R.color.smdm_actionbar));
+
+
+        snack.show();    }
 
     public static void ViewVisible (View view)
     {

@@ -59,7 +59,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     RelativeLayout quickFilter_baseLayout, qfDoneLayout, quickFilter_BorderLayout;
     FloorAvailabilityDetails floorAvailabilityDetails;
     private SharedPreferences sharedPreferences;
-    String userId, bearertoken,storeDescription;
+    String userId, bearertoken,storeDescription,geoLevel2Code,lobId;
     private static String seasongroup = "Current";
     private int count = 0;
     private boolean coreSelection = false;
@@ -82,7 +82,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private static String floorcheckSeasonGpVal = null;
     public static Activity floorAvailability;
     private boolean from_filter = false;
-    private String selectedString = "";
+    private String selectedString = "", isMultiStore, value;
     private boolean toggleClick = false;
     private TabLayout Tabview;
 
@@ -91,13 +91,16 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_floor_availability);
         getSupportActionBar().hide();
-        initalise();
+
         gson = new Gson();
         floorAvailability = this;
-        FloorList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -105,6 +108,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         queue.start();
 //        floor_txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        floor_txtStoreName.setText(storeDescription.substring(5));
+        initalise();
+        FloorList = new ArrayList<FloorAvailabilityDetails>();
         floorListView.setTag("FOOTER");
         floorListView.setVisibility(View.VISIBLE);
 
@@ -137,18 +142,18 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             if (from_filter) {
                 if (coreSelection) {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion;
+                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 } else {
                     //fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             } else {
                 if (coreSelection) {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
+                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 } else {
                     // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailability/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             }
             Log.e("TAG", "requestFloorAvailabilityApi: "+url );
@@ -190,8 +195,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                                 } else {
                                     floorAvailabilityAdapter = new FloorAvailabilityAdapter(FloorList, context);
                                     floorListView.setAdapter(floorAvailabilityAdapter);
-                                    floor_txtStoreCode.setText(FloorList.get(0).getStoreCode());
-                                    floor_txtStoreName.setText(FloorList.get(0).getStoreDescription());
+//                                    floor_txtStoreCode.setText(FloorList.get(0).getStoreCode());
+//                                    floor_txtStoreName.setText(FloorList.get(0).getStoreDescription());
                                 }
                                 Reusable_Functions.hDialog();
                             } catch (Exception e) {
@@ -274,6 +279,17 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private void initalise() {
         floor_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         floor_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            floor_txtStoreCode.setText("Concept : ");
+            floor_txtStoreName.setText(value);
+
+        }
+        else
+        {
+            floor_txtStoreCode.setText("Store : ");
+            floor_txtStoreName.setText(value);
+        }
         floor_BtnBack = (RelativeLayout) findViewById(R.id.fa_imageBtnBack);
         floor_BtnFilter = (RelativeLayout) findViewById(R.id.fa_imgfilter);
         floor_quickFilter = (RelativeLayout) findViewById(R.id.floor_quickFilter);

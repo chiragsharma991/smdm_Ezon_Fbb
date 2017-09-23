@@ -19,19 +19,23 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,8 +64,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.UUID;
 
@@ -74,14 +80,19 @@ import apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService;
 import apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken;
 import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Login.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
+import apsupportapp.aperotechnologies.com.designapp.model.Login_StoreList;
+
+import static apsupportapp.aperotechnologies.com.designapp.R.id.listView;
 
 public class SnapDashboardActivity extends SwitchingActivity implements onclickView
 {
@@ -91,7 +102,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private Context context;
     public static NestedScrollView nestedScrollview;
     RequestQueue queue;
-    String userId, bearertoken, geoLeveLDesc,pushtoken,geoLevel2Code,lobid;
+    String userId, bearertoken, geoLeveLDesc,pushtoken;
     SharedPreferences sharedPreferences;
     ArrayList<String> arrayList, eventUrlList;
     MySingleton m_config;
@@ -113,6 +124,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     public static SnapAdapter snapAdapter;
     public static boolean tokenProcess=false;
     private DatabaseHandler db;
+    private AlertDialog dialog;
+    private boolean[]lobchecked,conceptchecked;
+    private View viewpart;
 
   /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
             020. 021,  022, 023, 026, 027, 028*/
@@ -137,8 +151,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
-        geoLevel2Code = getIntent().getStringExtra("concept");
-        lobid = getIntent().getStringExtra("lobid");
         String[] kpiIdArray=getIntent().getStringArrayExtra("kpiId");
         Log.e(TAG, "onCreate: kpi id"+kpiIdArray.length );
       //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
@@ -151,7 +163,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         queue.start();
         gson = new Gson();
         if(userId.equals("")){
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity1.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
@@ -195,7 +207,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
         }
       //  checkPermission();
-        Arrays.asList(kpiIdArray);
+       // Arrays.asList(kpiIdArray);
+
+
         setupAdapter(Arrays.asList(kpiIdArray));
 
         if( getIntent().getExtras() != null)
@@ -247,6 +261,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private void initalise()
     {
         db = new DatabaseHandler(context);
+        viewpart = findViewById(android.R.id.content);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
@@ -278,7 +293,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.commit();
-            db.deleteAllData();
+           // db.deleteAllData();
             SalesFilterActivity.level_filter = 1;
             //  SalesAnalysisActivity1.selectedsegValue = null;
             SalesAnalysisActivity1.level = 1;
@@ -288,7 +303,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notifManager.cancelAll();
             return true;
-        } else if (id == R.id.aboutus) {
+        }
+        else if(id == R.id.mapping){
+
+            selectConceptNLob();
+
+
+        }
+        else if (id == R.id.aboutus) {
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
 //            finish();
@@ -299,116 +321,318 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     }
 
 
+    private void selectConceptNLob() {
+        List<Login_StoreList> list=db.db_GetAllContacts();
+        Log.i(TAG, "selectConceptNLob: list size "+list.size() );
+        ArrayList<String>conceptData=new ArrayList<>();
+        ArrayList<String>lobData=new ArrayList<>();
+        for(Login_StoreList data : list){
+            conceptData.add(data.getGeoLevel2Code());
+            lobData.add(data.getLobName());
+        }
+        Set<String> set = new HashSet<>();
+        set.addAll(conceptData);
+        conceptData.clear();
+        conceptData.addAll(set);  // remove dublicate values from list
+
+        set = new HashSet<>();
+        set.addAll(lobData);
+        lobData.clear();
+        lobData.addAll(set);  // remove dublicate values from list
+        Log.i(TAG, "after has set list are: "+conceptData.size()+" and "+lobData.size() );
+
+        customAlert(conceptData,lobData);
+
+
+
+
+
+    }
+
+    private void customAlert(final ArrayList<String> conceptData, final ArrayList<String> lobData){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        // Get the layout inflater
+        LayoutInflater inflater = this.getLayoutInflater();
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        View v = inflater.inflate(R.layout.dashboard_dropdown, null);
+        final RecyclerView lobList = (RecyclerView) v.findViewById(R.id.lobList);
+        final RecyclerView conceptList = (RecyclerView) v.findViewById(R.id.conceptList);
+        RelativeLayout qfDoneLayout = (RelativeLayout) v.findViewById(R.id.qfDoneLayout);
+        lobchecked=new boolean[lobData.size()];
+        conceptchecked=new boolean[conceptData.size()];
+        for (int i = 0; i <lobData.size() ; i++) {
+            lobchecked[i]=false;
+        }
+        for (int i = 0; i <conceptData.size() ; i++) {
+            conceptchecked[i]=false;
+        }
+
+        lobList.setLayoutManager(new LinearLayoutManager(context));
+        lobList.setLayoutManager(new LinearLayoutManager(lobList.getContext(),LinearLayoutManager.VERTICAL, false));
+        final LobMappingAdapter lobMappingAdapter = new LobMappingAdapter(lobData, context,lobchecked);
+        lobList.setAdapter(lobMappingAdapter);
+
+        conceptList.setLayoutManager(new LinearLayoutManager(context));
+        conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(),LinearLayoutManager.VERTICAL, false));
+        final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptData, context,conceptchecked);
+        conceptList.setAdapter(conceptMappingAdapter);
+
+        lobList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Log.e(TAG, "lobList onClick: "+position );
+
+                if(position==0){
+                    lobchecked[0]=true;
+                    lobchecked[1]=false;
+                }else if(position==1){
+                    lobchecked[0]=false;
+                    lobchecked[1]=true;
+                }
+            /*    for (int i = 0; i < lobchecked.length ; i++) {
+                    if(position==i) {
+                        lobchecked[position]=true;
+                       // Log.i(TAG, "onItemlobList: true"+position);
+
+                    }else{
+                        lobchecked[position]=false;
+                       // Log.i(TAG, "onItemlobList: false"+position);
+
+                    }
+                }*/
+                lobMappingAdapter.notifyDataSetChanged();
+            }
+        }));
+        conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                Log.e(TAG, "conceptList onClick: "+position );
+                if(position==0){
+                    conceptchecked[0]=true;
+                    conceptchecked[1]=false;
+
+
+                }else if(position==1){
+                    conceptchecked[0]=false;
+                    conceptchecked[1]=true;
+
+                }
+             /*   for (int i = 0; i <conceptData.size() ; i++) {
+                    if(position==i)   conceptchecked[position]=true;
+                    else conceptchecked[position]=false;
+                }*/
+                conceptMappingAdapter.notifyDataSetChanged();
+
+            }
+        }));
+
+        qfDoneLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, "qfDoneLayout onClick: " );
+                String selectconcept=null;
+                String selectLob=null;
+                List<Login_StoreList> list=db.db_GetAllContacts();
+
+
+                for (int i = 0; i <lobchecked.length ; i++) {
+                    if(lobchecked[i]){
+                         selectLob=lobData.get(i);
+                    }
+                }
+                for (int i = 0; i <conceptchecked.length ; i++) {
+                    if(conceptchecked[i]){
+                         selectconcept=conceptData.get(i);
+                    }
+                }
+
+                if(selectconcept==null || selectLob== null){
+                    Reusable_Functions.showSnackbarError(context,viewpart,"Please select both entries");
+                    //dialog.dismiss();
+                    return;
+                }
+
+                for (Login_StoreList data :list){
+
+                    if(data.getGeoLevel2Code().equals(selectconcept) && data.getLobName().equals(selectLob)){
+                        Reusable_Functions.showSnackbar(viewpart,"Mapping success !");
+                        String kpi_id = data.getKpiId();
+                        String[] selectKpiID = kpi_id.split(",");
+                        setupAdapter(Arrays.asList(selectKpiID));
+                        dialog.dismiss();
+                        return;
+
+                    }
+                }
+                dialog.dismiss();
+                Reusable_Functions.showSnackbarError(context,viewpart,"Mapping failed please try again");
+
+            }
+        });
+
+        builder.setView(v);
+        dialog = builder.create();
+        dialog.show();
+
+    }
+
+
     private void setupAdapter(List<String> kpiIdArray) {
 
+       /* Mapping
+        001 - Product Info
+        002 - Visual Assortment
+        003 - Visual Assortment Report
+        004 - Sales
+        005 - Sales PvA
+        006 - Freshness Index
+        007 - Option Efficiency
+        008 - Skewed Sizes
+        009 - Best/Worst performers
+        010 - Stock Ageing
+        011 - Floor availability
+        012 - Target stock exception
+        013 - Sell Thru exception
+        014 - Running promo
+        015 - Upcoming promo
+        016 - Expiring promo
+        017 - Best/worst promo
+        018 - Key products PvA
+        019 - Key products hourly
+        020 - Collaboration to do
+        021 - Collaboration status
+        022 - Feedback
+        023 - Feedback list
+        024 - Store inspection new
+        025 - Store inspection history
+        026 - Season catalogue
+        027 - Customer loyalty
+        028 - Hourly performance
+        029 - BORIS
+        030 - Customer Feedback : Product Availability & Notify
+        031 - Customer Feedback : Policy Exchange,Refund
+        032 - Customer Feedback : Price & Promotion
+        033 - Customer Feedback : Product Quality & Range
+        034 - Customer Feedback : Our Store Services
+        035 - Customer Feedback : Supervisor & Staff*/
 
         snapAdapter = new SnapAdapter(context, eventUrlList);
 
         if (geoLeveLDesc.equals("E ZONE")) {
-            for (int i = 0; i <kpiIdArray.size(); i++) {
+    /*        for (int i = 0; i <kpiIdArray.size(); i++) {
+                Log.i(TAG, "kpiIdArray:"+kpiIdArray.get(i).toString() );
                 switch (kpiIdArray.get(i)){
+
                     case "004":
                         List<App> apps = getProduct(21);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
                         break;
+
                     case "006":
                         apps = getProduct(22);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
                         break;
 
                    default:
+                      // finish();
                        break;
 
 
                 }
 
             }
+            */
 
         } else
         {
 
-
-  /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
-            020. 021,  022, 023, 026, 027, 028*/
-
-   /* Product Info,
-   Visual Asst,  Visual Assrt Report,
-    Sales, Sales PVA, Freshness Index, Option Eff,
-    Skewed Size, Best/Worst Per, Stock Ageing,
-    Floor Avl, Target Stock Exc, Sell Thru Exc,
-    Running Promo, Upcoming Promo, Expiring Promo, Best/Worst Promo, Key Product PVA, Stock Transfer, Stock Transfer Status, Best Worst Feedback, Best Worst Feedback List, Season Catalogue, Customer Eng, Hourly Performance
-*/
-
-
             for (int i = 0; i <kpiIdArray.size(); i++) {
+                Log.i(TAG, "kpiIdArray:"+kpiIdArray.get(i).toString() );
                 switch (kpiIdArray.get(i)){
+
                     case "001":
                         List<App> apps = getProduct(0);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
                         break;
+
                     case "002":
                         apps = getProduct(1);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
                         break;
+
                     case "004":
                         apps = getProduct(2);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
                         break;
+
                     case "006":
                         apps = getProduct(3);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
                         break;
-                    case "026":
-                        apps = getProduct(7);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+
+                    case "014":
+                        apps = getProduct(4);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
                         break;
-                    case "027":
-                        apps = getProduct(8);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+
+                    case "020":
+                        apps = getProduct(5);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
                         break;
+
                     case "022":
                         apps = getProduct(6);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
                         break;
-                    case "020":
-                        apps = getProduct(4);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+
+                    case "026":
+                        apps = getProduct(7);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+                        break;
+
+                    case "027":
+                        apps = getProduct(8);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+                        break;
+
+                    // hourly has been shifted in sales module
+                /*    case "028":
+                        apps = getProduct(9);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Hourly performance", apps));
+                        break;*/
+
+                    case "029":
+                        apps = getProduct(10);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "BORIS", apps));
+                        break;
+
+                    case "030":
+                        apps = getProduct(11);
+                        snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback", apps));
                         break;
 
                     default:
+                       // finish();
                         break;
 
 
                 }
 
             }
-
-            // In release build when required hide promo analysis and collabration as per requirement and customer engagement will start from 4 onwards
-            // In debug build unhide promo analysis and collabration and numbering will start from 4 onwards
-
-
-
-
-//            apps = getProduct(4);
-//            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-
-       //     apps = getProduct(5);
-        //    snapAdapter.addSnap(new Snap(Gravity.START,"Customer Feedback",apps));
-
-
-//            apps = getProduct(10);
-//            snapAdapter.addSnap(new Snap(Gravity.START,"Boris",apps));
         }
         Recycler_verticalView.setAdapter(snapAdapter);
     }
 
 
     @Override
-    public void onclickView(int group_position, int child_position)
+    public void onclickView(int group_position, int child_position , String kpiID)
     {
-        Log.e(TAG, "group_position: " + group_position + "child_position" + child_position);
+        Log.e(TAG, "group_position: " + group_position + "child_position" + child_position+" tag is"+kpiID);
         int value = Integer.parseInt("" + group_position + "" + child_position);
-        moveTo(value, context);
+        moveTo(kpiID, context);
     }
 
 
@@ -672,7 +896,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "Event Response: " + response.length());
+                        Log.e(TAG, "Event Response: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {

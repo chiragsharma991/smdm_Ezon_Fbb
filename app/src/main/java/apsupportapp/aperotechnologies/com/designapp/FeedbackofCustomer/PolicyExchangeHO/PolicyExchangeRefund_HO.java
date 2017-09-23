@@ -26,7 +26,7 @@ public class PolicyExchangeRefund_HO extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         context = this;
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
-        if(getIntent().getExtras().getString("from") != null )
+        if(getIntent().getExtras().getString("storeCode") != null )
         {
             storeCode = getIntent().getExtras().getString("storeCode");
         }
