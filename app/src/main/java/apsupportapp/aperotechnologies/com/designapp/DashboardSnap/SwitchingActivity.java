@@ -263,7 +263,7 @@ public class SwitchingActivity extends AppCompatActivity
 //                    Intent ProductQualityRange = new Intent(context, ProductQualityRange_HO.class);
 //                    startActivity(ProductQualityRange);
                     Reusable_Functions.sDialog(context, "Fetching...");
-                    commentDialog("VisualReportActivity");
+                    commentDialog("ProductQualityRange_HO");
                     break;
                 case "034":
 //                    Intent OurStoreServices = new Intent(context, OurStoreServices_HO.class);

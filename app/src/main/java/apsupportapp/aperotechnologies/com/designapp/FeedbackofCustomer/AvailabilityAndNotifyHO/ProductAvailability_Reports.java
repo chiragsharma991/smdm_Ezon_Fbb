@@ -198,7 +198,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                 card_productAvail.setVisibility(View.GONE);
                 relFIndexTablelayout_productavail.setVisibility(View.GONE);
                 Log.e("here","case 0");
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummaryNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&storeCode=" +store_code; //Pie chart Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummaryNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&storeCode=" +store_code ; //Pie chart Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:

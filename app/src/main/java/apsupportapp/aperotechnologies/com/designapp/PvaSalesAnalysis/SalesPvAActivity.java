@@ -120,7 +120,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     private RadioButton product_radiobtn, location_radiobtn;
     private int preValue = 1, postValue;
     private boolean from_filter;
-    private String filterSelectedString;
+    private String filterSelectedString, isMultiStore, value;
 
 
     @Override
@@ -136,7 +136,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         geoLevel2Code = sharedPreferences.getString("concept", "");
         lobId = sharedPreferences.getString("lobid","");
-
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -631,6 +632,17 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         rel_store_layout.setVisibility(View.VISIBLE);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreDesc.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreDesc.setText(value);
+        }
         Log.e(TAG, "store desc: " + storeDescription);
         if (geoLeveLDesc.equals("E ZONE"))
         {

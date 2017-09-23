@@ -28,10 +28,10 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     private ViewPager viewPager;
     private TabLayout tab;
     private Context context;
-    private TextView storedescription;
+    private TextView txtStoreName, txtStoreCode;
     RelativeLayout status_imageBtnBack;
     public static ProgressBar StatusProcess;
-    private String store;
+    private String store, isMultiStore, value;
     SharedPreferences sharedPreferences;
 
 
@@ -43,6 +43,8 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         setSupportActionBar(toolbar);
         context = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
         initialise();
 
         if (Build.VERSION.SDK_INT >= 21) {
@@ -72,8 +74,21 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
         status_imageBtnBack = (RelativeLayout) findViewById(R.id.status_imageBtnBack);
         StatusProcess = (ProgressBar) findViewById(R.id.statusProcess);
-        storedescription = (TextView) findViewById(R.id.txtStoreCode);
+        txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
+        txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+
         StatusProcess.setVisibility(View.GONE);
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreName.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreName.setText(value);
+        }
      //   store = sharedPreferences.getString("storeDescription", "");
 //        SelectedStoreCode = store.trim().substring(0, 4);
    //     Log.e("store"," "+store);

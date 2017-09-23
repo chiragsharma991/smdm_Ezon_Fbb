@@ -117,7 +117,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     public static int ezone_level = 1;
     int ez_firstVisible_no, ez_currentVmPos, ez_sFirstPosVal = 0, ez_totalItemCount;
     ProgressBar ez_progessBar;
-    private String filterSelectedString = "";
+    private String filterSelectedString = "", isMultiStore, value;
     private int filter_level;
     TabLayout ez_tabView;
 
@@ -133,6 +133,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         storeDescription = sharedPreferences.getString("storeDescription","");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
         Log.e("lobId "," "+lobId);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -661,6 +663,17 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //        etListText = (EditText) findViewById(R.id.etListText);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreDesc.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreDesc.setText(value);
+        }
 //        Log.e( "initialize_fbb_ui: ", ""+storeDescription.trim().substring(0,4));
 //        txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        txtStoreDesc.setText(storeDescription.substring(5));

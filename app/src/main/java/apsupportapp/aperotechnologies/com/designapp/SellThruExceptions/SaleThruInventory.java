@@ -85,7 +85,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private boolean coreSelection = false, filter_toggleClick = false;
     public static Activity saleThru;
     private boolean from_filter = false;
-    private String selectedString = "";
+    private String selectedString = "", isMultiStore, value;
     private TabLayout Tabview;
 
 
@@ -94,20 +94,18 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_best_performer_inventory);
         getSupportActionBar().hide();
-        initalise();
-        BstInventory_salesU_chk.setChecked(true);
-        BaseLayoutInventory.setVisibility(View.GONE);
-        BestInventListview.setVisibility(View.VISIBLE);
-        Bst_sortInventory.setVisibility(View.GONE);
+
+
         gson = new Gson();
         context = this;
         saleThru = this;
-        BestInventList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -115,6 +113,13 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         queue.start();
 //        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        BestInvent_txtStoreName.setText(storeDescription.substring(5));
+        initalise();
+        BstInventory_salesU_chk.setChecked(true);
+        BaseLayoutInventory.setVisibility(View.GONE);
+        BestInventListview.setVisibility(View.VISIBLE);
+        Bst_sortInventory.setVisibility(View.GONE);
+        BestInventList = new ArrayList<RunningPromoListDisplay>();
+
         BestInventListview.setTag("FOOTER");
 
         Reusable_Functions.hDialog();
@@ -310,7 +315,17 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
         BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            BestInvent_txtStoreCode.setText("Concept : ");
+            BestInvent_txtStoreName.setText(value);
 
+        }
+        else
+        {
+            BestInvent_txtStoreCode.setText("Store : ");
+            BestInvent_txtStoreName.setText(value);
+        }
         BestInvent_BtnBack = (RelativeLayout) findViewById(R.id.bestInvent_BtnBack);
         BestInvent_imgfilter = (RelativeLayout) findViewById(R.id.bestInvent_imgfilter);
         BestQuickFilterBorder = (RelativeLayout) findViewById(R.id.bestQuickFilterBorder);

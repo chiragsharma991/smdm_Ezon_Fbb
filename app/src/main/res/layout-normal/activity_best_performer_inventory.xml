@@ -254,22 +254,20 @@
             android:layout_marginTop="8dp">
 
 
-            <TextView
-                android:id="@+id/bestInvent_storeCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/store"
-                android:textColor="@color/ezfb_black"
-                android:textSize="@dimen/smdm_store_title_normal"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/bestInvent_storeCode"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/store"-->
+                <!--android:textColor="@color/ezfb_black"-->
+                <!--android:textSize="@dimen/smdm_store_title_normal"-->
+                <!--/>-->
 
             <TextView
                 android:id="@+id/bestInvent_txtStoreCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
-                android:textStyle="bold"
-                android:layout_toRightOf="@+id/bestInvent_storeCode"
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/smdm_store_title_normal"
                 />
