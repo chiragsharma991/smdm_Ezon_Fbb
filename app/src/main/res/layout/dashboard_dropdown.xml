@@ -3,6 +3,7 @@
     android:id="@+id/quickFilterPopup"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/border4"
     android:visibility="visible">
 
     <!--base layout for click anywhere-->
@@ -31,12 +32,15 @@
                 android:id="@+id/qfilter_menuPopupLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -56,8 +60,6 @@
                     android:id="@+id/bst_lineOne_child"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/ezfb_black" />
 
@@ -65,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/conceptList"
+                    android:layout_marginTop="2dp"
                     >
 
 
@@ -82,8 +85,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -101,14 +105,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/smdm_quickfilter_divider"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:background="@color/ezfb_black" />
 
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:id="@+id/lobList"
                     >
 
@@ -132,14 +135,33 @@
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:background="@color/ezfb_Red"
+                    android:id="@+id/done"
                     android:clickable="false"
                     android:text="Done"
                     android:textColor="@color/divider_salescard1"
                     android:textSize="@dimen/smdm_quickfilter_subtitle_normal"
                     />
 
+
+
             </RelativeLayout>
+
+
+
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_incorrect"
+            android:visibility="visible"
+            android:layout_below="@+id/quickFilter_BorderLayout"
+            android:textColor="@color/ezfbb_red"
+            android:textSize="10sp"
+            android:gravity="left"
+            android:layout_margin="5dp"
+            android:text="Please select both entries"
+            android:letterSpacing="0.1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
 
