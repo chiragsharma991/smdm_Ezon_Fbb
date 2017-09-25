@@ -130,7 +130,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private boolean[] lobchecked, conceptchecked;
     private View viewpart;
     private RecyclerView lobList;
-    private ArrayList<String> lobData = null, conceptData = null;
+    private ArrayList<String> lobData = null, conceptData = null ,conceptDesc=null;
 
   /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
             020. 021,  022, 023, 026, 027, 028*/
@@ -330,20 +330,28 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         lobData=null;conceptData=null;
         List<Login_StoreList> list = db.db_GetAllContacts();
         conceptData = new ArrayList<>();
+        conceptDesc = new ArrayList<>();
         for (Login_StoreList data : list) {
             conceptData.add(data.getGeoLevel2Code());
+            conceptDesc.add(data.getGeoLevel2Desc());
             // lobData.add(data.getLobName());
         }
         Set<String> set = new HashSet<>();
         set.addAll(conceptData);
         conceptData.clear();
         conceptData.addAll(set);  // remove dublicate values from list
-        customAlert(conceptData);
+       // customAlert(conceptData);
+
+        set = new HashSet<>();
+        set.addAll(conceptDesc);
+        conceptDesc.clear();
+        conceptDesc.addAll(set);  // remove dublicate values from list
+        customAlert(conceptDesc);
 
 
     }
 
-    private void customAlert(final ArrayList<String> conceptData) {
+    private void customAlert(final ArrayList<String> conceptDesc) {
 
         final Dialog dialog = new Dialog(context, R.style.ThemeDialog);
         dialog.getWindow().getAttributes().windowAnimations = R.style.ThemeDialog;
@@ -362,21 +370,21 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         RelativeLayout qfDoneLayout = (RelativeLayout) dialog.findViewById(R.id.qfDoneLayout);
         final TextView txt_incorrect = (TextView) dialog.findViewById(R.id.txt_incorrect);
         txt_incorrect.setVisibility(View.GONE);
-        conceptchecked = new boolean[conceptData.size()];
-        for (int i = 0; i < conceptData.size(); i++) {
+        conceptchecked = new boolean[conceptDesc.size()];
+        for (int i = 0; i < conceptDesc.size(); i++) {
             conceptchecked[i] = false;
         }
 
         conceptList.setLayoutManager(new LinearLayoutManager(context));
         conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(), LinearLayoutManager.VERTICAL, false));
-        final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptData, context, conceptchecked);
+        final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptDesc, context, conceptchecked);
         conceptList.setAdapter(conceptMappingAdapter);
 
         conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public  void onItemClick(View view, int position) {
 
-                for (int i = 0; i < conceptData.size(); i++) {
+                for (int i = 0; i < conceptDesc.size(); i++) {
                     if (position == i) conceptchecked[i] = true;
                     else conceptchecked[i] = false;
 
@@ -385,7 +393,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<Login_StoreList> list = db.db_GetListWhereClause(conceptData.get(position));
                 lobData = new ArrayList<>();
                 for (Login_StoreList data : list) {
-                    Log.e(TAG, "lobData: "+data.getLobName());
                     lobData.add(data.getLobName());
                 }
                 Set<String> set = new HashSet<>();
