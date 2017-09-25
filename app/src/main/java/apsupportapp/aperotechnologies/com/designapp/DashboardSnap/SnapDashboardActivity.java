@@ -94,6 +94,7 @@ import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterAct
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
 import apsupportapp.aperotechnologies.com.designapp.model.Login_StoreList;
 
+import static apsupportapp.aperotechnologies.com.designapp.R.id.concept;
 import static apsupportapp.aperotechnologies.com.designapp.R.id.listView;
 
 public class SnapDashboardActivity extends SwitchingActivity implements onclickView
@@ -104,7 +105,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private Context context;
     public static NestedScrollView nestedScrollview;
     RequestQueue queue;
-    String userId, bearertoken, geoLeveLDesc,pushtoken;
+    String userId, bearertoken, geoLeveLDesc,pushtoken,lobName;
     SharedPreferences sharedPreferences;
     ArrayList<String> arrayList, eventUrlList;
     MySingleton m_config;
@@ -122,7 +123,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private EtlStatus etlStatus;
     private ArrayList<EtlStatus> etlStatusList;
     private Snackbar snackbar;
-    private TextView RefreshTime;
+    private TextView RefreshTime,concept_txt,lob_name_txt;
     public static SnapAdapter snapAdapter;
     public static boolean tokenProcess=false;
     private DatabaseHandler db;
@@ -152,6 +153,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("concept", "");
+        lobName = sharedPreferences.getString("lobname", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
         String[] kpiIdArray=getIntent().getStringArrayExtra("kpiId");
         Log.e(TAG, "onCreate: kpi id"+kpiIdArray.length );
@@ -268,10 +270,16 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         setSupportActionBar(toolbar);
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
         RefreshTime = (TextView) findViewById(R.id.refreshTime);
+        lob_name_txt = (TextView) findViewById(R.id.lob_name);
+        concept_txt = (TextView) findViewById(R.id.concept);
+        lob_name_txt.setText(lobName);
+        concept_txt.setText(geoLeveLDesc);
         nestedScrollview = (NestedScrollView) findViewById(R.id.nestedScrollview);
         Recycler_verticalView.setNestedScrollingEnabled(false);
         Recycler_verticalView.setLayoutManager(new LinearLayoutManager(this));
         Recycler_verticalView.setHasFixedSize(true);
+
+
         //setupAdapter();
     }
 
@@ -441,11 +449,15 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
                     if(data.getGeoLevel2Code().equals(selectconcept) && data.getLobName().equals(selectLob)){
                         Reusable_Functions.showSnackbar(viewpart,"Mapping success !");
+                        lob_name_txt.setText(data.getLobName());
+                        concept_txt.setText(data.getGeoLevel2Code());
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("concept", data.getGeoLevel2Code());
                         editor.putString("lobid", data.getLobId());
+                        editor.putString("lobname", data.getLobName());
                         editor.putString("kpi_id",data.getKpiId());
                         editor.apply();
+
                         String kpi_id = data.getKpiId();
                         String[] selectKpiID = kpi_id.split(",");
                         setupAdapter(Arrays.asList(selectKpiID));
