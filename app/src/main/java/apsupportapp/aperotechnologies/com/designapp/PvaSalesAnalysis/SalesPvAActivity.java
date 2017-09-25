@@ -72,6 +72,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
@@ -118,7 +119,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     private TabLayout tabLayout, ez_tabLayout;
     private PopupWindow popupWindow;
     private RadioButton product_radiobtn, location_radiobtn;
-    private int preValue = 1, postValue;
+    private int preValue = 1, postValue,sales_filter_level;
     private boolean from_filter;
     private String filterSelectedString, isMultiStore, value;
 
@@ -184,12 +185,12 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
             if (filterSelectedString == null) {
 
-                if (getIntent().getStringExtra("selectedDept") == null) {
+                if (getIntent().getStringExtra("selectedStringVal") == null) {
                     filter_toggleClick = false;
                     retainSegmentValuesFilter();
                     requestSalesViewPagerValueAPI();
-                } else if (getIntent().getStringExtra("selectedDept") != null) {
-                    String selectedString = getIntent().getStringExtra("selectedDept");
+                } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+                    String selectedString = getIntent().getStringExtra("selectedStringVal");
                     filter_toggleClick = true;
                     retainSegmentValuesFilter();
                     requestSalesSelectedFilterVal(selectedString);
@@ -690,7 +691,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent filterIntent = new Intent(SalesPvAActivity.this, SalesFilterActivity.class);
+                Intent filterIntent = new Intent(SalesPvAActivity.this, SalesAnalysisFilter.class);
                 filterIntent.putExtra("checkfrom", "pvaAnalysis");
                 startActivity(filterIntent);
             }
@@ -717,7 +718,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         action_department.setSize(FloatingActionButton.SIZE_MINI);
         action_department.setColorNormalResId(R.color.pink);
         action_department.setColorPressedResId(R.color.ezfb_Red);
-        action_department.setIcon(R.drawable.ic_fab_star);
+        action_department.setIcon(R.drawable.fabicon_department);
         action_department.setStrokeVisible(false);
 
 
@@ -733,7 +734,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         action_category.setSize(FloatingActionButton.SIZE_MINI);
         action_category.setColorNormalResId(R.color.pink);
         action_category.setColorPressedResId(R.color.ezfb_Red);
-        action_category.setIcon(R.drawable.ic_fab_star);
+        action_category.setIcon(R.drawable.fabicon_category);
         action_category.setStrokeVisible(false);
 
         action_category.setOnClickListener(new View.OnClickListener() {
@@ -749,7 +750,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         action_class.setSize(FloatingActionButton.SIZE_MINI);
         action_class.setColorNormalResId(R.color.pink);
         action_class.setColorPressedResId(R.color.ezfb_Red);
-        action_class.setIcon(R.drawable.ic_fab_star);
+        action_class.setIcon(R.drawable.fabicon_class);
         action_class.setStrokeVisible(false);
 
         action_class.setOnClickListener(new View.OnClickListener() {
@@ -764,7 +765,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         action_brand.setSize(FloatingActionButton.SIZE_MINI);
         action_brand.setColorNormalResId(R.color.pink);
         action_brand.setColorPressedResId(R.color.ezfb_Red);
-        action_brand.setIcon(R.drawable.ic_fab_star);
+        action_brand.setIcon(R.drawable.fabicon_brand);
         action_brand.setStrokeVisible(false);
 
         action_brand.setOnClickListener(new View.OnClickListener() {
@@ -779,7 +780,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         action_brandclass.setSize(FloatingActionButton.SIZE_MINI);
         action_brandclass.setColorNormalResId(R.color.pink);
         action_brandclass.setColorPressedResId(R.color.ezfb_Red);
-        action_brandclass.setIcon(R.drawable.ic_fab_star);
+        action_brandclass.setIcon(R.drawable.fabicon_brand_class);
         action_brandclass.setStrokeVisible(false);
 
         action_brandclass.setOnClickListener(new View.OnClickListener() {
@@ -790,14 +791,14 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             }
         });
 
-        final FloatingActionButton action_location = (FloatingActionButton) findViewById(R.id.action_location);
-        action_location.setSize(FloatingActionButton.SIZE_MINI);
-        action_location.setColorNormalResId(R.color.pink);
-        action_location.setColorPressedResId(R.color.ezfb_Red);
-        action_location.setIcon(R.drawable.ic_fab_star);
-        action_location.setStrokeVisible(false);
+        final FloatingActionButton action_store = (FloatingActionButton) findViewById(R.id.action_store);
+        action_store.setSize(FloatingActionButton.SIZE_MINI);
+        action_store.setColorNormalResId(R.color.pink);
+        action_store.setColorPressedResId(R.color.ezfb_Red);
+        action_store.setIcon(R.drawable.fabicon_store);
+        action_store.setStrokeVisible(false);
 
-        action_location.setOnClickListener(new View.OnClickListener() {
+        action_store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

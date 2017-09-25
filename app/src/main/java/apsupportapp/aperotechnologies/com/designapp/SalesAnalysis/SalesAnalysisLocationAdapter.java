@@ -45,7 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-
+import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter.explv_an_prod;
 
 
 /**
@@ -124,7 +124,9 @@ public class SalesAnalysisLocationAdapter extends BaseExpandableListAdapter {
 
             convertView.setTag(groupViewHolder);
 
-        } else {
+        }
+        else
+        {
             groupViewHolder = (GroupViewHolder) convertView.getTag();
         }
 
@@ -135,9 +137,12 @@ public class SalesAnalysisLocationAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
 
-        if (mListDataChild.get(mListDataGroup.get(groupPosition)) != null) {
+        if (mListDataChild.get(mListDataGroup.get(groupPosition)) != null)
+        {
             return mListDataChild.get(mListDataGroup.get(groupPosition)).size();
-        } else {
+        }
+        else
+        {
             return 0;
         }
     }
@@ -207,13 +212,8 @@ public class SalesAnalysisLocationAdapter extends BaseExpandableListAdapter {
                                                if (!cb.isChecked()) {
                                                    salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(true);
-                                                   salesAnalysisFilter.rel_an_process_filter.setVisibility(View.VISIBLE);
-                                                   if (groupPosition == 1) {
-//                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
-//                                                       cb.setChecked(true);
-                                                       salesAnalysisFilter.rel_an_process_filter.setVisibility(View.GONE);
+                                                  // salesAnalysisFilter.rel_an_process_filter.setVisibility(View.G);
 
-                                                   }
                                                    BuildUP(groupPosition);
 
                                                } else if (cb.isChecked())
@@ -432,15 +432,20 @@ public class SalesAnalysisLocationAdapter extends BaseExpandableListAdapter {
         if (charText.length() == 0) {
             mListDataChild.putAll(dublicate_listDataChild);
             //Collapse Group
+            explv_an_prod.collapseGroup(0);
+            explv_an_prod.collapseGroup(1);
+            explv_an_prod.collapseGroup(2);
+            explv_an_prod.collapseGroup(3);
+            explv_an_prod.collapseGroup(4);
             salesAnalysisFilter.explv_an_locatn.collapseGroup(0);
-            salesAnalysisFilter.explv_an_locatn.collapseGroup(1);
 
         } else {
 
-            for (int j = 0; j < 2; j++) {
+            for (int j = 0; j < 1; j++) {
                 List<String> arrayList = new ArrayList<String>();
 
-                for (int k = 0; k < dublicate_listDataChild.get(mListDataGroup.get(j)).size(); k++) {
+                for (int k = 0; k < dublicate_listDataChild.get(mListDataGroup.get(j)).size(); k++)
+                {
                     if (dublicate_listDataChild.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText)) {
                         arrayList.add(dublicate_listDataChild.get(mListDataGroup.get(j)).get(k));
                         Log.e("array list size  :", "" + arrayList.size());
@@ -449,9 +454,6 @@ public class SalesAnalysisLocationAdapter extends BaseExpandableListAdapter {
                 mListDataChild.put(mListDataGroup.get(j), arrayList);
             }
             salesAnalysisFilter.explv_an_locatn.expandGroup(0);
-            salesAnalysisFilter.explv_an_locatn.expandGroup(1);
-
-
             notifyDataSetChanged();
         }
     }

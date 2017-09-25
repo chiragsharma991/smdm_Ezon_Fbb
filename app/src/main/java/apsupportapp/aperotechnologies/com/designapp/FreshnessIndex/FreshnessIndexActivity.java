@@ -61,6 +61,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
@@ -350,7 +351,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
         Tabview = (TabLayout) findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Fashion"));
-        Tabview.addTab(Tabview.newTab().setText("Core"));
+        Tabview.addTab(Tabview.newTab().setText("All"));
         Tabview.setOnTabSelectedListener(FreshnessIndexActivity.this);
     }
 
@@ -2745,7 +2746,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                 }else{
 
-                    Intent intent = new Intent(FreshnessIndexActivity.this, SalesFilterActivity.class);
+                    Intent intent = new Intent(FreshnessIndexActivity.this, SalesAnalysisFilter.class);
                     intent.putExtra("checkfrom", "freshnessIndex");
                     startActivity(intent);
                 }

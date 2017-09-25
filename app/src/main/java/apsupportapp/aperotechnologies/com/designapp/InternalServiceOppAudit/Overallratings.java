@@ -1,10 +1,12 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
+import org.json.JSONObject;
+
 /**
  * Created by hasai on 21/09/17.
  */
 
-public class Overallratings {
+public class Overallratings extends JSONObject{
 
     String header;
     String code;

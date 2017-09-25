@@ -72,6 +72,7 @@ public class StyleActivity extends AppCompatActivity
     TextView collection, style,txt_store;
     List<String> collectionList, list;
     ArrayList<String> arrayList, articleOptionList,storeList;
+    static ArrayList<String> newcollectionList;
     String userId, bearertoken;
     View view;
     String collectionNM, optionName, from,store_name;
@@ -122,6 +123,7 @@ public class StyleActivity extends AppCompatActivity
         storeList =new ArrayList<String>();
         collectionList = new ArrayList<String>();
         arrayList = new ArrayList<String>();
+
         list = new ArrayList<>();
 //        seloptionName = null;
 //        selStoreName = null;
@@ -192,17 +194,7 @@ public class StyleActivity extends AppCompatActivity
                 optionLayout.setVisibility(View.GONE);
             }
         });
-        collection.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Log.e("", "onClick: ");
-                edtsearchCollection.setText("");
-                storeLayout.setVisibility(View.GONE);
-                collectionLayout.setVisibility(View.VISIBLE);
-                optionLayout.setVisibility(View.GONE);
-            }
-        });
+
         btnSubmit.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -306,7 +298,6 @@ public class StyleActivity extends AppCompatActivity
             }
         });
 
-
         edtsearchOption.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -319,7 +310,17 @@ public class StyleActivity extends AppCompatActivity
                 return false;
             }
         });
-
+        collection.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Log.e("", "onClick: ");
+                edtsearchCollection.setText("");
+                storeLayout.setVisibility(View.GONE);
+                collectionLayout.setVisibility(View.VISIBLE);
+                optionLayout.setVisibility(View.GONE);
+            }
+        });
         style.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -733,7 +734,10 @@ public class StyleActivity extends AppCompatActivity
                                     txt_store.setText(selStoreName);
                                     collection.setText(selcollectionName);
                                     style.setText(seloptionName);
+                                    arrayList.addAll(newcollectionList);
+                                    articleOptionList.addAll(SnapDashboardActivity._collectionitems);
                                     style.setEnabled(true);
+                                    collection.setEnabled(true);
 
                                 }
                                 else
@@ -812,6 +816,8 @@ public class StyleActivity extends AppCompatActivity
                             arrayList.add(0, "Select Collection");
                             collectionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+                            newcollectionList = new ArrayList();
+                           newcollectionList.addAll(arrayList);
                             listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
                             {
                                 @Override
@@ -1083,6 +1089,7 @@ public class StyleActivity extends AppCompatActivity
             selStoreName = null;
             selcollectionName = null;
             seloptionName = null;
+            newcollectionList= new ArrayList();
             SnapDashboardActivity._collectionitems = new ArrayList();
             finish();
         }

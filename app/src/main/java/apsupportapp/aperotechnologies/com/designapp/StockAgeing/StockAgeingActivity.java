@@ -45,6 +45,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -412,7 +413,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.stockAgeing_imgfilter:
-                Intent intent1 = new Intent(StockAgeingActivity.this, SalesFilterActivity.class);
+                Intent intent1 = new Intent(StockAgeingActivity.this, SalesAnalysisFilter.class);
                 intent1.putExtra("checkfrom", "stockAgeing");
                 startActivity(intent1);
                 break;

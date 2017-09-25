@@ -1,13 +1,16 @@
 [{
   "header" : "Wrong Billing",
-  "code" :  "1"
+  "code" :  "1",
+  "smiley" : "0"
 
 },
   {
     "header" : "Wait Time (Queue length vis a vis staffing)",
-    "code" :  "2"
+    "code" :  "2",
+    "smiley" : "0"
   },
   {
     "header" : "Slow Billing",
-    "code" :  "3"
+    "code" :  "3",
+    "smiley" : "0"
   }]

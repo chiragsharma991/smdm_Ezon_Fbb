@@ -41,6 +41,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -454,7 +455,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
                 break;
             case R.id.bestInvent_imgfilter:
-                Intent intent = new Intent(this, SalesFilterActivity.class);
+                Intent intent = new Intent(this, SalesAnalysisFilter.class);
                 intent.putExtra("checkfrom", "sellThruExceptions");
                 startActivity(intent);
                 break;

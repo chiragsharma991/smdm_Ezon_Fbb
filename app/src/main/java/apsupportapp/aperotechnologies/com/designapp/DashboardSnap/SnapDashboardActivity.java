@@ -240,6 +240,10 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 requestSubmitAPI(context, getObject());
             Log.e(TAG, "onResume: !tokenProcess");
         }
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("device_id", device_id);
+        editor.apply();
     }
 
     @Override

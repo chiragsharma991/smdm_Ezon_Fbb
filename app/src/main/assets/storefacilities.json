@@ -1,0 +1,36 @@
+[{
+  "header" : "Layout",
+  "code" :  "1",
+  "smiley" : "0"
+
+},
+  {
+    "header" : "Overall Cleanliness",
+    "code" :  "2",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Lift & Escalators",
+    "code" :  "3",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Washroom",
+    "code" :  "4",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Air Conditioning",
+    "code" :  "5",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Drinking Water",
+    "code" :  "6",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Seating Arrangements",
+    "code" :  "7",
+    "smiley" : "0"
+  }]

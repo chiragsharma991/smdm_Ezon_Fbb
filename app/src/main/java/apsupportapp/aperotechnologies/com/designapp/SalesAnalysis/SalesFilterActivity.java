@@ -247,26 +247,8 @@ public class SalesFilterActivity extends Activity {
                     build.append(Brandclass.replace(",$", ""));
 
                 }
-                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis"))
-                {
-                    intent = new Intent(SalesFilterActivity.this, SalesAnalysisActivity1.class);
-                    if (build.length() != 0)
-                    {
-                        SalesAnalysisActivity1.SalesAnalysisActivity.finish();
-                    }
-                    callback(build);
 
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
-                {
-                    intent = new Intent(SalesFilterActivity.this, SalesPvAActivity.class);
-                    if (build.length() != 0) {
-                        SalesPvAActivity.Sales_Pva_Activity.finish();
-                    }
-                    callback(build);
-
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("TopFullCut")) {
+                if (getIntent().getStringExtra("checkfrom").equals("TopFullCut")) {
                     intent = new Intent(SalesFilterActivity.this, TopFullCut.class);
                     if (build.length() != 0) {
                         TopFullCut.topFullcut.finish();
@@ -280,57 +262,6 @@ public class SalesFilterActivity extends Activity {
                         VisualAssortmentActivity.Visual_Assortment_Activity.finish();
                     }
                     callback(build);
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("skewedSize")) {
-                    intent = new Intent(SalesFilterActivity.this, SkewedSizesActivity.class);
-                    if (build.length() != 0)
-                    {
-                        SkewedSizesActivity.SkewedSizes.finish();
-                    }
-                    callback(build);
-                } else if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex")) {
-                    intent = new Intent(SalesFilterActivity.this, FreshnessIndexActivity.class);
-                    if (build.length() != 0) {
-                        FreshnessIndexActivity.freshness_Index.finish();
-                    }
-                    callback(build);
-                } else if (getIntent().getStringExtra("checkfrom").equals("optionEfficiency")) {
-                    intent = new Intent(SalesFilterActivity.this, OptionEfficiencyActivity.class);
-                    if (build.length() != 0) {
-                        OptionEfficiencyActivity.option_Efficiency.finish();
-                    }
-                    callback(build);
-                } else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
-                    intent = new Intent(SalesFilterActivity.this, BestPerformerInventory.class);
-                    if (build.length() != 0) {
-                        BestPerformerInventory.bestperoformer.finish();
-                    }
-                    callback(build);
-
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {
-                    intent = new Intent(SalesFilterActivity.this, StockAgeingActivity.class);
-                    if (build.length() != 0) {
-                        StockAgeingActivity.stockAgeing.finish();
-                    }
-                    callback(build);
-
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability")) {
-                    intent = new Intent(SalesFilterActivity.this, FloorAvailabilityActivity.class);
-                    if (build.length() != 0) {
-                        FloorAvailabilityActivity.floorAvailability.finish();
-                    }
-                    callback(build);
-
-
-                } else if (getIntent().getStringExtra("checkfrom").equals("sellThruExceptions")) {
-                    intent = new Intent(SalesFilterActivity.this, SaleThruInventory.class);
-                    if (build.length() != 0) {
-                        SaleThruInventory.saleThru.finish();
-                    }
-                    callback(build);
-
 
                 }
             }

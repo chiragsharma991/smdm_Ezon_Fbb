@@ -62,6 +62,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyHeader;
@@ -186,7 +187,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         optionEfficiency_imgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OptionEfficiencyActivity.this, SalesFilterActivity.class);
+                Intent intent = new Intent(OptionEfficiencyActivity.this, SalesAnalysisFilter.class);
                 intent.putExtra("checkfrom", "optionEfficiency");
                 startActivity(intent);
             }

@@ -110,7 +110,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             userId = sharedPreferences.getString("userId", "");  //E zone userid =username
         } else {
             userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
-            userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
+             // userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
         }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());

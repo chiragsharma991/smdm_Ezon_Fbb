@@ -42,6 +42,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -377,7 +378,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 }
                 break;
             case R.id.sk_imgfilter:
-                Intent intent = new Intent(SkewedSizesActivity.this, SalesFilterActivity.class);
+                Intent intent = new Intent(SkewedSizesActivity.this, SalesAnalysisFilter.class);
                 intent.putExtra("checkfrom", "skewedSize");
                 startActivity(intent);
                 break;
