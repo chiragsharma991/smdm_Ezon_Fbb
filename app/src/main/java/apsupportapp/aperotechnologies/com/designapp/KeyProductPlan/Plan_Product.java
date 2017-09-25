@@ -924,8 +924,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+                                  //  String storeCode = productName1.getString("storeCode");
+                                 //   String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
@@ -937,8 +937,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
-                                    productNameBean.setStoreCode(storeCode);
-                                    productNameBean.setStoreDesc(storeDesc);
+                                 //   productNameBean.setStoreCode(storeCode);
+                                  //  productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -956,8 +956,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+                                   // String storeCode = productName1.getString("storeCode");
+                                   // String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
@@ -969,8 +969,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
-                                    productNameBean.setStoreCode(storeCode);
-                                    productNameBean.setStoreDesc(storeDesc);
+                                //    productNameBean.setStoreCode(storeCode);
+                                //    productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 

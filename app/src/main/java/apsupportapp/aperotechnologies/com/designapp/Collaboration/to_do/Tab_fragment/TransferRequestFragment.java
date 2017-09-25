@@ -46,6 +46,8 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment.store_Code;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -81,7 +83,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
     private Button submit;
     TransferRequestAdapter transferRequestAdapter;
 
-    public TransferRequestFragment() {
+    public TransferRequestFragment(String storeCode) {
         // Required empty public constructor
     }
 
@@ -100,7 +102,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
 
     //TODO: Rename and change types and number of parameters
     public static StockPullFragment newInstance(String param1, String param2) {
-        StockPullFragment fragment = new StockPullFragment();
+        StockPullFragment fragment = new StockPullFragment(store_Code);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

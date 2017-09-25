@@ -233,12 +233,16 @@ public class SwitchingActivity extends AppCompatActivity
                     break;
 
                 case "020":
-                    Intent To_Do = new Intent(context, To_Do.class);
-                    startActivity(To_Do);
+//                    Intent To_Do = new Intent(context, To_Do.class);
+//                    startActivity(To_Do);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("To_Do");
                     break;
                 case "021":
-                    Intent StatusActivity = new Intent(context, StatusActivity.class);
-                    startActivity(StatusActivity);
+//                    Intent StatusActivity = new Intent(context, StatusActivity.class);
+//                    startActivity(StatusActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("StatusActivity");
                     break;
                 case "030":
 //                    Intent ProductAvailability_Notify = new Intent(context, ProductAvailability_notify_HO.class);
@@ -278,12 +282,16 @@ public class SwitchingActivity extends AppCompatActivity
                     commentDialog("SupervisorStaff_HO");
                     break;
                 case "022":
-                    Intent Feedback = new Intent(context, Feedback.class);
-                    startActivity(Feedback);
+//                    Intent Feedback = new Intent(context, Feedback.class);
+//                    startActivity(Feedback);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("Feedback");
                     break;
                 case "023":
-                    Intent FeedbackList = new Intent(context, FeedbackList.class);
-                    startActivity(FeedbackList);
+//                    Intent FeedbackList = new Intent(context, FeedbackList.class);
+//                    startActivity(FeedbackList);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("FeedbackList");
                     break;
                 case "024":
                     Intent InspectionBeginActivity = new Intent(context, InspectionBeginActivity.class);
@@ -637,7 +645,29 @@ public class SwitchingActivity extends AppCompatActivity
                                         startActivity(intent);
                                     }
 
+                                    else if(from.equals("Feedback")){
+                                        Intent intent = new Intent(SwitchingActivity.this, Feedback.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
 
+                                    else if(from.equals("FeedbackList")){
+                                        Intent intent = new Intent(SwitchingActivity.this, FeedbackList.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("To_Do")){
+                                        Intent intent = new Intent(SwitchingActivity.this, To_Do.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("StatusActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, StatusActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
                                 }
                             });
 
