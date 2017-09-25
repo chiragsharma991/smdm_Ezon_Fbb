@@ -775,8 +775,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+                                //    String storeCode = productName1.getString("storeCode");
+                                //    String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
                                     keyPlanProductBean = new KeyPlanProductBean();
                                     keyPlanProductBean.setLevel(level);
@@ -788,8 +788,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
                                     keyPlanProductBean.setSaleTotQty(saleTotQty);
                                     keyPlanProductBean.setPvaSales(pvaSales);
                                     keyPlanProductBean.setPvaStock(pvaStock);
-                                    keyPlanProductBean.setStoreCode(storeCode);
-                                    keyPlanProductBean.setStoreDesc(storeDesc);
+                                  //  keyPlanProductBean.setStoreCode(storeCode);
+                                 //   keyPlanProductBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(keyPlanProductBean);
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -807,8 +807,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+                                //    String storeCode = productName1.getString("storeCode");
+                                //    String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
 
                                     keyPlanProductBean = new KeyPlanProductBean();
@@ -821,8 +821,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
                                     keyPlanProductBean.setSaleTotQty(saleTotQty);
                                     keyPlanProductBean.setPvaSales(pvaSales);
                                     keyPlanProductBean.setPvaStock(pvaStock);
-                                    keyPlanProductBean.setStoreCode(storeCode);
-                                    keyPlanProductBean.setStoreDesc(storeDesc);
+                               //     keyPlanProductBean.setStoreCode(storeCode);
+                               //     keyPlanProductBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(keyPlanProductBean);
 
                                 }
@@ -893,8 +893,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+                                 //   String storeCode = productName1.getString("storeCode");
+                                 //   String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
 
                                     keyPlanProductBean = new KeyPlanProductBean();
@@ -907,8 +907,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
                                     keyPlanProductBean.setSaleTotQty(saleTotQty);
                                     keyPlanProductBean.setPvaSales(pvaSales);
                                     keyPlanProductBean.setPvaStock(pvaStock);
-                                    keyPlanProductBean.setStoreCode(storeCode);
-                                    keyPlanProductBean.setStoreDesc(storeDesc);
+                                 //   keyPlanProductBean.setStoreCode(storeCode);
+                                 //   keyPlanProductBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(keyPlanProductBean);
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -926,8 +926,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+                                 //   String storeCode = productName1.getString("storeCode");
+                                 //   String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
 
                                     keyPlanProductBean = new KeyPlanProductBean();
@@ -940,8 +940,8 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
                                     keyPlanProductBean.setSaleTotQty(saleTotQty);
                                     keyPlanProductBean.setPvaSales(pvaSales);
                                     keyPlanProductBean.setPvaStock(pvaStock);
-                                    keyPlanProductBean.setStoreCode(storeCode);
-                                    keyPlanProductBean.setStoreDesc(storeDesc);
+                                //    keyPlanProductBean.setStoreCode(storeCode);
+                                //    keyPlanProductBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(keyPlanProductBean);
 
                                 }

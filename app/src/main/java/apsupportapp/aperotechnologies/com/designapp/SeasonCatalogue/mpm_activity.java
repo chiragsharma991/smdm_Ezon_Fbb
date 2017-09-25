@@ -87,7 +87,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
       userId = sharedPreferences.getString("userId", "");
       bearertoken = sharedPreferences.getString("bearerToken", "");
-      geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+      geoLevel2Code = sharedPreferences.getString("concept","");
       lobId = sharedPreferences.getString("lobid","");
       cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
       network = new BasicNetwork(new HurlStack());
@@ -109,7 +109,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       Pdf_zoom_btn.setOnClickListener(this);
       WebViewWrap = (LinearLayout) findViewById(R.id.webview_wrap);
 
-      url = ConstsCore.web_url + "/v1/display/mpmproductsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+      url = ConstsCore.web_url + "/v1/display/mpmproductsNew/" + userId +"?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
 
       listView = (ListView) findViewById(R.id.department_list);
       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

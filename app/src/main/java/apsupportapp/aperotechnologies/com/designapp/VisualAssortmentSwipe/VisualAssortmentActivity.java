@@ -62,7 +62,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     SwipeDeckAdapter adapter;
     static String likeDislikeFlg ;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken,storeCode,geoLevel2Code, lobId;
+    String userId, bearertoken,storeCode,geoLevel2Code, lobId,store_Code;
     RadioButton visualAssort_PendingChk,visualAssort_CompletedChk;
     LinearLayout visualAssort_Pending,visualAssort_Completed;
     RequestQueue queue;
@@ -83,7 +83,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     boolean flag = false;
    JsonArrayRequest postRequest;
     public static Activity Visual_Assortment_Activity;
-    String recache = "";
+    String recache = "", isMultiStore, value;
     int maxCharactes ;
 
 
@@ -98,13 +98,21 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId","");
         geoLevel2Code = sharedPreferences.getString("concept","");
+        Log.e("geoLevel2Code ",""+geoLevel2Code);
         lobId = sharedPreferences.getString("lobid","");
-
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        userId = userId.substring(0,userId.length()-5);
 //        Log.e("userId",""+userId);
         bearertoken = sharedPreferences.getString("bearerToken","");
        // storeCode = sharedPreferences.getString("storeDescription","");
-        storeCode = getIntent().getExtras().getString("storeCode");
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            store_Code = storeCode.substring(0,4);
+            Log.i(TAG, "storeCode: "+storeCode );
+        }
+
         reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
@@ -126,8 +134,18 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
         txtStoreCode = (TextView)findViewById(R.id.txtStoreCode);
 //        txtStoreCode.setText(storeCode.trim().substring(0,4));
-//        txtStoreName = (TextView)findViewById(R.id.txtStoreName);
-//        txtStoreName.setText(storeCode.substring(5));
+        txtStoreName = (TextView)findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreName.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreName.setText(value);
+        }
         imgBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         visualsort = (RelativeLayout)findViewById(R.id.visualsort);
         SwipeLayout = (LinearLayout)findViewById(R.id.swipeLayout);
@@ -356,6 +374,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         obj.put("likeDislikeFlg", "0");
                         obj.put("feedback", checkFeedback);
                         obj.put("sizeSet", checkSizeSet);
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -368,7 +388,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         {
                             postRequest.cancel();
                         }
-                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code);
+                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code, store_Code);
                         visualAssort1.setLikeDislikeFlg("0");
                     }
                     else
@@ -378,7 +398,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         {
                             postRequest.cancel();
                         }
-                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context, geoLevel2Code);
+                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context, geoLevel2Code, store_Code);
                         visualAssort1.setLikeDislikeFlg("0");
                     }
                 }
@@ -418,10 +438,12 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 obj.put("likeDislikeFlg", "1");
                                 obj.put("feedback", checkFeedback);
                                 obj.put("sizeSet", Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
+
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code);
+                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code, store_Code);
                             VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
                             relbuy.setEnabled(false);
                             visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
@@ -451,6 +473,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                             obj.put("likeDislikeFlg", "1");
                             obj.put("feedback", checkFeedback);
                             obj.put("sizeSet", checkSizeSet);
+
                         }
                         catch (JSONException e)
                         {
@@ -462,14 +485,14 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                             if (postRequest != null) {
                                 postRequest.cancel();
                             }
-                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context,geoLevel2Code);
+                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context,geoLevel2Code, store_Code);
                             visualAssort1.setLikeDislikeFlg("1");
                         } else {
                             //GO FOR PUT METHOD
                             if (postRequest != null) {
                                 postRequest.cancel();
                             }
-                            VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context,geoLevel2Code);
+                            VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context,geoLevel2Code, store_Code);
                             visualAssort1.setLikeDislikeFlg("1");
                         }
                     }
@@ -629,7 +652,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
+                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack, store_Code);
                                     cardStack.setAdapter(adapter);
 
                                     adapter.notifyDataSetChanged();
@@ -653,7 +676,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack);
+                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack, store_Code);
                                     cardStack.setAdapter(adapter);
 
                                     adapter.notifyDataSetChanged();

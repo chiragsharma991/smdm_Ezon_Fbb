@@ -31,7 +31,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     private TextView txtStoreName, txtStoreCode;
     RelativeLayout status_imageBtnBack;
     public static ProgressBar StatusProcess;
-    private String store, isMultiStore, value;
+    private String store, isMultiStore, value, storeCode;
     SharedPreferences sharedPreferences;
 
 
@@ -45,6 +45,11 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            //  Log.i(TAG, "storeCode: "+storeCode );
+        }
         initialise();
 
         if (Build.VERSION.SDK_INT >= 21) {

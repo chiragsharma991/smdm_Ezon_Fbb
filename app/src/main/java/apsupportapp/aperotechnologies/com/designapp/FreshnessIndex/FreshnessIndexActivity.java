@@ -351,7 +351,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
         Tabview = (TabLayout) findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Fashion"));
-        Tabview.addTab(Tabview.newTab().setText("Core"));
+        Tabview.addTab(Tabview.newTab().setText("All"));
         Tabview.setOnTabSelectedListener(FreshnessIndexActivity.this);
     }
 

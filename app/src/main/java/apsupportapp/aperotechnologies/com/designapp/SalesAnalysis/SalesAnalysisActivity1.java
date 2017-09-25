@@ -95,7 +95,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     public static String selectedsegValue = "WTD";
     String saleFirstVisibleItem, fromWhere = "Department", val, txtSalesClickedValue;
     TextView txtStoreCode, txtStoreDesc, txtheaderplanclass, txthDeptName;
-    ;
+
     public static int level = 1;
     RequestQueue queue;
     RelativeLayout relimgrank, relimgfilter, relprevbtn, relnextbtn, relLayoutSales, btnBack;
@@ -106,7 +106,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     // Ezone Elements Declaration
     public static String ez_segment_val = "LD";
     SegmentedGroup ez_segmentgrp;
-    RelativeLayout rel_ez_back, rel_ez_sort, rel_ez_filter, rel_ez_next, rel_ez_prev, rel_ez_viewBy;
+    RelativeLayout rel_ez_back, rel_ez_sort, rel_ez_filter, rel_ez_next, rel_ez_prev, rel_ez_viewBy,relStoreLayout;
     RadioButton btn_ez_LD, btn_ez_WTD, btn_ez_MTD, btn_ez_YTD, rb_ez_viewBy_ProductChk, rb_ez_viewBy_LocatnChk;
     TextView txt_ez_header, ez_txt_hierarchy_nm;
     RecyclerView recyclevw_ez_sales;
@@ -663,19 +663,21 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         val = "";
         firstVisibleItem = 0;
 //        etListText = (EditText) findViewById(R.id.etListText);
+        relStoreLayout = (RelativeLayout)findViewById(R.id.relStoreLayout);
+        relStoreLayout.setVisibility(View.GONE);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
-        if(isMultiStore.equals("Yes"))
-        {
-            txtStoreCode.setText("Concept : ");
-            txtStoreDesc.setText(value);
-
-        }
-        else
-        {
-            txtStoreCode.setText("Store : ");
-            txtStoreDesc.setText(value);
-        }
+//        if(isMultiStore.equals("Yes"))
+//        {
+//            txtStoreCode.setText("Concept : ");
+//            txtStoreDesc.setText(value);
+//
+//        }
+//        else
+//        {
+//            txtStoreCode.setText("Store : ");
+//            txtStoreDesc.setText(value);
+//        }
 //        Log.e( "initialize_fbb_ui: ", ""+storeDescription.trim().substring(0,4));
 //        txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        txtStoreDesc.setText(storeDescription.substring(5));

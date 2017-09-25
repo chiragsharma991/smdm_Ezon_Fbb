@@ -119,7 +119,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     private TabLayout tabLayout, ez_tabLayout;
     private PopupWindow popupWindow;
     private RadioButton product_radiobtn, location_radiobtn;
-    private int preValue = 1, postValue;
+    private int preValue = 1, postValue,sales_filter_level;
     private boolean from_filter;
     private String filterSelectedString, isMultiStore, value;
 
@@ -185,12 +185,12 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
             if (filterSelectedString == null) {
 
-                if (getIntent().getStringExtra("selectedDept") == null) {
+                if (getIntent().getStringExtra("selectedStringVal") == null) {
                     filter_toggleClick = false;
                     retainSegmentValuesFilter();
                     requestSalesViewPagerValueAPI();
-                } else if (getIntent().getStringExtra("selectedDept") != null) {
-                    String selectedString = getIntent().getStringExtra("selectedDept");
+                } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+                    String selectedString = getIntent().getStringExtra("selectedStringVal");
                     filter_toggleClick = true;
                     retainSegmentValuesFilter();
                     requestSalesSelectedFilterVal(selectedString);

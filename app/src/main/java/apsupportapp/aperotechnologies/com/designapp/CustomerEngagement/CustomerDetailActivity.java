@@ -556,13 +556,13 @@ public class CustomerDetailActivity extends AppCompatActivity {
     {
         String url = "";
         if (businessCcb.equals("Food")) {
-            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code;
         } else if (businessCcb.equals("Fashion")) {
-            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code;
         } else if (businessCcb.equals("Home")) {
-            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code;
         } else if (businessCcb.equals("Electronics")) {
-            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code;
         }
         Log.e("pie on focus ", "" + url);
 
