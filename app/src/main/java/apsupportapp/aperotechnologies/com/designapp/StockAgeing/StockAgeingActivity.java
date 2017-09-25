@@ -45,6 +45,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -84,7 +85,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     String checkAgeingVal = null;
     private boolean coreSelection = false;
     private boolean from_filter = false;
-    private String selectedString = "", geoLevel2Code, lobId;
+    private String selectedString = "", geoLevel2Code, lobId, isMultiStore, value;
     public static Activity stockAgeing;
     private boolean toggleClick = false;
     private TabLayout Tabview;
@@ -95,7 +96,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_ageing);
         getSupportActionBar().hide();
-        initalise();
+
         gson = new Gson();
         stockAgeing = this;
         StockAgeingList = new ArrayList<RunningPromoListDisplay>();
@@ -104,11 +105,14 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        initalise();
 //        stock_txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        stock_txtStoreName.setText(storeDescription.substring(5));
         StockAgListView.setTag("FOOTER");
@@ -340,6 +344,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private void initalise() {
         stock_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         stock_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            stock_txtStoreCode.setText("Concept : ");
+            stock_txtStoreName.setText(value);
+
+        }
+        else
+        {
+            stock_txtStoreCode.setText("Store : ");
+            stock_txtStoreName.setText(value);
+        }
         stock_BtnBack = (RelativeLayout) findViewById(R.id.stockAgeing_imageBtnBack);
         stock_BtnFilter = (RelativeLayout) findViewById(R.id.stockAgeing_imgfilter);
         stock_quickFilter = (RelativeLayout) findViewById(R.id.sa_quickFilter);
@@ -398,7 +413,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.stockAgeing_imgfilter:
-                Intent intent1 = new Intent(StockAgeingActivity.this, SalesFilterActivity.class);
+                Intent intent1 = new Intent(StockAgeingActivity.this, SalesAnalysisFilter.class);
                 intent1.putExtra("checkfrom", "stockAgeing");
                 startActivity(intent1);
                 break;

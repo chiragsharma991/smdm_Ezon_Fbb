@@ -57,6 +57,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -106,7 +107,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private boolean coreSelection = false;
     public static Activity bestperoformer;
     private boolean from_filter = false;
-    private String selectedString = "", geoLevel2Code, lobId;
+    private String selectedString = "", geoLevel2Code, lobId, isMultiStore, value;
     private boolean toggleClick = true;
     private boolean worstToggle = false;
     private RelativeLayout FreshnessIndex_Ez_moreVertical;
@@ -126,6 +127,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         if (geoLeveLDesc.equals("E ZONE")) {
             setContentView(R.layout.activity_best_performer_ez_inventory);
@@ -656,6 +659,17 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
 //        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        BestInvent_txtStoreName.setText(storeDescription.substring(5));
+        if(isMultiStore.equals("Yes"))
+        {
+            BestInvent_txtStoreCode.setText("Concept : ");
+            BestInvent_txtStoreName.setText(value);
+
+        }
+        else
+        {
+            BestInvent_txtStoreCode.setText("Store : ");
+            BestInvent_txtStoreName.setText(value);
+        }
         rel_store_layout.setVisibility(View.VISIBLE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
         BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
@@ -722,7 +736,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                     break;
 
                 } else {
-                    Intent intent = new Intent(this, SalesFilterActivity.class);
+                    Intent intent = new Intent(this, SalesAnalysisFilter.class);
                     intent.putExtra("checkfrom", "bestPerformers");
                     startActivity(intent);
                     break;
@@ -1284,6 +1298,20 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void intializeUIofEzon() {
 
+        BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
+        BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
+//        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        BestInvent_txtStoreName.setText(storeDescription.substring(5));
+        if(isMultiStore.equals("No"))
+        {
+            BestInvent_txtStoreCode.setText("Store : ");
+            BestInvent_txtStoreName.setText(value);
+        }
+        else
+        {
+            BestInvent_txtStoreCode.setText("Concept : ");
+            BestInvent_txtStoreName.setText(value);
+        }
         rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
         rel_store_layout.setVisibility(View.INVISIBLE);
         FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);

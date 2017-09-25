@@ -121,11 +121,11 @@ public class ApiRequest  {
                     @Override
                     public  void onResponse(JSONArray response) {
                         Log.e(TAG, "onResponse: "+response );
+                        Reusable_Functions.hDialog();
 
                         try {
 
                             if (response.equals("") || response == null || response.length() == 0 ) {
-                                Reusable_Functions.hDialog();
                                 if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                                     FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -135,9 +135,12 @@ public class ApiRequest  {
                                     ResposeInterface.nodatafound();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 }else{
+                                    Log.e("no data found","");
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    Reusable_Functions.hDialog();
 
                                     ResposeInterface.nodatafound();
-
+                                    return;
 //                                    if(data.equals("Feedback with callback")) {
 //                                        Toast.makeText(context, "no data found for Feedback with Callback", Toast.LENGTH_SHORT).show();
 //                                    }
@@ -152,7 +155,7 @@ public class ApiRequest  {
 
 
                                 }
-                                return;
+
 
                             }
                             else if (response.length() == limit) {

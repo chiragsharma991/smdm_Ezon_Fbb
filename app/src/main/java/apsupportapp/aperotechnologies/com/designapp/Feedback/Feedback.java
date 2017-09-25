@@ -377,10 +377,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private void commentDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-        // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         View v = inflater.inflate(R.layout.comment_dialog, null);
         LinearLayout skip = (LinearLayout) v.findViewById(R.id.comment_skip);
         LinearLayout ok = (LinearLayout) v.findViewById(R.id.comment_ok);

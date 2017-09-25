@@ -72,6 +72,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
@@ -120,7 +121,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     private RadioButton product_radiobtn, location_radiobtn;
     private int preValue = 1, postValue;
     private boolean from_filter;
-    private String filterSelectedString;
+    private String filterSelectedString, isMultiStore, value;
 
 
     @Override
@@ -136,7 +137,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         geoLevel2Code = sharedPreferences.getString("concept", "");
         lobId = sharedPreferences.getString("lobid","");
-
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -631,6 +633,17 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         rel_store_layout.setVisibility(View.VISIBLE);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreDesc.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreDesc.setText(value);
+        }
         Log.e(TAG, "store desc: " + storeDescription);
         if (geoLeveLDesc.equals("E ZONE"))
         {
@@ -678,7 +691,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent filterIntent = new Intent(SalesPvAActivity.this, SalesFilterActivity.class);
+                Intent filterIntent = new Intent(SalesPvAActivity.this, SalesAnalysisFilter.class);
                 filterIntent.putExtra("checkfrom", "pvaAnalysis");
                 startActivity(filterIntent);
             }

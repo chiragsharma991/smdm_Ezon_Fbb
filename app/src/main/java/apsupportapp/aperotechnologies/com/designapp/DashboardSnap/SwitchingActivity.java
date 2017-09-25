@@ -263,7 +263,7 @@ public class SwitchingActivity extends AppCompatActivity
 //                    Intent ProductQualityRange = new Intent(context, ProductQualityRange_HO.class);
 //                    startActivity(ProductQualityRange);
                     Reusable_Functions.sDialog(context, "Fetching...");
-                    commentDialog("VisualReportActivity");
+                    commentDialog("ProductQualityRange_HO");
                     break;
                 case "034":
 //                    Intent OurStoreServices = new Intent(context, OurStoreServices_HO.class);
@@ -382,6 +382,8 @@ public class SwitchingActivity extends AppCompatActivity
                 apps.add(new App("Sales", R.mipmap.salesanalysis,"004"));
                 apps.add(new App("Plan Vs Actual ", R.mipmap.planvsactual,"005"));
                 apps.add(new App("Key Product PVA", R.mipmap.planvsactual,"018"));
+                apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,"028"));
+
                 break;
 
             case 3 :
@@ -565,7 +567,7 @@ public class SwitchingActivity extends AppCompatActivity
                             if (response.equals("") || response == null || response.length() == 0 )
                             {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(SwitchingActivity.this, "No collection data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SwitchingActivity.this, "No data found", Toast.LENGTH_LONG).show();
                             }
                             else
                             {
@@ -605,7 +607,6 @@ public class SwitchingActivity extends AppCompatActivity
                                         startActivity(intent);
 
                                     }
-
                                     else if(from.equals("PolicyExchangeRefund_HO")){
                                         Intent intent = new Intent(SwitchingActivity.this, PolicyExchangeRefund_HO.class);
                                         intent.putExtra("storeCode", storeCode);
@@ -635,7 +636,6 @@ public class SwitchingActivity extends AppCompatActivity
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
 
                                 }
                             });

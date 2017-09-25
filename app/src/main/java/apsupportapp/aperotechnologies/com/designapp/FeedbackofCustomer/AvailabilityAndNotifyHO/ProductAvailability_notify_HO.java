@@ -32,9 +32,10 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
         getSupportActionBar().setElevation(0);
         context = this;
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
-        if(getIntent().getExtras().getString("from") != null )
+        if(getIntent().getExtras().getString("storeCode") != null )
         {
             storeCode = getIntent().getExtras().getString("storeCode");
+            Log.i(TAG, "storeCode: "+storeCode );
         }
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);

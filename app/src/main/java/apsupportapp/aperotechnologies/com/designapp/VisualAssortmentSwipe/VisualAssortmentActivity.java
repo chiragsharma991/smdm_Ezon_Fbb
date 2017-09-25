@@ -126,8 +126,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
 
         txtStoreCode = (TextView)findViewById(R.id.txtStoreCode);
 //        txtStoreCode.setText(storeCode.trim().substring(0,4));
-        txtStoreName = (TextView)findViewById(R.id.txtStoreName);
-        txtStoreName.setText(storeCode.substring(5));
+//        txtStoreName = (TextView)findViewById(R.id.txtStoreName);
+//        txtStoreName.setText(storeCode.substring(5));
         imgBtnBack = (RelativeLayout) findViewById(R.id.imageBtnBack);
         visualsort = (RelativeLayout)findViewById(R.id.visualsort);
         SwipeLayout = (LinearLayout)findViewById(R.id.swipeLayout);

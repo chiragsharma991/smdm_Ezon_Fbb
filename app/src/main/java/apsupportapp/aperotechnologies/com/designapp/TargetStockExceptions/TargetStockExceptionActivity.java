@@ -78,7 +78,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private SegmentedGroup target_segmented;
     private RadioButton target_fashion, target_core;
     private ToggleButton Toggle_target_fav;
-    private String corefashion = "Fashion", view = "STD";
+    private String corefashion = "Fashion", view = "STD", isMultiStore, value;
     String checkSeasonGpVal = null, checkTimeVal = null, checkTitleVal = null;
     int checkTargetROSVal = 7;
     private SeekBar TargetSeek;
@@ -92,14 +92,15 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_target_exception);
         getSupportActionBar().hide();
-        initalise();
+
         gson = new Gson();
-        targetStockList = new ArrayList<FloorAvailabilityDetails>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -107,6 +108,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         queue.start();
 //        target_txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        target_txtStoreName.setText(storeDescription.substring(5));
+        initalise();
+        targetStockList = new ArrayList<FloorAvailabilityDetails>();
         targetListView.setTag("FOOTER");
         targetListView.setVisibility(View.VISIBLE);
         if (Reusable_Functions.chkStatus(context)) {
@@ -277,6 +280,17 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private void initalise() {
         target_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         target_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            target_txtStoreCode.setText("Concept : ");
+            target_txtStoreName.setText(value);
+
+        }
+        else
+        {
+            target_txtStoreCode.setText("Store : ");
+            target_txtStoreName.setText(value);
+        }
         target_BtnBack = (RelativeLayout) findViewById(R.id.target_imageBtnBack);
         target_BtnFilter = (RelativeLayout) findViewById(R.id.target_imgfilter);
         target_quickFilter = (RelativeLayout) findViewById(R.id.target_quickFilter);

@@ -46,6 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter.an_str_checkFrom;
+import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter.explv_an_locatn;
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter.explv_an_prod;
 import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter.rel_an_process_filter;
 
@@ -207,16 +208,6 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
                                                an_level = groupPosition + 2;
                                                if (!cb.isChecked()) {
 
-                                                   if (an_str_checkFrom.equals("anoneSales")  || an_str_checkFrom.equals("pvaAnalysis")) {
-                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
-                                                       cb.setChecked(true);
-                                                       rel_an_process_filter.setVisibility(View.VISIBLE);
-                                                       if (groupPosition == 3)
-                                                       {
-                                                          rel_an_process_filter.setVisibility(View.GONE);
-                                                       }
-
-                                                   } else {
                                                        salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                        cb.setChecked(true);
                                                        rel_an_process_filter.setVisibility(View.VISIBLE);
@@ -224,7 +215,7 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
                                                        {
                                                           rel_an_process_filter.setVisibility(View.GONE);
                                                        }
-                                                   }
+
                                                    Log.e("salesListchecked :", "" + salesList);
                                                    BuildUP(an_level);
                                                } else if (cb.isChecked())
@@ -240,106 +231,12 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    private void removeBuildUP(int prod_level) {
+    private void removeBuildUP(int prod_level)
+    {
         int filterLevel;
         filterLevel = prod_level;
-
-        if (an_str_checkFrom.equals("ezoneSales") || an_str_checkFrom.equals("pvaAnalysis"))
-        {
-            Log.e("removeBuildUP: ","Sales" );
-            removeDataforSales(filterLevel);
-        }
-        else
-        {
-            Log.e("removeBuildUP: ","Inventory" );
-            removeDataforInventory(filterLevel);
-        }
-
-    }
-
-    private void removeDataforSales(int filterLevel) {
-        if (filterLevel == 2) {
-            deptList.remove(txtClickedVal.trim());
-            String[] array = (String[]) deptList.toArray(new String[0]);
-            String str1 = Arrays.toString(array);
-            str1 = str1.replace("[", "");
-            str1 = str1.replace("]", "");
-            str1 = str1.replace(", ", ",");
-            an_dept_text = str1;
-
-            if (deptList.size() == 0) {
-                salesList.clear();
-                mListDataChild.putAll(dublicate_listDataChild2);
-                for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                    explv_an_prod.collapseGroup(k);
-                }
-                for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                    explv_an_prod.expandGroup(k);
-                }
-            } else {
-                requestProductHierarchyAPI(filterLevel, an_dept_text);
-            }
-        }
-        if (filterLevel == 3) {
-            categryList.remove(categryList.indexOf(txtClickedVal.trim()));
-            String[] array = (String[]) categryList.toArray(new String[0]);
-            String str1 = Arrays.toString(array);
-            str1 = str1.replace("[", "");
-            str1 = str1.replace("]", "");
-            str1 = str1.replace(", ", ",");
-            an_categry_text = str1;
-            if (categryList.size() == 0) {
-                if (deptList.size() == 0) {
-                    mListDataChild.putAll(dublicate_listDataChild2);
-                    for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                        explv_an_prod.collapseGroup(k);
-                    }
-                    for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                        explv_an_prod.expandGroup(k);
-                    }
-                } else {
-                    filterLevel = 2;
-                    requestProductHierarchyAPI(filterLevel, an_dept_text);
-                }
-            } else {
-                requestProductHierarchyAPI(filterLevel, an_categry_text);
-            }
-
-        }
-        if (filterLevel == 4) {
-            classList.remove(classList.indexOf(txtClickedVal.trim()));
-            String[] array = (String[]) classList.toArray(new String[0]);
-            String str1 = Arrays.toString(array);
-            str1 = str1.replace("[", "");
-            str1 = str1.replace("]", "");
-            str1 = str1.replace(", ", ",");
-            an_class_text = str1;
-            if (classList.size() == 0) {
-                if (categryList.size() == 0) {
-                    mListDataChild.putAll(dublicate_listDataChild2);
-                    for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                        explv_an_prod.collapseGroup(k);
-                    }
-                    for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                        explv_an_prod.expandGroup(k);
-                    }
-                } else {
-                    filterLevel = 3;
-                    requestProductHierarchyAPI(filterLevel, an_categry_text);
-                }
-            } else {
-                requestProductHierarchyAPI(filterLevel, an_class_text);
-            }
-        }
-        if (filterLevel == 5) {
-            brandList.remove(brandList.indexOf(txtClickedVal.trim()));
-            String[] array = (String[]) brandList.toArray(new String[0]);
-            String str1 = Arrays.toString(array);
-            str1 = str1.replace("[", "");
-            str1 = str1.replace("]", "");
-            str1 = str1.replace(", ", ",");
-            an_brand_text = str1;
-        }
+        Log.e("removeBuildUP: ","Inventory" );
+         removeDataforInventory(filterLevel);
     }
 
     private void removeDataforInventory(int filterLevel)
@@ -458,118 +355,12 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
     private void BuildUP(int prod_level) {
         int filterLevel;
         filterLevel = prod_level;
-        if (an_str_checkFrom.equals("ezoneSales") || an_str_checkFrom.equals("pvaAnalysis"))
-        {
-            Log.e("BuildUP: ","Sales" );
-            buildUpdataSales(filterLevel);
-        } else
-        {
+
             Log.e("BuildUP: ","Inventory" );
             buildUpdataInventory(filterLevel);
-        }
+
     }
 
-
-    private void buildUpdataSales(int filterLevel) {
-        if (filterLevel == 2) {
-            if (!an_dept_flg) {
-                deptList.add(txtClickedVal.trim());
-                an_dept_flg = true;
-                an_cat_flg = false;
-                an_class_flg = false;
-                an_brand_flg = false;
-                String[] array = (String[]) deptList.toArray(new String[0]);
-                String str_dept = Arrays.toString(array);
-                str_dept = str_dept.replace("[", "");
-                str_dept = str_dept.replace("]", "");
-                str_dept = str_dept.replace(", ", ",");
-                an_dept_text = str_dept;
-                requestProductHierarchyAPI(filterLevel, an_dept_text);
-            } else {
-                deptList.add(txtClickedVal.trim());
-                String[] array = (String[]) deptList.toArray(new String[0]);
-                String str_dept = Arrays.toString(array);
-                str_dept = str_dept.replace("[", "");
-                str_dept = str_dept.replace("]", "");
-                str_dept = str_dept.replace(", ", ",");
-                an_dept_text = str_dept;
-                requestProductHierarchyAPI(filterLevel, an_dept_text);
-            }
-        }
-        if (filterLevel == 3) {
-            if (!an_cat_flg) {
-                categryList.add(txtClickedVal.trim());
-                an_dept_flg = false;
-                an_cat_flg = true;
-                an_class_flg = false;
-                an_brand_flg = false;
-                String[] array = (String[]) categryList.toArray(new String[0]);
-                String str_cate = Arrays.toString(array);
-                str_cate = str_cate.replace("[", "");
-                str_cate = str_cate.replace("]", "");
-                str_cate = str_cate.replace(", ", ",");
-                an_categry_text = str_cate;
-                requestProductHierarchyAPI(filterLevel, an_categry_text);
-            } else {
-                categryList.add(txtClickedVal.trim());
-                String[] array = (String[]) categryList.toArray(new String[0]);
-                String str_cate = Arrays.toString(array);
-                str_cate = str_cate.replace("[", "");
-                str_cate = str_cate.replace("]", "");
-                str_cate = str_cate.replace(", ", ",");
-                an_categry_text = str_cate;
-                requestProductHierarchyAPI(filterLevel, an_categry_text);
-            }
-        }
-        if (filterLevel == 4) {
-            if (!an_class_flg) {
-                classList.add(txtClickedVal.trim());
-                an_dept_flg = false;
-                an_cat_flg = false;
-                an_class_flg = true;
-                an_brand_flg = false;
-                String[] array = (String[]) classList.toArray(new String[0]);
-                String str_class = Arrays.toString(array);
-                str_class = str_class.replace("[", "");
-                str_class = str_class.replace("]", "");
-                str_class = str_class.replace(", ", ",");
-                an_class_text = str_class;
-                requestProductHierarchyAPI(filterLevel, an_class_text);
-            } else {
-                classList.add(txtClickedVal.trim());
-                String[] array = (String[]) classList.toArray(new String[0]);
-                String str_class = Arrays.toString(array);
-                str_class = str_class.replace("[", "");
-                str_class = str_class.replace("]", "");
-                str_class = str_class.replace(", ", ",");
-                an_class_text = str_class;
-                requestProductHierarchyAPI(filterLevel, an_class_text);
-            }
-        }
-        if (filterLevel == 5) {
-            if (!an_brand_flg) {
-                brandList.add(txtClickedVal.trim());
-                an_dept_flg = false;
-                an_cat_flg = false;
-                an_class_flg = false;
-                an_brand_flg = true;
-                String[] array = (String[]) brandList.toArray(new String[0]);
-                String str_brand = Arrays.toString(array);
-                str_brand = str_brand.replace("[", "");
-                str_brand = str_brand.replace("]", "");
-                str_brand = str_brand.replace(", ", ",");
-                an_brand_text = str_brand;
-            } else {
-                brandList.add(txtClickedVal.trim());
-                String[] array = (String[]) brandList.toArray(new String[0]);
-                String str_brand = Arrays.toString(array);
-                str_brand = str_brand.replace("[", "");
-                str_brand = str_brand.replace("]", "");
-                str_brand = str_brand.replace(", ", ",");
-                an_brand_text = str_brand;
-            }
-        }
-    }
 
     private void buildUpdataInventory(int filterLevel) {
         if (filterLevel == 2) {
@@ -714,43 +505,17 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
             mListDataChild.putAll(dublicate_listDataChild2);
             //Collapse Group
 
-            if (an_str_checkFrom.equals("ezoneSales") || an_str_checkFrom.equals("pvaAnalysis")) {
-                explv_an_prod.collapseGroup(0);
-                explv_an_prod.collapseGroup(1);
-                explv_an_prod.collapseGroup(2);
-                explv_an_prod.collapseGroup(3);
-            } else {
                 explv_an_prod.collapseGroup(0);
                 explv_an_prod.collapseGroup(1);
                 explv_an_prod.collapseGroup(2);
                 explv_an_prod.collapseGroup(3);
                 explv_an_prod.collapseGroup(4);
-            }
+                explv_an_locatn.collapseGroup(0);
+
 
         } else {
 
-            if (an_str_checkFrom.equals("ezoneSales") || an_str_checkFrom.equals("pvaAnalysis")) {
-
-                for (int j = 0; j < 4; j++) {
-                    List<String> arrayList1 = new ArrayList<String>();
-
-                    for (int k = 0; k < dublicate_listDataChild2.get(mListDataGroup.get(j)).size(); k++) {
-                        if (dublicate_listDataChild2.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText)) {
-                            arrayList1.add(dublicate_listDataChild2.get(mListDataGroup.get(j)).get(k));
-                            Log.e("array list size 1 :", "" + arrayList1.size());
-
-                        }
-                    }
-                    mListDataChild.put(mListDataGroup.get(j), arrayList1);
-                }
-                explv_an_prod.expandGroup(0);
-                explv_an_prod.expandGroup(1);
-                explv_an_prod.expandGroup(2);
-                explv_an_prod.expandGroup(3);
-                notifyDataSetChanged();
-            } else {
-
-                for (int j = 0; j < 5; j++) {
+               for (int j = 0; j < 5; j++) {
                     List<String> arrayList1 = new ArrayList<String>();
 
                     for (int k = 0; k < dublicate_listDataChild2.get(mListDataGroup.get(j)).size(); k++) {
@@ -769,7 +534,7 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
                 explv_an_prod.expandGroup(4);
                 notifyDataSetChanged();
             }
-        }
+
     }
 
     public final class GroupViewHolder {
@@ -794,36 +559,24 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
         String search_url = " ";
-        if (an_str_checkFrom.equals("ezoneSales") || an_str_checkFrom.equals("pvaAnalysis")) {
-            if (prod_level == 2) {
-                Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
-            } else if (prod_level == 3) {
-
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
-
-            } else if (prod_level == 4) {
-
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
-            }
-        } else {
             if (prod_level == 2)
             {
                 Log.e("str in global search :", "" + str);
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
-            } else if (prod_level == 3) {
-
+            } else if (prod_level == 3)
+            {
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
-            } else if (prod_level == 4) {
-
+            } else if (prod_level == 4)
+            {
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
-            } else if (prod_level == 5) {
+            }
+            else if (prod_level == 5) {
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
             }
-        }
+
         Log.e("search url:", "" + search_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, search_url,
                 new Response.Listener<JSONArray>() {

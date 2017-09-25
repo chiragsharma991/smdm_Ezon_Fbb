@@ -62,6 +62,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyHeader;
@@ -107,7 +108,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     ArrayList<PieEntry> entries;
     private CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     boolean flag = false;
-    private String qfButton = "OFF";
+    private String qfButton = "OFF", isMultiStore, value;
     private boolean CutCount = false, fullSize = false, fullCut = false;
     private boolean coreSelection = false, filter_toggleClick = false;
     private ProgressBar processBar;
@@ -137,6 +138,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -184,7 +187,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         optionEfficiency_imgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OptionEfficiencyActivity.this, SalesFilterActivity.class);
+                Intent intent = new Intent(OptionEfficiencyActivity.this, SalesAnalysisFilter.class);
                 intent.putExtra("checkfrom", "optionEfficiency");
                 startActivity(intent);
             }
@@ -740,6 +743,17 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
 //        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
 //        txtStoreDesc.setText(storeDescription.substring(5));
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreDesc.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreDesc.setText(value);
+        }
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         txtNoChart = (TextView) findViewById(R.id.noChartOption);
         oe_txtHeaderClass = (TextView) findViewById(R.id.oe_txtHeaderClass);
@@ -967,6 +981,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
 
@@ -992,7 +1008,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                             requestOptionEfficiencyDetails();
                         } catch (Exception e) {
-                            Reusable_Functions.hDialog();
                             Toast.makeText(context, " no data found  ", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
@@ -1041,9 +1056,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onResponse(JSONArray response) {
                         int i;
+                        Reusable_Functions.hDialog();
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 OnItemClick = false;
                                 llayoutOEfficiency.setVisibility(View.GONE);
@@ -1324,6 +1340,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         if (SalesFilterActivity.level_filter == 2)
                         {
                             oe_txtHeaderClass.setText("Category");
@@ -1504,10 +1522,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no chart data found", Toast.LENGTH_SHORT).show();
                                 llayoutOEfficiency.setVisibility(View.VISIBLE);
                                 OnItemClick = false;
@@ -1664,9 +1682,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onResponse(JSONArray response) {
                         int i;
+                        Reusable_Functions.hDialog();
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 OnItemClick = false;
                                 Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
@@ -1781,6 +1800,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.e( "onResponse:All Api ",""+response );
+                        Reusable_Functions.hDialog();
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
 
@@ -1865,11 +1886,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Reusable_Functions.hDialog();
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
+
                                 OnItemClick = false;
                                 Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
@@ -1977,9 +1998,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 OnItemClick = false;
                                 Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
@@ -2084,10 +2106,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         try {
 
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 OnItemClick = false;
                                 Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
 
@@ -2223,10 +2246,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 OnItemClick = false;
                                 processBar.setVisibility(View.GONE);

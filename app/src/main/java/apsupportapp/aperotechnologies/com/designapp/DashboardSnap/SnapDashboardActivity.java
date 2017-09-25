@@ -1,12 +1,14 @@
 package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -19,19 +21,23 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,8 +66,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.UUID;
 
@@ -74,14 +82,20 @@ import apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService;
 import apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken;
 import apsupportapp.aperotechnologies.com.designapp.FCM.TokenRefresh;
 import apsupportapp.aperotechnologies.com.designapp.HorlyAnalysis.ProductNameBean;
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Login.LoginActivity;
 import apsupportapp.aperotechnologies.com.designapp.LoginActivity1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.EtlStatus;
+import apsupportapp.aperotechnologies.com.designapp.model.Login_StoreList;
+
+import static apsupportapp.aperotechnologies.com.designapp.R.id.concept;
+import static apsupportapp.aperotechnologies.com.designapp.R.id.listView;
 
 public class SnapDashboardActivity extends SwitchingActivity implements onclickView
 {
@@ -91,7 +105,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private Context context;
     public static NestedScrollView nestedScrollview;
     RequestQueue queue;
-    String userId, bearertoken, geoLeveLDesc,pushtoken,geoLevel2Code,lobid;
+    String userId, bearertoken, geoLeveLDesc,pushtoken,lobName;
     SharedPreferences sharedPreferences;
     ArrayList<String> arrayList, eventUrlList;
     MySingleton m_config;
@@ -109,11 +123,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private EtlStatus etlStatus;
     private ArrayList<EtlStatus> etlStatusList;
     private Snackbar snackbar;
-    private TextView RefreshTime;
+    private TextView RefreshTime,concept_txt,lob_name_txt;
     public static SnapAdapter snapAdapter;
     public static boolean tokenProcess=false;
     private DatabaseHandler db;
-    String[] kpiIdArray;
+    private AlertDialog dialog;
+    private boolean[]lobchecked,conceptchecked;
+    private View viewpart;
 
   /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
             020. 021,  022, 023, 026, 027, 028*/
@@ -136,13 +152,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        geoLeveLDesc = sharedPreferences.getString("concept", "");
+        lobName = sharedPreferences.getString("lobname", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
-        geoLevel2Code = getIntent().getStringExtra("concept");
-        lobid = getIntent().getStringExtra("lobid");
-
         String[] kpiIdArray=getIntent().getStringArrayExtra("kpiId");
-  //      Log.e(TAG, "onCreate: kpi id"+kpiIdArray.length );
+        Log.e(TAG, "onCreate: kpi id"+kpiIdArray.length );
       //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 //        Log.e("SnapDashboard", "Refreshed token:------ " + refreshedToken);
         Log.e(TAG,"userId :--"+ userId);
@@ -153,7 +167,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         queue.start();
         gson = new Gson();
         if(userId.equals("")){
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity1.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
@@ -197,7 +211,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
         }
       //  checkPermission();
-        Arrays.asList(kpiIdArray);
+       // Arrays.asList(kpiIdArray);
+
+
         setupAdapter(Arrays.asList(kpiIdArray));
 
         if( getIntent().getExtras() != null)
@@ -249,14 +265,21 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private void initalise()
     {
         db = new DatabaseHandler(context);
+        viewpart = findViewById(android.R.id.content);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Recycler_verticalView = (RecyclerView) findViewById(R.id.recycler_verticalView);
         RefreshTime = (TextView) findViewById(R.id.refreshTime);
+        lob_name_txt = (TextView) findViewById(R.id.lob_name);
+        concept_txt = (TextView) findViewById(R.id.concept);
+        lob_name_txt.setText(lobName);
+        concept_txt.setText(geoLeveLDesc);
         nestedScrollview = (NestedScrollView) findViewById(R.id.nestedScrollview);
         Recycler_verticalView.setNestedScrollingEnabled(false);
         Recycler_verticalView.setLayoutManager(new LinearLayoutManager(this));
         Recycler_verticalView.setHasFixedSize(true);
+
+
         //setupAdapter();
     }
 
@@ -290,7 +313,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notifManager.cancelAll();
             return true;
-        } else if (id == R.id.aboutus) {
+        }
+        else if(id == R.id.mapping){
+
+            selectConceptNLob();
+
+
+        }
+        else if (id == R.id.aboutus) {
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
 //            finish();
@@ -298,6 +328,159 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void selectConceptNLob() {
+        List<Login_StoreList> list=db.db_GetAllContacts();
+        Log.i(TAG, "selectConceptNLob: list size "+list.size() );
+        ArrayList<String>conceptData=new ArrayList<>();
+        ArrayList<String>lobData=new ArrayList<>();
+        for(Login_StoreList data : list){
+            conceptData.add(data.getGeoLevel2Code());
+            lobData.add(data.getLobName());
+        }
+        Set<String> set = new HashSet<>();
+        set.addAll(conceptData);
+        conceptData.clear();
+        conceptData.addAll(set);  // remove dublicate values from list
+
+        set = new HashSet<>();
+        set.addAll(lobData);
+        lobData.clear();
+        lobData.addAll(set);  // remove dublicate values from list
+        customAlert(conceptData,lobData);
+
+
+
+
+
+    }
+
+    private void customAlert(final ArrayList<String> conceptData, final ArrayList<String> lobData){
+
+        final Dialog dialog = new Dialog(context, R.style.ThemeDialog);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.ThemeDialog;
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.gravity = Gravity.BOTTOM;
+        window.setAttributes(wlp);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.dashboard_dropdown);
+        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        final RecyclerView lobList = (RecyclerView) dialog.findViewById(R.id.lobList);
+        final RecyclerView conceptList = (RecyclerView) dialog.findViewById(R.id.conceptList);
+        RelativeLayout qfDoneLayout = (RelativeLayout) dialog.findViewById(R.id.qfDoneLayout);
+        final TextView txt_incorrect = (TextView) dialog.findViewById(R.id.txt_incorrect);
+        txt_incorrect.setVisibility(View.GONE);
+        lobchecked=new boolean[lobData.size()];
+        conceptchecked=new boolean[conceptData.size()];
+        for (int i = 0; i <lobData.size() ; i++) {
+            lobchecked[i]=false;
+        }
+        for (int i = 0; i <conceptData.size() ; i++) {
+            conceptchecked[i]=false;
+        }
+
+        lobList.setLayoutManager(new LinearLayoutManager(context));
+        lobList.setLayoutManager(new LinearLayoutManager(lobList.getContext(),LinearLayoutManager.VERTICAL, false));
+        final LobMappingAdapter lobMappingAdapter = new LobMappingAdapter(lobData, context,lobchecked);
+        lobList.setAdapter(lobMappingAdapter);
+
+        conceptList.setLayoutManager(new LinearLayoutManager(context));
+        conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(),LinearLayoutManager.VERTICAL, false));
+        final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptData, context,conceptchecked);
+        conceptList.setAdapter(conceptMappingAdapter);
+
+        lobList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                    for (int i = 0; i <lobchecked.length ; i++) {
+                    if(position==i)   lobchecked[i]=true;
+                    else lobchecked[i]=false;
+                }
+                lobMappingAdapter.notifyDataSetChanged();
+            }
+        }));
+        conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                for (int i = 0; i <conceptData.size() ; i++) {
+                    if(position==i)   conceptchecked[i]=true;
+                    else conceptchecked[i]=false;
+                }
+                conceptMappingAdapter.notifyDataSetChanged();
+
+            }
+        }));
+
+        qfDoneLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String selectconcept=null;
+                String selectLob=null;
+                List<Login_StoreList> list=db.db_GetAllContacts();
+
+
+                for (int i = 0; i <lobchecked.length ; i++) {
+                    if(lobchecked[i]){
+                         selectLob=lobData.get(i);
+                    }
+                }
+                for (int i = 0; i <conceptchecked.length ; i++) {
+                    if(conceptchecked[i]){
+                         selectconcept=conceptData.get(i);
+                    }
+                }
+
+                if(selectconcept==null || selectLob== null){
+                    txt_incorrect.setVisibility(View.VISIBLE);
+                    //Reusable_Functions.showSnackbarError(context,viewpart,"Please select both entries");
+                    //dialog.dismiss();
+                    return;
+                }
+
+                for (Login_StoreList data :list){
+
+                    if(data.getGeoLevel2Code().equals(selectconcept) && data.getLobName().equals(selectLob)){
+                        Reusable_Functions.showSnackbar(viewpart,"Mapping success !");
+                        lob_name_txt.setText(data.getLobName());
+                        concept_txt.setText(data.getGeoLevel2Code());
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("concept", data.getGeoLevel2Code());
+                        editor.putString("lobid", data.getLobId());
+                        editor.putString("lobname", data.getLobName());
+                        editor.putString("kpi_id",data.getKpiId());
+                        editor.apply();
+
+                        String kpi_id = data.getKpiId();
+                        String[] selectKpiID = kpi_id.split(",");
+                        setupAdapter(Arrays.asList(selectKpiID));
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading events...");
+                            requestMarketingEventsAPI();
+                        } else {
+                            Toast.makeText(SnapDashboardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                        }
+                        dialog.dismiss();
+                        return;
+
+                    }
+                }
+                dialog.dismiss();
+                Reusable_Functions.showSnackbarError(context,viewpart,"Mapping failed please try again");
+
+            }
+        });
+
+        dialog.show();
+
     }
 
 
@@ -364,7 +547,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
                 }
 
-            }*/
+            }
+            */
 
         } else
         {
@@ -418,10 +602,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                         snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
                         break;
 
-                    case "028":
+                    // hourly has been shifted in sales module
+                /*    case "028":
                         apps = getProduct(9);
                         snapAdapter.addSnap(new Snap(Gravity.START, "Hourly performance", apps));
-                        break;
+                        break;*/
 
                     case "029":
                         apps = getProduct(10);
@@ -709,13 +894,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void requestMarketingEventsAPI() {
 
-        String url = ConstsCore.web_url + "/v1/display/dashboard/" + userId;
+        geoLeveLDesc = sharedPreferences.getString("concept", "");
+        String url = ConstsCore.web_url + "/v1/display/dashboardNew/" + userId+"?geoLevel2Code="+geoLeveLDesc;
         Log.e(TAG, "requestMarketingEventsAPI: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "Event Response: " + response);
+                        Log.i(TAG, "Event Response: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
