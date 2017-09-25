@@ -1,0 +1,46 @@
+[{
+  "header" : "Trial Room",
+  "code" :  "1",
+  "smiley" : "0"
+
+},
+  {
+    "header" : "Baggage Counter Services",
+    "code" :  "2",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Future Pay/Payback/T24",
+    "code" :  "3",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Exchange & Refund Services",
+    "code" :  "4",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Gift Wrapping Services",
+    "code" :  "5",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Gift Voucher Services",
+    "code" :  "6",
+    "smiley" : "0"
+  },
+  {
+    "header" : "CSD Services",
+    "code" :  "7",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Cashier Services",
+    "code" :  "8",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Priority Services",
+    "code" :  "9",
+    "smiley" : "0"
+  }]
