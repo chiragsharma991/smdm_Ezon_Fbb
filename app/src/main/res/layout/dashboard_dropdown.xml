@@ -119,13 +119,26 @@
                 </android.support.v7.widget.RecyclerView>
 
 
+                <TextView
+                    android:id="@+id/txt_incorrect"
+                    android:visibility="visible"
+                    android:layout_below="@+id/quickFilter_BorderLayout"
+                    android:textColor="@color/ezfbb_red"
+                    android:textSize="10sp"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:letterSpacing="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_below="@+id/qfilter_menuPopupLayout"
                 android:id="@+id/qfDoneLayout"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="38dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/ezfb_Red"
                 android:visibility="visible">
@@ -150,18 +163,6 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/txt_incorrect"
-            android:visibility="visible"
-            android:layout_below="@+id/quickFilter_BorderLayout"
-            android:textColor="@color/ezfbb_red"
-            android:textSize="10sp"
-            android:gravity="left"
-            android:layout_margin="5dp"
-            android:text="Please select both entries"
-            android:letterSpacing="0.1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
 
 

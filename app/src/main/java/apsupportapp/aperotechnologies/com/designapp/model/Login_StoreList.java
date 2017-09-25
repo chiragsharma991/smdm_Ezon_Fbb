@@ -25,6 +25,19 @@ public class Login_StoreList
     String lobName;
 
 
+
+/*    public Login_StoreList(String geoLevel2Code ,String kpiId, String lobId, String lobName ) {
+        this.geoLevel2Code = geoLevel2Code;
+        this.kpiId = kpiId;
+        this.lobId = lobId;
+        this.lobName = lobName;
+    }*/
+
+    public Login_StoreList() {
+        // empty constructor for set params.
+    }
+
+
     public String getLoginName() {
         return loginName;
     }

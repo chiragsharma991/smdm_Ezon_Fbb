@@ -289,6 +289,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 //default concept and lobid
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
+                                editor.putString("conceptDesc", loginStoreArray.get(0).getGeoLevel2Desc());
                                 editor.putString("lobid", loginStoreArray.get(0).getLobId());
                                 editor.putString("lobname", loginStoreArray.get(0).getLobName());
                                 editor.putString("kpi_id",loginStoreArray.get(0).getKpiId());
