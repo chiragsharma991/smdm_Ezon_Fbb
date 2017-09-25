@@ -732,7 +732,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         action_department.setSize(FloatingActionButton.SIZE_MINI);
         action_department.setColorNormalResId(R.color.pink);
         action_department.setColorPressedResId(R.color.ezfb_Red);
-        action_department.setIcon(R.drawable.ic_fab_star);
+        action_department.setIcon(R.drawable.fabicon_department);
         action_department.setStrokeVisible(false);
 
 
@@ -748,7 +748,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         action_category.setSize(FloatingActionButton.SIZE_MINI);
         action_category.setColorNormalResId(R.color.pink);
         action_category.setColorPressedResId(R.color.ezfb_Red);
-        action_category.setIcon(R.drawable.ic_fab_star);
+        action_category.setIcon(R.drawable.fabicon_category);
         action_category.setStrokeVisible(false);
 
         action_category.setOnClickListener(new View.OnClickListener() {
@@ -764,7 +764,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         action_class.setSize(FloatingActionButton.SIZE_MINI);
         action_class.setColorNormalResId(R.color.pink);
         action_class.setColorPressedResId(R.color.ezfb_Red);
-        action_class.setIcon(R.drawable.ic_fab_star);
+        action_class.setIcon(R.drawable.fabicon_class);
         action_class.setStrokeVisible(false);
 
         action_class.setOnClickListener(new View.OnClickListener() {
@@ -779,7 +779,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         action_brand.setSize(FloatingActionButton.SIZE_MINI);
         action_brand.setColorNormalResId(R.color.pink);
         action_brand.setColorPressedResId(R.color.ezfb_Red);
-        action_brand.setIcon(R.drawable.ic_fab_star);
+        action_brand.setIcon(R.drawable.fabicon_brand);
         action_brand.setStrokeVisible(false);
 
         action_brand.setOnClickListener(new View.OnClickListener() {
@@ -794,7 +794,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         action_brandclass.setSize(FloatingActionButton.SIZE_MINI);
         action_brandclass.setColorNormalResId(R.color.pink);
         action_brandclass.setColorPressedResId(R.color.ezfb_Red);
-        action_brandclass.setIcon(R.drawable.ic_fab_star);
+        action_brandclass.setIcon(R.drawable.fabicon_brand_class);
         action_brandclass.setStrokeVisible(false);
 
         action_brandclass.setOnClickListener(new View.OnClickListener() {
@@ -805,14 +805,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             }
         });
 
-        final FloatingActionButton action_location = (FloatingActionButton) findViewById(R.id.action_location);
-        action_location.setSize(FloatingActionButton.SIZE_MINI);
-        action_location.setColorNormalResId(R.color.pink);
-        action_location.setColorPressedResId(R.color.ezfb_Red);
-        action_location.setIcon(R.drawable.ic_fab_star);
-        action_location.setStrokeVisible(false);
+        final FloatingActionButton action_store = (FloatingActionButton) findViewById(R.id.action_store);
+        action_store.setSize(FloatingActionButton.SIZE_MINI);
+        action_store.setColorNormalResId(R.color.pink);
+        action_store.setColorPressedResId(R.color.ezfb_Red);
+        action_store.setIcon(R.drawable.fabicon_store);
+        action_store.setStrokeVisible(false);
 
-        action_location.setOnClickListener(new View.OnClickListener() {
+        action_store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

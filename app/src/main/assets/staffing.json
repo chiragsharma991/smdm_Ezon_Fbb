@@ -1,9 +1,11 @@
 [{
   "header" : "Staff helpfulness & knowledge",
-  "code" :  "1"
+  "code" :  "1",
+  "smiley" : "0"
 
 },
   {
     "header" : "Suggestive selling by category staff",
-    "code" :  "2"
+    "code" :  "2",
+    "smiley" : "0"
   }]
