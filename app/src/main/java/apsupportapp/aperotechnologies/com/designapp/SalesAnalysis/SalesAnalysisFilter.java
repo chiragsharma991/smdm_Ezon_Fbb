@@ -48,6 +48,7 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
@@ -289,16 +290,10 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         prod_listDataChild.put(prod_listDataHeader.get(4), an_mcList); // Header, Child data
         loc_listDataChild.put(loc_listDataHeader.get(0), an_storeList);
         rel_an_process_filter.setVisibility(View.GONE);
-
-
-
     }
 
-
-
-
-
-    private void initialise_ui() {
+    private void initialise_ui()
+    {
         rel_an_sfilter_back = (RelativeLayout) findViewById(R.id.rel_an_sfilter_back);
         rel_an_sfilter_done = (RelativeLayout) findViewById(R.id.rel_an_sfilter_done);
         rel_an_process_filter = (RelativeLayout) findViewById(R.id.rel_an_process_filter);
@@ -316,11 +311,10 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         rel_an_sfilter_back.setOnClickListener(this);
     }
 
-
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
-
     }
 
     @Override
@@ -333,17 +327,19 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Send selected hierarchy level to selected activity
-
                 selectbuild();
-                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis")) {
+                if (getIntent().getStringExtra("checkfrom").equals("SalesAnalysis"))
+                {
                     intent = new Intent(SalesAnalysisFilter.this, SalesAnalysisActivity1.class);
-                    if (build.length() != 0) {
+                    if (build.length() != 0)
+                    {
                         SalesAnalysisActivity1.SalesAnalysisActivity.finish();
                     }
                     callback(build);
 
                 }
-                else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+                else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis"))
+                {
                     intent = new Intent(SalesAnalysisFilter.this, SalesPvAActivity.class);
 
                     if (build.length() != 0) {
@@ -379,37 +375,43 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                     callback(build);
 
                 }
-                else if (getIntent().getStringExtra("checkfrom").equals("skewedSize")) {
+                else if (getIntent().getStringExtra("checkfrom").equals("skewedSize"))
+                {
                     intent = new Intent(SalesAnalysisFilter.this, SkewedSizesActivity.class);
 
                     if (build.length() != 0) {
                         SkewedSizesActivity.SkewedSizes.finish();
                     }
                     callback(build);
-
                 }
-                else if (getIntent().getStringExtra("checkfrom").equals("sellThruExceptions")) {
+                else if (getIntent().getStringExtra("checkfrom").equals("sellThruExceptions"))
+                {
                     intent = new Intent(SalesAnalysisFilter.this, SaleThruInventory.class);
 
                     if (build.length() != 0) {
                         SaleThruInventory.saleThru.finish();
                     }
                     callback(build);
-
                 }
-                else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing")) {
+                else if (getIntent().getStringExtra("checkfrom").equals("stockAgeing"))
+                {
                     intent = new Intent(SalesAnalysisFilter.this, StockAgeingActivity.class);
 
                     if (build.length() != 0) {
                         StockAgeingActivity.stockAgeing.finish();
                     }
                     callback(build);
-
                 }
+                else if (getIntent().getStringExtra("checkfrom").equals("floorAvailability"))
+                {
+                    intent = new Intent(SalesAnalysisFilter.this, FloorAvailabilityActivity.class);
 
-               break;
-
-
+                    if (build.length() != 0) {
+                        FloorAvailabilityActivity.floorAvailability.finish();
+                    }
+                    callback(build);
+                }
+                break;
         }
     }
 

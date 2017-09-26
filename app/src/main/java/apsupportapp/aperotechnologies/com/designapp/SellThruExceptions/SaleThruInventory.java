@@ -88,6 +88,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     private boolean from_filter = false;
     private String selectedString = "", isMultiStore, value;
     private TabLayout Tabview;
+    private int filter_level;
 
 
     @Override
@@ -124,13 +125,15 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         BestInventListview.setTag("FOOTER");
 
         Reusable_Functions.hDialog();
-        Reusable_Functions.sDialog(context, "Loading.......");
+        Reusable_Functions.sDialog(context, "Loading...");
 
-        if (getIntent().getStringExtra("selectedDept") == null) {
+        if (getIntent().getStringExtra("selectedStringVal") == null) {
             from_filter = false;
             filter_toggleClick = false;
-        } else if (getIntent().getStringExtra("selectedDept") != null) {
-            selectedString = getIntent().getStringExtra("selectedDept");
+        } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+            selectedString = getIntent().getStringExtra("selectedStringVal");
+            filter_level  = getIntent().getIntExtra("selectedlevelVal",0);
+
             from_filter = true;
             filter_toggleClick = true;
 
@@ -153,13 +156,27 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                 if (coreSelection) {
 
                     //core selection without season params
-
-                    url = ConstsCore.web_url + "/v1/display/sellthruexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                    if(filter_level != 0)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/sellthruexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/sellthruexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                    }
                 } else {
 
                     // fashion select with season params
+                    if(filter_level != 0)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/sellthruexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
-                    url = ConstsCore.web_url + "/v1/display/sellthruexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/sellthruexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit  + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+                    }
                 }
             } else {
                 if (coreSelection) {

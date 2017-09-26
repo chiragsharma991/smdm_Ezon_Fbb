@@ -170,21 +170,26 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     retainEzoneSegVal();
                     ezone_level = 1;
                     requestEzoneSalesDetailAPI();
-                } else {
-
+                }
+                else
+                {
                     Log.e("welcome----", "=======");
                     ez_filter_toggleClick = true;
                     retainEzoneSegVal();
                     requestEzoneFilterSelectedVal(filterSelectedString,filter_level);
                 }
-            } else {
+            }
+            else
+            {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 ez_progessBar.setVisibility(View.GONE);
             }
             // Scroll listener on Recycle View
-            recyclevw_ez_sales.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            recyclevw_ez_sales.addOnScrollListener(new RecyclerView.OnScrollListener()
+            {
                 @Override
-                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+                {
                     super.onScrollStateChanged(recyclerView, newState);
                     currentState = newState;
                     if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE && !ezone_onClickflg) {
@@ -201,7 +206,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                 }
 
                 @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+                {
                     super.onScrolled(recyclerView, dx, dy);
                     RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
                     ez_totalItemCount = mRecyclerViewHelper.getItemCount();
@@ -329,7 +335,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                                     }
                                                     break;
 
-//                                                case "Brand":
+                                                case "Brand":
 //                                                    txt_ez_header.setText("Brand Class");
 //                                                    ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
 //                                                    ez_fromWhere = "Brand Class";
@@ -342,8 +348,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 //                                                        if (ez_postRequest != null) {
 //                                                            ez_postRequest.cancel();
 //                                                        }
-////                                                        Reusable_Functions.hDialog();
-////                                                        Reusable_Functions.sDialog(context, "Loading data...");
+//                                                        Reusable_Functions.hDialog();
+//                                                        Reusable_Functions.sDialog(context, "Loading data...");
 //                                                        Reusable_Functions.progressDialog = new ProgressDialog(context);
 //                                                        if (!Reusable_Functions.progressDialog.isShowing()) {
 //                                                            Reusable_Functions.progressDialog.show();
@@ -2915,26 +2921,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         {
             salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + sales_filter_level + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         }
-//        else if( sales_filter_level == 2)
-//        {
-//            salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + sales_filter_level + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        }
-//        else if(sales_filter_level == 3)
-//        {
-//            salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + sales_filter_level + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        }
-//        else if(sales_filter_level == 4)
-//        {
-//            salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + sales_filter_level + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        }
-//        else if( sales_filter_level == 5)
-//        {
-//            salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + sales_filter_level + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        }
-//        else if(SalesAnalysisLocationAdapter.an_store_str.length() != 0 && sales_filter_level == 6)
-//        {
-//            salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + sales_filter_level + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        }
+
         else
         {
             salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;

@@ -456,6 +456,10 @@ public class SalesAnalysisLocationAdapter extends BaseExpandableListAdapter {
             salesAnalysisFilter.explv_an_locatn.expandGroup(0);
             notifyDataSetChanged();
         }
+
+
+
+
     }
 
     public final class GroupViewHolder {
