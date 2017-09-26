@@ -334,13 +334,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         for (Login_StoreList data : list) {
             conceptData.add(data.getGeoLevel2Code());
             conceptDesc.add(data.getGeoLevel2Desc());
-            // lobData.add(data.getLobName());
         }
+
+        // Note: concept data is not useful because we are using concept desc to show list.
         Set<String> set = new HashSet<>();
         set.addAll(conceptData);
         conceptData.clear();
         conceptData.addAll(set);  // remove dublicate values from list
-       // customAlert(conceptData);
 
         set = new HashSet<>();
         set.addAll(conceptDesc);
@@ -390,7 +390,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
                 }
 
-                List<Login_StoreList> list = db.db_GetListWhereClause(conceptData.get(position));
+                List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
+                Log.i(TAG, "db_GetListWhereClause sizes are: "+list.size());
                 lobData = new ArrayList<>();
                 for (Login_StoreList data : list) {
                     lobData.add(data.getLobName());
@@ -413,11 +414,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 String selectconcept = null;
                 String selectLob = null;
 
-                if (lobData == null || conceptData == null) {
+                if (lobData == null || conceptDesc == null) {
                     txt_incorrect.setText("Please select Concept first");
                     txt_incorrect.setVisibility(View.VISIBLE);
-                    //Reusable_Functions.showSnackbarError(context,viewpart,"Please select both entries");
-                    //dialog.dismiss();
                     return;
                 }
 
@@ -428,19 +427,19 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 }
                 for (int i = 0; i < conceptchecked.length; i++) {
                     if (conceptchecked[i]) {
-                        selectconcept = conceptData.get(i);
+                        selectconcept = conceptDesc.get(i);
                     }
                 }
 
                 if (selectconcept == null || selectLob == null) {
                     txt_incorrect.setText("Please select Lob name");
                     txt_incorrect.setVisibility(View.VISIBLE);
-                    //Reusable_Functions.showSnackbarError(context,viewpart,"Please select both entries");
-                    //dialog.dismiss();
                     return;
                 }
 
-                Login_StoreList model = db.db_GetOneRowDetails(selectLob);
+                List<Login_StoreList> list = db.db_GetListMulipleWhereClause(selectLob,selectconcept);
+                Log.i(TAG, "db_GetListMulipleWhereClause sizes are: "+list.size()+" and "+gson.toJson(list));
+                Login_StoreList model=list.get(0);
                 Reusable_Functions.showSnackbar(viewpart, "Mapping success !");
                 lob_name_txt.setText(selectLob);
                 concept_txt.setText(model.getGeoLevel2Desc());
