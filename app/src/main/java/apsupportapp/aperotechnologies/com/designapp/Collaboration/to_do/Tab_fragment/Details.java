@@ -65,7 +65,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     private int levelOfOption = 3;  //  3 is for option and 4 is for size
     private String MCCodeDesc = "",prodLevel3Desc = "";    // code and description
     private double MCCode ;    // code and description
-    private String option = "";    // code and description
+    private String option = "", store_code;    // code and description
     private StockDetailsAdapter stockDetailsAdapter;
     Button btn_selectAll,btn_reset;
 
@@ -115,7 +115,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
         option = option.replace(" ", "%20").replace("&", "%26");
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20");
         Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -199,7 +199,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
         prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
         MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId +"?storeCode="+store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20");
         Log.e("TAG", "requestReceiversDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -294,6 +294,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         String subcategory = getIntent().getExtras().getString("prodLevel3Desc");
         String mc = getIntent().getExtras().getString("MCCodeDesc");
         Double data2 = getIntent().getExtras().getDouble("AvlQty");
+        store_code = getIntent().getExtras().getString("storeCode");
+
         MCCodeDesc = mc; //MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values //  - this is actual value
         prodLevel3Desc = subcategory; // prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  // - this is actual value
         MCCode = (Math.round(data2));
@@ -339,11 +341,12 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
 
-    public void StartActivity(Context context, String subcategory,String mc ,Double data2)
+    public void StartActivity(Context context, String subcategory, String mc, Double data2, String storeCode)
     {
         Intent intent = new Intent(context, Details.class);
         intent.putExtra("prodLevel3Desc",subcategory);
         intent.putExtra("MCCodeDesc", mc);
+        intent.putExtra("storeCode", storeCode);
         Log.e( "StartActivity: ",""+subcategory + "\t" +mc + data2 );
         intent.putExtra("AvlQty", data2);
         context.startActivity(intent);

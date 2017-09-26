@@ -75,7 +75,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         storeDescription = sharedPreferences.getString("storeDescription","");
-        geoLevel2Code = sharedPreferences.getString("geoLevel2Code","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");

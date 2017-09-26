@@ -673,11 +673,14 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetailsNew/" + userId +"?geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId ;//+"?recache="+recache
            // String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId + "?geoLevel2Code="+ geoLevel2Code ;//+"?recache="+recache
             Log.e(TAG, "requestReceiverSubmitAPI: "+object.toString());
+            Log.e(TAG, "requestReceiverSubmitAPI url: "+url.toString());
+
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response)
                         {
+                            Log.e("response requestReceiverSubmitAPI "," "+response);
                             try {
                                 if (response == null || response.equals(null)) {
                                     Reusable_Functions.hDialog();

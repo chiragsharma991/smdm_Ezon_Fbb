@@ -277,7 +277,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         if (Reusable_Functions.chkStatus(context))
         {
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=1
-            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId +"?level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache ;
+            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +storeCode + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache ;
             Log.e("TAG", "requestTransferRequestsummary: " + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
 
@@ -379,7 +379,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
 
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear
-            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level
+            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +storeCode + "&level=" + level
                     +"&prodLevel3Desc="+prodLevel3Desc+"&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
 
             Log.e("TAG", "requestTransferRequestsummary: " + url);
@@ -438,7 +438,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                         subcategory_name = ReceiverSummaryList.get(position).getLevel();
                                         mc_name = subcategoryList.get(position).getLevel();
                                         Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name +"\t"+subcategoryList.get(position).getStkQtyAvl());
-                                        new Details().StartActivity(context, selected_subCategory,mc_name, subcategoryList.get(position).getStkQtyAvl());
+                                        new Details().StartActivity(context, selected_subCategory,mc_name, subcategoryList.get(position).getStkQtyAvl(), storeCode);
 
                                     }
                                 });
