@@ -373,114 +373,196 @@ public class SwitchingActivity extends AppCompatActivity
     }
 
 
-    protected List<App> getProduct(int i) {
+    protected List<App> getProduct(int i , List<String> kpiIdArray) {
         List<App> apps = new ArrayList<>();
 
 
 
+
         switch (i){
+
             case 0 :
                 apps.add(new App("Product Info", R.mipmap.productinfo,"001"));
                 break;
-            case 1 :
-                apps.add(new App("Visual Assortment", R.mipmap.visualassortment,"002"));
-                apps.add(new App("Option Report", R.mipmap.ageingexceptions,"003"));
-                break;
-            case 2 :
-                apps.add(new App("Sales", R.mipmap.salesanalysis,"004"));
-                apps.add(new App("Plan Vs Actual ", R.mipmap.planvsactual,"005"));
-                apps.add(new App("Key Product PVA", R.mipmap.planvsactual,"018"));
-                apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,"028"));
 
+            case 1 :
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "002":
+                            apps.add(new App("Visual Assortment", R.mipmap.visualassortment,"002"));
+                            break;
+                        case "003":
+                            apps.add(new App("Option Report", R.mipmap.ageingexceptions,"003"));
+                            break;
+                    }
+                }
+                break;
+
+            case 2 :
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "004":
+                            apps.add(new App("Sales", R.mipmap.salesanalysis,"004"));
+                            break;
+                        case "005":
+                            apps.add(new App("Plan Vs Actual ", R.mipmap.planvsactual,"005"));
+                            break;
+                        case "018":
+                            apps.add(new App("Key Product PVA", R.mipmap.planvsactual,"018"));
+                            break;
+                        case "028":
+                            apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,"028"));
+                            break;
+                    }
+                }
                 break;
 
             case 3 :
-                apps.add(new App("Freshness Index", R.mipmap.freshnessindex,"006"));
-                apps.add(new App("Option Efficiency", R.mipmap.optionefficiency,"007"));
-                apps.add(new App("Skewed Sizes", R.mipmap.skewedsizes,"008"));
-                apps.add(new App("Best/Worst Performers", R.mipmap.bestworstperformers,"009"));
-                apps.add(new App("Stock Ageing Exception", R.mipmap.ageingexceptions,"010"));
-                apps.add(new App("Floor Availability", R.mipmap.flooravailability,"011"));
-                apps.add(new App("Target Stock Exceptions", R.mipmap.targetstockexceptions,"012"));
-                apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions,"013"));
+
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "006":
+                            apps.add(new App("Freshness Index", R.mipmap.freshnessindex,"006"));
+                            break;
+                        case "007":
+                            apps.add(new App("Option Efficiency", R.mipmap.optionefficiency,"007"));
+                            break;
+                        case "008":
+                            apps.add(new App("Skewed Sizes", R.mipmap.skewedsizes,"008"));
+                            break;
+                        case "009":
+                            apps.add(new App("Best/Worst Performers", R.mipmap.bestworstperformers,"009"));
+                            break;
+                        case "010":
+                            apps.add(new App("Stock Ageing Exception", R.mipmap.ageingexceptions,"010"));
+                            break;
+                        case "011":
+                            apps.add(new App("Floor Availability", R.mipmap.flooravailability,"011"));
+                            break;
+                        case "012":
+                            apps.add(new App("Target Stock Exceptions", R.mipmap.targetstockexceptions,"012"));
+                            break;
+                        case "013":
+                            apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions,"013"));
+                            break;
+                    }
+                }
                 break;
 
             case 4 :
-                apps.add(new App("Running Promo", R.mipmap.runningpromo,"014"));
-                apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo,"015"));
-                apps.add(new App("Expiring Promo", R.mipmap.expiringpromo,"016"));
-                apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers,"017"));
+
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "014":
+                            apps.add(new App("Running Promo", R.mipmap.runningpromo,"014"));
+                            break;
+                        case "015":
+                            apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo,"015"));
+                            break;
+                        case "016":
+                            apps.add(new App("Expiring Promo", R.mipmap.expiringpromo,"016"));
+                            break;
+                        case "017":
+                            apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers,"017"));
+                            break;
+                    }
+                }
                 break;
 
-
             case 5 :
-                apps.add(new App("To Do", R.mipmap.stocktransfer,"020"));
-                apps.add(new App("Status", R.mipmap.stocktransfer,"021"));
+
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "020":
+                            apps.add(new App("To Do", R.mipmap.stocktransfer,"020"));
+                            break;
+                        case "021":
+                            apps.add(new App("Status", R.mipmap.stocktransfer,"021"));
+                            break;
+
+                    }
+                }
                 break;
 
             case 6 :
-                apps.add(new App("Best Worst Performer", R.mipmap.feedback,"022"));
-                apps.add(new App("Best Worst Performer List", R.mipmap.feedbacklist,"023"));
-                apps.add(new App("Begin Inspection", R.mipmap.storeinspection,"024"));
-                apps.add(new App("Inspection History", R.mipmap.storeinspection,"025"));
+
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "022":
+                            apps.add(new App("Best Worst Performer", R.mipmap.feedback,"022"));
+                            break;
+                        case "023":
+                            apps.add(new App("Best Worst Performer List", R.mipmap.feedbacklist,"023"));
+                            break;
+                        case "024":
+                            apps.add(new App("Begin Inspection", R.mipmap.storeinspection,"024"));
+                            break;
+                        case "025":
+                            apps.add(new App("Inspection History", R.mipmap.storeinspection,"025"));
+                            break;
+                    }
+                }
                 break;
 
             case 7 :
-                apps.add(new App("Season Catalogue", R.mipmap.seasoncatalogue,"026"));
+
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "026":
+                            apps.add(new App("Season Catalogue", R.mipmap.seasoncatalogue,"026"));
+                            break;
+                    }
+                }
                 break;
 
-            case 8:
-                apps.add(new App("Customer Engagement", R.mipmap.customerengagement,"027"));
+            case 8 :
+
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "027":
+                            apps.add(new App("Customer Engagement", R.mipmap.customerengagement,"027"));
+                            break;
+                    }
+                }
                 break;
 
-            case 9:
-                apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,"028"));
-                break;
 
             case 10 :
-                apps.add(new App("Boris",R.mipmap.customerengagement,"029"));
+
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "029":
+                            apps.add(new App("Boris",R.mipmap.customerengagement,"029"));
+                            break;
+                    }
+                }
                 break;
 
-            case 11:
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability,"030"));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn,"031"));
-                apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion,"032"));
-                apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange,"033"));
-                apps.add(new App("Our Store Services",R.mipmap.ourstoreservices,"034"));
-                apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff,"035"));
+            case 11 :
+
+                for (int j = 0; j <kpiIdArray.size() ; j++) {
+                    switch (kpiIdArray.get(j)){
+                        case "030":
+                            apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability,"030"));
+                            break;
+                        case "031":
+                            apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn,"031"));
+                            break;
+                        case "032":
+                            apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion,"032"));
+                            break;
+                        case "033":
+                            apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange,"033"));
+                            break;
+                        case "034":
+                            apps.add(new App("Our Store Services",R.mipmap.ourstoreservices,"034"));
+                            break;
+                        case "035":
+                            apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff,"035"));
+                            break;
+                    }
+                }
                 break;
-
-
-
-
-
-
-
-            // switch for ezone user
-            /*case 21 :
-                apps.add(new App("Sales", R.mipmap.salesanalysis,""));
-                apps.add(new App("Plan Vs Actual",R.mipmap.planvsactual,""));
-                apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,""));
-
-                break;
-            case 22 :
-                apps.add(new App("Assortment Analysis", R.mipmap.freshnessindex,""));
-                apps.add(new App("Best/Worst Performers", R.mipmap.bestworstperformers,""));
-                break;
-            case 23 :
-                apps.add(new App("Customer Engagement", R.mipmap.customerengagement,""));
-                break;
-            case 24 :
-                apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,""));
-                break;
-            case 25 :
-                apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability,""));
-                apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn,""));
-                apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion,""));
-                apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange,""));
-                apps.add(new App("Our Store Services",R.mipmap.ourstoreservices,""));
-                apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff,""));
-                break;*/
 
             default:
                 Log.e("TAG", "not found: Activity");
