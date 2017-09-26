@@ -33,6 +33,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_TWO = "kpiId";
     private static final String KEY_THREE = "lobId";
     private static final String KEY_FOUR = "lobName";
+    private static final String KEY_FIVE = "geoLevel2Desc";
     private final Context context;
 
     public DatabaseHandler(Context context) {
@@ -48,8 +49,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_ONE + " VARCHAR,"
-                + KEY_TWO + " VARCHAR," + KEY_THREE + " VARCHAR,"
-                + KEY_FOUR + " VARCHAR"+")";
+                + KEY_TWO + " VARCHAR," + KEY_THREE + " VARCHAR,"+ KEY_FOUR + " VARCHAR,"
+                + KEY_FIVE + " VARCHAR"+")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -77,6 +78,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(KEY_TWO, loginStoreArray.get(i).getKpiId());
             values.put(KEY_THREE, loginStoreArray.get(i).getLobId());
             values.put(KEY_FOUR, loginStoreArray.get(i).getLobName());
+            values.put(KEY_FIVE, loginStoreArray.get(i).getGeoLevel2Desc());
             db.insert(TABLE_NAME, null, values);
         }
         db.close(); // Closing database connection
@@ -110,16 +112,65 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    TestModel db_GetContact(int id) {
+    public Login_StoreList db_GetOneRowDetails(String lobName) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query( TABLE_NAME, new String[] { KEY_ID,
-                        KEY_ONE, KEY_TWO,KEY_THREE,KEY_FOUR }, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                        KEY_ONE, KEY_TWO,KEY_THREE,KEY_FOUR,KEY_FIVE }, KEY_FOUR + "=?",
+                new String[] { String.valueOf(lobName) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        TestModel data = new TestModel(cursor.getInt(0),
-                cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getInt(5));
+        Login_StoreList data = new Login_StoreList();
+        data.setGeoLevel2Code(cursor.getString(1));
+        data.setKpiId(cursor.getString(2));
+        data.setLobId(cursor.getString(3));
+        data.setLobName(cursor.getString(4));
+        data.setGeoLevel2Desc(cursor.getString(5));
         return data;
+    }
+
+    public List<Login_StoreList> db_GetListWhereClause(String geoLevel2Desc) {
+        List<Login_StoreList> dataList = new ArrayList<Login_StoreList>();
+        //Cursor cursorr =  db.rawQuery("select * from " + DATABASE_TABLE_EHS + " where " + TASK_ID + "='" + taskid + "'" , null);
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE geoLevel2Desc = '"+geoLevel2Desc+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Login_StoreList data = new Login_StoreList();
+                data.setGeoLevel2Code(cursor.getString(1));
+                data.setKpiId(cursor.getString(2));
+                data.setLobId(cursor.getString(3));
+                data.setLobName(cursor.getString(4));
+                data.setGeoLevel2Desc(cursor.getString(5));
+                Log.i(TAG, "db_GetListWhereClause: "+data.getGeoLevel2Code()+" and 2 "+data.getKpiId()+" and 3 "+data.getLobId()+" and 4 "+data.getLobName()+" and 5 is "+data.getGeoLevel2Desc() );
+                // Adding contact to list
+                dataList.add(data);
+                // Log.i(TAG, "cursor GetAllContacts: "+cursor.moveToNext() );
+            } while (cursor.moveToNext());
+        }
+        return dataList;
+    }
+    public List<Login_StoreList> db_GetListMulipleWhereClause(String lobName, String selectconcept) {
+        List<Login_StoreList> dataList = new ArrayList<Login_StoreList>();
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE lobName = '"+lobName+"' AND geoLevel2Desc = '"+selectconcept+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Login_StoreList data = new Login_StoreList();
+                data.setGeoLevel2Code(cursor.getString(1));
+                data.setKpiId(cursor.getString(2));
+                data.setLobId(cursor.getString(3));
+                data.setLobName(cursor.getString(4));
+                data.setGeoLevel2Desc(cursor.getString(5));
+                Log.i(TAG, "db_GetListMulipleWhereClause: "+data.getGeoLevel2Code()+" and 2 "+data.getKpiId()+" and 3 "+data.getLobId()+" and 4 "+data.getLobName()+" and 5 is "+data.getGeoLevel2Desc() );
+                // Adding contact to list
+                dataList.add(data);
+                // Log.i(TAG, "cursor GetAllContacts: "+cursor.moveToNext() );
+            } while (cursor.moveToNext());
+        }
+        return dataList;
     }
 
     public List<Login_StoreList> db_GetAllContacts() {
@@ -134,6 +185,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 data.setKpiId(cursor.getString(2));
                 data.setLobId(cursor.getString(3));
                 data.setLobName(cursor.getString(4));
+                data.setGeoLevel2Desc(cursor.getString(5));
                 // Adding contact to list
                 dataList.add(data);
                // Log.i(TAG, "cursor GetAllContacts: "+cursor.moveToNext() );

@@ -50,6 +50,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -1013,7 +1015,13 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(true);
-                orderbycol = "fwdWeekCover,sellThruUnits";
+                try {
+                    orderbycol = "order by fwd_week_cover desc,sell_thru_units desc";
+                    orderbycol =  URLEncoder.encode(orderbycol, "UTF-8");
+                    Log.i(TAG, "coverNsellPopUp: "+orderbycol);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 BestInventList.clear();
                 Reusable_Functions.sDialog(this, "Loading...");
                 popPromo = 10;

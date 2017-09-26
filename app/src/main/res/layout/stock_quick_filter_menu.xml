@@ -274,83 +274,36 @@
 
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/qfDoneLayout"
-
-                    >
-
-
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:layout_centerInParent="true"
-                        android:background="@color/ezfb_Red"
-                        android:clickable="false"
-                        android:text="Done"
-                        android:textColor="@color/ezfb_White"
-                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
-
-
-
-
-
-
-                </LinearLayout>
-
-                <!--<View-->
-                <!--android:id="@+id/bst_lineTwo_child"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="2dp"-->
-                <!--android:background="@color/divider_salescard" />-->
-
-            </LinearLayout>
-
-
-
-
-            <LinearLayout
-                android:layout_below="@+id/qfilter_seasonGpLayout"
-                android:id="@+id/qfilter_Ageing"
-                android:layout_width="185dp"
-                android:visibility="gone"
-                android:layout_marginLeft="15dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/popupmenu"
-                android:orientation="vertical">
-
-                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/txtAgeing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Ageing"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/ezfb_black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/bst_lineOne_child1"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="5dp"
-                    android:background="@color/divider_salescard" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/ezfb_black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     android:weightSum="10">
 
                     <LinearLayout
@@ -364,8 +317,9 @@
                             android:id="@+id/txtpopAgeing1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/ezfb_black"
                             android:text="100 - 200 Days"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
                     </LinearLayout>
 
@@ -406,6 +360,7 @@
                             android:id="@+id/txtpopAgeing2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/ezfb_black"
                             android:text="150 - 250 Days"
                             android:textSize="14sp" />
 
@@ -425,6 +380,7 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="@android:color/black"
                             android:focusable="true" />
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -447,6 +403,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="250 - 350 Days"
+                            android:textColor="@color/ezfb_black"
                             android:textSize="14sp" />
 
                     </LinearLayout>
@@ -458,85 +415,284 @@
                         android:gravity="end"
                         android:orientation="vertical">
 
-
                         <CheckBox
                             android:id="@+id/checkAgeing3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:buttonTint="@android:color/black"
                             android:focusable="true" />
+
                     </LinearLayout>
                 </LinearLayout>
 
-                <!--&lt;!&ndash;Upcoming  &ndash;&gt;-->
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="10">-->
 
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="3"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/txtpopUpcoming"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Upcoming"-->
-                <!--android:textSize="14sp" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="7"-->
-                <!--android:gravity="end"-->
-                <!--android:orientation="vertical">-->
-
-
-                <!--<CheckBox-->
-                <!--android:id="@+id/checkUpcoming"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="5"-->
-                <!--android:buttonTint="@android:color/black"-->
-                <!--android:focusable="true" />-->
-
-                <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
-
-                <View
-                    android:id="@+id/bst_lineTwo_child2"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/divider_salescard" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/qfDoneLayout"
+
+                    >
+
+
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_centerInParent="true"
+                        android:background="@color/ezfb_Red"
+                        android:clickable="false"
+                        android:text="Done"
+                        android:textColor="@color/ezfb_White"
+                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
+
+
+
+
+
+
+                </LinearLayout>
+
+                <!--<View-->
+                <!--android:id="@+id/bst_lineTwo_child"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:background="@color/divider_salescard" />-->
 
             </LinearLayout>
-            <RelativeLayout
-                android:layout_below="@+id/qfilter_Ageing"
-                android:layout_width="184dp"
-                android:layout_marginLeft="15dp"
-                android:layout_height="25dp"
-                android:background="@color/colorPrimary"
-                android:visibility="gone">
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@color/ezfb_Red"
-                    android:clickable="false"
-                    android:text="Done"
-                    android:textColor="@color/ezfb_White"
-                    android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
 
-            </RelativeLayout>
+
+
+            <!--    <LinearLayout
+                    android:layout_below="@+id/qfilter_seasonGpLayout"
+                    android:id="@+id/qfilter_Ageing"
+                    android:layout_width="185dp"
+                    android:visibility="gone"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/popupmenu"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtAgeing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Ageing"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/bst_lineOne_child1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/divider_salescard" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtpopAgeing1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="100 - 200 Days"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+
+                            <CheckBox
+                                android:id="@+id/checkAgeing1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"
+                                android:focusable="true" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    &lt;!&ndash;Previous&ndash;&gt;
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtpopAgeing2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="150 - 250 Days"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+
+                            <CheckBox
+                                android:id="@+id/checkAgeing2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"
+                                android:focusable="true" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtAgeing3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="250 - 350 Days"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+
+                            <CheckBox
+                                android:id="@+id/checkAgeing3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"
+                                android:focusable="true" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    &lt;!&ndash;&lt;!&ndash;Upcoming  &ndash;&gt;&ndash;&gt;
+                    &lt;!&ndash;<LinearLayout&ndash;&gt;
+                    &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
+                    &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+                    &lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;
+                    &lt;!&ndash;android:orientation="horizontal"&ndash;&gt;
+                    &lt;!&ndash;android:weightSum="10">&ndash;&gt;
+
+                    &lt;!&ndash;<LinearLayout&ndash;&gt;
+                    &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
+                    &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+                    &lt;!&ndash;android:layout_gravity="center"&ndash;&gt;
+                    &lt;!&ndash;android:layout_weight="3"&ndash;&gt;
+                    &lt;!&ndash;android:orientation="vertical">&ndash;&gt;
+
+                    &lt;!&ndash;<TextView&ndash;&gt;
+                    &lt;!&ndash;android:id="@+id/txtpopUpcoming"&ndash;&gt;
+                    &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;
+                    &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+                    &lt;!&ndash;android:text="Upcoming"&ndash;&gt;
+                    &lt;!&ndash;android:textSize="14sp" />&ndash;&gt;
+
+                    &lt;!&ndash;</LinearLayout>&ndash;&gt;
+
+                    &lt;!&ndash;<LinearLayout&ndash;&gt;
+                    &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
+                    &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+                    &lt;!&ndash;android:layout_weight="7"&ndash;&gt;
+                    &lt;!&ndash;android:gravity="end"&ndash;&gt;
+                    &lt;!&ndash;android:orientation="vertical">&ndash;&gt;
+
+
+                    &lt;!&ndash;<CheckBox&ndash;&gt;
+                    &lt;!&ndash;android:id="@+id/checkUpcoming"&ndash;&gt;
+                    &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;
+                    &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+                    &lt;!&ndash;android:layout_weight="5"&ndash;&gt;
+                    &lt;!&ndash;android:buttonTint="@android:color/black"&ndash;&gt;
+                    &lt;!&ndash;android:focusable="true" />&ndash;&gt;
+
+                    &lt;!&ndash;</LinearLayout>&ndash;&gt;
+                    &lt;!&ndash;</LinearLayout>&ndash;&gt;
+
+                    <View
+                        android:id="@+id/bst_lineTwo_child2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/divider_salescard" />
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_below="@+id/qfilter_Ageing"
+                    android:layout_width="184dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="25dp"
+                    android:background="@color/colorPrimary"
+                    android:visibility="gone">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/ezfb_Red"
+                        android:clickable="false"
+                        android:text="Done"
+                        android:textColor="@color/ezfb_White"
+                        android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
+
+                </RelativeLayout>-->
+
+
+
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
