@@ -130,7 +130,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private boolean[] lobchecked, conceptchecked;
     private View viewpart;
     private RecyclerView lobList;
-    private ArrayList<String> lobData = null, conceptData = null ,conceptDesc=null;
+    private ArrayList<String> lobData = null, conceptData = null, conceptDesc = null;
 
   /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
             020. 021,  022, 023, 026, 027, 028*/
@@ -327,20 +327,21 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
 
     private void selectConceptNLob() {
-        lobData=null;conceptData=null;
+        lobData = null;
+        conceptData = null;
         List<Login_StoreList> list = db.db_GetAllContacts();
         conceptData = new ArrayList<>();
         conceptDesc = new ArrayList<>();
         for (Login_StoreList data : list) {
             conceptData.add(data.getGeoLevel2Code());
             conceptDesc.add(data.getGeoLevel2Desc());
-            // lobData.add(data.getLobName());
         }
+
+        // Note: concept data is not useful because we are using concept desc to show list.
         Set<String> set = new HashSet<>();
         set.addAll(conceptData);
         conceptData.clear();
         conceptData.addAll(set);  // remove dublicate values from list
-       // customAlert(conceptData);
 
         set = new HashSet<>();
         set.addAll(conceptDesc);
@@ -382,7 +383,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public  void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position) {
 
                 for (int i = 0; i < conceptDesc.size(); i++) {
                     if (position == i) conceptchecked[i] = true;
@@ -390,7 +391,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
                 }
 
-                List<Login_StoreList> list = db.db_GetListWhereClause(conceptData.get(position));
+                List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
+                Log.i(TAG, "db_GetListWhereClause sizes are: " + list.size());
                 lobData = new ArrayList<>();
                 for (Login_StoreList data : list) {
                     lobData.add(data.getLobName());
@@ -413,11 +415,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 String selectconcept = null;
                 String selectLob = null;
 
-                if (lobData == null || conceptData == null) {
+                if (lobData == null || conceptDesc == null) {
                     txt_incorrect.setText("Please select Concept first");
                     txt_incorrect.setVisibility(View.VISIBLE);
-                    //Reusable_Functions.showSnackbarError(context,viewpart,"Please select both entries");
-                    //dialog.dismiss();
                     return;
                 }
 
@@ -428,24 +428,26 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 }
                 for (int i = 0; i < conceptchecked.length; i++) {
                     if (conceptchecked[i]) {
-                        selectconcept = conceptData.get(i);
+                        selectconcept = conceptDesc.get(i);
                     }
                 }
 
                 if (selectconcept == null || selectLob == null) {
                     txt_incorrect.setText("Please select Lob name");
                     txt_incorrect.setVisibility(View.VISIBLE);
-                    //Reusable_Functions.showSnackbarError(context,viewpart,"Please select both entries");
-                    //dialog.dismiss();
                     return;
                 }
 
-                Login_StoreList model = db.db_GetOneRowDetails(selectLob);
+                List<Login_StoreList> list = db.db_GetListMulipleWhereClause(selectLob, selectconcept);
+                Log.i(TAG, "db_GetListMulipleWhereClause sizes are: " + list.size() + " and " + gson.toJson(list));
+                Login_StoreList model = list.get(0);
                 Reusable_Functions.showSnackbar(viewpart, "Mapping success !");
                 lob_name_txt.setText(selectLob);
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("concept", model.getGeoLevel2Code());
+                if(model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION") )
+                editor.putString("concept","BB,FBB");
+                else editor.putString("concept", model.getGeoLevel2Code());
                 editor.putString("conceptDesc", model.getGeoLevel2Desc());
                 editor.putString("lobid", model.getLobId());
                 editor.putString("lobname", model.getLobName());
@@ -473,7 +475,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     }
 
-    private  void displaylobName(final ArrayList<String> lobData) {
+    private void displaylobName(final ArrayList<String> lobData) {
 
         lobchecked = new boolean[lobData.size()];
         for (int i = 0; i < lobData.size(); i++) {
@@ -500,6 +502,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
 
     private void setupAdapter(List<String> kpiIdArray) {
+        Log.i(TAG, "kpiIdArray: " + kpiIdArray.toString());
 
        /* Mapping
         001 - Product Info
@@ -567,78 +570,49 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         } else {
 
-            for (int i = 0; i < kpiIdArray.size(); i++) {
-                Log.i(TAG, "kpiIdArray:" + kpiIdArray.get(i).toString());
-                switch (kpiIdArray.get(i)) {
-
-                    case "001":
-                        List<App> apps = getProduct(0);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
-                        break;
-
-                    case "002":
-                        apps = getProduct(1);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
-                        break;
-
-                    case "004":
-                        apps = getProduct(2);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
-                        break;
-
-                    case "006":
-                        apps = getProduct(3);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
-                        break;
-
-                    case "014":
-                        apps = getProduct(4);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-                        break;
-
-                    case "020":
-                        apps = getProduct(5);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
-                        break;
-
-                    case "022":
-                        apps = getProduct(6);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
-                        break;
-
-                    case "026":
-                        apps = getProduct(7);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
-                        break;
-
-                    case "027":
-                        apps = getProduct(8);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
-                        break;
-
-                    // hourly has been shifted in sales module
-                /*    case "028":
-                        apps = getProduct(9);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Hourly performance", apps));
-                        break;*/
-
-                    case "029":
-                        apps = getProduct(10);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "BORIS", apps));
-                        break;
-
-                    case "030":
-                        apps = getProduct(11);
-                        snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback", apps));
-                        break;
-
-                    default:
-                        // finish();
-                        break;
-
-
-                }
-
+            if (kpiIdArray.contains("001")) {
+                List<App> apps = getProduct(0, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
+            }
+            if (kpiIdArray.contains("002") || kpiIdArray.contains("003")) {
+                List<App> apps = getProduct(1, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
+            }
+            if (kpiIdArray.contains("004") || kpiIdArray.contains("005") || kpiIdArray.contains("018") || kpiIdArray.contains("028")) {
+                List<App> apps = getProduct(2, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+            }
+            if (kpiIdArray.contains("006") || kpiIdArray.contains("007") || kpiIdArray.contains("008") || kpiIdArray.contains("009") || kpiIdArray.contains("010") || kpiIdArray.contains("011") || kpiIdArray.contains("012") || kpiIdArray.contains("013")) {
+                List<App> apps = getProduct(3, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+            }
+            if (kpiIdArray.contains("014") || kpiIdArray.contains("015") || kpiIdArray.contains("016") || kpiIdArray.contains("017")) {
+                List<App> apps = getProduct(4, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
+            }
+            if (kpiIdArray.contains("020") || kpiIdArray.contains("021")) {
+                List<App> apps = getProduct(5, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+            }
+            if (kpiIdArray.contains("022") || kpiIdArray.contains("023") || kpiIdArray.contains("024") || kpiIdArray.contains("025")) {
+                List<App> apps = getProduct(6, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
+            }
+            if (kpiIdArray.contains("026")) {
+                List<App> apps = getProduct(7, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+            }
+            if (kpiIdArray.contains("027")) {
+                List<App> apps = getProduct(8, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+            }
+            if (kpiIdArray.contains("029")) {
+                List<App> apps = getProduct(10, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "BORIS", apps));
+            }
+            if (kpiIdArray.contains("030") || kpiIdArray.contains("031") || kpiIdArray.contains("032") || kpiIdArray.contains("033") || kpiIdArray.contains("034") || kpiIdArray.contains("035")) {
+                List<App> apps = getProduct(11, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback", apps));
             }
         }
         Recycler_verticalView.setAdapter(snapAdapter);

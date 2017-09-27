@@ -44,6 +44,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.FloorAvailabilityDetails;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -85,6 +86,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     private String selectedString = "", isMultiStore, value;
     private boolean toggleClick = false;
     private TabLayout Tabview;
+    private int filter_level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,15 +122,18 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
             limit = 10;
             count = 0;
             top = 10;
-            if (getIntent().getStringExtra("selectedDept") == null) {
+            if (getIntent().getStringExtra("selectedStringVal") == null) {
                 from_filter = false;
-            } else if (getIntent().getStringExtra("selectedDept") != null) {
-                selectedString = getIntent().getStringExtra("selectedDept");
+            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+                selectedString = getIntent().getStringExtra("selectedStringVal");
+                filter_level = getIntent().getIntExtra("selectedlevelVal",0);
                 from_filter = true;
             }
             RetainFromMain_filter();
             requestFloorAvailabilityApi(selectedString);
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
@@ -139,15 +144,39 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     if (Reusable_Functions.chkStatus(context)) {
 
             String url;
-            if (from_filter) {
-                if (coreSelection) {
+            if (from_filter)
+            {
+                if (coreSelection)
+                {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-                } else {
-                    //fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                    if(filter_level != 0)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit  + selectedString + "&top=" + top + "&corefashion=" + corefashion+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+                    }
                 }
-            } else {
+                else
+                {
+                    //fashion select with season params
+                    if(filter_level != 0)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+                    }
+                }
+            }
+            else
+            {
                 if (coreSelection) {
                     //core selection without season params
                     url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
@@ -242,16 +271,15 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
             floorListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                 public int VisibleItemCount, TotalItemCount, FirstVisibleItem;
-
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
 
                     if (FirstVisibleItem + VisibleItemCount == TotalItemCount && scrollState == SCROLL_STATE_IDLE && lazyScroll.equals("OFF")) {
 
-                        if (floorListView.getTag().equals("FOOTER_REMOVE")) {
+                        if (floorListView.getTag().equals("FOOTER_REMOVE"))
+                        {
                             floorListView.addFooterView(footer);
                             floorListView.setTag("FOOTER_ADDED");
-
                         }
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
@@ -363,7 +391,7 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
                 break;
             case R.id.fa_imgfilter:
-                Intent intent = new Intent(FloorAvailabilityActivity.this, SalesFilterActivity.class);
+                Intent intent = new Intent(FloorAvailabilityActivity.this, SalesAnalysisFilter.class);
                 intent.putExtra("checkfrom", "floorAvailability");
                 startActivity(intent);
                 break;
@@ -394,14 +422,16 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
                     quickFilterPopup.setVisibility(View.GONE);
 
-                } else if (checkUpcoming.isChecked()) {
+                } else if (checkUpcoming.isChecked())
+                {
                     popupUpcoming();
                     floorcheckSeasonGpVal = "Upcoming";
 
                     quickFilterPopup.setVisibility(View.GONE);
-                } else {
+                }
+                else
+                {
                     Toast.makeText(this, "Uncheck", Toast.LENGTH_SHORT).show();
-
                 }
 
                 break;

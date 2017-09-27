@@ -83,7 +83,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private ArrayList<String> optionList;
     private boolean feedbackReport = false;
     private Feedback_model feedback_model_report;
-    private String selectCategory, isMultiStore, value, storeCode, store_Code;
+    private String selectCategory, isMultiStore, value, storeCode, store_Code, body_geoLevel2Code;
     private String storecode, storeDes;
 
 
@@ -106,7 +106,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if(getIntent().getExtras().getString("storeCode") != null )
         {
             storeCode = getIntent().getExtras().getString("storeCode");
+            body_geoLevel2Code = getIntent().getExtras().getString("body_geoLevel2Code");
             store_Code = storeCode.substring(0,4);
+            Log.e("body_geoLevel2Code "," "+body_geoLevel2Code);
             Log.i(TAG, "storeCode: "+storeCode );
         }
         Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
@@ -194,13 +196,13 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             String url;
 
             if (!feedbackReport) {
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId +"&storeCode=" +store_Code;
                // url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             } else {
 
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code + "&option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code + "&option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+"&storeCode=" +store_Code;
               //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
@@ -656,6 +658,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             jsonObject.put("styling", styling);
             jsonObject.put("fabricQuality", fabric);
             jsonObject.put("garmentQuality", fabricQuality);
+            jsonObject.put("geoLevel2Code", body_geoLevel2Code);
+            jsonObject.put("lobId", lobId);
+            jsonObject.put("storeCode", store_Code);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -670,7 +675,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
-            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetailsNew/" + userId +"?geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId ;//+"?recache="+recache
+            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetailsNew/" + userId  ;//+"?geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId
            // String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId + "?geoLevel2Code="+ geoLevel2Code ;//+"?recache="+recache
             Log.e(TAG, "requestReceiverSubmitAPI: "+object.toString());
             Log.e(TAG, "requestReceiverSubmitAPI url: "+url.toString());

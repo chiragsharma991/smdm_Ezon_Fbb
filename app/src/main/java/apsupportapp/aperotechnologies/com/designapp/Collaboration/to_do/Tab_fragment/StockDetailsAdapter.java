@@ -182,7 +182,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public JSONArray OnSubmit(String MCCodeDesc,String prodLevel3Desc,String deviceId)
+    public JSONArray OnSubmit(String MCCodeDesc, String prodLevel3Desc, String deviceId, String store_code)
     {
         int count=0;  //count is for add one by one in Jsonarray.
         JSONArray jsonarray=new JSONArray();
@@ -203,6 +203,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
                             obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
                             obj.put("deviceId",deviceId);
+                            obj.put("storeCode",store_code);
                             jsonarray.put(count,obj);
                             count++;
                         }

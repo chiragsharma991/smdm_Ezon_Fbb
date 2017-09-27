@@ -31,6 +31,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -535,6 +536,7 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
                 notifyDataSetChanged();
             }
 
+
     }
 
     public final class GroupViewHolder {
@@ -563,18 +565,19 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
             if (prod_level == 2)
             {
                 Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
-
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20").replace("%","%25");
             } else if (prod_level == 3)
             {
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&category=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId+ "&category=" + str.replaceAll("&", "%26").replace(" ", "%20").replace("%","%25");
 
             } else if (prod_level == 4)
             {
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&class=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId+ "&class=" + str.replaceAll("&", "%26").replace(" ", "%20").replace("%","%25");
+
             }
-            else if (prod_level == 5) {
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+            else if (prod_level == 5)
+            {
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20").replace("%","%25");
             }
 
         Log.e("search url:", "" + search_url);

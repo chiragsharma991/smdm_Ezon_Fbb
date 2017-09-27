@@ -119,6 +119,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     public static Activity option_Efficiency;
     Snackbar snackbar;
     private TabLayout Tabview;
+    private int filter_level;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -157,18 +158,20 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             level = 1;
 
             oe_llayouthierarchy.setVisibility(View.GONE);
-            if (getIntent().getStringExtra("selectedDept") == null) {
+            if (getIntent().getStringExtra("selectedStringVal") == null) {
                 // filter_toggleClick = false;
                 seasonGroup = "Current";
                 retainValuesFilter();
                 requestHearderAPI();
-            } else if (getIntent().getStringExtra("selectedDept") != null) {
-                String selectedString = getIntent().getStringExtra("selectedDept");
+            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+                String selectedString = getIntent().getStringExtra("selectedStringVal");
+                filter_level=getIntent().getIntExtra("selectedlevelVal",0);
+
                 // filter_toggleClick = true;
                 coreSelection = true;
                 retainValuesFilter();
                 optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                requestOptionEfficiencyFilterVal(selectedString);
+                requestOptionEfficiencyFilterVal(selectedString,filter_level);
             }
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1324,16 +1327,34 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     // Api for filter selected value
-    private void requestOptionEfficiencyFilterVal(final String selectedString) {
-        String oe_filterval_url;
+    private void requestOptionEfficiencyFilterVal(final String selectedString,final int filter_level) {
+        String oe_filterval_url = "";
         if (coreSelection)
         {
             //core selection without season params
-            oe_filterval_url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + SalesFilterActivity.level_filter + selectedString + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+
+            if(filter_level != 0)
+            {
+                oe_filterval_url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + filter_level + selectedString + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+            }
+            else
+            {
+                oe_filterval_url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick  + selectedString + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+            }
+
         } else {
             //fashion selection with season params
-            oe_filterval_url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + SalesFilterActivity.level_filter + selectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            if(filter_level != 0) {
+                oe_filterval_url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + filter_level + selectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+            }
+            else
+            {
+                oe_filterval_url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick  + selectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
 
+            }
         }
         Log.e("TAG", "requestOptionEfficiencyFilterVal: " + oe_filterval_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_filterval_url,
@@ -1342,32 +1363,32 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
 
-                        if (SalesFilterActivity.level_filter == 2)
+                        if (filter_level == 2)
                         {
                             oe_txtHeaderClass.setText("Category");
                             fromWhere = "Category";
                             oe_btnPrev.setVisibility(View.VISIBLE);
 
                         }
-                        else if (SalesFilterActivity.level_filter == 3)
+                        else if (filter_level == 3)
                         {
                             oe_txtHeaderClass.setText("Class");
                             fromWhere = "Class";
                             oe_btnPrev.setVisibility(View.VISIBLE);
 
-                        } else if (SalesFilterActivity.level_filter == 4) {
+                        } else if (filter_level == 4) {
                             oe_txtHeaderClass.setText("Brand");
                             fromWhere = "Brand";
                             oe_btnPrev.setVisibility(View.VISIBLE);
 
-                        } else if (SalesFilterActivity.level_filter == 5) {
+                        } else if (filter_level == 5) {
                             oe_txtHeaderClass.setText("Brand Class");
                             fromWhere = "Brand Class";
                             oe_btnPrev.setVisibility(View.VISIBLE);
                             oe_btnNext.setVisibility(View.INVISIBLE);
 
 
-                        } else if (SalesFilterActivity.level_filter == 6) {
+                        } else if (filter_level == 6) {
                             oe_txtHeaderClass.setText("Brand Class");
                             fromWhere = "Brand Class";
                             oe_btnPrev.setVisibility(View.VISIBLE);
@@ -1392,7 +1413,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestOptionEfficiencyFilterVal(selectedString);
+                                requestOptionEfficiencyFilterVal(selectedString, filter_level);
 
                             } else if (response.length() < limit) {
                                 for (i = 0; i < response.length(); i++) {
@@ -2417,7 +2438,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         } else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
                             optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                            requestOptionEfficiencyFilterVal(selectedString);
+                            requestOptionEfficiencyFilterVal(selectedString, filter_level);
 
                         }
                     } else {
@@ -2444,7 +2465,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         } else if (getIntent().getStringExtra("selectedDept") != null) {
                             String selectedString = getIntent().getStringExtra("selectedDept");
                             optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                            requestOptionEfficiencyFilterVal(selectedString);
+                            requestOptionEfficiencyFilterVal(selectedString, filter_level);
                         }
 
                     } else {

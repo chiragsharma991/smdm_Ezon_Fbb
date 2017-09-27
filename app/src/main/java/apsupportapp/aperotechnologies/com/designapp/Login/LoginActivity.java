@@ -288,14 +288,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 db.db_AddData(loginStoreArray);
                                 //default concept and lobid
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
+                                if(loginStoreArray.get(0).getGeoLevel2Code().equals("BB") || loginStoreArray.get(0).getGeoLevel2Code().equals("FBB") && loginStoreArray.get(0).getLobName().equals("FASHION") )
+                                editor.putString("concept","BB,FBB");
+                                else editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
                                 editor.putString("conceptDesc", loginStoreArray.get(0).getGeoLevel2Desc());
                                 editor.putString("lobid", loginStoreArray.get(0).getLobId());
                                 editor.putString("lobname", loginStoreArray.get(0).getLobName());
                                 editor.putString("kpi_id",loginStoreArray.get(0).getKpiId());
                                 editor.putString("isMultiStore", loginStoreArray.get(0).getIsMultiStore());
                                 editor.apply();
-                                Log.e(TAG, "isMultiStore "+loginStoreArray.get(0).getIsMultiStore());
                                 if(response.length() == 1 ) // for single response save storecode
                                 {
                                     Log.e(TAG, "requestUserStore - in if 1: " );

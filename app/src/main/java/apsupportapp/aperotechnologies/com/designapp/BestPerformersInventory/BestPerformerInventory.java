@@ -50,6 +50,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -115,7 +117,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private RadioButton product_radiobtn, location_radiobtn;
     private static int preValue = 1, postValue;  //this is for radio button
     private JsonArrayRequest postRequest;
-    private int selectedlevel; //select level from filter
+    private int selectedlevel,filter_level; //select level from filter
     private TabLayout Tabview;
 
     @Override
@@ -199,17 +201,16 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         } else {
 
-            if (getIntent().getStringExtra("selectedDept") == null) {
+            if (getIntent().getStringExtra("selectedStringVal") == null) {
                 from_filter = false;
-            } else if (getIntent().getStringExtra("selectedDept") != null) {
-                selectedString = getIntent().getStringExtra("selectedDept");
+            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+                selectedString = getIntent().getStringExtra("selectedStringVal");
+                filter_level = getIntent().getIntExtra("selectedlevelVal",0);
                 from_filter = true;
 
             }
 
         }
-
-
         RetainFromMain_filter();
         requestRunningPromoApi(selectedString);
     }
@@ -627,13 +628,27 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             if (coreSelection) {
 
                 //core selection without season params
+                if(filter_level != 0)
+                {
+                    url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                }
+                else
+                {
+                    url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol  + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+
+                }
             } else {
 
                 // fashion select with season params
-
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                if(filter_level != 0)
+                {
+                    url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                }
+                else
+                {
+                    url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                }
             }
         } else {
             if (coreSelection) {
@@ -652,8 +667,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     }
 
 
-    private void initalise() {
-
+    private void initalise()
+    {
         rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
         BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
@@ -680,8 +695,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         BestCheckPrevious.setOnClickListener(this);
         BestCheckOld.setOnClickListener(this);
         BestCheckUpcoming.setOnClickListener(this);
-
-
     }
 
 
@@ -741,10 +754,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                     startActivity(intent);
                     break;
                 }
-
-
                 //Quick filter>>>
-
             case R.id.bestInvent_quickFilter:
                 filterFunction();
                 break;
@@ -775,68 +785,80 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 //Time >>>if you press done then you pass checkTimeValueIs and checkValueIs params
                 if (Reusable_Functions.chkStatus(context)) {
 
-                    if (TAG.equals("BestPerformer_Ez_Inventory")) {
+                    if (TAG.equals("BestPerformer_Ez_Inventory"))
+                    {
 
-                        if (CheckWTD.isChecked()) {
+                        if (CheckWTD.isChecked())
+                        {
                             checkTimeValueIs = "CheckWTD";
                             view = "WTD";
                             popupDoneEz();
 
-                        } else if (CheckL4W.isChecked()) {
+                        }
+                        else if (CheckL4W.isChecked())
+                        {
                             checkTimeValueIs = "CheckL4W";
                             view = "L4W";
                             popupDoneEz();
 
 
-                        } else if (CheckSTD.isChecked()) {
+                        }
+                        else if (CheckSTD.isChecked())
+                        {
                             checkTimeValueIs = "CheckYTD";
                             view = "YTD";
                             popupDoneEz();
-
-
                         }
 
 
                     } else {
 
-                        if (CheckWTD.isChecked()) {
+                        if (CheckWTD.isChecked())
+                        {
                             checkTimeValueIs = "CheckWTD";
                             view = "WTD";
-
-                        } else if (CheckL4W.isChecked()) {
+                        }
+                        else if (CheckL4W.isChecked())
+                        {
                             checkTimeValueIs = "CheckL4W";
                             view = "L4W";
-
-
-                        } else if (CheckSTD.isChecked()) {
+                        }
+                        else if (CheckSTD.isChecked())
+                        {
                             checkTimeValueIs = "CheckSTD";
                             view = "STD";
-
                         }
                         //season group
 
-                        if (BestCheckCurrent.isChecked()) {
+                        if (BestCheckCurrent.isChecked())
+                        {
                             checkValueIs = "BestCheckCurrent";
                             popupCurrent();
                             quickFilterPopup.setVisibility(View.GONE);
 
-                        } else if (BestCheckPrevious.isChecked()) {
+                        }
+                        else if (BestCheckPrevious.isChecked())
+                        {
                             checkValueIs = "BestCheckPrevious";
                             popupPrevious();
                             quickFilterPopup.setVisibility(View.GONE);
 
-                        } else if (BestCheckOld.isChecked()) {
+                        }
+                        else if (BestCheckOld.isChecked())
+                        {
                             checkValueIs = "BestCheckOld";
                             popupOld();
                             quickFilterPopup.setVisibility(View.GONE);
 
-                        } else if (BestCheckUpcoming.isChecked()) {
+                        }
+                        else if (BestCheckUpcoming.isChecked())
+                        {
                             checkValueIs = "BestCheckUpcoming";
                             popupUpcoming();
                             quickFilterPopup.setVisibility(View.GONE);
-
-
-                        } else {
+                        }
+                        else
+                        {
                             CheckTimeDone();
                             quickFilterPopup.setVisibility(View.GONE);
                         }
@@ -993,7 +1015,13 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_salesThru_chk.setChecked(false);
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(true);
-                orderbycol = "fwdWeekCover,sellThruUnits";
+                try {
+                    orderbycol = "fwdWeekCover,sellThruUnits";
+                    orderbycol =  URLEncoder.encode(orderbycol, "UTF-8");
+                    Log.i(TAG, "coverNsellPopUp: "+orderbycol);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 BestInventList.clear();
                 Reusable_Functions.sDialog(this, "Loading...");
                 popPromo = 10;

@@ -68,7 +68,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
     ImageView img_VisualAssortment;
     TextView txtName, txtSeason, txtColor, txtFabric, txtFit, txtCollection, txtSizeRatio, txtAmount;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken,geoLevel2Code, storeCode;
+    String userId, bearertoken,geoLevel2Code, storeCode, body_geoLevel2Code;
     ProgressBar visualprogressPicaso;
     int pos;
     static LinearLayout fragmentLayout;
@@ -78,12 +78,13 @@ public class SwipeDeckAdapter extends BaseAdapter {
     StyleDetailsBean styleDetailsBean;
     int offset , limit;
 
-    public SwipeDeckAdapter(ArrayList<VisualAssort> visualassortmentlist, Context context, SwipeDeck cardStack, String storeCode)
+    public SwipeDeckAdapter(ArrayList<VisualAssort> visualassortmentlist, Context context, SwipeDeck cardStack, String storeCode, String body_geoLevel2Code)
     {
         this.visualassortmentlist = visualassortmentlist;
         this.context = context;
         this.cardStack = cardStack;
         this.storeCode = storeCode;
+        this.body_geoLevel2Code = body_geoLevel2Code;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -435,6 +436,8 @@ public class SwipeDeckAdapter extends BaseAdapter {
                         obj.put("likeDislikeFlg", checkLikedislike);
                         obj.put("feedback", VisualAssortmentActivity.edtTextComment.getText().toString().trim());
                         obj.put("sizeSet", checkSizeSet);
+                        obj.put("storecode", storeCode);
+                        obj.put("geoLevel2Code", body_geoLevel2Code);
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
@@ -442,7 +445,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     if(checkLikedislike.equals("") && checkSizeSet == 0 && (checkFeedback.equals("")))
                     {
                         //GO FOR POST METHOD
-                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code, storeCode);
+                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, storeCode);
                         VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
                         relcomment.setEnabled(false);
                         visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
@@ -450,7 +453,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
                     else
                     {
                         //GO FOR PUT METHOD
-                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context, geoLevel2Code,storeCode);
+                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context,storeCode);
                         VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
                         relcomment.setEnabled(false);
                         visualAssort1.setFeedback(VisualAssortmentActivity.edtTextComment.getText().toString());
