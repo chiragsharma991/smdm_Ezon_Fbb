@@ -161,7 +161,7 @@ public class StyleActivity extends AppCompatActivity
         collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
         //attach the adapter to the list
         listCollection.setAdapter(collectionAdapter);
-        listCollection.setTextFilterEnabled(true);
+       // listCollection.setTextFilterEnabled(true);
         collectionAdapter.notifyDataSetChanged();
         style = (TextView) findViewById(R.id.searchablespinnerlibrary1);
         style.setText("Select Option");
@@ -817,7 +817,7 @@ public class StyleActivity extends AppCompatActivity
                             collectionAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
                             newcollectionList = new ArrayList();
-                           newcollectionList.addAll(arrayList);
+                            newcollectionList.addAll(arrayList);
                             listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
                             {
                                 @Override

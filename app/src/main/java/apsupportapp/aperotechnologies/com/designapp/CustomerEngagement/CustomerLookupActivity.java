@@ -61,15 +61,14 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
 
-        if (geoLeveLDesc.equals("E ZONE"))
-        {
-            userId = sharedPreferences.getString("userId", "");  //E zone userid =username
-        }
-        else
-        {
-            userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
-            userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
-        }
+//        if (geoLeveLDesc.equals("E ZONE"))
+//        {
+//            userId = sharedPreferences.getString("userId", "");  //E zone userid =username
+//        }
+//        else
+//        {
+//            userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
+//        }
         gson = new Gson();
         initialiseUi();
         setTab();

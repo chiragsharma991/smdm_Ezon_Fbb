@@ -389,10 +389,10 @@ public class CustomerLookup_PageTwo extends Fragment
                             }
                             Reusable_Functions.hDialog();
 
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
                             customerDetailsList.remove(pos);
                             customerDetailAdapter.notifyDataSetChanged();
-
                              Reusable_Functions.hDialog();
                             Log.e("exception :", "" + e.getMessage());
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
@@ -405,8 +405,7 @@ public class CustomerLookup_PageTwo extends Fragment
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        customerDetailsList.remove(pos);
-                        customerDetailAdapter.notifyDataSetChanged();
+
                         cust_progressBar.setVisibility(View.GONE);
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
@@ -438,7 +437,7 @@ public class CustomerLookup_PageTwo extends Fragment
         RequestQueue mqueue;
         mqueue = new RequestQueue(cache, network);
         mqueue.start();
-        user_id = user_id.substring(0, user_id.length() - 5);
+//        user_id = user_id.substring(0, user_id.length() - 5);
         String url = "";
         final Gson gson;
         gson = new Gson();
@@ -518,8 +517,6 @@ public class CustomerLookup_PageTwo extends Fragment
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        customerDetailsList.remove(pos);
-                        customerDetailAdapter.notifyDataSetChanged();
                         Reusable_Functions.hDialog();
                         Toast.makeText(mcontext, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();

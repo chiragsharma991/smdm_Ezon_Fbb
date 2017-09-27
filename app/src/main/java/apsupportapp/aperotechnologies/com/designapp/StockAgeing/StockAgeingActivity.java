@@ -531,7 +531,6 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.checkAgeing1:
-
                 checkAgeing1.setChecked(true);
                 checkAgeing2.setChecked(false);
                 checkAgeing3.setChecked(false);
