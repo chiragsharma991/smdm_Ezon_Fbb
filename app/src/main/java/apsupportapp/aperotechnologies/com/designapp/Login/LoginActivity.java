@@ -199,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Log.e("Login Response   ", response.toString());
                         try {
                             if (response == null || response.equals(null)) {
-                                Reusable_Functions.hDialog();
+//                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
 
                             } else
@@ -312,7 +312,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                     if (Reusable_Functions.chkStatus(context))
                                     {
-
                                         Reusable_Functions.sDialog(context, "Fetching store code and concept...");
                                         requestUserStoreConcept();
                                     }
@@ -327,7 +326,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                     if (Reusable_Functions.chkStatus(context))
                                     {
-                                        Reusable_Functions.hDialog();
                                         Reusable_Functions.sDialog(context, "Fetching store code and concept...");
                                         requestUserStoreConcept();
                                     }
@@ -336,7 +334,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                     }
                                 }
-                                Reusable_Functions.hDialog();
+
 
 
 
