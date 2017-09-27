@@ -64,7 +64,7 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
     SharedPreferences sharedPreferences;
     private RequestQueue queue;
     private ScrollView scrollView;
-    private String remark, SelectedStoreCode;
+    private String remark, SelectedStoreCode, storeCode, store_code;
     private TextInputLayout input_remarks;
     private String remarks_text;
     private String TAG = "ProductQualityRange";
@@ -74,6 +74,11 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
             customerBrand, customerProduct, customerSize, customerColorOption1, customerColorOption2,
             customerFit, customerStyle, customerCallBack, customerArcDate;
     private View v;
+
+    public ProductQualityRange_Feedback(String storeCode) {
+
+        this.storeCode = storeCode;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -416,10 +421,11 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
         userId = sharedPreferences.getString("userId", "");
         Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
-        SelectedStoreCode = store.trim().substring(0, 4);
+        store_code = storeCode.substring(0, 4);
+      //  SelectedStoreCode = store.trim().substring(0, 4);
 
-        Log.e("store"," "+store);
-        storedescription.setText(store);
+      //  Log.e("store"," "+store);
+        storedescription.setText(storeCode);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         //  editor.putString("storeDescription",storeDescription);
@@ -544,7 +550,7 @@ public class ProductQualityRange_Feedback extends Fragment implements View.OnCli
 
             case 0:   //total values
 
-                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
+                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId + "&storeCode=" +store_code;
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
 
                 break;

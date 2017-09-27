@@ -198,40 +198,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+           >
 
 
+
+            <!--<TextView-->
+                <!--android:id="@+id/tstoreCode"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/store"-->
+                <!--android:textColor="@color/ezfb_black"-->
+                <!--android:textSize="@dimen/smdm_store_title_normal"-->
+                <!--/>-->
 
             <TextView
-                android:id="@+id/tstoreCode"
+                android:id="@+id/bestInvent_txtStoreCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/store"
+                android:layout_marginLeft="3dp"
+                android:hint=""
+                android:visibility="gone"
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/smdm_store_title_normal"
+
                 />
 
             <TextView
-                android:id="@+id/txtStoreCode"
+                android:id="@+id/bestInvent_txtStoreName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:textStyle="bold"
-                android:layout_toRightOf="@+id/tstoreCode"
+                android:layout_toRightOf="@id/bestInvent_txtStoreCode"
                 android:hint=""
-                android:textColor="@color/ezfb_black"
-                android:textSize="@dimen/smdm_store_title_normal"
-
-                />
-
-            <TextView
-                android:id="@+id/txtStoreName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:textStyle="bold"
-                android:layout_toRightOf="@id/txtStoreCode"
-                android:hint=""
+                android:visibility="gone"
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/smdm_store_title_normal" />
 

@@ -59,7 +59,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private String bearertoken,storeDescription;
+    private String bearertoken,storeDescription,geoLevel2Code,lobId;
     private String TAG = "FEEDBACK";
     private RequestQueue queue;
     private int count = 0;
@@ -83,9 +83,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private ArrayList<String> optionList;
     private boolean feedbackReport = false;
     private Feedback_model feedback_model_report;
-    private String selectCategory;
+    private String selectCategory, isMultiStore, value, storeCode, store_Code;
     private String storecode, storeDes;
-    private String geoLevel2Code;
+
 
 
     @Override
@@ -93,18 +93,28 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         getSupportActionBar().hide();//
-        initalise();
+
         gson = new Gson();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
-        geoLevel2Code = sharedPreferences.getString("geoLevel2Code", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            store_Code = storeCode.substring(0,4);
+            Log.i(TAG, "storeCode: "+storeCode );
+        }
         Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        initalise();
         feedbackList = new ArrayList<>();
         feedbackReportList = new ArrayList<>();
 
@@ -133,6 +143,18 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         Feedback_option = (TextView) findViewById(R.id.feedback_option);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreName.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreName.setText(value);
+        }
         ImageLoader_feedback = (ProgressBar) findViewById(R.id.imageLoader_feedback);
         firstView = (LinearLayout) findViewById(R.id.replaceView_first);
         secondView = (RelativeLayout) findViewById(R.id.replaceView_two);
@@ -172,13 +194,13 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             String url;
 
             if (!feedbackReport) {
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                // url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             } else {
 
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code + "&option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
               //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
@@ -376,10 +398,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private void commentDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-        // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         View v = inflater.inflate(R.layout.comment_dialog, null);
         LinearLayout skip = (LinearLayout) v.findViewById(R.id.comment_skip);
         LinearLayout ok = (LinearLayout) v.findViewById(R.id.comment_ok);
@@ -651,12 +670,17 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
-            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId ;//+"?recache="+recache
+            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetailsNew/" + userId +"?geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId ;//+"?recache="+recache
            // String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId + "?geoLevel2Code="+ geoLevel2Code ;//+"?recache="+recache
+            Log.e(TAG, "requestReceiverSubmitAPI: "+object.toString());
+            Log.e(TAG, "requestReceiverSubmitAPI url: "+url.toString());
+
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
-                        public void onResponse(JSONObject response) {
+                        public void onResponse(JSONObject response)
+                        {
+                            Log.e("response requestReceiverSubmitAPI "," "+response);
                             try {
                                 if (response == null || response.equals(null)) {
                                     Reusable_Functions.hDialog();

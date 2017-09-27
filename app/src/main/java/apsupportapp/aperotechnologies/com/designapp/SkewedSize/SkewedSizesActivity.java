@@ -42,6 +42,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.SkewedSizeListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -56,7 +57,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private SharedPreferences sharedPreferences;
     CheckBox checkCurrent, checkPrevious, checkOld, checkUpcoming;
     RadioButton Skewed_checkWTD, Skewed_checkL4W, Skewed_checkSTD;
-    String userId, bearertoken,storeDescription;
+    String userId, bearertoken,storeDescription,geoLevel2Code,lobId;
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
@@ -67,7 +68,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private Gson gson;
     ListView SkewedSizeListview;
     ArrayList<SkewedSizeListDisplay> SkewedSizeList;
-    private int focusposition = 0;
+    private int focusposition = 0,filter_level;
     private boolean userScrolled;
     private SkewedSizeAdapter SkewedSizeAdapter;
     private View footer;
@@ -84,7 +85,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     private static String view = "STD";
     public static Activity SkewedSizes;
     private boolean from_filter = false, filter_toggleClick = false;
-    private String selectedString = "";
+    private String selectedString = "", isMultiStore, value;
     private TabLayout Tabview;
 
 
@@ -93,36 +94,44 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skewed_sizes);
         getSupportActionBar().hide();
-        initalise();
+
         gson = new Gson();
         SkewedSizes = this;
-        SkewedSizeListview.setVisibility(View.VISIBLE);
-        SkewedSizeList = new ArrayList<SkewedSizeListDisplay>();
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
-
+        Log.e("isMultiStore in skewed sizes "," "+ isMultiStore);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
 //        Skewed_txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        Skewed_txtStoreName.setText(storeDescription.substring(5));
+        initalise();
+        SkewedSizeListview.setVisibility(View.VISIBLE);
+        SkewedSizeList = new ArrayList<SkewedSizeListDisplay>();
         SkewedSizeListview.setTag("FOOTER");
+
         Reusable_Functions.sDialog(this, "Loading.......");
-        if (getIntent().getStringExtra("selectedDept") == null) {
+        if (getIntent().getStringExtra("selectedStringVal") == null) {
             from_filter = false;
             filter_toggleClick = false;
 
-        } else if (getIntent().getStringExtra("selectedDept") != null) {
-            selectedString = getIntent().getStringExtra("selectedDept");
+        } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+            selectedString = getIntent().getStringExtra("selectedStringVal");
+            filter_level = getIntent().getIntExtra("selectedlevelVal",0);
             from_filter = true;
             filter_toggleClick = true;
         }
         Log.e("TAG", "Selected string: "+selectedString+" "+from_filter );
         retainValuesFilter();
-        requestRunningPromoApi(selectedString);
+        requestRunningPromoApi(selectedString,filter_level);
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
         SkewedSizeListview.addFooterView(footer);
 
@@ -149,7 +158,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    private void requestRunningPromoApi(final String selectedString) {
+    private void requestRunningPromoApi(final String selectedString,final int filter_level) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
@@ -159,23 +168,36 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 if (coreSelection) {
 
                     //core selection without season params
-
-                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
-                } else {
-
+                    if(filter_level != 0)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&geoLevel2Code=" +geoLevel2Code + "&lobId="+ lobId;
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&geoLevel2Code=" +geoLevel2Code + "&lobId="+ lobId;
+                    }
+                }
+                else
+                {
                     // fashion select with season params
-
-                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                    if(filter_level != 0)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" +filter_level+ selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                    }
                 }
             } else {
                 if (coreSelection) {
 
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view;
+                    url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&geoLevel2Code=" +geoLevel2Code + "&lobId="+ lobId;
                 } else {
 
                     // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/skewedsizes/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view;
+                    url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             }
             Log.e("url:",""+url);
@@ -278,7 +300,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                         }
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
-                        requestRunningPromoApi(selectedString);
+                        requestRunningPromoApi(selectedString, filter_level);
                     }
 
                 }
@@ -304,6 +326,17 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
         Skewed_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         Skewed_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            Skewed_txtStoreCode.setText("Concept : ");
+            Skewed_txtStoreName.setText(value);
+
+        }
+        else
+        {
+            Skewed_txtStoreCode.setText("Store : ");
+            Skewed_txtStoreName.setText(value);
+        }
         Skewed_BtnBack = (RelativeLayout) findViewById(R.id.skewed_BtnBack);
         sk_imgfilter = (RelativeLayout) findViewById(R.id.sk_imgfilter);
         SkewedSizeListview = (ListView) findViewById(R.id.skewedListView);
@@ -359,7 +392,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 }
                 break;
             case R.id.sk_imgfilter:
-                Intent intent = new Intent(SkewedSizesActivity.this, SalesFilterActivity.class);
+                Intent intent = new Intent(SkewedSizesActivity.this, SalesAnalysisFilter.class);
                 intent.putExtra("checkfrom", "skewedSize");
                 startActivity(intent);
                 break;
@@ -550,7 +583,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             seasonGroup = "Current";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi(selectedString, filter_level);
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -566,7 +599,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             seasonGroup = "Previous";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi(selectedString, filter_level);
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -582,7 +615,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             seasonGroup = "Old";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi(selectedString, filter_level);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -597,7 +630,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             seasonGroup = "Upcoming";
             SkewedSizeList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi(selectedString, filter_level);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -699,7 +732,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(this, "Loading.......");
                     coreSelection = true;
-                    requestRunningPromoApi(selectedString);
+                    requestRunningPromoApi(selectedString, filter_level);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     Reusable_Functions.hDialog();
@@ -718,7 +751,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(this, "Loading.......");
                     coreSelection = false;
-                    requestRunningPromoApi(selectedString);
+                    requestRunningPromoApi(selectedString, filter_level);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     Reusable_Functions.hDialog();

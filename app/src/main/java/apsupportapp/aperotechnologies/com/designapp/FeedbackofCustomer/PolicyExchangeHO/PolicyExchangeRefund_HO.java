@@ -16,6 +16,7 @@ public class PolicyExchangeRefund_HO extends AppCompatActivity {
     TabLayout tabLayout;
     private RelativeLayout imageBtnBack1;
     private Context context;
+    private String storeCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,10 @@ public class PolicyExchangeRefund_HO extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         context = this;
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+        }
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Reports"));
@@ -41,7 +46,7 @@ public class PolicyExchangeRefund_HO extends AppCompatActivity {
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PolicyExchange_ViewPagerAdapter adapter = new PolicyExchange_ViewPagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
+                (getSupportFragmentManager(), tabLayout.getTabCount(), storeCode);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

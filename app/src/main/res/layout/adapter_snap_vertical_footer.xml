@@ -42,6 +42,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_below="@+id/text_profile_video"
                 android:id="@+id/view_pager"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="225dp"
                 android:layout_marginLeft="10dp"

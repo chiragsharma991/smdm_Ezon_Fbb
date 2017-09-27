@@ -95,24 +95,24 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/tstoreCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/store"
-                    android:textColor="@color/ezfbb_black"
-                    android:textSize="@dimen/normallayout_storesize" />
+                <!--<TextView-->
+                    <!--android:id="@+id/tstoreCode"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/store"-->
+                    <!--android:textColor="@color/ezfbb_black"-->
+                    <!--android:textSize="@dimen/normallayout_storesize" />-->
 
                 <TextView
                     android:id="@+id/txtStoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
-                    android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
+                    android:visibility="gone"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
-                    android:textStyle="bold" />
+                     />
 
                 <TextView
                     android:id="@+id/txtStoreName"
@@ -121,6 +121,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/txtStoreCode"
                     android:hint=""
+                    android:visibility="gone"
                     android:textColor="@color/bg_store_code_text"
                     android:textSize="@dimen/normallayout_storesize"
                     android:textStyle="bold" />

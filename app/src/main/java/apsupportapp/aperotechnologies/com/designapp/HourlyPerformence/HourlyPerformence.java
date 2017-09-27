@@ -87,7 +87,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private RelativeLayout hrl_btnBack;
     private boolean concept_toggle = true, focusOnPie = false;  //concept toggle true and rotate pie focus position
     public static ProgressBar hrl_pi_Process;
-    private String leveLDesc;  // for GeoLevel2Desc / GeoLevel3Desc.
+    private String leveLDesc, geoLevel2Code, isMultiStore, value;  // for GeoLevel2Desc / GeoLevel3Desc.
     private int focusPosition, dupfocusPosition = 0;
     private LinearLayout addleggend;
     private TabLayout Tabview;
@@ -103,11 +103,14 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
         if (geoLeveLDesc.equals("E ZONE")) {
             userId = sharedPreferences.getString("userId", "");  //E zone userid =username
         } else {
             userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
-            userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
+             // userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
         }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -141,13 +144,13 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case 0:   //total values
                 level = 5;
                 if (focusOnPie) {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true"; //Detail Api
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" + "&geoLevel2Code="+ geoLevel2Code; //Detail Api
                     //hrl_pi_Process.setVisibility(View.VISIBLE);
                     Reusable_Functions.animateScaleOut(hrl_pi_Process);
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
 
                 } else {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true"; //Detail Api
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
                     Reusable_Functions.sDialog(context, "Loading...");
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
                 }
@@ -159,7 +162,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 if (focusOnPie) {
                     ApiCallBack(model, 2);  //calling for pie chart
                 } else {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true"; //Detail Api
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for identification
                 }
 
@@ -169,10 +172,10 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case 2:   //Bar values
                 level = 1;
                 if (focusOnPie) {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true"; //Detail Api
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2);  // 2 is id for identification
                 } else {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true"; //Detail Api
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2);  // 2 is id for identification
                 }
 
@@ -181,10 +184,10 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case 3:   //Store values
                 level = 4;
                 if (focusOnPie) {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true"; //Detail Api
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 3);  // 3 is id for identification
                 } else {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true"; //Detail Api
+                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 3);  // 3 is id for identification
                 }
 

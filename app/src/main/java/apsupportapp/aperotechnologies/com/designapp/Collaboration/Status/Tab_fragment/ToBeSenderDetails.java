@@ -80,7 +80,7 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         storedesc = sharedPreferences.getString("storeDescription", "");
-        str_storeCode = storedesc.trim().substring(0,4);
+       // str_storeCode = storedesc.trim().substring(0,4);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);

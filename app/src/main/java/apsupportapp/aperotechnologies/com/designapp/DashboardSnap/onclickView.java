@@ -6,5 +6,5 @@ package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 
 public interface onclickView {
 
-    void onclickView(int group_position, int child_position);
+    void onclickView(int group_position, int child_position,String tag);
 }

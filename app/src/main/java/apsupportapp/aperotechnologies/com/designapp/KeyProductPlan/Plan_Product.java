@@ -97,7 +97,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     int headerCellsWidth[] = new int[headers.length];
     KeyPlanProductBean productNameBean;
     TextView txtStoreCode, txtStoreDesc;
-    String userId, bearertoken,storeDescription;
+    String userId, bearertoken,storeDescription,geoLevel2Code,lobId;
     MySingleton m_config;
     int offsetvalue = 0, limit = 100;
     int count = 0;
@@ -113,6 +113,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         m_config = MySingleton.getInstance(context);
     }
@@ -777,7 +779,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
 
     private void requestFilterProductAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&productName=" + filterProductValues.replace(" ", "%20").replaceAll("&", "%26") + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&productName=" + filterProductValues.replace(" ", "%20").replaceAll("&", "%26") + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
         Log.e("TAG", "requestPlan_product: " + url);
 
@@ -898,7 +900,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     }
 
     private void requestPlanProductAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e("TAG", "requestPlanProductAPI: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -922,8 +924,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+                                  //  String storeCode = productName1.getString("storeCode");
+                                 //   String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
@@ -935,8 +937,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
-                                    productNameBean.setStoreCode(storeCode);
-                                    productNameBean.setStoreDesc(storeDesc);
+                                 //   productNameBean.setStoreCode(storeCode);
+                                  //  productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -954,8 +956,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+                                   // String storeCode = productName1.getString("storeCode");
+                                   // String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
@@ -967,8 +969,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
-                                    productNameBean.setStoreCode(storeCode);
-                                    productNameBean.setStoreDesc(storeDesc);
+                                //    productNameBean.setStoreCode(storeCode);
+                                //    productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 
@@ -1016,7 +1018,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     }
 
     private void requestPlanProductAchColorAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplan/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&achColor=" + achColor + "&offset=" + offsetvalue + "&limit=" + limit;
+        String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&achColor=" + achColor + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

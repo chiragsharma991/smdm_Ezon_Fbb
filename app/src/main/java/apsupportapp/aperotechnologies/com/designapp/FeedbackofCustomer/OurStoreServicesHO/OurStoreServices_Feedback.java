@@ -65,13 +65,18 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
     private TextInputLayout input_remarks;
     private ScrollView scrollView;
     private String remark;
-    String remarks_text, SelectedStoreCode;
+    String remarks_text, SelectedStoreCode, storeCode, store_code;
     private String TAG = "OurStoreServices";
     private TextView incorrect_phone, incorrect_remark, storedescription;
     private String userId, bearertoken, geoLeveLDesc, store;
     private String customerFeedback, customerNumber, customerRemarks, customerName, customerLastname,
             customerCallBack, customerArcDate, customerStoreName;
     private View v;
+
+    public OurStoreServices_Feedback(String storeCode) {
+
+        this.storeCode = storeCode;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -403,9 +408,11 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         userId = sharedPreferences.getString("userId", "");
         Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
-        SelectedStoreCode = store.trim().substring(0, 4);
-        Log.e("store"," "+store);
-        storedescription.setText(store);
+        store_code = storeCode.substring(0, 4);
+
+        //  SelectedStoreCode = store.trim().substring(0, 4);
+     //   Log.e("store"," "+store);
+        storedescription.setText(storeCode);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         //  editor.putString("storeDescription",storeDescription);
@@ -525,7 +532,7 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
 
             case 0:   //total values
 
-                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
+                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId + "&storeCode=" +store_code;
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
 
                 break;

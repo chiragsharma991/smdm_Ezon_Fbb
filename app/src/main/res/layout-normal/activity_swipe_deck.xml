@@ -105,26 +105,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
-            <TextView
-                android:id="@+id/tstoreCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/store"
-                android:textColor="@color/ezfbb_black"
-                android:textSize="@dimen/normallayout_storesize" />
+            <!--<TextView-->
+                <!--android:id="@+id/tstoreCode"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/store"-->
+                <!--android:textColor="@color/ezfbb_black"-->
+                <!--android:textSize="@dimen/normallayout_storesize" />-->
 
             <TextView
                 android:id="@+id/txtStoreCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
-                android:layout_toRightOf="@+id/tstoreCode"
                 android:text=""
                 android:textColor="@color/ezfbb_black"
                 android:textSize="13sp"
-                android:textStyle="bold" />
+               />
 
             <TextView
                 android:id="@+id/txtStoreName"

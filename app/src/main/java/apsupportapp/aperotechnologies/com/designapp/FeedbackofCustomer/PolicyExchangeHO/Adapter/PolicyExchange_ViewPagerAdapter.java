@@ -14,10 +14,12 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExc
 public class PolicyExchange_ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     int mNumOfTabs;
+    String storeCode;
 
-    public PolicyExchange_ViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public PolicyExchange_ViewPagerAdapter(FragmentManager fm, int NumOfTabs, String storeCode) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        this.storeCode = storeCode;
     }
 
     @Override
@@ -25,10 +27,10 @@ public class PolicyExchange_ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                PolicyExchange_Reports tab1 = new PolicyExchange_Reports();
+                PolicyExchange_Reports tab1 = new PolicyExchange_Reports(storeCode);
                 return tab1;
             case 1:
-                PolicyExchange_Feedback tab2 = new PolicyExchange_Feedback();
+                PolicyExchange_Feedback tab2 = new PolicyExchange_Feedback(storeCode);
                 return tab2;
             default:
                 return null;

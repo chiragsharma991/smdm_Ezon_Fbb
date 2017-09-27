@@ -98,19 +98,22 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private String selectprodLevel3Desc="";
     private HashMap<Integer, String> mapValues;
     private String dublicateSelectprodLevel3Desc="";
+    public static String store_Code;
     private ProgressBar progressBar;
     private Button stock_fragmentSubmit;
     StockPullAdapter stockPullAdapter;
     private boolean[] selectMc;
-    private String TAG="StockPullFragment";
+    private String TAG="StockPullFragment", storeCode;
     private LinearLayout spinner;
     private TextView spinner_text;
     private AlertDialog dialog;
     private ImageButton dropdkown;
 
 
-    public StockPullFragment() {
+    public StockPullFragment(String store_Code) {
         // Required empty public constructor
+        this.store_Code = store_Code;
+
     }
 
 
@@ -129,7 +132,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
     // TODO: Rename and change types and number of parameters
     public static StockPullFragment newInstance(String param1, String param2) {
-        StockPullFragment fragment = new StockPullFragment();
+        StockPullFragment fragment = new StockPullFragment(store_Code);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -175,6 +178,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        storeCode = store_Code.substring(0,4);
         //barChart = (BarChart) view.findViewById(R.id.bar_chart);
         spinner=(LinearLayout)view.findViewById(R.id.spinner);
         spinner_text=(TextView)view.findViewById(R.id.spinner_text);
@@ -229,6 +233,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                         obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
                         obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
                         obj.put("deviceId",device_Id);
+
                         jsonArray.put(obj);
                     }
                 }
@@ -272,7 +277,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         if (Reusable_Functions.chkStatus(context))
         {
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=1
-            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
+            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +storeCode + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache ;
             Log.e("TAG", "requestTransferRequestsummary: " + url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
 
@@ -374,7 +379,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
 
             //https://smdm.manthan.com/v1/display/stocktransfer/receiverdetail/69-4795?level=2&prodLevel3Desc=BF011C-BF - Ladies ethnicwear
-            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?level=" + level
+            String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +storeCode + "&level=" + level
                     +"&prodLevel3Desc="+prodLevel3Desc+"&offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
 
             Log.e("TAG", "requestTransferRequestsummary: " + url);
@@ -433,7 +438,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                         subcategory_name = ReceiverSummaryList.get(position).getLevel();
                                         mc_name = subcategoryList.get(position).getLevel();
                                         Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name +"\t"+subcategoryList.get(position).getStkQtyAvl());
-                                        new Details().StartActivity(context, selected_subCategory,mc_name, subcategoryList.get(position).getStkQtyAvl());
+                                        new Details().StartActivity(context, selected_subCategory,mc_name, subcategoryList.get(position).getStkQtyAvl(), storeCode);
 
                                     }
                                 });
@@ -484,12 +489,13 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
 
-            String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId;//+"?recache="+recache
+            String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/"  + userId +"?storeCode=" + storeCode;//+"?recache="+recache
             Log.e("requestReceiverSubmitAPI: ",""+url + "\t" + object.toString() );
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            Log.e("responseReceiverSubmitAPI "," "+response);
                             try {
                                 if (response == null || response.equals("")) {
                                     Reusable_Functions.hDialog();

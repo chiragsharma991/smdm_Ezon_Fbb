@@ -28,7 +28,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     private ViewPager viewPager;
     private TabLayout tab;
     RelativeLayout ToDo_imageBtnBack;
-    String userId, bearertoken, storeDescription, geoLeveLDesc;
+    String userId, bearertoken, storeDescription, geoLeveLDesc, isMultiStore, value, storeCode;
     SharedPreferences sharedPreferences;
     private TextView txtStoreCode,txtStoreName;
     public static String deviceId;
@@ -44,13 +44,31 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         storeDescription = sharedPreferences.getString("storeDescription", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         deviceId = sharedPreferences.getString("device_id","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
         Log.e( "onCreate: ",""+deviceId );
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
-        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
-        txtStoreName.setText(storeDescription.substring(5));
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+          //  Log.i(TAG, "storeCode: "+storeCode );
+        }
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreName.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreName.setText(value);
+        }
+//        txtStoreCode.setText(storeDescription.trim().substring(0, 4));
+//        txtStoreName.setText(storeDescription.substring(5));
         ToDo_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();
@@ -84,8 +102,8 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private void setupViewPager(ViewPager viewPager) {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StockPullFragment(), "Pull from Stores");
-        adapter.addFragment(new TransferRequestFragment(), "Requested by Stores");
+        adapter.addFragment(new StockPullFragment(storeCode), "Pull from Stores");
+        adapter.addFragment(new TransferRequestFragment(storeCode), "Requested by Stores");
         viewPager.setAdapter(adapter);
     }
 

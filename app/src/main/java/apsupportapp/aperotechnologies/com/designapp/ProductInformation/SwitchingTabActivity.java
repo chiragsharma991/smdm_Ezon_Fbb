@@ -2,8 +2,10 @@ package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +32,8 @@ public class SwitchingTabActivity extends AppCompatActivity {
     public static Activity switchingTabActivity;
     public static ViewPager viewPager;
     public static TabLayout tabLayout;
+    SharedPreferences sharedPreferences;
+    String kpi_id;
 
 
     @Override
@@ -40,6 +44,10 @@ public class SwitchingTabActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
         switchingTabActivity = this;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        kpi_id = sharedPreferences.getString("kpi_id", "");
+
         backButton = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         imageBtnHomePage = (RelativeLayout) findViewById(R.id.imageBtnHomePage);
 
@@ -55,14 +63,16 @@ public class SwitchingTabActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SwitchingTabActivity.this, SnapDashboardActivity.class);
-                startActivity(intent);
-                finish();
-                if(getIntent().getStringExtra("checkFrom").equals("bestInventory"))
-                {
-                    BestPerformerInventory.bestperoformer.finish();
-
-                }
+//                Intent intent = new Intent(SwitchingTabActivity.this, SnapDashboardActivity.class);
+//                String[] kpiIdArray = kpi_id.split(",");
+//                intent.putExtra("kpiId", kpiIdArray);
+//                startActivity(intent);
+//                finish();
+//                if(getIntent().getStringExtra("checkFrom").equals("bestInventory"))
+//                {
+//                    BestPerformerInventory.bestperoformer.finish();
+//
+//                }
 
             }
         });
@@ -148,6 +158,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
             Intent intent = new Intent(SwitchingTabActivity.this, StyleActivity.class);
             intent.putExtra("selCollectionname", getIntent().getExtras().getString("selCollectionname"));
             intent.putExtra("selOptionName", getIntent().getExtras().getString("selOptionName"));
+           // intent.putExtra("selStoreName",getIntent().getExtras().getString("selStoreName"));
             startActivity(intent);
             finish();
         }

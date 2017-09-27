@@ -151,7 +151,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 log_flag = ((CheckBox) v).isChecked();
                 break;
             case R.id.btnLogin:
-
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 uname = edtUserName.getText().toString().trim();
@@ -197,18 +196,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 {
                     @Override
                     public void onResponse(JSONObject response) {
-
                         Log.e("Login Response   ", response.toString());
-
                         try {
-                            if (response == null || response.equals(null))
-                            {
-//                                Reusable_Functions.hDialog();
+                            if (response == null || response.equals(null)) {
+                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
 
                             } else
                             {
                                 login_storeList = gson.fromJson(response.toString(), Login_StoreList.class);
+
                             }
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("username", login_storeList.getLoginName());
@@ -276,7 +273,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(JSONArray response)
                     {
-//                        Log.e(TAG, "requestUserStore -***- onResponse: "+response);
+                        Log.e(TAG, "requestUserStore -***- onResponse: "+response);
 //                        Log.e(TAG, "requestUserStore - onResponse: "+response.length());
                         try
                         {
@@ -294,16 +291,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     loginStoreArray.add(login_storeList);
                                 }
                                 //database storeage
+                                db.deleteAllData();
                                 db.db_AddData(loginStoreArray);
                                 //default concept and lobid
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
+                                if(loginStoreArray.get(0).getGeoLevel2Code().equals("BB") || loginStoreArray.get(0).getGeoLevel2Code().equals("FBB") && loginStoreArray.get(0).getLobName().equals("FASHION") )
+                                editor.putString("concept","BB,FBB");
+                                else editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
+                                editor.putString("conceptDesc", loginStoreArray.get(0).getGeoLevel2Desc());
                                 editor.putString("lobid", loginStoreArray.get(0).getLobId());
+                                editor.putString("lobname", loginStoreArray.get(0).getLobName());
+                                editor.putString("kpi_id",loginStoreArray.get(0).getKpiId());
+                                editor.putString("isMultiStore", loginStoreArray.get(0).getIsMultiStore());
                                 editor.apply();
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
                                 Reusable_Functions.hDialog();
                                 if(response.length() == 1 ) // for single response save storecode
                                 {
+                                    Log.e(TAG, "requestUserStore - in if 1: " );
 
                                     if (Reusable_Functions.chkStatus(context))
                                     {
@@ -318,9 +323,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                                 else // for multiple response save concept (geoLevelDesc)
                                 {
-                                    Log.e(TAG, "requestUserStore - in else: " );
+                                    Log.e(TAG, "requestUserStore - in else multiple: " );
+
                                     if (Reusable_Functions.chkStatus(context))
                                     {
+                                        Reusable_Functions.hDialog();
                                         Reusable_Functions.sDialog(context, "Fetching store code and concept...");
                                         requestUserStoreConcept();
                                     }
@@ -329,7 +336,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                     }
                                 }
-
+                                Reusable_Functions.hDialog();
 
 
 
@@ -380,7 +387,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                       // Log.e(TAG, "requestUserStoreConcept - onResponse: "+response);
+                        Log.e(TAG, "requestUserStoreConcept - onResponse: "+response);
                         try {
                             if (response.equals("") || response == null)
                             {
@@ -393,7 +400,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 String value = "";
                                 for (int i=0 ; i<response.length();i++)
                                 {
-                                 value  = response.get(i).toString();
+                                   // value  = response.get(i).toString();
+                                    JSONObject jsonObject = response.getJSONObject(i);
+                                     value  = jsonObject.getString("value");
                                 }
                                 Log.e(TAG, "requestUserStoreConcept - onResponse: "+value);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -405,7 +414,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
                             String kpi_id = loginStoreArray.get(0).getKpiId();
-                            String[] kpiIdArray = kpi_id.split(",");
+                            StringBuilder s = new StringBuilder(kpi_id);
+                            s.append(",030");
+                            Log.i(TAG, "onResponse: Kpi Id--"+s.toString() );
+
+
+                            String[] kpiIdArray = s.toString().split(",");
                             intent.putExtra("kpiId", kpiIdArray);
                             //Log.e(TAG, "onResponse: "+kpiIdArray.length + kpiIdArray[i]);
                             intent.putExtra("BACKTO", "login");

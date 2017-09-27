@@ -47,7 +47,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   private int limit = 100;
   private int offsetvalue = 0;
   private String TAG = "mpm_activity";
-  private String url;
+  private String url, geoLevel2Code, lobId;
   public static int clickPosition=0;
   private Cache cache;
   private Network network;
@@ -70,6 +70,7 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_mpm_activity);
+      Log.e("here in season","");
       context = this;
       checkCollapsing();
       intialise();
@@ -86,6 +87,8 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
       userId = sharedPreferences.getString("userId", "");
       bearertoken = sharedPreferences.getString("bearerToken", "");
+      geoLevel2Code = sharedPreferences.getString("concept","");
+      lobId = sharedPreferences.getString("lobid","");
       cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
       network = new BasicNetwork(new HurlStack());
       queue = new RequestQueue(cache, network);
@@ -99,14 +102,14 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
       Pdf_zoom_btn = (RelativeLayout) findViewById(R.id.pdf_zoom_btn);
       Bottom_listItem = (LinearLayout) findViewById(R.id.bottom_listItem);
       BaseLayout = (LinearLayout) findViewById(R.id.baseLayout);
-      BaseLayout.setVisibility(View.GONE);
+      BaseLayout.setVisibility(View.VISIBLE);
       Bottom_listItem.setVisibility(View.VISIBLE);
       WebViewProcess.setVisibility(View.GONE);
       WebViewProcess.setOnClickListener(this);
       Pdf_zoom_btn.setOnClickListener(this);
       WebViewWrap = (LinearLayout) findViewById(R.id.webview_wrap);
 
-      url = ConstsCore.web_url + "/v1/display/mpmproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
+      url = ConstsCore.web_url + "/v1/display/mpmproductsNew/" + userId +"?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
 
       listView = (ListView) findViewById(R.id.department_list);
       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

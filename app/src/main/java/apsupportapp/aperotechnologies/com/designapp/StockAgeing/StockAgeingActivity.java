@@ -45,6 +45,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -84,10 +85,11 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     String checkAgeingVal = null;
     private boolean coreSelection = false;
     private boolean from_filter = false;
-    private String selectedString = "";
+    private String selectedString = "", geoLevel2Code, lobId, isMultiStore, value;
     public static Activity stockAgeing;
     private boolean toggleClick = false;
     private TabLayout Tabview;
+    private int filter_level;
 
 
     @Override
@@ -95,18 +97,23 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_ageing);
         getSupportActionBar().hide();
-        initalise();
+
         gson = new Gson();
         stockAgeing = this;
         StockAgeingList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        initalise();
 //        stock_txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        stock_txtStoreName.setText(storeDescription.substring(5));
         StockAgListView.setTag("FOOTER");
@@ -118,18 +125,21 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             limit = 10;
             count = 0;
             top = 10;
-            if (getIntent().getStringExtra("selectedDept") == null) {
+            if (getIntent().getStringExtra("selectedStringVal") == null) {
                 from_filter = false;
                 toggleClick=false;
 
-            } else if (getIntent().getStringExtra("selectedDept") != null) {
-                selectedString = getIntent().getStringExtra("selectedDept");
+            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+                selectedString = getIntent().getStringExtra("selectedStringVal");
+                filter_level  = getIntent().getIntExtra("selectedlevelVal",0);
                 from_filter = true;
                 toggleClick=true;
             }
             RetainFromMain_filter();
             requestStockAgeingApi(selectedString);
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
@@ -153,8 +163,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         baseclick();
     }
 
-    private void baseclick() {
-        if (checkSeasonGpVal == null && checkAgeingVal == null) {
+    private void baseclick()
+    {
+        if (checkSeasonGpVal == null && checkAgeingVal == null)
+        {
             checkCurrent.setChecked(true);
             checkPrevious.setChecked(false);
             checkOld.setChecked(false);
@@ -162,7 +174,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             checkAgeing1.setChecked(false);
             checkAgeing2.setChecked(false);
             checkAgeing3.setChecked(false);
-        } else {
+        }
+        else
+        {
             switch (checkSeasonGpVal) {
                 case "Current":
                     checkCurrent.setChecked(true);
@@ -201,18 +215,38 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             if (from_filter) {
                 if (coreSelection) {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion;
-                } else {
+                    if(filter_level != 0)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                    }
+                }
+                else
+                {
                     // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    if(filter_level != 0)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                    }
                 }
             } else {
-                if (coreSelection) {
+                if (coreSelection)
+                {
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion;
-                } else {
+                    url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                }
+                else
+                {
                     // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/stockageing/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup;
+                    url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                 }
             }
             Log.e("TAG", "requestStockAgeingApi: "+url );
@@ -227,7 +261,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     StockAgListView.removeFooterView(footer);
                                     StockAgListView.setTag("FOOTER_REMOVE");
-                                    if (StockAgeingList.size() == 0) {
+                                    if (StockAgeingList.size() == 0)
+                                    {
                                         StockAgListView.setVisibility(View.GONE);
                                     }
                                     return;
@@ -338,6 +373,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private void initalise() {
         stock_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         stock_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            stock_txtStoreCode.setText("Concept : ");
+            stock_txtStoreName.setText(value);
+
+        }
+        else
+        {
+            stock_txtStoreCode.setText("Store : ");
+            stock_txtStoreName.setText(value);
+        }
         stock_BtnBack = (RelativeLayout) findViewById(R.id.stockAgeing_imageBtnBack);
         stock_BtnFilter = (RelativeLayout) findViewById(R.id.stockAgeing_imgfilter);
         stock_quickFilter = (RelativeLayout) findViewById(R.id.sa_quickFilter);
@@ -396,7 +442,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.stockAgeing_imgfilter:
-                Intent intent1 = new Intent(StockAgeingActivity.this, SalesFilterActivity.class);
+                Intent intent1 = new Intent(StockAgeingActivity.this, SalesAnalysisFilter.class);
                 intent1.putExtra("checkfrom", "stockAgeing");
                 startActivity(intent1);
                 break;

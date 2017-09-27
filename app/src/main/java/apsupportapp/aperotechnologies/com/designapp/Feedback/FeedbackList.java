@@ -54,8 +54,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     Context context = this;
     private Gson gson;
     private SharedPreferences sharedPreferences;
-    private String userId;
-    private String bearertoken,storeDescription;
+    private String userId, storeCode, store_Code;
+    private String bearertoken,storeDescription,geoLevel2Code,lobId, isMultiStore, value;
     private String TAG = "FeedbackList";
     private RequestQueue queue;
     private int count = 0;
@@ -76,7 +76,6 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
     private ListView FeedbackDetailList;
     private ArrayList<String> optionList;
-    private String geoLevel2Code;
 
 
     @Override
@@ -88,8 +87,17 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        storeDescription = sharedPreferences.getString("storeDescription","");
-        geoLevel2Code = sharedPreferences.getString("geoLevel2Code", "");
+       // storeDescription = sharedPreferences.getString("storeDescription","");
+        geoLevel2Code = sharedPreferences.getString("concept","");
+        lobId = sharedPreferences.getString("lobid","");
+        isMultiStore = sharedPreferences.getString("isMultiStore","");
+        value = sharedPreferences.getString("value","");
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            store_Code = storeCode.substring(0,4);
+            Log.i(TAG, "storeCode: "+storeCode );
+        }
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -123,6 +131,17 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         Feedback_option = (TextView) findViewById(R.id.feedbackList_option);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+        if(isMultiStore.equals("Yes"))
+        {
+            txtStoreCode.setText("Concept : ");
+            txtStoreName.setText(value);
+
+        }
+        else
+        {
+            txtStoreCode.setText("Store : ");
+            txtStoreName.setText(value);
+        }
         ImageLoader_feedback = (ProgressBar) findViewById(R.id.imageLoader_feedbackList);
         FeedbackNext = (Button) findViewById(R.id.feedbackList_next);
         FeedbackPre = (Button) findViewById(R.id.feedbackList_pre);
@@ -151,7 +170,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         if (Reusable_Functions.chkStatus(context)) {
 
             //https://smdm.manthan.com/v1/display/worstperformerfeedback/displayreports/4813
-            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId  + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
+            String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId  + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=true"+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
           //  String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
 
             Log.e(TAG, "requestFeedbackApi: "+url);
@@ -309,8 +328,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         // set image per list
 
         Feedback_option.setText(feedbackListData.get(Listposition).getOption());
-        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-        txtStoreName.setText(storeDescription.substring(5));
+//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
+//        txtStoreName.setText(storeDescription.substring(5));
         ImageLoader_feedback.setVisibility(View.VISIBLE);
         if (!feedbackListData.get(Listposition).getProdImageUrl().equals("")) {
             Glide.
