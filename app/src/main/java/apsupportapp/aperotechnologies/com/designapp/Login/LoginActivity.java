@@ -197,16 +197,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 {
                     @Override
                     public void onResponse(JSONObject response) {
+
                         Log.e("Login Response   ", response.toString());
+
                         try {
-                            if (response == null || response.equals(null)) {
+                            if (response == null || response.equals(null))
+                            {
 //                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
 
                             } else
                             {
                                 login_storeList = gson.fromJson(response.toString(), Login_StoreList.class);
-
                             }
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("username", login_storeList.getLoginName());
