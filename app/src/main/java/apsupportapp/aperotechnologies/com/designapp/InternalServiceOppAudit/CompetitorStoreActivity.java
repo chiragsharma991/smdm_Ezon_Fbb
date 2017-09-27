@@ -1,8 +1,8 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +15,6 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
-import com.appyvet.rangebar.RangeBar;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +26,11 @@ import java.util.List;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-public class FGStoreActivity extends AppCompatActivity {
+//import com.marcinmoskala.arcseekbar.ArcSeekBar;
+
+//import apsupportapp.aperotechnologies.com.designapp.R;
+
+public class CompetitorStoreActivity extends AppCompatActivity {
 
     private Context context;
     private EditText edt_name_author, edt_dateofVisit, edt_dayofweek, edt_timeofVisit, edt_auditorType, edt_observations, edt_suggestions, edt_name_supervisor, edt_time_supervisor,  edt_product_name, edt_customer_name, edt_mobile, edt_keytakeaway;
@@ -47,7 +48,7 @@ public class FGStoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fgstore);
+        setContentView(R.layout.activity_competitor_store);
         context = this;
         list_overallratings = new ArrayList<>();
         list_billing_experience = new ArrayList<>();
@@ -178,7 +179,12 @@ public class FGStoreActivity extends AppCompatActivity {
             }
         });
 
-        RangeBar arc = (RangeBar) findViewById(R.id.rangebar);
+//        ArcSeekBar arc = (ArcSeekBar) findViewById(R.id.seekArc);
+//
+//        int[] intArray = getResources().getIntArray(R.array.progressGradientColors);
+//        arc.setProgressGradient(intArray);
+       
+
 
         Button btn_Submit = (Button) findViewById(R.id.btn_submit);
         btn_Submit.setOnClickListener(new View.OnClickListener() {

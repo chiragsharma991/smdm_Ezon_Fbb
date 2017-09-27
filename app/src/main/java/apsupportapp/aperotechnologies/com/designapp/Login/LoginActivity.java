@@ -151,6 +151,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 log_flag = ((CheckBox) v).isChecked();
                 break;
             case R.id.btnLogin:
+
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 uname = edtUserName.getText().toString().trim();
@@ -166,15 +167,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else
                 {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.progressDialog = new ProgressDialog(context);
-                        if (!Reusable_Functions.progressDialog.isShowing()) {
-                            Reusable_Functions.progressDialog.show();
-                            Reusable_Functions.progressDialog.setCancelable(false);
-                        }
-                        Reusable_Functions.progressDialog.setMessage("Authenticating User...");
+                    Reusable_Functions.sDialog(context,"Authenticating User...");
+                    if (Reusable_Functions.chkStatus(context))
+                    {
+//                        Reusable_Functions.progressDialog = new ProgressDialog(context);
+//                        if (!Reusable_Functions.progressDialog.isShowing()) {
+//                            Reusable_Functions.progressDialog.show();
+//                            Reusable_Functions.progressDialog.setCancelable(false);
+//                        }
+//                        Reusable_Functions.progressDialog.setMessage("Authenticating User...");
+
                         requestLoginAPI();
-                    } else {
+                    }
+                    else
+                    {
+                        Reusable_Functions.hDialog();
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -193,7 +200,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Log.e("Login Response   ", response.toString());
                         try {
                             if (response == null || response.equals(null)) {
-                                Reusable_Functions.hDialog();
+//                                Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
 
                             } else
@@ -212,6 +219,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                            editor.putString("geoLevel2Code",login_storeList.getGeoLevel2Code());
                             editor.putString("device_id", "");
                             editor.apply();
+                            Reusable_Functions.hDialog();
                             if (Reusable_Functions.chkStatus(context))
                             {
                                 Reusable_Functions.sDialog(context, "Loading...");
@@ -291,11 +299,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("lobid", loginStoreArray.get(0).getLobId());
                                 editor.apply();
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
+                                Reusable_Functions.hDialog();
                                 if(response.length() == 1 ) // for single response save storecode
                                 {
+
                                     if (Reusable_Functions.chkStatus(context))
                                     {
-                                        Reusable_Functions.hDialog();
+
                                         Reusable_Functions.sDialog(context, "Fetching store code and concept...");
                                         requestUserStoreConcept();
                                     }
@@ -309,7 +319,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Log.e(TAG, "requestUserStore - in else: " );
                                     if (Reusable_Functions.chkStatus(context))
                                     {
-                                        Reusable_Functions.hDialog();
                                         Reusable_Functions.sDialog(context, "Fetching store code and concept...");
                                         requestUserStoreConcept();
                                     }
@@ -318,7 +327,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                     }
                                 }
-                                Reusable_Functions.hDialog();
+
 
 
 
