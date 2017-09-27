@@ -685,7 +685,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             BestInvent_txtStoreCode.setText("Store : ");
             BestInvent_txtStoreName.setText(value);
         }
-        rel_store_layout.setVisibility(View.VISIBLE);
+    //    rel_store_layout.setVisibility(View.VISIBLE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
         BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
         BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);
@@ -1341,7 +1341,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             BestInvent_txtStoreName.setText(value);
         }
         rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
-        rel_store_layout.setVisibility(View.INVISIBLE);
+      //  rel_store_layout.setVisibility(View.INVISIBLE);
         FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);
         FreshnessIndex_Ez_moreVertical.setOnClickListener(new View.OnClickListener() {
             @Override

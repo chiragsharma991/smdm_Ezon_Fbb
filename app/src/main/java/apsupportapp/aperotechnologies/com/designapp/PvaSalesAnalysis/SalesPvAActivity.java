@@ -633,7 +633,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         barChart = (BarChart) findViewById(R.id.bar_chart);
 
         rel_store_layout = (RelativeLayout) findViewById(R.id.rel_store_layout);
-        rel_store_layout.setVisibility(View.VISIBLE);
+       // rel_store_layout.setVisibility(View.VISIBLE);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreDesc = (TextView) findViewById(R.id.txtStoreName);
         if(isMultiStore.equals("Yes"))
@@ -648,16 +648,16 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             txtStoreDesc.setText(value);
         }
         Log.e(TAG, "store desc: " + storeDescription);
-        if (geoLeveLDesc.equals("E ZONE"))
-        {
-            rel_store_layout.setVisibility(View.GONE);
-        }
-        else
-        {
-            rel_store_layout.setVisibility(View.VISIBLE);
-//            txtStoreCode.setText(storeDescription.trim().substring(0, 4));
-//            txtStoreDesc.setText(storeDescription.substring(5));
-        }
+//        if (geoLeveLDesc.equals("E ZONE"))
+//        {
+//          //  rel_store_layout.setVisibility(View.GONE);
+//        }
+//        else
+//        {
+//            rel_store_layout.setVisibility(View.VISIBLE);
+////            txtStoreCode.setText(storeDescription.trim().substring(0, 4));
+////            txtStoreDesc.setText(storeDescription.substring(5));
+//        }
 
         txt_pva_noChart = (TextView) findViewById(R.id.pva_noChart);
         //hierarchy header

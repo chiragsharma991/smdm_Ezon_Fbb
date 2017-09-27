@@ -251,7 +251,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            >
 
 
             <!--<TextView-->
@@ -268,6 +269,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
+                android:visibility="gone"
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/smdm_store_title_normal"
                 />
@@ -278,6 +280,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 android:layout_toRightOf="@id/bestInvent_txtStoreCode"
                 android:textColor="@color/ezfb_black"
                 android:textSize="@dimen/smdm_store_title_normal"

@@ -90,7 +90,8 @@
             android:id="@+id/rel_store_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
 
             <!--<TextView-->

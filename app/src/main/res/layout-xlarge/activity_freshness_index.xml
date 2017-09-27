@@ -93,17 +93,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:visibility="gone">
 
 
-                <TextView
-                    android:id="@+id/tstoreCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/store"
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="@dimen/smdm_store_title_normal"
-                    />
+                <!--<TextView-->
+                    <!--android:id="@+id/tstoreCode"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/store"-->
+                    <!--android:textColor="@color/ezfb_black"-->
+                    <!--android:textSize="@dimen/smdm_store_title_normal"-->
+                    <!--/>-->
 
                 <TextView
                     android:id="@+id/txtStoreCode"
@@ -114,7 +115,6 @@
                     android:hint=""
                     android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/smdm_store_title_normal"
-                    android:textStyle="bold"
                     />
 
                 <TextView
