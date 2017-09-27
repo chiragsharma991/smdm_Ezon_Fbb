@@ -60,7 +60,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     private Context context ;
     ArrayList<VisualAssort> visualassortmentlist;
     SwipeDeckAdapter adapter;
-    static String likeDislikeFlg ;
+    static String likeDislikeFlg;
     SharedPreferences sharedPreferences;
     String userId, bearertoken,storeCode,geoLevel2Code, lobId,store_Code;
     RadioButton visualAssort_PendingChk,visualAssort_CompletedChk;
@@ -79,7 +79,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
     static TextView txtSize;
     private TextView txtStoreCode,txtStoreName;
     private LinearLayout SwipeLayout;
-    public String selectedString="";
+    public String selectedString="", body_geoLevel2Code;
     boolean flag = false;
    JsonArrayRequest postRequest;
     public static Activity Visual_Assortment_Activity;
@@ -98,7 +98,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId","");
         geoLevel2Code = sharedPreferences.getString("concept","");
-        Log.e("geoLevel2Code ",""+geoLevel2Code);
+        Log.e("geoLevel2Code "," "+geoLevel2Code);
         lobId = sharedPreferences.getString("lobid","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
@@ -109,7 +109,9 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         if(getIntent().getExtras().getString("storeCode") != null )
         {
             storeCode = getIntent().getExtras().getString("storeCode");
+            body_geoLevel2Code = getIntent().getExtras().getString("body_geoLevel2Code");
             store_Code = storeCode.substring(0,4);
+            Log.e("body_geoLevel2Code "," "+body_geoLevel2Code);
             Log.i(TAG, "storeCode: "+storeCode );
         }
 
@@ -374,7 +376,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         obj.put("likeDislikeFlg", "0");
                         obj.put("feedback", checkFeedback);
                         obj.put("sizeSet", checkSizeSet);
-
+                        obj.put("storecode", store_Code);
+                        obj.put("geoLevel2Code", body_geoLevel2Code);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -388,7 +391,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         {
                             postRequest.cancel();
                         }
-                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code, store_Code);
+                        VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, store_Code);
                         visualAssort1.setLikeDislikeFlg("0");
                     }
                     else
@@ -398,7 +401,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                         {
                             postRequest.cancel();
                         }
-                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context, geoLevel2Code, store_Code);
+                        VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context, store_Code);
                         visualAssort1.setLikeDislikeFlg("0");
                     }
                 }
@@ -438,12 +441,13 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 obj.put("likeDislikeFlg", "1");
                                 obj.put("feedback", checkFeedback);
                                 obj.put("sizeSet", Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-
+                                obj.put("storecode", store_Code);
+                                obj.put("geoLevel2Code", body_geoLevel2Code);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, geoLevel2Code, store_Code);
+                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, store_Code);
                             VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
                             relbuy.setEnabled(false);
                             visualAssort1.setSizeSet(Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
@@ -473,6 +477,8 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                             obj.put("likeDislikeFlg", "1");
                             obj.put("feedback", checkFeedback);
                             obj.put("sizeSet", checkSizeSet);
+                            obj.put("storecode", store_Code);
+                            obj.put("geoLevel2Code", body_geoLevel2Code);
 
                         }
                         catch (JSONException e)
@@ -485,14 +491,14 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                             if (postRequest != null) {
                                 postRequest.cancel();
                             }
-                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context,geoLevel2Code, store_Code);
+                            VisualAssortmentCommentAPI.requestSaveComment(userId, bearertoken, obj, context, store_Code);
                             visualAssort1.setLikeDislikeFlg("1");
                         } else {
                             //GO FOR PUT METHOD
                             if (postRequest != null) {
                                 postRequest.cancel();
                             }
-                            VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context,geoLevel2Code, store_Code);
+                            VisualAssortmentCommentAPI.requestUpdateSaveComment(userId, bearertoken, obj, context, store_Code);
                             visualAssort1.setLikeDislikeFlg("1");
                         }
                     }
@@ -559,6 +565,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             }
         }
     }
+
     private void visualAssort_pendingFunction()
     {
         if (visualAssort_PendingChk.isChecked())
@@ -652,7 +659,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack, store_Code);
+                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack, store_Code, body_geoLevel2Code);
                                     cardStack.setAdapter(adapter);
 
                                     adapter.notifyDataSetChanged();
@@ -676,7 +683,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack, store_Code);
+                                    adapter = new SwipeDeckAdapter(visualassortmentlist, context, cardStack, store_Code, body_geoLevel2Code);
                                     cardStack.setAdapter(adapter);
 
                                     adapter.notifyDataSetChanged();

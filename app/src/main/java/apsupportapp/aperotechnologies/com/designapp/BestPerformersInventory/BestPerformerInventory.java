@@ -1016,7 +1016,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BstInventory_Fwd_chk.setChecked(false);
                 BstInventory_coverNsell_chk.setChecked(true);
                 try {
-                    orderbycol = "order by fwd_week_cover desc,sell_thru_units desc";
+                    orderbycol = "fwdWeekCover,sellThruUnits";
                     orderbycol =  URLEncoder.encode(orderbycol, "UTF-8");
                     Log.i(TAG, "coverNsellPopUp: "+orderbycol);
                 } catch (UnsupportedEncodingException e) {

@@ -3,7 +3,7 @@
     android:id="@+id/quickFilterPopup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone"
+    android:visibility="visible"
     >
 
     <!--base layout for click anywhere-->
@@ -319,7 +319,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/ezfb_black"
                             android:text="100 - 200 Days"
-                            android:textSize="@dimen/smdm_quickfilter_subtitle_normal" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 

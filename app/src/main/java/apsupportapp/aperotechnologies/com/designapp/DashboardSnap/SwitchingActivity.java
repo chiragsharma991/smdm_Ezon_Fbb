@@ -99,7 +99,7 @@ public class SwitchingActivity extends AppCompatActivity
     ListAdapter spinnerArrayAdapter;
     String SelectedStoreCode, storeDescription, from;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken,storeCode,geoLevel2Code, lobId;
+    String userId, bearertoken,storeCode,geoLevel2Code, lobId, body_geoLevel2Code;
     private AlertDialog dialog;
     ListView select_storeList;
     String auth_code;
@@ -645,7 +645,7 @@ public class SwitchingActivity extends AppCompatActivity
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId; //ConstsCore.web_url+ + "/v1/login/userId";
+        String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId; //ConstsCore.web_url+ + "/v1/login/userId";  // + "?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId
         Log.e("url store :", "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -664,6 +664,7 @@ public class SwitchingActivity extends AppCompatActivity
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     storeCode = collectionName.getString("storeCode");
+                                    body_geoLevel2Code = collectionName.getString("geoLevel2Code");
                                     arrayList.add(storeCode);
                                 }
                                 dialog.show();
@@ -684,6 +685,7 @@ public class SwitchingActivity extends AppCompatActivity
                                     if(from.equals("VisualAssortmentActivity")) {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualAssortmentActivity.class);
                                         intent.putExtra("storeCode", storeCode);
+                                        intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
                                         startActivity(intent);
                                     }
                                     else if(from.equals("VisualReportActivity")){
@@ -730,6 +732,7 @@ public class SwitchingActivity extends AppCompatActivity
                                     else if(from.equals("Feedback")){
                                         Intent intent = new Intent(SwitchingActivity.this, Feedback.class);
                                         intent.putExtra("storeCode", storeCode);
+                                        intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
                                         startActivity(intent);
                                     }
 
