@@ -14,6 +14,7 @@ import android.os.Build;
 
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +28,6 @@ public class Reusable_Functions  {
 
     public static ProgressDialog progressDialog = null;
 
-
-
-
-
     public static boolean chkStatus(Context context) {
         final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         //noinspection deprecation,deprecation
@@ -41,6 +38,8 @@ public class Reusable_Functions  {
     }
 
     public static void hDialog() {
+
+        Log.e("progressDialog hDialog "," "+progressDialog);
         if (progressDialog != null) {
             if (progressDialog.isShowing()) {
                 progressDialog.dismiss();
@@ -52,6 +51,7 @@ public class Reusable_Functions  {
 
     public static void sDialog(Context cont, String message)
     {
+        Log.e("progressDialog sDialog "," "+progressDialog);
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(cont);//R.style.AlertDialog_Theme);
             progressDialog.setIndeterminate(true);
