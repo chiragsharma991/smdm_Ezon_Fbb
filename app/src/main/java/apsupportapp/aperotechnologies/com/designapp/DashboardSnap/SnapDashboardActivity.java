@@ -157,11 +157,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         lobName = sharedPreferences.getString("lobname", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
-        Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
+     //   Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
         //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 //        Log.e("SnapDashboard", "Refreshed token:------ " + refreshedToken);
-        Log.e(TAG, "userId :--" + userId);
-        Log.e(TAG, "pushtoken :--" + pushtoken.toString());
+//        Log.e(TAG, "userId :--" + userId);
+//        Log.e(TAG, "pushtoken :--" + pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);

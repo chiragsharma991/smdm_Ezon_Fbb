@@ -57,12 +57,14 @@ public class ApiPostRequest {
 
         Log.e(TAG, "final_setApi: URL " + URL);
         Reusable_Functions.sDialog(context,"Submitting data…");
+        Log.e("object.toString() "," "+object.toString());
+        Log.e("URL "," "+URL);
         postRequest = new JsonObjectRequest(Request.Method.POST, URL, object.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
-
+                        Log.e("response post ",""+response);
                         try {
 
                             if (response.equals("") || response == null || response.length() == 0) {

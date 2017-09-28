@@ -294,12 +294,16 @@ public class SwitchingActivity extends AppCompatActivity
                     commentDialog("FeedbackList");
                     break;
                 case "024":
-                    Intent InspectionBeginActivity = new Intent(context, InspectionBeginActivity.class);
-                    startActivity(InspectionBeginActivity);
+//                    Intent InspectionBeginActivity = new Intent(context, InspectionBeginActivity.class);
+//                    startActivity(InspectionBeginActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("InspectionBeginActivity");
                     break;
                 case "025":
-                    Intent InspectionHistoryActivity = new Intent(context, InspectionHistoryActivity.class);
-                    startActivity(InspectionHistoryActivity);
+//                    Intent InspectionHistoryActivity = new Intent(context, InspectionHistoryActivity.class);
+//                    startActivity(InspectionHistoryActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("InspectionHistoryActivity");
                     break;
                 case "026":
                     Intent mpm_activity = new Intent(context, mpm_activity.class);
@@ -750,6 +754,18 @@ public class SwitchingActivity extends AppCompatActivity
 
                                     else if(from.equals("StatusActivity")){
                                         Intent intent = new Intent(SwitchingActivity.this, StatusActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("InspectionBeginActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, InspectionBeginActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("InspectionHistoryActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, InspectionHistoryActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }

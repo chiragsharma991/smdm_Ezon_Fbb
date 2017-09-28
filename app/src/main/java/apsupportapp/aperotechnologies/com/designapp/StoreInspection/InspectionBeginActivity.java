@@ -22,6 +22,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 
 import android.view.inputmethod.InputMethodManager;
@@ -120,7 +121,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
     private RequestQueue queue;
     private SharedPreferences sharedPreferences;
     private Gson gson;
-    private String insp_imagePath;
+    private String insp_imagePath, storeCode, store_Code;
     String strDate;
     Context context;
     private double overallRating = 0.0;
@@ -194,6 +195,11 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
 
     private void initialise()
     {
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            store_Code = storeCode.substring(0,4);
+        }
         image_improvement_cri_1 = (ImageView)findViewById(R.id.image_improvement_cri_1);
         image_improvement_cri_1.setVisibility(View.GONE);
         image_okay_cri_1 = (ImageView)findViewById(R.id.image_okay_cri_1);
@@ -1756,7 +1762,7 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 InputMethodManager imm1 = (InputMethodManager) et_comment.getContext()
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm1.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
-
+                obj.put("storeCode",store_Code);
                 //Rating
                 if(Math.round(cal_result) == 1)
                 {
@@ -1805,12 +1811,17 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Submitting data…");
+                Log.e("jsonarray storeinspection "," "+jsonarray);
+
                 String url;
                 url = ConstsCore.web_url + "/v1/save/storeinspection/submit/" + userId;//+"?recache="+recache
+                Log.e("url storeinspection "," "+url);
                 JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonarray.toString(),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+                                Log.e("response storeinspection "," "+response);
+
                                 try {
                                     if (response == null || response.equals("")) {
                                         Reusable_Functions.hDialog();

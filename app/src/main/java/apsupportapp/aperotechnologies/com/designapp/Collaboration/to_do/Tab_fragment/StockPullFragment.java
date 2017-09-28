@@ -87,7 +87,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private boolean checkNetworkFalse = false;
     private RequestQueue queue;
     private ArrayList<ToDo_Modal> ReceiverSummaryList,subcategoryList;
-    private String recache;
+    private String recache, value;
     private String mParam1;
     private String mParam2;
     private String mc_name , subcategory_name,selected_subCategory;
@@ -401,7 +401,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                         @Override
                         public void onResponse(JSONArray response)
                         {
-                            Log.d("TAG", "onResponse: " + response);
+                            Log.d("TAG", "onResponse: subcategory " + response);
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -522,6 +522,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     }
                                     stockPullAdapter.notifyDataSetChanged();
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
+                                    requestTransferRequestSubcategory(value);
                                  /*   Intent intent = new Intent(context, SnapDashboardActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                     startActivity(intent);*/
@@ -766,7 +767,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
                 Log.e("TAG", "onItemClick: "+position );
-                String value =  ReceiverSummaryList.get(position).getLevel();
+                value =  ReceiverSummaryList.get(position).getLevel();
                 spinner_text.setText(value);
                 selected_subCategory=value;
                 dialog.dismiss();

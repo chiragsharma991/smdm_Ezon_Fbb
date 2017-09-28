@@ -219,7 +219,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
             case 3:  // this is for only change list
                 card_productAvail.setVisibility(View.GONE);
                 relFIndexTablelayout_productavail.setVisibility(View.GONE);
-                Log.e("here","case 2");
+                Log.e("here","case 3");
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 ApiRequestNew_product api_request_new = new ApiRequestNew_product(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
@@ -401,7 +401,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
 //            card_productAvail.setVisibility(View.VISIBLE);
 //            relFIndexTablelayout_productavail.setVisibility(View.VISIBLE);
             Apicallback(3, false, "Feedback");
-        }else{
+        }else if(attribute14.equals("NO")){
             Log.e("","inside else no data found");
             attribute14 = "YES";
             cf_text.setText("Callback Required from CSD");
@@ -684,7 +684,7 @@ class ApiRequestNew_product {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: " + response);
+                        Log.e(TAG, "onResponse: case 3 " + response);
 
                         try {
 
@@ -759,7 +759,7 @@ class ApiRequestNew_product {
                         text_no_data_product.setVisibility(View.GONE);
 
 
-                        ResposeInterface.nodatafound();
+                       // ResposeInterface.nodatafound();
 
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
