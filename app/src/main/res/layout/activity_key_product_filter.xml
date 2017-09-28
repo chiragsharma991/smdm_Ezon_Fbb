@@ -1,135 +1,224 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:background="@color/ezfb_White"
-              tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/ezfb_White"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
 
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/keyproduct_toolbar"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_header_height"
-        android:layout_alignParentTop="true"
-        android:background="@color/ezfb_White"
-        android:contentInsetStart="0dp"
-        android:contentInsetLeft="0dp"
-        android:contentInsetRight="0dp"
-        android:contentInsetEnd="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp">
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/keyproduct_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_header_height"
+            android:layout_alignParentTop="true"
+            android:background="@color/ezfb_White"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/keyprodfilter_btnBack"
+                    android:background="@drawable/button_click"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/ic_arrow_back_black"
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prod_filter"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/keyprodfilter_btnBack"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/ezfb_black"
+                    android:id="@+id/toolbar_title" />
+
+
+                <RelativeLayout
+                    android:id="@+id/keyproduct_btnfilterdone"
+                    android:background="@drawable/button_click"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/iconcheck"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
 
-            <RelativeLayout
-                android:layout_marginLeft="0dp"
-                android:id="@+id/keyprodfilter_btnBack"
-                android:background="@drawable/button_click"
-                android:layout_width="@dimen/header_clickable_width"
-                android:layout_height="@dimen/header_clickable_height"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true">
 
-                <Button
-                    android:clickable="false"
-                    android:background="@mipmap/ic_arrow_back_black"
-                    android:layout_width="@dimen/arrow_back_icon_width"
-                    android:layout_height="@dimen/arrow_back_icon_height"
-                    android:layout_centerInParent="true"/>
-
-            </RelativeLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:layout_marginRight="60dp"
+                android:background="@android:color/transparent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:text="@string/prod_filter"
-                android:textSize="20sp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/keyprodfilter_btnBack"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/ezfb_black"
-                android:id="@+id/toolbar_title" />
-
-
-            <RelativeLayout
-                android:id="@+id/keyproduct_btnfilterdone"
-                android:background="@drawable/button_click"
-                android:layout_width="@dimen/header_clickable_width"
-                android:layout_height="@dimen/header_clickable_height"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
-
-                <Button
-                    android:clickable="false"
-                    android:background="@mipmap/iconcheck"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:layout_centerInParent="true"/>
-
-            </RelativeLayout>
-
+                android:hint="Enter text"
+                android:layout_marginLeft="10dp"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                style="@style/myEditText"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:singleLine="true"
+                android:layout_weight="9"
+                android:id="@+id/keyprodfilter_editSearch" />
 
 
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
-
-   <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
-
-
-        <EditText
-            android:layout_marginRight="60dp"
-            android:background="@android:color/transparent"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:hint="Enter text"
-            android:layout_marginLeft="10dp"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            style="@style/myEditText"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:singleLine="true"
-            android:layout_weight="9"
-            android:id="@+id/keyprodfilter_editSearch" />
-
-
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/ezfb_black"
-        >
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:id="@+id/keyprodfilter_linear"
-        android:layout_marginTop="10dp"
-        android:weightSum="1">
-
-        <ListView
-            android:id="@+id/keyproduct_listview"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/ezfb_black"
+            >
+
+        </LinearLayout>
+
+        <ScrollView
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/relSearch"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:id="@+id/txt_key_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/ezone_filter_location"
+                    android:textColor="@color/smdm_dark_Black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"/>
+
+                <ExpandableListView
+                    android:scrollbarThumbVertical="@color/bel_lightgrey_text"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:fadeScrollbars="false"
+                    android:scrollbarSize="2dp"
+                    android:scrollbars="vertical"
+                    android:id="@+id/explv_key_locatn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:childDivider="@color/smdm_divider_Black"
+                    android:divider="@color/smdm_divider_Black"
+                    android:smoothScrollbar="true"/>
+
+
+                <TextView
+                    android:id="@+id/txt_ez_filter_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/ezone_filter_product"
+                    android:textColor="@color/smdm_dark_Black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <ListView
+                    android:id="@+id/keyproduct_listview"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </ListView>
+            </LinearLayout>
+        </ScrollView>
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="left"-->
+        <!--android:id="@+id/keyprodfilter_linear"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:weightSum="1">-->
+
+        <!--<ListView-->
+        <!--android:id="@+id/keyproduct_listview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" >-->
+        <!--</ListView>-->
+
+
+        <!--</LinearLayout>-->
 
 
     </LinearLayout>
 
-</LinearLayout>
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/rel_process_filter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/filter_progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#0000"
+            android:keepScreenOn="true"
+            android:padding="10dp">
+
+        </ProgressBar>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
