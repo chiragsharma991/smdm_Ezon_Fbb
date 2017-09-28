@@ -4121,7 +4121,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                     public void onResponse(JSONArray response) {
                         Log.e("Ezone BrandPlan List response :", "" + response);
                         try {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
                                 ez_progessBar.setVisibility(View.GONE);
