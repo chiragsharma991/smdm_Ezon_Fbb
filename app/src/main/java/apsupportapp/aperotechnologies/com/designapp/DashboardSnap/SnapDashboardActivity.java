@@ -215,19 +215,19 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         setupAdapter(Arrays.asList(kpiIdArray));
 
-        if (getIntent().getExtras() != null) {
-            if (getIntent().getExtras().getString("from").equals("feedback")) {
-
-                nestedScrollview.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        nestedScrollview.fullScroll(View.FOCUS_DOWN);
-                    }
-                });
-
-
-            }
-        }
+//        if (getIntent().getExtras() != null) {
+//            if (getIntent().getExtras().getString("from").equals("feedback")) {
+//
+//                nestedScrollview.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        nestedScrollview.fullScroll(View.FOCUS_DOWN);
+//                    }
+//                });
+//
+//
+//            }
+//        }
     }
 
     @Override

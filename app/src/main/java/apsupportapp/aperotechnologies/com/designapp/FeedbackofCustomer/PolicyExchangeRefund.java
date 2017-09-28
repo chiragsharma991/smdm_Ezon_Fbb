@@ -67,6 +67,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
+import static apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity.nestedScrollview;
 import static apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiSMS.req_sms_API;
 
 /**
@@ -710,9 +711,11 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "policyexchange",SelectedStoreCode);
 
             cancelData();
-            Intent dashboard = new Intent(context, SnapDashboardActivity.class);
-            dashboard.putExtra("from","feedback");
-            startActivity(dashboard);
+            ((Activity) context).finish();
+            nestedScrollview.fullScroll(View.FOCUS_DOWN);
+//            Intent dashboard = new Intent(context, SnapDashboardActivity.class);
+//            dashboard.putExtra("from","feedback");
+//            startActivity(dashboard);
         } catch (JSONException e) {
             e.printStackTrace();
         }

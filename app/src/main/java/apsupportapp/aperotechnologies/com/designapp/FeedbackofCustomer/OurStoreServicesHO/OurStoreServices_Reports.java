@@ -754,7 +754,7 @@ class ApiRequestNew_storeServices {
                         text_no_data_store.setVisibility(View.GONE);
 
 
-                        ResposeInterface.nodatafound();
+                      //  ResposeInterface.nodatafound();
 
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();

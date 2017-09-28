@@ -86,7 +86,7 @@ public class StyleActivity extends AppCompatActivity
     int collectionoffset = 0, collectionlimit = 100, collectioncount = 0;
     SharedPreferences sharedPreferences;
     Button btnSubmit;
-    EditText edtsearchCollection, edtsearchOption, edit_barcode,edtsearchStore;
+    EditText edtsearchCollection, edtsearchOption, edit_barcode, edtsearchStore;
     public static String selcollectionName = null, seloptionName = null, selStoreName = null;
     LinearLayout stylemainlayout;
     LinearLayout collectionLayout, optionLayout,storeLayout;

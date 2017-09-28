@@ -275,6 +275,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".HourlyPerformence.HourlyStoreFilterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".CustomerEngagement.CustomerDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />

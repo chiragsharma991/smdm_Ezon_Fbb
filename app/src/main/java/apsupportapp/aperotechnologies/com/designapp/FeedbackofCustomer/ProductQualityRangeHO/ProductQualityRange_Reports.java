@@ -752,7 +752,7 @@ class ApiRequestNew_quality {
                         text_no_data_quality.setVisibility(View.GONE);
 
 
-                        ResposeInterface.nodatafound();
+                     //   ResposeInterface.nodatafound();
 
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();

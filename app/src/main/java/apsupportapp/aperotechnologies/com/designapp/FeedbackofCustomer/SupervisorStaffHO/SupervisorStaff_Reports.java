@@ -738,7 +738,7 @@ class ApiRequestNew_supervisor {
                         relFIndexTablelayout_supervisor.setVisibility(View.VISIBLE);
                         text_no_data_supervisor.setVisibility(View.GONE);
 
-                        ResposeInterface.nodatafound();
+                      //  ResposeInterface.nodatafound();
 
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();

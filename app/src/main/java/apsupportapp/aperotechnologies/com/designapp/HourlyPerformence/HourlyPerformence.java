@@ -1,6 +1,8 @@
 package apsupportapp.aperotechnologies.com.designapp.HourlyPerformence;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
@@ -16,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -58,6 +61,8 @@ import java.util.Random;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -91,6 +96,8 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     private int focusPosition, dupfocusPosition = 0;
     private LinearLayout addleggend;
     private TabLayout Tabview;
+    public static Activity hourlyPerformance;
+    private String from = null, storeCode;
 
 
     @Override
@@ -99,6 +106,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         setContentView(R.layout.activity_hourly_performence);
         getSupportActionBar().hide();
         context = this;
+        hourlyPerformance = this;
         TAG = "HourlyPerformence";
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -107,16 +115,25 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
         if (geoLeveLDesc.equals("E ZONE")) {
-            userId = sharedPreferences.getString("userId", "");  //E zone userid =username
+            userId = sharedPreferences.getString("userId", "");       //E zone userid =username
         } else {
-            userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
-             // userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
+            userId = sharedPreferences.getString("userId", "");       //FBB userid = username+store code
+            // userId = userId.substring(0, userId.length() - 5);     // Hourly works only userid = username;
         }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
+
+        if(getIntent().getExtras() != null)
+        {
+            if (getIntent().getExtras().getString("selectedStringVal") != null) {
+                from = "filter";
+                storeCode = getIntent().getExtras().getString("selectedStringVal");
+            }
+        }
+
         intialise();
         functionality();
     }
@@ -144,13 +161,29 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case 0:   //total values
                 level = 5;
                 if (focusOnPie) {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" + "&geoLevel2Code="+ geoLevel2Code; //Detail Api
+                    if(from != null)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code+""+storeCode; //Detail Api
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code; //Detail Api
+                    }
+
                     //hrl_pi_Process.setVisibility(View.VISIBLE);
                     Reusable_Functions.animateScaleOut(hrl_pi_Process);
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
 
                 } else {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
+                    if(from != null)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code+""+storeCode;
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code; //Detail Api
+
+                    }
                     Reusable_Functions.sDialog(context, "Loading...");
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
                 }
@@ -162,8 +195,15 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 if (focusOnPie) {
                     ApiCallBack(model, 2);  //calling for pie chart
                 } else {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
-                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for identification
+                    if(from != null)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code+""+storeCode; //Detail Api
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code; //Detail Api
+                    }
+                        api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for identification
                 }
 
 
@@ -172,11 +212,24 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case 2:   //Bar values
                 level = 1;
                 if (focusOnPie) {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
+                    if(from != null)
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code+""+storeCode; //Detail Api
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code; //Detail Api
+                    }
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2);  // 2 is id for identification
                 } else {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
-                    api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2);  // 2 is id for identification
+                    if(from != null) {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code+""+storeCode; //Detail Api
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" + "&geoLevel2Code=" + geoLevel2Code; //Detail Api
+                    }
+                        api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2);  // 2 is id for identification
                 }
 
                 break;
@@ -184,10 +237,24 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case 3:   //Store values
                 level = 4;
                 if (focusOnPie) {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
+                    if(from != null) {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code+""+storeCode; //Detail Api
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&" + leveLDesc + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
+                    }
+
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 3);  // 3 is id for identification
                 } else {
-                    url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
+                    if(from != null) {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code+""+storeCode; //Detail Api
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/hourlyplanactual/" + userId + "?level=" + level + "&recache=true" +"&geoLevel2Code="+ geoLevel2Code; //Detail Api
+                    }
+
                     api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 3);  // 3 is id for identification
                 }
 
@@ -365,10 +432,11 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     }
 
-    private void intialise() {
+    private void intialise()
+    {
 
         thousandSaperator = NumberFormat.getNumberInstance(new Locale("", "in"));
-      //  segmentButton = (SegmentedGroup) findViewById(R.id.hrl_segmented);
+        //segmentButton = (SegmentedGroup) findViewById(R.id.hrl_segmented);
         pieChart = (PieChart) findViewById(R.id.hrl_piechart);
         barChart = (CombinedChart) findViewById(R.id.hrl_barchart);
         listView = (RecyclerView) findViewById(R.id.hrl_geoPerformance_listview);
@@ -396,6 +464,17 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 finish();
             }
         });
+
+        RelativeLayout imgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
+        imgfilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HourlyPerformence.this, HourlyStoreFilterActivity.class);
+                intent.putExtra("checkfrom", "HourlyPerformance");
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -601,8 +680,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int id) {
-
-
     }
 
     @Override

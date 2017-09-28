@@ -46,6 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
+import static apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity.nestedScrollview;
 import static apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiSMS.req_sms_API;
 
 /**
@@ -570,9 +571,11 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
             req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "supervisorstaff",SelectedStoreCode);
 
             cancelData();
-            Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
-            dashboard.putExtra("from","feedback");
-            getActivity().startActivity(dashboard);
+            ((Activity) context).finish();
+            nestedScrollview.fullScroll(View.FOCUS_DOWN);
+//            Intent dashboard = new Intent(getActivity(), SnapDashboardActivity.class);
+//            dashboard.putExtra("from","feedback");
+//            getActivity().startActivity(dashboard);
         } catch (JSONException e) {
             e.printStackTrace();
         }
