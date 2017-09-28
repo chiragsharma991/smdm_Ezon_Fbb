@@ -109,42 +109,7 @@ public class SwitchingActivity extends AppCompatActivity
 
         if(loginFromFbb)
         {
-          /* Mapping
-        001 - Product Info
-        002 - Visual Assortment
-        003 - Visual Assortment Report
-        004 - Sales
-        005 - Sales PvA
-        006 - Freshness Index
-        007 - Option Efficiency
-        008 - Skewed Sizes
-        009 - Best/Worst performers
-        010 - Stock Ageing
-        011 - Floor availability
-        012 - Target stock exception
-        013 - Sell Thru exception
-        014 - Running promo
-        015 - Upcoming promo
-        016 - Expiring promo
-        017 - Best/worst promo
-        018 - Key products PvA
-        019 - Key products hourly
-        020 - Collaboration to do
-        021 - Collaboration status
-        022 - Feedback
-        023 - Feedback list
-        024 - Store inspection new
-        025 - Store inspection history
-        026 - Season catalogue
-        027 - Customer loyalty
-        028 - Hourly performance
-        029 - BORIS
-        030 - Customer Feedback : Product Availability & Notify
-        031 - Customer Feedback : Policy Exchange,Refund
-        032 - Customer Feedback : Price & Promotion
-        033 - Customer Feedback : Product Quality & Range
-        034 - Customer Feedback : Our Store Services
-        035 - Customer Feedback : Supervisor & Staff*/
+
 
 
             switch (value) {
