@@ -34,7 +34,7 @@ public class VisualAssortmentCommentAPI {
 
 
     // Api for post method
-    public static void requestSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context, String geoLevel2Code, String storeCode) {
+    public static void requestSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context, String storeCode) {
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -48,7 +48,7 @@ public class VisualAssortmentCommentAPI {
         }
 
        // userId = userId.substring(0,userId.length()-5);
-        String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId +"?storeCode=" +storeCode + "&geoLevel2Code="+geoLevel2Code ;
+        String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId ; //+"?storeCode=" +storeCode + "&geoLevel2Code="+geoLevel2Code
         Log.e("post url :",""+url +"\n"+obj);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
@@ -89,7 +89,7 @@ public class VisualAssortmentCommentAPI {
     }
 
     //Api call for put method
-    public static void requestUpdateSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context, String geoLevel2Code, String storeCode) {
+    public static void requestUpdateSaveComment(String userId, final String bearertoken, JSONObject obj, final Context context, String storeCode) {
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -101,7 +101,7 @@ public class VisualAssortmentCommentAPI {
             queue.start();
         }
        // userId = userId.substring(0,userId.length()-5);
-        String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId +"?storeCode=" +storeCode+ "?geoLevel2Code="+geoLevel2Code;
+        String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId ;  //+"?storeCode=" +storeCode+ "?geoLevel2Code="+geoLevel2Code
         Log.e("put request :",""+url + "\n"+obj);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, obj.toString(),
                 new Response.Listener<JSONObject>() {

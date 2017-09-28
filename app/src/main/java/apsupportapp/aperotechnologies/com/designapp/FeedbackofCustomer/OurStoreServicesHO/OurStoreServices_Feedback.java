@@ -73,6 +73,15 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
             customerCallBack, customerArcDate, customerStoreName;
     private View v;
 
+//    public OurStoreServices_Feedback(String storeCode)
+//    {
+//
+//    }
+//    public OurStoreServices_Feedback()
+//    {
+//
+//    }
+
     public OurStoreServices_Feedback(String storeCode) {
 
         this.storeCode = storeCode;

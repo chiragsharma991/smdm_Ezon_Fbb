@@ -101,6 +101,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     boolean onClickFlag = false, filter_toggleClick = false;
     ProgressBar progressBar1;
     TabLayout Tabview;
+    private String planDeptNm,planCategoryNm,planBrandNm,planClassNm;
     // Ezone Elements Declaration
     public static String ez_segment_val = "LD";
     SegmentedGroup ez_segmentgrp;
@@ -2289,7 +2290,43 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     private void requestSalesViewPagerValueAPI()
     {
         String url = " ";
-        url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+//        if (txtheaderplanclass.getText().toString().equals("Department"))
+//        {
+//            saleFirstVisibleItem = saleFirstVisibleItem.replace("%", "%25");
+//            saleFirstVisibleItem = saleFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
+//            url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue+"&department=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+//
+//        }
+        if (txtheaderplanclass.getText().toString().equals("Category"))
+        {
+            planDeptNm = planDeptNm.replace("%", "%25");
+            planDeptNm = planDeptNm.replace(" ", "%20").replace("&", "%26");
+            url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&department=" + planDeptNm.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+
+        }
+        else if (txtheaderplanclass.getText().toString().equals("Class"))
+        {
+            planCategoryNm = planCategoryNm.replace("%", "%25");
+            planCategoryNm = planCategoryNm.replace(" ", "%20").replace("&", "%26");
+            url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&category=" + planCategoryNm.replace(" ", "%20")+ "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+
+        }
+        else if (txtheaderplanclass.getText().toString().equals("Brand"))
+        {
+            planClassNm = planClassNm.replace("%", "%25");
+            planClassNm = planClassNm.replace(" ", "%20").replace("&", "%26");
+            url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&class=" + planClassNm.replace(" ", "%20")+ "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+        }
+        else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+        {
+            planBrandNm = planBrandNm.replace("%", "%25");
+            planBrandNm = planBrandNm.replace(" ", "%20").replace("&", "%26");
+            url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&brand=" + planBrandNm.replace(" ", "%20")+ "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+        }
+        else
+        {
+            url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+        }
         Log.e("Sales Analysis", "requestSalesViewPagerValueAPI: "+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -2555,6 +2592,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
+                                    planDeptNm = deptName;
                                     analysisArrayList.clear();
                                     requestSalesViewPagerValueAPI();
                                 }
@@ -2696,6 +2734,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
+                                    planCategoryNm = category;
                                     analysisArrayList.clear();
                                     requestSalesViewPagerValueAPI();
                                 }
@@ -2773,11 +2812,11 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 requestSalesBrandListAPI(planclass);
 
                             } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
 
                                     salesAnalysisClass = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisClass);
-
                                 }
 
                                 for (int i = 0; i < 3; i++) {
@@ -2834,6 +2873,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
+                                    planClassNm = planclass;
                                     analysisArrayList.clear();
                                     requestSalesViewPagerValueAPI();
                                 }
@@ -2930,6 +2970,24 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 int currentItem = vwpagersales.getCurrentItem();
                                 ImageView img = (ImageView) lldots.getChildAt(currentItem);
                                 img.setImageResource(R.mipmap.dots_selected);
+                                // For Add "All"
+                                salesAnalysisClass = new SalesAnalysisListDisplay();
+                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                    salesAnalysisClass.setPlanDept("All");
+
+                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                    salesAnalysisClass.setPlanCategory("All");
+
+                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                    salesAnalysisClass.setPlanClass("All");
+
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                    salesAnalysisClass.setBrandName("All");
+
+                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                                    salesAnalysisClass.setBrandplanClass("All");
+                                }
+                                salesAnalysisClassArrayList.add(0, salesAnalysisClass);
                                 listView_SalesAnalysis.setLayoutManager(new LinearLayoutManager(
                                         listView_SalesAnalysis.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
@@ -2953,6 +3011,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     limit = 100;
                                     count = 0;
                                     analysisArrayList.clear();
+                                    planBrandNm = brandnm;
                                     requestSalesViewPagerValueAPI();
                                 }
                                 else

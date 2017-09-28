@@ -361,7 +361,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
             case R.id.stock_detailSubmit:
                 if (!(DetailsList.size() == 0)) {
-                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc, prodLevel3Desc, deviceId);
+                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc, prodLevel3Desc, store_code);
                     if (jsonArray.length() == 0) {
                         Toast.makeText(Details.this, "Please select at least one option.", Toast.LENGTH_SHORT).show();
                     } else {

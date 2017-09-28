@@ -232,7 +232,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 //                        obj.put("prodAttribute4","");
                         obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
                         obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
-                        obj.put("deviceId",device_Id);
+                        //obj.put("deviceId",device_Id);
+                        obj.put("storeCode",storeCode);
 
                         jsonArray.put(obj);
                     }
@@ -489,7 +490,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
 
-            String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/"  + userId +"?storeCode=" + storeCode;//+"?recache="+recache
+            String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/"  + userId;//+"?recache="+recache  // +"?storeCode=" + storeCode
             Log.e("requestReceiverSubmitAPI: ",""+url + "\t" + object.toString() );
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
