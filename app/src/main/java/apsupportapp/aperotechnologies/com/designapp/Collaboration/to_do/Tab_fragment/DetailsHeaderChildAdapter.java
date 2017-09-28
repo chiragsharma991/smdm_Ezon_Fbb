@@ -65,6 +65,7 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
             if (headercheckList[PrePosition])
             {
                 CheckedItems.add(Childtag);
+
             }
             else
             {

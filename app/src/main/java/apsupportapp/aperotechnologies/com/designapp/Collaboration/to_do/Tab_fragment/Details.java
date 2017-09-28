@@ -312,7 +312,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         Todo_detailStoreAvlQty.setText(" " + Math.round(MCCode));
         details_imageBtnBack.setOnClickListener(this);
         btn_receiver_submit.setOnClickListener(this);
-        btn_selectAll.setOnClickListener(new View.OnClickListener() {
+        btn_selectAll.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -320,6 +321,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                 {
                     stockDetailsAdapter.HeadercheckList[i]= true;
                     stockDetailsAdapter.visibleItems[i]=true;
+
                 }
                 stockDetailsAdapter.notifyDataSetChanged();
 
@@ -333,6 +335,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                 {
                     stockDetailsAdapter.HeadercheckList[i] = false;
                     stockDetailsAdapter.visibleItems[i] = true;
+                    stockDetailsAdapter.selectedSizeList.clear();
+                    stockDetailsAdapter.selectedOptionList.clear();
                 }
                 stockDetailsAdapter.notifyDataSetChanged();
             }

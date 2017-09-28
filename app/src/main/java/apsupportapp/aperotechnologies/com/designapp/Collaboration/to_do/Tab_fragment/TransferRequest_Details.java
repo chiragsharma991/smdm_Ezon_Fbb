@@ -728,11 +728,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 Log.e(TAG, "requestSenderSubmitAPI: " + postofData);
 
             }
-            else if (id==1){
-                url = "https://mapi.futuregroup.in/fgapis/sap/STOCreateSRP/1.0?apikey=46a94bd1-04ea-466b-bcf0-59cb74abbd1b" ;
-                postofData=jsonobject.toString();
-
-            }
+//            else if (id==1){
+//                url = "https://mapi.futuregroup.in/fgapis/sap/STOCreateSRP/1.0?apikey=46a94bd1-04ea-466b-bcf0-59cb74abbd1b" ;
+//                postofData=jsonobject.toString();
+//
+//            }
             Log.e(TAG, "requestSenderSubmitAPI: "+url );
 
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url,postofData,
@@ -747,21 +747,21 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
                                 } else
                                 {
-                                    switch (id){
-                                        case 0:
-                                            requestforSap();
-                                            break;
-                                        case 1:
-                                            // String result=response.getString("status");
-                                            Reusable_Functions.hDialog();
-                                            Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
-                                         //   String result=response.getString("status");
-                                         //   Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(TransferRequest_Details.this,To_Do.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                            startActivity(intent);
-                                            break;
-                                    }
+//                                    switch (id){
+//                                        case 0:
+//                                            requestforSap();
+//                                            break;
+//                                        case 1:
+//                                            // String result=response.getString("status");
+//                                            Reusable_Functions.hDialog();
+//                                            Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
+//                                         //   String result=response.getString("status");
+//                                         //   Toast.makeText(mcontext,""+result, Toast.LENGTH_LONG).show();
+//                                            Intent intent = new Intent(TransferRequest_Details.this,To_Do.class);
+//                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                                            startActivity(intent);
+//                                            break;
+//                                    }
 
                                 }
                             } catch (Exception e)

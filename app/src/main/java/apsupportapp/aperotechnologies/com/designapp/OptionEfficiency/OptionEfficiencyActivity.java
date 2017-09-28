@@ -1388,7 +1388,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             oe_btnNext.setVisibility(View.INVISIBLE);
 
 
-                        } else if (filter_level == 6) {
+                        } else if (filter_level == 5) {
                             oe_txtHeaderClass.setText("Brand Class");
                             fromWhere = "Brand Class";
                             oe_btnPrev.setVisibility(View.VISIBLE);

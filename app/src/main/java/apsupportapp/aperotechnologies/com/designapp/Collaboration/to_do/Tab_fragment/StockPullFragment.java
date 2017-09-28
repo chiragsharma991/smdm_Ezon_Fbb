@@ -58,6 +58,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,6 +109,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private TextView spinner_text;
     private AlertDialog dialog;
     private ImageButton dropdkown;
+    private ArrayList<String> selectedMcList;
 
 
     public StockPullFragment(String store_Code) {
@@ -179,6 +181,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         queue = new RequestQueue(cache, network);
         queue.start();
         storeCode = store_Code.substring(0,4);
+        selectedMcList = new ArrayList<String>();
         //barChart = (BarChart) view.findViewById(R.id.bar_chart);
         spinner=(LinearLayout)view.findViewById(R.id.spinner);
         spinner_text=(TextView)view.findViewById(R.id.spinner_text);
@@ -226,18 +229,25 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
                 for(int i = 0 ; i <selectMc.length; i++)
                 {
-                    if(selectMc[i]) {
-                        JSONObject obj = new JSONObject();
-//                        obj.put("option","");
-//                        obj.put("prodAttribute4","");
-                        obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
-                        obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
-                        //obj.put("deviceId",device_Id);
-                        obj.put("storeCode",storeCode);
-
-                        jsonArray.put(obj);
+                    if(selectMc[i])
+                    {
+                        selectedMcList.add(subcategoryList.get(i).getLevel());
                     }
                 }
+                String[] array = (String[]) selectedMcList.toArray(new String[0]);
+                String subMC = Arrays.toString(array);
+                subMC = subMC.replace("[", "");
+                subMC = subMC.replace("]", "");
+                subMC = subMC.replace(", ", ",");
+                JSONObject obj = new JSONObject();
+//                        obj.put("option","");
+//                        obj.put("prodAttribute4","");
+                obj.put("prodLevel6Code",subMC);//MCCodeDesc
+                obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
+                //obj.put("deviceId",device_Id);
+                obj.put("storeCode",storeCode);
+
+                jsonArray.put(obj);
                 if(jsonArray.length() != 0){
                     requestReceiverSubmitAPI(context, jsonArray);
                 }
@@ -429,6 +439,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                 selectMc=new boolean[subcategoryList.size()];
                                 for (int i = 0; i <subcategoryList.size() ; i++) {
                                     selectMc[i]=false;
+                                    selectedMcList.clear();
+                                    Log.e("select Mc :",""+selectMc[i] + selectedMcList);
                                 }
                                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 recyclerView.setOnFlingListener(null);
@@ -525,6 +537,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
+                            Log.e(TAG, "onErrorResponse: " + error);
                             Toast.makeText(context, "server not responding...", Toast.LENGTH_SHORT).show();
                             error.printStackTrace();
                         }

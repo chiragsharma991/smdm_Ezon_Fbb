@@ -322,17 +322,18 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
             String url = null;
             String postofData= null;
 
-            if(id ==0) {
+            if(id ==0)
+            {
                 Reusable_Functions.sDialog(mcontext, "Submitting data…");
                 url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
                 postofData=jsonarray.toString();
                 Log.e(TAG, "requestSenderSubmitAPI: " + postofData);
             }
-            else if (id==1){
-                url = "https://mapi.futuregroup.in/fgapis/sap/STOCreateSRP/1.0?apikey=46a94bd1-04ea-466b-bcf0-59cb74abbd1b" ;
-                postofData=jsonobject.toString();
-
-            }
+//            else if (id==1){
+//                url = "https://mapi.futuregroup.in/fgapis/sap/STOCreateSRP/1.0?apikey=46a94bd1-04ea-466b-bcf0-59cb74abbd1b" ;
+//                postofData=jsonobject.toString();
+//
+//            }
             Log.e(TAG, "requestSenderSubmitAPI: "+url );
 
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url,postofData,
@@ -347,22 +348,22 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
 
                                 } else
                                 {
-                                    switch (id){
-                                        case 0:
-                                            String selectCase=jsonarray.getJSONObject(0).get("caseNo").toString();
-                                            requestforSap(selectCase);
-                                            break;
-                                        case 1:
-                                            // String result=response.getString("status");
-                                            Reusable_Functions.hDialog();
-                                            for (int i = 0; i <SenderSummaryList.size() ; i++) {
-                                                selectMc[i]=false;
-                                            }
-                                            transferRequestAdapter.notifyDataSetChanged();
-                                            Log.e(TAG, "requestforSap: success ------" );
-                                            Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
-                                            break;
-                                    }
+//                                    switch (id){
+//                                        case 0:
+//                                            String selectCase=jsonarray.getJSONObject(0).get("caseNo").toString();
+//                                            requestforSap(selectCase);
+//                                            break;
+//                                        case 1:
+//                                            // String result=response.getString("status");
+//                                            Reusable_Functions.hDialog();
+//                                            for (int i = 0; i <SenderSummaryList.size() ; i++) {
+//                                                selectMc[i]=false;
+//                                            }
+//                                            transferRequestAdapter.notifyDataSetChanged();
+//                                            Log.e(TAG, "requestforSap: success ------" );
+//                                            Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
+//                                            break;
+//                                    }
 
                                 }
                             } catch (Exception e)
