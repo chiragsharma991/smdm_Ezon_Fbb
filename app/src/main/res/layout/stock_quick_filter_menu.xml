@@ -3,7 +3,7 @@
     android:id="@+id/quickFilterPopup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="visible"
+    android:visibility="gone"
     >
 
     <!--base layout for click anywhere-->
@@ -331,7 +331,7 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/checkAgeing1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -374,7 +374,7 @@
                         android:orientation="vertical">
 
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/checkAgeing2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -415,7 +415,7 @@
                         android:gravity="end"
                         android:orientation="vertical">
 
-                        <CheckBox
+                        <RadioButton
                             android:id="@+id/checkAgeing3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
