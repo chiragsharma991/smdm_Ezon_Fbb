@@ -60,7 +60,7 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
     private InspectionBeanClass inspectionBeanClass;
     private ArrayList<InspectionBeanClass> inspectionArrayList;
     private Gson gson;
-    private String recache;
+    private String recache, storeCode, store_Code;
     private Insp_History_Adapter insp_history_adapter;
     JsonArrayRequest postRequest;
 
@@ -96,6 +96,11 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
 
     private void initialise()
     {
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            store_Code = storeCode.substring(0,4);
+        }
         rel_insp_history_btnBack = (RelativeLayout) findViewById(R.id.insp_history_btnback);
         rv_insp_history = (RecyclerView) findViewById(R.id.rv_insp_history);
         mLayoutManager = new LinearLayoutManager(this);
@@ -113,7 +118,7 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
     }
 
     private void requestInspectionSummary() {
-        String url = ConstsCore.web_url + "/v1/display/storeinspectionsummary/" + userId + "?recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/storeinspectionsummary/" + userId + "?storeCode=" + store_Code + "&recache=" + recache;
         Log.e("", "requestInspectionSummary: "+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

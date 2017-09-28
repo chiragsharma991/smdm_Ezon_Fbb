@@ -527,7 +527,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
      public void requestScanDetailsAPI(String contents,final Context context) {
 
-         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber="+contents ;
+         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber="+contents +"&recache=true" ;
          Log.e(TAG, "requestScanDetailsAPI: "+url );
          final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -642,7 +642,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestforSap() {
 
-        String url = ConstsCore.web_url + "/v1/display/pulltransfersapsubmit/" + userId+"?caseNo="+detail_CaseNo;
+        String url = ConstsCore.web_url + "/v1/display/pulltransfersapsubmit/" + userId+"?caseNo="+detail_CaseNo +"&recache=true";
         Log.e(TAG, "requestforSap: "+url );
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {

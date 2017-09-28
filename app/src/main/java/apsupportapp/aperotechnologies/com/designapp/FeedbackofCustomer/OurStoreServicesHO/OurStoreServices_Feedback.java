@@ -517,7 +517,7 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", SelectedStoreCode);
+            jsonObject.put("storeCode", store_code);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -541,7 +541,7 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
 
             case 0:   //total values
 
-                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId + "&storeCode=" +store_code;
+                String url = ConstsCore.web_url + "/v1/save/feedback/" + userId;
                 ApiPostRequest api_request = new ApiPostRequest(context, bearertoken, url, TAG, queue, id, object, this);
 
                 break;

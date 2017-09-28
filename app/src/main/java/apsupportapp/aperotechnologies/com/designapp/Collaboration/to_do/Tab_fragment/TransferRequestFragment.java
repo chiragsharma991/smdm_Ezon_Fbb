@@ -160,12 +160,14 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
         if (Reusable_Functions.chkStatus(context)) {
 
             String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendersummary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit +"&recache="+recache;
+            Log.i(TAG, "url: "+url );
+
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response)
                         {
-                            Log.i(TAG, "onResponse: "+response );
+                            Log.i(TAG, "onResponse: sendersummary "+response );
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -409,13 +411,13 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
 
     private void requestforSap(String selectCase) {
 
-        String url = ConstsCore.web_url + "/v1/display/pulltransfersapsubmit/" + userId+"?caseNo="+selectCase;
+        String url = ConstsCore.web_url + "/v1/display/pulltransfersapsubmit/" + userId+"?caseNo="+selectCase +"&recache=true";
         Log.e(TAG, "requestforSap: "+url );
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e(TAG, "onResponse: "+response);
+                        Log.e(TAG, "onResponse: pulltransfersapsubmit "+response);
                         try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0)
