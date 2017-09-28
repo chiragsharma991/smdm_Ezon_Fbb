@@ -232,7 +232,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 //                        obj.put("prodAttribute4","");
                         obj.put("prodLevel6Code",subcategoryList.get(i).getLevel());//MCCodeDesc
                         obj.put("prodLevel3Code",selected_subCategory);//prodLevel3Desc
-                        obj.put("deviceId",device_Id);
+                        //obj.put("deviceId",device_Id);
                         obj.put("storeCode",storeCode);
 
                         jsonArray.put(obj);

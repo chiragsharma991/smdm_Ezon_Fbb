@@ -146,6 +146,11 @@ public class StyleActivity extends AppCompatActivity
         if (getIntent().getExtras() != null)
         {
            // selStoreName = getIntent().getExtras().getString("selStoreName");
+            // harshada
+            store_name = getIntent().getExtras().getString("selStoreName");
+            optionName = getIntent().getExtras().getString("selOptionName");
+            collectionNM = getIntent().getExtras().getString("selCollectionname");
+            //
             selcollectionName = getIntent().getExtras().getString("selCollectionname");
             seloptionName = getIntent().getExtras().getString("selOptionName");
        }
@@ -161,7 +166,7 @@ public class StyleActivity extends AppCompatActivity
         collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
         //attach the adapter to the list
         listCollection.setAdapter(collectionAdapter);
-       // listCollection.setTextFilterEnabled(true);
+        listCollection.setTextFilterEnabled(true);
         collectionAdapter.notifyDataSetChanged();
         style = (TextView) findViewById(R.id.searchablespinnerlibrary1);
         style.setText("Select Option");
@@ -214,9 +219,11 @@ public class StyleActivity extends AppCompatActivity
                 } else {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
+                        Log.e("store name "," "+store_name+" "+store_name.substring(0,4));
                         store_name = store_name.substring(0,4);
                         Reusable_Functions.sDialog(context, "Loading  data...");
                         requestStyleDetailsAPI(optionName, "optionname",store_name);
+
                     } else {
                         Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                     }
@@ -321,6 +328,7 @@ public class StyleActivity extends AppCompatActivity
                 optionLayout.setVisibility(View.GONE);
             }
         });
+
         style.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -333,6 +341,75 @@ public class StyleActivity extends AppCompatActivity
             }
 
         });
+
+        listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                //harshada
+                offsetvalue = 0;
+                count = 0;
+
+                //
+
+                collectionNM = (String) collectionAdapter.getItem(position);
+                selcollectionName = collectionNM;
+                collection.setText(selcollectionName);
+                Log.e("collect_name ", " "+collect_name);
+
+                //harshada
+                seloptionName = null;
+                optionName = "";
+                //
+
+
+                if(!collect_name.equals(""))
+                {
+                    if (!collectionNM.equals(collect_name))
+                    {
+                        style.setText("Select Option");
+                    }
+                    else
+                    {
+                        style.setText(seloptionName);
+                        style.setEnabled(true);
+                    }
+                }
+                collectionLayout.setVisibility(View.GONE);
+                optionLayout.setVisibility(View.GONE);
+                InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (inputManager != null)
+                {
+                    inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                if (collectionNM.equalsIgnoreCase("Select Collection"))
+                {
+                    Log.e(" came ", "here");
+                    //  collectionNM = selcollectionName;
+                }
+                else
+                {
+                    if (Reusable_Functions.chkStatus(context))
+                    {
+                        Reusable_Functions.sDialog(context, "Loading options data...");
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        store_name = store_name.substring(0,4);
+                        articleOptionList = new ArrayList<String>();
+                        optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
+                        listOption.setAdapter(optionAdapter);
+                        requestArticleOptionsAPI(collectionNM,store_name);
+                    }
+                    else
+                    {
+                        Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
         listOption.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -590,6 +667,9 @@ public class StyleActivity extends AppCompatActivity
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
+
+
+                                Log.e("== "," "+articleCode+" "+articleOption+" "+styleDetailsBean+" "+collectionNM+" "+optionName);
                               //  intent.putExtra("selStoreName",store_name);
                                 startActivity(intent);
                                 finish();
@@ -671,15 +751,31 @@ public class StyleActivity extends AppCompatActivity
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                                 {
+
+                                    //harshada
+                                    collectionoffset = 0;
+                                    collectioncount = 0;
+//                                    arrayList = new ArrayList<String>();
+//                                    collectionAdapter.notifyDataSetChanged();
+                                    //
+
                                     store_name = (String) storeAdapter.getItem(position);
                                     selStoreName = store_name;
                                     txt_store.setText(store_name);
                                     Log.e("store_name ", " "+store_name);
 
+                                    //harshada
+                                    selcollectionName = null;
+                                    seloptionName = null;
+                                    optionName = "";
+                                    collectionNM = "";
+                                    //
+
 
                                         if (!store_name.equals(store_nm))
                                         {
                                             collection.setText("Select Collection");
+                                            style.setText("Select Option");
                                         }
                                         else
                                         {
@@ -709,6 +805,16 @@ public class StyleActivity extends AppCompatActivity
                                             count = 0;
                                             collectionList.clear();
                                             store_name = store_name.substring(0,4);
+                                            // harshada
+                                            arrayList = new ArrayList<String>();
+                                            collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
+                                            listCollection.setAdapter(collectionAdapter);
+
+                                            articleOptionList = new ArrayList<String>();
+                                            optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
+                                            listOption.setAdapter(optionAdapter);
+                                            //
+
                                             requestCollectionAPI(store_name);
                                         }
                                         else
@@ -787,11 +893,25 @@ public class StyleActivity extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("collection response "," "+response.length() +" "+collectioncount+" ");
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && collectioncount == 0)
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No collection data found", Toast.LENGTH_LONG).show();
+
+                            }
+                            else if (response.equals("") || response == null || response.length() == 0 && collectioncount > 0)
+                            {
+
+                                // harshada
+                                Collections.sort(arrayList);
+                                arrayList.add(0, "Select Collection");
+                                collectionAdapter.notifyDataSetChanged();
+                                Reusable_Functions.hDialog();
+                                newcollectionList = new ArrayList();
+                                newcollectionList.addAll(arrayList);
                             }
                             else if (response.length() == collectionlimit)
                             {
@@ -811,66 +931,19 @@ public class StyleActivity extends AppCompatActivity
                                     collectionNM = collectionName.getString("collectionName");
                                     arrayList.add(collectionNM);
                                 }
+                                // harshada
+                                Collections.sort(arrayList);
+                                arrayList.add(0, "Select Collection");
+                                collectionAdapter.notifyDataSetChanged();
+                                Reusable_Functions.hDialog();
+                                newcollectionList = new ArrayList();
+                                newcollectionList.addAll(arrayList);
                             }
-                            Collections.sort(arrayList);
-                            arrayList.add(0, "Select Collection");
-                            collectionAdapter.notifyDataSetChanged();
-                            Reusable_Functions.hDialog();
-                            newcollectionList = new ArrayList();
-                            newcollectionList.addAll(arrayList);
-                            listCollection.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                            {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                                {
-                                    collectionNM = (String) collectionAdapter.getItem(position);
-                                    selcollectionName = collectionNM;
-                                    collection.setText(selcollectionName);
-                                    Log.e("collect_name ", " "+collect_name);
 
-                                    if(!collect_name.equals(""))
-                                    {
-                                        if (!collectionNM.equals(collect_name))
-                                        {
-                                            style.setText("Select Option");
-                                        }
-                                        else
-                                        {
-                                            style.setText(seloptionName);
-                                            style.setEnabled(true);
-                                        }
-                                    }
-                                    collectionLayout.setVisibility(View.GONE);
-                                    optionLayout.setVisibility(View.GONE);
-                                    InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                    if (inputManager != null)
-                                    {
-                                        inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                                    }
-                                    if (collectionNM.equalsIgnoreCase("Select Collection"))
-                                    {
-                                        Log.e(" come ", "here");
-                                      //  collectionNM = selcollectionName;
-                                    }
-                                    else
-                                    {
-                                        if (Reusable_Functions.chkStatus(context))
-                                        {
-                                            Reusable_Functions.sDialog(context, "Loading options data...");
-                                            offsetvalue = 0;
-                                            limit = 100;
-                                            count = 0;
-                                            store_name = store_name.substring(0,4);
-                                            articleOptionList.clear();
-                                            requestArticleOptionsAPI(collectionNM,store_name);
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                }
-                            });
+
+
+
+
                             Log.e("selcollectionName ", " "+selcollectionName);
                             if (selcollectionName == null || selcollectionName.equals(""))
                             {
@@ -955,6 +1028,8 @@ public class StyleActivity extends AppCompatActivity
                     @Override
                     public void onResponse(JSONArray response)
                     {
+
+                        Log.e("option response "," "+response.length());
                         try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -962,7 +1037,16 @@ public class StyleActivity extends AppCompatActivity
                                 style.setEnabled(false);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No options data found", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit)
+                            }
+                            if (response.equals("") || response == null || response.length() == 0 && count > 0)
+                            {
+                                Collections.sort(articleOptionList);
+                                articleOptionList.add(0, "Select Option");
+                                style.setEnabled(true);
+                                SnapDashboardActivity._collectionitems = new ArrayList();
+                                SnapDashboardActivity._collectionitems.addAll(articleOptionList);
+                            }
+                            else if (response.length() == limit)
                             {
                                 for (int i = 0; i < response.length(); i++)
                                 {
@@ -984,14 +1068,15 @@ public class StyleActivity extends AppCompatActivity
                                     String articleOptions = jsonResponse.getString("articleOptions");
                                     articleOptionList.add(articleOptions);
                                 }
-                            }
-                            Collections.sort(articleOptionList);
-                            articleOptionList.add(0, "Select Option");
-                            style.setEnabled(true);
-                            SnapDashboardActivity._collectionitems = new ArrayList();
-                            SnapDashboardActivity._collectionitems.addAll(articleOptionList);
-                            Log.e("seloptionName ", " "+seloptionName);
 
+                                Collections.sort(articleOptionList);
+                                articleOptionList.add(0, "Select Option");
+                                style.setEnabled(true);
+                                SnapDashboardActivity._collectionitems = new ArrayList();
+                                SnapDashboardActivity._collectionitems.addAll(articleOptionList);
+                            }
+
+                            Log.e("seloptionName ", " "+seloptionName);
                             if (seloptionName == null || seloptionName.equals(""))
                             {
                                 style.setText("Select Option");

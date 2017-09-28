@@ -100,8 +100,8 @@ public class OurStoreServices_Reports extends Fragment  implements TabLayout.OnT
     private int runningId;
     private String callback_header="Callback Required from CSD";
 
-    public OurStoreServices_Reports(String storeCode) {
-
+    public OurStoreServices_Reports(String storeCode)
+    {
         this.storeCode = storeCode;
     }
 
