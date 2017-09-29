@@ -198,7 +198,7 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
             case 1:
                 card_supervisor.setVisibility(View.GONE);
                 relFIndexTablelayout_supervisor.setVisibility(View.GONE);
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
@@ -212,7 +212,7 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
                 card_supervisor.setVisibility(View.GONE);
                 relFIndexTablelayout_supervisor.setVisibility(View.GONE);
                 Log.e("here","case 2");
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 ApiRequestNew_supervisor api_request_new = new ApiRequestNew_supervisor(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             default:
@@ -378,7 +378,7 @@ public class SupervisorStaff_Reports extends Fragment implements TabLayout.OnTab
             card_supervisor.setVisibility(View.VISIBLE);
             relFIndexTablelayout_supervisor.setVisibility(View.VISIBLE);
             Apicallback(3, false, "Feedback");
-        }else{
+        }else if(attribute14.equals("NO")){
             Log.e("","inside else no data found");
             attribute14 = "YES";
             title.setText("Callback Required from CSD");
@@ -741,7 +741,7 @@ class ApiRequestNew_supervisor {
                       //  ResposeInterface.nodatafound();
 
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                         Log.e(TAG, "Server not found..."+error.getMessage() );
                         error.printStackTrace();
                     }

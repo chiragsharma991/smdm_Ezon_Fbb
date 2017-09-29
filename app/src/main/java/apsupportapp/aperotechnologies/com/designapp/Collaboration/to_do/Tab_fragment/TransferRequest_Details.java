@@ -740,13 +740,16 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.e(TAG, "requestSenderSubmitAPI onResponse: "+response);
+                            Reusable_Functions.hDialog();
+
                             try {
                                 if (response == null || response.equals("")) {
-                                    Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
 
                                 } else
                                 {
+                                    transferDetailsAdapter.notifyDataSetChanged();
+                                    requestSenderDetails();
 //                                    switch (id){
 //                                        case 0:
 //                                            requestforSap();

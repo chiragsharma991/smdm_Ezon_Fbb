@@ -729,7 +729,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "policyexchange",SelectedStoreCode);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "policyexchange",store_code);
             cancelData();
             ((Activity) context).finish();
             nestedScrollview.fullScroll(View.FOCUS_DOWN);

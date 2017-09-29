@@ -85,8 +85,8 @@ public class Callback_PolicyExchange extends AppCompatActivity implements HttpRe
         store = sharedPreferences.getString("storeDescription", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        txt_storecode.setText(store.trim().substring(0,4));
-        txt_storedesc.setText(store.substring(5));
+//        txt_storecode.setText(store.trim().substring(0,4));
+//        txt_storedesc.setText(store.substring(5));
         Intent intent=getIntent();
         view_params=intent.getStringExtra("view_params");
         attribute14=intent.getStringExtra("attribute14");

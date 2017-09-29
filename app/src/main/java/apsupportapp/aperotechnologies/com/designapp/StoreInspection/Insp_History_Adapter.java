@@ -32,12 +32,14 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
 
     private Context context;
     private ArrayList<InspectionBeanClass> list;
+    String store_Code;
 
 
-    public Insp_History_Adapter(ArrayList<InspectionBeanClass> list, Context context)
+    public Insp_History_Adapter(ArrayList<InspectionBeanClass> list, Context context, String store_Code)
     {
         this.list = list;  //main adapter
         this.context = context;//
+        this.store_Code = store_Code;
     }
 
     @Override
@@ -113,6 +115,7 @@ public class Insp_History_Adapter extends RecyclerView.Adapter<RecyclerView.View
 
                         Intent intent = new Intent(context ,InspectionDetailsActivity.class);
                         intent.putExtra("inspectionId",list.get(position).getInspectionId());
+                        intent.putExtra("store_Code", store_Code);
                         context.startActivity(intent);
                     }
                 });

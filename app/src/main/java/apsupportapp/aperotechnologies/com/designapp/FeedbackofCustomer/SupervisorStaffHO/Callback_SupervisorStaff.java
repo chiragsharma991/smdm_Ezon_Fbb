@@ -82,7 +82,7 @@ public class Callback_SupervisorStaff extends AppCompatActivity implements HttpR
         store = sharedPreferences.getString("storeDescription", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        storedesc.setText(store);
+       // storedesc.setText(store);
         Intent intent=getIntent();
         view_params=intent.getStringExtra("view_params");
         attribute14=intent.getStringExtra("attribute14");
