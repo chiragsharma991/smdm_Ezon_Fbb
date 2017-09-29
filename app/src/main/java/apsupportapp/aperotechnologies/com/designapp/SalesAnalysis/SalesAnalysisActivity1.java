@@ -91,7 +91,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     EditText etListText;
     RadioButton btnWTD, btnL4W, btnLW, btnYTD;
     public static String selectedsegValue = "WTD";
-    String saleFirstVisibleItem, fromWhere = "Department", val, txtSalesClickedValue;
+    String saleFirstVisibleItem, fromWhere = "Department", val, txtSalesClickedValue,all_from_val;
     TextView txtStoreCode, txtStoreDesc, txtheaderplanclass, txthDeptName;
 
     public static int level = 1;
@@ -897,148 +897,148 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
     }
 
     private void TimeUP() {
-        if (geoLeveLDesc.equals("E ZONE")) {
-            if (ez_sales_detalis_array.size() != 0) {
-                if (ez_firstVisible_no < ez_sales_detalis_array.size() && !ezone_onClickflg) {
-
-                    // product is checked in viewby
-                    if (txt_ez_header.getText().toString().equals("Department"))
-                    {
-                        ezone_level = 1;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-
-                    }
-                    else if (txt_ez_header.getText().toString().equals("Subdept"))
-                    {
-                        ezone_level = 2;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-                    else if (txt_ez_header.getText().toString().equals("Class"))
-                    {
-                        ezone_level = 3;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-                    else if (txt_ez_header.getText().toString().equals("Subclass"))
-                    {
-                        ezone_level = 4;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-//                    else if (txt_ez_header.getText().toString().equals("Brand Class"))
+//        if (geoLeveLDesc.equals("E ZONE")) {
+//            if (ez_sales_detalis_array.size() != 0) {
+//                if (ez_firstVisible_no < ez_sales_detalis_array.size() && !ezone_onClickflg) {
+//
+//                    // product is checked in viewby
+//                    if (txt_ez_header.getText().toString().equals("Department"))
 //                    {
-//                        ezone_level = 5;
+//                        ezone_level = 1;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//
+//                    }
+//                    else if (txt_ez_header.getText().toString().equals("Subdept"))
+//                    {
+//                        ezone_level = 2;
 //                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
 //                    }
-                    //location is checked in view by
-                    else if (txt_ez_header.getText().toString().equals("Region"))
-                    {
-                        ezone_level = 7;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-                    else if (txt_ez_header.getText().toString().equals("Store"))
-                    {
-                        ezone_level = 9;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-                    if (Reusable_Functions.chkStatus(context)) {
-//                        Reusable_Functions.hDialog();
-                        ez_currentVmPos = ez_viewpager.getCurrentItem();
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
-
-                        if (ez_firstVisible_no != ez_sFirstPosVal) {
-                            if (ez_postRequest != null) {
-                                ez_postRequest.cancel();
-                            }
-                            ez_progessBar.setVisibility(View.VISIBLE);
-                            if (ez_sale_first_item.equals("All")) {
-                                requestEzoneSalesHeaderAPI();
-                            } else {
-                                requestEzoneSalesPagerOnScrollAPI();
-                            }
-                            ez_sFirstPosVal = ez_firstVisible_no;
-                        }
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    ez_firstVisible_no = ez_sales_detalis_array.size() - 1;
-                    LinearLayoutManager llm = (LinearLayoutManager) recyclevw_ez_sales.getLayoutManager();
-                    llm.scrollToPosition(ez_firstVisible_no);
-                    // product is checked in view by
-                    if (txt_ez_header.getText().toString().equals("Department"))
-                    {
-                        ezone_level = 1;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-
-                    }
-                    else if (txt_ez_header.getText().toString().equals("Subdept"))
-                    {
-                        ezone_level = 2;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-                    else if (txt_ez_header.getText().toString().equals("Class"))
-                    {
-                        ezone_level = 3;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-                    else if (txt_ez_header.getText().toString().equals("Subclass"))
-                    {
-                        ezone_level = 4;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-//                    else if (txt_ez_header.getText().toString().equals("Brand Class")) {
-//                        ezone_level = 5;
+//                    else if (txt_ez_header.getText().toString().equals("Class"))
+//                    {
+//                        ezone_level = 3;
 //                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
 //                    }
-                    // when location is checked in view by
-                    else if (txt_ez_header.getText().toString().equals("Region"))
-                    {
-                        ezone_level = 7;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-                    else if (txt_ez_header.getText().toString().equals("Store"))
-                    {
-                        ezone_level = 9;
-                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-                    }
-
-                    if (Reusable_Functions.chkStatus(context))
-                    {
-                        //  Reusable_Functions.hDialog();
-                        ez_currentVmPos = ez_viewpager.getCurrentItem();
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
-
-                        if (ez_firstVisible_no != ez_sFirstPosVal) {
-                            if (ez_postRequest != null) {
-                                ez_postRequest.cancel();
-                            }
-                            ez_progessBar.setVisibility(View.VISIBLE);
-                            if (ez_sale_first_item.equals("All"))
-                            {
-                                requestEzoneSalesHeaderAPI();
-                            }
-                            else
-                            {
-                                requestEzoneSalesPagerOnScrollAPI();
-                            }
-                            ez_sFirstPosVal = ez_firstVisible_no;
-                        }
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }// end of if loop
-        } else   // condition for Fashion at BB
-        {
+//                    else if (txt_ez_header.getText().toString().equals("Subclass"))
+//                    {
+//                        ezone_level = 4;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//                    }
+////                    else if (txt_ez_header.getText().toString().equals("Brand Class"))
+////                    {
+////                        ezone_level = 5;
+////                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+////                    }
+//                    //location is checked in view by
+//                    else if (txt_ez_header.getText().toString().equals("Region"))
+//                    {
+//                        ezone_level = 7;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//                    }
+//                    else if (txt_ez_header.getText().toString().equals("Store"))
+//                    {
+//                        ezone_level = 9;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//                    }
+//                    if (Reusable_Functions.chkStatus(context)) {
+////                        Reusable_Functions.hDialog();
+//                        ez_currentVmPos = ez_viewpager.getCurrentItem();
+//                        offsetvalue = 0;
+//                        limit = 100;
+//                        count = 0;
+//                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+//
+//                        if (ez_firstVisible_no != ez_sFirstPosVal) {
+//                            if (ez_postRequest != null) {
+//                                ez_postRequest.cancel();
+//                            }
+//                            ez_progessBar.setVisibility(View.VISIBLE);
+//                            if (ez_sale_first_item.equals("All")) {
+//                                requestEzoneSalesHeaderAPI();
+//                            } else {
+//                                requestEzoneSalesPagerOnScrollAPI();
+//                            }
+//                            ez_sFirstPosVal = ez_firstVisible_no;
+//                        }
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                    }
+//                } else {
+//                    ez_firstVisible_no = ez_sales_detalis_array.size() - 1;
+//                    LinearLayoutManager llm = (LinearLayoutManager) recyclevw_ez_sales.getLayoutManager();
+//                    llm.scrollToPosition(ez_firstVisible_no);
+//                    // product is checked in view by
+//                    if (txt_ez_header.getText().toString().equals("Department"))
+//                    {
+//                        ezone_level = 1;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//
+//                    }
+//                    else if (txt_ez_header.getText().toString().equals("Subdept"))
+//                    {
+//                        ezone_level = 2;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//                    }
+//                    else if (txt_ez_header.getText().toString().equals("Class"))
+//                    {
+//                        ezone_level = 3;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//                    }
+//                    else if (txt_ez_header.getText().toString().equals("Subclass"))
+//                    {
+//                        ezone_level = 4;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//                    }
+////                    else if (txt_ez_header.getText().toString().equals("Brand Class")) {
+////                        ezone_level = 5;
+////                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+////                    }
+//                    // when location is checked in view by
+//                    else if (txt_ez_header.getText().toString().equals("Region"))
+//                    {
+//                        ezone_level = 7;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//                    }
+//                    else if (txt_ez_header.getText().toString().equals("Store"))
+//                    {
+//                        ezone_level = 9;
+//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
+//                    }
+//
+//                    if (Reusable_Functions.chkStatus(context))
+//                    {
+//                        //  Reusable_Functions.hDialog();
+//                        ez_currentVmPos = ez_viewpager.getCurrentItem();
+//                        offsetvalue = 0;
+//                        limit = 100;
+//                        count = 0;
+//                        ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+//
+//                        if (ez_firstVisible_no != ez_sFirstPosVal) {
+//                            if (ez_postRequest != null) {
+//                                ez_postRequest.cancel();
+//                            }
+//                            ez_progessBar.setVisibility(View.VISIBLE);
+//                            if (ez_sale_first_item.equals("All"))
+//                            {
+//                                requestEzoneSalesHeaderAPI();
+//                            }
+//                            else
+//                            {
+//                                requestEzoneSalesPagerOnScrollAPI();
+//                            }
+//                            ez_sFirstPosVal = ez_firstVisible_no;
+//                        }
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }// end of if loop
+//        } else   // condition for Fashion at BB
+//        {
             if (salesAnalysisClassArrayList.size() != 0) {
                 if (firstVisibleItem < salesAnalysisClassArrayList.size() && !onClickFlag) {
 
@@ -1072,7 +1072,30 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             }
                             progressBar1.setVisibility(View.VISIBLE);
                             if (saleFirstVisibleItem.equals("All")) {
-                                requestSalesViewPagerValueAPI();
+                                if(all_from_val.equals("category"))
+                                {
+                                    requestViewPagerValueAPI();
+                                }
+                                if(all_from_val.equals("class"))
+                                {
+                                    requestViewPagerValueAPI();
+                                }
+                                if(all_from_val.equals("brand"))
+                                {
+                                    requestViewPagerValueAPI();
+                                }
+                                if(all_from_val.equals("brandClass"))
+                                {
+                                    requestViewPagerValueAPI();
+
+                                }
+                                if(all_from_val.equals("filter"))
+                                {
+                                   requestHeaderAPI(sales_filter_level);
+                                }
+                                else {
+                                    requestSalesViewPagerValueAPI();
+                                }
                             } else {
                                 requestSalesPagerOnScrollAPI();
                             }
@@ -1128,7 +1151,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
                 }
             }// end of if loop
-        }// end of else loop
+//        }// end of else loop
     }
 
     @Override
@@ -2667,6 +2690,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     limit = 100;
                                     count = 0;
                                     planDeptNm = deptName;
+                                    all_from_val = "category";
                                     analysisArrayList.clear();
                                     requestViewPagerValueAPI();
                                 }
@@ -2809,6 +2833,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     limit = 100;
                                     count = 0;
                                     planCategoryNm = category;
+                                    all_from_val = "class";
                                     analysisArrayList.clear();
                                     requestViewPagerValueAPI();
                                 }
@@ -2948,6 +2973,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     limit = 100;
                                     count = 0;
                                     planClassNm = planclass;
+                                    all_from_val = "brand";
                                     analysisArrayList.clear();
                                     requestViewPagerValueAPI();
                                 }
@@ -3086,6 +3112,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     count = 0;
                                     analysisArrayList.clear();
                                     planBrandNm = brandnm;
+                                    all_from_val = "brandClass";
                                     requestViewPagerValueAPI();
                                 }
                                 else
@@ -3299,6 +3326,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     limit = 100;
                                     count = 0;
                                     analysisArrayList.clear();
+                                    all_from_val = "filter";
                                     llhierarchy.setVisibility(View.GONE);
                                     requestHeaderAPI(sales_filter_level);
                                 }

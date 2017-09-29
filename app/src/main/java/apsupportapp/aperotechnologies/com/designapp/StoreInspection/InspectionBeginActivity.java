@@ -1814,8 +1814,10 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 Log.e("jsonarray storeinspection "," "+jsonarray);
 
                 String url;
-                url = ConstsCore.web_url + "/v1/save/storeinspection/submit/" + userId;//+"?recache="+recache
+                url = ConstsCore.web_url + "/v1/save/storeinspection/submit/" + userId + "&storeCodew=" + store_Code;//+"?recache="+recache
                 Log.e("url storeinspection "," "+url);
+                //Log.e("url storeinspection "," "+url);
+
                 JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonarray.toString(),
                         new Response.Listener<JSONObject>() {
                             @Override

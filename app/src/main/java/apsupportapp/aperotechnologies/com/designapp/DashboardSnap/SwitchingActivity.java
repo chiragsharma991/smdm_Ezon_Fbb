@@ -106,9 +106,9 @@ public class SwitchingActivity extends AppCompatActivity
     RequestQueue queue;
     ArrayList<String> arrayList;
     public void moveTo(String value, Context context){
-
-        if(loginFromFbb)
-        {
+//
+//        if(loginFromFbb)
+//        {
 
 
 
@@ -326,10 +326,10 @@ public class SwitchingActivity extends AppCompatActivity
 
 
             }
-        }
-        else{
-
-            switch (value){
+//        }
+//        else{
+//
+//            switch (value){
 
               /*  case 0:
                     Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
@@ -382,8 +382,8 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(SupervisiorStaff);
                     break;*/
 
-            }
-        }
+//            }
+//        }
     }
 
 

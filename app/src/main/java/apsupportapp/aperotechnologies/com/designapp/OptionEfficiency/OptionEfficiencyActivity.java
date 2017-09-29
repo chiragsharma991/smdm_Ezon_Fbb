@@ -1497,7 +1497,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 offsetvalue = (limit * count) + limit;
                                 count++;
 
-                                requestHearderAPI();
+                                setFilterHeaderValue();
 
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1804,7 +1804,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
                             setHeaderValue();
                             optionEfficiencyDetails = new OptionEfficiencyDetails();
-                            if (oe_txtHeaderClass.getText().toString().equals("Category")) {
+                            if(oe_txtHeaderClass.getText().toString().equals("Category")) {
                                 optionEfficiencyDetails.setPlanCategory("All");
 
 
@@ -1909,7 +1909,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 offsetvalue = (limit * count) + limit;
                                 count++;
 
-                                requestHearderAPI();
+                                setHeaderValue();
 
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
