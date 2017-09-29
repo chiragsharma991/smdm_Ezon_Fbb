@@ -16,10 +16,13 @@ public class
 KeyProductPlanAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
     private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray<>();
+    String from,storeCode;
 
-    public KeyProductPlanAdapter(FragmentManager fm, int NumOfTabs) {
+    public KeyProductPlanAdapter(FragmentManager fm, int NumOfTabs, String from, String storeCode) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        this.from = from;
+        this.storeCode = storeCode;
     }
 
     @Override
@@ -27,7 +30,7 @@ KeyProductPlanAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-               Plan_Product tab1= new Plan_Product();
+               Plan_Product tab1= new Plan_Product(from , storeCode);
                return tab1;
             case 1:
                 Plan_Option_Fragment tab2= new Plan_Option_Fragment();

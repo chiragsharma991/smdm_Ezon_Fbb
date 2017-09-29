@@ -23,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,6 +95,7 @@ public class CustomerLookup_PageTwo extends Fragment
     int offset = 0, count = 0, limit = 100;
     private int arr_count = 0;
     public int pos;
+    RelativeLayout imgfilter;
 
    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -235,8 +237,9 @@ public class CustomerLookup_PageTwo extends Fragment
         return root;
     }
 
-    public CustomerLookup_PageTwo()
+    public CustomerLookup_PageTwo(RelativeLayout imgfilter)
     {
+        this.imgfilter = imgfilter;
 
     }
 
@@ -249,6 +252,7 @@ public class CustomerLookup_PageTwo extends Fragment
             if (checkNetworkFalse) {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
             }
+            imgfilter.setVisibility(View.GONE);
         }
 
     }
@@ -406,7 +410,11 @@ public class CustomerLookup_PageTwo extends Fragment
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        cust_progressBar.setVisibility(View.GONE);
+                        if(cust_progressBar != null)
+                        {
+                            cust_progressBar.setVisibility(View.GONE);
+                        }
+
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
@@ -422,6 +430,7 @@ public class CustomerLookup_PageTwo extends Fragment
                 return params;
             }
         };
+
         int socketTimeout = 60000;//5 seconds
 
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
@@ -442,7 +451,6 @@ public class CustomerLookup_PageTwo extends Fragment
         final Gson gson;
         gson = new Gson();
         if (band_Click) {
-
             url = ConstsCore.web_url + "/v1/display/customerdetails/" + user_id + "?engagementFor=" + engagementFor + "&engagementBrand=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
         } else {
             url = ConstsCore.web_url + "/v1/display/customerdetails/" + user_id + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;

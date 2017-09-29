@@ -45,6 +45,7 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     Gson gson;
     MySingleton m_config;
     public static Activity customerLookUpActivity;
+    private String from = null, storeCode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -88,12 +89,22 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         TabLayout tab = (TabLayout) findViewById(R.id.cust_dotTab);
         tab.setupWithViewPager(mViewPager, true);
-        adapter = new CustomerViewPagerAdapter(getApplicationContext(), getSupportFragmentManager());
+
+        if(getIntent().getExtras() != null)
+        {
+            if (getIntent().getExtras().getString("selectedStringVal") != null) {
+                from = "filter";
+                storeCode = getIntent().getExtras().getString("selectedStringVal");
+            }
+        }
+
+        RelativeLayout imgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
+        adapter = new CustomerViewPagerAdapter(getApplicationContext(), getSupportFragmentManager(), from, storeCode,imgfilter);
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(0);
         rel_cust_btnBack.setOnClickListener(this);
 
-        RelativeLayout imgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
+
         imgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +141,7 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
                     imgdot.setImageResource(R.mipmap.dots_unselected);
                     ez_linear_dots.addView(imgdot);
                 }
+
                 ImageView img = (ImageView) ez_linear_dots.getChildAt(position);
                 img.setImageResource(R.mipmap.dots_selected);
             }

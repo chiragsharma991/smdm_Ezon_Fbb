@@ -55,6 +55,8 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisProductAdapter;
 
+import static apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity.keyproductPlanActivity;
+
 /**
  * Created by pamrutkar on 03/03/17.
  */
@@ -102,7 +104,8 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
         queue = new RequestQueue(cache, network);
         queue.start();
         context = this;
-
+        rel_process_filter = (RelativeLayout) findViewById(R.id.rel_process_filter);
+        rel_process_filter.setVisibility(View.VISIBLE);
 
         key_storeList = new ArrayList<String>();
         initialize();
@@ -173,8 +176,7 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
 
 
     private void initialize() {
-        rel_process_filter = (RelativeLayout) findViewById(R.id.rel_process_filter);
-        rel_process_filter.setVisibility(View.VISIBLE);
+
         btnBack = (RelativeLayout)findViewById(R.id.keyprodfilter_btnBack);
         btnProd_Done =(RelativeLayout)findViewById(R.id.keyproduct_btnfilterdone) ;
         keyprod_editSearch = (EditText)findViewById(R.id.keyprodfilter_editSearch);
@@ -195,19 +197,44 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
                 onBackPressed();
                 break;
             case R.id.keyproduct_btnfilterdone:
-                Intent intent = new Intent(KeyProductFilterActivity.this,KeyProductPlanActivity.class);
+                selectbuild();
+
                 String filtervalue =  Arrays.toString(KeyProdFilterAdapter.checkedValue.toArray());
                 filtervalue = filtervalue.replace("[","");
                 String updatedfilterValue = filtervalue.replace("]","");
+                Intent intent = new Intent(KeyProductFilterActivity.this,KeyProductPlanActivity.class);
                 updatedfilterValue = updatedfilterValue.replace(", ",",");
                 intent.putExtra("productfilterValue",updatedfilterValue);
+                if(build.length() != 0)
+                {
+                    intent.putExtra("selectedStringVal", build.toString());
+                }
                 startActivity(intent);
+                keyproductPlanActivity.finish();
                 finish();
+                HourlyLocationAdapter.hr_store_str = "";
                 break;
         }
     }
 
-    private void requestProductListAPI(int offsetvalue2, final int limit2) {
+
+    private void selectbuild() {
+
+
+        if (HourlyLocationAdapter.hr_store_str.length() != 0) {
+            Log.e("came here 1","");
+            String store = HourlyLocationAdapter.hr_store_str;//.substring(0,4);
+            String Store;
+            Store = "storeCode=" + store;
+            build.append("&");
+            build.append(Store.replace(",$", ""));
+        }
+
+
+    }
+
+    private void requestProductListAPI(int offsetvalue2, final int limit2)
+    {
 
         String url = ConstsCore.web_url + "/v1/display/keyproducts/" + userId + "?offset=" + offsetvalue + "&limit=" + limit;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

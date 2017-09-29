@@ -106,6 +106,12 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     String filterProductValues = "", achColor;
     private TabLayout Tabview;
     private CardView table_area;
+    String from,storeCode;
+
+    public Plan_Product(String from, String storeCode) {
+        this.from = from;
+        this.storeCode = storeCode;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,6 +139,11 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         queue.start();
         planlevel = 1;
         filterProductValues = getActivity().getIntent().getStringExtra("productfilterValue");
+        if(filterProductValues == null)
+        {
+            filterProductValues = "";
+        }
+
         relPlanProd_Frag = (RelativeLayout) view.findViewById(R.id.planactual_rel);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.planactual_productrelLayout);
         table_area = (CardView) view.findViewById(R.id.table_area);
@@ -171,15 +182,27 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
             planlevel = 1;
             productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
 
-            if (filterProductValues == null || filterProductValues == "") {
-                plantoggleClick = false;
-                RetainSegVal();
-                requestPlanProductAPI(offsetvalue, limit);
-            } else {
-                //plantoggleClick = true;
+            if(!filterProductValues.equals("") || from != null)
+            {
                 RetainSegVal();
                 requestFilterProductAPI(offsetvalue, limit);
             }
+            else
+            {
+                plantoggleClick = false;
+                RetainSegVal();
+                requestPlanProductAPI(offsetvalue, limit);
+            }
+
+//            if (filterProductValues == null || filterProductValues == "") {
+//                plantoggleClick = false;
+//                RetainSegVal();
+//                requestPlanProductAPI(offsetvalue, limit);
+//            } else {
+//                //plantoggleClick = true;
+//                RetainSegVal();
+//                requestFilterProductAPI(offsetvalue, limit);
+//            }
         } else {
             Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
             plantoggleClick = false;
@@ -680,10 +703,22 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                         count = 0;
                         productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
                         planlevel = 1;
-                        if (filterProductValues == null || filterProductValues == "") {
-                            requestPlanProductAPI(offsetvalue, limit);
-                        } else {
+//                        if (filterProductValues == null || filterProductValues == "") {
+//                            requestPlanProductAPI(offsetvalue, limit);
+//                        } else {
+//                            requestFilterProductAPI(offsetvalue, limit);
+//                        }
+
+                        if(!filterProductValues.equals("") || from != null)
+                        {
+                            RetainSegVal();
                             requestFilterProductAPI(offsetvalue, limit);
+                        }
+                        else
+                        {
+                            plantoggleClick = false;
+                            RetainSegVal();
+                            requestPlanProductAPI(offsetvalue, limit);
                         }
                     } else {
                         Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -710,10 +745,21 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                         count = 0;
                         productNameBeanArrayList = new ArrayList<KeyPlanProductBean>();
                         planlevel = 1;
-                        if (filterProductValues == null || filterProductValues == "") {
-                            requestPlanProductAPI(offsetvalue, limit);
-                        } else {
+//                        if (filterProductValues == null || filterProductValues == "") {
+//                            requestPlanProductAPI(offsetvalue, limit);
+//                        } else {
+//                            requestFilterProductAPI(offsetvalue, limit);
+//                        }
+                        if(!filterProductValues.equals("") || from != null)
+                        {
+                            RetainSegVal();
                             requestFilterProductAPI(offsetvalue, limit);
+                        }
+                        else
+                        {
+                            plantoggleClick = false;
+                            RetainSegVal();
+                            requestPlanProductAPI(offsetvalue, limit);
                         }
                     } else {
                         Toast.makeText(getContext(), "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -779,7 +825,25 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
 
     private void requestFilterProductAPI(final int offset, int limit1) {
-        String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&productName=" + filterProductValues.replace(" ", "%20").replaceAll("&", "%26") + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        String url = null;
+
+        Log.e("== "," "+filterProductValues+" == "+from);
+        if(from != null && !filterProductValues.equals(""))
+        {
+            url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&productName=" + filterProductValues.replace(" ", "%20").replaceAll("&", "%26") + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+storeCode;
+        }
+        else
+        {
+            if(from != null)
+            {
+                url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+storeCode;
+            }
+            else if(!filterProductValues.equals(""))
+            {
+                url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&productName=" + filterProductValues.replace(" ", "%20").replaceAll("&", "%26") + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            }
+        }
+
 
         Log.e("TAG", "requestPlan_product: " + url);
 
@@ -806,8 +870,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+//                                    String storeCode = productName1.getString("storeCode");
+//                                    String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
@@ -819,8 +883,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
-                                    productNameBean.setStoreCode(storeCode);
-                                    productNameBean.setStoreDesc(storeDesc);
+//                                    productNameBean.setStoreCode(storeCode);
+//                                    productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -838,8 +902,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+//                                    String storeCode = productName1.getString("storeCode");
+//                                    String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
                                     productNameBean = new KeyPlanProductBean();
                                     productNameBean.setLevel(level);
@@ -851,8 +915,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
-                                    productNameBean.setStoreCode(storeCode);
-                                    productNameBean.setStoreDesc(storeDesc);
+//                                    productNameBean.setStoreCode(storeCode);
+//                                    productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 
@@ -868,6 +932,7 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                         } catch (Exception e) {
 
                             e.printStackTrace();
+                            Reusable_Functions.hDialog();
                             plantoggleClick = false;
 
                         }
@@ -1042,8 +1107,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+//                                    String storeCode = productName1.getString("storeCode");
+//                                    String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
 
                                     productNameBean = new KeyPlanProductBean();
@@ -1056,8 +1121,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
-                                    productNameBean.setStoreCode(storeCode);
-                                    productNameBean.setStoreDesc(storeDesc);
+//                                    productNameBean.setStoreCode(storeCode);
+//                                    productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                 }
                                 offsetvalue = (limit * count) + limit;
@@ -1075,8 +1140,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     double invClosingQty = productName1.getDouble("invClosingQty");
                                     double pvaSales = productName1.getDouble("pvaSales");
                                     double pvaStock = productName1.getDouble("pvaStock");
-                                    String storeCode = productName1.getString("storeCode");
-                                    String storeDesc = productName1.getString("storeDesc");
+//                                    String storeCode = productName1.getString("storeCode");
+//                                    String storeDesc = productName1.getString("storeDesc");
                                     String achColor = productName1.getString("achColor");
 
                                     productNameBean = new KeyPlanProductBean();
@@ -1089,8 +1154,8 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
                                     productNameBean.setSaleTotQty(saleTotQty);
                                     productNameBean.setPvaSales(pvaSales);
                                     productNameBean.setPvaStock(pvaStock);
-                                    productNameBean.setStoreCode(storeCode);
-                                    productNameBean.setStoreDesc(storeDesc);
+//                                    productNameBean.setStoreCode(storeCode);
+//                                    productNameBean.setStoreDesc(storeDesc);
                                     productNameBeanArrayList.add(productNameBean);
                                 }
 

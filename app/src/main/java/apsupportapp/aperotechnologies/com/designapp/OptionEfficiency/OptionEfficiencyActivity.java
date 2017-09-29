@@ -120,6 +120,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     Snackbar snackbar;
     private TabLayout Tabview;
     private int filter_level;
+    private String header_value;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,6 +131,22 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_FirstVisibleItem = "All";
         oe_ClickedVal = "";
         context = this;
+        header_value = "";
+        if(getIntent().getExtras() != null)
+        {
+            if(getIntent().getExtras().getString("selectedStringVal") != null)
+            {
+                header_value = getIntent().getExtras().getString("selectedStringVal");
+            }
+            else
+            {
+                header_value = "";
+            }
+        }
+        else
+        {
+            header_value = "";
+        }
         option_Efficiency = this;
         OptionefficiencyValue = "";
         focusposition = 0;
@@ -158,12 +175,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             level = 1;
 
             oe_llayouthierarchy.setVisibility(View.GONE);
-            if (getIntent().getStringExtra("selectedStringVal") == null) {
+            if (getIntent().getStringExtra("selectedStringVal") == null)
+            {
                 // filter_toggleClick = false;
                 seasonGroup = "Current";
                 retainValuesFilter();
                 requestHearderAPI();
-            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+            }
+            else if (getIntent().getStringExtra("selectedStringVal") != null)
+            {
                 String selectedString = getIntent().getStringExtra("selectedStringVal");
                 filter_level=getIntent().getIntExtra("selectedlevelVal",0);
 
@@ -173,7 +193,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                 requestOptionEfficiencyFilterVal(selectedString,filter_level);
             }
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             llayoutOEfficiency.setVisibility(View.GONE);
 
@@ -227,6 +249,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     return;
                 }
                 OptionefficiencyValue = "";
+                header_value = "";
 
                 switch (oe_txtHeaderClass.getText().toString()) {
 
@@ -342,6 +365,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     return;
                 }
                 OptionefficiencyValue = "";
+                header_value = "";
                 switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Department":
@@ -477,12 +501,22 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         switch (oe_txtHeaderClass.getText().toString()) {
 
                             case "Department":
+                                Log.e("here came"," ");
                                 oe_btnPrev.setVisibility(View.VISIBLE);
                                 oe_txtHeaderClass.setText("Category");
                                 oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanDept();
                                 fromWhere = "Category";
                                 level = 2;
                                 seasonGroup = "Current";
+                                if(!oe_ClickedVal.equals("All")) {
+                                    oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
+                                    oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                    header_value = "&department=" + oe_ClickedVal;
+                                }
+                                else
+                                {
+                                    header_value = "";
+                                }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.hDialog();
                                     Reusable_Functions.sDialog(context, "Loading data...");
@@ -511,6 +545,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 fromWhere = "Class";
                                 level = 3;
                                 seasonGroup = "Current";
+                                if(!oe_ClickedVal.equals("All")) {
+                                    oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
+                                    oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                    header_value = "&category=" + oe_ClickedVal;
+                                }
+                                else
+                                {
+                                    header_value = "";
+                                }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
                                         postRequest.cancel();
@@ -537,6 +580,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 fromWhere = "Brand";
                                 seasonGroup = "Current";
                                 level = 4;
+                                if(!oe_ClickedVal.equals("All"))
+                                {
+                                    oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
+                                    oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                    header_value = "&class=" + oe_ClickedVal;
+                                }
+                                else
+                                {
+                                    header_value = "";
+                                }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
                                         postRequest.cancel();
@@ -564,6 +617,16 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 fromWhere = "Brand Class";
                                 seasonGroup = "Current";
                                 level = 5;
+                                if(!oe_ClickedVal.equals("All"))
+                                {
+                                    oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
+                                    oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                    header_value = "&brand="+oe_ClickedVal;
+                                }
+                                else
+                                {
+                                    header_value = "";
+                                }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
                                         postRequest.cancel();
@@ -974,18 +1037,23 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         String url = "";
         if (coreSelection) {
             //core selection without season params
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
 
-            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        } else {
-            //  fashion select with season params
-            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
+        else {
+            //  fashion select with season params
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+
+        }
+
+        Log.e("requestHearderAPI url"," "+url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
-
+                        Log.e("requestHearderAPI response"," "+response);
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
 
@@ -1471,11 +1539,26 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         String url = "";
         if (coreSelection) {
             //core selection without season params
+            if(!header_value.equals(""))
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            }
 
-            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         } else {
             //  fashion select with season params
-            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            if(!header_value.equals(""))
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            }
+
         }
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -1604,19 +1687,33 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
         if (coreSelection) {
             //core selection without season group
-            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-
+            if(!header_value.equals(""))
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+            }
         } else {
             //fashion selection with season group
-            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-
+            if(!header_value.equals(""))
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+            }
         }
-        Log.e( "requestHeaderPieChart: ",""+url );
+
+        Log.e( "requestHeaderPieChart: url ",""+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
+                        Log.e("requestHeaderPieChart response "," "+response);
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -1815,6 +1912,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
                             optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
                             oe_listView.setLayoutManager(new LinearLayoutManager(context));
+                            optionEfficiencyDetails = optionEfficiencyDetailsArrayList.get(0);
+
+                            Log.e("=== "," "+optionEfficiencyDetails.getOptionCount());
 
                             oe_listView.setLayoutManager(new LinearLayoutManager(
                                     oe_listView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
@@ -1879,21 +1979,36 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void setHeaderValue() {
-        Log.e("come","here");
+
         String url = "";
         if (coreSelection) {
             //core selection without season params
-
-            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        } else {
-            //  fashion select with season params
-            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            if(!header_value.equals(""))
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+            }
         }
+        else {
+            //  fashion select with season params
+            if(!header_value.equals("")) {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
+            }
+            else
+            {
+                url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+            }
+        }
+        Log.e("setHeaderValue url "," "+url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e( "onResponse:All Api ",""+response );
+                        Log.e( "onResponse:setHeaderValue ",""+response );
                         Reusable_Functions.hDialog();
 
                         try {
@@ -1918,6 +2033,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     oeHeaderList.add(optionEfficiencyHeader);
                                 }
                             }
+
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
