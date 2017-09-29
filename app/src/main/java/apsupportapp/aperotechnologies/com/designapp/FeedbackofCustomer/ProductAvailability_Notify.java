@@ -46,6 +46,8 @@ import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpPostResponse;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_model;
+
+import static apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity.nestedScrollview;
 import static apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiSMS.req_sms_API;
 
 /**
@@ -617,9 +619,11 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
            // SelectedStoreCode = "2663";
             req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "productavailability",SelectedStoreCode);
             cancelData();
-            Intent dashboard = new Intent(context, SnapDashboardActivity.class);
-            dashboard.putExtra("from","feedback");
-            startActivity(dashboard);
+            ((Activity) context).finish();
+            nestedScrollview.fullScroll(View.FOCUS_DOWN);
+//            Intent dashboard = new Intent(context, SnapDashboardActivity.class);
+//            dashboard.putExtra("from","feedback");
+//            startActivity(dashboard);
         } catch (JSONException e) {
             e.printStackTrace();
         }

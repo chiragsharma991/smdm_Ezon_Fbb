@@ -100,8 +100,8 @@ public class OurStoreServices_Reports extends Fragment  implements TabLayout.OnT
     private int runningId;
     private String callback_header="Callback Required from CSD";
 
-    public OurStoreServices_Reports(String storeCode) {
-
+    public OurStoreServices_Reports(String storeCode)
+    {
         this.storeCode = storeCode;
     }
 
@@ -754,7 +754,7 @@ class ApiRequestNew_storeServices {
                         text_no_data_store.setVisibility(View.GONE);
 
 
-                        ResposeInterface.nodatafound();
+                      //  ResposeInterface.nodatafound();
 
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();

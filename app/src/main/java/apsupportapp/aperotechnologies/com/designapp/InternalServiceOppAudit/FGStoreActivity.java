@@ -15,6 +15,9 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+import com.appyvet.rangebar.RangeBar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -174,8 +177,8 @@ public class FGStoreActivity extends AppCompatActivity {
 
             }
         });
-       
 
+        RangeBar arc = (RangeBar) findViewById(R.id.rangebar);
 
         Button btn_Submit = (Button) findViewById(R.id.btn_submit);
         btn_Submit.setOnClickListener(new View.OnClickListener() {

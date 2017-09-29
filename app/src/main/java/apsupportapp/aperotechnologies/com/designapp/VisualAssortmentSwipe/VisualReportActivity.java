@@ -63,7 +63,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     TextView vr_likeVal,vr_dislikeVal,vr_pendingVal,txt_like_color,txt_dislike_color,txt_pending_color,txtStoreCode,txtStoreName;
     PieDataSet dataSet;
     PieData pieData;
-    String recache, isMultiStore, value;
+    String recache, isMultiStore, value, storeCode, store_Code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,12 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         lobId = sharedPreferences.getString("lobid","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            store_Code = storeCode.substring(0,4);
+            Log.i(TAG, "storeCode: "+storeCode );
+        }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -128,7 +134,7 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
 
     private void requestVisualReportAPI() {
 
-      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache +"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;//+"&offset=" + offset + "&limit=" + limit ;
+      String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache +"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId +"&storeCode=" +store_Code;//+"&offset=" + offset + "&limit=" + limit ;
         Log.e(TAG, "requestVisualReportAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

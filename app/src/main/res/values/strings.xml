@@ -207,5 +207,8 @@
     <string name="boris_return_detail">Return Detail</string>
 
     <string name="fg_store_audit">FG store Audit</string>
+    <string name="competitor_store_audit">Competitor-Store-Audit</string>
+    <string name="inspectionhistory">Inspection History</string>
+    <string name="txt_store">Store</string>
 
 </resources>

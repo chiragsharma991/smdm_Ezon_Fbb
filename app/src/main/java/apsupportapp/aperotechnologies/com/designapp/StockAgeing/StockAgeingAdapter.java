@@ -89,9 +89,9 @@ public class StockAgeingAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         Position = position;
-        final StockAgeingAdapter.Holder holder;
+        final Holder holder;
         if (convertView == null) {
-            holder = new StockAgeingAdapter.Holder();
+            holder = new Holder();
             convertView = mInflater.inflate(R.layout.activity_stock_ageing_child, null);
             holder.stock_ageing = (TextView) convertView.findViewById(R.id.stock_ageing);
             holder.stock_SOH_U = (TextView) convertView.findViewById(R.id.stock_SOH_U);
@@ -102,7 +102,7 @@ public class StockAgeingAdapter extends BaseAdapter {
             holder.stock_fav = (RelativeLayout) convertView.findViewById(R.id.stock_fav);
             convertView.setTag(holder);
         } else {
-            holder = (StockAgeingAdapter.Holder) convertView.getTag();
+            holder = (Holder) convertView.getTag();
             holder.ProgressPicaso.setVisibility(View.VISIBLE);
         }
         holder.stock_option.setText(arrayList.get(position).getOption());

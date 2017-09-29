@@ -458,7 +458,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
             build.append(Brandclass.replace(",$", ""));
         }
         if (SalesAnalysisLocationAdapter.an_store_str.length() != 0) {
-            String store = SalesAnalysisLocationAdapter.an_store_str.substring(0,4);
+            String store = SalesAnalysisLocationAdapter.an_store_str;
           //  String updateStore = store.replace(" ", "%20").replace("&", "%26");
             String Store;
             Store = "storeCode=" + store;
@@ -508,7 +508,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
             filter_level = 5;
         }
         if (build.toString().contains("brandclass")) {
-            filter_level = 6;
+            filter_level = 5;
         }
 
     }

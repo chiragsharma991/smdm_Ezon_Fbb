@@ -99,7 +99,7 @@ public class SwitchingActivity extends AppCompatActivity
     ListAdapter spinnerArrayAdapter;
     String SelectedStoreCode, storeDescription, from;
     SharedPreferences sharedPreferences;
-    String userId, bearertoken,storeCode,geoLevel2Code, lobId;
+    String userId, bearertoken,storeCode,geoLevel2Code, lobId, body_geoLevel2Code;
     private AlertDialog dialog;
     ListView select_storeList;
     String auth_code;
@@ -109,42 +109,7 @@ public class SwitchingActivity extends AppCompatActivity
 
         if(loginFromFbb)
         {
-          /* Mapping
-        001 - Product Info
-        002 - Visual Assortment
-        003 - Visual Assortment Report
-        004 - Sales
-        005 - Sales PvA
-        006 - Freshness Index
-        007 - Option Efficiency
-        008 - Skewed Sizes
-        009 - Best/Worst performers
-        010 - Stock Ageing
-        011 - Floor availability
-        012 - Target stock exception
-        013 - Sell Thru exception
-        014 - Running promo
-        015 - Upcoming promo
-        016 - Expiring promo
-        017 - Best/worst promo
-        018 - Key products PvA
-        019 - Key products hourly
-        020 - Collaboration to do
-        021 - Collaboration status
-        022 - Feedback
-        023 - Feedback list
-        024 - Store inspection new
-        025 - Store inspection history
-        026 - Season catalogue
-        027 - Customer loyalty
-        028 - Hourly performance
-        029 - BORIS
-        030 - Customer Feedback : Product Availability & Notify
-        031 - Customer Feedback : Policy Exchange,Refund
-        032 - Customer Feedback : Price & Promotion
-        033 - Customer Feedback : Product Quality & Range
-        034 - Customer Feedback : Our Store Services
-        035 - Customer Feedback : Supervisor & Staff*/
+
 
 
             switch (value) {
@@ -294,12 +259,16 @@ public class SwitchingActivity extends AppCompatActivity
                     commentDialog("FeedbackList");
                     break;
                 case "024":
-                    Intent InspectionBeginActivity = new Intent(context, InspectionBeginActivity.class);
-                    startActivity(InspectionBeginActivity);
+//                    Intent InspectionBeginActivity = new Intent(context, InspectionBeginActivity.class);
+//                    startActivity(InspectionBeginActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("InspectionBeginActivity");
                     break;
                 case "025":
-                    Intent InspectionHistoryActivity = new Intent(context, InspectionHistoryActivity.class);
-                    startActivity(InspectionHistoryActivity);
+//                    Intent InspectionHistoryActivity = new Intent(context, InspectionHistoryActivity.class);
+//                    startActivity(InspectionHistoryActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("InspectionHistoryActivity");
                     break;
                 case "026":
                     Intent mpm_activity = new Intent(context, mpm_activity.class);
@@ -701,7 +670,7 @@ public class SwitchingActivity extends AppCompatActivity
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId; //ConstsCore.web_url+ + "/v1/login/userId";
+        String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId; //ConstsCore.web_url+ + "/v1/login/userId";  // + "?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId
         Log.e("url store :", "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -720,6 +689,7 @@ public class SwitchingActivity extends AppCompatActivity
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     storeCode = collectionName.getString("storeCode");
+                                    body_geoLevel2Code = collectionName.getString("geoLevel2Code");
                                     arrayList.add(storeCode);
                                 }
                                 dialog.show();
@@ -740,6 +710,7 @@ public class SwitchingActivity extends AppCompatActivity
                                     if(from.equals("VisualAssortmentActivity")) {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualAssortmentActivity.class);
                                         intent.putExtra("storeCode", storeCode);
+                                        intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
                                         startActivity(intent);
                                     }
                                     else if(from.equals("VisualReportActivity")){
@@ -786,6 +757,7 @@ public class SwitchingActivity extends AppCompatActivity
                                     else if(from.equals("Feedback")){
                                         Intent intent = new Intent(SwitchingActivity.this, Feedback.class);
                                         intent.putExtra("storeCode", storeCode);
+                                        intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
                                         startActivity(intent);
                                     }
 
@@ -803,6 +775,18 @@ public class SwitchingActivity extends AppCompatActivity
 
                                     else if(from.equals("StatusActivity")){
                                         Intent intent = new Intent(SwitchingActivity.this, StatusActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("InspectionBeginActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, InspectionBeginActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("InspectionHistoryActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, InspectionHistoryActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }

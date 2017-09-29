@@ -383,7 +383,8 @@
                             android:layout_height="72dp"
                             android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"/>
-                        
+
+
 
                     </LinearLayout>
 
@@ -411,8 +412,6 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
-
                     </LinearLayout>
 
                     <View
@@ -1358,6 +1357,11 @@
 
 
             </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
         </RelativeLayout>
 
     </ScrollView>

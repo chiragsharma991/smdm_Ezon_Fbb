@@ -3,6 +3,7 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fra
 import android.content.Context;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,6 +39,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public OnPress onPressInterface;
     private Set<Pair<Integer, Integer>> CheckedItems ;
     public boolean[] visibleItems;
+    public ArrayList<String> selectedOptionList,selectedSizeList;
 
 
     public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess) {
@@ -49,6 +52,8 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         CheckedItems=new HashSet<Pair<Integer,Integer>>();
         visibleItems=new boolean[list.size()];
         this.detailProcess=detailProcess;
+        selectedOptionList = new ArrayList<String>();
+        selectedSizeList = new ArrayList<String>();
 
     }
 
@@ -182,55 +187,89 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public JSONArray OnSubmit(String MCCodeDesc,String prodLevel3Desc,String deviceId)
-    {
-        int count=0;  //count is for add one by one in Jsonarray.
+    public JSONArray OnSubmit(String MCCodeDesc, String prodLevel3Desc, String store_code) {
+
+
+       for(int i = 0;i<list.size();i++)
+       {
+           // for option List
+           if(HeadercheckList[i])
+           {
+               selectedOptionList.add((list.get(i).getLevel()));
+
+           }
+           //for size list
+           for(int j = 0; j<HashMapSubChild.get(i).size();j++)
+           {
+               Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
+               if(CheckedItems.contains(Tag))
+               {
+                  selectedSizeList.add(HashMapSubChild.get(i).get(j).getLevel());
+               }
+
+           }
+       }
+
+       Log.e("OnSubmit------: ", "size List" + selectedSizeList + "\n" + "optionList " + selectedOptionList);
+        // for option List converted to string array to string
+        String[] optionArray = (String[]) selectedOptionList.toArray(new String[0]);
+        String optionList = Arrays.toString(optionArray);
+        optionList = optionList.replace("[", "");
+        optionList = optionList.replace("]", "");
+        optionList = optionList.replace(", ", ",");
+
+        // for size List converted to string array to string
+        String[] sizeArray = (String[]) selectedSizeList.toArray(new String[0]);
+        String sizeList = Arrays.toString(sizeArray);
+        sizeList = sizeList.replace("[", "");
+        sizeList = sizeList.replace("]", "");
+        sizeList = sizeList.replace(", ", ",");
+
         JSONArray jsonarray=new JSONArray();
         try
         {
-            for (int i = 0; i <list.size(); i++) {
 
-                if(!HashMapSubChild.get(i).isEmpty())   //fst start with subchild if no one select in subchild then it will go header selection.
-                {
-                    for (int j = 0; j <HashMapSubChild.get(i).size(); j++)
-                    {
-                        Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
-                        if(CheckedItems.contains(Tag))
-                        {
-                            JSONObject obj = new JSONObject();
-                            obj.put("option",list.get(i).getLevel());
-                            obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
-                            obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
-                            obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
-                            obj.put("deviceId",deviceId);
-                            jsonarray.put(count,obj);
-                            count++;
-                        }
-                    }
-                }
-                else
-                {
-                    if(HeadercheckList[i])
-                    {
-                        JSONObject obj = new JSONObject();
-//                        obj.put("option",list.get(i).getLevel());
-//                        obj.put("prodLevel6Code",MCCodeDesc);
-                        obj.put("option",list.get(i).getLevel());
-//                        obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
-                        obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
-                        obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
-                        obj.put("deviceId",deviceId);
-                        jsonarray.put(count,obj);
-                        count++;
+            JSONObject obj = new JSONObject();
+            obj.put("option",optionList);
+            obj.put("prodAttribute4",sizeList);
+            obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
+            obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
+            //   obj.put("deviceId",deviceId);
+            obj.put("storeCode",store_code);
+            jsonarray.put(obj);
 
-                    }
-                }
-            }
+//                if(HashMapSubChild.)   //fst start with subchild if no one select in subchild then it will go header selection.
+//                {
+//
+//                        Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
+//                        if(CheckedItems.contains(Tag))
+//                        {
+//                        }
+//
+//                }
+//                else
+//                {
+//                    if(HeadercheckList[i])
+//                    {
+//
+//                        JSONObject obj = new JSONObject();
+////                        obj.put("option",list.get(i).getLevel());
+////                        obj.put("prodLevel6Code",MCCodeDesc);
+//                        obj.put("option",optionList);
+////                        obj.put("prodAttribute4",HashMapSubChild.get(i).get(j).getLevel());
+//                        obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
+//                        obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
+//                        //  obj.put("deviceId",deviceId);
+//                        jsonarray.put(obj);
+//                      }
+//                }
+
         }
         catch (JSONException e)
         {
             e.printStackTrace();
         }
-        return jsonarray;
+       return jsonarray;
     }
+
 }

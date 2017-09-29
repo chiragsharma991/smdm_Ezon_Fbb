@@ -2548,7 +2548,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 fromWhere = "Brand Class";
                                 btnSalesPrev.setVisibility(View.VISIBLE);
                                 btnSalesNext.setVisibility(View.INVISIBLE);
-                            } else if (sales_filter_level == 6) {
+                            } else if (sales_filter_level == 5) {
                                 txtheaderplanclass.setText("Brand Class");
                                 fromWhere = "Brand Class";
                                 btnSalesPrev.setVisibility(View.VISIBLE);

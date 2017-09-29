@@ -1388,7 +1388,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             oe_btnNext.setVisibility(View.INVISIBLE);
 
 
-                        } else if (filter_level == 6) {
+                        } else if (filter_level == 5) {
                             oe_txtHeaderClass.setText("Brand Class");
                             fromWhere = "Brand Class";
                             oe_btnPrev.setVisibility(View.VISIBLE);
@@ -1424,66 +1424,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             }
 
                             oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
-//                            setHeaderValue();
-//                            optionEfficiencyDetails = new OptionEfficiencyDetails();
-//                            if (oe_txtHeaderClass.getText().toString().equals("Department"))
-//                            {
-//                                optionEfficiencyDetails.setPlanDept("All");
-//                            }
-//                            else if (oe_txtHeaderClass.getText().toString().equals("Category"))
-//                            {
-//                                optionEfficiencyDetails.setPlanCategory("All");
-//                            }
-//                            if (oe_txtHeaderClass.getText().toString().equals("Class"))
-//                            {
-//                                optionEfficiencyDetails.setPlanClass("All");
-//                            }
-//                            if (oe_txtHeaderClass.getText().toString().equals("Brand"))
-//                            {
-//                                optionEfficiencyDetails.setBrandName("All");
-//                            }
-//                            if (oe_txtHeaderClass.getText().toString().equals("Brand Class"))
-//                            {
-//                                optionEfficiencyDetails.setBrandplanClass("All");
-//                            }
-//
-//                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
-//                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
-//                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
-//                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
-//                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
-                            oe_listView.setLayoutManager(new LinearLayoutManager(context));
+                            setFilterHeaderValue();
 
-                            oe_listView.setLayoutManager(new LinearLayoutManager(
-                                        oe_listView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
-                                        LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                                oe_listView.setOnFlingListener(null);
-                                new GravitySnapHelper(48).attachToRecyclerView(oe_listView);
-                                optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
-                                oe_listView.setAdapter(optionIndexSnapAdapter);
-                                optionIndexSnapAdapter.notifyDataSetChanged();
-
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                optionArrayList.clear();
-                                if (oe_txtHeaderClass.getText().toString().equals("Department")) {
-                                    level = 1;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanDept().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
-                                    level = 2;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanCategory().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
-                                    level = 3;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanClass().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
-                                    level = 4;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getBrandName().toString();
-                                } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
-                                    level = 5;
-                                    oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getBrandplanClass().toString();
-                                }
-                                requestOEPieChart();
 
 
                         } catch (Exception e) {
@@ -1523,7 +1465,138 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     }
 
-       private void requestHeaderPieChart() {
+    private void setFilterHeaderValue()
+    {
+        Log.e("come","here");
+        String url = "";
+        if (coreSelection) {
+            //core selection without season params
+
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        } else {
+            //  fashion select with season params
+            url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        }
+        postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e( "onResponse:All Api ",""+response );
+                        Reusable_Functions.hDialog();
+
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+
+                                return;
+                            } else if (response.length() == limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
+                                    oeHeaderList.add(optionEfficiencyHeader);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+
+                                requestHearderAPI();
+
+                            } else if (response.length() < limit) {
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    optionEfficiencyHeader = gson.fromJson(response.get(i).toString(), OptionEfficiencyHeader.class);
+                                    oeHeaderList.add(optionEfficiencyHeader);
+                                }
+                            }
+                            optionEfficiencyDetails = new OptionEfficiencyDetails();
+                            if (oe_txtHeaderClass.getText().toString().equals("Department"))
+                            {
+                                optionEfficiencyDetails.setPlanDept("All");
+                            }
+                            else if (oe_txtHeaderClass.getText().toString().equals("Category"))
+                            {
+                                optionEfficiencyDetails.setPlanCategory("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Class"))
+                            {
+                                optionEfficiencyDetails.setPlanClass("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Brand"))
+                            {
+                                optionEfficiencyDetails.setBrandName("All");
+                            }
+                            if (oe_txtHeaderClass.getText().toString().equals("Brand Class"))
+                            {
+                                optionEfficiencyDetails.setBrandplanClass("All");
+                            }
+
+                            optionEfficiencyDetails.setOptionCount(optionEfficiencyHeader.getOptionCount());
+                            optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
+                            optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
+                            optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
+                            optionEfficiencyDetailsArrayList.add(0, optionEfficiencyDetails);
+                            oe_listView.setLayoutManager(new LinearLayoutManager(context));
+
+                            oe_listView.setLayoutManager(new LinearLayoutManager(
+                                    oe_listView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                    LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                            oe_listView.setOnFlingListener(null);
+                            new GravitySnapHelper(48).attachToRecyclerView(oe_listView);
+                            optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
+                            oe_listView.setAdapter(optionIndexSnapAdapter);
+                            optionIndexSnapAdapter.notifyDataSetChanged();
+
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            optionArrayList.clear();
+                            if (oe_txtHeaderClass.getText().toString().equals("Department")) {
+                                level = 1;
+                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanDept().toString();
+                            } else if (oe_txtHeaderClass.getText().toString().equals("Category")) {
+                                level = 2;
+                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanCategory().toString();
+                            } else if (oe_txtHeaderClass.getText().toString().equals("Class")) {
+                                level = 3;
+                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getPlanClass().toString();
+                            } else if (oe_txtHeaderClass.getText().toString().equals("Brand")) {
+                                level = 4;
+                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getBrandName().toString();
+                            } else if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
+                                level = 5;
+                                oe_FirstVisibleItem = optionEfficiencyDetailsArrayList.get(0).getBrandplanClass().toString();
+                            }
+                            requestOEPieChart();
+
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, " no data found  ", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+    private void requestHeaderPieChart() {
         String url = "";
         offsetvalue = 0;
         limit = 100;

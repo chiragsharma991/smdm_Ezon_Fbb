@@ -115,7 +115,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
         option = option.replace(" ", "%20").replace("&", "%26");
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20") +"&recache=true";
         Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -199,7 +199,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
         prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
         MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId +"?storeCode="+store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId +"?storeCode="+store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20") +"&recache=true";
         Log.e("TAG", "requestReceiversDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -312,7 +312,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         Todo_detailStoreAvlQty.setText(" " + Math.round(MCCode));
         details_imageBtnBack.setOnClickListener(this);
         btn_receiver_submit.setOnClickListener(this);
-        btn_selectAll.setOnClickListener(new View.OnClickListener() {
+        btn_selectAll.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -320,6 +321,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                 {
                     stockDetailsAdapter.HeadercheckList[i]= true;
                     stockDetailsAdapter.visibleItems[i]=true;
+
                 }
                 stockDetailsAdapter.notifyDataSetChanged();
 
@@ -333,6 +335,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                 {
                     stockDetailsAdapter.HeadercheckList[i] = false;
                     stockDetailsAdapter.visibleItems[i] = true;
+                    stockDetailsAdapter.selectedSizeList.clear();
+                    stockDetailsAdapter.selectedOptionList.clear();
                 }
                 stockDetailsAdapter.notifyDataSetChanged();
             }
@@ -361,7 +365,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
             case R.id.stock_detailSubmit:
                 if (!(DetailsList.size() == 0)) {
-                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc, prodLevel3Desc, deviceId);
+                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc, prodLevel3Desc, store_code);
                     if (jsonArray.length() == 0) {
                         Toast.makeText(Details.this, "Please select at least one option.", Toast.LENGTH_SHORT).show();
                     } else {

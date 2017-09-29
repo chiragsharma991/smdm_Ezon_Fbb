@@ -1,6 +1,8 @@
 package apsupportapp.aperotechnologies.com.designapp.CustomerEngagement;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,6 +24,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.google.gson.Gson;
 
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
+import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyStoreFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
@@ -40,6 +44,7 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
     SharedPreferences sharedPreferences;
     Gson gson;
     MySingleton m_config;
+    public static Activity customerLookUpActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -48,6 +53,7 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_customer_lookup);
         getSupportActionBar().hide();
         context = this;
+        customerLookUpActivity = this;
         m_config = MySingleton.getInstance(context);
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -61,15 +67,14 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
 
-        if (geoLeveLDesc.equals("E ZONE"))
-        {
-            userId = sharedPreferences.getString("userId", "");  //E zone userid =username
-        }
-        else
-        {
-            userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
-            userId = userId.substring(0, userId.length() - 5);    // Hourly works only userid=username;
-        }
+//        if (geoLeveLDesc.equals("E ZONE"))
+//        {
+//            userId = sharedPreferences.getString("userId", "");  //E zone userid =username
+//        }
+//        else
+//        {
+//            userId = sharedPreferences.getString("userId", "");   //FBB userid =username+store code
+//        }
         gson = new Gson();
         initialiseUi();
         setTab();
@@ -87,6 +92,16 @@ public class CustomerLookupActivity extends AppCompatActivity implements View.On
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(0);
         rel_cust_btnBack.setOnClickListener(this);
+
+        RelativeLayout imgfilter = (RelativeLayout) findViewById(R.id.imgfilter);
+        imgfilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomerLookupActivity.this, HourlyStoreFilterActivity.class);
+                intent.putExtra("checkfrom", "CustomerEngagement");
+                startActivity(intent);
+            }
+        });
     }
 
     private void setTab()

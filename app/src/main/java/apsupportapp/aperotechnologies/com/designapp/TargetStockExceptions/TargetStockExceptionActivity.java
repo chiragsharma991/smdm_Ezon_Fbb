@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -40,8 +41,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.model.FloorAvailabilityDetails;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -349,7 +352,14 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
         qfDoneLayout.setOnClickListener(this);
        // target_segmented.setOnCheckedChangeListener(TargetStockExceptionActivity.this);
         target_BtnBack.setOnClickListener(TargetStockExceptionActivity.this);
-        target_BtnFilter.setOnClickListener(this);
+        target_BtnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TargetStockExceptionActivity.this, SalesAnalysisFilter.class);
+                intent.putExtra("checkfrom", "targetstockexception");
+                startActivity(intent);
+            }
+        });
         target_quickFilter.setOnClickListener(this);
         quickFilter_baseLayout.setOnClickListener(this);
         quickFilter_BorderLayout.setOnClickListener(this);

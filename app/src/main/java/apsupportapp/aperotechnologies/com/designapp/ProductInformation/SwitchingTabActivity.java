@@ -158,7 +158,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
             Intent intent = new Intent(SwitchingTabActivity.this, StyleActivity.class);
             intent.putExtra("selCollectionname", getIntent().getExtras().getString("selCollectionname"));
             intent.putExtra("selOptionName", getIntent().getExtras().getString("selOptionName"));
-           // intent.putExtra("selStoreName",getIntent().getExtras().getString("selStoreName"));
+            intent.putExtra("selStoreName",getIntent().getExtras().getString("selStoreName"));
             startActivity(intent);
             finish();
         }

@@ -444,14 +444,43 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 lob_name_txt.setText(selectLob);
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                if (model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION"))
+
+                if (model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION")){
                     editor.putString("concept", "BB,FBB");
-                else editor.putString("concept", model.getGeoLevel2Code());
+                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
+                    editor.putString("lobid", model.getLobId());
+                    editor.putString("lobname", model.getLobName());
+                    editor.putString("kpi_id", model.getKpiId());
+                    editor.apply();
+
+                } else if (model.getGeoLevel2Code().equals("EZ")){
+
+                    editor.putString("concept", "BB,EZ");
+                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
+                    editor.putString("lobid", model.getLobId());
+                    editor.putString("lobname", "ELECTRONICS");
+                    editor.putString("kpi_id", model.getKpiId());
+                    editor.apply();
+
+                }
+                else if (model.getGeoLevel2Code().equals("BB") && model.getLobName().equals("ELECTRONICS")){
+
+                    editor.putString("concept", "BB,EZ");
+                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
+                    editor.putString("lobid", model.getLobId());
+                    editor.putString("lobname", "ELECTRONICS");
+                    editor.putString("kpi_id", model.getKpiId());
+                    editor.apply();
+
+                }
+                else {
+                editor.putString("concept", model.getGeoLevel2Code());
                 editor.putString("conceptDesc", model.getGeoLevel2Desc());
                 editor.putString("lobid", model.getLobId());
                 editor.putString("lobname", model.getLobName());
                 editor.putString("kpi_id", model.getKpiId());
                 editor.apply();
+                }
 
                 String kpi_id = model.getKpiId();
                 String[] selectKpiID = kpi_id.split(",");

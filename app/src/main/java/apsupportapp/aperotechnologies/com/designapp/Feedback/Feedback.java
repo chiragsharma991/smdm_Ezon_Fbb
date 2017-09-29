@@ -83,7 +83,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private ArrayList<String> optionList;
     private boolean feedbackReport = false;
     private Feedback_model feedback_model_report;
-    private String selectCategory, isMultiStore, value, storeCode, store_Code;
+    private String selectCategory, isMultiStore, value, storeCode, store_Code, body_geoLevel2Code;
     private String storecode, storeDes;
 
 
@@ -106,7 +106,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if(getIntent().getExtras().getString("storeCode") != null )
         {
             storeCode = getIntent().getExtras().getString("storeCode");
+            body_geoLevel2Code = getIntent().getExtras().getString("body_geoLevel2Code");
             store_Code = storeCode.substring(0,4);
+            Log.e("body_geoLevel2Code "," "+body_geoLevel2Code);
             Log.i(TAG, "storeCode: "+storeCode );
         }
         Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
@@ -194,7 +196,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             String url;
 
             if (!feedbackReport) {
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId +"&storeCode=" +store_Code;
                // url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             } else {
@@ -258,6 +260,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         limit = 10;
                                         offsetvalue = 0;
 
+                                   //     feedbackDetails("", 0);
                                         for (int i = 0; i < optionList.size(); i++) {
 
                                             feedbackDetails(i, 0);
@@ -453,6 +456,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         Log.e(TAG, "feedbackDetails: " );
 
+        Log.e("position feedbackDetails"," "+position);
         // firstView.setVisibility(View.GONE);
         // secondView.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= 21) {
@@ -511,6 +515,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setLayoutParams(layoutParams);
                 lp.setBackgroundColor(Color.parseColor("#e3e2e3"));
+
                 if (position == 0) {
                     Fitting_relative.addView(lp);
                 } else if (position == 1) {
@@ -527,6 +532,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                     garment_relative.addView(lp);
                 }
 
+
                 AddText(position, Listposition);
 
             }
@@ -536,6 +542,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void AddText(int position, int Listposition) {
+        Log.e("position "," "+position);
+        Log.e("Listposition "," "+Listposition);
 
 
         // starting title text
@@ -575,7 +583,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         // another text
 
         final TextView textView2 = new TextView(context);
-
+        Log.e("position "," "+position);
         // get percentage for all list & 0 will be change according to next pre button
         if (position == 0) {
             textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFittingCntPer()) + " %");
@@ -656,6 +664,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             jsonObject.put("styling", styling);
             jsonObject.put("fabricQuality", fabric);
             jsonObject.put("garmentQuality", fabricQuality);
+            jsonObject.put("geoLevel2Code", body_geoLevel2Code);
+            jsonObject.put("lobId", lobId);
+            jsonObject.put("storeCode", store_Code);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -670,7 +681,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if (Reusable_Functions.chkStatus(mcontext)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
-            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetailsNew/" + userId +"?geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId ;//+"?recache="+recache
+            String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetailsNew/" + userId  ;//+"?geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId
            // String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId + "?geoLevel2Code="+ geoLevel2Code ;//+"?recache="+recache
             Log.e(TAG, "requestReceiverSubmitAPI: "+object.toString());
             Log.e(TAG, "requestReceiverSubmitAPI url: "+url.toString());
