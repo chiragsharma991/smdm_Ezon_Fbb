@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.KeyProductPlan;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,8 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
     RequestQueue queue;
     public static CustomViewPager plan_pager;
     public static TextView txtStoreCode,txtStoreDesc;
+    private String from = null, storeCode;
+    public static Activity keyproductPlanActivity;
 
 
     @Override
@@ -44,7 +47,17 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         getSupportActionBar().hide();
         setContentView(R.layout.activity_actual_product);
         context = this;
+        keyproductPlanActivity = this;
         m_config = MySingleton.getInstance(context);
+
+        if(getIntent().getExtras() != null)
+        {
+            if (getIntent().getExtras().getString("selectedStringVal") != null) {
+                from = "filter";
+                storeCode = getIntent().getExtras().getString("selectedStringVal");
+            }
+        }
+
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -62,7 +75,7 @@ public class KeyProductPlanActivity extends AppCompatActivity implements View.On
         tabLayout.addTab(tabLayout.newTab().setText("SKU"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         plan_pager = (CustomViewPager) findViewById(R.id.planactual_pager);
-        adapter = new KeyProductPlanAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        adapter = new KeyProductPlanAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), from, storeCode);
         plan_pager.setAdapter(adapter);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

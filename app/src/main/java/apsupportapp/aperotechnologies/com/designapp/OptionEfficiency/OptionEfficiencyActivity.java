@@ -158,12 +158,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             level = 1;
 
             oe_llayouthierarchy.setVisibility(View.GONE);
-            if (getIntent().getStringExtra("selectedStringVal") == null) {
+            if (getIntent().getStringExtra("selectedStringVal") == null)
+            {
                 // filter_toggleClick = false;
                 seasonGroup = "Current";
                 retainValuesFilter();
                 requestHearderAPI();
-            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+            }
+            else if (getIntent().getStringExtra("selectedStringVal") != null)
+            {
                 String selectedString = getIntent().getStringExtra("selectedStringVal");
                 filter_level=getIntent().getIntExtra("selectedlevelVal",0);
 
@@ -173,7 +176,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
                 requestOptionEfficiencyFilterVal(selectedString,filter_level);
             }
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             llayoutOEfficiency.setVisibility(View.GONE);
 

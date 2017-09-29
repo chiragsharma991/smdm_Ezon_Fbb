@@ -21,6 +21,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,10 +106,14 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private int totalItemCount = 0;  // this is total item present in listview
     int firstVisibleItem = 0;
     MySingleton m_config;
+    private String from, storeCode;
+    RelativeLayout imgfilter;
 
-    public CustomerLookup_PageOne()
+    public CustomerLookup_PageOne(String from, String storeCode, RelativeLayout imgfilter)
     {
-
+        this.from = from;
+        this.storeCode = storeCode;
+        this.imgfilter = imgfilter;
     }
 
     @Override
@@ -120,6 +125,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
 
             }
+            imgfilter.setVisibility(View.VISIBLE);
         }
     }
 
@@ -223,12 +229,22 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
     private void requestCustomerLoyaltySummary()
     {
-        String url = ConstsCore.web_url + "/v1/display/customerloyaltysummary/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        String url;
+        if(from != null)
+        {
+            url = ConstsCore.web_url + "/v1/display/customerloyaltysummary/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+storeCode;
+        }
+        else
+        {
+            url = ConstsCore.web_url + "/v1/display/customerloyaltysummary/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        }
+
+
         Log.e("cust summary url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("response :", "" + response);
+                Log.e("responseCustomerLoyaltySummary :", "" + response);
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -315,13 +331,20 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private void requestCustomerPlanEngagement()
     {
         int level = 1;
-        String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;//+ "&offset=" + offsetval + "&limit=" + limit;
-
+        String url;
+        if(from != null)
+        {
+            url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+storeCode;//+ "&offset=" + offsetval + "&limit=" + limit;
+        }
+        else
+        {
+            url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;//+ "&offset=" + offsetval + "&limit=" + limit;
+        }
         Log.e("cust summary url ", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("response :", "" + response);
+                Log.e("responseCustomerPlanEngagement :", "" + response);
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0)
@@ -420,13 +443,21 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     private void requestLifeStage()
     {
         int level = 2;
-        String url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;//+ "&offset=" + offsetval + "&limit=" + limit;
+        String url;
+        if(from != null)
+        {
+            url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+storeCode;//+ "&offset=" + offsetval + "&limit=" + limit;
+        }
+        else
+        {
+            url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;//+ "&offset=" + offsetval + "&limit=" + limit;
+        }
 
         Log.e("cust summary url 1", "" + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("response 1 :", "" + response);
+                Log.e("responseLifeStage 1 :", "" + response);
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {

@@ -105,10 +105,12 @@ public class SwitchingActivity extends AppCompatActivity
     String auth_code;
     RequestQueue queue;
     ArrayList<String> arrayList;
-    public void moveTo(String value, Context context){
+    public void moveTo(String value, Context context)
+    {
 
-        if(loginFromFbb)
-        {
+        Log.e("loginFromFbb "," "+loginFromFbb);
+//        if(loginFromFbb)
+//        {
           /* Mapping
         001 - Product Info
         002 - Visual Assortment
@@ -314,12 +316,12 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(MobileScreenActivity);
                     break;
             }
-        }
+        /*}
         else{
 
             switch (value){
 
-              /*  case 0:
+             case 0:
                     Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
                     startActivity(SalesAnalysisActivity1);
                     break;
@@ -366,11 +368,11 @@ public class SwitchingActivity extends AppCompatActivity
                 case 45:
                     Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
                     startActivity(SupervisiorStaff);
-                    break;*/
+                    break;
 
-            }
+            }*/
         }
-    }
+//    }
 
 
     protected List<App> getProduct(int i , List<String> kpiIdArray) {
