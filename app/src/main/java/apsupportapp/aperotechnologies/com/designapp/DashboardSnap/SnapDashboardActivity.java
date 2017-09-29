@@ -157,11 +157,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         lobName = sharedPreferences.getString("lobname", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
-     //   Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
+        Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
         //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 //        Log.e("SnapDashboard", "Refreshed token:------ " + refreshedToken);
-//        Log.e(TAG, "userId :--" + userId);
-//        Log.e(TAG, "pushtoken :--" + pushtoken.toString());
+        Log.e(TAG, "userId :--" + userId);
+        Log.e(TAG, "pushtoken :--" + pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -215,19 +215,19 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         setupAdapter(Arrays.asList(kpiIdArray));
 
-//        if (getIntent().getExtras() != null) {
-//            if (getIntent().getExtras().getString("from").equals("feedback")) {
-//
-//                nestedScrollview.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        nestedScrollview.fullScroll(View.FOCUS_DOWN);
-//                    }
-//                });
-//
-//
-//            }
-//        }
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().getString("from").equals("feedback")) {
+
+                nestedScrollview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        nestedScrollview.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
+
+
+            }
+        }
     }
 
     @Override
@@ -375,7 +375,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         for (int i = 0; i < conceptDesc.size(); i++) {
             conceptchecked[i] = false;
         }
-
         conceptList.setLayoutManager(new LinearLayoutManager(context));
         conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(), LinearLayoutManager.VERTICAL, false));
         final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptDesc, context, conceptchecked);
@@ -391,6 +390,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
                 }
 
+                conceptMappingAdapter.notifyDataSetChanged();
                 List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
                 Log.i(TAG, "db_GetListWhereClause sizes are: " + list.size());
                 lobData = new ArrayList<>();
@@ -403,7 +403,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 lobData.addAll(set);  // remove dublicate values from list
                 displaylobName(lobData);
 
-                conceptMappingAdapter.notifyDataSetChanged();
 
             }
         }));
@@ -445,14 +444,43 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 lob_name_txt.setText(selectLob);
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                if(model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION") )
-                editor.putString("concept","BB,FBB");
-                else editor.putString("concept", model.getGeoLevel2Code());
+
+                if (model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION")){
+                    editor.putString("concept", "BB,FBB");
+                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
+                    editor.putString("lobid", model.getLobId());
+                    editor.putString("lobname", model.getLobName());
+                    editor.putString("kpi_id", model.getKpiId());
+                    editor.apply();
+
+                } else if (model.getGeoLevel2Code().equals("EZ")){
+
+                    editor.putString("concept", "BB,EZ");
+                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
+                    editor.putString("lobid", model.getLobId());
+                    editor.putString("lobname", "ELECTRONICS");
+                    editor.putString("kpi_id", model.getKpiId());
+                    editor.apply();
+
+                }
+                else if (model.getGeoLevel2Code().equals("BB") && model.getLobName().equals("ELECTRONICS")){
+
+                    editor.putString("concept", "BB,EZ");
+                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
+                    editor.putString("lobid", model.getLobId());
+                    editor.putString("lobname", "ELECTRONICS");
+                    editor.putString("kpi_id", model.getKpiId());
+                    editor.apply();
+
+                }
+                else {
+                editor.putString("concept", model.getGeoLevel2Code());
                 editor.putString("conceptDesc", model.getGeoLevel2Desc());
                 editor.putString("lobid", model.getLobId());
                 editor.putString("lobname", model.getLobName());
                 editor.putString("kpi_id", model.getKpiId());
                 editor.apply();
+                }
 
                 String kpi_id = model.getKpiId();
                 String[] selectKpiID = kpi_id.split(",");
@@ -486,18 +514,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         final LobMappingAdapter lobMappingAdapter = new LobMappingAdapter(lobData, context, lobchecked);
         lobList.setAdapter(lobMappingAdapter);
 
-        lobList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
 
-                for (int i = 0; i < lobData.size(); i++) {
-                    if (position == i) lobchecked[i] = true;
-                    else lobchecked[i] = false;
-                }
-                lobMappingAdapter.notifyDataSetChanged();
-
-            }
-        }));
     }
 
 
@@ -534,12 +551,28 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         027 - Customer loyalty
         028 - Hourly performance
         029 - BORIS
-        030 - Customer Feedback : Product Availability & Notify
-        031 - Customer Feedback : Policy Exchange,Refund
-        032 - Customer Feedback : Price & Promotion
-        033 - Customer Feedback : Product Quality & Range
-        034 - Customer Feedback : Our Store Services
-        035 - Customer Feedback : Supervisor & Staff*/
+        030 - Title Customer Feedback HO  : Product Availability & Notify
+        031 - Title Customer Feedback HO  : Policy Exchange,Refund
+        032 - Title Customer Feedback HO  : Price & Promotion
+        033 - Title Customer Feedback HO  : Product Quality & Range
+        034 - Title Customer Feedback HO  : Our Store Services
+        035 - Title Customer Feedback HO  : Supervisor & Staff
+
+        New modules
+     036 - Customer Feedback : Product Availability & Notify
+037 - Customer Feedback : Policy Exchange,Refund
+038 - Customer Feedback : Price & Promotion
+039 - Customer Feedback : Product Quality & Range
+040 - Customer Feedback : Our Store Services
+041 - Customer Feedback : Supervisor & Staff
+042 - Sales Ezone
+043 - PvA Ezone
+044 - Assortment Analysis Ezone
+045 - Best Worst Performer Ezone
+
+
+
+        */
 
         snapAdapter = new SnapAdapter(context, eventUrlList);
 
@@ -612,8 +645,22 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
             if (kpiIdArray.contains("030") || kpiIdArray.contains("031") || kpiIdArray.contains("032") || kpiIdArray.contains("033") || kpiIdArray.contains("034") || kpiIdArray.contains("035")) {
                 List<App> apps = getProduct(11, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Title Customer Feedback HO", apps));
+            }
+            if (kpiIdArray.contains("036") || kpiIdArray.contains("037") || kpiIdArray.contains("038") || kpiIdArray.contains("039") || kpiIdArray.contains("040") || kpiIdArray.contains("041")) {
+                List<App> apps = getProduct(12, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback", apps));
             }
+            if (kpiIdArray.contains("042") || kpiIdArray.contains("043")) {
+                List<App> apps = getProduct(13, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+            }
+            if (kpiIdArray.contains("044") || kpiIdArray.contains("045")) {
+                List<App> apps = getProduct(14, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+            }
+
+
         }
         Recycler_verticalView.setAdapter(snapAdapter);
     }
