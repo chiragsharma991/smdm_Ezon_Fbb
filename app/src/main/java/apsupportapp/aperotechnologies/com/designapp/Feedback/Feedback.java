@@ -202,7 +202,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             } else {
 
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code + "&option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+"&storeCode=" +store_Code;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code + "&option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
               //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
@@ -260,6 +260,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         limit = 10;
                                         offsetvalue = 0;
 
+                                   //     feedbackDetails("", 0);
                                         for (int i = 0; i < optionList.size(); i++) {
 
                                             feedbackDetails(i, 0);
@@ -455,6 +456,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         Log.e(TAG, "feedbackDetails: " );
 
+        Log.e("position feedbackDetails"," "+position);
         // firstView.setVisibility(View.GONE);
         // secondView.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= 21) {
@@ -513,6 +515,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setLayoutParams(layoutParams);
                 lp.setBackgroundColor(Color.parseColor("#e3e2e3"));
+
                 if (position == 0) {
                     Fitting_relative.addView(lp);
                 } else if (position == 1) {
@@ -529,6 +532,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                     garment_relative.addView(lp);
                 }
 
+
                 AddText(position, Listposition);
 
             }
@@ -538,6 +542,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void AddText(int position, int Listposition) {
+        Log.e("position "," "+position);
+        Log.e("Listposition "," "+Listposition);
 
 
         // starting title text
@@ -577,7 +583,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         // another text
 
         final TextView textView2 = new TextView(context);
-
+        Log.e("position "," "+position);
         // get percentage for all list & 0 will be change according to next pre button
         if (position == 0) {
             textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFittingCntPer()) + " %");

@@ -105,48 +105,11 @@ public class SwitchingActivity extends AppCompatActivity
     String auth_code;
     RequestQueue queue;
     ArrayList<String> arrayList;
-    public void moveTo(String value, Context context)
-    {
+    public void moveTo(String value, Context context){
 
-        Log.e("loginFromFbb "," "+loginFromFbb);
-//        if(loginFromFbb)
-//        {
-          /* Mapping
-        001 - Product Info
-        002 - Visual Assortment
-        003 - Visual Assortment Report
-        004 - Sales
-        005 - Sales PvA
-        006 - Freshness Index
-        007 - Option Efficiency
-        008 - Skewed Sizes
-        009 - Best/Worst performers
-        010 - Stock Ageing
-        011 - Floor availability
-        012 - Target stock exception
-        013 - Sell Thru exception
-        014 - Running promo
-        015 - Upcoming promo
-        016 - Expiring promo
-        017 - Best/worst promo
-        018 - Key products PvA
-        019 - Key products hourly
-        020 - Collaboration to do
-        021 - Collaboration status
-        022 - Feedback
-        023 - Feedback list
-        024 - Store inspection new
-        025 - Store inspection history
-        026 - Season catalogue
-        027 - Customer loyalty
-        028 - Hourly performance
-        029 - BORIS
-        030 - Customer Feedback : Product Availability & Notify
-        031 - Customer Feedback : Policy Exchange,Refund
-        032 - Customer Feedback : Price & Promotion
-        033 - Customer Feedback : Product Quality & Range
-        034 - Customer Feedback : Our Store Services
-        035 - Customer Feedback : Supervisor & Staff*/
+        if(loginFromFbb)
+        {
+
 
 
             switch (value) {
@@ -296,12 +259,16 @@ public class SwitchingActivity extends AppCompatActivity
                     commentDialog("FeedbackList");
                     break;
                 case "024":
-                    Intent InspectionBeginActivity = new Intent(context, InspectionBeginActivity.class);
-                    startActivity(InspectionBeginActivity);
+//                    Intent InspectionBeginActivity = new Intent(context, InspectionBeginActivity.class);
+//                    startActivity(InspectionBeginActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("InspectionBeginActivity");
                     break;
                 case "025":
-                    Intent InspectionHistoryActivity = new Intent(context, InspectionHistoryActivity.class);
-                    startActivity(InspectionHistoryActivity);
+//                    Intent InspectionHistoryActivity = new Intent(context, InspectionHistoryActivity.class);
+//                    startActivity(InspectionHistoryActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("InspectionHistoryActivity");
                     break;
                 case "026":
                     Intent mpm_activity = new Intent(context, mpm_activity.class);
@@ -315,13 +282,56 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent MobileScreenActivity = new Intent(context, MobileScreenActivity.class);
                     startActivity(MobileScreenActivity);
                     break;
+                case "036":
+                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify.class);
+                    startActivity(ProductAvailability_Notify);
+                    break;
+                case "037":
+                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund.class);
+                    startActivity(PolicyExchangeRefund);
+                    break;
+                case "038":
+                    Intent Price_Promotion = new Intent(context, Price_Promotion.class);
+                    startActivity(Price_Promotion);
+                    break;
+                case "039":
+                    Intent ProductQualityRange = new Intent(context, ProductQualityRange.class);
+                    startActivity(ProductQualityRange);
+                    break;
+                case "040":
+                    Intent OurStoreServices = new Intent(context,OurStoreServices.class);
+                    startActivity(OurStoreServices);
+                    break;
+                case "041":
+                    Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
+                    startActivity(SupervisiorStaff);
+                    break;
+
+                case "042":
+                    SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
+                    startActivity(SalesAnalysisActivity1);
+                    break;
+                case "043":
+                    SalesPvAActivity = new Intent(context, SalesPvAActivity.class);
+                    startActivity(SalesPvAActivity);
+                    break;
+                case "044":
+                    FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
+                    startActivity(FreshnessIndexActivity);
+                    break;
+                case "045":
+                    BestPerformerInventory = new Intent(context, BestPerformerInventory.class);
+                    startActivity(BestPerformerInventory);
+                    break;
+
+
             }
-        /*}
+        }
         else{
 
             switch (value){
 
-             case 0:
+              /*  case 0:
                     Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
                     startActivity(SalesAnalysisActivity1);
                     break;
@@ -345,6 +355,8 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent HourlyPerformence = new Intent(context,HourlyPerformence.class);
                     startActivity(HourlyPerformence);
                     break;
+
+
                 case 40:
                     Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify.class);
                     startActivity(ProductAvailability_Notify);
@@ -368,17 +380,16 @@ public class SwitchingActivity extends AppCompatActivity
                 case 45:
                     Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
                     startActivity(SupervisiorStaff);
-                    break;
+                    break;*/
 
-            }*/
+            }
         }
-//    }
+    }
 
 
     protected List<App> getProduct(int i , List<String> kpiIdArray) {
+
         List<App> apps = new ArrayList<>();
-
-
 
 
         switch (i){
@@ -388,183 +399,195 @@ public class SwitchingActivity extends AppCompatActivity
                 break;
 
             case 1 :
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "002":
-                            apps.add(new App("Visual Assortment", R.mipmap.visualassortment,"002"));
-                            break;
-                        case "003":
-                            apps.add(new App("Option Report", R.mipmap.ageingexceptions,"003"));
-                            break;
-                    }
-                }
+
+                if (kpiIdArray.contains("002"))
+                    apps.add(new App("Visual Assortment", R.mipmap.visualassortment,"002"));
+
+                if (kpiIdArray.contains("003"))
+                    apps.add(new App("Option Report", R.mipmap.ageingexceptions,"003"));
+
                 break;
 
             case 2 :
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "004":
-                            apps.add(new App("Sales", R.mipmap.salesanalysis,"004"));
-                            break;
-                        case "005":
-                            apps.add(new App("Plan Vs Actual ", R.mipmap.planvsactual,"005"));
-                            break;
-                        case "018":
-                            apps.add(new App("Key Product PVA", R.mipmap.planvsactual,"018"));
-                            break;
-                        case "028":
-                            apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,"028"));
-                            break;
-                    }
-                }
+
+                if (kpiIdArray.contains("004"))
+                    apps.add(new App("Sales", R.mipmap.salesanalysis,"004"));
+
+                if (kpiIdArray.contains("005"))
+                    apps.add(new App("Plan Vs Actual ", R.mipmap.planvsactual,"005"));
+
+                if (kpiIdArray.contains("018"))
+                    apps.add(new App("Key Product PVA", R.mipmap.planvsactual,"018"));
+
+                if (kpiIdArray.contains("028"))
+                    apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,"028"));
+
                 break;
 
             case 3 :
 
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "006":
-                            apps.add(new App("Freshness Index", R.mipmap.freshnessindex,"006"));
-                            break;
-                        case "007":
-                            apps.add(new App("Option Efficiency", R.mipmap.optionefficiency,"007"));
-                            break;
-                        case "008":
-                            apps.add(new App("Skewed Sizes", R.mipmap.skewedsizes,"008"));
-                            break;
-                        case "009":
-                            apps.add(new App("Best/Worst Performers", R.mipmap.bestworstperformers,"009"));
-                            break;
-                        case "010":
-                            apps.add(new App("Stock Ageing Exception", R.mipmap.ageingexceptions,"010"));
-                            break;
-                        case "011":
-                            apps.add(new App("Floor Availability", R.mipmap.flooravailability,"011"));
-                            break;
-                        case "012":
-                            apps.add(new App("Target Stock Exceptions", R.mipmap.targetstockexceptions,"012"));
-                            break;
-                        case "013":
-                            apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions,"013"));
-                            break;
-                    }
-                }
+                if (kpiIdArray.contains("006"))
+                    apps.add(new App("Freshness Index", R.mipmap.freshnessindex,"006"));
+
+                if (kpiIdArray.contains("007"))
+                    apps.add(new App("Option Efficiency", R.mipmap.optionefficiency,"007"));
+
+                if (kpiIdArray.contains("008"))
+                    apps.add(new App("Skewed Sizes", R.mipmap.skewedsizes,"008"));
+
+                if (kpiIdArray.contains("009"))
+                    apps.add(new App("Best/Worst Performers", R.mipmap.bestworstperformers,"009"));
+
+                if (kpiIdArray.contains("010"))
+                    apps.add(new App("Stock Ageing Exception", R.mipmap.ageingexceptions,"010"));
+
+                if (kpiIdArray.contains("011"))
+                    apps.add(new App("Floor Availability", R.mipmap.flooravailability,"011"));
+
+                if (kpiIdArray.contains("012"))
+                    apps.add(new App("Target Stock Exceptions", R.mipmap.targetstockexceptions,"012"));
+
+                if (kpiIdArray.contains("013"))
+                    apps.add(new App("Sell Thru Exceptions", R.mipmap.sellthruexceptions,"013"));
                 break;
+
 
             case 4 :
 
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "014":
-                            apps.add(new App("Running Promo", R.mipmap.runningpromo,"014"));
-                            break;
-                        case "015":
-                            apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo,"015"));
-                            break;
-                        case "016":
-                            apps.add(new App("Expiring Promo", R.mipmap.expiringpromo,"016"));
-                            break;
-                        case "017":
-                            apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers,"017"));
-                            break;
-                    }
-                }
+                if (kpiIdArray.contains("014"))
+                    apps.add(new App("Running Promo", R.mipmap.runningpromo,"014"));
+
+                if (kpiIdArray.contains("015"))
+                    apps.add(new App("Upcoming Promo", R.mipmap.upcomingpromo,"015"));
+
+                if (kpiIdArray.contains("016"))
+                    apps.add(new App("Expiring Promo", R.mipmap.expiringpromo,"016"));
+
+                if (kpiIdArray.contains("017"))
+                    apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers,"017"));
+
                 break;
+
+
 
             case 5 :
 
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "020":
-                            apps.add(new App("To Do", R.mipmap.stocktransfer,"020"));
-                            break;
-                        case "021":
-                            apps.add(new App("Status", R.mipmap.stocktransfer,"021"));
-                            break;
+                if (kpiIdArray.contains("020"))
+                    apps.add(new App("To Do", R.mipmap.stocktransfer,"020"));
 
-                    }
-                }
+                if (kpiIdArray.contains("021"))
+                    apps.add(new App("Status", R.mipmap.stocktransfer,"021"));
+
+
                 break;
+
 
             case 6 :
 
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "022":
-                            apps.add(new App("Best Worst Performer", R.mipmap.feedback,"022"));
-                            break;
-                        case "023":
-                            apps.add(new App("Best Worst Performer List", R.mipmap.feedbacklist,"023"));
-                            break;
-                        case "024":
-                            apps.add(new App("Begin Inspection", R.mipmap.storeinspection,"024"));
-                            break;
-                        case "025":
-                            apps.add(new App("Inspection History", R.mipmap.storeinspection,"025"));
-                            break;
-                    }
-                }
+
+                if (kpiIdArray.contains("022"))
+                    apps.add(new App("Best Worst Performer", R.mipmap.feedback,"022"));
+
+                if (kpiIdArray.contains("023"))
+                    apps.add(new App("Best Worst Performer List", R.mipmap.feedbacklist,"023"));
+
+                if (kpiIdArray.contains("024"))
+                    apps.add(new App("Begin Inspection", R.mipmap.storeinspection,"024"));
+
+                if (kpiIdArray.contains("025"))
+                    apps.add(new App("Inspection History", R.mipmap.storeinspection,"025"));
+
                 break;
+
 
             case 7 :
 
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "026":
-                            apps.add(new App("Season Catalogue", R.mipmap.seasoncatalogue,"026"));
-                            break;
-                    }
-                }
+                if (kpiIdArray.contains("026"))
+                    apps.add(new App("Season Catalogue", R.mipmap.seasoncatalogue,"026"));
+
                 break;
+
+
 
             case 8 :
 
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "027":
-                            apps.add(new App("Customer Engagement", R.mipmap.customerengagement,"027"));
-                            break;
-                    }
-                }
-                break;
+                if (kpiIdArray.contains("027"))
+                    apps.add(new App("Customer Engagement", R.mipmap.customerengagement,"027"));
 
+                break;
 
             case 10 :
 
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "029":
-                            apps.add(new App("Boris",R.mipmap.customerengagement,"029"));
-                            break;
-                    }
-                }
+                if (kpiIdArray.contains("029"))
+                    apps.add(new App("Boris",R.mipmap.customerengagement,"029"));
+
                 break;
+
 
             case 11 :
 
-                for (int j = 0; j <kpiIdArray.size() ; j++) {
-                    switch (kpiIdArray.get(j)){
-                        case "030":
-                            apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability,"030"));
-                            break;
-                        case "031":
-                            apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn,"031"));
-                            break;
-                        case "032":
-                            apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion,"032"));
-                            break;
-                        case "033":
-                            apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange,"033"));
-                            break;
-                        case "034":
-                            apps.add(new App("Our Store Services",R.mipmap.ourstoreservices,"034"));
-                            break;
-                        case "035":
-                            apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff,"035"));
-                            break;
-                    }
-                }
+                if (kpiIdArray.contains("030"))
+                    apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability,"030"));
+
+                if (kpiIdArray.contains("031"))
+                    apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn,"031"));
+
+                if (kpiIdArray.contains("032"))
+                    apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion,"032"));
+
+                if (kpiIdArray.contains("033"))
+                    apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange,"033"));
+
+                if (kpiIdArray.contains("034"))
+                    apps.add(new App("Our Store Services",R.mipmap.ourstoreservices,"034"));
+
+                if (kpiIdArray.contains("035"))
+                    apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff,"035"));
+
                 break;
+
+            case 12 :
+
+                if (kpiIdArray.contains("036"))
+                    apps.add(new App("Product Availability & Notify Me",R.mipmap.productavailability,"036"));
+
+                if (kpiIdArray.contains("037"))
+                    apps.add(new App("Policy - Exchange Refund",R.mipmap.policyexchangereturn,"037"));
+
+                if (kpiIdArray.contains("038"))
+                    apps.add(new App("Price & Promotion",R.mipmap.priceandpromotion,"038"));
+
+                if (kpiIdArray.contains("039"))
+                    apps.add(new App("Product Quality & Range",R.mipmap.productqualityandrange,"039"));
+
+                if (kpiIdArray.contains("040"))
+                    apps.add(new App("Our Store Services",R.mipmap.ourstoreservices,"040"));
+
+                if (kpiIdArray.contains("041"))
+                    apps.add(new App("Supervisior & Staff",R.mipmap.supervisorandstaff,"041"));
+
+                break;
+
+            case 13 :
+
+                if (kpiIdArray.contains("042"))
+                    apps.add(new App("Sales Ezone", R.mipmap.salesanalysis,"042"));
+
+                if (kpiIdArray.contains("043"))
+                    apps.add(new App("PvA Ezone", R.mipmap.planvsactual,"043"));
+
+                break;
+
+            case 14 :
+
+                if (kpiIdArray.contains("044"))
+                    apps.add(new App("Assortment Analysis Ezone", R.mipmap.freshnessindex,"044"));
+
+                if (kpiIdArray.contains("045"))
+                    apps.add(new App("Best Worst Performer Ezone", R.mipmap.bestworstperformers,"045"));
+
+                break;
+
 
             default:
                 Log.e("TAG", "not found: Activity");
@@ -752,6 +775,18 @@ public class SwitchingActivity extends AppCompatActivity
 
                                     else if(from.equals("StatusActivity")){
                                         Intent intent = new Intent(SwitchingActivity.this, StatusActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("InspectionBeginActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, InspectionBeginActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("InspectionHistoryActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, InspectionHistoryActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }

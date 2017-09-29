@@ -62,12 +62,12 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private SharedPreferences sharedPreferences;
     private LinearLayout qfDoneLayout;
     String userId, bearertoken,storeDescription;
-    private static String seasongroup = "Current",stockageband="100";
+    private static String seasongroup = "Current",stockageband="100-200";
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    CheckBox checkAgeing1, checkAgeing2, checkAgeing3;
+    RadioButton checkAgeing1, checkAgeing2, checkAgeing3;
     RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
     Context context = this;
     private RequestQueue queue;
@@ -171,7 +171,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             checkPrevious.setChecked(false);
             checkOld.setChecked(false);
             checkUpcoming.setChecked(false);
-            checkAgeing1.setChecked(false);
+            checkAgeing1.setChecked(true);
             checkAgeing2.setChecked(false);
             checkAgeing3.setChecked(false);
         }
@@ -215,14 +215,15 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     checkCurrent.setChecked(false);
                     checkOld.setChecked(false);
                     checkUpcoming.setChecked(false);
-
                     break;
+
                 case "Old":
                     checkOld.setChecked(true);
                     checkCurrent.setChecked(false);
                     checkPrevious.setChecked(false);
                     checkUpcoming.setChecked(false);
                     break;
+
                 case "Upcoming":
                     checkUpcoming.setChecked(true);
                     checkCurrent.setChecked(false);
@@ -428,9 +429,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
         checkOld = (RadioButton) findViewById(R.id.checkOld);
         checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
-        checkAgeing1 = (CheckBox) findViewById(R.id.checkAgeing1);
-        checkAgeing2 = (CheckBox) findViewById(R.id.checkAgeing2);
-        checkAgeing3 = (CheckBox) findViewById(R.id.checkAgeing3);
+        checkAgeing1 = (RadioButton) findViewById(R.id.checkAgeing1);
+        checkAgeing2 = (RadioButton) findViewById(R.id.checkAgeing2);
+        checkAgeing3 = (RadioButton) findViewById(R.id.checkAgeing3);
         Tabview = (TabLayout) findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Fashion"));
         Tabview.addTab(Tabview.newTab().setText("Core"));
@@ -487,15 +488,15 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                     if (checkAgeing1.isChecked()) {
                         checkAgeingVal = "CheckAgeing1";
-                        stockageband="100";
+                        stockageband="100-200";
 
                     } else if (checkAgeing2.isChecked()) {
                         checkAgeingVal = "CheckAgeing2";
-                        stockageband="200";
+                        stockageband="150-250";
 
                     } else if (checkAgeing3.isChecked()) {
                         checkAgeingVal = "CheckAgeing3";
-                        stockageband="300";
+                        stockageband="250-350";
                     }
 
 
@@ -703,6 +704,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         super.onBackPressed();
         corefashion = null;
         checkSeasonGpVal = null;
+        checkAgeingVal = null;
         seasongroup = null;
         corefashion = "Fashion";
         seasongroup = "Current";

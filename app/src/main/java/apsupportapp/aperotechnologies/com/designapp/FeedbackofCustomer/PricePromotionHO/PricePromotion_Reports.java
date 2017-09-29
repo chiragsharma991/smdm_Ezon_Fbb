@@ -731,7 +731,7 @@ class ApiRequestNew_price {
 
                         text_no_data_price.setVisibility(View.GONE);
 
-                        ResposeInterface.nodatafound();
+                       // ResposeInterface.nodatafound();
 
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();

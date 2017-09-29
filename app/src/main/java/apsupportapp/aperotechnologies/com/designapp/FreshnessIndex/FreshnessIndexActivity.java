@@ -136,6 +136,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        context = this;
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
@@ -162,7 +163,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             setContentView(R.layout.activity_freshness_index);
             getSupportActionBar().hide();
             TAG = "FreshnessIndexActivity";
-            context = this;
             common_intializeUI();
             Fbb_collection();  // start Fbb collection.
 
@@ -1452,7 +1452,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             btnFIndexPrev.setVisibility(View.VISIBLE);
                             btnFIndexNext.setVisibility(View.INVISIBLE);
                         }
-                        else if (inv_filter_level== 6)
+                        else if (inv_filter_level== 5)
                         {
                             txtFIndexClass.setText("Brand Class");
                             fromWhere = "Brand Class";
@@ -2336,7 +2336,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         selFirstPositionValue = 0;
         initializeUI();
 
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.sDialog(context, "Loading data...");
             processBar.setVisibility(View.GONE);
             offsetvalue = 0;
