@@ -205,7 +205,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                 card_productAvail.setVisibility(View.GONE);
                 relFIndexTablelayout_productavail.setVisibility(View.GONE);
                 Log.e("here","case 1");
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
                 break;
@@ -213,7 +213,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                 card_productAvail.setVisibility(View.GONE);
                 relFIndexTablelayout_productavail.setVisibility(View.GONE);
                 Log.e("here","case 2");
-                url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
+                url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             case 3:  // this is for only change list
@@ -762,7 +762,7 @@ class ApiRequestNew_product {
                        // ResposeInterface.nodatafound();
 
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                         Log.e(TAG, "Server not found..." + error.getMessage());
                         error.printStackTrace();
                     }

@@ -89,7 +89,7 @@ public class Callback_ProductQualityRange extends AppCompatActivity implements H
         store = sharedPreferences.getString("storeDescription", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
-        storedesc.setText(store);
+     //   storedesc.setText(store);
         Intent intent=getIntent();
         view_params=intent.getStringExtra("view_params");
         attribute14=intent.getStringExtra("attribute14");

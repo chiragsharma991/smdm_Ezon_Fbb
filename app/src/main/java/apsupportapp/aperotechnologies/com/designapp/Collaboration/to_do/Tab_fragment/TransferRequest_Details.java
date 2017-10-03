@@ -41,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -91,6 +92,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     String[] permissionsRequired = new String[]{Manifest.permission.CAMERA,
           };
     private SharedPreferences permissionStatus;
+    public ArrayList<String> selectSizeList,selectOptionList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +102,8 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         initalise();
         recache = "true";
         gson = new Gson();
+        selectOptionList = new ArrayList<String>();
+        selectSizeList = new ArrayList<String>();
         Sender_DetailsList = new ArrayList<Transfer_Request_Model>();
         ScanList = new ArrayList<Transfer_Request_Model>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -400,52 +404,96 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private void putMethod()
     {
         JSONArray jsonarray=new JSONArray();
-        int count=0;
+//        int count=0;
 
-        for (int i = 0; i <Sender_DetailsList.size(); i++)  //all list of details
+        for(int i = 0 ; i< Sender_DetailsList.size() ; i++)
         {
-            if(!subchildqty.get(i).isEmpty())   //fst start with subchild if no one select in subchild then it will go header selection.
+            // for option list
+            if(transferDetailsAdapter.TransferDetails_HeadercheckList[i])
             {
-                for (int j = 0; j < subchildqty.get(i).size(); j++)  // all sizes of one option
-                {
-                    Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i, j);  //check if any check box is check another wise it will not proceed.
-                    if (CheckedItems.contains(Tag)) {
-                        JSONObject obj = new JSONObject();
-                        try {
-                            obj.put("option", Sender_DetailsList.get(i).getLevel());
-                            obj.put("prodAttribute4", subchildqty.get(i).get(j).getLevel());
-                            obj.put("caseNo", detail_CaseNo);
-                            jsonarray.put(count, obj);
-                            count++;
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+                selectOptionList.add(Sender_DetailsList.get(i).getLevel());
             }
-                else
-                {
-                    if(transferDetailsAdapter.TransferDetails_HeadercheckList[i])
-                    {
-                        JSONObject obj = new JSONObject();
-                        try
-                        {
-                            obj.put("option",Sender_DetailsList.get(i).getLevel());
-//                            obj.put("prodAttribute4","");
-                            obj.put("caseNo",detail_CaseNo);
-                            jsonarray.put(count,obj);
-                            count++;
 
-                        }
-                        catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
+            // for size list
+            for (int j = 0; j < subchildqty.get(i).size(); j++)  // all sizes of one option
+            {
+                Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i, j);  //check if any check box is check another wise it will not proceed.
+                if (CheckedItems.contains(Tag))
+                {
+                    selectSizeList.add(subchildqty.get(i).get(j).getLevel());
                 }
+               }
 
         }
+
+        String[] optionArray = (String[]) selectOptionList.toArray(new String[0]);
+        String optionList = Arrays.toString(optionArray);
+        optionList = optionList.replace("[", "");
+        optionList = optionList.replace("]", "");
+        optionList = optionList.replace(", ", ",");
+
+        // for size List converted to string array to string
+        String[] sizeArray = (String[]) selectSizeList.toArray(new String[0]);
+        String sizeList = Arrays.toString(sizeArray);
+        sizeList = sizeList.replace("[", "");
+        sizeList = sizeList.replace("]", "");
+        sizeList = sizeList.replace(", ", ",");
+
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("option", optionList);
+            obj.put("prodAttribute4", sizeList);
+            obj.put("caseNo", detail_CaseNo);
+            jsonarray.put(obj);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+//        for (int i = 0; i <Sender_DetailsList.size(); i++)  //all list of details
+//        {
+//            if(!subchildqty.get(i).isEmpty())   //fst start with subchild if no one select in subchild then it will go header selection.
+//            {
+//                for (int j = 0; j < subchildqty.get(i).size(); j++)  // all sizes of one option
+//                {
+//                    Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i, j);  //check if any check box is check another wise it will not proceed.
+//                    if (CheckedItems.contains(Tag)) {
+//                        JSONObject obj = new JSONObject();
+//                        try {
+//                            obj.put("option", Sender_DetailsList.get(i).getLevel());
+//                            obj.put("prodAttribute4", subchildqty.get(i).get(j).getLevel());
+//                            obj.put("caseNo", detail_CaseNo);
+//                            jsonarray.put(count, obj);
+//                            count++;
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            }
+//                else
+//                {
+//                    if(transferDetailsAdapter.TransferDetails_HeadercheckList[i])
+//                    {
+//                        JSONObject obj = new JSONObject();
+//                        try
+//                        {
+//                            obj.put("option",Sender_DetailsList.get(i).getLevel());
+////                            obj.put("prodAttribute4","");
+//                            obj.put("caseNo",detail_CaseNo);
+//                            jsonarray.put(count,obj);
+//                            count++;
+//
+//                        }
+//                        catch (JSONException e)
+//                        {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//
+//        }
         if(jsonarray.length()==0)
         {
             Toast.makeText(context,"Please select at least one size.",Toast.LENGTH_SHORT).show();
@@ -740,13 +788,16 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.e(TAG, "requestSenderSubmitAPI onResponse: "+response);
+                            Reusable_Functions.hDialog();
+
                             try {
                                 if (response == null || response.equals("")) {
-                                    Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
 
                                 } else
                                 {
+//                                    transferDetailsAdapter.notifyDataSetChanged();
+//                                    requestSenderDetails();
 //                                    switch (id){
 //                                        case 0:
 //                                            requestforSap();

@@ -57,6 +57,7 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExc
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PolicyExchangeHO.PolicyExchangeRefund_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.PricePromotionHO.PricePromotion_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Price_Promotion;
+import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRange;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductQualityRangeHO.ProductQualityRange_HO;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.SupervisiorStaff;
@@ -105,10 +106,11 @@ public class SwitchingActivity extends AppCompatActivity
     String auth_code;
     RequestQueue queue;
     ArrayList<String> arrayList;
+    ArrayList<String> arrayListbody;
     public void moveTo(String value, Context context){
 
-        if(loginFromFbb)
-        {
+//        if(loginFromFbb)
+//        {
 
 
 
@@ -283,28 +285,40 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(MobileScreenActivity);
                     break;
                 case "036":
-                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify.class);
-                    startActivity(ProductAvailability_Notify);
+//                    Intent ProductAvailability_Notify= new Intent(context, apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.ProductAvailability_Notify.class);
+//                    startActivity(ProductAvailability_Notify);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("ProductAvailability_Notify");
                     break;
                 case "037":
-                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund.class);
-                    startActivity(PolicyExchangeRefund);
+//                    Intent PolicyExchangeRefund= new Intent(context, PolicyExchangeRefund.class);
+//                    startActivity(PolicyExchangeRefund);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("PolicyExchangeRefund");
                     break;
                 case "038":
-                    Intent Price_Promotion = new Intent(context, Price_Promotion.class);
-                    startActivity(Price_Promotion);
+//                    Intent Price_Promotion = new Intent(context, Price_Promotion.class);
+//                    startActivity(Price_Promotion);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("Price_Promotion");
                     break;
                 case "039":
-                    Intent ProductQualityRange = new Intent(context, ProductQualityRange.class);
-                    startActivity(ProductQualityRange);
+//                    Intent ProductQualityRange = new Intent(context, ProductQualityRange.class);
+//                    startActivity(ProductQualityRange);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("ProductQualityRange");
                     break;
                 case "040":
-                    Intent OurStoreServices = new Intent(context,OurStoreServices.class);
-                    startActivity(OurStoreServices);
+//                    Intent OurStoreServices = new Intent(context,OurStoreServices.class);
+//                    startActivity(OurStoreServices);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("OurStoreServices");
                     break;
                 case "041":
-                    Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
-                    startActivity(SupervisiorStaff);
+//                    Intent SupervisiorStaff = new Intent(context, SupervisiorStaff.class);
+//                    startActivity(SupervisiorStaff);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("SupervisiorStaff");
                     break;
 
                 case "042":
@@ -326,10 +340,10 @@ public class SwitchingActivity extends AppCompatActivity
 
 
             }
-        }
-        else{
+//        }
+//        else{
 
-            switch (value){
+//            switch (value){
 
               /*  case 0:
                     Intent SalesAnalysisActivity1 = new Intent(context, SalesAnalysisActivity1.class);
@@ -382,8 +396,8 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(SupervisiorStaff);
                     break;*/
 
-            }
-        }
+//            }
+ //       }
     }
 
 
@@ -610,7 +624,7 @@ public class SwitchingActivity extends AppCompatActivity
         // search function for search store code from list.
         final EditText search = (EditText) v.findViewById(R.id.search_store);
         arrayList = new ArrayList<String>();
-
+        arrayListbody = new ArrayList<String>();
 
         spinnerArrayAdapter = new ListAdapter(arrayList, SwitchingActivity.this);
         select_storeList.setAdapter(spinnerArrayAdapter);
@@ -670,7 +684,8 @@ public class SwitchingActivity extends AppCompatActivity
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId; //ConstsCore.web_url+ + "/v1/login/userId";  // + "?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId
+        String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId +"?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+                 //ConstsCore.web_url+ + "/v1/login/userId";  // + "?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId
         Log.e("url store :", "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -691,21 +706,31 @@ public class SwitchingActivity extends AppCompatActivity
                                     storeCode = collectionName.getString("storeCode");
                                     body_geoLevel2Code = collectionName.getString("geoLevel2Code");
                                     arrayList.add(storeCode);
+                                    arrayListbody.add(body_geoLevel2Code);
+
                                 }
                                 dialog.show();
                             }
 
-                            Collections.sort(arrayList);
+//                            Collections.sort(arrayList);
+//                            Collections.sort(arrayListbody);
+                            Log.e("arrayList "," "+arrayList.toString());
+                            Log.e("arrayListbody "," "+arrayListbody.toString());
+
                             // arrayList.add(0, "Select Storecode");
                             spinnerArrayAdapter.notifyDataSetChanged();
-
                             select_storeList.setOnItemClickListener(new AdapterView.OnItemClickListener()
                             {
+
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                                 {
+
                                     storeCode = (String) spinnerArrayAdapter.getItem(position);
+                                    body_geoLevel2Code = arrayListbody.get(position);
                                     Log.e("storeCode "," "+storeCode);
+                                    Log.e("body_geoLevel2Code "," "+body_geoLevel2Code);
+
                                     dialog.dismiss();
                                     if(from.equals("VisualAssortmentActivity")) {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualAssortmentActivity.class);
@@ -787,6 +812,42 @@ public class SwitchingActivity extends AppCompatActivity
 
                                     else if(from.equals("InspectionHistoryActivity")){
                                         Intent intent = new Intent(SwitchingActivity.this, InspectionHistoryActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("ProductAvailability_Notify")){
+                                        Intent intent = new Intent(SwitchingActivity.this, ProductAvailability_Notify.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("PolicyExchangeRefund")){
+                                        Intent intent = new Intent(SwitchingActivity.this, PolicyExchangeRefund.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("Price_Promotion")){
+                                        Intent intent = new Intent(SwitchingActivity.this, Price_Promotion.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("ProductQualityRange")){
+                                        Intent intent = new Intent(SwitchingActivity.this, ProductQualityRange.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("OurStoreServices")){
+                                        Intent intent = new Intent(SwitchingActivity.this, OurStoreServices.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("SupervisiorStaff")){
+                                        Intent intent = new Intent(SwitchingActivity.this, SupervisiorStaff.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }

@@ -606,7 +606,7 @@ public class ProductAvailability_Feedback extends Fragment implements View.OnCli
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "productavailability", SelectedStoreCode);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "productavailability", store_code);
             clearData();
             ((Activity) context).finish();
             nestedScrollview.fullScroll(View.FOCUS_DOWN);

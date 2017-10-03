@@ -407,6 +407,11 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     checkNetworkFalse = true;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    subcategoryList.clear();
+                                  //  stockPullAdapter.notifyDataSetChanged();
+                                    stockPullAdapter = new StockPullAdapter(subcategoryList,selectMc, getActivity(), null);
+                                    recyclerView.setAdapter(stockPullAdapter);
+
                                     Log.e("TAG", "requestTransferRequestSubcategory: " ); //
                                     dropdkown.setVisibility(View.VISIBLE);
                                     progressBar.setVisibility(View.GONE);

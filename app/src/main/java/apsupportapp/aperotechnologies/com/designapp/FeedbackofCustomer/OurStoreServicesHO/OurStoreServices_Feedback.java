@@ -562,7 +562,7 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack,  context, "ourstoreservices",SelectedStoreCode);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack,  context, "ourstoreservices",store_code);
             cancelData();
             ((Activity) context).finish();
             nestedScrollview.fullScroll(View.FOCUS_DOWN);
