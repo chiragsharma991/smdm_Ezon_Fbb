@@ -354,9 +354,9 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 }
 
                 if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
-                    intent = new Intent(EzoneSalesFilter.this, SalesAnalysisActivity1.class);
+                    intent = new Intent(EzoneSalesFilter.this, EzoneSalesAnalysisActivity1.class);
                     if (build.length() != 0) {
-                        SalesAnalysisActivity1.SalesAnalysisActivity.finish();
+                        EzoneSalesAnalysisActivity1.SalesAnalysisActivity.finish();
                     }
                     callback(build);
                 } else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
@@ -415,10 +415,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
         }
 
-        if (EzoneFilterProductAdapter.dept_text.length() != 0)
+        if (EzoneFilterProductAdapter.department_text.length() != 0)
 
         {
-            String deptmnt = EzoneFilterProductAdapter.dept_text.replace("%", "%25");
+            String deptmnt = EzoneFilterProductAdapter.department_text.replace("%", "%25");
             String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
             String Department;
             Department = "department=" + updateDept;
@@ -483,7 +483,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             Log.e("TAG", "callback:  selectedlevelVal" + filter_level);
         }
         startActivity(intent);
-        EzoneFilterProductAdapter.dept_text = "";
+        EzoneFilterProductAdapter.department_text = "";
         EzoneFilterProductAdapter.categry_text = "";
         EzoneFilterProductAdapter.class_text = "";
         EzoneFilterProductAdapter.brand_text = "";
