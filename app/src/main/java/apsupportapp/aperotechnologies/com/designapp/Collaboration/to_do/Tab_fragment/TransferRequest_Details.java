@@ -53,6 +53,8 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment.store_Code;
+
 /**
  * Created by pamrutkar on 08/03/17.
  */
@@ -364,12 +366,13 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
         btn_Submit.setOnClickListener(this);
     }
 
-    public void StartActivity(String CaseNo, double reqQty,String reqStoreCode, Context context)
+    public void StartActivity(String CaseNo, double reqQty, String reqStoreCode, Context context, String store_Code)
     {
         Intent intent = new Intent(context, TransferRequest_Details.class);
         intent.putExtra("caseNo", CaseNo);
         intent.putExtra("reqQty", reqQty);
         intent.putExtra("reqStoreCode",reqStoreCode);
+        intent.putExtra("store_Code",store_Code);
         context.startActivity(intent);
     }
 
@@ -445,6 +448,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
             obj.put("option", optionList);
             obj.put("prodAttribute4", sizeList);
             obj.put("caseNo", detail_CaseNo);
+          //  obj.put("storeCode", store_Code);
             jsonarray.put(obj);
 
         } catch (JSONException e) {

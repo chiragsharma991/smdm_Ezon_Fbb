@@ -195,9 +195,17 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                                     offsetvalue = (limit * count) + limit;
                                     count++;
 
-                                    //  count++ ;
 
+                                    //  count++
                                     requestFeedbackApi();
+                                    if(feedbackListData.size() == 1)
+                                    {
+                                        FeedbackNext_layout.setVisibility(View.GONE);
+
+                                    }else{
+                                        FeedbackNext_layout.setVisibility(View.VISIBLE);
+
+                                    }
 
                                 } else if (response.length() < limit) {
                                     for (int i = 0; i < response.length(); i++) {
@@ -210,6 +218,14 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                                     limit = 10;
                                     offsetvalue = 0;
                                     Reusable_Functions.hDialog();
+                                    if(feedbackListData.size() == 1)
+                                    {
+                                        FeedbackNext_layout.setVisibility(View.GONE);
+
+                                    }else{
+                                        FeedbackNext_layout.setVisibility(View.VISIBLE);
+
+                                    }
                                     for (int i = 0; i < optionList.size(); i++) {
 
                                         feedbackReport(i, 0);
@@ -272,21 +288,36 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.feedbackList_next:
 
-                nextCount++;
-                if (nextCount != feedbackListData.size() - 1) {
-                    for (int i = 0; i < optionList.size(); i++) {
+                Log.e("dd option ", ""+ optionList.size());
+                Log.e("dd feedbackListData ", ""+ feedbackListData.size());
 
-                        feedbackReport(i, nextCount);
+//                if(feedbackListData.size() == 1){
+//                    Log.e("here ", "inside if");
+//
+//                   // nextCount++;
+//                   // feedbackReport(0, nextCount);
+//                    FeedbackNext_layout.setVisibility(View.GONE);
+//
+//                }
+//                else if(feedbackListData.size() > 1){
+//                    Log.e("here ", "inside else if");
+
+                    nextCount++;
+                    if (nextCount != feedbackListData.size() - 1) {
+                        for (int i = 0; i < optionList.size(); i++) {
+
+                            feedbackReport(i, nextCount);
+                        }
+                        FeedbackPre_layout.setVisibility(View.VISIBLE);
+
+                    } else {
+                        for (int i = 0; i < optionList.size(); i++) {
+
+                            feedbackReport(i, nextCount);
+                        }
+                        FeedbackNext_layout.setVisibility(View.GONE);
                     }
-                    FeedbackPre_layout.setVisibility(View.VISIBLE);
-
-                } else {
-                    for (int i = 0; i < optionList.size(); i++) {
-
-                        feedbackReport(i, nextCount);
-                    }
-                    FeedbackNext_layout.setVisibility(View.GONE);
-                }
+//                }
                 break;
             case R.id.feedbackList_pre:
                 nextCount--;
@@ -327,97 +358,98 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         garment_relative.removeAllViewsInLayout();
         // set image per list
 
-        Feedback_option.setText(feedbackListData.get(Listposition).getOption());
+
+            Feedback_option.setText(feedbackListData.get(Listposition).getOption());
 //        txtStoreCode.setText(storeDescription.trim().substring(0,4));
 //        txtStoreName.setText(storeDescription.substring(5));
-        ImageLoader_feedback.setVisibility(View.VISIBLE);
-        if (!feedbackListData.get(Listposition).getProdImageUrl().equals("")) {
-            Glide.
-                    with(context)
-                    .load(feedbackListData.get(Listposition).getProdImageUrl())
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            ImageLoader_feedback.setVisibility(View.GONE);
-                            return false;
-                        }
+            ImageLoader_feedback.setVisibility(View.VISIBLE);
+            if (!feedbackListData.get(Listposition).getProdImageUrl().equals("")) {
+                Glide.
+                        with(context)
+                        .load(feedbackListData.get(Listposition).getProdImageUrl())
+                        .listener(new RequestListener<String, GlideDrawable>() {
+                            @Override
+                            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                ImageLoader_feedback.setVisibility(View.GONE);
+                                return false;
+                            }
 
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            ImageLoader_feedback.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(Feedback_image);
+                            @Override
+                            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                ImageLoader_feedback.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .into(Feedback_image);
 
-        } else {
-            ImageLoader_feedback.setVisibility(View.GONE);
-            Glide.with(context).
-                    load(R.mipmap.noimageavailable).
-                    into(Feedback_image);
-        }
-
-        //calculate screen view size and add line bar process.
-
-        ViewTreeObserver vto = Fitting_relative.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    Fitting_relative.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                    Fitting_relative.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
-                int width = Fitting_relative.getMeasuredWidth();
-                int height = Fitting_relative.getMeasuredHeight();
-
-                // Calculation width acording to size of phone
-
-                double x = 0;
-                if (position == 0)
-                //get 0 is depend on next and pre button
-                {
-                    x = ((double) feedbackListData.get(Listposition).getFittingCntPer() / 100) * width;
-                } else if (position == 1) {
-                    x = ((double) feedbackListData.get(Listposition).getPricingCntPer() / 100) * width;
-                } else if (position == 2) {
-                    x = ((double) feedbackListData.get(Listposition).getColorsCntPer() / 100) * width;
-                } else if (position == 3) {
-                    x = ((double) feedbackListData.get(Listposition).getPrintCntPer() / 100) * width;
-                } else if (position == 4) {
-                    x = ((double) feedbackListData.get(Listposition).getStylingCntPer() / 100) * width;
-                } else if (position == 5) {
-                    x = ((double) feedbackListData.get(Listposition).getFabricQualityCntPer() / 100) * width;
-                } else if (position == 6) {
-                    x = ((double) feedbackListData.get(Listposition).getGarmentQualityCntPer() / 100) * width;
-                }
-
-                int percentage = (int) x;
-                Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackListData.get(0).getFittingCntPer() + "and values are" + percentage);
-                View lp = new View(context);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
-                lp.setLayoutParams(layoutParams);
-                lp.setBackgroundColor(Color.parseColor("#e3e2e3"));
-                if (position == 0) {
-                    Fitting_relative.addView(lp);
-                } else if (position == 1) {
-                    Pricing_relative.addView(lp);
-                } else if (position == 2) {
-                    colours_relative.addView(lp);
-                } else if (position == 3) {
-                    prints_relative.addView(lp);
-                } else if (position == 4) {
-                    styling_relative.addView(lp);
-                } else if (position == 5) {
-                    fabric_relative.addView(lp);
-                } else if (position == 6) {
-                    garment_relative.addView(lp);
-                }
-
-                AddText(position, Listposition);
-
+            } else {
+                ImageLoader_feedback.setVisibility(View.GONE);
+                Glide.with(context).
+                        load(R.mipmap.noimageavailable).
+                        into(Feedback_image);
             }
-        });
+
+            //calculate screen view size and add line bar process.
+
+            ViewTreeObserver vto = Fitting_relative.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                        Fitting_relative.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    } else {
+                        Fitting_relative.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                    int width = Fitting_relative.getMeasuredWidth();
+                    int height = Fitting_relative.getMeasuredHeight();
+
+                    // Calculation width acording to size of phone
+
+                    double x = 0;
+                    if (position == 0)
+                    //get 0 is depend on next and pre button
+                    {
+                        x = ((double) feedbackListData.get(Listposition).getFittingCntPer() / 100) * width;
+                    } else if (position == 1) {
+                        x = ((double) feedbackListData.get(Listposition).getPricingCntPer() / 100) * width;
+                    } else if (position == 2) {
+                        x = ((double) feedbackListData.get(Listposition).getColorsCntPer() / 100) * width;
+                    } else if (position == 3) {
+                        x = ((double) feedbackListData.get(Listposition).getPrintCntPer() / 100) * width;
+                    } else if (position == 4) {
+                        x = ((double) feedbackListData.get(Listposition).getStylingCntPer() / 100) * width;
+                    } else if (position == 5) {
+                        x = ((double) feedbackListData.get(Listposition).getFabricQualityCntPer() / 100) * width;
+                    } else if (position == 6) {
+                        x = ((double) feedbackListData.get(Listposition).getGarmentQualityCntPer() / 100) * width;
+                    }
+
+                    int percentage = (int) x;
+                    Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackListData.get(0).getFittingCntPer() + "and values are" + percentage);
+                    View lp = new View(context);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
+                    lp.setLayoutParams(layoutParams);
+                    lp.setBackgroundColor(Color.parseColor("#e3e2e3"));
+                    if (position == 0) {
+                        Fitting_relative.addView(lp);
+                    } else if (position == 1) {
+                        Pricing_relative.addView(lp);
+                    } else if (position == 2) {
+                        colours_relative.addView(lp);
+                    } else if (position == 3) {
+                        prints_relative.addView(lp);
+                    } else if (position == 4) {
+                        styling_relative.addView(lp);
+                    } else if (position == 5) {
+                        fabric_relative.addView(lp);
+                    } else if (position == 6) {
+                        garment_relative.addView(lp);
+                    }
+
+                    AddText(position, Listposition);
+
+                }
+            });
 
 
     }

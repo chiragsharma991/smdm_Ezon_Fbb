@@ -1423,6 +1423,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
+                        Log.e(TAG, "requestFreshnessIndexFilterVal: response "+response );
 
                         if (inv_filter_level == 2)
                         {

@@ -87,6 +87,8 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
 
     public TransferRequestFragment(String storeCode) {
         // Required empty public constructor
+       // this.store_Code = store_Code;
+
     }
 
     @Override
@@ -211,7 +213,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                     @Override
                                     public void onItemClick(View view, int position)
                                     {
-                                        new TransferRequest_Details().StartActivity(SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getStkOnhandQtyRequested(),SenderSummaryList.get(position).getReqStoreCode(),context);
+                                        new TransferRequest_Details().StartActivity(SenderSummaryList.get(position).getCaseNo(),SenderSummaryList.get(position).getStkOnhandQtyRequested(),SenderSummaryList.get(position).getReqStoreCode(),context, store_Code);
                                     }
                                 });
                                 senderSummary_recyclerView.setAdapter(transferRequestAdapter );
@@ -302,6 +304,8 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                 JSONObject obj = new JSONObject();
                 //obj.put("option",SenderSummaryList.get(i).getLevel());
                 obj.put("caseNo",caseNo);
+               // obj.put("storeCode",store_Code);
+
                 jsonArray.put(obj);
 
                 if(jsonArray.length() != 0){
@@ -340,7 +344,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                 Reusable_Functions.sDialog(mcontext, "Submitting data…");
                 url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
                 postofData=jsonarray.toString();
-                Log.e(TAG, "requestSenderSubmitAPI: " + postofData);
+                Log.e(TAG, "requestSenderSubmitAPI: json" + postofData);
             }
 //            else if (id==1){
 //                url = "https://mapi.futuregroup.in/fgapis/sap/STOCreateSRP/1.0?apikey=46a94bd1-04ea-466b-bcf0-59cb74abbd1b" ;
@@ -362,6 +366,8 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
 
                                 } else
                                 {
+                                    transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), null);
+                                    senderSummary_recyclerView.setAdapter(transferRequestAdapter);
 //                                    transferRequestAdapter.notifyDataSetChanged();
 //                                    requestTransferRequestsummary();
 //                                    switch (id){
