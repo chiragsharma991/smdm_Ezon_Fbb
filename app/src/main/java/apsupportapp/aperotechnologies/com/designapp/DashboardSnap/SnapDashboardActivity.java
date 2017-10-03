@@ -158,8 +158,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         pushtoken = sharedPreferences.getString("push_tokken", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
         Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
-        //  String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-//        Log.e("SnapDashboard", "Refreshed token:------ " + refreshedToken);
         Log.e(TAG, "userId :--" + userId);
         Log.e(TAG, "pushtoken :--" + pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
@@ -177,7 +175,10 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         initalise();
         eventUrlList = new ArrayList<>();
 
-        if (geoLeveLDesc.equals("E ZONE")) {
+
+        Log.e("harshada geoLeveLDesc"," "+geoLeveLDesc);
+
+        /*if (geoLeveLDesc.equals("E ZONE")) {
             Log.e("TAG", "Ezone login");
             loginFromFbb = false;
             if (Reusable_Functions.chkStatus(context)) {
@@ -191,7 +192,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         //-------------------------------------------------------------//
 
-        else {
+        else {*/
             Log.e("TAG", "FBB login");
             loginFromFbb = true;
             _collectionitems = new ArrayList();
@@ -199,16 +200,18 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             productNameBeanArrayList = new ArrayList<>();
             //  initialize_fbb_ui();
             //Marketing events API
-            if (Reusable_Functions.chkStatus(context)) {
+            if (Reusable_Functions.chkStatus(context))
+            {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Loading events...");
                 requestMarketingEventsAPI();
                 RefreshTimeAPI();
-
-            } else {
+            }
+            else
+            {
                 Toast.makeText(SnapDashboardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
             }
-        }
+//        }
         //  checkPermission();
         // Arrays.asList(kpiIdArray);
 

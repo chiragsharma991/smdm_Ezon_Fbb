@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.Ezone;
 
 
 import android.content.Context;
@@ -45,9 +45,9 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.explv_ez_prod;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.rel_ez_process_filter;
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.str_checkFrom;
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_prod;
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.rel_ez_process_filter;
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.str_checkFrom;
 
 
 public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
@@ -210,19 +210,19 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                                    if (str_checkFrom.equals("ezoneSales")  || str_checkFrom.equals("pvaAnalysis")) {
                                                        salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                        cb.setChecked(true);
-                                                       ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.VISIBLE);
+                                                       rel_ez_process_filter.setVisibility(View.VISIBLE);
                                                        if (groupPosition == 3)
                                                        {
-                                                          ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
+                                                          rel_ez_process_filter.setVisibility(View.GONE);
                                                        }
 
                                                    } else {
                                                        salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                        cb.setChecked(true);
-                                                       ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.VISIBLE);
+                                                       rel_ez_process_filter.setVisibility(View.VISIBLE);
                                                        if (groupPosition == 4)
                                                        {
-                                                          ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
+                                                          rel_ez_process_filter.setVisibility(View.GONE);
                                                        }
                                                    }
                                                    Log.e("salesListchecked :", "" + salesList);
@@ -271,10 +271,10 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 salesList.clear();
                 mListDataChild.putAll(dublicate_listDataChild2);
                 for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                    EzoneSalesFilter.explv_ez_prod.collapseGroup(k);
+                    explv_ez_prod.collapseGroup(k);
                 }
                 for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                    EzoneSalesFilter.explv_ez_prod.expandGroup(k);
+                    explv_ez_prod.expandGroup(k);
                 }
             } else {
                 requestProductHierarchyAPI(filterLevel, dept_text);
@@ -357,10 +357,10 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 salesList.clear();
                 mListDataChild.putAll(dublicate_listDataChild2);
                 for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                    EzoneSalesFilter.explv_ez_prod.collapseGroup(k);
+                    explv_ez_prod.collapseGroup(k);
                 }
                 for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
-                    EzoneSalesFilter.explv_ez_prod.expandGroup(k);
+                    explv_ez_prod.expandGroup(k);
                 }
             } else {
                 requestProductHierarchyAPI(filterLevel, dept_text);
@@ -715,16 +715,16 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             //Collapse Group
 
             if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(0);
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(1);
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(2);
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(3);
+                explv_ez_prod.collapseGroup(0);
+                explv_ez_prod.collapseGroup(1);
+                explv_ez_prod.collapseGroup(2);
+                explv_ez_prod.collapseGroup(3);
             } else {
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(0);
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(1);
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(2);
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(3);
-                EzoneSalesFilter.explv_ez_prod.collapseGroup(4);
+                explv_ez_prod.collapseGroup(0);
+                explv_ez_prod.collapseGroup(1);
+                explv_ez_prod.collapseGroup(2);
+                explv_ez_prod.collapseGroup(3);
+                explv_ez_prod.collapseGroup(4);
             }
 
         } else {
@@ -743,10 +743,10 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     }
                     mListDataChild.put(mListDataGroup.get(j), arrayList1);
                 }
-                EzoneSalesFilter.explv_ez_prod.expandGroup(0);
-                EzoneSalesFilter.explv_ez_prod.expandGroup(1);
-                EzoneSalesFilter.explv_ez_prod.expandGroup(2);
-                EzoneSalesFilter.explv_ez_prod.expandGroup(3);
+                explv_ez_prod.expandGroup(0);
+                explv_ez_prod.expandGroup(1);
+                explv_ez_prod.expandGroup(2);
+                explv_ez_prod.expandGroup(3);
                 notifyDataSetChanged();
             } else {
 
@@ -762,11 +762,11 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     }
                     mListDataChild.put(mListDataGroup.get(j), arrayList1);
                 }
-                EzoneSalesFilter.explv_ez_prod.expandGroup(0);
-                EzoneSalesFilter.explv_ez_prod.expandGroup(1);
-                EzoneSalesFilter.explv_ez_prod.expandGroup(2);
-                EzoneSalesFilter.explv_ez_prod.expandGroup(3);
-                EzoneSalesFilter.explv_ez_prod.expandGroup(4);
+                explv_ez_prod.expandGroup(0);
+                explv_ez_prod.expandGroup(1);
+                explv_ez_prod.expandGroup(2);
+                explv_ez_prod.expandGroup(3);
+                explv_ez_prod.expandGroup(4);
                 notifyDataSetChanged();
             }
         }
@@ -834,7 +834,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(mContext, "no data found", Toast.LENGTH_LONG).show();
-                                ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
 
                             } else {
                                 for (int i = prod_level - 1; i < mListDataChild.size(); i++) {
@@ -896,12 +896,12 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                     }
                                 }
                                 notifyDataSetChanged();
-                                ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
                             }
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
+                            rel_ez_process_filter.setVisibility(View.GONE);
                             Toast.makeText(mContext, "data failed..." + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }

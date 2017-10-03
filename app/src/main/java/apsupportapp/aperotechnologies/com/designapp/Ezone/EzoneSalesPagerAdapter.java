@@ -1,7 +1,6 @@
-package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.Ezone;
 
 import android.content.Context;
-
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -18,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 

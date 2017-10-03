@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.Ezone;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,12 +9,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -40,7 +38,6 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
-
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.mikephil.charting.charts.BarChart;
@@ -50,9 +47,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
@@ -66,9 +61,8 @@ import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-
-import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter;
 import apsupportapp.aperotechnologies.com.designapp.MyMarkerView;
+import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.PvASnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
@@ -79,7 +73,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPager
 import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
 
 
-public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener {
+public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener {
 
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100;
@@ -589,7 +583,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent filterIntent = new Intent(SalesPvAActivity.this, EzoneSalesFilter.class);
+                Intent filterIntent = new Intent(EzoneSalesPvAActivity.this, EzoneSalesFilter.class);
                 filterIntent.putExtra("checkfrom", "pvaAnalysis");
                 startActivity(filterIntent);
             }
@@ -676,7 +670,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent filterIntent = new Intent(SalesPvAActivity.this, SalesAnalysisFilter.class);
+                Intent filterIntent = new Intent(EzoneSalesPvAActivity.this, SalesAnalysisFilter.class);
                 filterIntent.putExtra("checkfrom", "pvaAnalysis");
                 startActivity(filterIntent);
             }
