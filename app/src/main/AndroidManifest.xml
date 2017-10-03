@@ -104,6 +104,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".Ezone.EzoneSalesAnalysisActivity1"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".SalesAnalysis.SalesFilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
@@ -256,10 +261,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".StoreInspection.InspectionDetailsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".SalesAnalysis.EzoneSalesFilter"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

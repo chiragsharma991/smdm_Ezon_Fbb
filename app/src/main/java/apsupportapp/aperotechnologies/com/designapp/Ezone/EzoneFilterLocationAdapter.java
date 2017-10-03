@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.SalesAnalysis;
+package apsupportapp.aperotechnologies.com.designapp.Ezone;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -45,8 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-import static apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter.rel_ez_process_filter;
-
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.rel_ez_process_filter;
 
 /**
  * Created by pamrutkar on 08/06/17.
@@ -207,11 +206,11 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                                if (!cb.isChecked()) {
                                                    salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(true);
-                                                   ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.VISIBLE);
+                                                   rel_ez_process_filter.setVisibility(View.VISIBLE);
                                                    if (groupPosition == 1) {
 //                                                       salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
 //                                                       cb.setChecked(true);
-                                                       ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
+                                                       rel_ez_process_filter.setVisibility(View.GONE);
 
                                                    }
                                                    BuildUP(groupPosition);
@@ -353,7 +352,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                             {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(mContext, "no data found", Toast.LENGTH_LONG).show();
-                                ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
+                                rel_ez_process_filter.setVisibility(View.GONE);
 
                             } else {
                                 for (int i = mGroupPosition + 1 ; i < mListDataChild.size(); i++) {
@@ -382,13 +381,13 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                      notifyDataSetChanged();
                                     mListDataChild.put(mListDataGroup.get(1), drillDownList);
                                     ezoneSalesFilter.explv_ez_locatn.expandGroup(1);
-                                    ezoneSalesFilter.rel_ez_process_filter.setVisibility(View .GONE);
+                                    rel_ez_process_filter.setVisibility(View .GONE);
                                 }
                             }
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            ezoneSalesFilter.rel_ez_process_filter.setVisibility(View.GONE);
+                            rel_ez_process_filter.setVisibility(View.GONE);
                             Toast.makeText(mContext, "data failed..." + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }

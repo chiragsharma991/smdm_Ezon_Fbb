@@ -59,6 +59,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
@@ -67,8 +68,6 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.EzoneSalesFilter;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndex_Ez_Model;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -127,6 +126,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private int selectedlevel;
     private TabLayout Tabview;
     private int filter_level;
+    private String header_value;
 
 
     @Override
@@ -137,6 +137,24 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         context = this;
+        header_value = "";
+        if(getIntent().getExtras() != null)
+        {
+            if(getIntent().getExtras().getString("selectedStringVal") != null)
+            {
+                header_value = getIntent().getExtras().getString("selectedStringVal");
+            }
+            else
+            {
+                header_value = "";
+            }
+        }
+        else
+        {
+            header_value = "";
+        }
+
+
 //        storeDescription = sharedPreferences.getString("storeDescription","");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
@@ -276,7 +294,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             postRequest.cancel();
                         }
                         processBar.setVisibility(View.VISIBLE);
-                        requestFIndexPieChart();
+                        requestFIndexPieChart("");
                         OveridePositionValue = firstVisibleItem;
                     }
                 } else {
@@ -318,7 +336,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             postRequest.cancel();
                         }
                         processBar.setVisibility(View.VISIBLE);
-                        requestFIndexPieChart();
+                        requestFIndexPieChart("");
                         OveridePositionValue = firstVisibleItem;
                     }
                 }
@@ -544,7 +562,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     // For Category List on click of Dept Value
     private void request_FreshnessIndex_CategoryList(final String deptName)
     {
-        String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         Log.e(TAG, "request_FreshnessIndex_CategoryList: "+ freshnessindex_category_listurl);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
@@ -574,12 +592,14 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                     freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
                                 }
-                                freshnessIndexDetails = new FreshnessIndexDetails();
-                                if(txtFIndexClass.getText().toString().equals("Category"))
-                                {
-                                    freshnessIndexDetails.setPlanCategory("All");
-                                }
-                                freshnessIndexDetails.setStkOnhandQty(freshnessIndexDetail.getStkOnhandQty());
+//                                freshnessIndexDetails = new FreshnessIndexDetails();
+//                                if(txtFIndexClass.getText().toString().equals("Category"))
+//                                {
+//                                    freshnessIndexDetails.setPlanCategory("All");
+//                                }
+
+                                requestHeader(deptName, 2);
+                                /*freshnessIndexDetails.setStkOnhandQty(freshnessIndexDetail.getStkOnhandQty());
                                 freshnessIndexDetails.setStkOnhandQtyCount(100);
                                 freshnessIndexDetails.setStkGitQty(freshnessIndexDetail.getStkGitQty());
 
@@ -594,10 +614,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
                                 TestItem();
 
-                                // FreshnessIndexValue = " ";
-                                //FreshnessIndexValue = " > " + deptName;
-                                // txtfIndexDeptName.setText(FreshnessIndexValue);
-                                Log.e(TAG, "txtfIndexDeptName: "+deptName+"and FreshnessIndex"+FreshnessIndexValue );
+
+                                Log.e(TAG, "txtfIndexDeptName: "+deptName+" and FreshnessIndex"+FreshnessIndexValue);
                                 txtfIndexDeptName.setText(hierarchy(deptName));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
                                 fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanCategory().toString();
@@ -605,7 +623,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 2;
-                                requestFIndexPieChart();
+                                requestFIndexPieChart();*/
 
                             }
 
@@ -682,7 +700,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                     freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
                                 }
-                                freshnessIndexDetails = new FreshnessIndexDetails();
+                                requestHeader(category, 3);
+                                /*freshnessIndexDetails = new FreshnessIndexDetails();
                                 if(txtFIndexClass.getText().toString().equals("Class"))
                                 {
                                     freshnessIndexDetails.setPlanClass("All");
@@ -701,19 +720,20 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
                                 freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
-                                TestItem();
+
                                 freshnessIndexSnapAdapter.notifyDataSetChanged();
 
                                 // FreshnessIndexValue += " > " + category;
                                 //  txtfIndexDeptName.setText(FreshnessIndexValue);
                                 txtfIndexDeptName.setText(hierarchy(category));
                                 llfIndexhierarchy.setVisibility(View.VISIBLE);
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanClass().toString();
+//                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanClass().toString();
+                                TestItem();
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
                                 level = 3;
-                                requestFIndexPieChart();
+                                requestFIndexPieChart();*/
                             }
 
                         } catch (Exception e) {
@@ -779,8 +799,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                     freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
                                 }
-
-                                freshnessIndexDetails = new FreshnessIndexDetails();
+                                requestHeader(planclass, 4);
+                                /*freshnessIndexDetails = new FreshnessIndexDetails();
                                 if(txtFIndexClass.getText().toString().equals("Brand"))
                                 {
                                     freshnessIndexDetails.setBrandName("All");
@@ -810,7 +830,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 4;
-                                requestFIndexPieChart();
+                                requestFIndexPieChart();*/
 
                             }
 
@@ -882,8 +902,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                     freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
                                 }
-
-                                freshnessIndexDetails = new FreshnessIndexDetails();
+                                requestHeader(brandnm, 4);
+                                /*freshnessIndexDetails = new FreshnessIndexDetails();
                                 if(txtFIndexClass.getText().toString().equals("Brand Class"))
                                 {
                                     freshnessIndexDetails.setBrandplanClass("All");
@@ -914,7 +934,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 limit = 100;
                                 count = 0;
                                 level = 5;
-                                requestFIndexPieChart();
+                                requestFIndexPieChart();*/
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -953,7 +973,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     }
 
     // Pie Chart val changed on Scroll of list view
-    private void requestFIndexPieChart() {
+    private void requestFIndexPieChart(String header_value_filter) {
         offsetvalue = 0;
         limit = 100;
         count = 0;
@@ -961,7 +981,10 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         txtNoChart.setVisibility(View.GONE);
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
 
-        if (fIndexFirstVisibleItem.equals("All")) {
+        Log.e("header_value_filter "," "+header_value_filter+" "+fIndexFirstVisibleItem);
+
+        if (fIndexFirstVisibleItem.equals("All"))
+        {
             ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
             upcoming = (float) freshnessIndexDetail.getUpcomingGroupCount();
             oldgroup = (float) freshnessIndexDetail.getOldGroupCount();
@@ -1043,23 +1066,45 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
         fIndexFirstVisibleItem = fIndexFirstVisibleItem.replace("%", "%25");
         fIndexFirstVisibleItem = fIndexFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
-        if (txtFIndexClass.getText().toString().equals("Department")) {
-            url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        } else if (txtFIndexClass.getText().toString().equals("Category")) {
-            url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&category=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        } else if (txtFIndexClass.getText().toString().equals("Class")) {
-            url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&class=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        } else if (txtFIndexClass.getText().toString().equals("Brand")) {
-            url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
-            url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+
+        if(!header_value_filter.equals(""))
+        {
+            if (txtFIndexClass.getText().toString().equals("Department")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&department=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
+            } else if (txtFIndexClass.getText().toString().equals("Category")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&category=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
+            } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&class=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
+            } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
+            } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+ header_value_filter;
+            }
         }
-        Log.e(TAG, "URL: "+ url);
+        else
+        {
+            if (txtFIndexClass.getText().toString().equals("Department")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&department=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            } else if (txtFIndexClass.getText().toString().equals("Category")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&category=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&class=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
+                url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            }
+        }
+
+
+        Log.e("requestFIndexPieChart ","  URL: "+ url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
+                        Log.e("response requestFIndexPieChart "," "+response);
 
                         try {
                             int i;
@@ -1074,7 +1119,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestFIndexPieChart();
+                                requestFIndexPieChart("");
                             } else if (response.length() < limit) {
                                 for (i = 0; i < response.length(); i++) {
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
@@ -1254,8 +1299,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
     private void requestAll() {
-        String fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexheaderNew/" + userId + "?corefashion=" + FIndex_SegmentClick +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e(TAG, "URL: "+ fIdetails);
+        String fIdetails;
+
+        fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexheaderNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+
+
+        Log.e(TAG, "requestAll URL: "+ fIdetails);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1301,6 +1351,220 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
                             freshnessIndexDetailsArrayList.add(0, freshnessIndexDetail);
                             setAdapter();
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG,"Data failed."+e.getMessage());
+                            llfreshnessIndex.setVisibility(View.GONE);
+                            OnItemClick = false;
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "Server not found", Toast.LENGTH_SHORT).show();
+                        llfreshnessIndex.setVisibility(View.GONE);
+                        OnItemClick = false;
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+
+    private void requestHeader(final String name, final int level) {
+        String fIdetails;
+
+        fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexheaderNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
+
+
+        Log.e(TAG, "requestHeader URL: "+ fIdetails);
+
+        postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e(TAG, "requestHeader onResponse: All"+response );
+                        Reusable_Functions.hDialog();
+
+
+                        int i;
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                OnItemClick = false;
+                                llfreshnessIndex.setVisibility(View.GONE);
+                                return;
+
+                            } else {
+                                freshnessIndexDetail = new FreshnessIndexDetails();
+                                for (i = 0; i < response.length(); i++) {
+                                    freshnessIndexDetail = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
+                                }
+                                if (txtFIndexClass.getText().toString().equals("Department")) {
+                                    freshnessIndexDetail.setPlanDept("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Category")) {
+                                    freshnessIndexDetail.setPlanCategory("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                                    freshnessIndexDetail.setPlanClass("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+                                    freshnessIndexDetail.setBrandName("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
+                                    freshnessIndexDetail.setBrandplanClass("All");
+                                }
+
+                                freshnessIndexDetail.setStkOnhandQty(freshnessIndexDetail.getStkOnhandQty());
+                                freshnessIndexDetail.setStkOnhandQtyCount(100);
+                                freshnessIndexDetail.setStkGitQty(freshnessIndexDetail.getStkGitQty());
+                                freshnessIndexDetail.setCoreGrpCount(freshnessIndexDetail.getCoreGrpCount());
+                                freshnessIndexDetail.setUpcomingGroupCount(freshnessIndexDetail.getUpcomingGrpCount());
+                                freshnessIndexDetail.setOldGroupCount(freshnessIndexDetail.getOldGrpCount());
+                                freshnessIndexDetail.setPreviousGroupCount(freshnessIndexDetail.getPreviousGrpCount());
+                                freshnessIndexDetail.setSohCurrentGrpCount(freshnessIndexDetail.getSohCurrentGrpCount());
+                            }
+
+                            freshnessIndexDetailsArrayList.add(0, freshnessIndexDetail);
+                            listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
+                            listViewFIndex.setLayoutManager(new LinearLayoutManager(
+                                    listViewFIndex.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                    LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                            listViewFIndex.setOnFlingListener(null);
+                            new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
+                            freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
+                            listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
+
+                            txtfIndexDeptName.setText(hierarchy(name.replaceAll("%20"," ").replaceAll("%26","&")));
+                            llfIndexhierarchy.setVisibility(View.VISIBLE);
+                            TestItem();
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            FreshnessIndexActivity.level = level;
+                            requestFIndexPieChart("");
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG,"Data failed."+e.getMessage());
+                            llfreshnessIndex.setVisibility(View.GONE);
+                            OnItemClick = false;
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "Server not found", Toast.LENGTH_SHORT).show();
+                        llfreshnessIndex.setVisibility(View.GONE);
+                        OnItemClick = false;
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+    }
+
+    private void requestFilterHeader() {
+        String fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexheaderNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
+
+        Log.e(TAG, "requestFilterHeader URL: "+ fIdetails);
+
+        postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e(TAG, "requestHeader onResponse: All"+response );
+                        Reusable_Functions.hDialog();
+
+
+                        int i;
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                OnItemClick = false;
+                                llfreshnessIndex.setVisibility(View.GONE);
+                                return;
+
+                            } else {
+                                freshnessIndexDetail = new FreshnessIndexDetails();
+                                for (i = 0; i < response.length(); i++) {
+                                    freshnessIndexDetail = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
+                                }
+                                if (txtFIndexClass.getText().toString().equals("Department")) {
+                                    freshnessIndexDetail.setPlanDept("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Category")) {
+                                    freshnessIndexDetail.setPlanCategory("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                                    freshnessIndexDetail.setPlanClass("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+                                    freshnessIndexDetail.setBrandName("All");
+                                } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
+                                    freshnessIndexDetail.setBrandplanClass("All");
+                                }
+
+                                freshnessIndexDetail.setStkOnhandQty(freshnessIndexDetail.getStkOnhandQty());
+                                freshnessIndexDetail.setStkOnhandQtyCount(100);
+                                freshnessIndexDetail.setStkGitQty(freshnessIndexDetail.getStkGitQty());
+                                freshnessIndexDetail.setCoreGrpCount(freshnessIndexDetail.getCoreGrpCount());
+                                freshnessIndexDetail.setUpcomingGroupCount(freshnessIndexDetail.getUpcomingGrpCount());
+                                freshnessIndexDetail.setOldGroupCount(freshnessIndexDetail.getOldGrpCount());
+                                freshnessIndexDetail.setPreviousGroupCount(freshnessIndexDetail.getPreviousGrpCount());
+                                freshnessIndexDetail.setSohCurrentGrpCount(freshnessIndexDetail.getSohCurrentGrpCount());
+
+                                freshnessIndexDetailsArrayList.add(0,freshnessIndexDetail);
+
+                                listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
+                                listViewFIndex.setLayoutManager(new LinearLayoutManager(
+                                        listViewFIndex.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
+                                        LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                                listViewFIndex.setOnFlingListener(null);
+                                new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
+                                freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
+                                listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
+
+                                offsetvalue = 0;
+                                limit = 100;
+                                count = 0;
+                                fIndexArrayList.clear();
+                                TestItem();
+
+                                requestFIndexPieChart(header_value);
+
+
+                            }
+
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1404,7 +1668,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         limit = 100;
         count = 0;
         llfIndexhierarchy.setVisibility(View.GONE);
-        requestFIndexPieChart();
+        requestFIndexPieChart("");
     }
 
     private void requestFreshnessIndexFilterVal(final String selectedString,final int inv_filter_level) {
@@ -1484,8 +1748,8 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                     freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
                                 }
-
-                                freshnessIndexDetails = new FreshnessIndexDetails();
+                                requestFilterHeader();
+                                /*freshnessIndexDetails = new FreshnessIndexDetails();
                                 if (txtFIndexClass.getText().toString().equals("Department")) {
                                     freshnessIndexDetails.setPlanDept("All");
                                 } else if (txtFIndexClass.getText().toString().equals("Category")) {
@@ -1536,7 +1800,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getBrandplanClass().toString();
                                 }
 
-                                requestFIndexPieChart();
+                                requestFIndexPieChart();*/
 
                             }
 
@@ -1860,7 +2124,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 break;
 
             case 1:
-                //String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&dept=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
+                //String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&" + fromWhere + "=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
                 Reusable_Functions.sDialog(context,"Loading...");
@@ -2384,7 +2648,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     return;
                 }
                 FreshnessIndexValue = "";
-
+                header_value = "";
                 switch (txtFIndexClass.getText().toString()) {
 
                     case "Brand Class":
@@ -2503,6 +2767,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     return;
                 }
                 FreshnessIndexValue = "";
+                header_value = "";
                 switch (txtFIndexClass.getText().toString()) {
 
                     case "Department":
@@ -2629,6 +2894,17 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                                 freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanDept();
                                                 fromWhere = "Category";
                                                 level = 2;
+
+                                                if(!freshnessIndex_ClickedVal.equals("All")) {
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&department=" + freshnessIndex_ClickedVal;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
+
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
                                                         postRequest.cancel();
@@ -2653,6 +2929,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                                 freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanCategory();
                                                 fromWhere = "Class";
                                                 level = 3;
+                                                if(!freshnessIndex_ClickedVal.equals("All")) {
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&category=" + freshnessIndex_ClickedVal;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
                                                         postRequest.cancel();
@@ -2676,6 +2961,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                                 freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getPlanClass();
                                                 fromWhere = "Brand";
                                                 level = 4;
+                                                if(!freshnessIndex_ClickedVal.equals("All")) {
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&class=" + freshnessIndex_ClickedVal;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
                                                         postRequest.cancel();
@@ -2701,6 +2995,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                                 freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getBrandName();
                                                 fromWhere = "Brand Class";
                                                 level = 5;
+                                                if(!freshnessIndex_ClickedVal.equals("All")) {
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&brand=" + freshnessIndex_ClickedVal;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
                                                         postRequest.cancel();
