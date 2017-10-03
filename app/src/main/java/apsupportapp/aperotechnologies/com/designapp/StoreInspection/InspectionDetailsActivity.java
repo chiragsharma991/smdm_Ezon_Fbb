@@ -49,7 +49,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     private RelativeLayout insp_detls_btnback;
     Context context = this;
     private String userId;
-    private String bearertoken;
+    private String bearertoken, storeCode;
     private RequestQueue queue;
     private SharedPreferences sharedPreferences;
     int inspectn_Id;
@@ -121,6 +121,11 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
 
 
     private void initialise() {
+
+        if(getIntent().getExtras().getString("store_Code") != null )
+        {
+            storeCode = getIntent().getExtras().getString("store_Code");
+        }
         insp_detls_btnback = (RelativeLayout)findViewById(R.id.insp_detls_btnback);
         txt_inspdetls_date_Val = (TextView)findViewById(R.id.txt_inspdetls_date_Val);
         txt_inspdetls_id_Val = (TextView)findViewById(R.id.txt_inspdetls_id_Val);
@@ -254,7 +259,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements View
     //-------------------------- API Declaration --------------------------//
     private void requestInspectionDetails(final int inspectn_id)
     {
-            String url = ConstsCore.web_url + "/v1/display/storeinspection/" + userId+"?inspectionId="+inspectn_id;
+            String url = ConstsCore.web_url + "/v1/display/storeinspection/" + userId+"?inspectionId="+inspectn_id + "&storeCode=" + storeCode;
         Log.e("", "requestInspectionDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {

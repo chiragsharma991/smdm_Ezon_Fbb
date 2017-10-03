@@ -26,12 +26,12 @@ public class OurStoreServices_ViewPagerAdapter extends FragmentStatePagerAdapter
     public Fragment getItem(int position) {
 
         switch (position) {
-//            case 0:
-//                OurStoreServices_Reports tab1 = new OurStoreServices_Reports(storeCode);
-//                return tab1;
-//            case 1:
-//                OurStoreServices_Feedback tab2 = new OurStoreServices_Feedback(storeCode);
-//                return tab2;
+            case 0:
+                OurStoreServices_Reports tab1 = new OurStoreServices_Reports(storeCode);
+                return tab1;
+            case 1:
+                OurStoreServices_Feedback tab2 = new OurStoreServices_Feedback(storeCode);
+                return tab2;
             default:
                 return null;
         }

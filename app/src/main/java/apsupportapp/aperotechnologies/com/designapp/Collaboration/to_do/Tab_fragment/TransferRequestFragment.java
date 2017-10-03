@@ -207,7 +207,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                 senderSummary_recyclerView.setLayoutManager(new LinearLayoutManager(senderSummary_recyclerView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 senderSummary_recyclerView.setOnFlingListener(null);
 
-                                 transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), new TransferRequestAdapter.OnItemClickListener() {
+                                transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), new TransferRequestAdapter.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(View view, int position)
                                     {
@@ -318,7 +318,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-                    }
+        }
     }
 
 
@@ -354,13 +354,16 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.e(TAG, "requestSenderSubmitAPI onResponse: "+response);
+                            Reusable_Functions.hDialog();
+
                             try {
                                 if (response == null || response.equals("")) {
-                                    Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext,"Sending data failed...", Toast.LENGTH_LONG).show();
 
                                 } else
                                 {
+//                                    transferRequestAdapter.notifyDataSetChanged();
+//                                    requestTransferRequestsummary();
 //                                    switch (id){
 //                                        case 0:
 //                                            String selectCase=jsonarray.getJSONObject(0).get("caseNo").toString();
@@ -377,7 +380,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
 //                                            Toast.makeText(mcontext,"Submission success", Toast.LENGTH_LONG).show();
 //                                            break;
 //                                    }
-                                 Reusable_Functions.hDialog();
+                                    Reusable_Functions.hDialog();
                                 }
                             } catch (Exception e)
                             {

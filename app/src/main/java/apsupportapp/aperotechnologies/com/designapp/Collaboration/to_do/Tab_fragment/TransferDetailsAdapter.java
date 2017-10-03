@@ -101,13 +101,13 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         {
                             //Header check is enable when view is open
                             TransferDetails_HeadercheckList[position]=true;
+                          //  transferRequestDetails.selectOptionList.clear();
                             visibleItems[position]=true;
                             notifyItemChanged(position);
                         }else
                         {
                             TransferDetails_HeadercheckList[position]=false;
                             visibleItems[position]=true;
-
                             notifyItemChanged(position);
                         }
                     }

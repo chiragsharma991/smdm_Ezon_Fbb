@@ -68,7 +68,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
     private RequestQueue queue;
     private ScrollView scrollView;
     private TextInputLayout input_remarks;
-    private String remark, remarks_text, SelectedStoreCode;
+    private String remark, remarks_text, SelectedStoreCode, storeCode, store_Code;
     private String TAG = "ProductAvailability";
     private TextView incorrect_phone, incorrect_remark, storedescription;
     private String userId, bearertoken, geoLeveLDesc, store;
@@ -94,6 +94,12 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
 
     private void initializeUI() {
 
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            store_Code = storeCode.substring(0,4);
+            Log.i(TAG, "storeCode: "+storeCode );
+        }
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         input_remarks = (TextInputLayout) findViewById(R.id.input_remarks);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
@@ -442,10 +448,10 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         userId = sharedPreferences.getString("userId", "");
         Log.e("userId"," "+userId);
         store = sharedPreferences.getString("storeDescription", "");
-        SelectedStoreCode = store.trim().substring(0, 4);
-
-        Log.e("store"," "+store);
-        storedescription.setText(store);
+//        SelectedStoreCode = store.trim().substring(0, 4);
+//
+//        Log.e("store"," "+store);
+//        storedescription.setText(store);
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         //  editor.putString("storeDescription",storeDescription);
@@ -567,7 +573,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", SelectedStoreCode);
+            jsonObject.put("storeCode", store_Code);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -617,7 +623,7 @@ public class ProductAvailability_Notify extends AppCompatActivity implements Vie
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
            // SelectedStoreCode = "2663";
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "productavailability",SelectedStoreCode);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "productavailability",store_Code);
             cancelData();
             ((Activity) context).finish();
             nestedScrollview.fullScroll(View.FOCUS_DOWN);

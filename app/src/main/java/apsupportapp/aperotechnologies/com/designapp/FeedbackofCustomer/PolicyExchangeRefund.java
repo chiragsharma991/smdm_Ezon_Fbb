@@ -86,7 +86,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
     private LinearLayout linear_toolbar;
     private ScrollView scrollView;
     private TextInputLayout input_remarks;
-    private String remark, remarks_text, SelectedStoreCode;
+    private String remark, remarks_text, SelectedStoreCode, storeCode, store_Code;
     private Spinner spinner_reasons;
     private String TAG = "PolicyExchangeRefund";
     private RequestQueue queue;
@@ -113,6 +113,12 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
     private void initializeUI() {
 
+        if(getIntent().getExtras().getString("storeCode") != null )
+        {
+            storeCode = getIntent().getExtras().getString("storeCode");
+            store_Code = storeCode.substring(0,4);
+            Log.i(TAG, "storeCode: "+storeCode );
+        }
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         input_remarks = (TextInputLayout) findViewById(R.id.input_remarks);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
@@ -137,7 +143,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         txt_empty_exchange = (TextView) findViewById(R.id.txt_empty_exchange);
         spinner_reasons = (Spinner) findViewById(R.id.spinner_reasons);
         storedescription = (TextView) findViewById(R.id.txtStoreCode);
-        storedescription.setText(store);
+     //   storedescription.setText(store);
         linear_toolbar = (LinearLayout) findViewById(R.id.linear_toolbar);
         linear_toolbar.setVisibility(View.VISIBLE);
 
@@ -489,7 +495,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         userId = sharedPreferences.getString("userId", "");
         user_trim = userId.substring(0,2);
         store = sharedPreferences.getString("storeDescription", "");
-        SelectedStoreCode = store.trim().substring(0, 4);
+      //  SelectedStoreCode = store.trim().substring(0, 4);
 
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
@@ -665,7 +671,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("feedbackKey", customerFeedback);
-            jsonObject.put("storeCode", SelectedStoreCode);
+            jsonObject.put("storeCode", store_Code);
             jsonObject.put("attribute1", customerNumber);
             jsonObject.put("attribute2", customerRemarks);
             jsonObject.put("attribute3", customerName);
@@ -708,7 +714,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
            // SelectedStoreCode = "2663";
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "policyexchange",SelectedStoreCode);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "policyexchange",store_Code);
 
             cancelData();
             ((Activity) context).finish();

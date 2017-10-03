@@ -151,7 +151,7 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
                             rv_insp_history.setLayoutManager(new LinearLayoutManager(rv_insp_history.getContext(), 48 == Gravity.CENTER_HORIZONTAL ? LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             rv_insp_history.setOnFlingListener(null);
                             // new GravitySnapHelper(48).attachToRecyclerView(recyclerView);
-                            insp_history_adapter = new Insp_History_Adapter(inspectionArrayList, context);
+                            insp_history_adapter = new Insp_History_Adapter(inspectionArrayList, context, store_Code);
                             rv_insp_history.setAdapter(insp_history_adapter);
                             Reusable_Functions.hDialog();
 

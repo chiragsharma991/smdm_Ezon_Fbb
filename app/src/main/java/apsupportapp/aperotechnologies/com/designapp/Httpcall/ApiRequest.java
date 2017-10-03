@@ -136,7 +136,7 @@ public class ApiRequest  {
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Log.e("no data found","");
-                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                //    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     Reusable_Functions.hDialog();
 
                                     ResposeInterface.nodatafound();
@@ -212,7 +212,7 @@ public class ApiRequest  {
                             ResposeInterface.nodatafound();
                         }
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
                         Log.e(TAG, "Server not found..."+error.getMessage() );
                         error.printStackTrace();
                     }

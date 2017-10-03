@@ -568,7 +568,7 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
         try {
             result = response.getString("status");
             Reusable_Functions.displayToast(context, result);
-            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "supervisorstaff",SelectedStoreCode);
+            req_sms_API(userId, customerNumber, bearertoken, customerCallBack, context, "supervisorstaff",store_code);
 
             cancelData();
             ((Activity) context).finish();
