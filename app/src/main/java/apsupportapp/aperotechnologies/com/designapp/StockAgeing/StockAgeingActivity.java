@@ -177,8 +177,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         }
         else
         {
-            if(checkAgeingVal!=null){
-                switch (checkAgeingVal) {
+            if(checkAgeingVal!=null)
+            {
+                switch (checkAgeingVal)
+                {
                     case "CheckAgeing1":
                         checkAgeing1.setChecked(true);
                         checkAgeing2.setChecked(false);
@@ -202,7 +204,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 checkAgeing3.setChecked(false);
             }
 
-            switch (checkSeasonGpVal) {
+            switch (checkSeasonGpVal)
+            {
                 case "Current":
                     checkCurrent.setChecked(true);
                     checkPrevious.setChecked(false);
@@ -240,8 +243,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
         if (Reusable_Functions.chkStatus(context)) {
             String url;
-            if (from_filter) {
-                if (coreSelection) {
+            if (from_filter)
+            {
+                if (coreSelection)
+                {
                     //core selection without season params
                     if(filter_level != 0)
                     {
@@ -265,7 +270,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                         url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion +"&stockageband="+stockageband+ "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                     }
                 }
-            } else {
+            }
+            else {
                 if (coreSelection)
                 {
                     //core selection without season params

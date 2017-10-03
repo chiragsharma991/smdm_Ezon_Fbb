@@ -57,6 +57,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
+import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
 import apsupportapp.aperotechnologies.com.designapp.TopOptionCutSize.TopFullCut;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndex_Ez_Model;
@@ -408,6 +409,15 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
 
                     if (build.length() != 0) {
                         FloorAvailabilityActivity.floorAvailability.finish();
+                    }
+                    callback(build);
+                }
+                else if (getIntent().getStringExtra("checkfrom").equals("targetstockexception"))
+                {
+                    intent = new Intent(SalesAnalysisFilter.this, TargetStockExceptionActivity.class);
+
+                    if (build.length() != 0) {
+                        TargetStockExceptionActivity.targetStockException.finish();
                     }
                     callback(build);
                 }
