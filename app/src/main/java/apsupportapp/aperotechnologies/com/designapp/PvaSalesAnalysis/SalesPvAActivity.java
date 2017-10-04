@@ -1280,6 +1280,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             }
         } else {
             salespva_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
+
+
         }
         Log.e(TAG, "requestSalesListDisplayAPI: " + salespva_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_listurl,
@@ -1904,10 +1906,9 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 //        } else {
         salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
 //        }
-        Log.e(TAG, "requestSalesPvACategoryList: " + salespvacategory_listurl);
-
-        postRequest = new JsonArrayRequest(Request.Method.GET, salespvacategory_listurl,
-                new Response.Listener<JSONArray>() {
+        Log.e( TAG, "requestSalesPvACategoryList: " + salespvacategory_listurl );
+        postRequest = new JsonArrayRequest(Request.Method.GET,salespvacategory_listurl,
+                new Response.Listener< JSONArray >() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.e(TAG, "requestSalesPvACategoryList: " + response);
@@ -2480,7 +2481,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         if (fromWhere.equals("category")) {
             dept_clickVal = dept_clickVal.replace("%", "%25");
             dept_clickVal = dept_clickVal.replace(" ", "%20").replace("&", "%26");
-
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&department=" + dept_clickVal + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
         } else if (fromWhere.equals("class")) {
             categry_clickVal = categry_clickVal.replace("%", "%25");
