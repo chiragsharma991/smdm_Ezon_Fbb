@@ -131,29 +131,17 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
-        if (geoLeveLDesc.equals("E ZONE")) {
-            setContentView(R.layout.activity_best_performer_ez_inventory);
-            getSupportActionBar().hide();
-            context = this;
-            TAG = "BestPerformer_Ez_Inventory";
-            Log.e(TAG, "Ezone login ... ");
-            common_intializeUI();
-            intializeUIofEzon();
-            Ezon_collection();  // start method for ezon collection
 
-        }
-        else
-        {
-            setContentView(R.layout.activity_best_performer_inventory);
-            getSupportActionBar().hide();
-            context = this;
-            TAG = "BestPerformerInventory";
-            Log.e(TAG, "FBB login ... ");
-            common_intializeUI();
-            initalise();
-            Fbb_collection();   // start Fbb collection.
+        setContentView(R.layout.activity_best_performer_inventory);
+        getSupportActionBar().hide();
+        context = this;
+        TAG = "BestPerformerInventory";
+        Log.e(TAG, "FBB login ... ");
+        common_intializeUI();
+        initalise();
+        Fbb_collection();   // start Fbb collection.
 
-        }
+
     }
 
 
@@ -178,40 +166,28 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void checkfromFilter() {
 
-        if (TAG.equals("BestPerformer_Ez_Inventory")) {
 
-            if (getIntent().getStringExtra("selectedStringVal") == null) {
-                from_filter = false;
-                level = 7;
-                preValue = 1;
-                //  BestInvent_fashion.toggle();
-                Log.e(TAG, "checkfromFilter: null");
-
-            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-                selectedString = getIntent().getStringExtra("selectedStringVal");
-                selectedlevel = getIntent().getIntExtra("selectedlevelVal", 0);
-                from_filter = true;
-                setChangeViewBy(selectedlevel);
-                Log.e(TAG, "checkfromFilter: ok " + selectedlevel + " " + selectedString);
-            }
-
-            show_popup();
-
-
-        } else {
-
-            if (getIntent().getStringExtra("selectedStringVal") == null) {
-                from_filter = false;
-            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-                selectedString = getIntent().getStringExtra("selectedStringVal");
-                filter_level = getIntent().getIntExtra("selectedlevelVal",0);
-                from_filter = true;
-
-            }
+        if (getIntent().getStringExtra("selectedStringVal") == null)
+        {
+            from_filter = false;
 
         }
+        else if (getIntent().getStringExtra("selectedStringVal") != null)
+        {
+            selectedString = getIntent().getStringExtra("selectedStringVal");
+            filter_level = getIntent().getIntExtra("selectedlevelVal",0);
+            from_filter = true;
+
+        }
+
+        Log.e("here "," "+from_filter);
         RetainFromMain_filter();
-        requestRunningPromoApi(selectedString);
+
+        if(Tabview.getTabAt(0).isSelected())
+        {
+            requestRunningPromoApi();
+        }
+
     }
 
 
@@ -310,21 +286,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         }
 
-        if (TAG.equals("BestPerformerInventory")) {
-
-            if (title.equals("Worst")) {
-                worstToggle = true;
-                Toolbar_title.setText("Worst Performers");
-                BestAndWorst.setChecked(true);
-            }
-            baseclick();
-
-
-        } else {
-
-            baseclickEz_QF();
-        }
-
+        baseclickEz_QF();
         sortRetain();
     }
 
@@ -428,26 +390,19 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     }
 
-    private void requestRunningPromoApi(final String selectedString) {
+    private void requestRunningPromoApi() {
 
 
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(context))
+        {
             String url;
-            if (postRequest != null) {
-                Log.e(TAG, ": cancel request>>>>>>>");
+            if (postRequest != null)
+            {
                 postRequest.cancel();
-           //     bestPerformerInventoryAdapter.notifyDataSetChanged();
             }
-            if (TAG.equals("BestPerformer_Ez_Inventory")) {
 
-                //https://smdm.manthan.com/v1/display/inventorybestworstperformersEZ/1234?view=WTD&top=10&offset=0&limit=5&orderby=DESC&orderbycol=10
-                url = get_ez_url();
-                Log.e("url ezone ",""+url);
+            url = getUrl();
 
-            } else {
-
-                url = getUrl();
-            }
             Log.e(TAG, "requestRunningPromoApi: " + url);
 
             postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -455,7 +410,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         @Override
                         public void onResponse(JSONArray response) {
 
-                            Log.e("response ezone ",""+response);
+//                            Log.e("response ezone ",""+response);
 
                             BestInventListview.setVisibility(View.VISIBLE);
                             try {
@@ -475,15 +430,14 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
                                     for (int i = 0; i < response.length(); i++) {
 
-                                        Log.e(TAG, "onResponse:list size is " + BestInventList.size() + "response length" + response.length());
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         BestInventList.add(BestInventSizeListDisplay);
                                     }
                                     offsetvalue = offsetvalue + 10;
                                     top = top + 10;
 
-                                } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
+                                } else if (response.length() < limit)
+                                {
                                     for (int i = 0; i < response.length(); i++) {
 
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -503,7 +457,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 {
                                     bestPerformerInventoryAdapter = new BestPerformerInventoryAdapter(BestInventList, context, TAG);
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
-                                    Log.e(TAG, "onResponse: list size is" + BestInventList.size());
+//                                    Log.e(TAG, "onResponse: list size is" + BestInventList.size());
 
 
                                 }
@@ -514,7 +468,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 BestInventListview.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                                Log.e(TAG, "catch: " + e.getMessage());
+//                                Log.e(TAG, "catch: " + e.getMessage());
                                 BestInventListview.removeFooterView(footer);
                                 BestInventListview.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
@@ -596,7 +550,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         }
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
-                        requestRunningPromoApi(selectedString);
+                        requestRunningPromoApi();
                     }
 
                 }
@@ -621,9 +575,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         String url = "";
 
-        Log.e(TAG, "getUrl: "+"from filter"+from_filter+" and from coreselection"+coreSelection );
+//        Log.e(TAG, "getUrl: "+"from filter"+from_filter+" and from coreselection"+coreSelection );
+        Log.e( ": ","from filter"+from_filter+" "+filter_level+" "+selectedString);
 
-        if (from_filter) {
+        if (from_filter)
+        {
             if (coreSelection) {
 
                 //core selection without season params
@@ -784,33 +740,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 //Time >>>if you press done then you pass checkTimeValueIs and checkValueIs params
                 if (Reusable_Functions.chkStatus(context)) {
 
-                    if (TAG.equals("BestPerformer_Ez_Inventory"))
-                    {
 
-                        if (CheckWTD.isChecked())
-                        {
-                            checkTimeValueIs = "CheckWTD";
-                            view = "WTD";
-                            popupDoneEz();
-
-                        }
-                        else if (CheckL4W.isChecked())
-                        {
-                            checkTimeValueIs = "CheckL4W";
-                            view = "L4W";
-                            popupDoneEz();
-
-
-                        }
-                        else if (CheckSTD.isChecked())
-                        {
-                            checkTimeValueIs = "CheckYTD";
-                            view = "YTD";
-                            popupDoneEz();
-                        }
-
-
-                    } else {
 
                         if (CheckWTD.isChecked())
                         {
@@ -861,7 +791,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                             CheckTimeDone();
                             quickFilterPopup.setVisibility(View.GONE);
                         }
-                    }
+
 
 
                 } else {
@@ -934,7 +864,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BestInventListview.setVisibility(View.GONE);
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(this, "Loading...");
-                    requestRunningPromoApi(selectedString);
+                    requestRunningPromoApi();
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     BestInventListview.setVisibility(View.GONE);
@@ -954,7 +884,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 BestInventListview.setVisibility(View.GONE);
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(this, "Loading...");
-                    requestRunningPromoApi(selectedString);
+                    requestRunningPromoApi();
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     BestInventListview.setVisibility(View.GONE);
@@ -990,7 +920,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 limit = 10;
                 offsetvalue = 0;
                 top = 10;
-                requestRunningPromoApi(selectedString);
+                requestRunningPromoApi();
                 BaseLayoutInventory.setVisibility(View.GONE);
             }
         } else {
@@ -1027,7 +957,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 limit = 10;
                 offsetvalue = 0;
                 top = 10;
-                requestRunningPromoApi(selectedString);
+                requestRunningPromoApi();
                 BaseLayoutInventory.setVisibility(View.GONE);
 
             }
@@ -1059,7 +989,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 limit = 10;
                 offsetvalue = 0;
                 top = 10;
-                requestRunningPromoApi(selectedString);
+                requestRunningPromoApi();
                 BaseLayoutInventory.setVisibility(View.GONE);
 
             }
@@ -1090,7 +1020,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 limit = 10;
                 offsetvalue = 0;
                 top = 10;
-                requestRunningPromoApi(selectedString);
+                requestRunningPromoApi();
                 BaseLayoutInventory.setVisibility(View.GONE);
 
             }
@@ -1114,7 +1044,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             seasonGroup = "Current";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading...");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi();
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1130,7 +1060,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             seasonGroup = "Previous";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading...");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi();
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1147,7 +1077,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             seasonGroup = "Old";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading...");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1162,7 +1092,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             seasonGroup = "All";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading...");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi();
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1180,7 +1110,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             seasonGroup = "Upcoming";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading...");
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi();
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -1220,7 +1150,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        Log.e(TAG, "onCheckedChanged: " + toggleClick);
+//        Log.e(TAG, "onCheckedChanged: " + toggleClick);
         if (!toggleClick) {
 
 
@@ -1240,7 +1170,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.sDialog(context, "Loading data...");
                             coreSelection = true;
-                            requestRunningPromoApi(selectedString);
+                            requestRunningPromoApi();
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             BestInventListview.setVisibility(View.GONE);
@@ -1264,7 +1194,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.sDialog(this, "Loading...");
                             coreSelection = false;
-                            requestRunningPromoApi(selectedString);
+                            requestRunningPromoApi();
                         } else {
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                             BestInventListview.setVisibility(View.GONE);
@@ -1314,7 +1244,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             offsetvalue = 0;
             top = 10;
             BestInventList.clear();
-            requestRunningPromoApi(selectedString);
+            requestRunningPromoApi();
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1432,7 +1362,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     public String get_ez_url() {
 
         String url;
-        Log.e(TAG, "getUrl: "+"from filter"+from_filter+" and from coreselection"+coreSelection );
+//        Log.e(TAG, "getUrl: "+"from filter"+from_filter+" and from coreselection"+coreSelection );
 
 
    /*     if (from_filter) {
@@ -1562,7 +1492,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 top = 10;
                 BestInventList.clear();
                 Reusable_Functions.sDialog(this, "Loading...");
-                requestRunningPromoApi(selectedString);
+                requestRunningPromoApi();
 
             } else {
                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -1576,58 +1506,45 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
 
-        int checkedId= Tabview.getSelectedTabPosition();
+        int checkedId = Tabview.getSelectedTabPosition();
+        Log.e("onTabSelected "," "+checkedId);
 
 
         switch (checkedId) {
                 case 1 :   //core selection
-                    from_filter = false;
                     limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        if (TAG.equals("BestPerformer_Ez_Inventory")) {
-                            orderby = "ASC";
-                        }
-                        corefashion = "Core";
-                        lazyScroll = "OFF";
-                        BestInventList.clear();
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Core";
+                    lazyScroll = "OFF";
+                    BestInventList.clear();
+                    BestInventListview.setVisibility(View.GONE);
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        coreSelection = true;
+                        requestRunningPromoApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         BestInventListview.setVisibility(View.GONE);
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            coreSelection = true;
-                            requestRunningPromoApi(selectedString);
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            BestInventListview.setVisibility(View.GONE);
-
-                        }
-
+                    }
                     break;
                 case 0 :  // fashion selection
-
-                    from_filter = false;
                     limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Fashion";
-                        if (TAG.equals("BestPerformer_Ez_Inventory")) {
-                            orderby = "DESC";
-                        }
-                        lazyScroll = "OFF";
+                    offsetvalue = 0;
+                    top = 10;
+                    corefashion = "Fashion";
+                    lazyScroll = "OFF";
+                    BestInventListview.setVisibility(View.GONE);
+                    BestInventList.clear();
+
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.sDialog(this, "Loading...");
+                        coreSelection = false;
+                        requestRunningPromoApi();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         BestInventListview.setVisibility(View.GONE);
-                        BestInventList.clear();
-
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.sDialog(this, "Loading...");
-                            coreSelection = false;
-                            requestRunningPromoApi(selectedString);
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            BestInventListview.setVisibility(View.GONE);
-
-                        }
-
-
+                    }
                     break;
 
 

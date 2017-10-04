@@ -81,10 +81,10 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private SegmentedGroup target_segmented;
     private RadioButton target_fashion, target_core;
     private ToggleButton Toggle_target_fav;
-   private String isMultiStore, value;
-   public static String checkSeasonGpVal = null, checkTimeVal = null, checkTitleVal = null;
+    private String isMultiStore, value;
+    public static String checkSeasonGpVal = null, checkTimeVal = null, checkTitleVal = null;
     public static String corefashion = "Fashion", view = "STD";
-     static int checkTargetROSVal = 7;
+    static int checkTargetROSVal = 7;
     private SeekBar TargetSeek;
     private TextView targetMax;
     private int setValue = 7;
@@ -137,7 +137,11 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 from_filter = true;
             }
             RetainFromMain_filter();
-            requestTargetStockExcepApi(selectedString);
+            if(Tabview.getTabAt(0).isSelected())
+            {
+                requestTargetStockExcepApi(selectedString);
+            }
+
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }

@@ -1,18 +1,14 @@
 package apsupportapp.aperotechnologies.com.designapp.Ezone;
 
 import android.app.Activity;
-import android.graphics.drawable.BitmapDrawable;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
-import apsupportapp.aperotechnologies.com.designapp.R;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +53,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
@@ -107,7 +105,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
     private static String orderby = "DESC";
     private CheckBox BestCheckCurrent, BestCheckPrevious, BestCheckOld, BestCheckUpcoming;
     private boolean coreSelection = false;
-    public static Activity bestperoformer;
+    public static Activity ezone_bestperoformer;
     private boolean from_filter = false;
     private String selectedString = "", geoLevel2Code, lobId, isMultiStore, value;
     private boolean toggleClick = true;
@@ -132,85 +130,39 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
-        if (geoLeveLDesc.equals("E ZONE")) {
-            setContentView(R.layout.activity_best_performer_ez_inventory);
-            getSupportActionBar().hide();
-            context = this;
-            TAG = "BestPerformer_Ez_Inventory";
-            Log.e(TAG, "Ezone login ... ");
-            common_intializeUI();
-            intializeUIofEzon();
-            Ezon_collection();  // start method for ezon collection
 
-        }
-        else
-        {
-            setContentView(R.layout.activity_best_performer_inventory);
-            getSupportActionBar().hide();
-            context = this;
-            TAG = "BestPerformerInventory";
-            Log.e(TAG, "FBB login ... ");
-            common_intializeUI();
-            initalise();
-            Fbb_collection();   // start Fbb collection.
-
-        }
-    }
-
-
-    private void Fbb_collection()
-    {
-        BestInventListview.setVisibility(View.VISIBLE);
-
-        if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
-            Reusable_Functions.sDialog(context, "Loading data...");
-            offsetvalue = 0;
-            limit = 10;
-            count = 0;
-            top = 10;
-            checkfromFilter();
-        } else {
-            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-        }
-
+        setContentView(R.layout.activity_best_performer_ez_inventory);
+        getSupportActionBar().hide();
+        context = this;
+        TAG = "BestPerformer_Ez_Inventory";
+        Log.e(TAG, "Ezone login ... ");
+        common_intializeUI();
+        intializeUIofEzon();
+        Ezon_collection();  // start method for ezon collection
 
     }
+
 
     private void checkfromFilter() {
 
-        if (TAG.equals("BestPerformer_Ez_Inventory")) {
+        if (getIntent().getStringExtra("selectedStringVal") == null)
+        {
+            from_filter = false;
+            level = 7;
+            preValue = 1;
+            //  BestInvent_fashion.toggle();
+            Log.e(TAG, "checkfromFilter: null");
 
-            if (getIntent().getStringExtra("selectedStringVal") == null) {
-                from_filter = false;
-                level = 7;
-                preValue = 1;
-                //  BestInvent_fashion.toggle();
-                Log.e(TAG, "checkfromFilter: null");
-
-            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-                selectedString = getIntent().getStringExtra("selectedStringVal");
-                selectedlevel = getIntent().getIntExtra("selectedlevelVal", 0);
-                from_filter = true;
-                setChangeViewBy(selectedlevel);
-                Log.e(TAG, "checkfromFilter: ok " + selectedlevel + " " + selectedString);
-            }
-
-            show_popup();
-
-
-        } else {
-
-            if (getIntent().getStringExtra("selectedStringVal") == null) {
-                from_filter = false;
-            } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-                selectedString = getIntent().getStringExtra("selectedStringVal");
-                filter_level = getIntent().getIntExtra("selectedlevelVal",0);
-                from_filter = true;
-
-            }
-
+        } else if (getIntent().getStringExtra("selectedStringVal") != null)
+        {
+            selectedString = getIntent().getStringExtra("selectedStringVal");
+            selectedlevel = getIntent().getIntExtra("selectedlevelVal", 0);
+            from_filter = true;
+            setChangeViewBy(selectedlevel);
+            Log.e(TAG, "checkfromFilter: ok " + selectedlevel + " " + selectedString);
         }
+
+        show_popup();
         RetainFromMain_filter();
         requestRunningPromoApi(selectedString);
     }
@@ -218,7 +170,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
 
     private void common_intializeUI() {
 
-        bestperoformer = EzoneBestPerformerInventory.this;
+        ezone_bestperoformer = EzoneBestPerformerInventory.this;
 
         // toggleClick = true;  // you set toggle on segment button so you have to handle this flag.
         BestInventListview = (ListView) findViewById(R.id.bestInvent_ListView);
@@ -239,9 +191,9 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
         BstInventory_coverNsell_chk = (RadioButton) findViewById(R.id.bstInventory_coverNsellchk);
         quickFilterPopup = (RelativeLayout) findViewById(R.id.baseQuickFilterPopup);
         BestQfDoneLayout = (RelativeLayout) findViewById(R.id.bestQfDoneLayout);
-      //  BestInvent_core = (RadioButton) findViewById(R.id.bestInvent_core);
-    //    BestInvent_fashion = (RadioButton) findViewById(R.id.bestInvent_fashion);
-     //   BestInvent_segmented = (SegmentedGroup) findViewById(R.id.bestInvent_segmented);
+        //  BestInvent_core = (RadioButton) findViewById(R.id.bestInvent_core);
+        //    BestInvent_fashion = (RadioButton) findViewById(R.id.bestInvent_fashion);
+        //   BestInvent_segmented = (SegmentedGroup) findViewById(R.id.bestInvent_segmented);
         BestQuickFilterBorder = (RelativeLayout) findViewById(R.id.bestQuickFilterBorder);
         CheckWTD = (RadioButton) findViewById(R.id.checkWTD);
         CheckL4W = (RadioButton) findViewById(R.id.checkL4W);
@@ -265,7 +217,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
         BstInventory_Fwd.setOnClickListener(this);
         BestInvent_quickFilter.setOnClickListener(this);
         BestQfDoneLayout.setOnClickListener(this);
-      //  BestInvent_segmented.setOnCheckedChangeListener(this);
+        //  BestInvent_segmented.setOnCheckedChangeListener(this);
         Bst_sortInventory.setOnClickListener(this);
         BaseLayoutInventory.setOnClickListener(this);
         BstInventory_salesU.setOnClickListener(this);
@@ -281,8 +233,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
         BestAndWorst.setOnCheckedChangeListener(this);
 
         toggle_txt.setText("Best");
-
-
 
 
         gson = new Gson();
@@ -306,7 +256,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
 
         } else {
             coreSelection = true;
-           // BestInvent_core.toggle();
+            // BestInvent_core.toggle();
             Tabview.getTabAt(1).select();
 
         }
@@ -437,19 +387,13 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
             if (postRequest != null) {
                 Log.e(TAG, ": cancel request>>>>>>>");
                 postRequest.cancel();
-           //     bestPerformerInventoryAdapter.notifyDataSetChanged();
+                //     bestPerformerInventoryAdapter.notifyDataSetChanged();
             }
-            if (TAG.equals("BestPerformer_Ez_Inventory")) {
 
-                //https://smdm.manthan.com/v1/display/inventorybestworstperformersEZ/1234?view=WTD&top=10&offset=0&limit=5&orderby=DESC&orderbycol=10
-                url = get_ez_url();
-                Log.e("url ezone ",""+url);
 
-            } else {
+            url = get_ez_url();
+            Log.e("url ezone ",""+url);
 
-                url = getUrl();
-            }
-            Log.e(TAG, "requestRunningPromoApi: " + url);
 
             postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
@@ -685,7 +629,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
             BestInvent_txtStoreCode.setText("Store : ");
             BestInvent_txtStoreName.setText(value);
         }
-    //    rel_store_layout.setVisibility(View.VISIBLE);
+        //    rel_store_layout.setVisibility(View.VISIBLE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
         BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
         BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);
@@ -741,20 +685,14 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                 break;
             case R.id.bestInvent_imgfilter:
 
-//                if (TAG.equals("BestPerformer_Ez_Inventory")) {
+                Intent intent = new Intent(this, EzoneSalesFilter.class);
+                intent.putExtra("checkfrom", "ezonebestPerformers");
+                startActivity(intent);
+                break;
+
 //
-//                    Intent intent = new Intent(this, EzoneSalesFilter.class);
-//                    intent.putExtra("checkfrom", "bestPerformers");
-//                    startActivity(intent);
-//                    break;
-//
-//                } else {
-                    Intent intent = new Intent(this, SalesAnalysisFilter.class);
-                    intent.putExtra("checkfrom", "bestPerformers");
-                    startActivity(intent);
-                    break;
 //                }
-                //Quick filter>>>
+            //Quick filter>>>
             case R.id.bestInvent_quickFilter:
                 filterFunction();
                 break;
@@ -763,19 +701,8 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
 
             case R.id.baseQuickFilterPopup:
 
-                if (TAG.equals("BestPerformer_Ez_Inventory")) {
-
-                    baseclickEz_QF();
-
-                    quickFilterPopup.setVisibility(View.GONE);
-
-                } else {
-
-                    baseclick();
-
-                    quickFilterPopup.setVisibility(View.GONE);
-                }
-
+                baseclickEz_QF();
+                quickFilterPopup.setVisibility(View.GONE);
 
                 break;
 
@@ -785,8 +712,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                 //Time >>>if you press done then you pass checkTimeValueIs and checkValueIs params
                 if (Reusable_Functions.chkStatus(context)) {
 
-                    if (TAG.equals("BestPerformer_Ez_Inventory"))
-                    {
+
 
                         if (CheckWTD.isChecked())
                         {
@@ -811,58 +737,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                         }
 
 
-                    } else {
 
-                        if (CheckWTD.isChecked())
-                        {
-                            checkTimeValueIs = "CheckWTD";
-                            view = "WTD";
-                        }
-                        else if (CheckL4W.isChecked())
-                        {
-                            checkTimeValueIs = "CheckL4W";
-                            view = "L4W";
-                        }
-                        else if (CheckSTD.isChecked())
-                        {
-                            checkTimeValueIs = "CheckSTD";
-                            view = "STD";
-                        }
-                        //season group
-
-                        if (BestCheckCurrent.isChecked())
-                        {
-                            checkValueIs = "BestCheckCurrent";
-                            popupCurrent();
-                            quickFilterPopup.setVisibility(View.GONE);
-
-                        }
-                        else if (BestCheckPrevious.isChecked())
-                        {
-                            checkValueIs = "BestCheckPrevious";
-                            popupPrevious();
-                            quickFilterPopup.setVisibility(View.GONE);
-
-                        }
-                        else if (BestCheckOld.isChecked())
-                        {
-                            checkValueIs = "BestCheckOld";
-                            popupOld();
-                            quickFilterPopup.setVisibility(View.GONE);
-
-                        }
-                        else if (BestCheckUpcoming.isChecked())
-                        {
-                            checkValueIs = "BestCheckUpcoming";
-                            popupUpcoming();
-                            quickFilterPopup.setVisibility(View.GONE);
-                        }
-                        else
-                        {
-                            CheckTimeDone();
-                            quickFilterPopup.setVisibility(View.GONE);
-                        }
-                    }
 
 
                 } else {
@@ -1231,9 +1106,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                         limit = 10;
                         offsetvalue = 0;
                         top = 10;
-                        if (TAG.equals("BestPerformer_Ez_Inventory")) {
-                            orderby = "ASC";
-                        }
+                        orderby = "ASC";
                         corefashion = "Core";
                         lazyScroll = "OFF";
                         BestInventList.clear();
@@ -1255,9 +1128,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                         offsetvalue = 0;
                         top = 10;
                         corefashion = "Fashion";
-                        if (TAG.equals("BestPerformer_Ez_Inventory")) {
-                            orderby = "DESC";
-                        }
+                        orderby = "DESC";
                         lazyScroll = "OFF";
                         BestInventListview.setVisibility(View.GONE);
                         BestInventList.clear();
@@ -1341,7 +1212,7 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
             BestInvent_txtStoreName.setText(value);
         }
         rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
-      //  rel_store_layout.setVisibility(View.INVISIBLE);
+        //  rel_store_layout.setVisibility(View.INVISIBLE);
         FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);
         FreshnessIndex_Ez_moreVertical.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1449,24 +1320,24 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
 
                 //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol  + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             }
         } else {
             if (coreSelection) {
 
                 //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             }
         }
         return url;
@@ -1581,58 +1452,54 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
 
 
         switch (checkedId) {
-                case 1 :   //core selection
-                    from_filter = false;
-                    limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        if (TAG.equals("BestPerformer_Ez_Inventory")) {
-                            orderby = "ASC";
-                        }
-                        corefashion = "Core";
-                        lazyScroll = "OFF";
-                        BestInventList.clear();
-                        BestInventListview.setVisibility(View.GONE);
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            coreSelection = true;
-                            requestRunningPromoApi(selectedString);
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            BestInventListview.setVisibility(View.GONE);
+            case 1 :   //core selection
+                from_filter = false;
+                limit = 10;
+                offsetvalue = 0;
+                top = 10;
+                orderby = "ASC";
+                corefashion = "Core";
+                lazyScroll = "OFF";
+                BestInventList.clear();
+                BestInventListview.setVisibility(View.GONE);
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    coreSelection = true;
+                    requestRunningPromoApi(selectedString);
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    BestInventListview.setVisibility(View.GONE);
 
-                        }
+                }
 
-                    break;
-                case 0 :  // fashion selection
+                break;
+            case 0 :  // fashion selection
 
-                    from_filter = false;
-                    limit = 10;
-                        offsetvalue = 0;
-                        top = 10;
-                        corefashion = "Fashion";
-                        if (TAG.equals("BestPerformer_Ez_Inventory")) {
-                            orderby = "DESC";
-                        }
-                        lazyScroll = "OFF";
-                        BestInventListview.setVisibility(View.GONE);
-                        BestInventList.clear();
+                from_filter = false;
+                limit = 10;
+                offsetvalue = 0;
+                top = 10;
+                corefashion = "Fashion";
+                orderby = "DESC";
+                lazyScroll = "OFF";
+                BestInventListview.setVisibility(View.GONE);
+                BestInventList.clear();
 
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.sDialog(this, "Loading...");
-                            coreSelection = false;
-                            requestRunningPromoApi(selectedString);
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            BestInventListview.setVisibility(View.GONE);
+                if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.sDialog(this, "Loading...");
+                    coreSelection = false;
+                    requestRunningPromoApi(selectedString);
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    BestInventListview.setVisibility(View.GONE);
 
-                        }
+                }
 
 
-                    break;
+                break;
 
 
-            }
+        }
 
 
     }

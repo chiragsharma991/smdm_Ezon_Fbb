@@ -130,7 +130,11 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 from_filter = true;
             }
             RetainFromMain_filter();
-            requestFloorAvailabilityApi(selectedString);
+            if(Tabview.getTabAt(0).isSelected())
+            {
+                requestFloorAvailabilityApi(selectedString);
+            }
+
         }
         else
         {
@@ -140,7 +144,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
         floorListView.addFooterView(footer);
     }
 
-    private void requestFloorAvailabilityApi(final String selectedString) {
+    private void requestFloorAvailabilityApi(final String selectedString)
+    {
     if (Reusable_Functions.chkStatus(context)) {
 
             String url;
@@ -404,6 +409,8 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                 quickFilterPopup.setVisibility(View.GONE);
                 break;
             case R.id.qfDoneLayout:
+                from_filter = false;
+
                 if (checkCurrent.isChecked()) {
                     popupCurrent();
                     floorcheckSeasonGpVal = "Current";
@@ -590,9 +597,10 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     public void onTabSelected(TabLayout.Tab tab) {
 
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: "+toggleClick );
+        Log.e("TAB", "onTabSelected: "+checkedId );
 
-        if (toggleClick == false) {
+//        if (toggleClick == false)
+//        {
             switch (checkedId) {
                 case 1 :   //core selection
                         if (Reusable_Functions.chkStatus(context)) {
@@ -635,9 +643,9 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
 
                     break;
             }
-        } else {
-            toggleClick = false;
-        }
+//        } else {
+//            toggleClick = false;
+//        }
     }
 
     @Override

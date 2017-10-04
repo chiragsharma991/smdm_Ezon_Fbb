@@ -139,7 +139,10 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
         }
         retainSegmentVal();
-        requestRunningPromoApi(selectedString);
+        if(Tabview.getTabAt(0).isSelected())
+        {
+            requestRunningPromoApi(selectedString);
+        }
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
         BestInventListview.addFooterView(footer);
     }
@@ -492,6 +495,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
             case R.id.bestQfDoneLayout:
 
+                from_filter = false;
                 if (Reusable_Functions.chkStatus(context)) {
 
                     //Time >>>
@@ -791,7 +795,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            corefashion = "Core";
             seasonGroup = "Old";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
@@ -824,7 +827,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
             limit = 10;
             offsetvalue = 0;
             top = 10;
-            corefashion = "Core";
             seasonGroup = "Upcoming";
             BestInventList.clear();
             Reusable_Functions.sDialog(this, "Loading.......");
@@ -865,7 +867,7 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
         int checkedId= Tabview.getSelectedTabPosition();
         Log.e("TAB", "onTabSelected: "+filter_toggleClick );
 
-        if (filter_toggleClick == false) {
+//        if (filter_toggleClick == false) {
             switch (checkedId) {
                 case 1 :   //core selection
                         limit = 10;
@@ -902,9 +904,9 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
 
                     break;
             }
-        } else {
-            filter_toggleClick = false;
-        }
+//        } else {
+//            filter_toggleClick = false;
+//        }
     }
 
     @Override
