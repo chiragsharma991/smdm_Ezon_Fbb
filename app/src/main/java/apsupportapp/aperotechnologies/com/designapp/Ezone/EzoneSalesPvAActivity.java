@@ -617,7 +617,14 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
             tabLayout.getTabAt(1).select();
 
         }
-      //  if(sales_filter_level==7 ||)
+        if(getIntent().getStringExtra("selectedStringVal") != null){
+            if(sales_filter_level==7 || sales_filter_level==9){
+                product_radiobtn.setChecked(false);
+                location_radiobtn.setChecked(true);
+                preValue=2;
+            }
+        }
+
 
     }
 
