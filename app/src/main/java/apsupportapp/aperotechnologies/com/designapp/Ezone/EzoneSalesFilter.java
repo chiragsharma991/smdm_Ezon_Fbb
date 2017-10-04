@@ -538,7 +538,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 filter_level = 5;
             }
             if (build.toString().contains("brandclass")) {
-                filter_level = 6;
+                filter_level = 5;
             }
 
         }
