@@ -10,6 +10,7 @@ public class Feedback_model
     String storeDesc;
     String option;
     String prodImageUrl;
+    String articleOptionCode;
     double fittingCnt;
     double fittingCntPer;
     double pricingCnt;
@@ -45,6 +46,14 @@ public class Feedback_model
 
     public void setProdImageUrl(String prodImageUrl) {
         this.prodImageUrl = prodImageUrl;
+    }
+
+    public String getArticleOptionCode() {
+        return articleOptionCode;
+    }
+
+    public void setArticleOptionCode(String articleOptionCode) {
+        this.articleOptionCode = articleOptionCode;
     }
 
     public double getFittingCnt() {

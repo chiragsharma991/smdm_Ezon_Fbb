@@ -366,6 +366,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
 
                                 } else
                                 {
+                                    SenderSummaryList.clear();
                                     transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), null);
                                     senderSummary_recyclerView.setAdapter(transferRequestAdapter);
 //                                    transferRequestAdapter.notifyDataSetChanged();

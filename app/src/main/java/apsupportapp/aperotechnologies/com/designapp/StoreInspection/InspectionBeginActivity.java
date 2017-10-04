@@ -1697,8 +1697,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                     } else if (suggSellingByStaff == 2) {
                         obj.put("suggSellingByStaff", 2); //Okay is selected
                     } else if (suggSellingByStaff == 3) {
-                        obj.put("merchPresentationStd", 3); //Good is selected
-                    } else if (merchPresentationStd == 4) {
+                        obj.put("suggSellingByStaff", 3); //Good is selected
+                    } else if (suggSellingByStaff == 4) {
                         obj.put("suggSellingByStaff", 4); //Excellent is selected
                     }
                 }
@@ -1706,8 +1706,8 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
                 {
                     if (overallCleanliness == 1) {
                         obj.put("overallCleanliness", 1); //Need Improvement is selected
-                    } else if (merchPresentationStd == 2) {
-                        obj.put("merchPresentationStd", 2); //Okay is selected
+                    } else if (overallCleanliness == 2) {
+                        obj.put("overallCleanliness", 2); //Okay is selected
                     } else if (overallCleanliness == 3) {
                         obj.put("overallCleanliness", 3); //Good is selected
                     } else if (overallCleanliness == 4) {
