@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -39,6 +40,7 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,9 +48,10 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
+
+import static apsupportapp.aperotechnologies.com.designapp.StockAgeing.AgeingAdapter.checkedValue_StockAgeing;
 
 /**
  * Created by pamrutkar on 05/12/16.
@@ -62,12 +65,12 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private SharedPreferences sharedPreferences;
     private LinearLayout qfDoneLayout;
     String userId, bearertoken,storeDescription;
-    private static String seasongroup = "Current",stockageband="100-200";
+    private static String seasongroup = "Current", stockageband; //, stockageband="100-200";
     private int count = 0;
     private int limit = 10;
     private int offsetvalue = 0;
     private int top = 10;
-    RadioButton checkAgeing1, checkAgeing2, checkAgeing3;
+    CheckBox checkAgeing1, checkAgeing2, checkAgeing3;
     RadioButton checkCurrent, checkPrevious, checkOld, checkUpcoming;
     Context context = this;
     private RequestQueue queue;
@@ -75,6 +78,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     ListView StockAgListView;
     ArrayList<RunningPromoListDisplay> StockAgeingList;
     StockAgeingAdapter stockAgeingAdapter;
+    ExpandableListView expandableListView_ageing;
     private View footer;
     private String lazyScroll = "OFF";
     private SegmentedGroup stock_segmented;
@@ -85,11 +89,17 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private static String checkAgeingVal = null;
     private boolean coreSelection = false;
     private boolean from_filter = false;
-    private String selectedString = "", geoLevel2Code, lobId, isMultiStore, value;
+    private String selectedString = "", geoLevel2Code, lobId, isMultiStore, value, stockageband1,stockageband2,stockageband3;
     public static Activity stockAgeing;
     private boolean toggleClick = false;
     private TabLayout Tabview;
     private int filter_level;
+    private ArrayList<String> ageing;
+    private ArrayList<String> ageing_val;
+    private AgeingAdapter listAdapter ;
+
+    private ListView listAgeing;
+
 
 
     @Override
@@ -100,6 +110,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
         gson = new Gson();
         stockAgeing = this;
+        ageing = new ArrayList<String>();
+        ageing_val = new ArrayList<String>();
+
         StockAgeingList = new ArrayList<RunningPromoListDisplay>();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = sharedPreferences.getString("userId", "");
@@ -136,7 +149,11 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 toggleClick=true;
             }
             RetainFromMain_filter();
-            requestStockAgeingApi(selectedString);
+            if(Tabview.getTabAt(0).isSelected())
+            {
+                requestStockAgeingApi(selectedString);
+            }
+
         }
         else
         {
@@ -171,9 +188,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             checkPrevious.setChecked(false);
             checkOld.setChecked(false);
             checkUpcoming.setChecked(false);
-            checkAgeing1.setChecked(true);
-            checkAgeing2.setChecked(false);
-            checkAgeing3.setChecked(false);
+//            checkAgeing1.setChecked(false);
+//            checkAgeing2.setChecked(false);
+//            checkAgeing3.setChecked(false);
         }
         else
         {
@@ -181,27 +198,59 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             {
                 switch (checkAgeingVal)
                 {
-                    case "CheckAgeing1":
-                        checkAgeing1.setChecked(true);
-                        checkAgeing2.setChecked(false);
-                        checkAgeing3.setChecked(false);
+                   /* case "CheckAgeing1":
+                        Log.e("CheckAgeing1 ","");
+//                        checkAgeing1.setChecked(true);
+//                        checkAgeing2.setChecked(false);
+//                        checkAgeing3.setChecked(false);
+                        if(checkAgeing1.isChecked())
+                        {
+                            checkAgeing1.setChecked(false);
+                        }
+                        else
+                        {
+                            checkAgeing1.setChecked(true);
+
+                        }
                         break;
 
                     case "CheckAgeing2":
-                        checkAgeing1.setChecked(false);
-                        checkAgeing2.setChecked(true);
-                        checkAgeing3.setChecked(false);
+                        Log.e("CheckAgeing2 ","");
+
+                        // checkAgeing1.setChecked(false);
+                      //  checkAgeing2.setChecked(true);
+                       // checkAgeing3.setChecked(false);
+                        if(checkAgeing2.isChecked())
+                        {
+                            checkAgeing2.setChecked(false);
+                        }
+                        else
+                        {
+                            checkAgeing2.setChecked(true);
+
+                        }
                         break;
                     case "CheckAgeing3":
-                        checkAgeing1.setChecked(false);
-                        checkAgeing2.setChecked(false);
-                        checkAgeing3.setChecked(true);
-                        break;
+                        Log.e("CheckAgeing3 ","");
+
+                        //  checkAgeing1.setChecked(false);
+                      //  checkAgeing2.setChecked(false);
+                     //   checkAgeing3.setChecked(true);
+                        if(checkAgeing3.isChecked())
+                        {
+                            checkAgeing3.setChecked(false);
+                        }
+                        else
+                        {
+                            checkAgeing3.setChecked(true);
+
+                        }
+                        break;  */
                 }
             }else{
-                checkAgeing1.setChecked(false);
-                checkAgeing2.setChecked(false);
-                checkAgeing3.setChecked(false);
+//                checkAgeing1.setChecked(false);
+//                checkAgeing2.setChecked(false);
+//                checkAgeing3.setChecked(false);
             }
 
             switch (checkSeasonGpVal)
@@ -245,17 +294,19 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             String url;
             if (from_filter)
             {
+                Log.e("from_filter","" );
+
                 if (coreSelection)
                 {
                     //core selection without season params
                     if(filter_level != 0)
                     {
-                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion +"&stockageband="+stockageband+ "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId; //+"&stockageband="+stockageband
 
                     }
                     else
                     {
-                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion +"&stockageband="+stockageband+"&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion +"&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                     }
                 }
                 else
@@ -263,24 +314,41 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     // fashion select with season params
                     if(filter_level != 0)
                     {
-                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion +"&stockageband="+stockageband+ "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + filter_level + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                     }
                     else
                     {
-                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion +"&stockageband="+stockageband+ "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                     }
                 }
             }
             else {
                 if (coreSelection)
                 {
+                    if(stockageband1 == null || stockageband1.equals(""))
+                    {
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId +"&stockageband="+stockageband1;
+
+                    }
+
                     //core selection without season params
-                    url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion +"&stockageband="+stockageband+ "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
                 }
-                else
-                {
-                    // fashion select with season params
-                    url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion +"&stockageband="+stockageband+ "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                else {
+                    if (stockageband1 == null || stockageband1.equals("")) {
+
+                        // fashion select with season params
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+                    }
+                    else
+                    {
+                        url = ConstsCore.web_url + "/v1/display/stockageingNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup +"&stockageband=" + stockageband1 + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+
+                    }
                 }
             }
             Log.e("TAG", "requestStockAgeingApi: "+url );
@@ -289,6 +357,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                         @Override
                         public void onResponse(JSONArray response) {
                             StockAgListView.setVisibility(View.VISIBLE);
+                            ageing.clear();
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -407,6 +476,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private void initalise() {
         stock_txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         stock_txtStoreName = (TextView) findViewById(R.id.txtStoreName);
+        listAgeing = (ListView) findViewById(R.id.listAgeing);
+
+
         if(isMultiStore.equals("Yes"))
         {
             stock_txtStoreCode.setText("Concept : ");
@@ -435,9 +507,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         checkPrevious = (RadioButton) findViewById(R.id.checkPrevious);
         checkOld = (RadioButton) findViewById(R.id.checkOld);
         checkUpcoming = (RadioButton) findViewById(R.id.checkUpcoming);
-        checkAgeing1 = (RadioButton) findViewById(R.id.checkAgeing1);
-        checkAgeing2 = (RadioButton) findViewById(R.id.checkAgeing2);
-        checkAgeing3 = (RadioButton) findViewById(R.id.checkAgeing3);
+//        checkAgeing1 = (CheckBox) findViewById(R.id.checkAgeing1);
+//        checkAgeing2 = (CheckBox) findViewById(R.id.checkAgeing2);
+//        checkAgeing3 = (CheckBox) findViewById(R.id.checkAgeing3);
         Tabview = (TabLayout) findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Fashion"));
         Tabview.addTab(Tabview.newTab().setText("Core"));
@@ -447,9 +519,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         checkPrevious.setOnClickListener(this);
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
-        checkAgeing3.setOnClickListener(this);
-        checkAgeing2.setOnClickListener(this);
-        checkAgeing1.setOnClickListener(this);
+//        checkAgeing3.setOnClickListener(this);
+//        checkAgeing2.setOnClickListener(this);
+//        checkAgeing1.setOnClickListener(this);
         qfDoneLayout.setOnClickListener(this);
         stock_segmented.setOnCheckedChangeListener(StockAgeingActivity.this);
         stock_BtnBack.setOnClickListener(StockAgeingActivity.this);
@@ -457,6 +529,9 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         stock_quickFilter.setOnClickListener(this);
         quickFilter_baseLayout.setOnClickListener(this);
         quickFilter_BorderLayout.setOnClickListener(this);
+
+        stockageband_api();
+
     }
 
 
@@ -490,20 +565,51 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             case R.id.qfDoneLayout:
                 from_filter=false;
 
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
 
-                    if (checkAgeing1.isChecked()) {
-                        checkAgeingVal = "CheckAgeing1";
-                        stockageband="100-200";
+                    Log.e("checkedValue_StockAgeing"," "+checkedValue_StockAgeing);
 
-                    } else if (checkAgeing2.isChecked()) {
-                        checkAgeingVal = "CheckAgeing2";
-                        stockageband="150-250";
 
-                    } else if (checkAgeing3.isChecked()) {
-                        checkAgeingVal = "CheckAgeing3";
-                        stockageband="250-350";
-                    }
+                    String[] array = (String[]) checkedValue_StockAgeing.toArray(new String[0]);
+                    stockageband1 = Arrays.toString(array);
+                    stockageband1 = stockageband1.replace("[", "");
+                    stockageband1 = stockageband1.replace("]", "");
+                    stockageband1 = stockageband1.replace(", ", ",");
+
+//                    if (checkAgeing1.isChecked()) {
+//                        checkAgeingVal = "CheckAgeing1";
+//                        stockageband1="100-200";
+//                        ageing.add(stockageband1);
+//
+//                    }
+//                    if (checkAgeing2.isChecked()) {
+//                        checkAgeingVal = "CheckAgeing2";
+//                        stockageband2="150-250";
+//                        ageing.add(stockageband2);
+//
+//
+//                    }
+//                    if (checkAgeing3.isChecked()) {
+//                        checkAgeingVal = "CheckAgeing3";
+//                        stockageband3="250-350";
+//                        ageing.add(stockageband3);
+//
+//                    }
+//
+//                    String[] array = (String[]) ageing.toArray(new String[0]);
+//                    subMC = Arrays.toString(array);
+//                    subMC = subMC.replace("[", "");
+//                    subMC = subMC.replace("]", "");
+//                    subMC = subMC.replace(", ", ",");
+//
+
+//                    else{
+//                        stockageband=" ";
+//                        ageing.clear();
+//
+//                    }
+
 
 
                     if (checkCurrent.isChecked()) {
@@ -539,6 +645,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                 break;
             case R.id.checkCurrent:
+                Toast.makeText(context, "ageing"+ageing.toString(),Toast.LENGTH_SHORT).show();
                 checkCurrent.setChecked(true);
                 checkPrevious.setChecked(false);
                 checkOld.setChecked(false);
@@ -569,24 +676,51 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                 checkPrevious.setChecked(false);
 
                 break;
-            case R.id.checkAgeing1:
+          /*  case R.id.checkAgeing1:
 
-                checkAgeing1.setChecked(true);
-                checkAgeing2.setChecked(false);
-                checkAgeing3.setChecked(false);
+//                checkAgeing1.setChecked(true);
+//                checkAgeing2.setChecked(false);
+//                checkAgeing3.setChecked(false);
+                if(!checkAgeing1.isChecked())
+                {
+                    checkAgeing1.setChecked(false);
+                }
+                else
+                {
+                    checkAgeing1.setChecked(true);
+
+                }
                 break;
             case R.id.checkAgeing2:
 
-                checkAgeing2.setChecked(true);
-                checkAgeing1.setChecked(false);
-                checkAgeing3.setChecked(false);
+//                checkAgeing2.setChecked(true);
+//                checkAgeing1.setChecked(false);
+//                checkAgeing3.setChecked(false);
+                if(!checkAgeing2.isChecked())
+                {
+                    checkAgeing2.setChecked(false);
+                }
+                else
+                {
+                    checkAgeing2.setChecked(true);
+
+                }
                 break;
             case R.id.checkAgeing3:
 
-                checkAgeing3.setChecked(true);
-                checkAgeing1.setChecked(false);
-                checkAgeing2.setChecked(false);
-                break;
+//                checkAgeing3.setChecked(true);
+//                checkAgeing1.setChecked(false);
+//                checkAgeing2.setChecked(false);
+                if(!checkAgeing3.isChecked())
+                {
+                    checkAgeing3.setChecked(false);
+                }
+                else
+                {
+                    checkAgeing3.setChecked(true);
+
+                }
+                break;  */
         }
     }
 
@@ -726,8 +860,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
         int checkedId= Tabview.getSelectedTabPosition();
         Log.e("TAG", "onTabSelected: " );
 
-        if (toggleClick == false) {  // toggleClick is use when you retain tab button that time it will call .
-            from_filter=false;
+//        if (toggleClick == false) {  // toggleClick is use when you retain tab button that time it will call .
+//            from_filter=false;
             switch (checkedId) {
                 case 1 :   //core selection
                         limit = 10;
@@ -770,13 +904,72 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     break;
 
             }
-        }
+//        }
+//
+//    else {
+//            toggleClick = false;
+//
+//        }
 
-    else {
-            toggleClick = false;
 
-        }
+    }
 
+    private void stockageband_api(){
+
+        String url = ConstsCore.web_url + "/v1/display/stockageband/" + userId + "?lobId=" + lobId ; //+"&stockageband="+stockageband
+
+        Log.e("TAG", "stockageband: "+url );
+        final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+                        Log.e("stockageband response "," "+response);
+                        try {
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+
+                              //  return;
+
+                            } else{
+                                for (int i = 0; i < response.length(); i++) {
+
+                                    String planDept = response.get(i).toString();
+                                    ageing_val.add(planDept);
+                                }
+                                listAdapter = new AgeingAdapter(ageing_val, context);
+                                listAgeing.setAdapter( listAdapter );
+                            }
+                            Log.e("ageing_val "," "+ageing_val);
+                        } catch (Exception e) {
+
+                            Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
 
     }
 

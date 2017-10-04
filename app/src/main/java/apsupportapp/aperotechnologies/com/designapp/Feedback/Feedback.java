@@ -654,6 +654,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("option", Feedback_option.getText().toString());
+            jsonObject.put("articleOptionCode", feedbackList.get(listCount).getArticleOptionCode());
             jsonObject.put("userId", userId);
             jsonObject.put("prodImageUrl", feedbackList.get(listCount).getProdImageUrl());
             jsonObject.put("comments", feedback_comment.getText().toString());
