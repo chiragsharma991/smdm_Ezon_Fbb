@@ -75,7 +75,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     SalesPagerAdapter pageradapter;
     EzoneSalesPagerAdapter ez_sales_pager_adapter;
     Gson gson;
-    public static Activity SalesAnalysisActivity;
+    public static Activity Ezone_SalesAnalysisActivity;
     Context context;
     String planDept, planCategory, planClass;
     // Fashion At BB Elements Declaration
@@ -120,7 +120,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-        SalesAnalysisActivity = this;
+        Ezone_SalesAnalysisActivity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");

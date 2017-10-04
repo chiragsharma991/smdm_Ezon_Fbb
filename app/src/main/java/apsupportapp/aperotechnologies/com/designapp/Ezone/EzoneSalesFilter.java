@@ -54,6 +54,8 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
 
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
+
 /**
  * Created by pamrutkar on 05/06/17.
  */
@@ -255,7 +257,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
         loc_listDataHeader.add("Region");
         loc_listDataHeader.add("Store");
-        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
             prod_listDataHeader.add("Department");
             prod_listDataHeader.add("Subdept");
             prod_listDataHeader.add("Class");
@@ -282,7 +284,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         }
 
 
-        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
             listdataFill();
         } else {
             listdataFill();
@@ -338,7 +340,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Send selected hierarchy level to selected activity
-                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
                     selectbuild();
 
                 } else {
@@ -354,9 +356,9 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 }
 
                 if (getIntent().getStringExtra("checkfrom").equals("ezoneSales")) {
-                    intent = new Intent(EzoneSalesFilter.this, SalesAnalysisActivity1.class);
+                    intent = new Intent(EzoneSalesFilter.this, EzoneSalesAnalysisActivity1.class);
                     if (build.length() != 0) {
-                        SalesAnalysisActivity1.SalesAnalysisActivity.finish();
+                        Ezone_SalesAnalysisActivity.finish();
                     }
                     callback(build);
                 } else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
@@ -366,19 +368,22 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
                     }
                     callback(build);
-                } else if (getIntent().getStringExtra("checkfrom").equals("freshnessIndex")) {
-                    intent = new Intent(EzoneSalesFilter.this, FreshnessIndexActivity.class);
+                }
+                else if (getIntent().getStringExtra("checkfrom").equals("ezonefreshnessIndex")) {
+                    intent = new Intent(EzoneSalesFilter.this, EzoneFreshnessIndexActivity.class);
                     if (build.length() != 0) {
-                        FreshnessIndexActivity.freshness_Index.finish();
+                        EzoneFreshnessIndexActivity.ezone_freshness_Index.finish();
                         Log.e("TAG", "freshnessIndex:  call finish ");
 
 
                     }
                     callback(build);
-                } else if (getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
-                    intent = new Intent(EzoneSalesFilter.this, SalesPvAActivity.class);
+                }
+
+                else if (getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
+                    intent = new Intent(EzoneSalesFilter.this, EzoneSalesPvAActivity.class);
                     if (build.length() != 0) {
-                        SalesPvAActivity.SalesPvAActivity.finish();
+                        EzoneSalesPvAActivity.Ezone_Sales_Pva_Activity.finish();
                         Log.e("TAG", "freshnessIndex:  call finish ");
 
 
@@ -469,7 +474,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         }
         else
         {
-            if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+            if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
                 callFilterLevelSales();
 
 
@@ -1105,7 +1110,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         {
                             if(response.equals("") || response == null || response.length()==0) {
 
-                                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+                                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
                                     rel_ez_process_filter.setVisibility(View.GONE);
                                 } else {
                                     rel_ez_process_filter.setVisibility(View.GONE);
@@ -1151,7 +1156,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
     public void requestEzoneBrandPlanClass(int offsetvalue1, int limit1) {
 
         String mc_url = "";
-//        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+//        if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
 //            //with geolevel2code field
             mc_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchyNew/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
 //        }

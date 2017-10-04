@@ -47,7 +47,9 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusA
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookupActivity;
+import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneFreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1;
+import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.Feedback;
 import apsupportapp.aperotechnologies.com.designapp.Feedback.FeedbackList;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_notify_HO;
@@ -326,11 +328,11 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(SalesAnalysisActivity1);
                     break;
                 case "043":
-                    SalesPvAActivity = new Intent(context, SalesPvAActivity.class);
+                    SalesPvAActivity = new Intent(context, EzoneSalesPvAActivity.class);
                     startActivity(SalesPvAActivity);
                     break;
                 case "044":
-                    FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
+                    FreshnessIndexActivity = new Intent(context, EzoneFreshnessIndexActivity.class);
                     startActivity(FreshnessIndexActivity);
                     break;
                 case "045":
