@@ -1388,112 +1388,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         queue.add(postRequest);
     }
 
-    private void requestFilterHeader() {
-        String fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexheaderNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
 
-        Log.e(TAG, "requestFilterHeader URL: "+ fIdetails);
-
-        postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestHeader onResponse: All"+response );
-                        Reusable_Functions.hDialog();
-
-
-                        int i;
-                        try {
-                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                OnItemClick = false;
-                                llfreshnessIndex.setVisibility(View.GONE);
-                                return;
-
-                            } else {
-                                freshnessIndexDetail = new FreshnessIndexDetails();
-                                for (i = 0; i < response.length(); i++) {
-                                    freshnessIndexDetail = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
-                                }
-                                if (txtFIndexClass.getText().toString().equals("Department")) {
-                                    freshnessIndexDetail.setPlanDept("All");
-                                } else if (txtFIndexClass.getText().toString().equals("Category")) {
-                                    freshnessIndexDetail.setPlanCategory("All");
-                                } else if (txtFIndexClass.getText().toString().equals("Class")) {
-                                    freshnessIndexDetail.setPlanClass("All");
-                                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
-                                    freshnessIndexDetail.setBrandName("All");
-                                } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
-                                    freshnessIndexDetail.setBrandplanClass("All");
-                                }
-
-                                freshnessIndexDetail.setStkOnhandQty(freshnessIndexDetail.getStkOnhandQty());
-                                freshnessIndexDetail.setStkOnhandQtyCount(100);
-                                freshnessIndexDetail.setStkGitQty(freshnessIndexDetail.getStkGitQty());
-                                freshnessIndexDetail.setCoreGrpCount(freshnessIndexDetail.getCoreGrpCount());
-                                freshnessIndexDetail.setUpcomingGroupCount(freshnessIndexDetail.getUpcomingGrpCount());
-                                freshnessIndexDetail.setOldGroupCount(freshnessIndexDetail.getOldGrpCount());
-                                freshnessIndexDetail.setPreviousGroupCount(freshnessIndexDetail.getPreviousGrpCount());
-                                freshnessIndexDetail.setSohCurrentGrpCount(freshnessIndexDetail.getSohCurrentGrpCount());
-
-                                freshnessIndexDetailsArrayList.add(0,freshnessIndexDetail);
-
-                                listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
-                                listViewFIndex.setLayoutManager(new LinearLayoutManager(
-                                        listViewFIndex.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
-                                        LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                                listViewFIndex.setOnFlingListener(null);
-                                new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-                                freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
-                                listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
-
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                fIndexArrayList.clear();
-                                TestItem();
-
-                                requestFIndexPieChart(header_value);
-
-
-                            }
-
-
-
-                        } catch (Exception e) {
-                            Reusable_Functions.hDialog();
-                            Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG,"Data failed."+e.getMessage());
-                            llfreshnessIndex.setVisibility(View.GONE);
-                            OnItemClick = false;
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Reusable_Functions.hDialog();
-                        Toast.makeText(context, "Server not found", Toast.LENGTH_SHORT).show();
-                        llfreshnessIndex.setVisibility(View.GONE);
-                        OnItemClick = false;
-                        error.printStackTrace();
-                    }
-                }
-
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + bearertoken);
-                return params;
-            }
-        };
-        int socketTimeout = 60000;//5 seconds
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        postRequest.setRetryPolicy(policy);
-        queue.add(postRequest);
-    }
 
     private void setAdapter() {
         listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
@@ -1593,6 +1488,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 String url;
                 if(from_filter)
                 {
+
                     if(!header_value.equals(""))
                     {
                         url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?level=" + selectedlevel +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value;
@@ -1601,9 +1497,11 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     {
                         url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?level=" + selectedlevel +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                     }
+
                     from_filter=false;
                 }
-                else{
+                else
+                {
                     if(!header_value.equals(""))
                     {
                         url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?level=" + level +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value;
@@ -1670,11 +1568,12 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
     private void TimeUpEzone() {
 
+        Log.e("firstVisibleItem ==  "," "+firstVisibleItem);
         if (freshnessIndexDetails_Ez_ArrayList.size() != 0) {
-            if (firstVisibleItem < freshnessIndexDetails_Ez_ArrayList.size()) {
+            if (firstVisibleItem < freshnessIndexDetails_Ez_ArrayList.size())
+            {
 
                 //10<10 where footer is call then it goes else condition
-
                 fIndexFirstVisibleItem = freshnessIndexDetails_Ez_ArrayList.get(firstVisibleItem).getLevel();
                 Log.e(TAG, "TimeUpEzone: fIndexFirstVisibleItem " + fIndexFirstVisibleItem);
 

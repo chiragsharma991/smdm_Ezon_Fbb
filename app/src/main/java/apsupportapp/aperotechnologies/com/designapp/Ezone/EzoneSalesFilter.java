@@ -56,6 +56,8 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
 
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
+
 /**
  * Created by pamrutkar on 05/06/17.
  */
