@@ -59,7 +59,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.ApiRequest;
 import apsupportapp.aperotechnologies.com.designapp.Httpcall.HttpResponse;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
@@ -1687,6 +1686,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
+                        Log.e(TAG, "requestFreshnessIndexFilterVal: response "+response );
 
                         if (inv_filter_level == 2)
                         {
@@ -3065,17 +3065,17 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         freshnessIndex_imgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TAG.equals("FreshnessIndex_Ez_Activity")){
-                    Intent intent = new Intent(context, EzoneSalesFilter.class);
-                    intent.putExtra("checkfrom", "freshnessIndex");
-                    startActivity(intent);
-
-                }else{
+//                if(TAG.equals("FreshnessIndex_Ez_Activity")){
+//                    Intent intent = new Intent(context, EzoneSalesFilter.class);
+//                    intent.putExtra("checkfrom", "freshnessIndex");
+//                    startActivity(intent);
+//
+//                }else{
 
                     Intent intent = new Intent(FreshnessIndexActivity.this, SalesAnalysisFilter.class);
                     intent.putExtra("checkfrom", "freshnessIndex");
                     startActivity(intent);
-                }
+//                }
 
             }
         });

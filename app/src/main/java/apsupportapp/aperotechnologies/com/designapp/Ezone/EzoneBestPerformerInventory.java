@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory;
+package apsupportapp.aperotechnologies.com.designapp.Ezone;
 
 import android.app.Activity;
 import android.graphics.drawable.BitmapDrawable;
@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventoryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import android.content.Context;
@@ -64,7 +65,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDispla
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class BestPerformerInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
+public class EzoneBestPerformerInventory extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener,TabLayout.OnTabSelectedListener {
 
     public  TextView BestInvent_txtStoreCode, BestInvent_txtStoreName;
     private RelativeLayout BestInvent_BtnBack, BestInvent_imgfilter, BestInvent_quickFilter, quickFilterPopup,
@@ -217,7 +218,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
     private void common_intializeUI() {
 
-        bestperoformer = BestPerformerInventory.this;
+        bestperoformer = EzoneBestPerformerInventory.this;
 
         // toggleClick = true;  // you set toggle on segment button so you have to handle this flag.
         BestInventListview = (ListView) findViewById(R.id.bestInvent_ListView);

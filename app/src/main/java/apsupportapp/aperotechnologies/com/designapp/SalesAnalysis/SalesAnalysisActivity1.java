@@ -1077,19 +1077,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (saleFirstVisibleItem.equals("All")) {
                                 if(all_from_val.equals("category"))
                                 {
-                                    requestViewPagerValueAPI();
+                                    requestViewPagerValueAPI("category");
                                 }
                                 if(all_from_val.equals("class"))
                                 {
-                                    requestViewPagerValueAPI();
+                                    requestViewPagerValueAPI("class");
                                 }
                                 if(all_from_val.equals("brand"))
                                 {
-                                    requestViewPagerValueAPI();
+                                    requestViewPagerValueAPI("brand");
                                 }
                                 if(all_from_val.equals("brandClass"))
                                 {
-                                    requestViewPagerValueAPI();
+                                    requestViewPagerValueAPI("brandClass");
 
                                 }
                                 if(all_from_val.equals("filter"))
@@ -1141,8 +1141,30 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             }
                             progressBar1.setVisibility(View.VISIBLE);
                             if (saleFirstVisibleItem.equals("All")) {
-                                requestSalesViewPagerValueAPI();
+                                if(all_from_val.equals("category"))
+                                {
+                                    requestViewPagerValueAPI("category");
+                                }
+                                if(all_from_val.equals("class"))
+                                {
+                                    requestViewPagerValueAPI("class");
+                                }
+                                if(all_from_val.equals("brand"))
+                                {
+                                    requestViewPagerValueAPI("brand");
+                                }
+                                if(all_from_val.equals("brandClass"))
+                                {
+                                    requestViewPagerValueAPI("brandClass");
 
+                                }
+                                if(all_from_val.equals("filter"))
+                                {
+                                    requestHeaderAPI(sales_filter_level);
+                                }
+                                else {
+                                    requestSalesViewPagerValueAPI();
+                                }
                             } else {
                                 requestSalesPagerOnScrollAPI();
                             }
@@ -2389,11 +2411,11 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
         queue.add(postRequest);
 
     }
-    private void requestViewPagerValueAPI()
+    private void requestViewPagerValueAPI(final String from_Where)
     {
         String url = " ";
 
-        if (txtheaderplanclass.getText().toString().equals("Category"))
+        if (from_Where.equals("category"))
         {
 
                 planDeptNm = planDeptNm.replace("%", "%25");
@@ -2402,7 +2424,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&department=" + planDeptNm + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
 
         }
-        else if (txtheaderplanclass.getText().toString().equals("Class"))
+        else if (from_Where.equals("class"))
         {
 
                 planCategoryNm = planCategoryNm.replace("%", "%25");
@@ -2411,7 +2433,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&category=" + planCategoryNm+ "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
 
         }
-        else if (txtheaderplanclass.getText().toString().equals("Brand"))
+        else if (from_Where.equals("brand"))
         {
 
                 planClassNm = planClassNm.replace("%", "%25");
@@ -2419,7 +2441,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
 
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&class=" + planClassNm+ "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         }
-        else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+        else if (fromWhere.equals("brandClass"))
         {
 
                 planBrandNm = planBrandNm.replace("%", "%25");
@@ -2448,7 +2470,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                 offsetvalue = (limit * count) + limit;
                                 count++;
 
-                                requestSalesViewPagerValueAPI();
+                                requestViewPagerValueAPI(from_Where);
 
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -2695,7 +2717,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     planDeptNm = deptName;
                                     all_from_val = "category";
                                     analysisArrayList.clear();
-                                    requestViewPagerValueAPI();
+                                    requestViewPagerValueAPI("category");
                                 }
                                 else
                                 {
@@ -2838,7 +2860,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     planCategoryNm = category;
                                     all_from_val = "class";
                                     analysisArrayList.clear();
-                                    requestViewPagerValueAPI();
+                                    requestViewPagerValueAPI("class");
                                 }
                                 else
                                 {
@@ -2978,7 +3000,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     planClassNm = planclass;
                                     all_from_val = "brand";
                                     analysisArrayList.clear();
-                                    requestViewPagerValueAPI();
+                                    requestViewPagerValueAPI("brand");
                                 }
                                 else
                                 {
@@ -3116,7 +3138,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                                     analysisArrayList.clear();
                                     planBrandNm = brandnm;
                                     all_from_val = "brandClass";
-                                    requestViewPagerValueAPI();
+                                    requestViewPagerValueAPI("brandClass");
                                 }
                                 else
                                 {

@@ -565,7 +565,7 @@ public class SalesAnalysisProductAdapter extends BaseExpandableListAdapter {
             if (prod_level == 2)
             {
                 Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20").replace("%","%25");
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId + "&department=" + str.replaceAll("&", "%26").replace(" ", "%20").replace("%","%25");
             } else if (prod_level == 3)
             {
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId+ "&category=" + str.replaceAll("&", "%26").replace(" ", "%20").replace("%","%25");

@@ -52,7 +52,9 @@ import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessInde
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisActivity1;
+
+
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
 
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
 
@@ -420,10 +422,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
         }
 
-        if (EzoneFilterProductAdapter.dept_text.length() != 0)
+        if (EzoneFilterProductAdapter.department_text.length() != 0)
 
         {
-            String deptmnt = EzoneFilterProductAdapter.dept_text.replace("%", "%25");
+            String deptmnt = EzoneFilterProductAdapter.department_text.replace("%", "%25");
             String updateDept = deptmnt.replace(" ", "%20").replace("&", "%26");
             String Department;
             Department = "department=" + updateDept;
@@ -488,7 +490,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             Log.e("TAG", "callback:  selectedlevelVal" + filter_level);
         }
         startActivity(intent);
-        EzoneFilterProductAdapter.dept_text = "";
+        EzoneFilterProductAdapter.department_text = "";
         EzoneFilterProductAdapter.categry_text = "";
         EzoneFilterProductAdapter.class_text = "";
         EzoneFilterProductAdapter.brand_text = "";

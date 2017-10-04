@@ -69,17 +69,17 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
     private String groupText;
     private String childText;
 
-    List deptList = new ArrayList();
+    List departmentList = new ArrayList();
     List categryList = new ArrayList();
     List classList = new ArrayList();
     List brandList = new ArrayList();
     List brandclsList = new ArrayList();
-    public static String dept_text = "", categry_text = "", class_text = "", brand_text = "", brandcls_text = "";
+    public static String department_text = "", categry_text = "", class_text = "", brand_text = "", brandcls_text = "";
     public static int ez_level;
     EzoneFilterProductAdapter listAdapter;
     int mGroupPosition = 0;
     int mChildPosition = 0;
-    public static boolean dept_flg = false, cat_flg = false, class_flg = false, brand_flg = false, brandcls_flg = false;
+    public static boolean department_flg = false, cat_flg = false, class_flg = false, brand_flg = false, brandcls_flg = false;
 
 
     public EzoneFilterProductAdapter(Context context, ArrayList<String> listDataGroup, HashMap<String, List<String>> listDataChild, ExpandableListView expandableListView, EzoneFilterProductAdapter listAdapter) {
@@ -259,15 +259,15 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
 
     private void removeDataforSales(int filterLevel) {
         if (filterLevel == 2) {
-            deptList.remove(txtClickedVal.trim());
-            String[] array = (String[]) deptList.toArray(new String[0]);
+            departmentList.remove(txtClickedVal.trim());
+            String[] array = (String[]) departmentList.toArray(new String[0]);
             String str1 = Arrays.toString(array);
             str1 = str1.replace("[", "");
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ", ",");
-            dept_text = str1;
+            department_text = str1;
 
-            if (deptList.size() == 0) {
+            if (departmentList.size() == 0) {
                 salesList.clear();
                 mListDataChild.putAll(dublicate_listDataChild2);
                 for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
@@ -277,7 +277,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     explv_ez_prod.expandGroup(k);
                 }
             } else {
-                requestProductHierarchyAPI(filterLevel, dept_text);
+                requestProductHierarchyAPI(filterLevel, department_text);
             }
         }
         if (filterLevel == 3) {
@@ -289,7 +289,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             str1 = str1.replace(", ", ",");
             categry_text = str1;
             if (categryList.size() == 0) {
-                if (deptList.size() == 0) {
+                if (departmentList.size() == 0) {
                     mListDataChild.putAll(dublicate_listDataChild2);
                     for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
                         explv_ez_prod.collapseGroup(k);
@@ -299,7 +299,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     }
                 } else {
                     filterLevel = 2;
-                    requestProductHierarchyAPI(filterLevel, dept_text);
+                    requestProductHierarchyAPI(filterLevel, department_text);
                 }
             } else {
                 requestProductHierarchyAPI(filterLevel, categry_text);
@@ -345,15 +345,15 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
     private void removeDataforInventory(int filterLevel)
     {
         if (filterLevel == 2) {
-            deptList.remove(txtClickedVal.trim());
-            String[] array = (String[]) deptList.toArray(new String[0]);
+            departmentList.remove(txtClickedVal.trim());
+            String[] array = (String[]) departmentList.toArray(new String[0]);
             String str1 = Arrays.toString(array);
             str1 = str1.replace("[", "");
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ", ",");
-            dept_text = str1;
+            department_text = str1;
 
-            if (deptList.size() == 0) {
+            if (departmentList.size() == 0) {
                 salesList.clear();
                 mListDataChild.putAll(dublicate_listDataChild2);
                 for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
@@ -363,7 +363,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     explv_ez_prod.expandGroup(k);
                 }
             } else {
-                requestProductHierarchyAPI(filterLevel, dept_text);
+                requestProductHierarchyAPI(filterLevel, department_text);
             }
         }
         if (filterLevel == 3) {
@@ -375,7 +375,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             str1 = str1.replace(", ", ",");
             categry_text = str1;
             if (categryList.size() == 0) {
-                if (deptList.size() == 0) {
+                if (departmentList.size() == 0) {
                     mListDataChild.putAll(dublicate_listDataChild2);
                     for (int k = filterLevel - 1; k < mListDataGroup.size(); k++) {
                         explv_ez_prod.collapseGroup(k);
@@ -385,7 +385,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     }
                 } else {
                     filterLevel = 2;
-                    requestProductHierarchyAPI(filterLevel, dept_text);
+                    requestProductHierarchyAPI(filterLevel, department_text);
                 }
             } else {
                 requestProductHierarchyAPI(filterLevel, categry_text);
@@ -472,34 +472,34 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
 
     private void buildUpdataSales(int filterLevel) {
         if (filterLevel == 2) {
-            if (!dept_flg) {
-                deptList.add(txtClickedVal.trim());
-                dept_flg = true;
+            if (!department_flg) {
+                departmentList.add(txtClickedVal.trim());
+                department_flg = true;
                 cat_flg = false;
                 class_flg = false;
                 brand_flg = false;
-                String[] array = (String[]) deptList.toArray(new String[0]);
-                String str_dept = Arrays.toString(array);
-                str_dept = str_dept.replace("[", "");
-                str_dept = str_dept.replace("]", "");
-                str_dept = str_dept.replace(", ", ",");
-                dept_text = str_dept;
-                requestProductHierarchyAPI(filterLevel, dept_text);
+                String[] array = (String[]) departmentList.toArray(new String[0]);
+                String str_department = Arrays.toString(array);
+                str_department = str_department.replace("[", "");
+                str_department = str_department.replace("]", "");
+                str_department = str_department.replace(", ", ",");
+                department_text = str_department;
+                requestProductHierarchyAPI(filterLevel, department_text);
             } else {
-                deptList.add(txtClickedVal.trim());
-                String[] array = (String[]) deptList.toArray(new String[0]);
-                String str_dept = Arrays.toString(array);
-                str_dept = str_dept.replace("[", "");
-                str_dept = str_dept.replace("]", "");
-                str_dept = str_dept.replace(", ", ",");
-                dept_text = str_dept;
-                requestProductHierarchyAPI(filterLevel, dept_text);
+                departmentList.add(txtClickedVal.trim());
+                String[] array = (String[]) departmentList.toArray(new String[0]);
+                String str_department = Arrays.toString(array);
+                str_department = str_department.replace("[", "");
+                str_department = str_department.replace("]", "");
+                str_department = str_department.replace(", ", ",");
+                department_text = str_department;
+                requestProductHierarchyAPI(filterLevel, department_text);
             }
         }
         if (filterLevel == 3) {
             if (!cat_flg) {
                 categryList.add(txtClickedVal.trim());
-                dept_flg = false;
+                department_flg = false;
                 cat_flg = true;
                 class_flg = false;
                 brand_flg = false;
@@ -524,7 +524,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         if (filterLevel == 4) {
             if (!class_flg) {
                 classList.add(txtClickedVal.trim());
-                dept_flg = false;
+                department_flg = false;
                 cat_flg = false;
                 class_flg = true;
                 brand_flg = false;
@@ -549,7 +549,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         if (filterLevel == 5) {
             if (!brand_flg) {
                 brandList.add(txtClickedVal.trim());
-                dept_flg = false;
+                department_flg = false;
                 cat_flg = false;
                 class_flg = false;
                 brand_flg = true;
@@ -573,35 +573,35 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
 
     private void buildUpdataInventory(int filterLevel) {
         if (filterLevel == 2) {
-            if (!dept_flg) {
-                deptList.add(txtClickedVal.trim());
-                dept_flg = true;
+            if (!department_flg) {
+                departmentList.add(txtClickedVal.trim());
+                department_flg = true;
                 cat_flg = false;
                 class_flg = false;
                 brand_flg = false;
                 brandcls_flg = false;
-                String[] array = (String[]) deptList.toArray(new String[0]);
-                String str_dept = Arrays.toString(array);
-                str_dept = str_dept.replace("[", "");
-                str_dept = str_dept.replace("]", "");
-                str_dept = str_dept.replace(", ", ",");
-                dept_text = str_dept;
-                requestProductHierarchyAPI(filterLevel, dept_text);
+                String[] array = (String[]) departmentList.toArray(new String[0]);
+                String str_department = Arrays.toString(array);
+                str_department = str_department.replace("[", "");
+                str_department = str_department.replace("]", "");
+                str_department = str_department.replace(", ", ",");
+                department_text = str_department;
+                requestProductHierarchyAPI(filterLevel, department_text);
             } else {
-                deptList.add(txtClickedVal.trim());
-                String[] array = (String[]) deptList.toArray(new String[0]);
-                String str_dept = Arrays.toString(array);
-                str_dept = str_dept.replace("[", "");
-                str_dept = str_dept.replace("]", "");
-                str_dept = str_dept.replace(", ", ",");
-                dept_text = str_dept;
-                requestProductHierarchyAPI(filterLevel, dept_text);
+                departmentList.add(txtClickedVal.trim());
+                String[] array = (String[]) departmentList.toArray(new String[0]);
+                String str_department = Arrays.toString(array);
+                str_department = str_department.replace("[", "");
+                str_department = str_department.replace("]", "");
+                str_department = str_department.replace(", ", ",");
+                department_text = str_department;
+                requestProductHierarchyAPI(filterLevel, department_text);
             }
         }
         if (filterLevel == 3) {
             if (!cat_flg) {
                 categryList.add(txtClickedVal.trim());
-                dept_flg = false;
+                department_flg = false;
                 cat_flg = true;
                 class_flg = false;
                 brand_flg = false;
@@ -627,7 +627,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         if (filterLevel == 4) {
             if (!class_flg) {
                 classList.add(txtClickedVal.trim());
-                dept_flg = false;
+                department_flg = false;
                 cat_flg = false;
                 class_flg = true;
                 brand_flg = false;
@@ -653,7 +653,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         if (filterLevel == 5) {
             if (!brand_flg) {
                 brandList.add(txtClickedVal.trim());
-                dept_flg = false;
+                department_flg = false;
                 cat_flg = false;
                 class_flg = false;
                 brand_flg = true;
@@ -679,7 +679,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         if (filterLevel == 6) {
             if (!brandcls_flg) {
                 brandclsList.add(txtClickedVal.trim());
-                dept_flg = false;
+                department_flg = false;
                 cat_flg = false;
                 class_flg = false;
                 brand_flg = false;
@@ -797,7 +797,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
             if (prod_level == 2) {
                 Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&department=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
             } else if (prod_level == 3) {
 
@@ -811,7 +811,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             if (prod_level == 2)
             {
                 Log.e("str in global search :", "" + str);
-                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&dept=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
+                search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&department=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
             } else if (prod_level == 3) {
 

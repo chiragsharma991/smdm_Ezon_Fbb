@@ -67,7 +67,6 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 
-import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter;
 import apsupportapp.aperotechnologies.com.designapp.MyMarkerView;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -144,16 +143,16 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        if (geoLeveLDesc.equals("E ZONE")) {
-            setContentView(R.layout.activity_ezone_pva);
-            Log.e(TAG, "----Wellcome in Ezone----");
-            getSupportActionBar().hide();
-            salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-            commanInitialize();
-            initializeEzoneUI();
-            commanListView();
-
-        } else {
+//        if (geoLeveLDesc.equals("E ZONE")) {
+//            setContentView(R.layout.activity_ezone_pva);
+//            Log.e(TAG, "----Wellcome in Ezone----");
+//            getSupportActionBar().hide();
+//            salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+//            commanInitialize();
+//            initializeEzoneUI();
+//            commanListView();
+//
+//        } else {
             setContentView(R.layout.activity_sales_pva);
             Log.e(TAG, "----Wellcome in FBB----");
             getSupportActionBar().hide();
@@ -163,7 +162,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             commanListView();
 
 
-        }
+//        }
     }
 
 
@@ -584,26 +583,26 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
     }
 
-    private void initializeEzoneUI() {
-        btnFilter = (RelativeLayout) findViewById(R.id.imgfilter);
-        btnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent filterIntent = new Intent(SalesPvAActivity.this, EzoneSalesFilter.class);
-                filterIntent.putExtra("checkfrom", "pvaAnalysis");
-                startActivity(filterIntent);
-            }
-        });
-        show_popup();
-        RelativeLayout sortPopup = (RelativeLayout) findViewById(R.id.sortPopup);
-        sortPopup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupWindow.showAsDropDown(view);
-            }
-        });
-
-    }
+//    private void initializeEzoneUI() {
+//        btnFilter = (RelativeLayout) findViewById(R.id.imgfilter);
+//        btnFilter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent filterIntent = new Intent(SalesPvAActivity.this, EzoneSalesFilter.class);
+//                filterIntent.putExtra("checkfrom", "pvaAnalysis");
+//                startActivity(filterIntent);
+//            }
+//        });
+//        show_popup();
+//        RelativeLayout sortPopup = (RelativeLayout) findViewById(R.id.sortPopup);
+//        sortPopup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                popupWindow.showAsDropDown(view);
+//            }
+//        });
+//
+//    }
 
     private void commanInitialize() {
         SalesPvAActivity = this;
@@ -1701,7 +1700,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         {
             dept_clickVal = dept_clickVal.replace("%", "%25");
             dept_clickVal = dept_clickVal.replace(" ", "%20").replace("&", "%26");
-            salespvaweekChart_url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweekNew/" + userId + "?view=" + salesPvA_SegmentClick + "&dept="+dept_clickVal +"&geoLevel2Code=" + geoLevel2Code + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
+            salespvaweekChart_url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweekNew/" + userId + "?view=" + salesPvA_SegmentClick + "&department="+dept_clickVal +"&geoLevel2Code=" + geoLevel2Code + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
 
         } else if (fromWhere.equals("class"))
         {
