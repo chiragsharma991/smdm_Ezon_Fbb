@@ -119,29 +119,35 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         SkewedSizeListview.setTag("FOOTER");
 
         Reusable_Functions.sDialog(this, "Loading.......");
-        if (getIntent().getStringExtra("selectedStringVal") == null) {
+
+        if (getIntent().getStringExtra("selectedStringVal") == null)
+        {
             from_filter = false;
             filter_toggleClick = false;
 
-        } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+        } else if (getIntent().getStringExtra("selectedStringVal") != null)
+        {
             selectedString = getIntent().getStringExtra("selectedStringVal");
             filter_level = getIntent().getIntExtra("selectedlevelVal",0);
             from_filter = true;
             filter_toggleClick = true;
         }
-        Log.e("TAG", "Selected string: "+selectedString+" "+from_filter );
+        Log.e("TAG", "Selected string: "+selectedString+" "+from_filter);
         retainValuesFilter();
-        requestRunningPromoApi(selectedString,filter_level);
+        if(Tabview.getTabAt(0).isSelected())
+        {
+            requestRunningPromoApi(selectedString, filter_level);
+        }
         footer = getLayoutInflater().inflate(R.layout.bestpromo_footer, null);
         SkewedSizeListview.addFooterView(footer);
 
 
     }
 
-    public void
-    retainValuesFilter() {
+    public void retainValuesFilter() {
       //  filter_toggleClick = true;
-        if (corefashion.equals("Fashion")) {
+        if (corefashion.equals("Fashion"))
+        {
           //  Skewed_core.toggle();
             coreSelection = false;
             Tabview.getTabAt(0).select();
@@ -158,13 +164,16 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    private void requestRunningPromoApi(final String selectedString,final int filter_level) {
+    private void requestRunningPromoApi(final String selectedString,final int filter_level)
+    {
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            Log.e("TAG", "From filter: "+from_filter );
+            Log.e("TAG", "From filter: "+ from_filter);
             String url;
+
             if (from_filter) {
+
                 if (coreSelection) {
 
                     //core selection without season params
@@ -206,6 +215,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                         @Override
                         public void onResponse(JSONArray response) {
                             SkewedSizeListview.setVisibility(View.VISIBLE);
+                            Log.e("response "," "+response);
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -406,9 +416,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.qfDoneLayout:
-
                 from_filter = false;
-
                 if (Reusable_Functions.chkStatus(context)) {
                     if (Skewed_checkWTD.isChecked()) {
                         checkTimeValueIs = "CheckWTD";
@@ -716,9 +724,9 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         int checkedId= Tabview.getSelectedTabPosition();
         Log.e("TAB", "onTabSelected: "+checkedId );
 
-        if (!filter_toggleClick)   // from filter is use when you retain tab button that time it will call .
-        {
-            from_filter = false;
+//        if (!filter_toggleClick)   // from filter is use when you retain tab button that time it will call .
+//        {
+//            from_filter = false;
 
             switch (checkedId) {
 
@@ -732,6 +740,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(this, "Loading.......");
                     coreSelection = true;
+                    Log.e("selected string "," "+selectedString);
                     requestRunningPromoApi(selectedString, filter_level);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -751,6 +760,7 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(this, "Loading.......");
                     coreSelection = false;
+                    Log.e("selected string "," "+selectedString);
                     requestRunningPromoApi(selectedString, filter_level);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -761,8 +771,10 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
 
         }
-        }else{  filter_toggleClick = false;
-        }
+//        }
+//        else
+//        {  filter_toggleClick = false;
+//        }
 
     }
 

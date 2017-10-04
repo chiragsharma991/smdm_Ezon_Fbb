@@ -26,6 +26,8 @@ import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivi
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
 import apsupportapp.aperotechnologies.com.designapp.VisualAssortmentSwipe.VisualAssortmentActivity;
 
+import static apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity.styleactivity;
+
 public class SwitchingTabActivity extends AppCompatActivity {
 
     RelativeLayout backButton, imageBtnHomePage;
@@ -62,6 +64,9 @@ public class SwitchingTabActivity extends AppCompatActivity {
         imageBtnHomePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                finish();
+                styleactivity.finish();
 
 //                Intent intent = new Intent(SwitchingTabActivity.this, SnapDashboardActivity.class);
 //                String[] kpiIdArray = kpi_id.split(",");

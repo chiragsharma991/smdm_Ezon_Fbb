@@ -207,7 +207,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                                ez_level = groupPosition + 2;
                                                if (!cb.isChecked()) {
 
-                                                   if (str_checkFrom.equals("ezoneSales")  || str_checkFrom.equals("pvaAnalysis")) {
+                                                   if (str_checkFrom.equals("ezoneSales")  || str_checkFrom.equals("ezonepvaAnalysis")) {
                                                        salesList.add(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                        cb.setChecked(true);
                                                        rel_ez_process_filter.setVisibility(View.VISIBLE);
@@ -244,7 +244,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         int filterLevel;
         filterLevel = prod_level;
 
-        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis"))
+        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis"))
         {
             Log.e("removeBuildUP: ","Sales" );
             removeDataforSales(filterLevel);
@@ -458,7 +458,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
     private void BuildUP(int prod_level) {
         int filterLevel;
         filterLevel = prod_level;
-        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis"))
+        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis"))
         {
             Log.e("BuildUP: ","Sales" );
             buildUpdataSales(filterLevel);
@@ -714,7 +714,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
             mListDataChild.putAll(dublicate_listDataChild2);
             //Collapse Group
 
-            if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
+            if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis")) {
                 explv_ez_prod.collapseGroup(0);
                 explv_ez_prod.collapseGroup(1);
                 explv_ez_prod.collapseGroup(2);
@@ -729,7 +729,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
 
         } else {
 
-            if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
+            if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis")) {
 
                 for (int j = 0; j < 4; j++) {
                     List<String> arrayList1 = new ArrayList<String>();
@@ -794,7 +794,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
         String search_url = " ";
-        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
+        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis")) {
             if (prod_level == 2) {
                 Log.e("str in global search :", "" + str);
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&department=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
@@ -849,7 +849,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                     List<String> drillDownList = new ArrayList<String>();
                                     JSONArray jsonArray = response.getJSONArray(i);
                                     for (int j = 0; j < jsonArray.length(); j++) {
-                                        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis")) {
+                                        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis")) {
                                             if (i == 1) {
                                                 String listValueCategory = jsonArray.getJSONObject(j).getString("planCategory");
                                                 drillDownList.add(listValueCategory);

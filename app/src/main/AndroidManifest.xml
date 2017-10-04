@@ -162,6 +162,11 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".Ezone.EzoneBestPerformerInventory"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".Ezone.EzoneSalesFilter"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />

@@ -93,11 +93,10 @@ public class StyleActivity extends AppCompatActivity
     private ListView listCollection, listOption,listStore;
     ListAdapter collectionAdapter,storeAdapter;
     ListAdapter1 optionAdapter;
-
     String collect_name = "",geoLevel2Code,lobId,store_nm;
-
     private ReaderManager mReaderManager;
     private IntentFilter filter;
+    public static StyleActivity styleactivity;
 
     String barcode;
 
@@ -108,6 +107,7 @@ public class StyleActivity extends AppCompatActivity
         setContentView(R.layout.activity_product_info);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         context = this;
+        styleactivity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
