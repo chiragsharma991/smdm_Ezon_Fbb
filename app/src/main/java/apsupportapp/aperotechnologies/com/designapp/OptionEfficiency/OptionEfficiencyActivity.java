@@ -1431,6 +1431,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
+                        Log.e("TAG", "requestOptionEfficiencyFilterVal: response  " + response);
 
                         if (filter_level == 2)
                         {

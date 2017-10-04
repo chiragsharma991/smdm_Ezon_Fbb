@@ -87,7 +87,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     EzonePvASnapAdapter salesPvAAdapter;
     ViewPortHandler handler;
     Context context;
-    public static Activity SalesPvAActivity;
+
     BarChart barChart, ez_barChart;
     RecyclerView listViewSalesPvA, ez_listView;
     int focusposition, selFirstPositionValue = 0, totalItemCount;
@@ -108,7 +108,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     int currentIndex, prevState = RecyclerView.SCROLL_STATE_IDLE, currentState = RecyclerView.SCROLL_STATE_IDLE;
     boolean onItemClickFlag = false, filter_toggleClick = false;
     ProgressBar pva_progressBar, ez_progressBar;
-    public static Activity Sales_Pva_Activity;
+    public static Activity Ezone_Sales_Pva_Activity;
     private TabLayout tabLayout, ez_tabLayout;
     private PopupWindow popupWindow;
     private RadioButton product_radiobtn, location_radiobtn;
@@ -123,7 +123,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
         super.onCreate(savedInstanceState);
 
         context = this;
-        Sales_Pva_Activity = this;
+        Ezone_Sales_Pva_Activity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -400,7 +400,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
             @Override
             public void onClick(View v) {
                 Intent filterIntent = new Intent(EzoneSalesPvAActivity.this, EzoneSalesFilter.class);
-                filterIntent.putExtra("checkfrom", "pvaAnalysis");
+                filterIntent.putExtra("checkfrom", "ezonepvaAnalysis");
                 startActivity(filterIntent);
             }
         });
@@ -416,7 +416,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     }
 
     private void commanInitialize() {
-        SalesPvAActivity = this;
+        Ezone_Sales_Pva_Activity = this;
         pva_progressBar = (ProgressBar) findViewById(R.id.pva_progressBar);
         tabLayout = (TabLayout) findViewById(R.id.tabview_salespva);
         tabLayout.addTab(tabLayout.newTab().setText("WTD"));
@@ -634,10 +634,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
                     } else if (txtheaderplanclass.getText().toString().equals("Subclass")) {
                         level = 4;
-
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
-
-
                     } else if (txtheaderplanclass.getText().toString().equals("Region")) {
                         level = 7;
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();

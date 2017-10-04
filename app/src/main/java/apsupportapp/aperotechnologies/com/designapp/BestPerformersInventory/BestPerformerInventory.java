@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import android.content.Context;
@@ -741,19 +740,19 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 break;
             case R.id.bestInvent_imgfilter:
 
-                if (TAG.equals("BestPerformer_Ez_Inventory")) {
-
-                    Intent intent = new Intent(this, EzoneSalesFilter.class);
-                    intent.putExtra("checkfrom", "bestPerformers");
-                    startActivity(intent);
-                    break;
-
-                } else {
+//                if (TAG.equals("BestPerformer_Ez_Inventory")) {
+//
+//                    Intent intent = new Intent(this, EzoneSalesFilter.class);
+//                    intent.putExtra("checkfrom", "bestPerformers");
+//                    startActivity(intent);
+//                    break;
+//
+//                } else {
                     Intent intent = new Intent(this, SalesAnalysisFilter.class);
                     intent.putExtra("checkfrom", "bestPerformers");
                     startActivity(intent);
                     break;
-                }
+//                }
                 //Quick filter>>>
             case R.id.bestInvent_quickFilter:
                 filterFunction();

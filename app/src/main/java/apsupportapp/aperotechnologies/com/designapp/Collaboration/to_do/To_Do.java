@@ -28,7 +28,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     private ViewPager viewPager;
     private TabLayout tab;
     RelativeLayout ToDo_imageBtnBack;
-    String userId, bearertoken, storeDescription, geoLeveLDesc, isMultiStore, value, storeCode;
+    String userId, bearertoken, storeDescription, geoLeveLDesc, isMultiStore, value, storeCode,store_Code;
     SharedPreferences sharedPreferences;
     private TextView txtStoreCode,txtStoreName;
     public static String deviceId;
@@ -54,7 +54,9 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         if(getIntent().getExtras().getString("storeCode") != null )
         {
             storeCode = getIntent().getExtras().getString("storeCode");
-          //  Log.i(TAG, "storeCode: "+storeCode );
+            store_Code = storeCode.substring(0,4);
+
+            //  Log.i(TAG, "storeCode: "+storeCode );
         }
         if(isMultiStore.equals("Yes"))
         {
@@ -102,8 +104,8 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private void setupViewPager(ViewPager viewPager) {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StockPullFragment(storeCode), "Pull from Stores");
-        adapter.addFragment(new TransferRequestFragment(storeCode), "Requested by Stores");
+        adapter.addFragment(new StockPullFragment(store_Code), "Pull from Stores");
+        adapter.addFragment(new TransferRequestFragment(store_Code), "Requested by Stores");
         viewPager.setAdapter(adapter);
     }
 

@@ -648,7 +648,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
             if (kpiIdArray.contains("030") || kpiIdArray.contains("031") || kpiIdArray.contains("032") || kpiIdArray.contains("033") || kpiIdArray.contains("034") || kpiIdArray.contains("035")) {
                 List<App> apps = getProduct(11, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Title Customer Feedback HO", apps));
+                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback HO", apps));
             }
             if (kpiIdArray.contains("036") || kpiIdArray.contains("037") || kpiIdArray.contains("038") || kpiIdArray.contains("039") || kpiIdArray.contains("040") || kpiIdArray.contains("041")) {
                 List<App> apps = getProduct(12, kpiIdArray);

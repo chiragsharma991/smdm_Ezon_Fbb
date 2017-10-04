@@ -1077,15 +1077,15 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             if (saleFirstVisibleItem.equals("All")) {
                                 if(all_from_val.equals("category"))
                                 {
-                                    requestViewPagerValueAPI("brandClass");
+                                    requestViewPagerValueAPI("category");
                                 }
                                 if(all_from_val.equals("class"))
                                 {
-                                    requestViewPagerValueAPI("brandClass");
+                                    requestViewPagerValueAPI("class");
                                 }
                                 if(all_from_val.equals("brand"))
                                 {
-                                    requestViewPagerValueAPI("brandClass");
+                                    requestViewPagerValueAPI("brand");
                                 }
                                 if(all_from_val.equals("brandClass"))
                                 {
@@ -1141,8 +1141,30 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements RadioGr
                             }
                             progressBar1.setVisibility(View.VISIBLE);
                             if (saleFirstVisibleItem.equals("All")) {
-                                requestSalesViewPagerValueAPI();
+                                if(all_from_val.equals("category"))
+                                {
+                                    requestViewPagerValueAPI("category");
+                                }
+                                if(all_from_val.equals("class"))
+                                {
+                                    requestViewPagerValueAPI("class");
+                                }
+                                if(all_from_val.equals("brand"))
+                                {
+                                    requestViewPagerValueAPI("brand");
+                                }
+                                if(all_from_val.equals("brandClass"))
+                                {
+                                    requestViewPagerValueAPI("brandClass");
 
+                                }
+                                if(all_from_val.equals("filter"))
+                                {
+                                    requestHeaderAPI(sales_filter_level);
+                                }
+                                else {
+                                    requestSalesViewPagerValueAPI();
+                                }
                             } else {
                                 requestSalesPagerOnScrollAPI();
                             }
