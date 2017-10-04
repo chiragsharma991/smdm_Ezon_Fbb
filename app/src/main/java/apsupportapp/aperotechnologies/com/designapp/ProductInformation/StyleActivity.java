@@ -596,7 +596,7 @@ public class StyleActivity extends AppCompatActivity
         {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
-
+        Log.e("requestStyleDetailsAPI: ",""+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
@@ -667,7 +667,7 @@ public class StyleActivity extends AppCompatActivity
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
-
+                                intent.putExtra("storeCode",store_name);
 
                                 Log.e("== "," "+articleCode+" "+articleOption+" "+styleDetailsBean+" "+collectionNM+" "+optionName);
                               //  intent.putExtra("selStoreName",store_name);

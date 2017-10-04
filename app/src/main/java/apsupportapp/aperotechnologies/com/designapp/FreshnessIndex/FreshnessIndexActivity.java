@@ -2472,7 +2472,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     }
                                     break;
 
-
                                 case "Region":
                                     btnFIndexPrev.setVisibility(View.VISIBLE);
                                     btnFIndexNext.setVisibility(View.INVISIBLE);

@@ -92,7 +92,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     private TabLayout Tabview;
     private String selectedString;
     private boolean from_filter = false;
-    private int filter_level;
+    public int filter_level;
     public static Activity targetStockException;
 
     @Override
@@ -130,14 +130,27 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
             if (getIntent().getStringExtra("selectedStringVal") == null) {
                 from_filter = false;
+                RetainFromMain_filter();
+                if(Tabview.getTabAt(0).isSelected())
+                {
+                    requestTargetStockExcepApi(selectedString,level);
+                }
 
             } else if (getIntent().getStringExtra("selectedStringVal") != null) {
                 selectedString = getIntent().getStringExtra("selectedStringVal");
                 filter_level  = getIntent().getIntExtra("selectedlevelVal",0);
                 from_filter = true;
+                RetainFromMain_filter();
+                if(filter_level != 0)
+                {
+                    requestTargetStockExcepApi(selectedString, filter_level);
+                }
+                else
+                {
+                    requestTargetStockExcepApi(selectedString,level);
+                }
             }
-            RetainFromMain_filter();
-            requestTargetStockExcepApi(selectedString);
+
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -165,7 +178,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
 
 
 
-    private void requestTargetStockExcepApi(final String selectedString) {
+    private void requestTargetStockExcepApi(final String selectedString,final int target_level) {
 
         if (Reusable_Functions.chkStatus(context)) {
 
@@ -259,8 +272,9 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                                     targetAgeingAdapter.notifyDataSetChanged();
                                     lazyScroll = "OFF";
                                 }
-                                  else {
-                                    targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList, context);
+                                  else
+                                  {
+                                    targetAgeingAdapter = new TargetStockExcepAdapter(targetStockList,target_level, context);
                                     targetListView.setAdapter(targetAgeingAdapter);
 
                                 }
@@ -321,7 +335,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         }
                         footer.setVisibility(View.VISIBLE);
                         lazyScroll = "ON";
-                        requestTargetStockExcepApi(selectedString);
+                        requestTargetStockExcepApi(selectedString,level);
                     }
                 }
 
@@ -438,6 +452,8 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 checkTimeVal = "";
                 checkSeasonGpVal = "";
                 checkTargetROSVal = 7;
+                level = 1;
+                corefashion = "Fashion";
                 finish();
                 break;
             case R.id.toggle_target_fav:
@@ -828,7 +844,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 1;
             targetStockList.clear();
-            requestTargetStockExcepApi(selectedString);
+            requestTargetStockExcepApi(selectedString,level);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -844,7 +860,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 2;
             targetStockList.clear();
-            requestTargetStockExcepApi(selectedString);
+            requestTargetStockExcepApi(selectedString,level);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -860,7 +876,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 3;
             targetStockList.clear();
-            requestTargetStockExcepApi(selectedString);
+            requestTargetStockExcepApi(selectedString,level);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -874,7 +890,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 4;
             targetStockList.clear();
-            requestTargetStockExcepApi(selectedString);
+            requestTargetStockExcepApi(selectedString,level);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -888,7 +904,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
             top = 10;
             level = 5;
             targetStockList.clear();
-            requestTargetStockExcepApi(selectedString);
+            requestTargetStockExcepApi(selectedString,level);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
@@ -949,6 +965,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     limit = 10;
                     offsetvalue = 0;
                     top = 10;
+
                     corefashion = "Core";
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
@@ -956,7 +973,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
                         coreSelection = true;
-                        requestTargetStockExcepApi(selectedString);
+                        requestTargetStockExcepApi(selectedString,level);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
@@ -965,6 +982,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                     limit = 10;
                     offsetvalue = 0;
                     top = 10;
+
                     corefashion = "Fashion";
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
@@ -972,7 +990,7 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                         targetStockList.clear();
                         targetListView.setVisibility(View.GONE);
                         coreSelection = false;
-                        requestTargetStockExcepApi(selectedString);
+                        requestTargetStockExcepApi(selectedString,level);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
