@@ -704,15 +704,144 @@ public class SwitchingActivity extends AppCompatActivity
                             }
                             else
                             {
-                                for (int i = 0; i < response.length(); i++) {
-                                    JSONObject collectionName = response.getJSONObject(i);
+                                if(response.length() == 1)
+                                {
+                                    JSONObject collectionName = response.getJSONObject(0);
                                     storeCode = collectionName.getString("storeCode");
                                     body_geoLevel2Code = collectionName.getString("geoLevel2Code");
-                                    arrayList.add(storeCode);
-                                    arrayListbody.add(body_geoLevel2Code);
+                                    Log.e("storeCode "," "+storeCode);
 
+                                    if(from.equals("VisualAssortmentActivity")) {
+                                        Intent intent = new Intent(SwitchingActivity.this, VisualAssortmentActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
+                                        startActivity(intent);
+                                    }
+                                    else if(from.equals("VisualReportActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, VisualReportActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+                                    else if(from.equals("ProductAvailability_notify_HO")){
+                                        Intent intent = new Intent(SwitchingActivity.this, ProductAvailability_notify_HO.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+
+                                    }
+                                    else if(from.equals("PolicyExchangeRefund_HO")){
+                                        Intent intent = new Intent(SwitchingActivity.this, PolicyExchangeRefund_HO.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("OurStoreServices_HO")){
+                                        Intent intent = new Intent(SwitchingActivity.this, OurStoreServices_HO.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("ProductQualityRange_HO")){
+                                        Intent intent = new Intent(SwitchingActivity.this, ProductQualityRange_HO.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("PricePromotion_HO")){
+                                        Intent intent = new Intent(SwitchingActivity.this, PricePromotion_HO.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("SupervisorStaff_HO")){
+                                        Intent intent = new Intent(SwitchingActivity.this, SupervisorStaff_HO.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("Feedback")){
+                                        Intent intent = new Intent(SwitchingActivity.this, Feedback.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("FeedbackList")){
+                                        Intent intent = new Intent(SwitchingActivity.this, FeedbackList.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("To_Do")){
+                                        Intent intent = new Intent(SwitchingActivity.this, To_Do.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("StatusActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, StatusActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("InspectionBeginActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, InspectionBeginActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("InspectionHistoryActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, InspectionHistoryActivity.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("ProductAvailability_Notify")){
+                                        Intent intent = new Intent(SwitchingActivity.this, ProductAvailability_Notify.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("PolicyExchangeRefund")){
+                                        Intent intent = new Intent(SwitchingActivity.this, PolicyExchangeRefund.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("Price_Promotion")){
+                                        Intent intent = new Intent(SwitchingActivity.this, Price_Promotion.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("ProductQualityRange")){
+                                        Intent intent = new Intent(SwitchingActivity.this, ProductQualityRange.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("OurStoreServices")){
+                                        Intent intent = new Intent(SwitchingActivity.this, OurStoreServices.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+
+                                    else if(from.equals("SupervisiorStaff")){
+                                        Intent intent = new Intent(SwitchingActivity.this, SupervisiorStaff.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
                                 }
-                                dialog.show();
+                                else {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject collectionName = response.getJSONObject(i);
+                                        storeCode = collectionName.getString("storeCode");
+                                        body_geoLevel2Code = collectionName.getString("geoLevel2Code");
+                                        arrayList.add(storeCode);
+                                        arrayListbody.add(body_geoLevel2Code);
+
+                                    }
+                                    dialog.show();
+                                }
                             }
 
 //                            Collections.sort(arrayList);
