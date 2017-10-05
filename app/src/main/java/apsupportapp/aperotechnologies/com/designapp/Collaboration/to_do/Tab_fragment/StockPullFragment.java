@@ -453,9 +453,9 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     @Override
                                     public void onItemClick(View view, int position) {
                                         Log.e(TAG, "onItemClick: ----"+position );
-                                        subcategory_name = ReceiverSummaryList.get(position).getLevel();
+//                                        subcategory_name = ReceiverSummaryList.get(position).getLevel();
                                         mc_name = subcategoryList.get(position).getLevel();
-                                        Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name +"\t"+subcategoryList.get(position).getStkQtyAvl());
+//                                        Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name +"\t"+subcategoryList.get(position).getStkQtyAvl());
                                         new Details().StartActivity(context, selected_subCategory,mc_name, subcategoryList.get(position).getStkQtyAvl(), storeCode);
 
                                     }

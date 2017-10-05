@@ -27,6 +27,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,6 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_prod;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.rel_ez_process_filter;
 
 /**
@@ -240,6 +242,18 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
             str1 = str1.replace(", ", ",");
             region_str = str1;
             Log.e("remove build up :", "" + region_list.size());
+            if (region_list.size() == 0) {
+                salesList.clear();
+                mListDataChild.putAll(dublicate_listDataChild);
+                for (int k = 0 ; k < mListDataGroup.size(); k++) {
+                    explv_ez_prod.collapseGroup(k);
+                }
+                for (int k = 0; k < mListDataGroup.size(); k++) {
+                    explv_ez_prod.expandGroup(k);
+                }
+            } else {
+                requestLocationHierarchy(location_level  , region_str);
+            }
         }
         if (level == 1)
         {
@@ -318,7 +332,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         }
     }
 
-    private void requestLocationHierarchy(int level ,String txtClickedVal) {
+    private void requestLocationHierarchy(final int level ,String txtClickedVal) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
         String geoLevel2Code = sharedPreferences.getString("concept","");
@@ -355,22 +369,25 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
                             } else {
-                                for (int i = mGroupPosition + 1 ; i < mListDataChild.size(); i++) {
+                                for (int i = level - 2 ; i < mListDataChild.size(); i++) {
                                     Log.e("i :",""+i);
-                                    if (mGroupPosition +1 == i) {
+                                    if (level - 2  == i) {
                                         for (int j = i; j < mListDataChild.size(); j++) {
                                             mListDataChild.remove(i);
                                         }
                                     }
                                 }//end of first for
 
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = level - 2; i < response.length(); i++) {
                                     List<String> drillDownList = new ArrayList<String>();
-                                    JSONObject obj = response.getJSONObject(i);
+                                    for (int j = 0; j < response.length(); j++) {
+                                        JSONObject obj = response.getJSONObject(j);
 
                                         String store = obj.getString("descEz");
                                         drillDownList.add(store);
-                                        Log.e("drilldown list:", "" + drillDownList.size());
+//                                        Log.e("drilldown list:", "" + drillDownList.size());
+                                    }
+
 
                                     Set<String> setValue = new HashSet<>();
                                     setValue.addAll(drillDownList);
@@ -378,10 +395,10 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                     drillDownList.addAll(setValue);
                                     Collections.sort(drillDownList);
                                     //expand group
-                                     notifyDataSetChanged();
+                                    notifyDataSetChanged();
                                     mListDataChild.put(mListDataGroup.get(1), drillDownList);
                                     ezoneSalesFilter.explv_ez_locatn.expandGroup(1);
-                                    rel_ez_process_filter.setVisibility(View .GONE);
+                                    rel_ez_process_filter.setVisibility(View.GONE);
                                 }
                             }
 

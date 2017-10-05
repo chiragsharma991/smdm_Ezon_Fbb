@@ -2430,6 +2430,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         txtNoChart.setVisibility(View.GONE);
         oe_FirstVisibleItem = oe_FirstVisibleItem.replace("%", "%25");
         oe_FirstVisibleItem = oe_FirstVisibleItem.replace(" ", "%20").replace("&", "%26");
+
         if (oe_txtHeaderClass.getText().toString().equals("Department")) {
             if (coreSelection) {
                 //core selection without seasongroup
@@ -2462,12 +2463,13 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             }
         }
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
-
+                        Log.e("response OEP "," "+response);
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -2728,6 +2730,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         optionEfficiencyDetails.setFullSizeCount(optionEfficiencyHeader.getFullSizeCount());
         optionEfficiencyDetails.setStkOnhandQty(optionEfficiencyHeader.getStkOnhandQty());
         optionEfficiencyDetails.setSohCountFullSize(optionEfficiencyHeader.getSohCountFullSize());
+        optionEfficiencyDetails.setPartCutCount(optionEfficiencyHeader.getPartCutCount());
+        optionEfficiencyDetails.setFullCutCount(optionEfficiencyHeader.getFullCutCount());
         optionEfficiencyDetailsArrayList.add(0, this.optionEfficiencyDetails);
         oe_listView.setLayoutManager(new LinearLayoutManager(context));
         this.optionEfficiencyDetails = optionEfficiencyDetailsArrayList.get(0);
@@ -2767,6 +2771,81 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         limit = 100;
         count = 0;
         OptionEfficiencyActivity.level = level;
-        requestOEPieChart();
+//        requestHeaderPieChart();
+
+        entries = new ArrayList<PieEntry>();
+        for (OptionEfficiencyHeader optionEfficiency : oeHeaderList) {
+
+            fullSizeCount = (float) optionEfficiency.getFullSizeCount();
+            partCutCount = (float) optionEfficiency.getPartCutCount();
+            fullCutCount = (float) optionEfficiency.getFullCutCount();
+
+
+        }
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.parseColor("#20b5d3"));
+        colors.add(Color.parseColor("#21d24c"));
+        colors.add(Color.parseColor("#f5204c"));
+        ArrayList<String> labels = new ArrayList<>();
+        if (fullSizeCount > 0.0f) {
+            entries.add(new PieEntry(fullSizeCount, "Full Size"));
+        } else {
+            fullSize = true;
+        }
+        if (partCutCount > 0.0f) {
+
+            entries.add(new PieEntry(partCutCount, "Part Cut"));
+        } else {
+            CutCount = true;
+
+        }
+        if (fullCutCount > 0.0f) {
+
+            entries.add(new PieEntry(fullCutCount, "Full Cut"));
+        } else {
+            fullCut = true;
+
+        }
+        if (fullSize && CutCount && fullCut) {
+            txtNoChart.setVisibility(View.VISIBLE);
+            fullSize = false;
+            CutCount = false;
+            fullCut = false;
+
+        }
+
+        PieDataSet dataset = new PieDataSet(entries, "");
+        dataset.setColors(colors);
+        dataset.setValueLineWidth(0.7f);
+        dataset.setValueTextColor(Color.BLACK);
+        pieData = new PieData(dataset);
+        pieData.setValueFormatter(new MyValueFormatter());
+        dataset.setValueLinePart1Length(1.2f);
+        dataset.setValueLinePart2Length(1.8f);
+        oe_pieChart.setDrawMarkers(false);
+        pieData.setValueTextSize(10f);
+        dataset.setXValuePosition(null);
+        dataset.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        oe_pieChart.setEntryLabelColor(Color.BLACK);
+        oe_pieChart.setExtraOffsets(5, 10, 5, 5);
+        oe_pieChart.setHoleRadius(0);
+        oe_pieChart.setHoleColor(Color.WHITE);
+        oe_pieChart.setTransparentCircleRadius(0);
+        oe_pieChart.setData(pieData);
+        oe_pieChart.notifyDataSetChanged();
+        oe_pieChart.invalidate();
+        oe_pieChart.animateXY(4000, 4000);
+        oe_pieChart.setDescription(null);
+        oe_pieChart.setTouchEnabled(false);
+        Legend l = oe_pieChart.getLegend();
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        l.setEnabled(true);
+        l.setFormSize(11f);
+        llayoutOEfficiency.setVisibility(View.VISIBLE);
+        processBar.setVisibility(View.GONE);
+        OnItemClick = false;
+        processBar.setVisibility(View.GONE);
+        Reusable_Functions.hDialog();
+
     }
 }

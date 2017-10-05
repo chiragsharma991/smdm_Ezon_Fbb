@@ -576,6 +576,8 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     stockageband1 = stockageband1.replace("[", "");
                     stockageband1 = stockageband1.replace("]", "");
                     stockageband1 = stockageband1.replace(", ", ",");
+                    stockageband1 = stockageband1.replaceAll(" ", "%20");
+                    stockageband1 = stockageband1.replaceAll("&", "%26");
 
 //                    if (checkAgeing1.isChecked()) {
 //                        checkAgeingVal = "CheckAgeing1";

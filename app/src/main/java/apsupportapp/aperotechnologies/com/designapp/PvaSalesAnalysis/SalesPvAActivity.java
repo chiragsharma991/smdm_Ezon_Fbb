@@ -1313,7 +1313,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     }
                                 }// end of else
                                 header_value = "";
-                                if (pvaFirstVisibleItem.equals("All")) {
+                                if (pvaFirstVisibleItem.equals("All"))
+                                {
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
@@ -1321,7 +1322,9 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     salesPvAAnalysisWeekArrayList.clear();
                                     requestSalesWeekChart(header_value);
 
-                                } else {
+                                }
+                                else
+                                {
                                     llpvahierarchy.setVisibility(View.GONE);
                                     offsetvalue = 0;
                                     limit = 100;
@@ -1329,7 +1332,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                     salesPvAAnalysisWeekArrayList.clear();
                                     requestPvAChartAPI();
                                 }
-                                from_filter = false;
+
 
                             }
 
@@ -2583,17 +2586,17 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     header_value="";
                     // if you come from filter then tab always be maintain.
 
-                    if (getIntent().getStringExtra("selectedStringVal") == null) {
-                        filter_toggleClick = false;
-                        retainSegmentValuesFilter();
+//                    if (getIntent().getStringExtra("selectedStringVal") == null) {
+//                        filter_toggleClick = false;
+//                        retainSegmentValuesFilter();
                         requestSalesViewPagerValueAPI();
-                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-                        selectedString = getIntent().getStringExtra("selectedStringVal");
-                        sales_filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
-                        filter_toggleClick = true;
-                        retainSegmentValuesFilter();
-                        requestHeaderAPI("filter");
-                    }
+//                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+//                        selectedString = getIntent().getStringExtra("selectedStringVal");
+//                        sales_filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
+//                        filter_toggleClick = true;
+//                        retainSegmentValuesFilter();
+//                        requestHeaderAPI("filter");
+//                    }
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
@@ -2618,17 +2621,17 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     header_value="";
                     // if you come from filter then tab always be maintain.
 
-                    if (getIntent().getStringExtra("selectedStringVal") == null) {
-                        filter_toggleClick = false;
-                        retainSegmentValuesFilter();
+//                    if (getIntent().getStringExtra("selectedStringVal") == null) {
+//                        filter_toggleClick = false;
+//                        retainSegmentValuesFilter();
                         requestSalesViewPagerValueAPI();
-                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-                        selectedString = getIntent().getStringExtra("selectedStringVal");
-                        sales_filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
-                        filter_toggleClick = true;
-                        retainSegmentValuesFilter();
-                        requestHeaderAPI("filter");
-                    }
+//                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
+//                        selectedString = getIntent().getStringExtra("selectedStringVal");
+//                        sales_filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
+//                        filter_toggleClick = true;
+//                        retainSegmentValuesFilter();
+//                        requestHeaderAPI("filter");
+//                    }
 
                 }
                 else

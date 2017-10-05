@@ -238,19 +238,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
 
             }
             // Add all values
-            if(ez_sales_detail_array.size()!=0){
-                SalesAnalysisListDisplay salesAnalysisListDisplay = ez_sales_detail_array.get(position);
 
-                if (salesAnalysisListDisplay.getLevel() != null) {
-                    if (salesAnalysisListDisplay.getLevel().equals("All")) {
-                        salesAnalysisListDisplay.setPvaAchieved(ez_sales_pager.getPvaAchieved());
-                        ez_sales_detail_array.set(0, salesAnalysisListDisplay);
-                        ez_salesadapter.notifyDataSetChanged();
-
-                    }
-                }
-
-            }
 
         }
         else if (position == 1) {

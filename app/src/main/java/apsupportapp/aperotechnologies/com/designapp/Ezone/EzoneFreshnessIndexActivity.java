@@ -1768,7 +1768,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                     if(!freshnessIndex_ClickedVal.equals("All")) {
                                         freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                         freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                        header_value = "&subdept=" + freshnessIndex_ClickedVal;
+                                        header_value = "&category=" + freshnessIndex_ClickedVal;
                                     }
                                     else
                                     {
@@ -1827,7 +1827,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                     if(!freshnessIndex_ClickedVal.equals("All")) {
                                         freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                         freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                        header_value = "&subclass=" + freshnessIndex_ClickedVal;
+                                        header_value = "&brand=" + freshnessIndex_ClickedVal;
                                     }
                                     else
                                     {
@@ -1914,21 +1914,21 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         }
         else if (filter_level == 5)
         {
-            txtFIndexClass.setText("Brand Class");
-            btnFIndexNext.setVisibility(View.INVISIBLE);
-            btnFIndexPrev.setVisibility(View.VISIBLE);
-            preValue=1;
-
-        }
-        else if (filter_level == 6)
-        {
             txtFIndexClass.setText("MC");
             btnFIndexNext.setVisibility(View.INVISIBLE);
             btnFIndexPrev.setVisibility(View.VISIBLE);
             preValue=1;
 
-
         }
+//        else if (filter_level == 6)
+//        {
+//            txtFIndexClass.setText("MC");
+//            btnFIndexNext.setVisibility(View.INVISIBLE);
+//            btnFIndexPrev.setVisibility(View.VISIBLE);
+//            preValue=1;
+//
+//
+//        }
         else if(filter_level == 9)
         {
             txtFIndexClass.setText("Store");
