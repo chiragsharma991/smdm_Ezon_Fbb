@@ -93,11 +93,10 @@ public class StyleActivity extends AppCompatActivity
     private ListView listCollection, listOption,listStore;
     ListAdapter collectionAdapter,storeAdapter;
     ListAdapter1 optionAdapter;
-
     String collect_name = "",geoLevel2Code,lobId,store_nm;
-
     private ReaderManager mReaderManager;
     private IntentFilter filter;
+    public static StyleActivity styleactivity;
 
     String barcode;
 
@@ -108,6 +107,7 @@ public class StyleActivity extends AppCompatActivity
         setContentView(R.layout.activity_product_info);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         context = this;
+        styleactivity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -596,7 +596,7 @@ public class StyleActivity extends AppCompatActivity
         {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
-
+        Log.e("requestStyleDetailsAPI: ",""+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
@@ -667,7 +667,7 @@ public class StyleActivity extends AppCompatActivity
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
-
+                                intent.putExtra("storeCode",store_name);
 
                                 Log.e("== "," "+articleCode+" "+articleOption+" "+styleDetailsBean+" "+collectionNM+" "+optionName);
                               //  intent.putExtra("selStoreName",store_name);

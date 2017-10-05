@@ -47,6 +47,7 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusA
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookupActivity;
+import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneBestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneFreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesPvAActivity;
@@ -336,7 +337,7 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(FreshnessIndexActivity);
                     break;
                 case "045":
-                    BestPerformerInventory = new Intent(context, BestPerformerInventory.class);
+                    BestPerformerInventory = new Intent(context, EzoneBestPerformerInventory.class);
                     startActivity(BestPerformerInventory);
                     break;
 

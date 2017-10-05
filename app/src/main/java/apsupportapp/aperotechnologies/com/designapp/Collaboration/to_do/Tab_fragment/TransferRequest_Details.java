@@ -800,6 +800,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
                                 } else
                                 {
+                                    Sender_DetailsList.clear();
+                                    transferDetailsAdapter = new TransferDetailsAdapter(Sender_DetailsList, context,null,null,null,null,TransferRequest_Details.this,null);
+                                    tr_recyclerView.setAdapter(transferDetailsAdapter);
 //                                    transferDetailsAdapter.notifyDataSetChanged();
 //                                    requestSenderDetails();
 //                                    switch (id){

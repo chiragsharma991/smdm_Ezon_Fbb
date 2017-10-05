@@ -81,7 +81,7 @@ public class Style_Fragment extends Fragment {
     MySingleton m_config;
     static int cnt = 0;
     RelativeLayout relativeLayout;
-    String articleCode, articleOption;
+    String articleCode, articleOption,storeCode;
     int offsetvalue = 0, limit = 100;
     int count = 0;
     String TA = "StyleActivity";
@@ -114,6 +114,8 @@ public class Style_Fragment extends Fragment {
         Bundle bundle = getActivity().getIntent().getExtras();
         articleCode = bundle.getString("articleCode");
         articleOption = bundle.getString("articleOption");
+        storeCode = bundle.getString("storeCode");
+        Log.e(TAG, "onCreate: "+storeCode);
         context = getContext();
         styleColorBeanList = new ArrayList<>();
         m_config = MySingleton.getInstance(context);
@@ -126,7 +128,7 @@ public class Style_Fragment extends Fragment {
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.hDialog();
             requestStyleSizeDetailsAPI();
-            requestStyleColorDetailsAPI(offsetvalue, limit);
+
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
             Style_loadingBar.setVisibility(View.GONE);
@@ -135,7 +137,7 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
 
-        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId ;
+        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -269,8 +271,8 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleSizeDetailsAPI() {
 
-        String url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId ;
-
+        String url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+        Log.e(TAG, "requestStyleSizeDetailsAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

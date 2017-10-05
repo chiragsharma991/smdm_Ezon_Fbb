@@ -1,0 +1,90 @@
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        dbdb73b apsupportapp.aperotechnologies.com.designapp/.SplashActivity
+
+Receiver Resolver Table:
+  Non-Data Actions:
+      com.android.vending.INSTALL_REFERRER:
+        a3d2e58 apsupportapp.aperotechnologies.com.designapp/com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
+      com.google.android.c2dm.intent.RECEIVE:
+        3bbbb1 apsupportapp.aperotechnologies.com.designapp/com.google.firebase.iid.FirebaseInstanceIdReceiver
+
+Service Resolver Table:
+  Non-Data Actions:
+      com.google.firebase.INSTANCE_ID_EVENT:
+        3468c17 apsupportapp.aperotechnologies.com.designapp/com.google.firebase.iid.FirebaseInstanceIdService
+        8850896 apsupportapp.aperotechnologies.com.designapp/.FCM.TokenRefresh
+      com.google.firebase.MESSAGING_EVENT:
+        9f61ed apsupportapp.aperotechnologies.com.designapp/com.google.firebase.messaging.FirebaseMessagingService
+        482d804 apsupportapp.aperotechnologies.com.designapp/.FCM.MyFirebaseMessagingService
+
+Permissions:
+  Permission [apsupportapp.aperotechnologies.com.designapp.permission.C2D_MESSAGE] (7574dc4):
+    sourcePackage=apsupportapp.aperotechnologies.com.designapp
+    uid=10102 gids=null type=0 prot=signature
+    perm=Permission{e011822 apsupportapp.aperotechnologies.com.designapp.permission.C2D_MESSAGE}
+    packageSetting=PackageSetting{ce42419 apsupportapp.aperotechnologies.com.designapp/10102}
+
+Registered ContentProviders:
+  apsupportapp.aperotechnologies.com.designapp/com.google.firebase.provider.FirebaseInitProvider:
+    Provider{81dd2b3 apsupportapp.aperotechnologies.com.designapp/com.google.firebase.provider.FirebaseInitProvider}
+
+ContentProvider Authorities:
+  [apsupportapp.aperotechnologies.com.designapp.firebaseinitprovider]:
+    Provider{81dd2b3 apsupportapp.aperotechnologies.com.designapp/com.google.firebase.provider.FirebaseInitProvider}
+      applicationInfo=ApplicationInfo{4577070 apsupportapp.aperotechnologies.com.designapp}
+
+Key Set Manager:
+  [apsupportapp.aperotechnologies.com.designapp]
+      Signing KeySets: 13
+
+Packages:
+  Package [apsupportapp.aperotechnologies.com.designapp] (ce42419):
+    userId=10102
+    pkg=Package{6a210c2 apsupportapp.aperotechnologies.com.designapp}
+    codePath=/data/app/apsupportapp.aperotechnologies.com.designapp-2
+    resourcePath=/data/app/apsupportapp.aperotechnologies.com.designapp-2
+    legacyNativeLibraryDir=/data/app/apsupportapp.aperotechnologies.com.designapp-2/lib
+    primaryCpuAbi=null
+    secondaryCpuAbi=null
+    versionCode=121 targetSdk=25
+    versionName=2.1
+    splits=[base]
+    applicationInfo=ApplicationInfo{4577070 apsupportapp.aperotechnologies.com.designapp}
+    flags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    pkgFlagsEx=[ ]
+    dataDir=/data/user/0/apsupportapp.aperotechnologies.com.designapp
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2017-10-05 11:53:28
+    firstInstallTime=2017-10-05 09:56:04
+    lastUpdateTime=2017-10-05 11:53:28
+    signatures=PackageSignatures{f09098c [41d2fe9]}
+    installPermissionsFixed=true installStatus=1
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    declared permissions:
+      apsupportapp.aperotechnologies.com.designapp.permission.C2D_MESSAGE: prot=signature, INSTALLED
+    requested permissions:
+      android.permission.INTERNET
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.READ_EXTERNAL_STORAGE
+      android.permission.CAMERA
+      android.permission.CALL_PHONE
+      android.permission.READ_PHONE_STATE
+      android.permission.WAKE_LOCK
+      com.google.android.c2dm.permission.RECEIVE
+      apsupportapp.aperotechnologies.com.designapp.permission.C2D_MESSAGE
+    install permissions:
+      android.permission.INTERNET: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      apsupportapp.aperotechnologies.com.designapp.permission.C2D_MESSAGE: granted=true
+      android.permission.WAKE_LOCK: granted=true
+    User 0:  installed=true hidden=false stopped=false notLaunched=false enabled=0
+      gids=[3003]
+      runtime permissions:
+        android.permission.READ_EXTERNAL_STORAGE: granted=true
+        android.permission.READ_PHONE_STATE: granted=true
+        android.permission.CALL_PHONE: granted=true
+        android.permission.CAMERA: granted=true
+        android.permission.WRITE_EXTERNAL_STORAGE: granted=true

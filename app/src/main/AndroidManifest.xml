@@ -100,6 +100,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".Ezone.EzoneSalesPvAActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".SalesAnalysis.SalesAnalysisActivity1"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
@@ -150,6 +154,20 @@
         <!-- android:windowSoftInputMode="stateHidden" /> -->
         <activity
             android:name=".FreshnessIndex.FreshnessIndexActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Ezone.EzoneFreshnessIndexActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Ezone.EzoneBestPerformerInventory"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Ezone.EzoneSalesFilter"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

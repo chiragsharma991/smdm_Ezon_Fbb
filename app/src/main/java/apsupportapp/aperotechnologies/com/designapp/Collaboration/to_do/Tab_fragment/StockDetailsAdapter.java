@@ -225,6 +225,9 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         sizeList = sizeList.replace("]", "");
         sizeList = sizeList.replace(", ", ",");
 
+        MCCodeDesc = MCCodeDesc.replaceAll("%20"," ");
+        prodLevel3Desc = prodLevel3Desc.replaceAll("%20"," ");
+
         JSONArray jsonarray=new JSONArray();
         try
         {

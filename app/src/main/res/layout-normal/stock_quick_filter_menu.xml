@@ -298,132 +298,139 @@
                     android:layout_marginRight="10dp"
                     android:background="@color/ezfb_black" />
 
-                <LinearLayout
+                <ListView
+                    android:id="@+id/listAgeing"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    android:weightSum="10">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
+                </ListView>
 
-                        <TextView
-                            android:id="@+id/txtpopAgeing1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/ezfb_black"
-                            android:text="100 - 200 Days"
-                            android:textSize="14sp" />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:weightSum="10">-->
 
-                    </LinearLayout>
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:orientation="vertical">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="end"
-                        android:orientation="vertical">
+                        <!--<TextView-->
+                            <!--android:id="@+id/txtpopAgeing1"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:textColor="@color/ezfb_black"-->
+                            <!--android:text="100 - 200 Days"-->
+                            <!--android:textSize="14sp" />-->
 
+                    <!--</LinearLayout>-->
 
-                        <RadioButton
-                            android:id="@+id/checkAgeing1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:buttonTint="@android:color/black"
-                            android:focusable="true" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!--Previous-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtpopAgeing2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/ezfb_black"
-                            android:text="150 - 250 Days"
-                            android:textSize="14sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="end"
-                        android:orientation="vertical">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="7"-->
+                        <!--android:gravity="end"-->
+                        <!--android:orientation="vertical">-->
 
 
-                        <RadioButton
-                            android:id="@+id/checkAgeing2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:buttonTint="@android:color/black"
-                            android:focusable="true" />
+                        <!--<CheckBox-->
+                            <!--android:id="@+id/checkAgeing1"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:buttonTint="@android:color/black"-->
+                            <!--android:focusable="true" />-->
 
-                    </LinearLayout>
-                </LinearLayout>
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
+                <!--&lt;!&ndash;Previous&ndash;&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:weightSum="10">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:orientation="vertical">-->
 
-                        <TextView
-                            android:id="@+id/txtAgeing3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="250 - 350 Days"
-                            android:textColor="@color/ezfb_black"
-                            android:textSize="14sp" />
+                        <!--<TextView-->
+                            <!--android:id="@+id/txtpopAgeing2"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:textColor="@color/ezfb_black"-->
+                            <!--android:text="150 - 250 Days"-->
+                            <!--android:textSize="14sp" />-->
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:gravity="end"
-                        android:orientation="vertical">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="7"-->
+                        <!--android:gravity="end"-->
+                        <!--android:orientation="vertical">-->
 
-                        <RadioButton
-                            android:id="@+id/checkAgeing3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:buttonTint="@android:color/black"
-                            android:focusable="true" />
 
-                    </LinearLayout>
-                </LinearLayout>
+                        <!--<CheckBox-->
+                            <!--android:id="@+id/checkAgeing2"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:buttonTint="@android:color/black"-->
+                            <!--android:focusable="true" />-->
+
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:weightSum="10">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/txtAgeing3"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="250 - 350 Days"-->
+                            <!--android:textColor="@color/ezfb_black"-->
+                            <!--android:textSize="14sp" />-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="7"-->
+                        <!--android:gravity="end"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<CheckBox-->
+                            <!--android:id="@+id/checkAgeing3"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:buttonTint="@android:color/black"-->
+                            <!--android:focusable="true" />-->
+
+                    <!--</LinearLayout>-->
+
 
 
                 <LinearLayout
@@ -434,7 +441,6 @@
                     android:id="@+id/qfDoneLayout"
 
                     >
-
 
 
                     <Button
@@ -453,14 +459,13 @@
 
 
                 </LinearLayout>
-
+            </LinearLayout>
                 <!--<View-->
                 <!--android:id="@+id/bst_lineTwo_child"-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="2dp"-->
                 <!--android:background="@color/divider_salescard" />-->
 
-            </LinearLayout>
 
 
 
