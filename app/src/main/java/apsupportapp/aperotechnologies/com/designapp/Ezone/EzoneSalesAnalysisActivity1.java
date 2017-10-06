@@ -70,7 +70,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     SalesAnalysisListDisplay salesAnalysisClass, ez_sales_detail_model;
     SalesAnalysisSnapAdapter salesadapter;
     EzoneSalesAdapter ez_sales_adapter;
-    public static SalesAnalysisViewPagerValue salesAnalysis, ez_sales_header_model;
+    public
+    SalesAnalysisViewPagerValue salesAnalysis, ez_sales_header_model;
     SalesPagerAdapter pageradapter;
     EzoneSalesPagerAdapter ez_sales_pager_adapter;
     Gson gson;
@@ -622,9 +623,9 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
 
                     if (ez_firstVisible_no != ez_sFirstPosVal) {
-                        if (ez_postRequest != null) {
-                            ez_postRequest.cancel();
-                        }
+//                        if (ez_postRequest != null) {
+//                            ez_postRequest.cancel();
+//                        }
                         ez_progessBar.setVisibility(View.VISIBLE);
                         if (ez_sale_first_item.equals("All"))
                         {

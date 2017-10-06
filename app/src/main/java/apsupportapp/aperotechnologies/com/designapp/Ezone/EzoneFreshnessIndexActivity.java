@@ -563,6 +563,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
             } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
                 url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+ header_value_filter;
             }
+            Log.e(TAG, "requestFIndexPieChart: "+url );
         }
         else
         {
@@ -577,6 +578,8 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
             } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
                 url = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             }
+            Log.e(TAG, "requestFIndexPieChart: "+url );
+
         }
 
 

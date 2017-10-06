@@ -249,6 +249,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 }
                 OptionefficiencyValue = "";
                 header_value = "";
+                OveridePositionValue = 0;
+                focusposition=0;
 
                 switch (oe_txtHeaderClass.getText().toString()) {
 
@@ -365,6 +367,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 }
                 OptionefficiencyValue = "";
                 header_value = "";
+                OveridePositionValue = 0;
+                focusposition=0;
                 switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Department":
@@ -495,6 +499,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 } else {
 
                     OnItemClick = true;
+                    OveridePositionValue = 0;
+                    focusposition=0;
 
                     if (position < optionEfficiencyDetailsArrayList.size()) {
                         switch (oe_txtHeaderClass.getText().toString()) {
@@ -710,6 +716,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     private void TimeUP() {
 
         if (optionEfficiencyDetailsArrayList.size() != 0) {
+            Log.i("TAG", "TimeUP: OnItemClick"+OnItemClick);
 
             if (focusposition < optionEfficiencyDetailsArrayList.size() && !OnItemClick) {
 
@@ -734,7 +741,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
-
+                    Log.i("TAG", "TimeUP: firstVisibleItem"+focusposition+" and  OveridePositionValue"+OveridePositionValue);
                     if (focusposition != OveridePositionValue) {
 
                         if (postRequest != null) {
@@ -883,6 +890,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 if (Reusable_Functions.chkStatus(context)) {
 
                     //season group
+                    OveridePositionValue = 0;
+                    focusposition=0;
 
                     if (checkCurrent.isChecked()) {
                         checkValueIs = "BestCheckCurrent";
@@ -2770,6 +2779,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         offsetvalue = 0;
         limit = 100;
         count = 0;
+
         OptionEfficiencyActivity.level = level;
 //        requestHeaderPieChart();
 

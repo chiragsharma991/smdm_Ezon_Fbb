@@ -19,6 +19,16 @@ public class Transfer_Request_Model {
     double stkOnhandQty;
     double stkGitQty;
 
+    public String getLevelCode() {
+        return levelCode;
+    }
+
+    public void setLevelCode(String levelCode) {
+        this.levelCode = levelCode;
+    }
+
+    String levelCode;
+
 
     public String getProdAttribute2() {
         return prodAttribute2;
