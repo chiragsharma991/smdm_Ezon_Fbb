@@ -340,6 +340,10 @@ public class SwitchingActivity extends AppCompatActivity
                     BestPerformerInventory = new Intent(context, EzoneBestPerformerInventory.class);
                     startActivity(BestPerformerInventory);
                     break;
+                case "046":
+                    // voc implementation...
+
+                    break;
 
 
             }
@@ -513,6 +517,9 @@ public class SwitchingActivity extends AppCompatActivity
 
                 if (kpiIdArray.contains("025"))
                     apps.add(new App("Inspection History", R.mipmap.storeinspection,"025"));
+
+                if (kpiIdArray.contains("046"))
+                    apps.add(new App("VoC App", R.mipmap.voc,"046"));
 
                 break;
 

@@ -176,7 +176,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         eventUrlList = new ArrayList<>();
 
 
-        Log.e("harshada geoLeveLDesc"," "+geoLeveLDesc);
+        Log.e("harshada geoLeveLDesc", " " + geoLeveLDesc);
 
         /*if (geoLeveLDesc.equals("E ZONE")) {
             Log.e("TAG", "Ezone login");
@@ -193,24 +193,21 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         //-------------------------------------------------------------//
 
         else {*/
-            Log.e("TAG", "FBB login");
-            loginFromFbb = true;
-            _collectionitems = new ArrayList();
-            arrayList = new ArrayList<>();
-            productNameBeanArrayList = new ArrayList<>();
-            //  initialize_fbb_ui();
-            //Marketing events API
-            if (Reusable_Functions.chkStatus(context))
-            {
-                Reusable_Functions.hDialog();
-                Reusable_Functions.sDialog(context, "Loading events...");
-                requestMarketingEventsAPI();
-                RefreshTimeAPI();
-            }
-            else
-            {
-                Toast.makeText(SnapDashboardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
-            }
+        Log.e("TAG", "FBB login");
+        loginFromFbb = true;
+        _collectionitems = new ArrayList();
+        arrayList = new ArrayList<>();
+        productNameBeanArrayList = new ArrayList<>();
+        //  initialize_fbb_ui();
+        //Marketing events API
+        if (Reusable_Functions.chkStatus(context)) {
+            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading events...");
+            requestMarketingEventsAPI();
+            RefreshTimeAPI();
+        } else {
+            Toast.makeText(SnapDashboardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+        }
 //        }
         //  checkPermission();
         // Arrays.asList(kpiIdArray);
@@ -448,7 +445,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                if (model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION")){
+                if (model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION")) {
                     editor.putString("concept", "BB,FBB");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
@@ -456,7 +453,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     editor.putString("kpi_id", model.getKpiId());
                     editor.apply();
 
-                } else if (model.getGeoLevel2Code().equals("EZ")){
+                } else if (model.getGeoLevel2Code().equals("EZ")) {
 
                     editor.putString("concept", "BB,EZ");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
@@ -465,8 +462,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     editor.putString("kpi_id", model.getKpiId());
                     editor.apply();
 
-                }
-                else if (model.getGeoLevel2Code().equals("BB") && model.getLobName().equals("ELECTRONICS")){
+                } else if (model.getGeoLevel2Code().equals("BB") && model.getLobName().equals("ELECTRONICS")) {
 
                     editor.putString("concept", "BB,EZ");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
@@ -475,14 +471,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     editor.putString("kpi_id", model.getKpiId());
                     editor.apply();
 
-                }
-                else {
-                editor.putString("concept", model.getGeoLevel2Code());
-                editor.putString("conceptDesc", model.getGeoLevel2Desc());
-                editor.putString("lobid", model.getLobId());
-                editor.putString("lobname", model.getLobName());
-                editor.putString("kpi_id", model.getKpiId());
-                editor.apply();
+                } else {
+                    editor.putString("concept", model.getGeoLevel2Code());
+                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
+                    editor.putString("lobid", model.getLobId());
+                    editor.putString("lobname", model.getLobName());
+                    editor.putString("kpi_id", model.getKpiId());
+                    editor.apply();
                 }
 
                 String kpi_id = model.getKpiId();
@@ -562,17 +557,17 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         035 - Title Customer Feedback HO  : Supervisor & Staff
 
         New modules
-     036 - Customer Feedback : Product Availability & Notify
-037 - Customer Feedback : Policy Exchange,Refund
-038 - Customer Feedback : Price & Promotion
-039 - Customer Feedback : Product Quality & Range
-040 - Customer Feedback : Our Store Services
-041 - Customer Feedback : Supervisor & Staff
-042 - Sales Ezone
-043 - PvA Ezone
-044 - Assortment Analysis Ezone
-045 - Best Worst Performer Ezone
-
+        036 - Customer Feedback : Product Availability & Notify
+        037 - Customer Feedback : Policy Exchange,Refund
+        038 - Customer Feedback : Price & Promotion
+        039 - Customer Feedback : Product Quality & Range
+        040 - Customer Feedback : Our Store Services
+        041 - Customer Feedback : Supervisor & Staff
+        042 - Sales Ezone
+        043 - PvA Ezone
+        044 - Assortment Analysis Ezone
+        045 - Best Worst Performer Ezone
+        046 - VoC App
 
 
         */
@@ -630,7 +625,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<App> apps = getProduct(5, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
             }
-            if (kpiIdArray.contains("022") || kpiIdArray.contains("023") || kpiIdArray.contains("024") || kpiIdArray.contains("025")) {
+            if (kpiIdArray.contains("022") || kpiIdArray.contains("023") || kpiIdArray.contains("024") || kpiIdArray.contains("025") || kpiIdArray.contains("046") ) {
                 List<App> apps = getProduct(6, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
             }
@@ -672,7 +667,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     @Override
     public void onclickView(int group_position, int child_position, String kpiID) {
         Log.e(TAG, "group_position: " + group_position + "child_position" + child_position + " tag is " + kpiID);
-        Log.e("loginFromFbb ","== "+loginFromFbb);
+        Log.e("loginFromFbb ", "== " + loginFromFbb);
         int value = Integer.parseInt("" + group_position + "" + child_position);
         moveTo(kpiID, context);
     }
