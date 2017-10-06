@@ -3,6 +3,9 @@ package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -342,7 +345,22 @@ public class SwitchingActivity extends AppCompatActivity
                     break;
                 case "046":
                     // voc implementation...
-
+                    String your_apppackagename="com.geckolyst.futuregroup";
+                    PackageManager packageManager = getPackageManager();
+                    ApplicationInfo applicationInfo = null;
+                    try {
+                        applicationInfo = packageManager.getApplicationInfo(your_apppackagename, 0);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    if (applicationInfo == null) {
+                        // not installed it will open your app directly on playstore
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.geckolyst.futuregroup")));
+                    } else {
+                        // Installed
+                        Intent LaunchIntent = packageManager.getLaunchIntentForPackage(your_apppackagename);
+                        startActivity( LaunchIntent );
+                    }
                     break;
 
 
@@ -519,7 +537,7 @@ public class SwitchingActivity extends AppCompatActivity
                     apps.add(new App("Inspection History", R.mipmap.storeinspection,"025"));
 
                 if (kpiIdArray.contains("046"))
-                    apps.add(new App("VoC App", R.mipmap.voc,"046"));
+                    apps.add(new App("VOC", R.mipmap.voc,"046"));
 
                 break;
 

@@ -202,7 +202,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             } else {
 
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + "&articleOptionCode=" + article_option_code;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + "&articleOptionCode=" + feedbackList.get(listCount).getArticleOptionCode();
               //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
@@ -240,6 +240,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         }
                                         offsetvalue = (limit * count) + limit;
                                         count++;
+
                                         requestFeedbackApi();
                                     }
                                     // if api call for last entry.
@@ -663,7 +664,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         int fabric = selectCategory.equals("Fabric Quality") ? 1 : 0;
         int fabricQuality = selectCategory.equals("Garment Quality") ? 1 : 0;
 
-        article_option_code = feedbackList.get(listCount).getArticleOptionCode();
 
         JSONObject jsonObject = new JSONObject();
         try {
