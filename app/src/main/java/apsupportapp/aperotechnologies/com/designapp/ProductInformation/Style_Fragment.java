@@ -81,11 +81,11 @@ public class Style_Fragment extends Fragment {
     MySingleton m_config;
     static int cnt = 0;
     RelativeLayout relativeLayout;
-    String articleCode, articleOption,storeCode;
+    String articleCode, articleOption;
     int offsetvalue = 0, limit = 100;
     int count = 0;
     String TA = "StyleActivity";
-
+    String storeCode;
     // set the header titles
     String headers[] =
             {
@@ -100,6 +100,10 @@ public class Style_Fragment extends Fragment {
     private String TAG = "StyleActivity";
     private LinearLayout LinearTable;
     private RelativeLayout Style_loadingBar;
+
+    public Style_Fragment(String storeCode) {
+        this.storeCode = storeCode;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,7 +130,7 @@ public class Style_Fragment extends Fragment {
         queue.start();
         Log.e(TAG, "onCreate: ");
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading Styles data");
             requestStyleSizeDetailsAPI();
 
         } else {
@@ -136,12 +140,15 @@ public class Style_Fragment extends Fragment {
     }
 
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
+        Reusable_Functions.sDialog(context, "Loading Sizes data");
+        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+        Log.e("sizesNew url "," "+url.toString());
 
-        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("sizesNew res "," "+response.toString());
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
@@ -149,6 +156,7 @@ public class Style_Fragment extends Fragment {
                                 Style_loadingBar.setVisibility(View.GONE);
 
                             } else if (response.length() == limit) {
+                                Reusable_Functions.hDialog();
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
@@ -175,6 +183,7 @@ public class Style_Fragment extends Fragment {
                                 requestStyleColorDetailsAPI(offsetvalue, limit);
 
                             } else if (response.length() < limit) {
+                                Reusable_Functions.hDialog();
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
@@ -277,11 +286,12 @@ public class Style_Fragment extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: " + response);
+                        Log.e(TAG, "stylesNew onResponse: " + response);
                         try {
-                            if (response.equals("") || response == null) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data Found", Toast.LENGTH_LONG).show();
+                                requestStyleColorDetailsAPI(offsetvalue, limit);
 
                             } else {
                                 Reusable_Functions.hDialog();
@@ -313,6 +323,9 @@ public class Style_Fragment extends Fragment {
                                     txtFwdWeekCover.setText("" + String.format("%.1f",fwdWeekCover));
                                     txtsalesThruUnit.setText("" +  String.format("%.1f",sellThruUnitsRcpt)+"%");
                                     txtROS.setText("" + String.format("%.1f",ros));
+
+                                    requestStyleColorDetailsAPI(offsetvalue, limit);
+
                                 }
                             }
                         } catch (Exception e) {

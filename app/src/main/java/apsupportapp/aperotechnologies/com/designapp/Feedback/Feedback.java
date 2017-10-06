@@ -84,7 +84,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private boolean feedbackReport = false;
     private Feedback_model feedback_model_report;
     private String selectCategory, isMultiStore, value, storeCode, store_Code, body_geoLevel2Code;
-    private String storecode, storeDes;
+    private String storecode, storeDes, article_option_code;
 
 
 
@@ -202,7 +202,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             } else {
 
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code + "&option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + "&articleOptionCode=" + article_option_code;
               //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
@@ -495,18 +495,31 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 //get 0 is depend on next and pre button
                 {
                     x = ((double) feedbackReportList.get(Listposition).getFittingCntPer() / 100) * width;
+                    Log.e("x "," getFittingCntPer"+x);
                 } else if (position == 1) {
                     x = ((double) feedbackReportList.get(Listposition).getPricingCntPer() / 100) * width;
+                    Log.e("x "," getPricingCntPer"+x);
+
                 } else if (position == 2) {
                     x = ((double) feedbackReportList.get(Listposition).getColorsCntPer() / 100) * width;
+                    Log.e("x "," getColorsCntPer"+x);
+
                 } else if (position == 3) {
                     x = ((double) feedbackReportList.get(Listposition).getPrintCntPer() / 100) * width;
+                    Log.e("x "," getPrintCntPer"+x);
+
                 } else if (position == 4) {
                     x = ((double) feedbackReportList.get(Listposition).getStylingCntPer() / 100) * width;
+                    Log.e("x "," getStylingCntPer"+x);
+
                 } else if (position == 5) {
                     x = ((double) feedbackReportList.get(Listposition).getFabricQualityCntPer() / 100) * width;
+                    Log.e("x "," getFabricQualityCntPer"+x);
+
                 } else if (position == 6) {
                     x = ((double) feedbackReportList.get(Listposition).getGarmentQualityCntPer() / 100) * width;
+                    Log.e("x "," getGarmentQualityCntPer"+x);
+
                 }
 
                 int percentage = (int) x;
@@ -650,6 +663,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         int fabric = selectCategory.equals("Fabric Quality") ? 1 : 0;
         int fabricQuality = selectCategory.equals("Garment Quality") ? 1 : 0;
 
+        article_option_code = feedbackList.get(listCount).getArticleOptionCode();
 
         JSONObject jsonObject = new JSONObject();
         try {

@@ -356,6 +356,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
+                            Log.e("response "," "+response.toString());
                             StockAgListView.setVisibility(View.VISIBLE);
                             ageing.clear();
                             try {

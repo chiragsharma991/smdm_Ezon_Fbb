@@ -35,7 +35,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
     public static ViewPager viewPager;
     public static TabLayout tabLayout;
     SharedPreferences sharedPreferences;
-    String kpi_id;
+    String kpi_id, storeCode;
 
 
     @Override
@@ -47,7 +47,14 @@ public class SwitchingTabActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         switchingTabActivity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        if(getIntent().getExtras() != null)
+        {
+            if(getIntent().getExtras().getString("storeCode") != null)
+            {
+                storeCode = getIntent().getExtras().getString("storeCode");
+            }
 
+        }
         kpi_id = sharedPreferences.getString("kpi_id", "");
 
         backButton = (RelativeLayout) findViewById(R.id.imageBtnBack1);
@@ -89,7 +96,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         viewPager = (ViewPager) findViewById(R.id.pager);
-        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), storeCode);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
