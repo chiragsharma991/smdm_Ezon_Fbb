@@ -211,7 +211,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.d(TAG, "onResponse: "+response );
+                            Log.i(TAG, "onResponse: "+response );
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -336,6 +336,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.feedbackNext:
+                feedbackReportList.clear();
                 if (listCount + 1 < feedbackList.size()) {
                     if (Build.VERSION.SDK_INT >= 21) {
                         Reusable_Functions.ViewVisible(firstView);
@@ -454,9 +455,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void feedbackDetails(final int position, final int Listposition) {
 
-        Log.e(TAG, "feedbackDetails: " );
 
-        Log.e("position feedbackDetails"," "+position);
         // firstView.setVisibility(View.GONE);
         // secondView.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= 21) {
@@ -473,6 +472,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         styling_relative.removeAllViewsInLayout();
         fabric_relative.removeAllViewsInLayout();
         garment_relative.removeAllViewsInLayout();
+        Log.e(" feedbackReportList --size"," "+position+" list pos "+Listposition);
 
         //calculate screen view size and add line bar process.
         ViewTreeObserver vto = Fitting_relative.getViewTreeObserver();
@@ -495,22 +495,35 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 //get 0 is depend on next and pre button
                 {
                     x = ((double) feedbackReportList.get(Listposition).getFittingCntPer() / 100) * width;
+                    Log.i(TAG, "onGlobalLayout: "+feedbackReportList.get(Listposition).getFittingCntPer());
                 } else if (position == 1) {
                     x = ((double) feedbackReportList.get(Listposition).getPricingCntPer() / 100) * width;
+                    Log.i(TAG, "onGlobalLayout: "+feedbackReportList.get(Listposition).getPricingCntPer());
+
                 } else if (position == 2) {
                     x = ((double) feedbackReportList.get(Listposition).getColorsCntPer() / 100) * width;
+                    Log.i(TAG, "onGlobalLayout: "+feedbackReportList.get(Listposition).getColorsCntPer());
+
                 } else if (position == 3) {
                     x = ((double) feedbackReportList.get(Listposition).getPrintCntPer() / 100) * width;
+                    Log.i(TAG, "onGlobalLayout: "+feedbackReportList.get(Listposition).getPrintCntPer());
+
                 } else if (position == 4) {
                     x = ((double) feedbackReportList.get(Listposition).getStylingCntPer() / 100) * width;
+                    Log.i(TAG, "onGlobalLayout: "+feedbackReportList.get(Listposition).getStylingCntPer());
+
                 } else if (position == 5) {
                     x = ((double) feedbackReportList.get(Listposition).getFabricQualityCntPer() / 100) * width;
+                    Log.i(TAG, "onGlobalLayout: "+feedbackReportList.get(Listposition).getFabricQualityCntPer());
+
                 } else if (position == 6) {
                     x = ((double) feedbackReportList.get(Listposition).getGarmentQualityCntPer() / 100) * width;
+                    Log.i(TAG, "onGlobalLayout: "+feedbackReportList.get(Listposition).getGarmentQualityCntPer());
+
                 }
 
                 int percentage = (int) x;
-                Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackReportList.get(0).getFittingCntPer() + "and values are" + percentage);
+              //  Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackReportList.get(0).getFittingCntPer() + "and values are" + percentage);
                 View lp = new View(context);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setLayoutParams(layoutParams);
