@@ -186,9 +186,11 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                 mpm_model model = freshnessIndexDetails_ez_arrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
                 double stkGitQty = Double.parseDouble(String.format("%.1f", model.getStkGitQty()));
+                double soh = Double.parseDouble(String.format("%.1f", model.getStkOnhandQty()));
+
                 Log.e(TAG, "stkGitQty----: "+(model.getStkGitQty()));
                 ((FreshnessHolder) viewHolder).txtfindexClass.setText(model.getLevel());
-                ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(model.getStkOnhandQty()));
+                ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(soh));
                 ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", model.getStkOnhandQtyCont()));
                 ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(stkGitQty));
 

@@ -40,7 +40,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Set<Pair<Integer, Integer>> CheckedItems ;
     public boolean[] visibleItems;
     public ArrayList<String> selectedOptionList,selectedSizeList;
-
+    DetailsHeaderChildAdapter detailsHeaderChildAdapter;
 
     public StockDetailsAdapter(ArrayList<ToDo_Modal> list, HashMap<Integer, ArrayList<ToDo_Modal>> hashmapList, Context context, ProgressBar detailProcess) {
         this.list=list;
@@ -126,7 +126,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         }
                     }
                 });
-                DetailsHeaderChildAdapter detailsHeaderChildAdapter=new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
+                detailsHeaderChildAdapter =new DetailsHeaderChildAdapter(visibleItems,HashMapSubChild,HeadercheckList,CheckedItems,context,position,StockDetailsAdapter.this);
                 ((Holder)holder).detailsLinear.setAdapter(detailsHeaderChildAdapter);
             }
         }
@@ -167,7 +167,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         private final TextView Detail_Soh,Detail_reqQty,Detail_Git,Detail_AviQty,Detail_sellThru;
         private TextView Detail_optionLevel;
-        private LinearLayout Sizeslayout;
+        public LinearLayout Sizeslayout;
         public  CheckBox Detail_headerCheck;
         protected RecyclerView detailsLinear;
         public static View view_border;
@@ -187,28 +187,35 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public JSONArray OnSubmit(String MCCodeDesc, String prodLevel3Desc, String store_code) {
+    public JSONArray OnSubmit(String Mc_name_code, String prodLevel3Desc, String store_code) {
 
 
        for(int i = 0;i<list.size();i++)
        {
-           // for option List
-           if(HeadercheckList[i])
-           {
-               selectedOptionList.add((list.get(i).getLevel()));
 
-           }
            //for size list
-           for(int j = 0; j<HashMapSubChild.get(i).size();j++)
-           {
-               Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
-               if(CheckedItems.contains(Tag))
+//           if(!HashMapSubChild.isEmpty())
+//           {
+               for(int j = 0; j<HashMapSubChild.get(i).size();j++)
                {
-                  selectedSizeList.add(HashMapSubChild.get(i).get(j).getLevel());
-               }
+                   Pair<Integer, Integer> Tag = new Pair<Integer, Integer>(i,j);
+                   if(CheckedItems.contains(Tag))
+                   {
+                       selectedSizeList.add(HashMapSubChild.get(i).get(j).getLevelCode());
+                   }
 
+               }
+//           }
+//           else {
+               // for option List
+               if (HeadercheckList[i]) {
+                   selectedOptionList.add((list.get(i).getLevelCode()));
+
+               }
            }
-       }
+
+
+//       }
 
        Log.e("OnSubmit------: ", "size List" + selectedSizeList + "\n" + "optionList " + selectedOptionList);
         // for option List converted to string array to string
@@ -225,21 +232,39 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         sizeList = sizeList.replace("]", "");
         sizeList = sizeList.replace(", ", ",");
 
-        MCCodeDesc = MCCodeDesc.replaceAll("%20"," ");
+        Mc_name_code = Mc_name_code.replaceAll("%20"," ");
         prodLevel3Desc = prodLevel3Desc.replaceAll("%20"," ");
 
         JSONArray jsonarray=new JSONArray();
         try
         {
-
             JSONObject obj = new JSONObject();
-            obj.put("option",optionList);
-            obj.put("prodAttribute4",sizeList);
-            obj.put("prodLevel6Code",MCCodeDesc);//MCCodeDesc
-            obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
-            //   obj.put("deviceId",deviceId);
-            obj.put("storeCode",store_code);
-            jsonarray.put(obj);
+            if(!sizeList.equals(""))
+            {
+                Log.e("OnSubmit: ","in if" );
+                obj.put("option",optionList);
+                obj.put("prodAttribute4",sizeList);
+                obj.put("prodLevel6Code",Mc_name_code);//MCCodeDesc
+                obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
+                //   obj.put("deviceId",deviceId);
+                obj.put("storeCode",store_code);
+                jsonarray.put(obj);
+
+            }
+            else
+            {
+                Log.e("OnSubmit: ","in else" );
+                obj.put("option",optionList);
+//                obj.put("prodAttribute4",sizeList);
+                obj.put("prodLevel6Code",Mc_name_code);//MCCodeDesc
+                obj.put("prodLevel3Code",prodLevel3Desc);//prodLevel3Desc
+                //   obj.put("deviceId",deviceId);
+                obj.put("storeCode",store_code);
+                jsonarray.put(obj);
+
+            }
+
+
 
 //                if(HashMapSubChild.)   //fst start with subchild if no one select in subchild then it will go header selection.
 //                {

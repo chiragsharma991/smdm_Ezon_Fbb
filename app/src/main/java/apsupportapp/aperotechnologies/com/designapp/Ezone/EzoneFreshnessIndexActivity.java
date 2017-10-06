@@ -1316,8 +1316,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
         l.setFormSize(11f);
         l.setEnabled(true);
-
-
     }
 
     public void show_popup() {

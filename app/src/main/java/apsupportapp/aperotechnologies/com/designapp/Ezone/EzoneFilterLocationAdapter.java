@@ -259,7 +259,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         if (level == 1)
         {
             Log.e("remove in store---","");
-            store_List.remove(txtClickedVal.trim());
+            store_List.remove(txtClickedVal.substring(0,4).trim());
             String[] array = (String[]) store_List.toArray(new String[0]);
             String str1 = Arrays.toString(array);
             str1 = str1.replace("[", "");
@@ -307,7 +307,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         if (level == 1) {
             if (!store_flg) {
                 Log.e("come ", "----------");
-                store_List.add(txtClickedVal.trim());
+                store_List.add(txtClickedVal.substring(0,4).trim());
                 region_flg = false;
                 store_flg = true;
                 String[] array = (String[]) store_List.toArray(new String[0]);
@@ -320,7 +320,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 
             } else
             {
-                store_List.add(txtClickedVal.trim());
+                store_List.add(txtClickedVal.substring(0,4).trim());
                 String[] array = (String[]) store_List.toArray(new String[0]);
                 String str_brndcls = Arrays.toString(array);
                 str_brndcls = str_brndcls.replace("[", "");

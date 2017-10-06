@@ -153,10 +153,10 @@ public class DetailsHeaderChildAdapter extends RecyclerView.Adapter<RecyclerView
         return list.get(PrePosition).size();
     }
 
-    private static class Holder extends RecyclerView.ViewHolder {
+    public static class Holder extends RecyclerView.ViewHolder {
 
         private final TextView DetailChild_size, DetailChild_requiredQty, DetailChild_aviQty, DetailChild_git, DetailChild_soh,DetailChild_sellThru;
-        private CheckBox DetailChild_checkBox;
+        public CheckBox DetailChild_checkBox;
 
         public Holder(View itemView) {
             super(itemView);

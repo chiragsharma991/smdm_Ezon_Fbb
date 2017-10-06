@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,7 +128,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 switch (fromwhere)
                 {
                     case "Department":
-
+                        Log.e("onBindViewHolder: ","reset calling" );
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
 
                         break;

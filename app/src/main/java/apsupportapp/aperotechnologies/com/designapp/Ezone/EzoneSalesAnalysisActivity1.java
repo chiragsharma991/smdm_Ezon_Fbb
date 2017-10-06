@@ -221,10 +221,16 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         recyclevw_ez_sales.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, final int position) {
-                        if (ez_progessBar.getVisibility() == View.VISIBLE) {
-                            return;
-                        } else {
+                    public void onItemClick(View view, final int position)
+                    {
+                        ez_sFirstPosVal = 0;
+                        ez_firstVisible_no = 0;
+                        if (ez_progessBar.getVisibility() == View.VISIBLE)
+                        {
+                           return;
+                        }
+                        else
+                        {
                             ezone_onClickflg = true;
                             Handler h = new Handler();
                             h.postDelayed(new Runnable() {
@@ -572,8 +578,11 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
-            } else {
+            }
+            else
+            {
                 ez_firstVisible_no = ez_sales_detalis_array.size() - 1;
+                ezone_onClickflg = false;
                 LinearLayoutManager llm = (LinearLayoutManager) recyclevw_ez_sales.getLayoutManager();
                 llm.scrollToPosition(ez_firstVisible_no);
                 // product is checked in view by
@@ -617,7 +626,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             ez_postRequest.cancel();
                         }
                         ez_progessBar.setVisibility(View.VISIBLE);
-                        if (ez_sale_first_item.equals("All")) {
+                        if (ez_sale_first_item.equals("All"))
+                        {
                             requestEzoneSalesHeaderAPI();
                         } else {
                             requestEzoneSalesPagerOnScrollAPI();
@@ -2045,6 +2055,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
+                                ezone_onClickflg = false;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
 
                                 if (txt_ez_header.getText().toString().equals("Department")) {
@@ -2710,24 +2721,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 ezone_onClickflg = false;
                                 ez_progessBar.setVisibility(View.GONE);
-                            } else if (response.length() == limit) {
+                            } else
                                 for (int i = 0; i < response.length(); i++) {
 
                                     ez_sales_header_model = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
                                     ez_sales_header_array.add(ez_sales_header_model);
                                 }
-                                offsetvalue = (limit * count) + limit;
-                                count++;
-
-                                requestEzoneSalesHeaderAPI();
-
-                            } else if (response.length() < limit) {
-                                for (int i = 0; i < response.length(); i++) {
-
-                                    ez_sales_header_model = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
-                                    ez_sales_header_array.add(ez_sales_header_model);
-                                }
-                            }
                             Log.e("onResponse in header: ", "" + ez_sales_header_model.getPvaAchieved());
 
                             ez_sales_pager_adapter = new EzoneSalesPagerAdapter(context, ez_sales_header_array, ez_firstVisible_no, ez_viewpager, ez_linear_dots, ez_sales_adapter, recyclevw_ez_sales, ez_sales_detalis_array, ez_fromWhere, ez_sales_pager_adapter);
@@ -2746,10 +2745,11 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 }
 
                             }
-                           // ez_sales_pager_adapter.notifyDataSetChanged();
+                            // ez_sales_pager_adapter.notifyDataSetChanged();
                             ezone_onClickflg = false;
                             Reusable_Functions.hDialog();
                             ez_progessBar.setVisibility(View.GONE);
+
 
                         } catch (Exception e) {
                             ezone_onClickflg = false;
@@ -2789,10 +2789,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
     // Api for change view pager value on scroll - Api SalesDetailEz
     private void requestEzoneSalesPagerOnScrollAPI() {
-//        if (ez_sale_first_item.equals("All")) {
-//            requestEzoneSalesHeaderAPI();
-//            return;
-//        }
+
         String url = " ";
         ez_sale_first_item = ez_sale_first_item.replace("%", "%25");
         ez_sale_first_item = ez_sale_first_item.replace(" ", "%20").replace("&", "%26");
@@ -2812,7 +2809,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         else if (txt_ez_header.getText().toString().equals("Region")) {
             url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&region=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         } else if (txt_ez_header.getText().toString().equals("Store")) {
-            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&store=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&storeCode=" + ez_sale_first_item.substring(0,4) + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
         Log.e("Ezone On Scroll Api :", "" + url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,

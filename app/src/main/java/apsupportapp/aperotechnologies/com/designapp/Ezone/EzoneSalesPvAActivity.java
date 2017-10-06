@@ -1008,10 +1008,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
     // this method is used to create data for Bar graph<br for on scroll />
     private void requestPvAChartAPI() {
-//        if (pvaFirstVisibleItem.equals("All")) {
-//            requestSalesWeekChart("");
-//            return;
-//        }
+
         String url = "";
         pvaFirstVisibleItem = pvaFirstVisibleItem.replace("%", "%25");
         pvaFirstVisibleItem = pvaFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
@@ -1034,7 +1031,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
         } else if (txtheaderplanclass.getText().toString().equals("Store")) {
 
-            url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZNew/" + userId + "?store=" + pvaFirstVisibleItem + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick + "&lobId=" + lobId;
+            url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZNew/" + userId + "?storeCode=" + pvaFirstVisibleItem.substring(0,4) + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick + "&lobId=" + lobId;
 
         }
 

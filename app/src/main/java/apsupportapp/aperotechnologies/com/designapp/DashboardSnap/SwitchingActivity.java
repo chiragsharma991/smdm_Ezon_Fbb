@@ -694,7 +694,7 @@ public class SwitchingActivity extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response "," "+response);
+//                        Log.e("response "," "+response);
                         Reusable_Functions.hDialog();
                         try {
                             if (response.equals("") || response == null || response.length() == 0 )
@@ -846,8 +846,8 @@ public class SwitchingActivity extends AppCompatActivity
 
 //                            Collections.sort(arrayList);
 //                            Collections.sort(arrayListbody);
-                            Log.e("arrayList "," "+arrayList.toString());
-                            Log.e("arrayListbody "," "+arrayListbody.toString());
+//                            Log.e("arrayList "," "+arrayList.toString());
+//                            Log.e("arrayListbody "," "+arrayListbody.toString());
 
                             // arrayList.add(0, "Select Storecode");
                             spinnerArrayAdapter.notifyDataSetChanged();

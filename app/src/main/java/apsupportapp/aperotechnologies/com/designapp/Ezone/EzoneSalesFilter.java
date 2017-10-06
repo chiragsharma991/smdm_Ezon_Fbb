@@ -415,17 +415,17 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         if (EzoneFilterLocationAdapter.store_str.length() != 0)
 
         {
-            String store = EzoneFilterLocationAdapter.store_str.replace("%", "%25");
+            String store = EzoneFilterLocationAdapter.store_str;
 //            String updateStore = store.replace(" ", "%20").replace("&", "%26");
-            String updateStore = null;
-            try {
-                updateStore = URLEncoder.encode(store, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            Log.e("selectbuild: ",""+updateStore);
+//            String updateStore = null;
+//            try {
+//                updateStore = URLEncoder.encode(store, "UTF-8");
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//            Log.e("selectbuild: ",""+updateStore);
             String Store;
-            Store = "store=" + updateStore;
+            Store = "storeCode=" + store;
             build.append("&");
             build.append(Store.replace(",$", ""));
 
