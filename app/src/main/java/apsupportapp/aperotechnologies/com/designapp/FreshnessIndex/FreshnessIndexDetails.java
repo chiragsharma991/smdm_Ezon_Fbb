@@ -23,9 +23,67 @@ public class FreshnessIndexDetails {
     String planClass;
     String brandName;
     String brandplanClass;
+
     double upcomingGrpCount;
     double oldGrpCount;
     double previousGrpCount;
+
+    String level;
+    double stkOnhandQtyCont;
+    double sohAssortmentGrp;
+    double assortmentGrpCont;
+    double sohNonAssortmentGrp;
+    double nonAssortmentGrpCont;
+
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public double getStkOnhandQtyCont() {
+        return stkOnhandQtyCont;
+    }
+
+    public void setStkOnhandQtyCont(double stkOnhandQtyCont) {
+        this.stkOnhandQtyCont = stkOnhandQtyCont;
+    }
+
+    public double getSohAssortmentGrp() {
+        return sohAssortmentGrp;
+    }
+
+    public void setSohAssortmentGrp(double sohAssortmentGrp) {
+        this.sohAssortmentGrp = sohAssortmentGrp;
+    }
+
+    public double getAssortmentGrpCont() {
+        return assortmentGrpCont;
+    }
+
+    public void setAssortmentGrpCont(double assortmentGrpCont) {
+        this.assortmentGrpCont = assortmentGrpCont;
+    }
+
+    public double getSohNonAssortmentGrp() {
+        return sohNonAssortmentGrp;
+    }
+
+    public void setSohNonAssortmentGrp(double sohNonAssortmentGrp) {
+        this.sohNonAssortmentGrp = sohNonAssortmentGrp;
+    }
+
+    public double getNonAssortmentGrpCont() {
+        return nonAssortmentGrpCont;
+    }
+
+    public void setNonAssortmentGrpCont(double nonAssortmentGrpCont) {
+        this.nonAssortmentGrpCont = nonAssortmentGrpCont;
+    }
+
 
     public double getCoreGrpCount() {
         return coreGrpCount;

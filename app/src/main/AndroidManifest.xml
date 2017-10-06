@@ -111,7 +111,6 @@
             android:name=".Ezone.EzoneSalesAnalysisActivity1"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".SalesAnalysis.SalesFilterActivity"
             android:screenOrientation="portrait"
@@ -160,12 +159,10 @@
             android:name=".Ezone.EzoneFreshnessIndexActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Ezone.EzoneBestPerformerInventory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Ezone.EzoneSalesFilter"
             android:screenOrientation="portrait"
@@ -309,7 +306,6 @@
             android:name=".HourlyPerformence.HourlyStoreFilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".CustomerEngagement.CustomerDetailActivity"
             android:screenOrientation="portrait"
@@ -362,7 +358,8 @@
         <activity android:name=".BORIS.ReturnCatalogueActivity" />
         <activity android:name=".BORIS.ReturnDetailActivity" />
         <activity android:name=".SalesAnalysis.Samplebarcode" />
-        <activity android:name=".StoreFilterActivity"></activity>
+        <activity android:name=".StoreFilterActivity" />
+        <activity android:name=".Ezone.EzoneFreshnessIndexActivityDub"></activity>
     </application>
 
 </manifest>

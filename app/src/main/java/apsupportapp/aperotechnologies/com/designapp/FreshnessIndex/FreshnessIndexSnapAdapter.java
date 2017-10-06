@@ -81,20 +81,20 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     private boolean isPositionItem(int position)
     {
 
-        if (TAG.equals("FreshnessIndex_Ez_Activity")){
+       /* if (TAG.equals("FreshnessIndex_Ez_Activity")){
 
             return position != freshnessIndexDetails_ez_arrayList.size();
-        }
+        }*/
         return position != freshnessIndexDetailsArrayList.size();
     }
 
     @Override
     public int getItemCount() {
-        if (TAG.equals("FreshnessIndex_Ez_Activity"))
+    /*    if (TAG.equals("FreshnessIndex_Ez_Activity"))
         {
 
             return freshnessIndexDetails_ez_arrayList.size() +1;
-        }
+        }*/
         return freshnessIndexDetailsArrayList.size() + 1;
     }
 
@@ -181,15 +181,15 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
 
         else if (viewHolder instanceof FreshnessHolder &&  TAG.equals("FreshnessIndex_Ez_Activity"))
         {
-            if (position < freshnessIndexDetails_ez_arrayList.size())
+            if (position < freshnessIndexDetailsArrayList.size())
             {
-                mpm_model model = freshnessIndexDetails_ez_arrayList.get(position);
+                FreshnessIndexDetails freshnessIndexDetails = freshnessIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
-                double stkGitQty = Double.parseDouble(String.format("%.1f", model.getStkGitQty()));
-                Log.e(TAG, "stkGitQty----: "+(model.getStkGitQty()));
-                ((FreshnessHolder) viewHolder).txtfindexClass.setText(model.getLevel());
-                ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(model.getStkOnhandQty()));
-                ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", model.getStkOnhandQtyCont()));
+                double stkGitQty = Double.parseDouble(String.format("%.1f", freshnessIndexDetails.getStkGitQty()));
+                Log.e(TAG, "stkGitQty----: "+(freshnessIndexDetails.getStkGitQty()));
+                ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getLevel());
+                ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
+                ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCont()));
                 ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(stkGitQty));
 
             }
