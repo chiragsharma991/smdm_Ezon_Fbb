@@ -1,0 +1,77 @@
+Applications Graphics Acceleration Info:
+Uptime: 69467346 Realtime: 196201939
+
+** Graphics info for pid 24485 [apsupportapp.aperotechnologies.com.designapp] **
+
+Stats since: 61060276856560ns
+Total frames rendered: 33868
+Janky frames: 2643 (7.80%)
+90th percentile: 17ms
+95th percentile: 21ms
+99th percentile: 44ms
+Number Missed Vsync: 435
+Number High input latency: 10
+Number Slow UI thread: 1165
+Number Slow bitmap uploads: 980
+Number Slow issue draw commands: 583
+
+Caches:
+Current memory usage / total memory usage (bytes):
+  TextureCache           426732 / 25165824
+  LayerCache                  0 / 16777216 (numLayers = 0)
+  Layers total          0 (numLayers = 0)
+  RenderBufferCache           0 /  2097152
+  GradientCache               0 /   524288
+  PathCache             2777772 /  4194304
+  TessellationCache       23232 /  1048576
+  TextDropShadowCache         0 /  2097152
+  PatchCache                192 /   131072
+  FontRenderer 0 A8      524288 /   524288
+  FontRenderer 0 RGBA         0 /        0
+  FontRenderer 0 total   524288 /   524288
+Other:
+  FboCache                    1 /       16
+Total memory usage:
+  3752216 bytes, 3.58 MB
+
+Profile data in ms:
+
+	apsupportapp.aperotechnologies.com.designapp/apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity/android.view.ViewRootImpl@4e1c04c (visibility=8)
+Stats since: 61060276856560ns
+Total frames rendered: 33868
+Janky frames: 2643 (7.80%)
+90th percentile: 17ms
+95th percentile: 21ms
+99th percentile: 44ms
+Number Missed Vsync: 435
+Number High input latency: 10
+Number Slow UI thread: 1165
+Number Slow bitmap uploads: 980
+Number Slow issue draw commands: 583
+
+	apsupportapp.aperotechnologies.com.designapp/apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneBestPerformerInventory/android.view.ViewRootImpl@c0d720c (visibility=0)
+Stats since: 61060276856560ns
+Total frames rendered: 33868
+Janky frames: 2643 (7.80%)
+90th percentile: 17ms
+95th percentile: 21ms
+99th percentile: 44ms
+Number Missed Vsync: 435
+Number High input latency: 10
+Number Slow UI thread: 1165
+Number Slow bitmap uploads: 980
+Number Slow issue draw commands: 583
+
+View hierarchy:
+
+  apsupportapp.aperotechnologies.com.designapp/apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity/android.view.ViewRootImpl@4e1c04c
+  66 views, 69.09 kB of display lists
+
+  apsupportapp.aperotechnologies.com.designapp/apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneBestPerformerInventory/android.view.ViewRootImpl@c0d720c
+  262 views, 334.99 kB of display lists
+
+
+Total ViewRootImpl: 2
+Total Views:        328
+Total DisplayList:  404.08 kB
+

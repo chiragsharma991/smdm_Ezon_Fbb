@@ -193,6 +193,10 @@ public class StyleActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                if(storeList.size() == 1)
+                {
+                  return;
+                }
                 edtsearchStore.setText("");
                 storeLayout.setVisibility(View.VISIBLE);
                 collectionLayout.setVisibility(View.GONE);
@@ -350,20 +354,15 @@ public class StyleActivity extends AppCompatActivity
                 //harshada
                 offsetvalue = 0;
                 count = 0;
-
                 //
-
                 collectionNM = (String) collectionAdapter.getItem(position);
                 selcollectionName = collectionNM;
                 collection.setText(selcollectionName);
                 Log.e("collect_name ", " "+collect_name);
-
                 //harshada
                 seloptionName = null;
                 optionName = "";
                 //
-
-
                 if(!collect_name.equals(""))
                 {
                     if (!collectionNM.equals(collect_name))
@@ -383,6 +382,7 @@ public class StyleActivity extends AppCompatActivity
                 {
                     inputManager.hideSoftInputFromWindow(edtsearchCollection.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
+
                 if (collectionNM.equalsIgnoreCase("Select Collection"))
                 {
                     Log.e(" came ", "here");
@@ -596,7 +596,7 @@ public class StyleActivity extends AppCompatActivity
         {
             url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?eanNumber=" + content;
         }
-        Log.e("requestStyleDetailsAPI: ",""+url);
+
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
@@ -667,7 +667,7 @@ public class StyleActivity extends AppCompatActivity
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
-                                intent.putExtra("storeCode",store_name);
+
 
                                 Log.e("== "," "+articleCode+" "+articleOption+" "+styleDetailsBean+" "+collectionNM+" "+optionName);
                               //  intent.putExtra("selStoreName",store_name);
@@ -720,6 +720,81 @@ public class StyleActivity extends AppCompatActivity
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No store data found", Toast.LENGTH_LONG).show();
                             }
+                            else if(response.length()==1 && collectionoffset == 0)
+                            { //harshada
+                                collectionoffset = 0;
+                                collectioncount = 0;
+//                                    arrayList = new ArrayList<String>();
+//                                    collectionAdapter.notifyDataSetChanged();
+                                //
+
+                                JSONObject storeName = response.getJSONObject(0);
+                                store_name = storeName.getString("storeCode");
+                                storeList.add(store_name);
+
+                                selStoreName = store_name;
+                                txt_store.setText(store_name);
+                                Log.e("store_name ", " "+store_name);
+
+                                //harshada
+                                selcollectionName = null;
+                                seloptionName = null;
+                                optionName = "";
+                                collectionNM = "";
+                                //
+
+                                if (!store_name.equals(store_nm))
+                                {
+                                    collection.setText("Select Collection");
+                                    style.setText("Select Option");
+                                }
+                                else
+                                {
+                                    collection.setText("Select Collection");
+                                    style.setText("Select Option");
+                                    collection.setEnabled(true);
+                                    style.setEnabled(true);
+                                }
+
+                                storeLayout.setVisibility(View.GONE);
+                                collectionLayout.setVisibility(View.GONE);
+                                InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                if (inputManager != null) {
+                                    inputManager.hideSoftInputFromWindow(edtsearchStore.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                                }
+                                if (store_name.equalsIgnoreCase("Select Store"))
+                                {
+                                    Log.e(" come ", "here");
+                                    //  collectionNM = selcollectionName;
+                                }
+                                else
+                                {
+                                    if (Reusable_Functions.chkStatus(context)) {
+                                        Reusable_Functions.sDialog(context, "Loading collection data...");
+                                        offsetvalue = 0;
+                                        collectionlimit = 100;
+                                        count = 0;
+                                        collectionList.clear();
+                                        store_name = store_name.substring(0,4);
+                                        // harshada
+                                        arrayList = new ArrayList<String>();
+                                        collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
+                                        listCollection.setAdapter(collectionAdapter);
+
+                                        articleOptionList = new ArrayList<String>();
+                                        optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
+                                        listOption.setAdapter(optionAdapter);
+                                        //
+
+                                        requestCollectionAPI(store_name);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                            }
                             else if (response.length() == collectionlimit)
                             {
                                 for (int i = 0; i < response.length(); i++)
@@ -730,6 +805,7 @@ public class StyleActivity extends AppCompatActivity
 
                                 }
                                 collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
+
                                 collectioncount++;
                                 requestProductStoreSelection();
                             }
@@ -751,7 +827,6 @@ public class StyleActivity extends AppCompatActivity
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                                 {
-
                                     //harshada
                                     collectionoffset = 0;
                                     collectioncount = 0;

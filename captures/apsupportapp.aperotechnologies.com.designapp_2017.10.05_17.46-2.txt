@@ -1,0 +1,339 @@
+CURRENT STATS:
+System memory usage:
+  SOff/Norm: 1 samples:
+    Cached: 0.95GB min, 0.95GB avg, 0.95GB max
+    Free: 24MB min, 24MB avg, 24MB max
+    ZRam: 6.8MB min, 6.8MB avg, 6.8MB max
+    Kernel: 256MB min, 256MB avg, 256MB max
+    Native: 123MB min, 123MB avg, 123MB max
+       Mod : 1 samples:
+    Cached: 0.98GB min, 0.98GB avg, 0.98GB max
+    Free: 21MB min, 21MB avg, 21MB max
+    ZRam: 7.0MB min, 7.0MB avg, 7.0MB max
+    Kernel: 254MB min, 254MB avg, 254MB max
+    Native: 126MB min, 126MB avg, 126MB max
+  SOn /Norm: 3 samples:
+    Cached: 0.95GB min, 0.98GB avg, 1.0GB max
+    Free: 18MB min, 21MB avg, 25MB max
+    ZRam: 6.2MB min, 6.7MB avg, 6.9MB max
+    Kernel: 256MB min, 258MB avg, 261MB max
+    Native: 120MB min, 125MB avg, 131MB max
+       Mod : 4 samples:
+    Cached: 0.97GB min, 0.97GB avg, 0.98GB max
+    Free: 20MB min, 28MB avg, 42MB max
+    ZRam: 6.9MB min, 6.9MB avg, 7.1MB max
+    Kernel: 253MB min, 254MB avg, 255MB max
+    Native: 123MB min, 124MB avg, 127MB max
+
+Per-Package Stats:
+  * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+      * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+               TOTAL: 100% (5.6MB-90MB-136MB/3.0MB-84MB-129MB over 45)
+                 Top: 99% (5.6MB-90MB-136MB/3.0MB-84MB-129MB over 45)
+             Service: 0.67%
+          Service Rs: 0.03%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 5 / time 100%
+            Started count 5 / time 99%
+          Executing count 2 / time 0.36%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.MyFirebaseMessagingService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 2 / time 0.00%
+            Started count 2 / time 0.00%
+          Executing count 2 / time 0.00%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 4 / time 0.00%
+            Started count 2 / time 0.00%
+          Executing count 4 / time 0.00%
+      * com.google.android.gms.measurement.AppMeasurementService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 91 / time 6.9%
+            Started count 2 / time 0.01%
+              Bound count 89 / time 6.9%
+          Executing count 180 / time 0.09%
+
+Summary:
+  * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+           TOTAL: 100% (5.6MB-90MB-136MB/3.0MB-84MB-129MB over 45)
+             Top: 99% (5.6MB-90MB-136MB/3.0MB-84MB-129MB over 45)
+         Service: 0.67%
+      Service Rs: 0.03%
+
+Run time Stats:
+  SOff/Norm: +16m15s833ms
+       Mod : +1h11m2s43ms (running)
+  SOn /Norm: +10m8s534ms
+       Mod : +37m26s571ms
+      TOTAL: +2h14m52s981ms
+
+Memory usage:
+  Kernel : 255MB (61 samples)
+  Native : 125MB (61 samples)
+  Persist: 254MB (231 samples)
+  Top    : 88MB (158 samples)
+  ImpFg  : 7.1MB (99 samples)
+  ImpBg  : 26MB (20 samples)
+  Service: 55MB (302 samples)
+  Receivr: 369 (262 samples)
+  Home   : 26MB (25 samples)
+  CchEmty: 61MB (178 samples)
+  Cached : 0.97GB (61 samples)
+  Free   : 25MB (61 samples)
+  Z-Ram  : 6.9MB (61 samples)
+  TOTAL  : 1.9GB
+  ServRst: 27KB (90 samples)
+
+          Start time: 2017-10-05 10:02:00
+  Total elapsed time: +2h14m52s992ms (partial) libart.so
+
+AGGREGATED OVER LAST 24 HOURS:
+System memory usage:
+  SOff/Norm: 6 samples:
+    Cached: 831MB min, 894MB avg, 0.99GB max
+    Free: 24MB min, 126MB avg, 196MB max
+    ZRam: 4.4MB min, 5.3MB avg, 6.8MB max
+    Kernel: 251MB min, 254MB avg, 256MB max
+    Native: 123MB min, 154MB avg, 172MB max
+       Mod : 2 samples:
+    Cached: 853MB min, 0.91GB avg, 0.98GB max
+    Free: 21MB min, 64MB avg, 107MB max
+    ZRam: 4.9MB min, 5.9MB avg, 7.0MB max
+    Kernel: 253MB min, 254MB avg, 254MB max
+    Native: 126MB min, 139MB avg, 151MB max
+  SOn /Norm: 9 samples:
+    Cached: 821MB min, 0.90GB avg, 1.0GB max
+    Free: 18MB min, 91MB avg, 195MB max
+    ZRam: 4.1MB min, 5.4MB avg, 6.9MB max
+    Kernel: 250MB min, 254MB avg, 261MB max
+    Native: 120MB min, 148MB avg, 173MB max
+       Mod : 6 samples:
+    Cached: 853MB min, 0.93GB avg, 0.98GB max
+    Free: 20MB min, 68MB avg, 196MB max
+    ZRam: 4.9MB min, 6.3MB avg, 7.1MB max
+    Kernel: 250MB min, 253MB avg, 255MB max
+    Native: 123MB min, 132MB avg, 149MB max
+
+Per-Package Stats:
+  * apsupportapp.aperotechnologies.com.designapp / u0a100 / v121:
+      * apsupportapp.aperotechnologies.com.designapp / u0a100 / v121:
+               TOTAL: 32% (40MB-88MB-147MB/35MB-82MB-140MB over 31)
+                 Top: 31% (40MB-89MB-147MB/35MB-83MB-140MB over 29)
+              Imp Fg: 0.01%
+             Service: 1.1% (61MB-72MB-84MB/55MB-66MB-77MB over 2)
+          Service Rs: 0.01%
+            (Cached): 3.1% (10.0MB-10.0MB-10MB/7.2MB-7.2MB-7.2MB over 4)
+      * apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 20 / time 29%
+            Started count 19 / time 29%
+          Executing count 10 / time 0.00%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.MyFirebaseMessagingService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 10 / time 0.00%
+            Started count 10 / time 0.00%
+          Executing count 10 / time 0.00%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 16 / time 0.00%
+            Started count 9 / time 0.00%
+          Executing count 16 / time 0.00%
+      * com.google.android.gms.measurement.AppMeasurementService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 92 / time 4.0%
+            Started count 4 / time 0.00%
+              Bound count 84 / time 3.3%
+          Executing count 175 / time 1.3%
+  * apsupportapp.aperotechnologies.com.designapp / u0a101 / v122:
+      * apsupportapp.aperotechnologies.com.designapp / u0a101 / v122:
+               TOTAL: 19% (41MB-60MB-74MB/36MB-54MB-68MB over 9)
+                 Top: 3.4% (41MB-61MB-74MB/36MB-56MB-68MB over 6)
+              Imp Fg: 0.01%
+             Service: 13% (55MB-57MB-57MB/49MB-50MB-51MB over 3)
+          Service Rs: 3.4%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 5 / time 19%
+            Started count 5 / time 19%
+          Executing count 3 / time 0.00%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.MyFirebaseMessagingService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 2 / time 0.00%
+            Started count 2 / time 0.00%
+          Executing count 2 / time 0.00%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 4 / time 0.03%
+            Started count 2 / time 0.03%
+          Executing count 4 / time 0.00%
+      * com.google.android.gms.measurement.AppMeasurementService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 18 / time 0.50%
+            Started count 3 / time 0.00%
+              Bound count 14 / time 0.50%
+          Executing count 31 / time 0.01%
+  * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+      * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+               TOTAL: 45% (5.6MB-89MB-136MB/3.0MB-83MB-129MB over 46)
+                 Top: 44% (5.6MB-89MB-136MB/3.0MB-83MB-129MB over 46)
+             Service: 0.29%
+          Service Rs: 0.01%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 6 / time 44%
+            Started count 6 / time 44%
+          Executing count 3 / time 0.15%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.MyFirebaseMessagingService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 3 / time 0.00%
+            Started count 3 / time 0.00%
+          Executing count 3 / time 0.00%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 6 / time 0.01%
+            Started count 3 / time 0.01%
+          Executing count 6 / time 0.00%
+      * com.google.android.gms.measurement.AppMeasurementService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 94 / time 3.0%
+            Started count 3 / time 0.00%
+              Bound count 90 / time 3.0%
+          Executing count 185 / time 0.04%
+
+Summary:
+  * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+           TOTAL: 45% (5.6MB-89MB-136MB/3.0MB-83MB-129MB over 46)
+             Top: 44% (5.6MB-89MB-136MB/3.0MB-83MB-129MB over 46)
+         Service: 0.29%
+      Service Rs: 0.01%
+  * apsupportapp.aperotechnologies.com.designapp / u0a100 / v121:
+           TOTAL: 32% (40MB-88MB-147MB/35MB-82MB-140MB over 31)
+             Top: 31% (40MB-89MB-147MB/35MB-83MB-140MB over 29)
+          Imp Fg: 0.01%
+         Service: 1.1% (61MB-72MB-84MB/55MB-66MB-77MB over 2)
+      Service Rs: 0.01%
+        (Cached): 3.1% (10.0MB-10.0MB-10MB/7.2MB-7.2MB-7.2MB over 4)
+  * apsupportapp.aperotechnologies.com.designapp / u0a101 / v122:
+           TOTAL: 19% (41MB-60MB-74MB/36MB-54MB-68MB over 9)
+             Top: 3.4% (41MB-61MB-74MB/36MB-56MB-68MB over 6)
+          Imp Fg: 0.01%
+         Service: 13% (55MB-57MB-57MB/49MB-50MB-51MB over 3)
+      Service Rs: 3.4%
+
+Run time Stats:
+  SOff/Norm: +1h50m1s485ms
+       Mod : +1h41m44s653ms
+  SOn /Norm: +47m32s870ms
+       Mod : +56m17s32ms
+      TOTAL: +5h15m36s40ms
+
+Memory usage:
+  Kernel : 253MB (136 samples)
+  Native : 146MB (136 samples)
+  Persist: 262MB (572 samples)
+  Top    : 75MB (172 samples)
+  ImpFg  : 7.2MB (422 samples)
+  ImpBg  : 26MB (91 samples)
+  Service: 64MB (892 samples)
+  Receivr: 1.6KB (1109 samples)
+  Home   : 21MB (48 samples)
+  CchEmty: 63MB (502 samples)
+  Cached : 0.89GB (136 samples)
+  Free   : 100MB (136 samples)
+  Z-Ram  : 5.6MB (136 samples)
+  TOTAL  : 1.9GB
+  ServRst: 1.9MB (113 samples)
+
+          Start time: 2017-10-04 11:00:37
+  Total elapsed time: +1d1h16m15s386ms (partial) libart.so
+
+AGGREGATED OVER LAST 3 HOURS:
+System memory usage:
+  SOff/Norm: 1 samples:
+    Cached: 0.95GB min, 0.95GB avg, 0.95GB max
+    Free: 24MB min, 24MB avg, 24MB max
+    ZRam: 6.8MB min, 6.8MB avg, 6.8MB max
+    Kernel: 256MB min, 256MB avg, 256MB max
+    Native: 123MB min, 123MB avg, 123MB max
+       Mod : 1 samples:
+    Cached: 0.98GB min, 0.98GB avg, 0.98GB max
+    Free: 21MB min, 21MB avg, 21MB max
+    ZRam: 7.0MB min, 7.0MB avg, 7.0MB max
+    Kernel: 254MB min, 254MB avg, 254MB max
+    Native: 126MB min, 126MB avg, 126MB max
+  SOn /Norm: 3 samples:
+    Cached: 0.95GB min, 0.98GB avg, 1.0GB max
+    Free: 18MB min, 21MB avg, 25MB max
+    ZRam: 6.2MB min, 6.7MB avg, 6.9MB max
+    Kernel: 256MB min, 258MB avg, 261MB max
+    Native: 120MB min, 125MB avg, 131MB max
+       Mod : 4 samples:
+    Cached: 0.97GB min, 0.97GB avg, 0.98GB max
+    Free: 20MB min, 28MB avg, 42MB max
+    ZRam: 6.9MB min, 6.9MB avg, 7.1MB max
+    Kernel: 253MB min, 254MB avg, 255MB max
+    Native: 123MB min, 124MB avg, 127MB max
+
+Per-Package Stats:
+  * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+      * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+               TOTAL: 100% (5.6MB-90MB-136MB/3.0MB-84MB-129MB over 45)
+                 Top: 99% (5.6MB-90MB-136MB/3.0MB-84MB-129MB over 45)
+             Service: 0.67%
+          Service Rs: 0.03%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.ContCreateTokenService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 5 / time 100%
+            Started count 5 / time 99%
+          Executing count 2 / time 0.36%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.MyFirebaseMessagingService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 2 / time 0.00%
+            Started count 2 / time 0.00%
+          Executing count 2 / time 0.00%
+      * apsupportapp.aperotechnologies.com.designapp.FCM.FetchNewRefreshToken:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 4 / time 0.00%
+            Started count 2 / time 0.00%
+          Executing count 4 / time 0.00%
+      * com.google.android.gms.measurement.AppMeasurementService:
+        Process: apsupportapp.aperotechnologies.com.designapp
+            Running count 91 / time 6.9%
+            Started count 2 / time 0.01%
+              Bound count 89 / time 6.9%
+          Executing count 180 / time 0.09%
+
+Summary:
+  * apsupportapp.aperotechnologies.com.designapp / u0a102 / v121:
+           TOTAL: 100% (5.6MB-90MB-136MB/3.0MB-84MB-129MB over 45)
+             Top: 99% (5.6MB-90MB-136MB/3.0MB-84MB-129MB over 45)
+         Service: 0.67%
+      Service Rs: 0.03%
+
+Run time Stats:
+  SOff/Norm: +16m15s833ms
+       Mod : +1h11m2s101ms
+  SOn /Norm: +10m8s534ms
+       Mod : +37m26s571ms
+      TOTAL: +2h14m53s39ms
+
+Memory usage:
+  Kernel : 255MB (61 samples)
+  Native : 125MB (61 samples)
+  Persist: 254MB (231 samples)
+  Top    : 88MB (158 samples)
+  ImpFg  : 7.1MB (99 samples)
+  ImpBg  : 26MB (20 samples)
+  Service: 55MB (302 samples)
+  Receivr: 369 (262 samples)
+  Home   : 26MB (25 samples)
+  CchEmty: 61MB (178 samples)
+  Cached : 0.97GB (61 samples)
+  Free   : 25MB (61 samples)
+  Z-Ram  : 6.9MB (61 samples)
+  TOTAL  : 1.9GB
+  ServRst: 27KB (90 samples)
+
+          Start time: 2017-10-05 10:02:00
+  Total elapsed time: +2h14m53s39ms (partial) libart.so

@@ -1143,7 +1143,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     llm.scrollToPosition(firstVisibleItem);
                 }
             }
-        }
+        }//
         offsetvalue = 0;
         limit = 100;
         count = 0;
@@ -1202,7 +1202,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
                 }//header api
 
-//                Log.e(TAG, "Freshness_Ez:  URL " + url);
+                Log.e(TAG, "Freshness_Ez:  URL " + url);
                 // Reusable_Functions.hDialog();
                 mpm_model model = new mpm_model();
                 ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);
@@ -1453,21 +1453,21 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
             case 0:
                 String url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;   //Detail Api
                 Reusable_Functions.sDialog(context,"Loading...");
-                // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
+                Log.e(TAG, "Freshness_Ez: Detail URL " + url);
                 ApiRequest api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);  // 0 is id for identification
                 break;
 
             case 1:
                 //String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetail/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit;
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&" + fromWhere + "=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-                // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
+                Log.e(TAG, "Freshness_Ez: Detail URL " + url);
                 Reusable_Functions.sDialog(context,"Loading...");
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);
                 break;
 
             case 2:
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + selectedlevel + selectedString +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-                // Log.e(TAG, "Freshness_Ez: Detail URL " + url);
+                Log.e(TAG, "Freshness_Ez: Detail URL " + url);
                 Reusable_Functions.sDialog(context,"Loading...");
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0);
                 break;

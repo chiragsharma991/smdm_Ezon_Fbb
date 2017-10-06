@@ -46,6 +46,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_locatn;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_prod;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.rel_ez_process_filter;
 
@@ -246,10 +247,10 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                 salesList.clear();
                 mListDataChild.putAll(dublicate_listDataChild);
                 for (int k = 0 ; k < mListDataGroup.size(); k++) {
-                    explv_ez_prod.collapseGroup(k);
+                    explv_ez_locatn.collapseGroup(k);
                 }
                 for (int k = 0; k < mListDataGroup.size(); k++) {
-                    explv_ez_prod.expandGroup(k);
+                    explv_ez_locatn.expandGroup(k);
                 }
             } else {
                 requestLocationHierarchy(location_level  , region_str);
