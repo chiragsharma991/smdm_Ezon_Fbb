@@ -73,13 +73,14 @@ package apsupportapp.aperotechnologies.com.designapp.Ezone;
         import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
         import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
         import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndex_Ez_Model;
+        import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
         import info.hoang8f.android.segmented.SegmentedGroup;
 
 /**
  * Created by pamrutkar on 22/11/16.
  */
 
-public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, HttpResponse, TabLayout.OnTabSelectedListener {
+public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, HttpResponse  {
 
     RadioButton btnCore, btnFashion;
     private static String FIndex_SegmentClick = "Fashion";
@@ -93,7 +94,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
     RequestQueue queue;
     String FreshnessIndexValue="";   //set value in hierarchy
     Context context;
-    String fromWhere, freshnessIndex_ClickedVal, fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand;   // selected value from list
+    String fromWhere, freshnessIndex_ClickedVal, fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand ,fIndexregion;   // selected value from list
     PieChart pieChart;
     public static RecyclerView listViewFIndex;
     int selFirstPositionValue;
@@ -159,7 +160,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
         }
 
 
-//        storeDescription = sharedPreferences.getString("storeDescription","");
+//      storeDescription = sharedPreferences.getString("storeDescription","");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
@@ -227,7 +228,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
         if (txtFIndexClass.getText().toString().equals("Department")) {
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
-        } else if (txtFIndexClass.getText().toString().equals("Category")) {
+        } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
             level = 2;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
 
@@ -235,12 +236,16 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
             level = 3;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
 
-        } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+        } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
             level = 4;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
 
-        } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
-            level = 5;
+        } else if (txtFIndexClass.getText().toString().equals("Region")) {
+            level = 7;
+            fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
+
+        } else if (txtFIndexClass.getText().toString().equals("Store")) {
+            level = 9;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
 
         }
@@ -255,19 +260,26 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                 if (txtFIndexClass.getText().toString().equals("Department")) {
                     level = 1;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
-                } else if (txtFIndexClass.getText().toString().equals("Category")) {
+                } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
                     level = 2;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
                 } else if (txtFIndexClass.getText().toString().equals("Class")) {
                     level = 3;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
-                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+                } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
                     level = 4;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
-                } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
-                    level = 5;
+                }
+                else if (txtFIndexClass.getText().toString().equals("Region")) {
+                    level = 7;
+                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
+
+                } else if (txtFIndexClass.getText().toString().equals("Store")) {
+                    level = 9;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
                 }
+                Log.i(TAG, "fIndexFirstVisibleItem: "+fIndexFirstVisibleItem);
+
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     offsetvalue = 0;
@@ -281,7 +293,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                             postRequest.cancel();
                         }
                         processBar.setVisibility(View.VISIBLE);
-                      //  requestFIndexPieChart("");
+                        requestFIndexPieChart("");
                         OveridePositionValue = firstVisibleItem;
                     }
                 } else {
@@ -298,19 +310,27 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                 if (txtFIndexClass.getText().toString().equals("Department")) {
                     level = 1;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
-                } else if (txtFIndexClass.getText().toString().equals("Category")) {
+                } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
                     level = 2;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
                 } else if (txtFIndexClass.getText().toString().equals("Class")) {
                     level = 3;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
-                } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+                } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
                     level = 4;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
-                } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
-                    level = 5;
-                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
                 }
+                else if (txtFIndexClass.getText().toString().equals("Region")) {
+                    level = 7;
+                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
+
+                } else if (txtFIndexClass.getText().toString().equals("Store")) {
+                    level = 9;
+                    fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
+                }
+                Log.i(TAG, "fIndexFirstVisibleItem: "+fIndexFirstVisibleItem);
+
+
                 if (Reusable_Functions.chkStatus(context))
                 {
                     Reusable_Functions.hDialog();
@@ -323,7 +343,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                             postRequest.cancel();
                         }
                         processBar.setVisibility(View.VISIBLE);
-                      //  requestFIndexPieChart("");
+                        requestFIndexPieChart("");
                         OveridePositionValue = firstVisibleItem;
                     }
                 }
@@ -352,6 +372,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
 //        String code = storeDescription.substring(0,4);
 //
 //        txtStoreDesc.setText(storeDescription.substring(5));
+        FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
         txtNoChart = (TextView) findViewById(R.id.noChart);
@@ -359,24 +380,19 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
         btnFIndexNext = (RelativeLayout) findViewById(R.id.btnFIndexNext);
         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
-        Tabview = (TabLayout) findViewById(R.id.tabview);
-        Tabview.addTab(Tabview.newTab().setText("Fashion"));
-        Tabview.addTab(Tabview.newTab().setText("All"));
-        Tabview.setOnTabSelectedListener(this);
+
+        FreshnessIndex_Ez_moreVertical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.showAsDropDown(view);
+            }
+        });
+
     }
 
     public void retainValuesFilter()
     {
-        //   filter_toggleClick = true;
-        if (FIndex_SegmentClick.equals("All")) {
-            //btnCore.toggle();
-            Tabview.getTabAt(1).select();
 
-        } else {
-            //btnFashion.toggle();
-            Tabview.getTabAt(0).select();
-
-        }
 
     }
 
@@ -387,95 +403,6 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
     }
 
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        Log.e(TAG,"toggle is "+filter_toggleClick);
-        int checkedId= Tabview.getSelectedTabPosition();
-        OnItemClick = true;
-        FreshnessIndexValue = "";
-        if (!filter_toggleClick) {
-            switch (checkedId) {
-
-                case 1 :   //core selection
-                    if (FIndex_SegmentClick.equals("All"))
-                        break;
-                    FIndex_SegmentClick = "All";
-                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        if (postRequest != null) {
-                            postRequest.cancel();
-                        }
-                        processBar.setVisibility(View.VISIBLE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        //   if (getIntent().getStringExtra("selectedDept") == null) {
-                        requestFreshnessIndexDetails();
-                      /*  } else if (getIntent().getStringExtra("selectedDept") != null) {
-                            String selectedString = getIntent().getStringExtra("selectedDept");
-                            requestFreshnessIndexFilterVal(selectedString);
-
-                        }*/
-
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        processBar.setVisibility(View.GONE);
-
-                    }
-                    break;
-
-                case 0 :  // fashion selection
-
-                    if (FIndex_SegmentClick.equals("Fashion"))
-                        break;
-
-                    FIndex_SegmentClick = "Fashion";
-                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        if (postRequest != null) {
-                            postRequest.cancel();
-
-                        }
-                        processBar.setVisibility(View.VISIBLE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        //   if (getIntent().getStringExtra("selectedDept") == null) {
-                        requestFreshnessIndexDetails();
-                        /*   } else if (getIntent().getStringExtra("selectedDept") != null) {
-                            String selectedString = getIntent().getStringExtra("selectedDept");
-                            requestFreshnessIndexFilterVal(selectedString);
-
-                        }
-                        */
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        processBar.setVisibility(View.GONE);
-
-                    }
-
-                    break;
-
-                default:
-                    break;
-
-            }
-        } else {
-            filter_toggleClick = false;
-        }
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
 
 
     //----------------------------API Declaration---------------------------//
@@ -490,11 +417,11 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.i(TAG, "IndexDetails onResponse: "+response);
-                        Reusable_Functions.hDialog();
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 OnItemClick = false;
+                                Reusable_Functions.hDialog();
                                 return;
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
@@ -518,6 +445,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
 
                         } catch (Exception e) {
                             OnItemClick = false;
+                            Reusable_Functions.hDialog();
                             e.printStackTrace();
                         }
                     }
@@ -526,6 +454,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         OnItemClick = false;
+                        Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
@@ -545,6 +474,88 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
         queue.add(postRequest);
 
     }
+
+    // For Category List on click of Dept Value
+    private void request_FreshnessIndex_ProductAndLocation(final String selectedRegion)
+    {
+        String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&region=" + selectedRegion.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        Log.e(TAG, "request_product and location: "+ freshnessindex_category_listurl);
+
+        postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Reusable_Functions.hDialog();
+
+                        int i;
+                        try {
+                            if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
+                                Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
+                                processBar.setVisibility(View.GONE);
+                                OnItemClick = false;
+
+                            } else if (response.length() == limit) {
+                                for (i = 0; i < response.length(); i++) {
+                                    freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
+                                    freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
+                                }
+                                offsetvalue = (limit * count) + limit;
+                                count++;
+                                request_FreshnessIndex_CategoryList(selectedRegion);
+
+                            } else if (response.length() < limit) {
+                                for (i = 0; i < response.length(); i++) {
+                                    freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
+                                    freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
+                                }
+
+
+                                requestHeader(selectedRegion, 9);
+
+
+                            }
+
+                        } catch (Exception e) {
+                            Reusable_Functions.hDialog();
+                            Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
+                            processBar.setVisibility(View.GONE);
+                            OnItemClick = false;
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
+                        Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
+                        processBar.setVisibility(View.GONE);
+                        OnItemClick = false;
+                        error.printStackTrace();
+                    }
+                }
+
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + bearertoken);
+                return params;
+            }
+        };
+        int socketTimeout = 60000;//5 seconds
+
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        queue.add(postRequest);
+
+    }
+
+
+
+
+
 
 
     // For Category List on click of Dept Value
@@ -580,38 +591,10 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                     freshnessIndexDetailsArrayList.add(freshnessIndexDetails);
                                 }
-//                                freshnessIndexDetails = new FreshnessIndexDetails();
-//                                if(txtFIndexClass.getText().toString().equals("Category"))
-//                                {
-//                                    freshnessIndexDetails.setPlanCategory("All");
-//                                }
+
 
                                 requestHeader(deptName, 2);
-                                /*freshnessIndexDetails.setStkOnhandQty(freshnessIndexDetail.getStkOnhandQty());
-                                freshnessIndexDetails.setStkOnhandQtyCount(100);
-                                freshnessIndexDetails.setStkGitQty(freshnessIndexDetail.getStkGitQty());
 
-                                freshnessIndexDetailsArrayList.add(0,freshnessIndexDetails);
-                                listViewFIndex.setLayoutManager(new LinearLayoutManager(context));
-                                listViewFIndex.setLayoutManager(new LinearLayoutManager(
-                                        listViewFIndex.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
-                                        LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-                                listViewFIndex.setOnFlingListener(null);
-                                new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-                                freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
-                                listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
-                                TestItem();
-
-
-                                Log.e(TAG, "txtfIndexDeptName: "+deptName+" and FreshnessIndex"+FreshnessIndexValue);
-                                txtfIndexDeptName.setText(hierarchy(deptName));
-                                llfIndexhierarchy.setVisibility(View.VISIBLE);
-                                fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getPlanCategory().toString();
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                level = 2;
-                                requestFIndexPieChart();*/
 
                             }
 
@@ -973,6 +956,42 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
 
         if (fIndexFirstVisibleItem.equals("All"))
         {
+            Reusable_Functions.hDialog();
+            ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+            non_assortment_count = (float) freshnessIndexDetail.getNonAssortmentGrpCont();
+            assortment_count = (float) freshnessIndexDetail.getAssortmentGrpCont();
+            ArrayList<Integer> colors = new ArrayList<>();
+            colors.add(Color.parseColor("#20b5d3"));
+            colors.add(Color.parseColor("#21d24c"));
+            entries.add(new PieEntry(non_assortment_count, "Non Asst"));
+            entries.add(new PieEntry(assortment_count, "Asst"));
+            dataSet = new PieDataSet(entries, "");
+            dataSet.setColors(colors);
+            dataSet.setValueLineWidth(0.5f);
+            dataSet.setValueTextColor(Color.BLACK);
+            pieData = new PieData(dataSet);
+            pieData.setValueFormatter(new MyValueFormatter());
+            dataSet.setValueLinePart1Length(1.5f);
+            dataSet.setValueLinePart2Length(1.8f);
+            pieChart.setDrawMarkers(false);
+            pieData.setValueTextSize(11f);
+            dataSet.setXValuePosition(null);
+            dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+            pieChart.setEntryLabelColor(Color.BLACK);
+            pieChart.setExtraOffsets(5, 10, 5, 5);
+            pieChart.setHoleRadius(0);
+            pieChart.setTransparentCircleRadius(0);
+            pieChart.setData(pieData);
+            pieChart.invalidate();
+            pieChart.animateXY(4000, 4000);
+            pieChart.setDescription(null);
+            pieChart.setTouchEnabled(false);
+            Legend l = pieChart.getLegend();
+            l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+            l.setFormSize(11f);
+            l.setEnabled(true);
+
+
            /* ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
             upcoming = (float) freshnessIndexDetail.getUpcomingGroupCount();
             oldgroup = (float) freshnessIndexDetail.getOldGroupCount();
@@ -1059,28 +1078,32 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
         {
             if (txtFIndexClass.getText().toString().equals("Department")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&department=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
-            } else if (txtFIndexClass.getText().toString().equals("Category")) {
+            } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&category=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
             } else if (txtFIndexClass.getText().toString().equals("Class")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&class=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
-            } else if (txtFIndexClass.getText().toString().equals("Brand")) {
-                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
-            } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
-                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+ header_value_filter;
+            } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value_filter;
+            } else if (txtFIndexClass.getText().toString().equals("Region")) {
+                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&region=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
+            } else if (txtFIndexClass.getText().toString().equals("Store")) {
+                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&store=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+header_value_filter;
             }
         }
         else
         {
             if (txtFIndexClass.getText().toString().equals("Department")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&department=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            } else if (txtFIndexClass.getText().toString().equals("Category")) {
+            } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&category=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             } else if (txtFIndexClass.getText().toString().equals("Class")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&class=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            } else if (txtFIndexClass.getText().toString().equals("Brand")) {
+            } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
-                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            }else if (txtFIndexClass.getText().toString().equals("Region")) {
+                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&region=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            } else if (txtFIndexClass.getText().toString().equals("Store")) {
+                url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&store=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             }
         }
 
@@ -1099,6 +1122,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 llfreshnessIndex.setVisibility(View.VISIBLE);
+                                Reusable_Functions.hDialog();
                                 OnItemClick = false;
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
@@ -1113,6 +1137,42 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                                     freshnessIndexDetails = gson.fromJson(response.get(i).toString(), FreshnessIndexDetails.class);
                                     fIndexArrayList.add(freshnessIndexDetails);
                                 }
+                                Reusable_Functions.hDialog();
+                                ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+                                non_assortment_count = (float) fIndexArrayList.get(0).getNonAssortmentGrpCont();
+                                assortment_count = (float) fIndexArrayList.get(0).getAssortmentGrpCont();
+                                ArrayList<Integer> colors = new ArrayList<>();
+                                colors.add(Color.parseColor("#20b5d3"));
+                                colors.add(Color.parseColor("#21d24c"));
+                                entries.add(new PieEntry(non_assortment_count, "Non Asst"));
+                                entries.add(new PieEntry(assortment_count, "Asst"));
+                                dataSet = new PieDataSet(entries, "");
+                                dataSet.setColors(colors);
+                                dataSet.setValueLineWidth(0.5f);
+                                dataSet.setValueTextColor(Color.BLACK);
+                                pieData = new PieData(dataSet);
+                                pieData.setValueFormatter(new MyValueFormatter());
+                                dataSet.setValueLinePart1Length(1.5f);
+                                dataSet.setValueLinePart2Length(1.8f);
+                                pieChart.setDrawMarkers(false);
+                                pieData.setValueTextSize(11f);
+                                dataSet.setXValuePosition(null);
+                                dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                                pieChart.setEntryLabelColor(Color.BLACK);
+                                pieChart.setExtraOffsets(5, 10, 5, 5);
+                                pieChart.setHoleRadius(0);
+                                pieChart.setTransparentCircleRadius(0);
+                                pieChart.setData(pieData);
+                                pieChart.invalidate();
+                                pieChart.animateXY(4000, 4000);
+                                pieChart.setDescription(null);
+                                pieChart.setTouchEnabled(false);
+                                Legend l = pieChart.getLegend();
+                                l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+                                l.setFormSize(11f);
+                                l.setEnabled(true);
+
+
                               /*  ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
                                 fIndexFirstVisibleItem = fIndexFirstVisibleItem.replace("%25", "%");
                                 fIndexFirstVisibleItem = fIndexFirstVisibleItem.replace("%20", " ").replace("%26", "&");
@@ -1230,7 +1290,6 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
                                 llfreshnessIndex.setVisibility(View.VISIBLE);
-                                Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1299,7 +1358,6 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.i(TAG, "Header onResponse: All"+response );
-                        Reusable_Functions.hDialog();
 
 
                         int i;
@@ -1307,6 +1365,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 OnItemClick = false;
+                                Reusable_Functions.hDialog();
                                 llfreshnessIndex.setVisibility(View.GONE);
                                 return;
 
@@ -1328,6 +1387,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
                             Log.e(TAG,"Data failed."+e.getMessage());
                             llfreshnessIndex.setVisibility(View.GONE);
+                            Reusable_Functions.hDialog();
                             OnItemClick = false;
                             e.printStackTrace();
                         }
@@ -1340,6 +1400,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                         Toast.makeText(context, "Server not found", Toast.LENGTH_SHORT).show();
                         llfreshnessIndex.setVisibility(View.GONE);
                         OnItemClick = false;
+                        Reusable_Functions.hDialog();
                         error.printStackTrace();
                     }
                 }
@@ -1403,7 +1464,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                             new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
                             freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
                             listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
-
+                            fIndexFirstVisibleItem = "All";  // when you drill down then fst you get all
                             txtfIndexDeptName.setText(hierarchy(name.replaceAll("%20"," ").replaceAll("%26","&")));
                             llfIndexhierarchy.setVisibility(View.VISIBLE);
                             TestItem();
@@ -1412,7 +1473,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                             limit = 100;
                             count = 0;
                             EzoneFreshnessIndexActivityDub.level = level;
-                          //  requestFIndexPieChart("");
+                            requestFIndexPieChart("");
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1566,8 +1627,10 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
         new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
         freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
         listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
+        fIndexFirstVisibleItem = "All";
 
-        if (txtFIndexClass.getText().toString().equals("Department")) {
+
+    /*    if (txtFIndexClass.getText().toString().equals("Department")) {
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
             Log.i(TAG, "retain tab: "+firstVisibleItem+" fIndexFirstVisibleItem "+fIndexFirstVisibleItem);
@@ -1577,13 +1640,13 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                     llm.scrollToPosition(firstVisibleItem);
                 }
             }
-        }
+        }*/
         offsetvalue = 0;
         limit = 100;
         count = 0;
         llfIndexhierarchy.setVisibility(View.GONE);
         Log.e(TAG, "fIndexFirstVisibleItem: "+fIndexFirstVisibleItem );
-      //  requestFIndexPieChart("");
+        requestFIndexPieChart("");
     }
 
     private void requestFreshnessIndexFilterVal(final String selectedString,final int inv_filter_level) {
@@ -1758,13 +1821,20 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
     }
 
 
+
+
+
+
+
+
+
+
     // Ezon Area...>>>>>>>>
 
     private void intializeUIofEzon() {
         freshnessIndex_ClickedVal = "All";
         freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
         llfIndexhierarchy.setVisibility(View.GONE);
-        FreshnessIndex_Ez_moreVertical = (RelativeLayout) findViewById(R.id.freshnessIndex_Ez_moreVertical);
         FreshnessIndex_Ez_moreVertical.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1979,6 +2049,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                 Log.e(TAG, "sortFunction: true...");
                 if (Reusable_Functions.chkStatus(context))
                 {
+                    Reusable_Functions.sDialog(context, "Loading data...");
                     listViewFIndex.setVisibility(View.VISIBLE);
                     llfIndexhierarchy.setVisibility(View.GONE);
                     FreshnessIndexValue="";
@@ -1989,9 +2060,9 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                     level = 1;
                     btnFIndexPrev.setVisibility(View.INVISIBLE);
                     btnFIndexNext.setVisibility(View.VISIBLE);
-                    freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
-                    mpm_model model = new mpm_model();
-                    ApiCallBack(model, 0, "");
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    requestFreshnessIndexDetails();
+
 
                 }
                 else
@@ -2003,6 +2074,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
             } else if (postValue == 2) {
 
                 if (Reusable_Functions.chkStatus(context)) {
+                    Reusable_Functions.sDialog(context, "Loading data...");
                     listViewFIndex.setVisibility(View.VISIBLE);
                     FreshnessIndexValue="";
                     llfIndexhierarchy.setVisibility(View.GONE);
@@ -2013,9 +2085,8 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                     level = 7;
                     btnFIndexPrev.setVisibility(View.INVISIBLE);
                     btnFIndexNext.setVisibility(View.VISIBLE);
-                    freshnessIndexDetails_Ez_ArrayList = new ArrayList<>();
-                    mpm_model model = new mpm_model();
-                    ApiCallBack(model, 0, "");
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    requestFreshnessIndexDetails();
 
                 } else {
                     product_radiobtn.setChecked(true);
@@ -2539,6 +2610,8 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                 requestFreshnessIndexFilterVal(selectedString,filter_level);
 
             }
+            show_popup();
+
 
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -2567,17 +2640,19 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                 header_value = "";
                 switch (txtFIndexClass.getText().toString()) {
 
-                    case "Brand Class":
+
+
+                    case "Store":
                         btnFIndexNext.setVisibility(View.VISIBLE);
-                        txtFIndexClass.setText("Brand");
-                        fromWhere = "Brand";
-                        level = 4;
+                        btnFIndexPrev.setVisibility(View.INVISIBLE);
+                        txtFIndexClass.setText("Region");
+                        fromWhere = "Region";
+                        level = 7;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
                             Reusable_Functions.sDialog(context, "Loading data...");
                             processBar.setVisibility(View.GONE);
-
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -2595,7 +2670,8 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
 
                         break;
 
-                    case "Brand":
+                    case "Subclass":
+                        btnFIndexNext.setVisibility(View.VISIBLE);
                         txtFIndexClass.setText("Class");
                         fromWhere = "Class";
                         level = 3;
@@ -2622,8 +2698,8 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
 
 
                     case "Class":
-                        txtFIndexClass.setText("Category");
-                        fromWhere = "Category";
+                        txtFIndexClass.setText("Subdept");
+                        fromWhere = "Subdept";
                         level = 2;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         if (Reusable_Functions.chkStatus(context)) {
@@ -2643,7 +2719,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                         }
                         break;
 
-                    case "Category":
+                    case "Subdept":
                         btnFIndexPrev.setVisibility(View.INVISIBLE);
                         txtFIndexClass.setText("Department");
                         fromWhere = "Department";
@@ -2690,8 +2766,8 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
 
                     case "Department":
                         btnFIndexPrev.setVisibility(View.VISIBLE);
-                        txtFIndexClass.setText("Category");
-                        fromWhere = "Category";
+                        txtFIndexClass.setText("Subdept");
+                        fromWhere = "Subdept";
                         level = 2;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         if (Reusable_Functions.chkStatus(context)) {
@@ -2711,7 +2787,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                         }
                         break;
 
-                    case "Category":
+                    case "Subdept":
                         fromWhere = "Class";
                         txtFIndexClass.setText("Class");
                         level = 3;
@@ -2734,8 +2810,9 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                         break;
 
                     case "Class":
-                        txtFIndexClass.setText("Brand");
-                        fromWhere = "Brand";
+                        btnFIndexNext.setVisibility(View.INVISIBLE);
+                        txtFIndexClass.setText("Subclass");
+                        fromWhere = "Subclass";
                         level = 4;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         if (Reusable_Functions.chkStatus(context)) {
@@ -2757,11 +2834,12 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
 
                         break;
 
-                    case "Brand":
+                    case "Region":
                         btnFIndexNext.setVisibility(View.INVISIBLE);
-                        txtFIndexClass.setText("Brand Class");
-                        fromWhere = "Brand Class";
-                        level = 5;
+                        btnFIndexPrev.setVisibility(View.VISIBLE);
+                        txtFIndexClass.setText("Store");
+                        fromWhere = "Store";
+                        level = 9;
                         freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
                         if (Reusable_Functions.chkStatus(context)) {
                             Reusable_Functions.hDialog();
@@ -2780,6 +2858,8 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                         }
 
                         break;
+
+
                     default:
                 }
             }
@@ -2810,11 +2890,51 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                                         // TestItem();
                                         switch (txtFIndexClass.getText().toString()) {
 
+                                            case "Region":
+                                                btnFIndexPrev.setVisibility(View.VISIBLE);
+                                                btnFIndexNext.setVisibility(View.INVISIBLE);
+                                                txtFIndexClass.setText("Store");
+                                                FreshnessIndexValue = ""; // clear text for hierarchy
+                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
+                                                fromWhere = "Store";
+                                                level = 9;
+
+                                                if(!freshnessIndex_ClickedVal.equals("All")) {
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&region=" + freshnessIndex_ClickedVal;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
+
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    processBar.setVisibility(View.GONE);
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    freshnessIndexDetailsArrayList.clear();
+                                                    request_FreshnessIndex_ProductAndLocation(freshnessIndex_ClickedVal);
+                                                    fIndexregion = freshnessIndex_ClickedVal;
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                    Reusable_Functions.hDialog();
+                                                }
+
+                                                break;
+
+
+
                                             case "Department":
                                                 btnFIndexPrev.setVisibility(View.VISIBLE);
-                                                txtFIndexClass.setText("Category");
+                                                txtFIndexClass.setText("Subdept");
                                                 freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
-                                                fromWhere = "Category";
+                                                fromWhere = "Subdept";
                                                 level = 2;
 
                                                 if(!freshnessIndex_ClickedVal.equals("All")) {
@@ -2846,7 +2966,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
 
                                                 break;
 
-                                            case "Category":
+                                            case "Subdept":
                                                 txtFIndexClass.setText("Class");
                                                 freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
                                                 fromWhere = "Class";
@@ -2879,9 +2999,10 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                                                 break;
 
                                             case "Class":
-                                                txtFIndexClass.setText("Brand");
+                                                btnFIndexNext.setVisibility(View.INVISIBLE);
+                                                txtFIndexClass.setText("Subclass");
                                                 freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
-                                                fromWhere = "Brand";
+                                                fromWhere = "Subclass";
                                                 level = 4;
                                                 if(!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
@@ -2911,7 +3032,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                                                 }
                                                 break;
 
-                                            case "Brand":
+                                       /*     case "Brand":
                                                 btnFIndexNext.setVisibility(View.INVISIBLE);
                                                 txtFIndexClass.setText("Brand Class");
                                                 freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
@@ -2942,7 +3063,7 @@ public class EzoneFreshnessIndexActivityDub extends AppCompatActivity implements
                                                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                     Reusable_Functions.hDialog();
                                                 }
-                                                break;
+                                                break;*/
 
                                             default:
                                                 Reusable_Functions.hDialog();

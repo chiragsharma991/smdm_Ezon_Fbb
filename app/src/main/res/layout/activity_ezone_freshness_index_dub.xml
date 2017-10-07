@@ -62,7 +62,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/freshnessIndex_imageBtnBack"
-                        android:text="@string/fi_title"
+                        android:text="@string/ezone_assortment_analysis"
                         android:textColor="@color/ezfb_black"
                         android:textSize="@dimen/smdm_header_title_normal"
                         />
@@ -71,8 +71,7 @@
                         android:id="@+id/freshnessIndex_imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/freshnessIndex_Ez_moreVertical"
                         android:layout_marginRight="0dp"
                         android:background="@drawable/button_click">
 
@@ -81,6 +80,25 @@
                             android:layout_height="@dimen/icon_height"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/iconfilter"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/freshnessIndex_Ez_moreVertical"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click"
+                        >
+
+                        <Button
+                            android:layout_width="@dimen/icon_width"
+                            android:layout_height="@dimen/icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@mipmap/iconmore"
                             android:clickable="false" />
 
                     </RelativeLayout>
@@ -169,24 +187,16 @@
                         </info.hoang8f.android.segmented.SegmentedGroup>
             -->
 
-            <android.support.design.widget.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tabview"
-                app:tabIndicatorColor="@color/ezfb_Red"
-                app:tabTextColor="@color/ezfb_Red"
-                app:tabSelectedTextColor="@color/ezfb_Red"
-                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-                >
 
-            </android.support.design.widget.TabLayout>
 
-            <View
+           <!-- <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/smdm_divider"
                 android:background="@color/smdm_divider_Black">
 
-            </View>
+            </View>-->
+
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/llfreshnessIndex"
@@ -215,7 +225,8 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/fIndex_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="220dp" />
+                    android:layout_height="270dp"
+                    />
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
@@ -342,7 +353,7 @@
                             android:layout_marginRight="160dp"
                             android:layout_toLeftOf="@+id/txtNetSales"
                             android:gravity="center_vertical|center"
-                            android:text="SOH(U)"
+                            android:text="SOH(Lacs)"
                             android:textColor="@color/ezfb_black"
                             android:textSize="@dimen/smdm_departmentTitle"
                             />
@@ -357,7 +368,7 @@
                             android:layout_marginRight="90dp"
                             android:layout_toLeftOf="@+id/rel"
                             android:gravity="center_vertical|center"
-                            android:text="SOH(U)%"
+                            android:text="SOH%"
                             android:textColor="@color/ezfb_black"
                             android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="normal"/>
@@ -370,7 +381,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="center_vertical|center"
-                            android:text="GIT(U)"
+                            android:text="SOH(U)"
                             android:textColor="@color/ezfb_black"
                             android:textSize="@dimen/smdm_departmentTitle"
                             android:textStyle="normal"/>
