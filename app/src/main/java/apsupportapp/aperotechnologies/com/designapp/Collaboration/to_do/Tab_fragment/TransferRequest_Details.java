@@ -217,7 +217,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestSenderDetails() {
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&caseNo=" + detail_CaseNo + "&reqStoreCode=" + detl_reqStoreCode + "&recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&caseNo=" + detail_CaseNo + "&reqStoreCode=" + detl_reqStoreCode + "&recache=" + recache + "&senderStoreCode=" + store_Code;
         Log.e(TAG, "requestSenderDetails--: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

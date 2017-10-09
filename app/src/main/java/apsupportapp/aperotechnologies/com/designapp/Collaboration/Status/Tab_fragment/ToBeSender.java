@@ -260,17 +260,17 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         String url = "";
         if (Case == 1) //initiated status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + selectedStorecode + "&recache=" + recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/initiated/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + storeCode + "&recache=" + recache;
         } else if (Case == 2) //Sender Acpt Status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + selectedStorecode + "&recache=" + recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/senderacpt/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&actionStatus=" + actionStatus + "&senderStoreCode=" + storeCode + "&recache=" + recache;
 
         } else if (Case == 3) // STO status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + selectedStorecode + "&recache=" + recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/sto/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + storeCode + "&recache=" + recache;
         } else if (Case == 4) //GRN status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + selectedStorecode + "&recache=" + recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + storeCode + "&recache=" + recache;
         }
         Log.e(TAG, "requestSenderCaseStatus: " + url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
