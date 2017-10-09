@@ -483,37 +483,38 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             public void onClick(View view) {
 
 
-//                if (Reusable_Functions.chkStatus(context))
-//                {
-//                    Reusable_Functions.sDialog(context, "Loading...");
-//                    progressBar1.setVisibility(View.GONE);
-//                    llhierarchy.setVisibility(View.GONE);
-//                    offsetvalue = 0;
-//                    limit = 100;
-//                    count = 0;
-//                    level = 1;
-//                    relprevbtn.setVisibility(View.INVISIBLE);
-//                    relnextbtn.setVisibility(View.VISIBLE);
-//                    txtheaderplanclass.setText("Department");
-//                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-//                    fromWhere = "Department";
-//                    retainSegmentValuesFilter();
-//                    if(!drill_down_val.equals(""))
-//                    {
-//                        requestViewByDisplay(drill_down_val);
-//                    }
-//                    else
-//                    {
-//                        requestSalesListDisplayAPI();
-//                    }
-//
-//                }
-//                else
-//                {
-//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                    progressBar1.setVisibility(View.GONE);
-//                    Reusable_Functions.hDialog();
-//                }
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    progressBar1.setVisibility(View.GONE);
+                    llhierarchy.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 1;
+                    relprevbtn.setVisibility(View.INVISIBLE);
+                    relnextbtn.setVisibility(View.VISIBLE);
+                    txtheaderplanclass.setText("Department");
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    fromWhere = "Department";
+                    retainSegmentValuesFilter();
+                    if(!drill_down_val.equals(""))
+                    {
+
+                        requestViewByDisplay(drill_down_val);
+                    }
+                    else
+                    {
+                        requestSalesListDisplayAPI();
+                    }
+
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    progressBar1.setVisibility(View.GONE);
+                    Reusable_Functions.hDialog();
+                }
                 menuMultipleActions.collapse();
             }
         });
@@ -529,30 +530,38 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             @Override
             public void onClick(View view) {
 
-//                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-//                fromWhere = "Category";
-//
-//                if (Reusable_Functions.chkStatus(context))
-//                {
-//                    Reusable_Functions.sDialog(context, "Loading...");
-//                    progressBar1.setVisibility(View.GONE);
-//                    llhierarchy.setVisibility(View.GONE);
-//                    offsetvalue = 0;
-//                    limit = 100;
-//                    count = 0;
-//                    level = 2;
-//                    relprevbtn.setVisibility(View.VISIBLE);
-//                    relnextbtn.setVisibility(View.VISIBLE);
-//                    txtheaderplanclass.setText("Category");
-//                    retainSegmentValuesFilter();
-//                    requestSalesListDisplayAPI();
-//                }
-//                else
-//                {
-//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                    progressBar1.setVisibility(View.GONE);
-//                    Reusable_Functions.hDialog();
-//                }
+                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                fromWhere = "Category";
+
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    progressBar1.setVisibility(View.GONE);
+                    llhierarchy.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 2;
+                    relprevbtn.setVisibility(View.VISIBLE);
+                    relnextbtn.setVisibility(View.VISIBLE);
+                    txtheaderplanclass.setText("Category");
+                    retainSegmentValuesFilter();
+                    if(!drill_down_val.equals(""))
+                    {
+
+                        requestViewByDisplay(drill_down_val);
+                    }
+                    else
+                    {
+                        requestSalesListDisplayAPI();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    progressBar1.setVisibility(View.GONE);
+                    Reusable_Functions.hDialog();
+                }
                 menuMultipleActions.collapse();
 
             }
@@ -569,31 +578,39 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             @Override
             public void onClick(View view) {
 
-//                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-//                fromWhere = "Class";
-//
-//                if (Reusable_Functions.chkStatus(context))
-//                {
-//                    Reusable_Functions.sDialog(context, "Loading...");
-//                    progressBar1.setVisibility(View.GONE);
-//                    llhierarchy.setVisibility(View.GONE);
-//                    offsetvalue = 0;
-//                    limit = 100;
-//                    count = 0;
-//                    level = 3;
-//                    relprevbtn.setVisibility(View.VISIBLE);
-//                    relnextbtn.setVisibility(View.VISIBLE);
-//                    txtheaderplanclass.setText("Class");
-//                    retainSegmentValuesFilter();
-//                    requestSalesListDisplayAPI();
-//
-//                }
-//                else
-//                {
-//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                    progressBar1.setVisibility(View.GONE);
-//                    Reusable_Functions.hDialog();
-//                }
+                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                fromWhere = "Class";
+
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    progressBar1.setVisibility(View.GONE);
+                    llhierarchy.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 3;
+                    relprevbtn.setVisibility(View.VISIBLE);
+                    relnextbtn.setVisibility(View.VISIBLE);
+                    txtheaderplanclass.setText("Class");
+                    retainSegmentValuesFilter();
+                    if(!drill_down_val.equals(""))
+                    {
+
+                        requestViewByDisplay(drill_down_val);
+                    }
+                    else
+                    {
+                        requestSalesListDisplayAPI();
+                    }
+
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    progressBar1.setVisibility(View.GONE);
+                    Reusable_Functions.hDialog();
+                }
                 menuMultipleActions.collapse();
             }
         });
@@ -609,31 +626,39 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             @Override
             public void onClick(View view) {
 
-//                if (Reusable_Functions.chkStatus(context))
-//                {
-//                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-//                    fromWhere = "Brand";
-//
-//                    Reusable_Functions.sDialog(context, "Loading...");
-//                    progressBar1.setVisibility(View.GONE);
-//                    llhierarchy.setVisibility(View.GONE);
-//                    offsetvalue = 0;
-//                    limit = 100;
-//                    count = 0;
-//                    level = 4;
-//                    relprevbtn.setVisibility(View.VISIBLE);
-//                    relnextbtn.setVisibility(View.VISIBLE);
-//                    txtheaderplanclass.setText("Brand");
-//                    retainSegmentValuesFilter();
-//                    requestSalesListDisplayAPI();
-//
-//                }
-//                else
-//                {
-//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                    progressBar1.setVisibility(View.GONE);
-//                    Reusable_Functions.hDialog();
-//                }
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    fromWhere = "Brand";
+
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    progressBar1.setVisibility(View.GONE);
+                    llhierarchy.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 4;
+                    relprevbtn.setVisibility(View.VISIBLE);
+                    relnextbtn.setVisibility(View.VISIBLE);
+                    txtheaderplanclass.setText("Brand");
+                    retainSegmentValuesFilter();
+                    if(!drill_down_val.equals(""))
+                    {
+
+                        requestViewByDisplay(drill_down_val);
+                    }
+                    else
+                    {
+                        requestSalesListDisplayAPI();
+                    }
+
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    progressBar1.setVisibility(View.GONE);
+                    Reusable_Functions.hDialog();
+                }
                 menuMultipleActions.collapse();
             }
         });
@@ -649,31 +674,39 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             @Override
             public void onClick(View view) {
 
-//                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-//                fromWhere = "Brand Class";
-//
-//                if (Reusable_Functions.chkStatus(context))
-//                {
-//                    Reusable_Functions.sDialog(context, "Loading...");
-//                    progressBar1.setVisibility(View.GONE);
-//                    llhierarchy.setVisibility(View.GONE);
-//                    offsetvalue = 0;
-//                    limit = 100;
-//                    count = 0;
-//                    level = 5;
-//                    relprevbtn.setVisibility(View.VISIBLE);
-//                    relnextbtn.setVisibility(View.INVISIBLE);
-//                    txtheaderplanclass.setText("Brand Class");
-//                    retainSegmentValuesFilter();
-//                    requestSalesListDisplayAPI();
-//
-//                }
-//                else
-//                {
-//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                    progressBar1.setVisibility(View.GONE);
-//                    Reusable_Functions.hDialog();
-//                }
+                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                fromWhere = "Brand Class";
+
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    progressBar1.setVisibility(View.GONE);
+                    llhierarchy.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 5;
+                    relprevbtn.setVisibility(View.VISIBLE);
+                    relnextbtn.setVisibility(View.INVISIBLE);
+                    txtheaderplanclass.setText("Brand Class");
+                    retainSegmentValuesFilter();
+                    if(!drill_down_val.equals(""))
+                    {
+
+                        requestViewByDisplay(drill_down_val);
+                    }
+                    else
+                    {
+                        requestSalesListDisplayAPI();
+                    }
+
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    progressBar1.setVisibility(View.GONE);
+                    Reusable_Functions.hDialog();
+                }
                 menuMultipleActions.collapse();
             }
         });
@@ -689,30 +722,38 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             @Override
             public void onClick(View view) {
 
-//                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-//                fromWhere = "Store";
-//
-//                if (Reusable_Functions.chkStatus(context))
-//                {
-//                    Reusable_Functions.sDialog(context, "Loading...");
-//                    progressBar1.setVisibility(View.GONE);
-//                    llhierarchy.setVisibility(View.GONE);
-//                    offsetvalue = 0;
-//                    limit = 100;
-//                    count = 0;
-//                    level = 6;
-//                    relprevbtn.setVisibility(View.INVISIBLE);
-//                    relnextbtn.setVisibility(View.INVISIBLE);
-//                    txtheaderplanclass.setText("Store");
-//                    retainSegmentValuesFilter();
-//                    requestSalesListDisplayAPI();
-//                }
-//                else
-//                {
-//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                    progressBar1.setVisibility(View.GONE);
-//                    Reusable_Functions.hDialog();
-//                }
+                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                fromWhere = "Store";
+
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    progressBar1.setVisibility(View.GONE);
+                    llhierarchy.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 6;
+                    relprevbtn.setVisibility(View.INVISIBLE);
+                    relnextbtn.setVisibility(View.INVISIBLE);
+                    txtheaderplanclass.setText("Store");
+                    retainSegmentValuesFilter();
+                    if(!drill_down_val.equals(""))
+                    {
+
+                        requestViewByDisplay(drill_down_val);
+                    }
+                    else
+                    {
+                        requestSalesListDisplayAPI();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    progressBar1.setVisibility(View.GONE);
+                    Reusable_Functions.hDialog();
+                }
                 menuMultipleActions.collapse();
             }
         });
@@ -761,6 +802,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         level = 5;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                     }
+                    else if (txtheaderplanclass.getText().toString().equals("Store")) {
+                        level = 6;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
+                    }
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         currentVmPos = vwpagersales.getCurrentItem();
@@ -807,6 +852,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
                     } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
                         level = 5;
+                        saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
+                    }
+                    else if (txtheaderplanclass.getText().toString().equals("Store")) {
+                        level = 6;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                     }
                     if (Reusable_Functions.chkStatus(context)) {
@@ -1102,6 +1151,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                 salesAnalysisClassArrayList= new ArrayList<SalesAnalysisListDisplay>();
                 header_value = "";
+                selFirstPositionValue = 0;firstVisibleItem = 0;
                 if (Reusable_Functions.chkStatus(context))
                 {
                     Reusable_Functions.sDialog(context, "Loading...");
@@ -1201,6 +1251,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             salesAnalysisClass.setBrandplanClass("All");
 
                         }
+                        else if (txtheaderplanclass.getText().toString().equals("Store")) {
+                            salesAnalysisClass.setBrandplanClass("All");
+
+                        }
                         salesAnalysisClassArrayList.add(0, salesAnalysisClass);
                         listView_SalesAnalysis.setLayoutManager(new LinearLayoutManager(context));
 
@@ -1248,6 +1302,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
 
                                 level = 5;
+                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
+                                if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().equals(saleFirstVisibleItem)) {
+                                    listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
+                                }
+                            }
+                            else if (txtheaderplanclass.getText().toString().equals("Store")) {
+
+                                level = 6;
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                                 if (salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass().equals(saleFirstVisibleItem)) {
                                     listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
@@ -1527,6 +1589,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
             url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         }
+        else if (txtheaderplanclass.getText().toString().equals("Store")) {
+            url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&storeCode=" + saleFirstVisibleItem.substring(0,4) + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+        }
         Log.e("Sales Analysis", "requestSalesPagerOnScrollAPI: "+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -1684,7 +1749,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                                 val = "";
                                 val =  deptName.replaceAll("%20", " ").replaceAll("%26","&");
-                                drill_down_val = "&department="+ val;
+                                drill_down_val = "&department="+ deptName.replaceAll(" ", "%20").replaceAll("&","%26");
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
                                 offsetvalue = 0;
@@ -2388,8 +2453,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
     private void requestViewByDisplay(final String drill_down_val) {
         String viewby_url;
+
         viewby_url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + drill_down_val + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-        Log.e("Sales Anlysis", "requestSalesCategoryList: "+viewby_url);
+        Log.e("Sales Anlysis", "requestViewByDisplay: "+viewby_url);
         postRequest = new JsonArrayRequest(Request.Method.GET, viewby_url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2442,7 +2508,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 else if (txtheaderplanclass.getText().toString().equals("Category"))
                                 {
                                     salesAnalysisClass.setPlanCategory("All");
-
                                 }
                                 else if (txtheaderplanclass.getText().toString().equals("Class"))
                                 {
@@ -2453,6 +2518,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                     salesAnalysisClass.setBrandName("All");
 
                                 } else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+                                {
+                                    salesAnalysisClass.setBrandplanClass("All");
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Store"))
                                 {
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
@@ -2469,13 +2538,40 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 limit = 100;
                                 count = 0;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanCategory();
+                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                {
+                                    level = 1;
+                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanDept();
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                {
+                                    level = 2;
+                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanCategory();
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                    level = 3;
+                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanClass();
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Brand"))
+                                {
+                                    level = 4;
+                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandName();
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+                                {
+                                    level = 5;
+                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandplanClass();
+                                }
+                                else if (txtheaderplanclass.getText().toString().equals("Store"))
+                                {
+                                    level = 6;
+                                    saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandplanClass();
+                                }
 
                                 if (saleFirstVisibleItem.equals("All")) {
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
-                                    analysisArrayList.clear();
                                     header_value = drill_down_val;
                                     requestSalesViewPagerValueAPI();
                                 }
@@ -2484,7 +2580,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
-                                    analysisArrayList.clear();
                                     requestSalesPagerOnScrollAPI();
                                 }
                             }

@@ -48,15 +48,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
-import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-
-import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
 
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
 

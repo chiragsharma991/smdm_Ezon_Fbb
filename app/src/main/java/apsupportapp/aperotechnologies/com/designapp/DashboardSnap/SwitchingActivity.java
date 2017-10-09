@@ -336,6 +336,7 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(SalesPvAActivity);
                     break;
                 case "044":
+                  //  FreshnessIndexActivity = new Intent(context, EzoneFreshnessIndexActivity.class);
                     FreshnessIndexActivity = new Intent(context, EzoneFreshnessIndexActivity.class);
                     startActivity(FreshnessIndexActivity);
                     break;

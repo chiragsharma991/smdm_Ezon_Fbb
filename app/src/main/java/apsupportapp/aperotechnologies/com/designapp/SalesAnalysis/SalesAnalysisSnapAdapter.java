@@ -128,19 +128,16 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 switch (fromwhere)
                 {
                     case "Department":
-                        Log.e("onBindViewHolder: ","reset calling" );
+//                        Log.e("onBindViewHolder: ","reset calling" );
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
 
                         break;
                     case "Category":
-
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
 
                         break;
                     case "Class":
-
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
-
                         break;
                     case "Brand":
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
@@ -171,8 +168,8 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 ((SalesViewHolder) viewHolder).txtAchieve.setLayoutParams(params);
 
 
-                if (achieveVal < 70) {
-
+                if (achieveVal < 70)
+                {
                     ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.RED);
                 } else if (achieveVal > 90) {
                     ((SalesViewHolder) viewHolder).txtPlan.setBackgroundColor(Color.GREEN);//yellow
