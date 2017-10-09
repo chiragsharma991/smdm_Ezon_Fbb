@@ -71,14 +71,17 @@ public class ToBeSender extends Fragment implements OnclickStatus {
     private HashMap<Integer, ArrayList<StatusModel>> initiatedStatusList, senderAcpStatusList, stoStatusList, grnStatusList;
     private ToBeSenderAdapter SenderAdapter;
     private String recache;
+    private static String storeCode;
 
-    public ToBeSender() {
+    public ToBeSender(String storeCode) {
+
+        this.storeCode = storeCode;
         // Required empty public constructor
     }
 
 
     public static ToBeSender newInstance(String param1, String param2) {
-        ToBeSender fragment = new ToBeSender();
+        ToBeSender fragment = new ToBeSender(storeCode);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -137,7 +140,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
 
     private void requestSenderCaseStatusSummary()
     {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/summary/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=" + recache + "&senderStoreCode=" + storeCode;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

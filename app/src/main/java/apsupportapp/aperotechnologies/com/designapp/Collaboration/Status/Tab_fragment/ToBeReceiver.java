@@ -64,14 +64,18 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     private HashMap<Integer,ArrayList<StatusModel>> rec_initiatedStatusList,rec_senderAcpStatusList,rec_stoStatusList,rec_grnStatusList;
     private ToBeReceiverAdapter ReceiverAdapter;
     private String recache;
+    private static String storeCode;
 
-    public ToBeReceiver() {
+
+    public ToBeReceiver(String storeCode) {
+        this.storeCode = storeCode;
+
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
     public static ToBeReceiver newInstance(String param1, String param2) {
-        ToBeReceiver fragment = new ToBeReceiver();
+        ToBeReceiver fragment = new ToBeReceiver(storeCode);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -235,7 +239,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     //---------------------------- API Declaration --------------------------//
     private void requestReceiverCaseStatusSummary()
     {
-        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache;
+        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache + "&senderStoreCode=" + storeCode;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {
                     @Override

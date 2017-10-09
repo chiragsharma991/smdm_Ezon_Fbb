@@ -132,7 +132,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     }
 
     private void requestReceiversChildDetails(final int position) {
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20") + "&caseNo=" + detail_CaseNo + "&reqStoreCode=" + detl_reqStoreCode + "&recache=" + recache;
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20") + "&caseNo=" + detail_CaseNo + "&reqStoreCode=" + detl_reqStoreCode + "&recache=" + recache + "&senderStoreCode=" + store_Code;
         Log.e(TAG, "requestReceiversChildDetails: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

@@ -71,11 +71,11 @@ public class StyleActivity extends AppCompatActivity
     RelativeLayout imageBtnBack;
     TextView collection, style,txt_store;
     List<String> collectionList, list;
-    ArrayList<String> arrayList, articleOptionList,storeList;
+    ArrayList<String> arrayList, articleOptionList,storeList, collectionCode_list, articleOptionCode_list;
     static ArrayList<String> newcollectionList;
     String userId, bearertoken;
     View view;
-    String collectionNM, optionName, from,store_name;
+    String collectionNM, optionName, from,store_name, collectionCode, articleOptionCode;
     RequestQueue queue;
     Context context;
     ArrayList<StyleDetailsBean> styleDetailsBeenList;
@@ -123,7 +123,8 @@ public class StyleActivity extends AppCompatActivity
         storeList =new ArrayList<String>();
         collectionList = new ArrayList<String>();
         arrayList = new ArrayList<String>();
-
+        collectionCode_list = new ArrayList<String>();
+        articleOptionCode_list = new ArrayList<String>();
         list = new ArrayList<>();
 //        seloptionName = null;
 //        selStoreName = null;
@@ -227,9 +228,11 @@ public class StyleActivity extends AppCompatActivity
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Log.e("store name "," "+store_name+" "+store_name.substring(0,4));
+                        Log.e("articleOptionCode "," "+articleOptionCode);
+
                         store_name = store_name.substring(0,4);
                         Reusable_Functions.sDialog(context, "Loading  data...");
-                        requestStyleDetailsAPI(optionName, "optionname",store_name);
+                        requestStyleDetailsAPI(optionName, "optionname",store_name, articleOptionCode);
 
                     } else {
                         Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
@@ -392,6 +395,8 @@ public class StyleActivity extends AppCompatActivity
                 count = 0;
                 //
                 collectionNM = (String) collectionAdapter.getItem(position);
+                collectionCode = collectionCode_list.get(position-1);
+
                 selcollectionName = collectionNM;
                 collection.setText(selcollectionName);
                 Log.e("collect_name ", " "+collect_name);
@@ -436,7 +441,8 @@ public class StyleActivity extends AppCompatActivity
                         articleOptionList = new ArrayList<String>();
                         optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
                         listOption.setAdapter(optionAdapter);
-                        requestArticleOptionsAPI(collectionNM,store_name);
+                        Log.e("collectionCode "," "+collectionNM+ " , "+store_name);
+                        requestArticleOptionsAPI(collectionCode,store_name);   //collectionNM
                     }
                     else
                     {
@@ -452,6 +458,9 @@ public class StyleActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 optionName = (String) optionAdapter.getItem(position);
+                articleOptionCode = articleOptionCode_list.get(position-1);
+                Log.e("", "articleOptionCode: "+articleOptionCode);
+
                 //seloptionName = optionName;
                 Log.e("", "onItemClick: "+seloptionName);
                 style.setText(optionName);
@@ -505,7 +514,7 @@ public class StyleActivity extends AppCompatActivity
         if (Reusable_Functions.chkStatus(StyleActivity.this)) {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(StyleActivity.this, "Loading data...");
-            requestStyleDetailsAPI(barcode, "barcode", store_name);
+            requestStyleDetailsAPI(barcode, "barcode", store_name, articleOptionCode);
         }
         else
         {
@@ -546,7 +555,7 @@ public class StyleActivity extends AppCompatActivity
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
                     Reusable_Functions.sDialog(context, "Loading  data...");
-                    requestStyleDetailsAPI(result.getContents(), "barcode", store_name);
+                    requestStyleDetailsAPI(result.getContents(), "barcode", store_name, articleOptionCode);
 
                 }
                 else
@@ -620,12 +629,12 @@ public class StyleActivity extends AppCompatActivity
         }
     }
 
-    private void requestStyleDetailsAPI(String content, String check, final String store_name)
+    private void requestStyleDetailsAPI(String content, String check, final String store_name, final String articleOptionCode)
     {
         String url = " ";
         if (check.equals("optionname"))
         {
-            url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + content.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+store_name;
+            url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + articleOptionCode.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+store_name;
             Log.e("", "requestCollectionAPI: "+url);
         }
         else if (check.equals("barcode"))
@@ -701,6 +710,7 @@ public class StyleActivity extends AppCompatActivity
                                 intent.putExtra("checkFrom", "styleActivity");
                                 intent.putExtra("articleCode", articleCode);
                                 intent.putExtra("articleOption", articleOption);
+                                intent.putExtra("articleOptionCode", articleOptionCode);
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 intent.putExtra("selCollectionname", collectionNM);
                                 intent.putExtra("selOptionName", optionName);
@@ -737,7 +747,7 @@ public class StyleActivity extends AppCompatActivity
                 return params;
             }
         };
-        int socketTimeout = 60000;//5 seconds
+        int socketTimeout = 80000;//5 seconds
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         queue.add(postRequest);
@@ -986,8 +996,6 @@ public class StyleActivity extends AppCompatActivity
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();
-
-
                             e.printStackTrace();
                         }
                     }
@@ -1049,7 +1057,9 @@ public class StyleActivity extends AppCompatActivity
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
+                                    collectionCode = collectionName.getString("collectionCode");
                                     arrayList.add(collectionNM);
+                                    collectionCode_list.add(collectionCode);
                                 }
                                 collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
                                 collectioncount++;
@@ -1060,19 +1070,19 @@ public class StyleActivity extends AppCompatActivity
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
                                     collectionNM = collectionName.getString("collectionName");
+                                    collectionCode = collectionName.getString("collectionCode");
                                     arrayList.add(collectionNM);
+                                    collectionCode_list.add(collectionCode);
                                 }
                                 // harshada
                                 Collections.sort(arrayList);
+                                Collections.sort(collectionCode_list);
                                 arrayList.add(0, "Select Collection");
                                 collectionAdapter.notifyDataSetChanged();
                                 Reusable_Functions.hDialog();
                                 newcollectionList = new ArrayList();
                                 newcollectionList.addAll(arrayList);
                             }
-
-
-
 
 
                             Log.e("selcollectionName ", " "+selcollectionName);
@@ -1148,10 +1158,10 @@ public class StyleActivity extends AppCompatActivity
         queue.add(postRequest);
     }
 
-    private void requestArticleOptionsAPI(final String collectionNM, final String store_name)
+    private void requestArticleOptionsAPI(final String collectionCode, final String store_name)
     {
         String url;
-        url = ConstsCore.web_url + "/v1/display/collectionoptionsNew/" + userId + "?collectionName=" + collectionNM.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+store_name;
+        url = ConstsCore.web_url + "/v1/display/collectionoptionsNew/" + userId + "?prodLevel6Code=" + collectionCode.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+store_name;
 
         Log.e("url ", "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -1186,11 +1196,13 @@ public class StyleActivity extends AppCompatActivity
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");
                                     String articleOptions = jsonResponse.getString("articleOptions");
+                                    String articleOptionCode = jsonResponse.getString("articleOptionCode");
                                     articleOptionList.add(articleOptions);
+                                    articleOptionCode_list.add(articleOptionCode);
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
-                                requestArticleOptionsAPI(collectionNM, store_name);
+                                requestArticleOptionsAPI(collectionCode, store_name);
                             }
                             else if (response.length() < limit)
                             {
@@ -1199,10 +1211,15 @@ public class StyleActivity extends AppCompatActivity
                                     JSONObject jsonResponse = response.getJSONObject(i);
                                     String collectionNames = jsonResponse.getString("collectionNames");
                                     String articleOptions = jsonResponse.getString("articleOptions");
+                                    String articleOptionCode = jsonResponse.getString("articleOptionCode");
                                     articleOptionList.add(articleOptions);
+                                    articleOptionCode_list.add(articleOptionCode);
+
                                 }
 
-                                Collections.sort(articleOptionList);
+//                                Collections.sort(articleOptionList);
+//                                Collections.sort(articleOptionCode_list);
+
                                 articleOptionList.add(0, "Select Option");
                                 style.setEnabled(true);
                                 Reusable_Functions.hDialog();

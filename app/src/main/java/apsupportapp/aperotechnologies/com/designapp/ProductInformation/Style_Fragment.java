@@ -81,7 +81,7 @@ public class Style_Fragment extends Fragment {
     MySingleton m_config;
     static int cnt = 0;
     RelativeLayout relativeLayout;
-    String articleCode, articleOption;
+    String articleCode, articleOption, articleOptionCode;
     int offsetvalue = 0, limit = 100;
     int count = 0;
     String TA = "StyleActivity";
@@ -101,8 +101,10 @@ public class Style_Fragment extends Fragment {
     private LinearLayout LinearTable;
     private RelativeLayout Style_loadingBar;
 
-    public Style_Fragment(String storeCode) {
+    public Style_Fragment(String storeCode, String articleOptionCode) {
         this.storeCode = storeCode;
+        this.articleOptionCode = articleOptionCode;
+
     }
 
     @Override
@@ -141,7 +143,7 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
         Reusable_Functions.sDialog(context, "Loading Sizes data");
-        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOptionCode.replace(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
         Log.e("sizesNew url "," "+url.toString());
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -280,7 +282,7 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleSizeDetailsAPI() {
 
-        String url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+        String url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOptionCode.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
         Log.e(TAG, "requestStyleSizeDetailsAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
