@@ -407,7 +407,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             String region = EzoneFilterLocationAdapter.region_str.replace("%", "%25");
             String updateRegion = region.replace(" ", "%20").replace("&", "%26");
             String Region;
-            Region = "region=" + updateRegion;
+            Region = "regionDescription=" + updateRegion;
             build.append("&");
             build.append(Region.replace(",$", ""));
         }

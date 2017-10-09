@@ -1734,7 +1734,6 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 //
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanCategory();
 
-
                                     header_value = "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
 
                                 if (pvaFirstVisibleItem.equals("All")) {

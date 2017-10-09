@@ -88,7 +88,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
 
     String saleFirstVisibleItem, fromWhere = "Department", val, txtSalesClickedValue, all_from_val;
-    TextView txtStoreCode, txtStoreDesc, txtheaderplanclass, txthDeptName;
+    TextView txtheaderplanclass, txthDeptName;
 
     public static int level = 1;
     RequestQueue queue;
@@ -196,15 +196,15 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
-                if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE && !ezone_onClickflg) {
-                    Handler h = new Handler();
-                    h.postDelayed(new Runnable() {
-                        public void run() {
+                if (prevState != RecyclerView.SCROLL_STATE_IDLE  && !ezone_onClickflg) {
+//                    Handler h = new Handler();
+//                    h.postDelayed(new Runnable() {
+//                        public void run() {
                             if (!ezone_onClickflg) {
                                 TimeUP();
                             }
-                        }
-                    }, 700);
+//                        }
+//                    }, 700);
                 }
                 prevState = currentState;
             }
@@ -233,9 +233,9 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         else
                         {
                             ezone_onClickflg = true;
-                            Handler h = new Handler();
-                            h.postDelayed(new Runnable() {
-                                public void run() {
+//                            Handler h = new Handler();
+//                            h.postDelayed(new Runnable() {
+//                                public void run() {
                                     if (position < ez_sales_detalis_array.size()) {
                                         switch (txt_ez_header.getText().toString()) {
                                             case "Department":
@@ -399,7 +399,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (!ez_sclickedVal.equals("All")) {
                                                     ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
                                                     ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&region=" + ez_sclickedVal;
+                                                    header_value = "&regionDescription=" + ez_sclickedVal;
                                                 } else {
                                                     header_value = "";
                                                 }
@@ -439,8 +439,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                     }
                                 }
 
-                            }, 700);
-                        }
+//                            }, 700);
+//                        }
                     }
                 }));
 
@@ -583,7 +583,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
             else
             {
                 ez_firstVisible_no = ez_sales_detalis_array.size() - 1;
-                ezone_onClickflg = false;
+
                 LinearLayoutManager llm = (LinearLayoutManager) recyclevw_ez_sales.getLayoutManager();
                 llm.scrollToPosition(ez_firstVisible_no);
                 // product is checked in view by
@@ -621,11 +621,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     limit = 100;
                     count = 0;
                     ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                    Log.e("TimeUP: ",""+ez_sFirstPosVal + ez_firstVisible_no );
 
                     if (ez_firstVisible_no != ez_sFirstPosVal) {
-//                        if (ez_postRequest != null) {
-//                            ez_postRequest.cancel();
-//                        }
+                        if (ez_postRequest != null) {
+                            ez_postRequest.cancel();
+                        }
                         ez_progessBar.setVisibility(View.VISIBLE);
                         if (ez_sale_first_item.equals("All"))
                         {
@@ -2586,7 +2587,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     // Api - Ezone Sales Store List
     private void requestEzoneSalesStoreList(final String ez_sclickedVal) {
         String ez_sstore_listurl;
-        ez_sstore_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&region=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        ez_sstore_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&regionDescription=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         Log.e("Ezone Store List :", "" + ez_sstore_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sstore_listurl,
                 new Response.Listener<JSONArray>() {
@@ -2808,7 +2809,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 //            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brandclass=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
 //        }
         else if (txt_ez_header.getText().toString().equals("Region")) {
-            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&region=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+            url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&regionDescription=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         } else if (txt_ez_header.getText().toString().equals("Store")) {
             url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&storeCode=" + ez_sale_first_item.substring(0,4) + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
@@ -2848,9 +2849,10 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 ez_viewpager.setAdapter(ez_sales_pager_adapter);
                                 ez_viewpager.setCurrentItem(ez_currentVmPos);
 //                                ez_sales_pager_adapter.notifyDataSetChanged();
-                                ez_progessBar.setVisibility(View.GONE);
                                 ezone_onClickflg = false;
                                 Reusable_Functions.hDialog();
+                                ez_progessBar.setVisibility(View.GONE);
+
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -2888,10 +2890,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
     @Override
     public void onBackPressed() {
-//        selectedsegValue = "";
-//        level = 0;
-//        selectedsegValue = "WTD";
-//        level = 1;
+
         ezone_level = 0;
         ez_segment_val = "";
         ezone_level = 1;

@@ -116,7 +116,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     private int preValue = 1, postValue, sales_filter_level;
     private boolean from_filter;
     private String filterSelectedString, isMultiStore, value;
-    private String dept_clickVal, categry_clickVal, class_clickVal, brand_clickVal;
+    private String dept_clickVal, categry_clickVal, class_clickVal, brand_clickVal,region_clickVal;
     public String all_from_val,selectedString;
     private String header_value;
 
@@ -308,7 +308,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                             txtheaderplanclass.setText("Subclass");
                                             txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getLevel();
                                             btnSalesNext.setVisibility(View.INVISIBLE);
-
                                             fromWhere = "Subclass";
                                             level = 4;
                                             if (Reusable_Functions.chkStatus(context)) {
@@ -381,7 +380,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                                 limit = 100;
                                                 count = 0;
                                                 salesAnalysisClassArrayList.clear();
-                                                requestProductAndLocation(txtPvAClickedValue);
+                                                region_clickVal = txtPvAClickedValue;
+                                                requestHeaderAPI("store");
                                             } else {
                                                 Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                             }
@@ -814,7 +814,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("requestSalesListDisplayAPI Details", " " + response);
+//                        Log.i("requestSalesListDisplayAPI Details", " " + response);
                         try {
                             int i;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1027,12 +1027,11 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
         } else if (txtheaderplanclass.getText().toString().equals("Region")) {
 
-            url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZNew/" + userId + "?region=" + pvaFirstVisibleItem + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick + "&lobId=" + lobId;
+            url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZNew/" + userId + "?regionDescription=" + pvaFirstVisibleItem + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick + "&lobId=" + lobId;
 
-        } else if (txtheaderplanclass.getText().toString().equals("Store")) {
-
+        } else if (txtheaderplanclass.getText().toString().equals("Store"))
+        {
             url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZNew/" + userId + "?storeCode=" + pvaFirstVisibleItem.substring(0,4) + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick + "&lobId=" + lobId;
-
         }
 
         Log.e(TAG, "requestPvAChartAPI: " + url);
@@ -1041,7 +1040,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                     @Override
                     public void onResponse(JSONArray response) {
                         // Log.e(TAG, "onResponse: "+response);
-                        Log.e("requestPvAChartAPI ", " " + response);
+//                        Log.e("requestPvAChartAPI ", " " + response);
                         try {
 
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1162,7 +1161,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestSalesWeekChart: " + response);
+//                        Log.e(TAG, "requestSalesWeekChart: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1276,24 +1275,25 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
                 BarDataSet set1, set2;
 
-                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
+                if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0)
+                {
                     set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
                     set2 = (BarDataSet) barChart.getData().getDataSetByIndex(1);
                     set1.setValues(yVals1);
                     set2.setValues(yVals2);
                     barChart.getData().notifyDataChanged();
                     barChart.notifyDataSetChanged();
-                } else {
+                }
+                else
+                {
                     // create 2 datasets with different types
                     set1 = new BarDataSet(yVals1, "Plan Sales");
                     set1.setColor(Color.parseColor("#20b5d3"));
                     set2 = new BarDataSet(yVals2, "Net Sales");
                     set2.setColor(Color.parseColor("#21d24c"));
-
                     ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
                     dataSets.add(set1);
                     dataSets.add(set2);
-
                     BarData data = new BarData(dataSets);
                     data.setDrawValues(false);  //remove for number on bar
                     barChart.setData(data);
@@ -1311,9 +1311,10 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 barChart.setFitBars(true);
                 barChart.invalidate();
                 barChart.animateXY(3000, 3000);
-            } else {
+            }
+            else
+            {
                 barChart.clear();
-
             }
         } catch (Exception e) {
             barChart.clear();
@@ -1339,7 +1340,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "requestSalesPvACategoryList: " + response);
+//                        Log.i(TAG, "requestSalesPvACategoryList: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1373,21 +1374,19 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 //                                else
 //                                {
                                 salesAnalysisListDisplay = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Subdept")) {
+                                if (txtheaderplanclass.getText().toString().equals("Subdept"))
+                                {
                                     salesAnalysisListDisplay.setLevel("All");
                                 }
                                 salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                 salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                 salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
-
-
                                 salesAnalysisClassArrayList.add(0, salesAnalysisListDisplay);
                                 listViewSalesPvA.setLayoutManager(new LinearLayoutManager(
                                         listViewSalesPvA.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 listViewSalesPvA.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listViewSalesPvA);
-
                                 salesPvAAdapter = new EzonePvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA, geoLeveLDesc);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
 //                                    salesPvAAdapter.notifyDataSetChanged();
@@ -1404,7 +1403,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 //
 //                                    } else {
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getLevel();
-//                                    }
+
                                 header_value = "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 if (pvaFirstVisibleItem.equals("All")) {
@@ -1458,18 +1457,16 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
     }
 
-    private void requestSalesPvAPlanClassListAPI(final String category) {
+    private void requestSalesPvAPlanClassListAPI(final String category)
+    {
         String salespva_planclass_listurl;
-
         salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
-
-
         Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + salespva_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
+//                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1491,9 +1488,9 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
                                 salesAnalysisListDisplay = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                if (txtheaderplanclass.getText().toString().equals("Class"))
+                                {
                                     salesAnalysisListDisplay.setLevel("All");
-//
                                 }
                                 salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                 salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
@@ -1567,23 +1564,22 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
         queue.add(postRequest);
     }
 
-
-    private void requestProductAndLocation(final String region) {
+    private void requestProductAndLocation(final String region)
+    {
         String salespva_planclass_listurl;
-        salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&region=" + region.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
+        salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&regionDescription=" + region.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
         Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + salespva_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
-
-                        try {
+                        try
+                        {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
                                 onItemClickFlag = false;
-                                Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
@@ -1620,13 +1616,30 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                 salesPvAAnalysisWeekArrayList.clear();
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getLevel();
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
-                                requestPvAChartAPI();
+                                header_value = "&regionDescription=" + region.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                if (pvaFirstVisibleItem.equals("All")) {
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    salesPvAAnalysisWeekArrayList.clear();
+                                    requestSalesWeekChart(header_value);
+                                } else {
+                                    offsetvalue = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    salesPvAAnalysisWeekArrayList.clear();
+                                    requestPvAChartAPI();
+                                }
                             }
-                        } catch (Exception e) {
+
+                        }
+                        catch (Exception e)
+                        {
                             Reusable_Functions.hDialog();
                             onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
-                            Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, "onResponse in store: "+e.getMessage());
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -1637,7 +1650,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                         Reusable_Functions.hDialog();
                         pva_progressBar.setVisibility(View.GONE);
                         onItemClickFlag = false;
-                        Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }
@@ -1657,18 +1670,17 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     }
 
     private void requestSalesPvABrandListAPI(final String planclass) {
+
         String salespva_brand_listurl;
-
         salespva_brand_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
-
-
         Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + salespva_brand_listurl);
-
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brand_listurl,
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONArray>()
+                {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
+                    public void onResponse(JSONArray response)
+                    {
+//                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1692,15 +1704,11 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
                                 }
                                 salesAnalysisListDisplay = new SalesAnalysisListDisplay();
-//                                    if (geoLeveLDesc.equals("E ZONE")) {
+
                                         if (txtheaderplanclass.getText().toString().equals("Subclass")) {
                                             salesAnalysisListDisplay.setLevel("All");
 
                                         }
-//                                    } else {
-
-//                                    }
-
                                 salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                 salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                 salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
@@ -1716,7 +1724,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                 limit = 100;
                                 count = 0;
                                 salesPvAAnalysisWeekArrayList.clear();
-                                    if (geoLeveLDesc.equals("E ZONE")) {
+                                    if (geoLeveLDesc.equals("E ZONE"))
+                                    {
                                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getLevel();
 
                                     }
@@ -1783,7 +1792,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
+//                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1910,9 +1919,13 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
             brand_clickVal = brand_clickVal.replace("%", "%25");
             brand_clickVal = brand_clickVal.replace(" ", "%20").replace("&", "%26");
             url = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&brand=" + brand_clickVal + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
-        }
-        else if(fromWhere.equals("filter"))
+        } else if (fromWhere.equals("store"))
         {
+            region_clickVal = region_clickVal.replace("%", "%25");
+            region_clickVal = region_clickVal.replace(" ", "%20").replace("&", "%26");
+            url = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&regionDescription=" + region_clickVal + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
+
+        } else if (fromWhere.equals("filter")) {
             url = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + salesPvA_SegmentClick + selectedString + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
 
         }
@@ -1922,7 +1935,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestSalesViewPagerValueAPI: " + response);
+//                        Log.e(TAG, "requestSalesViewPagerValueAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1960,6 +1973,9 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                     break;
                                 case "brandClass":
                                     requestSalesPvABrandPlanListAPI(brand_clickVal);
+                                    break;
+                                case "store":
+                                    requestProductAndLocation(region_clickVal);
                                     break;
                                 case "filter":
                                     requestSalesSelectedFilterVal(selectedString, sales_filter_level);
@@ -2209,6 +2225,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
 
                                 header_value = selectedString;
+
                                 salesPvAAnalysisWeekArrayList.clear();
                                     if (pvaFirstVisibleItem.equals("All")) {
                                         offsetvalue = 0;

@@ -829,7 +829,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response :", "" + response);
+//                        Log.e("response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();

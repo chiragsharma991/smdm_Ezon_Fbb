@@ -390,7 +390,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             Tabview.getTabAt(0).select();
 
         }
-
     }
 
     @Override

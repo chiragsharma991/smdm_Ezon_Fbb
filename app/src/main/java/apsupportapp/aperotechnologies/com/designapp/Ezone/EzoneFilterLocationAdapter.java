@@ -71,7 +71,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
     private GroupViewHolder groupViewHolder;
     private String groupText;
     private String childText;
-    int location_level;
+    private int location_level;
     List region_list, store_List;
     EzoneFilterLocationAdapter listAdapter;
     int mGroupPosition = 0;
@@ -253,7 +253,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                     explv_ez_locatn.expandGroup(k);
                 }
             } else {
-                requestLocationHierarchy(location_level  , region_str);
+                requestLocationHierarchy(level  , region_str);
             }
         }
         if (level == 1)
@@ -346,13 +346,13 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 //        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis"))
 //        {
 //            //with geoLevel2Code param
-            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZNew/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20")+"&geoLevel2Code="+geoLevel2Code;
+            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZNew/" + userId + "?level=" + location_level + "&regionDescription=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20")+"&geoLevel2Code="+geoLevel2Code;
 
 //        }
 //        else
 //        {
 //            //without geoLevel2Code param
-//            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20");
+//            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?level=" + location_level + "&regionDescription=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20");
 //
 //        }
 
@@ -370,9 +370,9 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
                             } else {
-                                for (int i = level - 2 ; i < mListDataChild.size(); i++) {
-                                    Log.e("i :",""+i);
-                                    if (level - 2  == i) {
+                                for (int i = level - 2; i < mListDataChild.size(); i++) {
+                                    Log.e("i :", "" + i);
+                                    if (level - 2 == i) {
                                         for (int j = i; j < mListDataChild.size(); j++) {
                                             mListDataChild.remove(i);
                                         }
@@ -396,12 +396,21 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                     drillDownList.addAll(setValue);
                                     Collections.sort(drillDownList);
                                     //expand group
-                                    notifyDataSetChanged();
-                                    mListDataChild.put(mListDataGroup.get(1), drillDownList);
-                                    ezoneSalesFilter.explv_ez_locatn.expandGroup(1);
-                                    rel_ez_process_filter.setVisibility(View.GONE);
+                                    try {
+                                        mListDataChild.put(mListDataGroup.get(i), drillDownList);
+                                    } catch (IndexOutOfBoundsException e) {
+                                        Log.e("onResponse: ", "" + e.getMessage());
+                                    }
+                                    for (int k = level - 2; k < mListDataGroup.size(); k++) {
+                                        explv_ez_locatn.expandGroup(k);
+                                    }
                                 }
+                                notifyDataSetChanged();
+                                rel_ez_process_filter.setVisibility(View.GONE);
+
+
                             }
+
 
                         } catch (Exception e) {
                             e.printStackTrace();
