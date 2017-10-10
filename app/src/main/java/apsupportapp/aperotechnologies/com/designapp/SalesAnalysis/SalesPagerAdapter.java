@@ -304,7 +304,7 @@ public class SalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageC
                 }
             }
             if(salesAnalysisClassArrayList.size()!=0){
-            SalesAnalysisListDisplay salesAnalysisListDisplay = salesAnalysisClassArrayList.get(position);
+            SalesAnalysisListDisplay salesAnalysisListDisplay = salesAnalysisClassArrayList.get(0);
 
             if (salesAnalysisListDisplay.getPlanDept() != null) {
                 if (salesAnalysisListDisplay.getPlanDept().equals("All")) {

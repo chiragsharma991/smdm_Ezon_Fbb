@@ -31,6 +31,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     ArrayList<SalesAnalysisViewPagerValue> analysisArrayList;
     SalesPagerAdapter pageradapter;
     SalesAnalysisListDisplay salesAnalysisListDisplay;
+    SalesAnalysisViewPagerValue salesAnalysis;
     int focusposition, selFirstPositionValue;
     RecyclerView listView_SalesAnalysis;
     int currentIndex;
@@ -178,6 +179,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                 }
             }
         }
+
 
     }
 
