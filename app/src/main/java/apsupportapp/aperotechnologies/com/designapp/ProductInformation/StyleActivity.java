@@ -721,7 +721,7 @@ public class StyleActivity extends AppCompatActivity
                                 Toast.makeText(StyleActivity.this, "No store data found", Toast.LENGTH_LONG).show();
                             }
                             else if(response.length()==1 && collectionoffset == 0)
-                            { //harshada
+                            {
                                 collectionoffset = 0;
                                 collectioncount = 0;
 //                                    arrayList = new ArrayList<String>();
@@ -736,7 +736,7 @@ public class StyleActivity extends AppCompatActivity
                                 txt_store.setText(store_name);
                                 Log.e("store_name ", " "+store_name);
 
-                                //harshada
+
                                 selcollectionName = null;
                                 seloptionName = null;
                                 optionName = "";
