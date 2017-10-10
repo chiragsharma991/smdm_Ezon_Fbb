@@ -49,6 +49,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_locatn;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_prod;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.rel_ez_process_filter;
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.str_checkFrom;
 
 /**
  * Created by pamrutkar on 08/06/17.
@@ -370,16 +371,17 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
                             } else {
-                                for (int i = level - 2; i < mListDataChild.size(); i++) {
+                                for (int i = mGroupPosition+1; i < mListDataChild.size(); i++) {
                                     Log.e("i :", "" + i);
-                                    if (level - 2 == i) {
+                                    if (mGroupPosition + 1 == i) {
                                         for (int j = i; j < mListDataChild.size(); j++) {
                                             mListDataChild.remove(i);
                                         }
                                     }
                                 }//end of first for
 
-                                for (int i = level - 2; i < response.length(); i++) {
+                                for (int i = level - 2; i < response.length(); i++)
+                                {
                                     List<String> drillDownList = new ArrayList<String>();
                                     for (int j = 0; j < response.length(); j++) {
                                         JSONObject obj = response.getJSONObject(j);
@@ -389,7 +391,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 //                                        Log.e("drilldown list:", "" + drillDownList.size());
                                     }
 
-
                                     Set<String> setValue = new HashSet<>();
                                     setValue.addAll(drillDownList);
                                     drillDownList.clear();
@@ -397,20 +398,18 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                     Collections.sort(drillDownList);
                                     //expand group
                                     try {
-                                        mListDataChild.put(mListDataGroup.get(i), drillDownList);
+                                        mListDataChild.put(mListDataGroup.get(1), drillDownList);
                                     } catch (IndexOutOfBoundsException e) {
                                         Log.e("onResponse: ", "" + e.getMessage());
                                     }
-                                    for (int k = level - 2; k < mListDataGroup.size(); k++) {
-                                        explv_ez_locatn.expandGroup(k);
-                                    }
+
+                                        explv_ez_locatn.expandGroup(1);
+
                                 }
                                 notifyDataSetChanged();
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
-
                             }
-
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -458,8 +457,23 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         if (charText.length() == 0) {
             mListDataChild.putAll(dublicate_listDataChild);
             //Collapse Group
-            EzoneSalesFilter.explv_ez_locatn.collapseGroup(0);
-            EzoneSalesFilter.explv_ez_locatn.collapseGroup(1);
+            if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis")) {
+                explv_ez_prod.collapseGroup(0);
+                explv_ez_prod.collapseGroup(1);
+                explv_ez_prod.collapseGroup(2);
+                explv_ez_prod.collapseGroup(3);
+                explv_ez_locatn.collapseGroup(0);
+                explv_ez_locatn.collapseGroup(1);
+
+            } else {
+                explv_ez_prod.collapseGroup(0);
+                explv_ez_prod.collapseGroup(1);
+                explv_ez_prod.collapseGroup(2);
+                explv_ez_prod.collapseGroup(3);
+                explv_ez_prod.collapseGroup(4);
+                explv_ez_locatn.collapseGroup(0);
+                explv_ez_locatn.collapseGroup(1);
+            }
 
         } else {
 
@@ -476,8 +490,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
             }
             EzoneSalesFilter.explv_ez_locatn.expandGroup(0);
             EzoneSalesFilter.explv_ez_locatn.expandGroup(1);
-
-
             notifyDataSetChanged();
         }
     }

@@ -171,6 +171,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 sales_filter_level = getIntent().getIntExtra("selectedlevelVal",0);
                 filter_toggleClick = true;
                 retainSegmentValuesFilter();
+                drill_down_val = getIntent().getStringExtra("selectedStringVal");
                 requestSalesSelectedFilterVal(header_value,sales_filter_level);
             }
         } else {
@@ -211,7 +212,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             listView_SalesAnalysis.addOnItemTouchListener(
                     new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                         @Override
-                        public void onItemClick(View view, final int position) {
+                        public void onItemClick(View view, final int position)
+                        {
+                            selFirstPositionValue = 0;
+                            firstVisibleItem = 0;
                             if (progressBar1.getVisibility() == View.VISIBLE) {
                                 return;
                             } else {
@@ -503,6 +507,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                         requestViewByDisplay(drill_down_val);
                     }
+
+
                     else
                     {
                         requestSalesListDisplayAPI();
@@ -895,6 +901,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.prevplanclass:
+                selFirstPositionValue = 0;
+                firstVisibleItem = 0;
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
@@ -1016,6 +1024,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 }
                 break;
             case R.id.nextplanclass:
+                selFirstPositionValue = 0;
+                firstVisibleItem = 0;
                 if (postRequest != null)
                 {
                     postRequest.cancel();

@@ -164,7 +164,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
     {
         if (Reusable_Functions.chkStatus(context)) {
 
-            String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendersummary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit +"&recache="+recache;
+            String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendersummary/"+ userId + "?offset=" + offsetvalue + "&limit=" +limit +"&recache="+recache + "&senderStoreCode=" + store_Code;
             Log.i(TAG, "url: "+url );
 
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,

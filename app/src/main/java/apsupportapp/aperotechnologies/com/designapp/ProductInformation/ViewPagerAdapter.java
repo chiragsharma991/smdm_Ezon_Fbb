@@ -7,12 +7,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
-    String storeCode;
+    String storeCode, articleOptionCode;
 
-    public ViewPagerAdapter(FragmentManager fm, int NumOfTabs, String storeCode) {
+    public ViewPagerAdapter(FragmentManager fm, int NumOfTabs, String storeCode, String articleOptionCode) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
         this.storeCode = storeCode;
+        this.articleOptionCode = articleOptionCode;
+
     }
 
     @Override
@@ -23,7 +25,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 Details_Fragment tab1 = new Details_Fragment();
                 return tab1;
             case 1:
-                Style_Fragment tab2 = new Style_Fragment(storeCode);
+                Style_Fragment tab2 = new Style_Fragment(storeCode, articleOptionCode);
                 return tab2;
 
             default:
