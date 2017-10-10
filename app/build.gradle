@@ -23,6 +23,7 @@ repositories
 
                     }
             maven { url 'https://dl.bintray.com/sj/maven/' }
+            mavenCentral()
         }
 
 android {
@@ -75,6 +76,7 @@ dependencies
             compile 'com.android.support:appcompat-v7:25.1.1'
             compile 'com.android.support:design:25.1.1'
             compile 'com.android.support:support-v4:25.1.1'
+            compile 'com.nineoldandroids:library:2.4.0'
             compile 'com.mcxiaoke.volley:library:1.0.+'
             compile 'com.numetriclabz.numandroidcharts:numandroidcharts:1.0.12'
             compile 'com.thefinestartist:ytpa:1.2.1'
