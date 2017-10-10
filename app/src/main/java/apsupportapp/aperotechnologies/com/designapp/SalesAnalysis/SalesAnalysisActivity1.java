@@ -903,6 +903,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             case R.id.prevplanclass:
                 selFirstPositionValue = 0;
                 firstVisibleItem = 0;
+
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
@@ -1026,6 +1027,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             case R.id.nextplanclass:
                 selFirstPositionValue = 0;
                 firstVisibleItem = 0;
+
                 if (postRequest != null)
                 {
                     postRequest.cancel();

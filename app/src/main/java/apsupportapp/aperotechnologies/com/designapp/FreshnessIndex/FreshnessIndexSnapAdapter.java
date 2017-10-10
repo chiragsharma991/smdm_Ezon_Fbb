@@ -129,7 +129,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                 FreshnessIndexDetails freshnessIndexDetails = freshnessIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
                 double stkGitQty = Double.parseDouble(String.format("%.1f", freshnessIndexDetails.getStkGitQty()));
-                Log.e(TAG, "stkGitQty----: "+(stkGitQty));
 
 
                 if (fromWhere.equals("Department"))
@@ -186,7 +185,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                 FreshnessIndexDetails freshnessIndexDetails = freshnessIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
                 double stkGitQty = Double.parseDouble(String.format("%.1f", freshnessIndexDetails.getStkGitQty()));
-                Log.e(TAG, "stkGitQty----: "+(freshnessIndexDetails.getStkGitQty()));
                 ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getLevel());
                 ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
                 ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCont()));

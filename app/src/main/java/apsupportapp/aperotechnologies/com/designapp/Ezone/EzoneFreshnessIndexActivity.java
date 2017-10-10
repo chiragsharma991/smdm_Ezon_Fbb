@@ -165,6 +165,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
             public void onScrollStateChanged(RecyclerView recyclerView, final int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
+                Log.i(TAG, "onScrollStateChanged: "+firstVisibleItem);
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
@@ -245,7 +246,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     level = 9;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
                 }
-                Log.i(TAG, "fIndexFirstVisibleItem: " + fIndexFirstVisibleItem);
 
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
@@ -1469,6 +1469,8 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 Log.e(TAG, "sortFunction: true...");
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading data...");
+                    OveridePositionValue = 0;
+                    firstVisibleItem = 0;
                     listViewFIndex.setVisibility(View.VISIBLE);
                     llfIndexhierarchy.setVisibility(View.GONE);
                     FreshnessIndexValue = "";
@@ -1492,6 +1494,8 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading data...");
+                    OveridePositionValue = 0;
+                    firstVisibleItem = 0;
                     listViewFIndex.setVisibility(View.VISIBLE);
                     FreshnessIndexValue = "";
                     llfIndexhierarchy.setVisibility(View.GONE);
