@@ -45,6 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do.activity;
 
 
 public class Details extends AppCompatActivity implements OnPress, View.OnClickListener {
@@ -414,10 +415,10 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                     Log.e("onResponse: ",""+result);
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Details.this, To_Do.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.putExtra("from",store_code);
                                     startActivity(intent);
                                     Reusable_Functions.hDialog();
+                                    activity.finish();
                                     finish();
                                 }
                             }

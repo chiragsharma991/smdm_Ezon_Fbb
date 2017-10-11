@@ -111,13 +111,16 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private AlertDialog dialog;
     private ImageButton dropdkown;
     private ArrayList<String> selectedMcList;
+    String from;
 
-
-    public StockPullFragment(String store_Code) {
+    public StockPullFragment(String store_Code, String from) {
         // Required empty public constructor
         this.store_Code = store_Code;
+        this.from = from;
 
     }
+
+
 
 
     @Override
@@ -134,14 +137,14 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
 
     // TODO: Rename and change types and number of parameters
-    public static StockPullFragment newInstance(String param1, String param2) {
-        StockPullFragment fragment = new StockPullFragment(store_Code);
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static StockPullFragment newInstance(String param1, String param2) {
+//        StockPullFragment fragment = new StockPullFragment(store_Code, from);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -339,9 +342,12 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                 // stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
                                 // recyclerView.setAdapter(stockPullAdapter);
                                 Reusable_Functions.hDialog();
-                                if(!value.equals(""))
+                                if(from != null) {
                                     spinner_text.setText(val);
-                                requestTransferRequestSubcategory(value, "");
+                                    selected_subCategory=value;
+                                    requestTransferRequestSubcategory(value, "");
+                                }
+
                             }
                             catch (Exception e)
                             {

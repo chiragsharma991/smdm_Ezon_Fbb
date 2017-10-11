@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,12 +33,15 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     SharedPreferences sharedPreferences;
     private TextView txtStoreCode,txtStoreName;
     public static String deviceId;
+    String from ;
+    public static Activity activity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
+        activity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -52,7 +56,8 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
         if(getIntent().getExtras() != null) {
-            if (getIntent().getExtras().getString("from") == null) {
+            from = getIntent().getExtras().getString("from");
+            if (from == null) {
                 if (getIntent().getExtras().getString("storeCode") != null) {
                     storeCode = getIntent().getExtras().getString("storeCode");
                     store_Code = storeCode.substring(0, 4);
@@ -111,7 +116,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private void setupViewPager(ViewPager viewPager) {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StockPullFragment(store_Code), "Pull from Stores");
+        adapter.addFragment(new StockPullFragment(store_Code, from), "Pull from Stores");
         adapter.addFragment(new TransferRequestFragment(store_Code), "Requested by Stores");
         viewPager.setAdapter(adapter);
     }
