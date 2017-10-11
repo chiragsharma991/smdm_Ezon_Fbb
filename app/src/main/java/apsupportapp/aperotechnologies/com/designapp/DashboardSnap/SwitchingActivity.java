@@ -513,10 +513,10 @@ public class SwitchingActivity extends AppCompatActivity
             case 5 :
 
                 if (kpiIdArray.contains("020"))
-                    apps.add(new App("To Do", R.mipmap.stocktransfer,"020"));
+                    apps.add(new App("Stock Transfer", R.mipmap.stocktransfer,"020"));
 
                 if (kpiIdArray.contains("021"))
-                    apps.add(new App("Status", R.mipmap.stocktransfer,"021"));
+                    apps.add(new App("Stock Transfer Status", R.mipmap.stocktransfer,"021"));
 
 
                 break;

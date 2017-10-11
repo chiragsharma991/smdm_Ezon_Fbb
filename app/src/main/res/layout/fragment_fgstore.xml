@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="Store format : "/>
+
+    <Spinner
+        android:id="@+id/spinner_storeformat"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"></Spinner>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="Store name : "/>
+
+    <Spinner
+        android:id="@+id/spinner_storename"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"></Spinner>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bel_grey_text"
+        android:layout_marginTop="20dp"/>
+
+    <HorizontalScrollView
+        android:id="@+id/hsv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        >
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:paddingLeft="2dp"-->
+            <!--android:paddingRight="2dp"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:gravity="center_vertical"-->
+            <!--&gt;-->
+
+            <!--<TextView-->
+                <!--android:layout_width="110dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text=""/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="110dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Auditor Name"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="110dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Overall Audit Score"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="110dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Fashion quotient(display looks fashionable)"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="110dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Fashion quotient(display looks fashionable)"/>-->
+
+        <!--</LinearLayout>-->
+
+
+        <!--</HorizontalScrollView>-->
+
+    <!--<ListView-->
+        <!--android:id="@+id/list_audit1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></ListView>-->
+    
+    
+    <TableLayout
+        android:id="@+id/table_reports"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:stretchColumns="5"
+        android:layout_height="wrap_content">
+
+        <!--<TableRow-->
+            <!--android:id="@+id/tableRow3"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+           <!--&gt;-->
+        <!--<TextView-->
+        <!--android:layout_width="110dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text=""/>-->
+
+        <!--<TextView-->
+        <!--android:layout_width="110dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Auditor Name"/>-->
+
+        <!--<TextView-->
+        <!--android:layout_width="110dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Overall Audit Score"/>-->
+
+        <!--<TextView-->
+        <!--android:layout_width="110dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Fashion quotient(display looks fashionable)"/>-->
+
+        <!--<TextView-->
+        <!--android:layout_width="110dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Fashion quotient(display looks fashionable)"/>-->
+
+<!--</TableRow>-->
+    </TableLayout>
+
+
+    </HorizontalScrollView>
+
+
+</LinearLayout>

@@ -400,6 +400,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            Log.e("receiversubmitdetail: ",""+response);
+
                             try {
                                 if (response == null || response.equals("")) {
                                     Reusable_Functions.hDialog();
@@ -412,9 +414,11 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                     Log.e("onResponse: ",""+result);
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Details.this, To_Do.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.putExtra("from",store_code);
                                     startActivity(intent);
                                     Reusable_Functions.hDialog();
+                                    finish();
                                 }
                             }
                             catch (Exception e)

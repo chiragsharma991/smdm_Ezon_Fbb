@@ -770,6 +770,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(TransferRequest_Details.this, To_Do.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    intent.putExtra("from",store_Code);
                                     startActivity(intent);
                                     transferDetailsAdapter.notifyDataSetChanged();
                                     requestSenderDetails();

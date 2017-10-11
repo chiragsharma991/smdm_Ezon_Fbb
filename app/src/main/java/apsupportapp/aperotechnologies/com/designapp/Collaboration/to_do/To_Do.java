@@ -51,12 +51,19 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
-        if(getIntent().getExtras().getString("storeCode") != null )
-        {
-            storeCode = getIntent().getExtras().getString("storeCode");
-            store_Code = storeCode.substring(0,4);
+        if(getIntent().getExtras() != null) {
+            if (getIntent().getExtras().getString("from") == null) {
+                if (getIntent().getExtras().getString("storeCode") != null) {
+                    storeCode = getIntent().getExtras().getString("storeCode");
+                    store_Code = storeCode.substring(0, 4);
 
-            //  Log.i(TAG, "storeCode: "+storeCode );
+                    //  Log.i(TAG, "storeCode: "+storeCode );
+                }
+            }
+            else
+            {
+                store_Code = getIntent().getExtras().getString("from");
+            }
         }
         if(isMultiStore.equals("Yes"))
         {
