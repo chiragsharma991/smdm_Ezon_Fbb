@@ -112,61 +112,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
-//                if(geoLeveLDesc.equals("E ZONE"))
-//                {
-//                    if (fromWhere.equals("Department")) {
-//
-//                        department = productNameBean.getLevel();
-//
-//                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-//                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-//                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
-//
-//                    } else if (fromWhere.equals("Subdept"))
-//                    {
-//                        department = productNameBean.getLevel();
-//
-//                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-//                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-//                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
-//
-//                    } else if (fromWhere.equals("Class"))
-//                    {
-//                        department = productNameBean.getLevel();
-//
-//                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-//                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-//                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
-//
-//
-//                    } else if (fromWhere.equals("Subclass")) {
-//                        department = productNameBean.getLevel();
-//
-//                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-//                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-//                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
-//
-//                    }
-//                    else if (fromWhere.equals("Region"))
-//                    {
-//                        department = productNameBean.getLevel();
-//                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-//                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-//                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
-//
-//                    }
-//                    else if (fromWhere.equals("Store"))
-//                    {
-//                        department = productNameBean.getLevel();
-//                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-//                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-//                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
-//
-//                    }
-//
-//                }
-//                else //FBB login
-//                {
+
                     if (fromWhere.equals("Department")) {
 
                         department=productNameBean.getPlanDept();
@@ -194,14 +140,21 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     } else if (fromWhere.equals("Brand"))
                     {
-
                         department=productNameBean.getBrandName();
 
                         ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
                         ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
                         ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+                    }
+                    else if (fromWhere.equals("Brand Class"))
+                    {
+                        department=productNameBean.getBrandplanClass();
 
-                    } else if (fromWhere.equals("Brand Class"))
+                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+                    }
+                    else if (fromWhere.equals("Store"))
                     {
 
                         department=productNameBean.getBrandplanClass();
@@ -211,9 +164,6 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
                     }
-//
-//                }
-
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc
 
@@ -247,13 +197,10 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     }
 
-    public  class PvAViewHolder extends RecyclerView.ViewHolder {
-
-
+    public  class PvAViewHolder extends RecyclerView.ViewHolder
+    {
         TextView txtPlanClass, txtPlanSales, txtNetSales, txtPvASales, txtPlan, txtAchieve;
         RelativeLayout rel;
-
-
         public PvAViewHolder(View itemView) {
             super(itemView);
 

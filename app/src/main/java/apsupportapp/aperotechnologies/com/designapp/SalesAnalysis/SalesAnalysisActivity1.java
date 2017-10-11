@@ -151,7 +151,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
           // when geoLevelDesc is FBB
             getSupportActionBar().hide();
             initialize_fbb_ui();
-        if (Reusable_Functions.chkStatus(context)) {
+        if (Reusable_Functions.chkStatus(context))
+        {
             Reusable_Functions.sDialog(context, "Loading...");
             progressBar1.setVisibility(View.GONE);
             llhierarchy.setVisibility(View.GONE);
@@ -171,10 +172,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 sales_filter_level = getIntent().getIntExtra("selectedlevelVal",0);
                 filter_toggleClick = true;
                 retainSegmentValuesFilter();
+                onClickFlag = false;
+                drill_down_val = "";
                 drill_down_val = getIntent().getStringExtra("selectedStringVal");
                 requestSalesSelectedFilterVal(header_value,sales_filter_level);
             }
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
             progressBar1.setVisibility(View.GONE);
         }
@@ -218,7 +223,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             firstVisibleItem = 0;
                             if (progressBar1.getVisibility() == View.VISIBLE) {
                                 return;
-                            } else {
+                            }//002201520115--icic0000022
+                            else
+                            {
+//                                drill_down_val = "";
                                 onClickFlag = true;
                                 Handler h = new Handler();
                                 h.postDelayed(new Runnable() {
@@ -230,7 +238,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     txtheaderplanclass.setText("Category");
                                                     txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
                                                     fromWhere = "Category";
-
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
@@ -486,12 +493,20 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             @Override
             public void onClick(View view) {
 
-
+                selFirstPositionValue = 0; firstVisibleItem = 0;
                 if (Reusable_Functions.chkStatus(context))
                 {
                     Reusable_Functions.sDialog(context, "Loading...");
                     progressBar1.setVisibility(View.GONE);
-                    llhierarchy.setVisibility(View.GONE);
+                    if(drill_down_val.equals(getIntent().getStringExtra("selectedStringVal")) || drill_down_val.equals(""))
+                    {
+                        llhierarchy.setVisibility(View.GONE);
+
+                    }
+                    else
+                    {
+                        llhierarchy.setVisibility(View.VISIBLE);
+                    }
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
@@ -511,6 +526,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                     else
                     {
+                        Log.e("onClick: ", "in view dept");
                         requestSalesListDisplayAPI();
                     }
 
@@ -538,12 +554,21 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 fromWhere = "Category";
+                selFirstPositionValue = 0; firstVisibleItem = 0;
 
                 if (Reusable_Functions.chkStatus(context))
                 {
                     Reusable_Functions.sDialog(context, "Loading...");
                     progressBar1.setVisibility(View.GONE);
-                    llhierarchy.setVisibility(View.GONE);
+                    if(drill_down_val.equals(getIntent().getStringExtra("selectedStringVal")) || drill_down_val.equals(""))
+                    {
+                        llhierarchy.setVisibility(View.GONE);
+
+                    }
+                    else
+                    {
+                        llhierarchy.setVisibility(View.VISIBLE);
+                    }
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
@@ -559,6 +584,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     }
                     else
                     {
+                        Log.e("onClick: ", "in view category");
                         requestSalesListDisplayAPI();
                     }
                 }
@@ -586,12 +612,21 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 fromWhere = "Class";
+                selFirstPositionValue = 0; firstVisibleItem = 0;
 
                 if (Reusable_Functions.chkStatus(context))
                 {
                     Reusable_Functions.sDialog(context, "Loading...");
                     progressBar1.setVisibility(View.GONE);
-                    llhierarchy.setVisibility(View.GONE);
+                    if(drill_down_val.equals(getIntent().getStringExtra("selectedStringVal")) || drill_down_val.equals(""))
+                    {
+                        llhierarchy.setVisibility(View.GONE);
+
+                    }
+                    else
+                    {
+                        llhierarchy.setVisibility(View.VISIBLE);
+                    }
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
@@ -607,6 +642,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     }
                     else
                     {
+                        Log.e("onClick: ", "in view class");
                         requestSalesListDisplayAPI();
                     }
 
@@ -636,10 +672,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 {
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                     fromWhere = "Brand";
+                    selFirstPositionValue = 0; firstVisibleItem = 0;
 
                     Reusable_Functions.sDialog(context, "Loading...");
                     progressBar1.setVisibility(View.GONE);
-                    llhierarchy.setVisibility(View.GONE);
+                    if(drill_down_val.equals(getIntent().getStringExtra("selectedStringVal")) || drill_down_val.equals(""))
+                    {
+                        llhierarchy.setVisibility(View.GONE);
+
+                    }
+                    else
+                    {
+                        llhierarchy.setVisibility(View.VISIBLE);
+                    }
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
@@ -655,6 +700,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     }
                     else
                     {
+                        Log.e("onClick: ", "in view brand");
                         requestSalesListDisplayAPI();
                     }
 
@@ -682,12 +728,21 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 fromWhere = "Brand Class";
+                selFirstPositionValue = 0; firstVisibleItem = 0;
 
                 if (Reusable_Functions.chkStatus(context))
                 {
                     Reusable_Functions.sDialog(context, "Loading...");
                     progressBar1.setVisibility(View.GONE);
-                    llhierarchy.setVisibility(View.GONE);
+                    if(drill_down_val.equals(getIntent().getStringExtra("selectedStringVal")) || drill_down_val.equals(""))
+                    {
+                        llhierarchy.setVisibility(View.GONE);
+
+                    }
+                    else
+                    {
+                        llhierarchy.setVisibility(View.VISIBLE);
+                    }
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
@@ -703,6 +758,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     }
                     else
                     {
+                        Log.e("onClick: ", "in view brand class");
                         requestSalesListDisplayAPI();
                     }
 
@@ -730,12 +786,21 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 fromWhere = "Store";
+                selFirstPositionValue = 0; firstVisibleItem = 0;
 
                 if (Reusable_Functions.chkStatus(context))
                 {
                     Reusable_Functions.sDialog(context, "Loading...");
                     progressBar1.setVisibility(View.GONE);
-                    llhierarchy.setVisibility(View.GONE);
+                    if(drill_down_val.equals(getIntent().getStringExtra("selectedStringVal")) || drill_down_val.equals(""))
+                    {
+                        llhierarchy.setVisibility(View.GONE);
+
+                    }
+                    else
+                    {
+                        llhierarchy.setVisibility(View.VISIBLE);
+                    }
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
@@ -751,6 +816,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     }
                     else
                     {
+                        Log.e("onClick: ", "in view store");
                         requestSalesListDisplayAPI();
                     }
                 }
@@ -910,6 +976,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 if (progressBar1.getVisibility() == View.VISIBLE) {
                     return;
                 } else {
+                    drill_down_val = "";
                     switch (txtheaderplanclass.getText().toString()) {
 
                         case "Brand Class":
@@ -1038,6 +1105,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 }
                 else
                 {
+                    drill_down_val = "";
                     switch (txtheaderplanclass.getText().toString()) {
                         case "Department":
                             relprevbtn.setVisibility(View.VISIBLE);
@@ -1163,6 +1231,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                 salesAnalysisClassArrayList= new ArrayList<SalesAnalysisListDisplay>();
                 header_value = "";
+                drill_down_val = "";
                 selFirstPositionValue = 0;firstVisibleItem = 0;
                 if (Reusable_Functions.chkStatus(context))
                 {
@@ -1211,6 +1280,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         onClickFlag = false;
                         progressBar1.setVisibility(View.GONE);
+                        return;
                     } else if (response.length() == limit)
                     {
                         for (i = 0; i < response.length(); i++) {
@@ -1412,6 +1482,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 onClickFlag = false;
                                 progressBar1.setVisibility(View.GONE);
+                                return;
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -1433,7 +1504,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             pageradapter = new SalesPagerAdapter(context, analysisArrayList, firstVisibleItem, vwpagersales, lldots, salesadapter, listView_SalesAnalysis, salesAnalysisClassArrayList, fromWhere, pageradapter);
                             vwpagersales.setAdapter(pageradapter);
                             vwpagersales.setCurrentItem(currentVmPos);
-                            pageradapter.notifyDataSetChanged();
+//                            pageradapter.notifyDataSetChanged();
                             onClickFlag = false;
                             Reusable_Functions.hDialog();
                             progressBar1.setVisibility(View.GONE);
@@ -1617,6 +1688,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
+                                return;
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -1691,9 +1763,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
+                                return;
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1761,6 +1834,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                                 val = "";
                                 val =  deptName.replaceAll("%20", " ").replaceAll("%26","&");
+                                drill_down_val = "";
                                 drill_down_val = "&department="+ deptName.replaceAll(" ", "%20").replaceAll("&","%26");
                                 txthDeptName.setText(val);
                                 llhierarchy.setVisibility(View.VISIBLE);
@@ -1788,7 +1862,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -1799,7 +1873,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -1836,9 +1910,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
+                                return;
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -1932,7 +2007,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -1943,7 +2018,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -1979,9 +2054,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
+                                return;
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -2073,7 +2149,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -2084,7 +2160,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -2120,9 +2196,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
+                                return;
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -2213,7 +2290,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                         {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -2225,7 +2302,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -2307,6 +2384,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
+                                return;
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -2475,9 +2553,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 progressBar1.setVisibility(View.GONE);
                                 onClickFlag = false;
+                                return;
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -2597,7 +2676,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             }
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             progressBar1.setVisibility(View.GONE);
                             onClickFlag = false;
                             e.printStackTrace();
@@ -2608,7 +2687,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         progressBar1.setVisibility(View.GONE);
                         onClickFlag = false;
                         error.printStackTrace();
@@ -2639,6 +2718,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         level = 0;
         selectedsegValue = "WTD";
         level = 1;
+        drill_down_val = "";
         this.finish();
     }
 

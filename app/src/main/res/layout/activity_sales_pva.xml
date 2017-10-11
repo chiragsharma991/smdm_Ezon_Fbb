@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentTop="true"
-       >
+        android:layout_alignParentTop="true">
 
 
         <LinearLayout
@@ -73,10 +72,10 @@
 
 
                     <RelativeLayout
+                        android:layout_toLeftOf="@+id/btn_reset"
                         android:id="@+id/imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentRight="true"
                         android:background="@drawable/button_click"
                         >
 
@@ -89,8 +88,8 @@
 
                     </RelativeLayout>
 
-                 <!--   <RelativeLayout
-                        android:id="@+id/sortPopup"
+                    <RelativeLayout
+                        android:id="@+id/btn_reset"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
                         android:layout_alignParentRight="true"
@@ -103,10 +102,10 @@
                             android:layout_width="@dimen/icon_width"
                             android:layout_height="@dimen/icon_height"
                             android:layout_centerInParent="true"
-                            android:background="@mipmap/iconmore"
+                            android:background="@drawable/resetbtn"
                             android:clickable="false" />
 
-                    </RelativeLayout>-->
+                    </RelativeLayout>
 
 
                 </RelativeLayout>

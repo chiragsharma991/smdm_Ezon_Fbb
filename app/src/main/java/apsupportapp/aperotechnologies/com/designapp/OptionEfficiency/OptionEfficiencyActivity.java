@@ -1445,7 +1445,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Reusable_Functions.hDialog();
+
                         Log.e("TAG", "requestOptionEfficiencyFilterVal: response  " + response);
 
                         if (filter_level == 2)
@@ -1583,12 +1583,12 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.e( "onResponse:All Api ",""+response );
-                        Reusable_Functions.hDialog();
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
-
+                                Reusable_Functions.hDialog();
                                 return;
+
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -1678,7 +1678,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Reusable_Functions.hDialog();
                         error.printStackTrace();
+
                     }
                 }
 
@@ -2371,7 +2373,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 oe_pieChart.clearValues();
                                 oe_pieChart.clearFocus();
                                 oe_pieChart.invalidate();
-
                                 Reusable_Functions.hDialog();
                                 processBar.setVisibility(View.GONE);
 
