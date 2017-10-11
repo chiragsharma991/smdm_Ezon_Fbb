@@ -345,7 +345,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                 if(from != null) {
                                     spinner_text.setText(val);
                                     selected_subCategory=value;
-                                    requestTransferRequestSubcategory(value, "");
+                                    requestTransferRequestSubcategory(value);
                                 }
 
                             }
@@ -390,7 +390,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
     }
 
-    private void requestTransferRequestSubcategory(String prodLevel3Desc, final String nodata)
+    private void requestTransferRequestSubcategory(String prodLevel3Desc)
     {
         if (Reusable_Functions.chkStatus(context)) {
             dropdkown.setVisibility(View.GONE);
@@ -415,24 +415,24 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                    if(nodata.equals("nodata")){
-                                        spinner_text.setText("Select Subcategory");
-                                        subcategoryList=new ArrayList<>();
-                                        requestTransferRequestsummary();
-                                        return;
-                                    }else{
+
                                         checkNetworkFalse = true;
                                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                         subcategoryList.clear();
                                         //  stockPullAdapter.notifyDataSetChanged();
                                         stockPullAdapter = new StockPullAdapter(subcategoryList,selectMc, getActivity(), null);
                                         recyclerView.setAdapter(stockPullAdapter);
+                                    spinner_text.setText("Select Subcategory");
+                                    subcategoryList=new ArrayList<>();
+                                    requestTransferRequestsummary();
+
+
 
                                         Log.e("TAG", "requestTransferRequestSubcategory: " ); //
                                         dropdkown.setVisibility(View.VISIBLE);
                                         progressBar.setVisibility(View.GONE);
                                         return;
-                                    }
+
 
 
                                 } else if (response.length() == limit) {
@@ -539,6 +539,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext, "Sending data failed...", Toast.LENGTH_LONG).show();
 
+
+
                                 } else {
                                     Reusable_Functions.hDialog();
                                     String result = response.getString("status");
@@ -555,7 +557,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 //
 //                                        requestTransferRequestsummary("no data");
 //                                    }else{
-                                        requestTransferRequestSubcategory(value, "nodata");
+
+                                        requestTransferRequestSubcategory(value);
 
 //                                    }
 
@@ -763,7 +766,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
         if(!dublicateSelectprodLevel3Desc.equals(selectprodLevel3Desc))
         {
            // progressBar.setVisibility(View.VISIBLE);
-            requestTransferRequestSubcategory(selectprodLevel3Desc, "");
+            requestTransferRequestSubcategory(selectprodLevel3Desc);
             dublicateSelectprodLevel3Desc=selectprodLevel3Desc;
         }
 
@@ -811,7 +814,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                 spinner_text.setText(val);
                 selected_subCategory=value;
                 dialog.dismiss();
-                requestTransferRequestSubcategory(value, "");
+                requestTransferRequestSubcategory(value);
 
             }
         });
