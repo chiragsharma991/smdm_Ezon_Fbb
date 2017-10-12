@@ -239,7 +239,7 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     //---------------------------- API Declaration --------------------------//
     private void requestReceiverCaseStatusSummary()
     {
-        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache; //+ "&senderStoreCode=" + storeCode;
+        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache + "&reqStoreCode=" + storeCode;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {
                     @Override
