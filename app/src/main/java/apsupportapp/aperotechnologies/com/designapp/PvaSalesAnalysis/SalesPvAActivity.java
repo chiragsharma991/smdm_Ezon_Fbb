@@ -212,6 +212,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
+                Log.i(TAG, "onScrollStateChanged: "+focusposition);
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
@@ -239,6 +240,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     h.postDelayed(new Runnable() {
                         public void run() {
                             if (position < salesAnalysisClassArrayList.size()) {
+
+
                                  switch (txtheaderplanclass.getText().toString()) {
                                     case "Department":
                                         btnSalesPrev.setVisibility(View.VISIBLE);
@@ -1012,6 +1015,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
+                    Log.i(TAG, "TimeUP: firstVisibleItem" + focusposition + " and  OveridePositionValue" + selFirstPositionValue);
                     if (focusposition != selFirstPositionValue) {
                         if (postRequest != null) {
                             postRequest.cancel();
@@ -2931,6 +2935,8 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 
 
             case R.id.btnSalesBack:
+                selFirstPositionValue =0;
+                focusposition=0;
                 if (postRequest != null) {
                     postRequest.cancel();
                 }

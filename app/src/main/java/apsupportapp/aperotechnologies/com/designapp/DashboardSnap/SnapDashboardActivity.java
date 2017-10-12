@@ -440,12 +440,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<Login_StoreList> list = db.db_GetListMulipleWhereClause(selectLob, selectconcept);
                 Log.i(TAG, "db_GetListMulipleWhereClause sizes are: " + list.size() + " and " + gson.toJson(list));
                 Login_StoreList model = list.get(0);
+                Log.i(TAG, "model: "+model.getGeoLevel2Desc()+" "+model.getLobName());
                 Reusable_Functions.showSnackbar(viewpart, "Mapping success !");
                 lob_name_txt.setText(selectLob);
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                if (model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION")) {
+                if(model.getLobName().equals("FASHION") && model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") ) {
+                    Log.i(TAG, "after done model: "+model.getGeoLevel2Desc()+" "+model.getLobName());
                     editor.putString("concept", "BB,FBB");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
@@ -453,25 +455,16 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     editor.putString("kpi_id", model.getKpiId());
                     editor.apply();
 
-                } else if (model.getGeoLevel2Code().equals("EZ")) {
+                } else if (model.getLobName().equals("ELECTRONICS")) {
 
-                    editor.putString("concept", "BB,EZ");
+                    editor.putString("concept", "BB,EZ,CT,HT");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
                     editor.putString("lobname", "ELECTRONICS");
                     editor.putString("kpi_id", model.getKpiId());
                     editor.apply();
 
-                } else if (model.getGeoLevel2Code().equals("BB") && model.getLobName().equals("ELECTRONICS")) {
-
-                    editor.putString("concept", "BB,EZ");
-                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
-                    editor.putString("lobid", model.getLobId());
-                    editor.putString("lobname", "ELECTRONICS");
-                    editor.putString("kpi_id", model.getKpiId());
-                    editor.apply();
-
-                } else {
+                }  else {
                     editor.putString("concept", model.getGeoLevel2Code());
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());

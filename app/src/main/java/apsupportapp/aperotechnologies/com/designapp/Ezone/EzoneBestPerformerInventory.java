@@ -1320,24 +1320,24 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
 
                 //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol  + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol  + selectedString + "&top=" + top + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + selectedString + "&top=" + top + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             }
         } else {
             if (coreSelection) {
 
                 //core selection without season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             } else {
 
                 // fashion select with season params
 
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
             }
         }
         return url;

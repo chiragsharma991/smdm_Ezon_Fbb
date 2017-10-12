@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,8 @@ public class InspectionHistoryAdapter extends BaseAdapter
         this.context = context;
         this.list_inspectionHistory = list_inspectionHistory;
     }
+
+
 
     @Override
     public int getCount() {
@@ -84,6 +87,9 @@ public class InspectionHistoryAdapter extends BaseAdapter
             viewHolder.btn_view_details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    Intent view_details = new Intent(context, ViewDetailsActivity.class);
+                    context.startActivity(view_details);
 
                 }
             });

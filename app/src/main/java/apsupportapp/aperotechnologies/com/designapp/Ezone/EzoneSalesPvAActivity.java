@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -72,6 +73,10 @@ import apsupportapp.aperotechnologies.com.designapp.model.RecyclerItemClickListe
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesPvAAnalysisWeek;
+
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_FLING;
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL;
 
 
 public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener {
@@ -203,18 +208,26 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
 
+
+
+
         listViewSalesPvA.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 RecyclerViewPositionHelper mRecyclerViewHelper = RecyclerViewPositionHelper.createHelper(recyclerView);
                 totalItemCount = mRecyclerViewHelper.getItemCount();
                 focusposition = mRecyclerViewHelper.findFirstVisibleItemPosition();
+                listViewSalesPvA.invalidate();
             }
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                listViewSalesPvA.invalidate();
+
                 currentState = newState;
+                Log.i(TAG, "onScrollStateChanged: "+focusposition);
+
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
@@ -241,6 +254,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                     h.postDelayed(new Runnable() {
                         public void run() {
                             if (position < salesAnalysisClassArrayList.size()) {
+                                selFirstPositionValue =0;
+                                focusposition=0;
 
                                     switch (txtheaderplanclass.getText().toString()) {
                                         case "Department":
@@ -571,6 +586,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 Log.e(TAG, "sortFunction: true...");
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading data...");
+                    selFirstPositionValue =0;
+                    focusposition=0;
                     llpvahierarchy.setVisibility(View.GONE);
                     preValue = postValue;
                     txtheaderplanclass.setText("Department");
@@ -591,6 +608,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 // for location...
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading data...");
+                    selFirstPositionValue =0;
+                    focusposition=0;
                     llpvahierarchy.setVisibility(View.GONE);
                     txtheaderplanclass.setText("Region");
                     btnSalesPrev.setVisibility(View.INVISIBLE);
@@ -664,13 +683,14 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                         level = 9;
                         pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
                     }
-                    Log.e(TAG, "pvaFirstVisibleItem: " + pvaFirstVisibleItem + "\t" + focusposition);
 
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         offsetvalue = 0;
                         limit = 100;
                         count = 0;
+                        Log.i(TAG, "TimeUP: firstVisibleItem" + focusposition + " and  OveridePositionValue" + selFirstPositionValue);
+
                         if (focusposition != selFirstPositionValue) {
                             if (postRequest != null) {
                                 postRequest.cancel();
@@ -2392,6 +2412,9 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSalesNext:
+                selFirstPositionValue =0;
+                focusposition=0;
+
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
@@ -2475,30 +2498,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                         }
                         break;
 
-//                        case "Brand":
-//                            btnSalesNext.setVisibility(View.INVISIBLE);
-//                            txtheaderplanclass.setText("Brand Class");
-//                            fromWhere = "Brand Class";
-//                            level = 5;
-//                            pvaVal = " ";
-//                            salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-//                            listViewSalesPvA.removeAllViews();
-//                            llpvahierarchy.setVisibility(View.GONE);
-//
-//                            if (Reusable_Functions.chkStatus(context)) {
-//                                Reusable_Functions.hDialog();
-//                                Reusable_Functions.sDialog(context, "Loading data...");
-//                                pva_progressBar.setVisibility(View.GONE);
-//                                offsetvalue = 0;
-//                                limit = 100;
-//                                count = 0;
-//                                requestSalesViewPagerValueAPI();
-//
-//                            } else {
-//                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                            }
-//                            break;
-
                     case "Region":
                         btnSalesNext.setVisibility(View.INVISIBLE);
                         btnSalesPrev.setVisibility(View.VISIBLE);
@@ -2531,6 +2530,9 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
 
             case R.id.btnSalesBack:
+                selFirstPositionValue =0;
+                focusposition=0;
+
                 if (postRequest != null) {
                     postRequest.cancel();
                 }

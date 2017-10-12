@@ -223,7 +223,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             firstVisibleItem = 0;
                             if (progressBar1.getVisibility() == View.VISIBLE) {
                                 return;
-                            }
+                            }//002201520115--icic0000022
                             else
                             {
 //                                drill_down_val = "";
@@ -969,6 +969,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             case R.id.prevplanclass:
                 selFirstPositionValue = 0;
                 firstVisibleItem = 0;
+
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
@@ -1093,6 +1094,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             case R.id.nextplanclass:
                 selFirstPositionValue = 0;
                 firstVisibleItem = 0;
+
                 if (postRequest != null)
                 {
                     postRequest.cancel();

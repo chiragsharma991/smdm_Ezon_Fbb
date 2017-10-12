@@ -463,6 +463,7 @@ public class Style_Fragment extends Fragment {
     }
 
 
+
     private void addTableRowToTableA() {
         tableA.addView(this.componentATableRow());
     }
