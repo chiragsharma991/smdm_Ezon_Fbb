@@ -422,6 +422,15 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                     }
                     callback(build);
                 }
+                else if (getIntent().getStringExtra("checkfrom").equals("visualAssort"))
+                {
+                    intent = new Intent(SalesAnalysisFilter.this, VisualAssortmentActivity.class);
+
+                    if (build.length() != 0) {
+                        VisualAssortmentActivity.Visual_Assortment_Activity.finish();
+                    }
+                    callback(build);
+                }
                 break;
         }
     }

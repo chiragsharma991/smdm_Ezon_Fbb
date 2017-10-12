@@ -173,7 +173,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                         @Override
                         public void onResponse(JSONArray response)
                         {
-                            Log.i(TAG, "onResponse: sendersummary "+response );
+//                            Log.i(TAG, "onResponse: sendersummary "+response );
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {

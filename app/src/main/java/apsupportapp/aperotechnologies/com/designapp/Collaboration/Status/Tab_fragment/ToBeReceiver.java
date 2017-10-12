@@ -240,7 +240,8 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     //---------------------------- API Declaration --------------------------//
     private void requestReceiverCaseStatusSummary()
     {
-        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache; //+ "&senderStoreCode=" + storeCode;
+        String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache + "&reqStoreCode=" + storeCode;
+     //   String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache; //+ "&senderStoreCode=" + storeCode;
         Log.e("TAG", "requestReceiverCaseStatusSummary: "+receiver_case_url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {
@@ -337,8 +338,6 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         {
             url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&storeCode="+senderStoreCode+"&recache="+recache;
         }
-
-        Log.e("TAG", "requestReceiverCaseStatus: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

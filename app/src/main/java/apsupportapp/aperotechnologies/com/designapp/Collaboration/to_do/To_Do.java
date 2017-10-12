@@ -27,13 +27,13 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toobar;
     private ViewPager viewPager;
-    private TabLayout tab;
+    public static TabLayout tab;
     RelativeLayout ToDo_imageBtnBack;
     String userId, bearertoken, storeDescription, geoLeveLDesc, isMultiStore, value, storeCode,store_Code;
     SharedPreferences sharedPreferences;
     private TextView txtStoreCode,txtStoreName;
     public static String deviceId;
-    String from ;
+    String from ,details;
     public static Activity activity;
 
 
@@ -57,6 +57,8 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
         if(getIntent().getExtras() != null) {
             from = getIntent().getExtras().getString("from");
+//            details = getIntent().getExtras().getString("checkfrom");
+
             if (from == null) {
                 if (getIntent().getExtras().getString("storeCode") != null) {
                     storeCode = getIntent().getExtras().getString("storeCode");
@@ -68,8 +70,10 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
             else
             {
                 store_Code = getIntent().getExtras().getString("from");
+                details = getIntent().getExtras().getString("checkfrom");
             }
         }
+
         if(isMultiStore.equals("Yes"))
         {
             txtStoreCode.setText("Concept : ");
@@ -116,7 +120,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private void setupViewPager(ViewPager viewPager) {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StockPullFragment(store_Code, from), "Pull from Stores");
+        adapter.addFragment(new StockPullFragment(store_Code, from, details), "Pull from Stores");
         adapter.addFragment(new TransferRequestFragment(store_Code), "Requested by Stores");
         viewPager.setAdapter(adapter);
     }
