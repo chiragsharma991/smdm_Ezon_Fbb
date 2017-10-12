@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -240,11 +241,14 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     private void requestReceiverCaseStatusSummary()
     {
         String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache + "&reqStoreCode=" + storeCode;
+     //   String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache; //+ "&senderStoreCode=" + storeCode;
+        Log.e("TAG", "requestReceiverCaseStatusSummary: "+receiver_case_url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
+                        Log.e("TAG", "onResponse: "+response );
                     try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -327,12 +331,12 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
         }
         else if(Case == 3 ) // STO status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/sto/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&storeCode="+senderStoreCode+"&recache="+recache;
 
         }
         else if(Case==4) // GRN status
         {
-            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&senderStoreCode="+senderStoreCode+"&recache="+recache;
+            url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/grn/" + userId + "?offset=" + offsetval + "&limit=" + limit +"&caseNo="+caseNo+"&storeCode="+senderStoreCode+"&recache="+recache;
         }
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
