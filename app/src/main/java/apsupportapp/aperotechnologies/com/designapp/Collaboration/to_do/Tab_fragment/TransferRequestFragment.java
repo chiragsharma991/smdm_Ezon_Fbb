@@ -370,8 +370,9 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                     SenderSummaryList.clear();
                                     transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), null);
                                     senderSummary_recyclerView.setAdapter(transferRequestAdapter);
-//                                    transferRequestAdapter.notifyDataSetChanged();
-//                                    requestTransferRequestsummary();
+                                    transferRequestAdapter.notifyDataSetChanged();
+                                    Reusable_Functions.sDialog(context, "Loading...");
+                                    requestTransferRequestsummary();
 //                                    switch (id){
 //                                        case 0:
 //                                            String selectCase=jsonarray.getJSONObject(0).get("caseNo").toString();
