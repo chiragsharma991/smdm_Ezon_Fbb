@@ -16,7 +16,6 @@ public class InspectionHistory extends AppCompatActivity {
 //    ListView list_inspectionHistory;
 //    InspectionHistoryAdapter adp_inspectionhistory;
 //    List<InspectionHistoryZonalRatings> arr_zonalratings;
-    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

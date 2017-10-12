@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
+
+
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.InspectionHistoryZonalRatings;
 
@@ -22,19 +24,15 @@ import apsupportapp.aperotechnologies.com.designapp.model.InspectionHistoryZonal
 
 public class ExternalAuditReviewAdapter extends BaseAdapter
 {
-
     List<InspectionHistoryZonalRatings> arr_zonalratings;
     Context context;
-    ListView list_inspectionHistory;
-    int lastSelectedPos;
 
 
-
-    public ExternalAuditReviewAdapter(List<InspectionHistoryZonalRatings> arr_zonalratings, Context context, ListView list_inspectionHistory)
+    public ExternalAuditReviewAdapter(List<InspectionHistoryZonalRatings> arr_zonalratings, Context context, ListView list_externalauditorreview)
     {
         this.arr_zonalratings = arr_zonalratings;
         this.context = context;
-        this.list_inspectionHistory = list_inspectionHistory;
+
     }
 
     @Override
@@ -70,61 +68,19 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
 
             viewHolder = new Holder();
             mInflater = LayoutInflater.from(context);
-            view = mInflater.inflate(R.layout.adapter_inspection_history, null);
+            view = mInflater.inflate(R.layout.adapter_externalaudrev, null);
 
-            viewHolder.rel_zonal = (RelativeLayout) view.findViewById(R.id.rel_zonal);
-            viewHolder.rel_count =  (RelativeLayout) view.findViewById(R.id.rel_count);
-            viewHolder.txt_zone_name = (TextView) view.findViewById(R.id.txt_zone_name);
-            viewHolder.txt_avg_rating = (TextView) view.findViewById(R.id.txt_avg_rating);
-            viewHolder.txt_audit_done = (TextView) view.findViewById(R.id.txt_audit_done);
-            viewHolder.txt_count_fg_audit = (TextView) view.findViewById(R.id.txt_count_fg_audit);
-            viewHolder.txt_count_external_audit = (TextView) view.findViewById(R.id.txt_count_external_audit);
-            viewHolder.btn_view_details = (Button) view.findViewById(R.id.btn_view_details);
+            viewHolder.txt_1 = (TextView) view.findViewById(R.id.txt_1);
+            viewHolder.txt_2 = (TextView) view.findViewById(R.id.txt_2);
+            viewHolder.txt_3 = (TextView) view.findViewById(R.id.txt_3);
+            viewHolder.txt_4 = (TextView) view.findViewById(R.id.txt_4);
 
-            viewHolder.btn_view_details.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            Log.e("i "," "+i);
 
-                }
-            });
-
-
-
-            viewHolder.rel_zonal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Log.e("== "," "+lastSelectedPos +" "+list_inspectionHistory.getChildAt(lastSelectedPos));
-
-
-                    if(i != lastSelectedPos)
-                    {
-                        RelativeLayout rel_main = (RelativeLayout) list_inspectionHistory.getChildAt(lastSelectedPos);
-                        CardView cardview = (CardView) rel_main.getChildAt(0);
-                        RelativeLayout rel = (RelativeLayout) cardview.getChildAt(0);
-                        rel.getChildAt(2).setVisibility(View.GONE);
-                    }
-
-                    if(viewHolder.rel_count.getVisibility() == View.VISIBLE)
-                    {
-                        viewHolder.rel_count.setVisibility(View.GONE);
-                    }
-                    else
-                    {
-                        viewHolder.rel_count.setVisibility(View.VISIBLE);
-                    }
-
-                    lastSelectedPos = i;
-                    Log.e("pos[0] "," "+lastSelectedPos);
-                }
-            });
-
-
-            viewHolder.txt_zone_name.setText(arr_zonalratings.get(i).getZone_name());
-            viewHolder.txt_avg_rating.setText(arr_zonalratings.get(i).getAvg_rating());
-            viewHolder.txt_audit_done.setText("Audit done in : "+arr_zonalratings.get(i).getAudit_done());
-            viewHolder.txt_count_fg_audit.setText("Count of FG Audit : "+arr_zonalratings.get(i).getCount_fg_audit());
-            viewHolder.txt_count_external_audit.setText("Count of External Agency Audit : "+arr_zonalratings.get(i).getCount_external_audit());
+            viewHolder.txt_1.setText(arr_zonalratings.get(i).getZone_name());
+            viewHolder.txt_2.setText(arr_zonalratings.get(i).getAvg_rating());
+            viewHolder.txt_3.setText(arr_zonalratings.get(i).getAudit_done());
+            viewHolder.txt_4.setText(arr_zonalratings.get(i).getCount_fg_audit());
             view.setTag(viewHolder);
 
         } else
@@ -137,8 +93,7 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
 
     private class Holder
     {
-        RelativeLayout rel_zonal, rel_count;
-        TextView txt_zone_name, txt_avg_rating, txt_audit_done, txt_count_fg_audit, txt_count_external_audit;
-        Button btn_view_details;
+        TextView txt_1, txt_2, txt_3, txt_4;
+
     }
 }

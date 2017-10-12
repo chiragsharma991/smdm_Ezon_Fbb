@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="0dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardElevation="3dp"
+        card_view:cardUseCompatPadding="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rel_1"
+                    android:layout_toLeftOf="@+id/rel_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/txt_1"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="FBB  001 "
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:id="@+id/txt_2"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/txt_1"
+                        android:layout_marginLeft="10dp"
+                        android:text="FBB - ABC Mall "
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:id="@+id/txt_3"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/txt_2"
+                        android:layout_marginLeft="10dp"
+                        android:text="Kandivali, Mumbai 400088"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/txt_4"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/txt_3"
+                        android:layout_marginLeft="10dp"
+                        android:text="Thursday, August 31, 2017"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_2"
+                    android:layout_toLeftOf="@+id/rel_3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/txt_header_aud_type"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="6dp"
+                        android:text="Auditor Type:"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:id="@+id/txt_aud_type"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/txt_header_aud_type"
+                        android:text="External Auditor"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+                        android:id="@+id/txt_header_agency_name"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/txt_aud_type"
+                        android:text="Agency Name:"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/txt_agency_name"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/txt_header_agency_name"
+                        android:text="IMRB"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_3"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/ezfb_black"
+                        android:layout_above="@+id/txt_Reviews"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
+
+                    <TextView
+                        android:id="@+id/txt_Reviews"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="6dp"
+                        android:text="Pending Review"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+
+
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>
