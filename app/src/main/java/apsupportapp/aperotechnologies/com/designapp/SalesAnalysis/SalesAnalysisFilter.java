@@ -80,7 +80,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
     int offset = 0, limit = 100, count = 0;
     public int an_level_filter = 1, prod_level = 1;
     String userId, bearertoken, geoLevel2Code, lobId;
-    public int anone_filter_level = 1;
+
     private Intent intent;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
@@ -261,7 +261,6 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         loc_listDataChild = new HashMap<String, List<String>>();
         prod_listDataChild = new HashMap<String, List<String>>();
 
-
         prod_listDataHeader.add("Department");
         prod_listDataHeader.add("Category");
         prod_listDataHeader.add("Class");
@@ -358,7 +357,8 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                     callback(build);
 
                 }
-                else if (getIntent().getStringExtra("checkfrom").equals("optionEfficiency")) {
+                else if (getIntent().getStringExtra("checkfrom").equals("optionEfficiency"))
+                {
                     intent = new Intent(SalesAnalysisFilter.this, OptionEfficiencyActivity.class);
 
                     if (build.length() != 0) {
@@ -367,7 +367,8 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                     callback(build);
 
                 }
-                else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers")) {
+                else if (getIntent().getStringExtra("checkfrom").equals("bestPerformers"))
+                {
                     intent = new Intent(SalesAnalysisFilter.this, BestPerformerInventory.class);
 
                     if (build.length() != 0) {
@@ -566,7 +567,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("dept response :", "" + response);
+//                        Log.e("dept response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -650,7 +651,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("categry response :", "" + response);
+//                        Log.e("categry response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -738,7 +739,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("class response :", "" + response);
+//                        Log.e("class response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -826,7 +827,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("brand response :", "" + response);
+//                        Log.e("brand response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();

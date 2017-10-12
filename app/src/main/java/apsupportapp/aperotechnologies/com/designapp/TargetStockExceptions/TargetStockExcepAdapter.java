@@ -27,13 +27,16 @@ public class TargetStockExcepAdapter extends BaseAdapter {
     private ArrayList<FloorAvailabilityDetails> arrayList;
     private LayoutInflater mInflater;
     Context context;
-    int Position;
+    int Position,mlevel;
     ProgressBar progressView = null;
+    TargetStockExceptionActivity targetStockExceptionActivity;
 
-    public TargetStockExcepAdapter(ArrayList<FloorAvailabilityDetails> arrayList, Context context) {
+    public TargetStockExcepAdapter(ArrayList<FloorAvailabilityDetails> arrayList, int level, Context context) {
 
         this.arrayList = arrayList;
         this.context = context;
+        this.mlevel = level;
+        Log.e("TargetStockExcepAdapter: ",""+mlevel);
         mInflater = LayoutInflater.from(context);
     }
 
@@ -86,26 +89,26 @@ public class TargetStockExcepAdapter extends BaseAdapter {
         }
         NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
-        if (TargetStockExceptionActivity.level == 1)
+        if (mlevel == 1)
         {
            holder.target_option.setText(arrayList.get(position).getPlanDept());
 
         }
-        else if (TargetStockExceptionActivity.level == 2)
+        else if (mlevel == 2)
         {
             holder.target_option.setText(arrayList.get(position).getPlanCategory());
 
         }
-        else if (TargetStockExceptionActivity.level == 3)
+        else if (mlevel == 3)
         {
             holder.target_option.setText(arrayList.get(position).getPlanClass());
 
         }
-        else if (TargetStockExceptionActivity.level == 4)
+        else if (mlevel == 4)
         {
             holder.target_option.setText(arrayList.get(position).getBrandName());
         }
-        else if (TargetStockExceptionActivity.level == 5)
+        else if (mlevel == 5)
         {
             holder.target_option.setText(arrayList.get(position).getBrandplanClass());
         }

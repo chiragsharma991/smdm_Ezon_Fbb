@@ -3,6 +3,9 @@ package apsupportapp.aperotechnologies.com.designapp.DashboardSnap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -333,12 +336,32 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(SalesPvAActivity);
                     break;
                 case "044":
+                  //  FreshnessIndexActivity = new Intent(context, EzoneFreshnessIndexActivity.class);
                     FreshnessIndexActivity = new Intent(context, EzoneFreshnessIndexActivity.class);
                     startActivity(FreshnessIndexActivity);
                     break;
                 case "045":
                     BestPerformerInventory = new Intent(context, EzoneBestPerformerInventory.class);
                     startActivity(BestPerformerInventory);
+                    break;
+                case "046":
+                    // voc implementation...
+                    String your_apppackagename="com.geckolyst.futuregroup";
+                    PackageManager packageManager = getPackageManager();
+                    ApplicationInfo applicationInfo = null;
+                    try {
+                        applicationInfo = packageManager.getApplicationInfo(your_apppackagename, 0);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    if (applicationInfo == null) {
+                        // not installed it will open your app directly on playstore
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.geckolyst.futuregroup")));
+                    } else {
+                        // Installed
+                        Intent LaunchIntent = packageManager.getLaunchIntentForPackage(your_apppackagename);
+                        startActivity( LaunchIntent );
+                    }
                     break;
 
 
@@ -513,6 +536,9 @@ public class SwitchingActivity extends AppCompatActivity
 
                 if (kpiIdArray.contains("025"))
                     apps.add(new App("Inspection History", R.mipmap.storeinspection,"025"));
+
+                if (kpiIdArray.contains("046"))
+                    apps.add(new App("VOC", R.mipmap.voc,"046"));
 
                 break;
 
@@ -694,7 +720,7 @@ public class SwitchingActivity extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response "," "+response);
+//                        Log.e("response "," "+response);
                         Reusable_Functions.hDialog();
                         try {
                             if (response.equals("") || response == null || response.length() == 0 )
@@ -846,8 +872,8 @@ public class SwitchingActivity extends AppCompatActivity
 
 //                            Collections.sort(arrayList);
 //                            Collections.sort(arrayListbody);
-                            Log.e("arrayList "," "+arrayList.toString());
-                            Log.e("arrayListbody "," "+arrayListbody.toString());
+//                            Log.e("arrayList "," "+arrayList.toString());
+//                            Log.e("arrayListbody "," "+arrayListbody.toString());
 
                             // arrayList.add(0, "Select Storecode");
                             spinnerArrayAdapter.notifyDataSetChanged();

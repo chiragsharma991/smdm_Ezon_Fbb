@@ -288,6 +288,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     count = 0;
                     fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
 
+                    Log.i(TAG, "TimeUP: firstVisibleItem"+firstVisibleItem+" and  OveridePositionValue"+OveridePositionValue);
                     if (firstVisibleItem != OveridePositionValue) {
                         if (postRequest != null) {
                             postRequest.cancel();
@@ -389,7 +390,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             Tabview.getTabAt(0).select();
 
         }
-
     }
 
     @Override
@@ -1452,6 +1452,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             txtfIndexDeptName.setText(hierarchy(name.replaceAll("%20"," ").replaceAll("%26","&")));
                             llfIndexhierarchy.setVisibility(View.VISIBLE);
                             TestItem();
+                            OnItemClick = false;
                             offsetvalue = 0;
                             limit = 100;
                             count = 0;
@@ -1614,6 +1615,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         if (txtFIndexClass.getText().toString().equals("Department")) {
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanDept().toString();
+            Log.i(TAG, "retain tab: "+firstVisibleItem+" fIndexFirstVisibleItem "+fIndexFirstVisibleItem);
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
                 if (freshnessIndexDetailsArrayList.get(j).getPlanDept().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
@@ -1623,6 +1625,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         } else if (txtFIndexClass.getText().toString().equals("Category")) {
             level = 2;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanCategory().toString();
+            Log.i(TAG, "retain tab: "+firstVisibleItem+" fIndexFirstVisibleItem "+fIndexFirstVisibleItem);
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
                 if (freshnessIndexDetailsArrayList.get(j).getPlanCategory().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
@@ -1634,6 +1637,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         } else if (txtFIndexClass.getText().toString().equals("Class")) {
             level = 3;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getPlanClass().toString();
+            Log.i(TAG, "retain tab: "+firstVisibleItem+" fIndexFirstVisibleItem "+fIndexFirstVisibleItem);
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
                 if (freshnessIndexDetailsArrayList.get(j).getPlanClass().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
@@ -1644,6 +1648,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         } else if (txtFIndexClass.getText().toString().equals("Brand")) {
             level = 4;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandName().toString();
+            Log.i(TAG, "retain tab: "+firstVisibleItem+" fIndexFirstVisibleItem "+fIndexFirstVisibleItem);
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
                 if (freshnessIndexDetailsArrayList.get(j).getBrandName().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
@@ -1655,6 +1660,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         } else if (txtFIndexClass.getText().toString().equals("Brand Class")) {
             level = 5;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getBrandplanClass().toString();
+            Log.i(TAG, "retain tab: "+firstVisibleItem+" fIndexFirstVisibleItem "+fIndexFirstVisibleItem);
             for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
                 if (freshnessIndexDetailsArrayList.get(j).getBrandplanClass().contentEquals(fIndexFirstVisibleItem)) {
                     LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
@@ -2472,7 +2478,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                     }
                                     break;
 
-
                                 case "Region":
                                     btnFIndexPrev.setVisibility(View.VISIBLE);
                                     btnFIndexNext.setVisibility(View.INVISIBLE);
@@ -2639,6 +2644,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         btnFIndexPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OveridePositionValue =0;
                 firstVisibleItem = 0;
 
                 if (postRequest != null) {
@@ -2759,7 +2765,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         btnFIndexNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OveridePositionValue =0;
                 firstVisibleItem = 0;
+
                 if (postRequest != null) {
                     postRequest.cancel();
                 }
@@ -2871,8 +2879,12 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
 
 
+
                     @Override
                     public void onItemClick(View v, final int position) {
+                        OveridePositionValue =0;
+                        firstVisibleItem=0;
+
                         if (processBar.getVisibility() == View.VISIBLE) {
                             return;
                         } else {

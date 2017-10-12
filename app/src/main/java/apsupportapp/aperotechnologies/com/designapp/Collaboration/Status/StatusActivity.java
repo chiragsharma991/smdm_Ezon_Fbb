@@ -31,7 +31,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     private TextView txtStoreName, txtStoreCode;
     RelativeLayout status_imageBtnBack;
     public static ProgressBar StatusProcess;
-    private String store, isMultiStore, value, storeCode;
+    private String store, isMultiStore, value, storeCode, store_Code;
     SharedPreferences sharedPreferences;
 
 
@@ -48,7 +48,9 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         if(getIntent().getExtras().getString("storeCode") != null )
         {
             storeCode = getIntent().getExtras().getString("storeCode");
-            //  Log.i(TAG, "storeCode: "+storeCode );
+            store_Code = storeCode.substring(0,4);
+
+            Log.e( "storeCode : in status activity", " " +store_Code );
         }
         initialise();
 
@@ -107,8 +109,8 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
     private void setupViewPager(ViewPager viewPager) {
         StatusViewPagerAdapter adapter = new StatusViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ToBeSender(), "Transfer Status");
-        adapter.addFragment(new ToBeReceiver(), "Receive Status");
+        adapter.addFragment(new ToBeSender(store_Code), "Transfer Status");
+        adapter.addFragment(new ToBeReceiver(store_Code), "Receive Status");
         viewPager.setAdapter(adapter);
     }
 

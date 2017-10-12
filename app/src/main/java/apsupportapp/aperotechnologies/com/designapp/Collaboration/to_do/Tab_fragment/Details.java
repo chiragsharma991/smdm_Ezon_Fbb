@@ -63,7 +63,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     private ToDo_Modal toDo_modal;
     private RecyclerView recyclerView;
     private int levelOfOption = 3;  //  3 is for option and 4 is for size
-    private String MCCodeDesc = "",prodLevel3Desc = "";    // code and description
+    private String MCCodeDesc = "",prodLevel3Desc = "",MC_name_code = "";    // code and description
     private double MCCode ;    // code and description
     private String option = "", store_code;    // code and description
     private StockDetailsAdapter stockDetailsAdapter;
@@ -112,10 +112,10 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     {
 
         prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
-        MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
+        MC_name_code = MC_name_code.replace(" ", "%20").replace("&", "%26");
         option = option.replace(" ", "%20").replace("&", "%26");
 
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20") +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20") +"&recache=true";
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MC_name_code +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20") +"&recache=true";
         Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -198,8 +198,9 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     {
 
         prodLevel3Desc = prodLevel3Desc.replace(" ", "%20").replace("&", "%26");
-        MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
-        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId +"?storeCode="+store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MCCodeDesc.replaceAll(" ", "%20")+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20") +"&recache=true";
+        MC_name_code = MC_name_code.replace(" ", "%20").replace("&", "%26");
+      //  MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
+        String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId +"?storeCode="+store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MC_name_code+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20") +"&recache=true";
         Log.e("TAG", "requestReceiversDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -295,7 +296,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         String mc = getIntent().getExtras().getString("MCCodeDesc");
         Double data2 = getIntent().getExtras().getDouble("AvlQty");
         store_code = getIntent().getExtras().getString("storeCode");
-
+        String mc_name_code = getIntent().getExtras().getString("MCCode");
+        MC_name_code = mc_name_code;
         MCCodeDesc = mc; //MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values //  - this is actual value
         prodLevel3Desc = subcategory; // prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  // - this is actual value
         MCCode = (Math.round(data2));
@@ -345,12 +347,13 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     }
 
 
-    public void StartActivity(Context context, String subcategory, String mc, Double data2, String storeCode)
+    public void StartActivity(Context context, String subcategory, String mc, String mc_name_code, Double data2, String storeCode)
     {
         Intent intent = new Intent(context, Details.class);
         intent.putExtra("prodLevel3Desc",subcategory);
         intent.putExtra("MCCodeDesc", mc);
         intent.putExtra("storeCode", storeCode);
+        intent.putExtra("MCCode",mc_name_code);
         Log.e( "StartActivity: ",""+subcategory + "\t" +mc + data2 );
         intent.putExtra("AvlQty", data2);
         context.startActivity(intent);
@@ -365,7 +368,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
 
             case R.id.stock_detailSubmit:
                 if (!(DetailsList.size() == 0)) {
-                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MCCodeDesc, prodLevel3Desc, store_code);
+                    JSONArray jsonArray = stockDetailsAdapter.OnSubmit(MC_name_code, prodLevel3Desc, store_code);
                     if (jsonArray.length() == 0) {
                         Toast.makeText(Details.this, "Please select at least one option.", Toast.LENGTH_SHORT).show();
                     } else {
@@ -406,6 +409,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 else
                                 {
                                     String result = response.getString("status");
+                                    Log.e("onResponse: ",""+result);
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Details.this, To_Do.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -458,7 +462,7 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
     @Override
     public void onPress(int Position)
     {
-        option = DetailsList.get(Position).getLevel();
+        option = DetailsList.get(Position).getLevelCode();
         levelOfOption = 4; // 4 is for size
         ChildDetailList = new ArrayList<ToDo_Modal>();
         if (Reusable_Functions.chkStatus(context))

@@ -45,6 +45,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_locatn;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_prod;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.rel_ez_process_filter;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.str_checkFrom;
@@ -719,12 +720,17 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 explv_ez_prod.collapseGroup(1);
                 explv_ez_prod.collapseGroup(2);
                 explv_ez_prod.collapseGroup(3);
+                explv_ez_locatn.collapseGroup(0);
+                explv_ez_locatn.collapseGroup(1);
+
             } else {
                 explv_ez_prod.collapseGroup(0);
                 explv_ez_prod.collapseGroup(1);
                 explv_ez_prod.collapseGroup(2);
                 explv_ez_prod.collapseGroup(3);
                 explv_ez_prod.collapseGroup(4);
+                explv_ez_locatn.collapseGroup(0);
+                explv_ez_locatn.collapseGroup(1);
             }
 
         } else {
@@ -829,7 +835,7 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response :", "" + response);
+//                        Log.e("response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();

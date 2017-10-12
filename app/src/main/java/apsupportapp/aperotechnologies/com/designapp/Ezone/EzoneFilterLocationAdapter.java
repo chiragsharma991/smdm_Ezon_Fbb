@@ -27,6 +27,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,7 +46,10 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_locatn;
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.explv_ez_prod;
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.rel_ez_process_filter;
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesFilter.str_checkFrom;
 
 /**
  * Created by pamrutkar on 08/06/17.
@@ -68,7 +72,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
     private GroupViewHolder groupViewHolder;
     private String groupText;
     private String childText;
-    int location_level;
+    private int location_level;
     List region_list, store_List;
     EzoneFilterLocationAdapter listAdapter;
     int mGroupPosition = 0;
@@ -240,11 +244,23 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
             str1 = str1.replace(", ", ",");
             region_str = str1;
             Log.e("remove build up :", "" + region_list.size());
+            if (region_list.size() == 0) {
+                salesList.clear();
+                mListDataChild.putAll(dublicate_listDataChild);
+                for (int k = 0 ; k < mListDataGroup.size(); k++) {
+                    explv_ez_locatn.collapseGroup(k);
+                }
+                for (int k = 0; k < mListDataGroup.size(); k++) {
+                    explv_ez_locatn.expandGroup(k);
+                }
+            } else {
+                requestLocationHierarchy(level  , region_str);
+            }
         }
         if (level == 1)
         {
             Log.e("remove in store---","");
-            store_List.remove(txtClickedVal.trim());
+            store_List.remove(txtClickedVal.substring(0,4).trim());
             String[] array = (String[]) store_List.toArray(new String[0]);
             String str1 = Arrays.toString(array);
             str1 = str1.replace("[", "");
@@ -292,7 +308,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         if (level == 1) {
             if (!store_flg) {
                 Log.e("come ", "----------");
-                store_List.add(txtClickedVal.trim());
+                store_List.add(txtClickedVal.substring(0,4).trim());
                 region_flg = false;
                 store_flg = true;
                 String[] array = (String[]) store_List.toArray(new String[0]);
@@ -305,7 +321,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 
             } else
             {
-                store_List.add(txtClickedVal.trim());
+                store_List.add(txtClickedVal.substring(0,4).trim());
                 String[] array = (String[]) store_List.toArray(new String[0]);
                 String str_brndcls = Arrays.toString(array);
                 str_brndcls = str_brndcls.replace("[", "");
@@ -318,7 +334,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         }
     }
 
-    private void requestLocationHierarchy(int level ,String txtClickedVal) {
+    private void requestLocationHierarchy(final int level ,String txtClickedVal) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.mContext);
         String userId = sharedPreferences.getString("userId", "");
         String geoLevel2Code = sharedPreferences.getString("concept","");
@@ -331,13 +347,13 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 //        if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("pvaAnalysis"))
 //        {
 //            //with geoLevel2Code param
-            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZNew/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20")+"&geoLevel2Code="+geoLevel2Code;
+            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZNew/" + userId + "?level=" + location_level + "&regionDescription=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20")+"&geoLevel2Code="+geoLevel2Code;
 
 //        }
 //        else
 //        {
 //            //without geoLevel2Code param
-//            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?level=" + location_level + "&region=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20");
+//            loc_search_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?level=" + location_level + "&regionDescription=" + txtClickedVal.replaceAll("&", "%26").replace(" ", "%20");
 //
 //        }
 
@@ -355,22 +371,25 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
                             } else {
-                                for (int i = mGroupPosition + 1 ; i < mListDataChild.size(); i++) {
-                                    Log.e("i :",""+i);
-                                    if (mGroupPosition +1 == i) {
+                                for (int i = mGroupPosition+1; i < mListDataChild.size(); i++) {
+                                    Log.e("i :", "" + i);
+                                    if (mGroupPosition + 1 == i) {
                                         for (int j = i; j < mListDataChild.size(); j++) {
                                             mListDataChild.remove(i);
                                         }
                                     }
                                 }//end of first for
 
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = level - 2; i < response.length(); i++)
+                                {
                                     List<String> drillDownList = new ArrayList<String>();
-                                    JSONObject obj = response.getJSONObject(i);
+                                    for (int j = 0; j < response.length(); j++) {
+                                        JSONObject obj = response.getJSONObject(j);
 
                                         String store = obj.getString("descEz");
                                         drillDownList.add(store);
-                                        Log.e("drilldown list:", "" + drillDownList.size());
+//                                        Log.e("drilldown list:", "" + drillDownList.size());
+                                    }
 
                                     Set<String> setValue = new HashSet<>();
                                     setValue.addAll(drillDownList);
@@ -378,11 +397,18 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                     drillDownList.addAll(setValue);
                                     Collections.sort(drillDownList);
                                     //expand group
-                                     notifyDataSetChanged();
-                                    mListDataChild.put(mListDataGroup.get(1), drillDownList);
-                                    ezoneSalesFilter.explv_ez_locatn.expandGroup(1);
-                                    rel_ez_process_filter.setVisibility(View .GONE);
+                                    try {
+                                        mListDataChild.put(mListDataGroup.get(1), drillDownList);
+                                    } catch (IndexOutOfBoundsException e) {
+                                        Log.e("onResponse: ", "" + e.getMessage());
+                                    }
+
+                                        explv_ez_locatn.expandGroup(1);
+
                                 }
+                                notifyDataSetChanged();
+                                rel_ez_process_filter.setVisibility(View.GONE);
+
                             }
 
                         } catch (Exception e) {
@@ -431,8 +457,23 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         if (charText.length() == 0) {
             mListDataChild.putAll(dublicate_listDataChild);
             //Collapse Group
-            EzoneSalesFilter.explv_ez_locatn.collapseGroup(0);
-            EzoneSalesFilter.explv_ez_locatn.collapseGroup(1);
+            if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis")) {
+                explv_ez_prod.collapseGroup(0);
+                explv_ez_prod.collapseGroup(1);
+                explv_ez_prod.collapseGroup(2);
+                explv_ez_prod.collapseGroup(3);
+                explv_ez_locatn.collapseGroup(0);
+                explv_ez_locatn.collapseGroup(1);
+
+            } else {
+                explv_ez_prod.collapseGroup(0);
+                explv_ez_prod.collapseGroup(1);
+                explv_ez_prod.collapseGroup(2);
+                explv_ez_prod.collapseGroup(3);
+                explv_ez_prod.collapseGroup(4);
+                explv_ez_locatn.collapseGroup(0);
+                explv_ez_locatn.collapseGroup(1);
+            }
 
         } else {
 
@@ -449,8 +490,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
             }
             EzoneSalesFilter.explv_ez_locatn.expandGroup(0);
             EzoneSalesFilter.explv_ez_locatn.expandGroup(1);
-
-
             notifyDataSetChanged();
         }
     }

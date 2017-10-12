@@ -6,22 +6,27 @@ package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do;
 
 public class ToDo_Modal {
 
-//    String storeCode;
-//    String storeDesc;
-//    String transferStatus;
-//    double stkOnhandQtyRequested;
-//    double stkQtyAvl;
-//    double stkOnhandQty;
-//    double stkGitQty;
-//    int noOfOptions;
-//    double fwdWeekCover;
-//    double sellThruUnits;
-//    String mccodeDesc;
-//    String level;
-//
+
+
     String storeCode;
     String storeDesc;
     String level;
+
+    public String getLevelCode() {
+        return levelCode;
+    }
+
+    public void setLevelCode(String levelCode) {
+        this.levelCode = levelCode;
+    }
+
+    String levelCode;
+    double stkOnhandQtyRequested;
+    double stkQtyAvl;
+    double stkOnhandQty;
+    double stkGitQty;
+    double sellThruUnits;
+    double fwdWeekCover;
 
     public double getStkOnhandQtyRequested() {
         return stkOnhandQtyRequested;
@@ -95,12 +100,6 @@ public class ToDo_Modal {
         this.fwdWeekCover = fwdWeekCover;
     }
 
-    double stkOnhandQtyRequested;
-    double stkQtyAvl;
-    double stkOnhandQty;
-    double stkGitQty;
-    double sellThruUnits;
-    double fwdWeekCover;
 }
 
 

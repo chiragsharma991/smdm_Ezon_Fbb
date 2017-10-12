@@ -81,11 +81,11 @@ public class Style_Fragment extends Fragment {
     MySingleton m_config;
     static int cnt = 0;
     RelativeLayout relativeLayout;
-    String articleCode, articleOption;
+    String articleCode, articleOption, articleOptionCode;
     int offsetvalue = 0, limit = 100;
     int count = 0;
     String TA = "StyleActivity";
-
+    String storeCode;
     // set the header titles
     String headers[] =
             {
@@ -101,6 +101,12 @@ public class Style_Fragment extends Fragment {
     private LinearLayout LinearTable;
     private RelativeLayout Style_loadingBar;
 
+    public Style_Fragment(String storeCode, String articleOptionCode) {
+        this.storeCode = storeCode;
+        this.articleOptionCode = articleOptionCode;
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +120,8 @@ public class Style_Fragment extends Fragment {
         Bundle bundle = getActivity().getIntent().getExtras();
         articleCode = bundle.getString("articleCode");
         articleOption = bundle.getString("articleOption");
+        storeCode = bundle.getString("storeCode");
+        Log.e(TAG, "onCreate: "+storeCode);
         context = getContext();
         styleColorBeanList = new ArrayList<>();
         m_config = MySingleton.getInstance(context);
@@ -124,9 +132,9 @@ public class Style_Fragment extends Fragment {
         queue.start();
         Log.e(TAG, "onCreate: ");
         if (Reusable_Functions.chkStatus(context)) {
-            Reusable_Functions.hDialog();
+            Reusable_Functions.sDialog(context, "Loading Styles data");
             requestStyleSizeDetailsAPI();
-            requestStyleColorDetailsAPI(offsetvalue, limit);
+
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
             Style_loadingBar.setVisibility(View.GONE);
@@ -134,12 +142,15 @@ public class Style_Fragment extends Fragment {
     }
 
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
+        Reusable_Functions.sDialog(context, "Loading Sizes data");
+        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOptionCode.replace(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+        Log.e("sizesNew url "," "+url.toString());
 
-        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOption.replace(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId ;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("sizesNew res "," "+response.toString());
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
@@ -147,6 +158,7 @@ public class Style_Fragment extends Fragment {
                                 Style_loadingBar.setVisibility(View.GONE);
 
                             } else if (response.length() == limit) {
+                                Reusable_Functions.hDialog();
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
@@ -173,6 +185,7 @@ public class Style_Fragment extends Fragment {
                                 requestStyleColorDetailsAPI(offsetvalue, limit);
 
                             } else if (response.length() < limit) {
+                                Reusable_Functions.hDialog();
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject styleDetails = response.getJSONObject(i);
@@ -202,7 +215,7 @@ public class Style_Fragment extends Fragment {
                                 // createTable();
                                 Style_loadingBar.setVisibility(View.GONE);
 
-                                // Reusable_Functions.hDialog();
+//                                 Reusable_Functions.hDialog();
                             }
                         } catch (Exception e) {
                             Style_loadingBar.setVisibility(View.GONE);
@@ -269,17 +282,18 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleSizeDetailsAPI() {
 
-        String url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId ;
-
+        String url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOptionCode.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+        Log.e(TAG, "requestStyleSizeDetailsAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: " + response);
+                        Log.e(TAG, "stylesNew onResponse: " + response);
                         try {
-                            if (response.equals("") || response == null) {
+                            if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data Found", Toast.LENGTH_LONG).show();
+                                requestStyleColorDetailsAPI(offsetvalue, limit);
 
                             } else {
                                 Reusable_Functions.hDialog();
@@ -311,6 +325,9 @@ public class Style_Fragment extends Fragment {
                                     txtFwdWeekCover.setText("" + String.format("%.1f",fwdWeekCover));
                                     txtsalesThruUnit.setText("" +  String.format("%.1f",sellThruUnitsRcpt)+"%");
                                     txtROS.setText("" + String.format("%.1f",ros));
+
+                                    requestStyleColorDetailsAPI(offsetvalue, limit);
+
                                 }
                             }
                         } catch (Exception e) {
@@ -983,7 +1000,7 @@ public class Style_Fragment extends Fragment {
 
 
     private void requestStyleDetailsAPI(final Context context, String articleOption) {
-        String url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26");
+        String url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + articleOption.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c");
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

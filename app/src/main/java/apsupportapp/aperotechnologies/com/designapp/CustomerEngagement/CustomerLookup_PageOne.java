@@ -3,6 +3,7 @@
 package apsupportapp.aperotechnologies.com.designapp.CustomerEngagement;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -108,7 +109,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
     MySingleton m_config;
     private String from, storeCode;
     RelativeLayout imgfilter;
+    @SuppressLint("ValidFragment")
+    public CustomerLookup_PageOne()
+    {
 
+    }
     public CustomerLookup_PageOne(String from, String storeCode, RelativeLayout imgfilter)
     {
         this.from = from;

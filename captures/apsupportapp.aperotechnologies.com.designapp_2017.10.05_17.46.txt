@@ -1,0 +1,55 @@
+Applications Memory Usage (kB):
+Uptime: 69427673 Realtime: 196162266
+
+** MEMINFO in pid 24485 [apsupportapp.aperotechnologies.com.designapp] **
+                   Pss  Private  Private  Swapped     Heap     Heap     Heap
+                 Total    Dirty    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------
+  Native Heap    26392    25496        0        0    63936    57821     6114
+  Dalvik Heap    16067    16000        0        0    23788    21822     1966
+ Dalvik Other     3994     3828        0        0                           
+        Stack     1128     1128        0        0                           
+       Ashmem       27        0        0        0                           
+    Other dev        9        0        8        0                           
+     .so mmap     2367      196      700     1016                           
+    .apk mmap      476        0      196        0                           
+    .ttf mmap       80        0       16        0                           
+    .dex mmap    13500      248    13252        0                           
+    .oat mmap     4678        0     1480        0                           
+    .art mmap     1898     1428       12        0                           
+   Other mmap      142        8       76        4                           
+   EGL mtrack     8589     8589        0        0                           
+    GL mtrack    10616    10616        0        0                           
+      Unknown      236      232        0        8                           
+        TOTAL    90199    67769    15740     1028    87724    79643     8080
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:    17440
+         Native Heap:    25496
+                Code:    16088
+               Stack:     1128
+            Graphics:    19205
+       Private Other:     4152
+              System:     6690
+ 
+               TOTAL:    90199      TOTAL SWAP (KB):     1028
+ 
+ Objects
+               Views:      926         ViewRootImpl:        2
+         AppContexts:        7           Activities:        5
+              Assets:        3        AssetManagers:        2
+       Local Binders:       15        Proxy Binders:       27
+       Parcel memory:        7         Parcel count:       28
+    Death Recipients:        0      OpenSSL Sockets:        1
+ 
+ SQL
+         MEMORY_USED:      455
+  PAGECACHE_OVERFLOW:      131          MALLOC_SIZE:       62
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4       16             27         1/16/2  /data/user/0/apsupportapp.aperotechnologies.com.designapp/databases/storeDetails
+         4       92            247    1242/126/25  /data/user/0/apsupportapp.aperotechnologies.com.designapp/databases/google_app_measurement.db
+         4       16             70         4/19/5  /data/user/0/apsupportapp.aperotechnologies.com.designapp/databases/storeDetails

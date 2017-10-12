@@ -20,6 +20,8 @@ import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisA
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
 
+import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.ez_segment_val;
+
 
 public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
     Context context;
@@ -91,8 +93,6 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
         // Declare Variables
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = null;
-
-
         if (position == 0) {
             itemView = inflater.inflate(R.layout.activity_ez_viewpager1, container,
                     false);
@@ -151,7 +151,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("", "in"));
 
         if (position == 0) {
-            if (SalesAnalysisActivity1.ez_segment_val.equals("LD") || SalesAnalysisActivity1.ez_segment_val.equals("WTD")) {
+            if (ez_segment_val.equals("LD") || ez_segment_val.equals("WTD")) {
 
                 if (ez_sales_pager != null) {
                     txt_ez_NetSalesVal.setText("\u20B9\t" + format.format(Math.round(ez_sales_pager.getSaleNetVal())));
@@ -191,7 +191,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
                 }
 
 
-            } else if (SalesAnalysisActivity1.ez_segment_val.equals("MTD") || SalesAnalysisActivity1.ez_segment_val.equals("YTD")) {
+            } else if (ez_segment_val.equals("MTD") || ez_segment_val.equals("YTD")) {
 
                 if (ez_sales_pager != null) {
 
@@ -238,19 +238,7 @@ public class EzoneSalesPagerAdapter extends PagerAdapter implements ViewPager.On
 
             }
             // Add all values
-            if(ez_sales_detail_array.size()!=0){
-                SalesAnalysisListDisplay salesAnalysisListDisplay = ez_sales_detail_array.get(position);
 
-                if (salesAnalysisListDisplay.getLevel() != null) {
-                    if (salesAnalysisListDisplay.getLevel().equals("All")) {
-                        salesAnalysisListDisplay.setPvaAchieved(ez_sales_pager.getPvaAchieved());
-                        ez_sales_detail_array.set(0, salesAnalysisListDisplay);
-                        ez_salesadapter.notifyDataSetChanged();
-
-                    }
-                }
-
-            }
 
         }
         else if (position == 1) {

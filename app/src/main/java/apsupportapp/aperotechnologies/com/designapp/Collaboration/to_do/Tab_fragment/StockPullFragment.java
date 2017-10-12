@@ -90,7 +90,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private String recache, value;
     private String mParam1;
     private String mParam2;
-    private String mc_name , subcategory_name,selected_subCategory;
+    private String mc_name, mc_name_code, subcategory_name,selected_subCategory;
     private OnFragmentInteractionListener mListener;
     private Context context;
     private ViewGroup view;
@@ -231,7 +231,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                 {
                     if(selectMc[i])
                     {
-                        selectedMcList.add(subcategoryList.get(i).getLevel());
+                        selectedMcList.add(subcategoryList.get(i).getLevelCode());
                     }
                 }
                 String[] array = (String[]) selectedMcList.toArray(new String[0]);
@@ -453,10 +453,11 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     @Override
                                     public void onItemClick(View view, int position) {
                                         Log.e(TAG, "onItemClick: ----"+position );
-                                        subcategory_name = ReceiverSummaryList.get(position).getLevel();
+//                                        subcategory_name = ReceiverSummaryList.get(position).getLevel();
                                         mc_name = subcategoryList.get(position).getLevel();
-                                        Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name +"\t"+subcategoryList.get(position).getStkQtyAvl());
-                                        new Details().StartActivity(context, selected_subCategory,mc_name, subcategoryList.get(position).getStkQtyAvl(), storeCode);
+                                        mc_name_code = subcategoryList.get(position).getLevelCode();
+//                                        Log.e( "onItemClick: ",""+subcategory_name + "and mc name is"+mc_name +"\t"+subcategoryList.get(position).getStkQtyAvl());
+                                        new Details().StartActivity(context, selected_subCategory,mc_name, mc_name_code,subcategoryList.get(position).getStkQtyAvl(), storeCode);
 
                                     }
                                 });
@@ -772,8 +773,9 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
                 Log.e("TAG", "onItemClick: "+position );
-                value =  ReceiverSummaryList.get(position).getLevel();
-                spinner_text.setText(value);
+                String val = ReceiverSummaryList.get(position).getLevel();
+                value =  ReceiverSummaryList.get(position).getLevelCode();
+                spinner_text.setText(val);
                 selected_subCategory=value;
                 dialog.dismiss();
                 requestTransferRequestSubcategory(value);

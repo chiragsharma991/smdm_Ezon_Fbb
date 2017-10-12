@@ -84,7 +84,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private boolean feedbackReport = false;
     private Feedback_model feedback_model_report;
     private String selectCategory, isMultiStore, value, storeCode, store_Code, body_geoLevel2Code;
-    private String storecode, storeDes;
+    private String storecode, storeDes, article_option_code;
 
 
 
@@ -202,7 +202,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             } else {
 
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
-                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code + "&option=" + option  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + "&articleOptionCode=" + feedbackList.get(listCount).getArticleOptionCode();
               //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
@@ -240,6 +240,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         }
                                         offsetvalue = (limit * count) + limit;
                                         count++;
+
                                         requestFeedbackApi();
                                     }
                                     // if api call for last entry.
@@ -336,6 +337,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.feedbackNext:
+                feedbackReportList.clear();
                 if (listCount + 1 < feedbackList.size()) {
                     if (Build.VERSION.SDK_INT >= 21) {
                         Reusable_Functions.ViewVisible(firstView);
@@ -495,18 +497,31 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 //get 0 is depend on next and pre button
                 {
                     x = ((double) feedbackReportList.get(Listposition).getFittingCntPer() / 100) * width;
+                    Log.e("x "," getFittingCntPer"+x);
                 } else if (position == 1) {
                     x = ((double) feedbackReportList.get(Listposition).getPricingCntPer() / 100) * width;
+                    Log.e("x "," getPricingCntPer"+x);
+
                 } else if (position == 2) {
                     x = ((double) feedbackReportList.get(Listposition).getColorsCntPer() / 100) * width;
+                    Log.e("x "," getColorsCntPer"+x);
+
                 } else if (position == 3) {
                     x = ((double) feedbackReportList.get(Listposition).getPrintCntPer() / 100) * width;
+                    Log.e("x "," getPrintCntPer"+x);
+
                 } else if (position == 4) {
                     x = ((double) feedbackReportList.get(Listposition).getStylingCntPer() / 100) * width;
+                    Log.e("x "," getStylingCntPer"+x);
+
                 } else if (position == 5) {
                     x = ((double) feedbackReportList.get(Listposition).getFabricQualityCntPer() / 100) * width;
+                    Log.e("x "," getFabricQualityCntPer"+x);
+
                 } else if (position == 6) {
                     x = ((double) feedbackReportList.get(Listposition).getGarmentQualityCntPer() / 100) * width;
+                    Log.e("x "," getGarmentQualityCntPer"+x);
+
                 }
 
                 int percentage = (int) x;
@@ -654,6 +669,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("option", Feedback_option.getText().toString());
+            jsonObject.put("articleOptionCode", feedbackList.get(listCount).getArticleOptionCode());
             jsonObject.put("userId", userId);
             jsonObject.put("prodImageUrl", feedbackList.get(listCount).getProdImageUrl());
             jsonObject.put("comments", feedback_comment.getText().toString());

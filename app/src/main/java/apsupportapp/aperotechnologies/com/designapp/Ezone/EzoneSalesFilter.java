@@ -41,20 +41,17 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
-import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
-import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.SalesPvAActivity;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
-
-import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
 
 import static apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1.Ezone_SalesAnalysisActivity;
 
@@ -405,7 +402,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
             String region = EzoneFilterLocationAdapter.region_str.replace("%", "%25");
             String updateRegion = region.replace(" ", "%20").replace("&", "%26");
             String Region;
-            Region = "region=" + updateRegion;
+            Region = "regionDescription=" + updateRegion;
             build.append("&");
             build.append(Region.replace(",$", ""));
         }
@@ -413,10 +410,17 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         if (EzoneFilterLocationAdapter.store_str.length() != 0)
 
         {
-            String store = EzoneFilterLocationAdapter.store_str.replace("%", "%25");
-            String updateStore = store.replace(" ", "%20").replace("&", "%26");
+            String store = EzoneFilterLocationAdapter.store_str;
+//            String updateStore = store.replace(" ", "%20").replace("&", "%26");
+//            String updateStore = null;
+//            try {
+//                updateStore = URLEncoder.encode(store, "UTF-8");
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//            Log.e("selectbuild: ",""+updateStore);
             String Store;
-            Store = "store=" + updateStore;
+            Store = "storeCode=" + store;
             build.append("&");
             build.append(Store.replace(",$", ""));
 
@@ -1096,7 +1100,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     String brandName = productName1.getString("brandName");
                                     ez_brandList.add(brandName);
                                 }
-                                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("pvaAnalysis")) {
+                                if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
                                     rel_ez_process_filter.setVisibility(View.GONE);
                                 } else {
                                     rel_ez_process_filter.setVisibility(View.GONE);

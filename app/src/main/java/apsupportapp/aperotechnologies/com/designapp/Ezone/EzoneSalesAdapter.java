@@ -184,6 +184,7 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
         }
 
+
     }
 
     public class EzoneSalesViewHolder extends RecyclerView.ViewHolder
