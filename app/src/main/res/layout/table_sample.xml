@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/lin_table"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <!--<include layout="@layout/table_sample"/>-->
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Auditor Name"/>
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Overall Audit Score"/>
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Fashion quotient(display looks fashionable)"/>
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Fashion quotient(display looks fashionable)"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

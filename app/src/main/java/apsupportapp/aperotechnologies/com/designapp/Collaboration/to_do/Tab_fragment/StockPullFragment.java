@@ -87,7 +87,8 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private boolean checkNetworkFalse = false;
     private RequestQueue queue;
     private ArrayList<ToDo_Modal> ReceiverSummaryList,subcategoryList;
-    private String recache, value;
+    private String recache;
+    public static String value = "", val ="";
     private String mParam1;
     private String mParam2;
     private String mc_name, mc_name_code, subcategory_name,selected_subCategory;
@@ -110,13 +111,16 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
     private AlertDialog dialog;
     private ImageButton dropdkown;
     private ArrayList<String> selectedMcList;
+    String from;
 
-
-    public StockPullFragment(String store_Code) {
+    public StockPullFragment(String store_Code, String from) {
         // Required empty public constructor
         this.store_Code = store_Code;
+        this.from = from;
 
     }
+
+
 
 
     @Override
@@ -133,14 +137,14 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
 
 
     // TODO: Rename and change types and number of parameters
-    public static StockPullFragment newInstance(String param1, String param2) {
-        StockPullFragment fragment = new StockPullFragment(store_Code);
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static StockPullFragment newInstance(String param1, String param2) {
+//        StockPullFragment fragment = new StockPullFragment(store_Code, from);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -297,7 +301,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                         @Override
                         public void onResponse(JSONArray response)
                         {
-                            Log.d("TAG", "onResponse: " + response);
+                            Log.d("TAG", "onResponse: receiverdetail" + response);
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -338,6 +342,12 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                 // stockPullAdapter = new StockPullAdapter(ReceiverSummaryList,getActivity());
                                 // recyclerView.setAdapter(stockPullAdapter);
                                 Reusable_Functions.hDialog();
+                                if(from != null) {
+                                    spinner_text.setText(val);
+                                    selected_subCategory=value;
+                                    requestTransferRequestSubcategory(value);
+                                }
+
                             }
                             catch (Exception e)
                             {
@@ -405,17 +415,25 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                    checkNetworkFalse = true;
-                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                                    subcategoryList.clear();
-                                  //  stockPullAdapter.notifyDataSetChanged();
-                                    stockPullAdapter = new StockPullAdapter(subcategoryList,selectMc, getActivity(), null);
-                                    recyclerView.setAdapter(stockPullAdapter);
 
-                                    Log.e("TAG", "requestTransferRequestSubcategory: " ); //
-                                    dropdkown.setVisibility(View.VISIBLE);
-                                    progressBar.setVisibility(View.GONE);
-                                    return;
+                                        checkNetworkFalse = true;
+                                        Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                        subcategoryList.clear();
+                                        //  stockPullAdapter.notifyDataSetChanged();
+                                        stockPullAdapter = new StockPullAdapter(subcategoryList,selectMc, getActivity(), null);
+                                        recyclerView.setAdapter(stockPullAdapter);
+                                    spinner_text.setText("Select Subcategory");
+                                    subcategoryList=new ArrayList<>();
+                                    requestTransferRequestsummary();
+
+
+
+                                        Log.e("TAG", "requestTransferRequestSubcategory: " ); //
+                                        dropdkown.setVisibility(View.VISIBLE);
+                                        progressBar.setVisibility(View.GONE);
+                                        return;
+
+
 
                                 } else if (response.length() == limit) {
                                     for (int i = 0; i < response.length(); i++) {
@@ -441,6 +459,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     progressBar.setVisibility(View.GONE);
 
                                 }
+
                                 selectMc=new boolean[subcategoryList.size()];
                                 for (int i = 0; i <subcategoryList.size() ; i++) {
                                     selectMc[i]=false;
@@ -520,15 +539,32 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
                                     Reusable_Functions.hDialog();
                                     Toast.makeText(mcontext, "Sending data failed...", Toast.LENGTH_LONG).show();
 
+
+
                                 } else {
                                     Reusable_Functions.hDialog();
                                     String result = response.getString("status");
                                     for (int i = 0; i <subcategoryList.size() ; i++) {
                                         selectMc[i]=false;
                                     }
+                                    Log.e("subcategoryList.size() ", " "+subcategoryList.size());
+                                    Log.e("selectedMcList.size() ", " "+selectedMcList.size());
+
                                     stockPullAdapter.notifyDataSetChanged();
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
-                                    requestTransferRequestSubcategory(value);
+//                                    if(subcategoryList.size() == 0){
+//                                        //  initialise();
+//
+//                                        requestTransferRequestsummary("no data");
+//                                    }else{
+
+                                        requestTransferRequestSubcategory(value);
+
+//                                    }
+
+//                                    initialise();
+//                                    MainMethod();
+
                                  /*   Intent intent = new Intent(context, SnapDashboardActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                     startActivity(intent);*/
@@ -773,7 +809,7 @@ public class StockPullFragment extends Fragment implements OnChartGestureListene
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
                 Log.e("TAG", "onItemClick: "+position );
-                String val = ReceiverSummaryList.get(position).getLevel();
+                 val = ReceiverSummaryList.get(position).getLevel();
                 value =  ReceiverSummaryList.get(position).getLevelCode();
                 spinner_text.setText(val);
                 selected_subCategory=value;

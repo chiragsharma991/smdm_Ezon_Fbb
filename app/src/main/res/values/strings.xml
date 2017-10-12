@@ -210,5 +210,6 @@
     <string name="competitor_store_audit">Competitor-Store-Audit</string>
     <string name="inspectionhistory">Inspection History</string>
     <string name="txt_store">Store</string>
+    <string name="txt_reports">Reports</string>
 
 </resources>

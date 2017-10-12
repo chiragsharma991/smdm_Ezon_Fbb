@@ -42,8 +42,6 @@ public class InspectionFragment1 extends Fragment {
         return v;
     }
 
-
-
     private void setLastMonth()
     {
         InspectionHistoryZonalRatings inspectionHistoryZonalRatings = new InspectionHistoryZonalRatings();

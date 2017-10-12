@@ -56,6 +56,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
 import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment.store_Code;
+import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do.activity;
 
 /**
  * Created by pamrutkar on 08/03/17.
@@ -769,8 +770,9 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                     Log.e(TAG, "onResponse: " + result);
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(TransferRequest_Details.this, To_Do.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    intent.putExtra("from",store_Code);
                                     startActivity(intent);
+                                    activity.finish();
                                     transferDetailsAdapter.notifyDataSetChanged();
                                     requestSenderDetails();
 //
