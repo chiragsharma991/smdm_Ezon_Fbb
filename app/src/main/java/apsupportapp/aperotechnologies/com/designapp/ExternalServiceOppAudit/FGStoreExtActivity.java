@@ -47,7 +47,7 @@ public class FGStoreExtActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fgstore);
+        setContentView(R.layout.activity_fgextstore);
         context = this;
         list_overallratings = new ArrayList<>();
         list_billing_experience = new ArrayList<>();
