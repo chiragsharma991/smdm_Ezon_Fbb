@@ -131,6 +131,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private View viewpart;
     private RecyclerView lobList;
     private ArrayList<String> lobData = null, conceptData = null, conceptDesc = null;
+    String[] kpiIdArray;
 
   /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
             020. 021,  022, 023, 026, 027, 028*/
@@ -156,7 +157,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         geoLeveLDesc = sharedPreferences.getString("conceptDesc", "");
         lobName = sharedPreferences.getString("lobname", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
-        String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
+
+        kpiIdArray = getIntent().getStringArrayExtra("kpiId");
         Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
         Log.e(TAG, "userId :--" + userId);
         Log.e(TAG, "pushtoken :--" + pushtoken.toString());
@@ -166,7 +168,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         queue.start();
         gson = new Gson();
         if (userId.equals("")) {
-            Intent intent = new Intent(this, LoginActivity1.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();

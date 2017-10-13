@@ -63,6 +63,7 @@ import apsupportapp.aperotechnologies.com.designapp.ListAdapter1;
 import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.StoreAdapter;
 
 
 public class StyleActivity extends AppCompatActivity
@@ -91,7 +92,8 @@ public class StyleActivity extends AppCompatActivity
     LinearLayout stylemainlayout;
     LinearLayout collectionLayout, optionLayout,storeLayout;
     private ListView listCollection, listOption,listStore;
-    ListAdapter collectionAdapter,storeAdapter;
+    ListAdapter collectionAdapter;
+    StoreAdapter storeAdapter;
     ListAdapter1 optionAdapter;
     String collect_name = "",geoLevel2Code,lobId,store_nm;
     private ReaderManager mReaderManager;
@@ -162,13 +164,7 @@ public class StyleActivity extends AppCompatActivity
         collection = (TextView) findViewById(R.id.searchablespinnerlibrary);
         collection.setText("Select Collection");
         listCollection = (ListView) findViewById(R.id.listCollection);
-        storeAdapter = new ListAdapter(storeList,StyleActivity.this);
-        listStore.setAdapter(storeAdapter);
-        collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
-        //attach the adapter to the list
-        listCollection.setAdapter(collectionAdapter);
-        listCollection.setTextFilterEnabled(true);
-        collectionAdapter.notifyDataSetChanged();
+
         style = (TextView) findViewById(R.id.searchablespinnerlibrary1);
         style.setText("Select Option");
         style.setEnabled(false);
@@ -176,15 +172,22 @@ public class StyleActivity extends AppCompatActivity
         {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(context, "Loading store data...");
-            collectionoffset = 0;
-            collectionlimit = 100;
-           requestProductStoreSelection();
+//            collectionoffset = 0;
+//            collectionlimit = 100;
+            requestProductStoreSelection();
 
         }
         else
         {
             Toast.makeText(StyleActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
         }
+
+//        storeAdapter.notifyDataSetChanged();
+        collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
+        //attach the adapter to the list
+        listCollection.setAdapter(collectionAdapter);
+        listCollection.setTextFilterEnabled(true);
+        collectionAdapter.notifyDataSetChanged();
         listOption = (ListView) findViewById(R.id.listOption);
         optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
         listOption.setAdapter(optionAdapter);
@@ -756,22 +759,25 @@ public class StyleActivity extends AppCompatActivity
 
     private void requestProductStoreSelection()
     {
-        String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId;
+        String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId +"?geoLevel2Code="+geoLevel2Code + "&lobId="+lobId;
         Log.e("", "requestProductStoreSelection: "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("onResponse: ","" + response.length()+"=== "+response);
                         try {
-                            if (response.equals("") || response == null || response.length() == 0 && collectioncount == 0)
+                            if (response.equals("") || response == null || response.length() == 0 )
                             {
+                                Log.e("===1","");
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No store data found", Toast.LENGTH_LONG).show();
                             }
-                            else if(response.length()==1 && collectionoffset == 0)
-                            { //harshada
-                                collectionoffset = 0;
-                                collectioncount = 0;
+                            else if(response.length() == 1)
+                            {   //harshada
+                                Log.e("===2","");
+//                                collectionoffset = 0;
+//                                collectioncount = 0;
 //
 
                                 JSONObject storeName = response.getJSONObject(0);
@@ -800,7 +806,6 @@ public class StyleActivity extends AppCompatActivity
                                 else
                                 {
                                     Log.e("here in else ", " "+store_nm);
-
                                     collection.setText("Select Collection");
                                     style.setText("Select Option");
                                     collection.setEnabled(true);
@@ -846,25 +851,26 @@ public class StyleActivity extends AppCompatActivity
                                 }
 
                             }
-                            else if (response.length() == collectionlimit)
+//                            else if (response.length() == collectionlimit)
+//                            {
+//                                Log.e("===3","");
+//                                Log.e("here in else if ==", " "+store_nm);
+//
+//                                for (int i = 0; i < response.length(); i++)
+//                                {
+//                                    JSONObject storeName = response.getJSONObject(i);
+//                                    store_name = storeName.getString("storeCode");
+//                                    storeList.add(store_name);
+//
+//                                }
+//                                collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
+//                                collectioncount++;
+//                                requestProductStoreSelection();
+//                            }
+                            else //if (response.length() < collectionlimit)
                             {
-                                Log.e("here in else if ==", " "+store_nm);
-
-                                for (int i = 0; i < response.length(); i++)
-                                {
-                                    JSONObject storeName = response.getJSONObject(i);
-                                    store_name = storeName.getString("storeCode");
-                                    storeList.add(store_name);
-
-                                }
-                                collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
-
-                                collectioncount++;
-                                requestProductStoreSelection();
-                            }
-                            else if (response.length() < collectionlimit)
-                            {
-                                Log.e("here in else if <", " "+store_nm);
+                                Log.e("===4","");
+//                                Log.e("here in else if <", " "+store_nm);
 
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject storeName = response.getJSONObject(i);
@@ -873,9 +879,12 @@ public class StyleActivity extends AppCompatActivity
                                 }
                             }
 //                            Collections.sort(storeList);
+                            storeAdapter = new StoreAdapter(storeList,StyleActivity.this);
+                            listStore.setAdapter(storeAdapter);
                             storeList.add(0, "Select Store");
                             storeAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
+                            Log.e("storeList =="," "+storeList.size());
 
                             listStore.setOnItemClickListener(new AdapterView.OnItemClickListener()
                             {
@@ -902,8 +911,7 @@ public class StyleActivity extends AppCompatActivity
                                     collectionNM = "";
                                     //
 
-
-                                        if (!store_name.equals(store_nm))
+                                       if (!store_name.equals(store_nm))
                                         {
                                             collection.setText("Select Collection");
                                             style.setText("Select Option");
