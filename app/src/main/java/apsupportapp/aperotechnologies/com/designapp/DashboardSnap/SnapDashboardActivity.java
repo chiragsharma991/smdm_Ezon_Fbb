@@ -157,7 +157,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         lobName = sharedPreferences.getString("lobname", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
-        Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
+        String[] hierarchyLevels = getIntent().getStringArrayExtra("hierarchyLevels");
+        Log.e(TAG, "onCreate: hierarchyLevels" + hierarchyLevels.length);
         Log.e(TAG, "userId :--" + userId);
         Log.e(TAG, "pushtoken :--" + pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
@@ -453,6 +454,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     editor.putString("lobid", model.getLobId());
                     editor.putString("lobname", model.getLobName());
                     editor.putString("kpi_id", model.getKpiId());
+                    editor.putString("hierarchyLevels", model.getHierarchyLevels());
                     editor.apply();
 
                 } else if (model.getLobName().equals("ELECTRONICS")) {
@@ -462,6 +464,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     editor.putString("lobid", model.getLobId());
                     editor.putString("lobname", "ELECTRONICS");
                     editor.putString("kpi_id", model.getKpiId());
+                    editor.putString("hierarchyLevels", model.getHierarchyLevels());
                     editor.apply();
 
                 }  else {
@@ -470,6 +473,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     editor.putString("lobid", model.getLobId());
                     editor.putString("lobname", model.getLobName());
                     editor.putString("kpi_id", model.getKpiId());
+                    editor.putString("hierarchyLevels", model.getHierarchyLevels());
                     editor.apply();
                 }
 
@@ -602,7 +606,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<App> apps = getProduct(1, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
             }
-            if (kpiIdArray.contains("004") || kpiIdArray.contains("005") || kpiIdArray.contains("018") || kpiIdArray.contains("028")) {
+            if (kpiIdArray.contains("004") || kpiIdArray.contains("005") || kpiIdArray.contains("018") ) {
                 List<App> apps = getProduct(2, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
             }

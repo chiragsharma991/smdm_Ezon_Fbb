@@ -289,6 +289,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 {
                                     login_storeList = gson.fromJson(response.get(i).toString(),Login_StoreList.class);
                                     loginStoreArray.add(login_storeList);
+                                    Log.i(TAG, "loginStoreArray sizes: "+loginStoreArray.size());
                                 }
                                 //database storeage
                                 db.deleteAllData();
@@ -302,6 +303,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("lobid", loginStoreArray.get(0).getLobId());
                                 editor.putString("lobname", loginStoreArray.get(0).getLobName());
                                 editor.putString("kpi_id",loginStoreArray.get(0).getKpiId());
+                                editor.putString("hierarchyLevels",loginStoreArray.get(0).getHierarchyLevels());
                                 editor.putString("isMultiStore", loginStoreArray.get(0).getIsMultiStore());
                                 editor.apply();
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
@@ -418,7 +420,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //
 
                             String[] kpiIdArray = kpi_id.toString().split(",");
+                            String[] HierarchyLevels = loginStoreArray.get(0).getHierarchyLevels().split(",");
                             intent.putExtra("kpiId", kpiIdArray);
+                            intent.putExtra("hierarchyLevels", HierarchyLevels);
                             //Log.e(TAG, "onResponse: "+kpiIdArray.length + kpiIdArray[i]);
                             intent.putExtra("BACKTO", "login");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

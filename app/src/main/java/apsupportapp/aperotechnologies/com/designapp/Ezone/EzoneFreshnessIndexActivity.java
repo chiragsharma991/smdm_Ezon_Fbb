@@ -116,6 +116,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     private int selectedlevel;
     private int filter_level;
     private String header_value;
+    public int x=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -358,6 +359,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
 
     }
+    private void testmethod(){}
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {

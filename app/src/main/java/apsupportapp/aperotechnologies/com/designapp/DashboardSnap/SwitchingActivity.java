@@ -619,6 +619,9 @@ public class SwitchingActivity extends AppCompatActivity
                 if (kpiIdArray.contains("043"))
                     apps.add(new App("PvA Ezone", R.mipmap.planvsactual,"043"));
 
+                if (kpiIdArray.contains("028"))
+                    apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,"028"));
+
                 break;
 
             case 14 :

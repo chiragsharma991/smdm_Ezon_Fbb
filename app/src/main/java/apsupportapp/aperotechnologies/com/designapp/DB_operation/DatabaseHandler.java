@@ -20,7 +20,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.TestModel;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String DATABASE_NAME = "storeDetails";
 
@@ -34,6 +34,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_THREE = "lobId";
     private static final String KEY_FOUR = "lobName";
     private static final String KEY_FIVE = "geoLevel2Desc";
+    private static final String KEY_SIX = "hierarchyLevels";
     private final Context context;
 
     public DatabaseHandler(Context context) {
@@ -50,7 +51,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_ONE + " VARCHAR,"
                 + KEY_TWO + " VARCHAR," + KEY_THREE + " VARCHAR,"+ KEY_FOUR + " VARCHAR,"
-                + KEY_FIVE + " VARCHAR"+")";
+                + KEY_FIVE + " VARCHAR"+ KEY_SIX + " VARCHAR"+")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -69,7 +70,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void db_AddData(ArrayList<Login_StoreList> loginStoreArray) {
 
-        Log.e(TAG, "db_AddData: size"+loginStoreArray.size() );
+        Log.e(TAG, "db_AddData: size"+loginStoreArray.size()+" "+loginStoreArray.get(0).getHierarchyLevels() );
         SQLiteDatabase db = this.getWritableDatabase();
 
         for (int i = 0; i <loginStoreArray.size(); i++) {
@@ -79,6 +80,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(KEY_THREE, loginStoreArray.get(i).getLobId());
             values.put(KEY_FOUR, loginStoreArray.get(i).getLobName());
             values.put(KEY_FIVE, loginStoreArray.get(i).getGeoLevel2Desc());
+            values.put(KEY_SIX, loginStoreArray.get(i).getHierarchyLevels());
             db.insert(TABLE_NAME, null, values);
         }
         db.close(); // Closing database connection
@@ -115,7 +117,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Login_StoreList db_GetOneRowDetails(String lobName) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query( TABLE_NAME, new String[] { KEY_ID,
-                        KEY_ONE, KEY_TWO,KEY_THREE,KEY_FOUR,KEY_FIVE }, KEY_FOUR + "=?",
+                        KEY_ONE, KEY_TWO,KEY_THREE,KEY_FOUR,KEY_FIVE,KEY_SIX }, KEY_FOUR + "=?",
                 new String[] { String.valueOf(lobName) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -125,6 +127,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         data.setLobId(cursor.getString(3));
         data.setLobName(cursor.getString(4));
         data.setGeoLevel2Desc(cursor.getString(5));
+        data.setHierarchyLevels(cursor.getString(6));
         return data;
     }
 
@@ -143,6 +146,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 data.setLobId(cursor.getString(3));
                 data.setLobName(cursor.getString(4));
                 data.setGeoLevel2Desc(cursor.getString(5));
+                data.setHierarchyLevels(cursor.getString(6));
                 Log.i(TAG, "db_GetListWhereClause: "+data.getGeoLevel2Code()+" and 2 "+data.getKpiId()+" and 3 "+data.getLobId()+" and 4 "+data.getLobName()+" and 5 is "+data.getGeoLevel2Desc() );
                 // Adding contact to list
                 dataList.add(data);
@@ -164,6 +168,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 data.setLobId(cursor.getString(3));
                 data.setLobName(cursor.getString(4));
                 data.setGeoLevel2Desc(cursor.getString(5));
+                data.setHierarchyLevels(cursor.getString(6));
                 Log.i(TAG, "db_GetListMulipleWhereClause: "+data.getGeoLevel2Code()+" and 2 "+data.getKpiId()+" and 3 "+data.getLobId()+" and 4 "+data.getLobName()+" and 5 is "+data.getGeoLevel2Desc() );
                 // Adding contact to list
                 dataList.add(data);
@@ -186,11 +191,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 data.setLobId(cursor.getString(3));
                 data.setLobName(cursor.getString(4));
                 data.setGeoLevel2Desc(cursor.getString(5));
+                data.setHierarchyLevels(cursor.getString(6));
                 // Adding contact to list
                 dataList.add(data);
                // Log.i(TAG, "cursor GetAllContacts: "+cursor.moveToNext() );
             } while (cursor.moveToNext());
         }
+        Log.i(TAG, "db_GetAllContacts: "+dataList.size() );
         return dataList;
     }
 
