@@ -83,6 +83,7 @@ import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisA
 import apsupportapp.aperotechnologies.com.designapp.SellThruExceptions.SaleThruInventory;
 import apsupportapp.aperotechnologies.com.designapp.SkewedSize.SkewedSizesActivity;
 import apsupportapp.aperotechnologies.com.designapp.StockAgeing.StockAgeingActivity;
+import apsupportapp.aperotechnologies.com.designapp.StoreAdapter;
 import apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionBeginActivity;
 import apsupportapp.aperotechnologies.com.designapp.StoreInspection.InspectionHistoryActivity;
 import apsupportapp.aperotechnologies.com.designapp.TargetStockExceptions.TargetStockExceptionActivity;
@@ -103,7 +104,7 @@ public class SwitchingActivity extends AppCompatActivity
 {
     boolean loginFromFbb;
     private Context context = this;
-    ListAdapter spinnerArrayAdapter;
+    StoreAdapter spinnerArrayAdapter;
     String SelectedStoreCode, storeDescription, from;
     SharedPreferences sharedPreferences;
     String userId, bearertoken,storeCode,geoLevel2Code, lobId, body_geoLevel2Code;
@@ -187,7 +188,6 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent SaleThruInventory = new Intent(context, SaleThruInventory.class);
                     startActivity(SaleThruInventory);
                     break;
-
                 case "014":
                     Intent RunningPromoActivity = new Intent(context, RunningPromoActivity.class);
                     startActivity(RunningPromoActivity);
@@ -655,7 +655,7 @@ public class SwitchingActivity extends AppCompatActivity
         arrayList = new ArrayList<String>();
         arrayListbody = new ArrayList<String>();
 
-        spinnerArrayAdapter = new ListAdapter(arrayList, SwitchingActivity.this);
+        spinnerArrayAdapter = new StoreAdapter(arrayList, SwitchingActivity.this);
         select_storeList.setAdapter(spinnerArrayAdapter);
         select_storeList.setTextFilterEnabled(true);
         spinnerArrayAdapter.notifyDataSetChanged();

@@ -43,6 +43,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.cipherlab.barcode.GeneralString;
 import com.cipherlab.barcode.ReaderManager;
 import com.cipherlab.barcode.decoder.BcReaderType;
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -64,6 +65,9 @@ import apsupportapp.aperotechnologies.com.designapp.MySingleton;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.StoreAdapter;
+import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
+
+
 
 
 public class StyleActivity extends AppCompatActivity
@@ -72,8 +76,9 @@ public class StyleActivity extends AppCompatActivity
     RelativeLayout imageBtnBack;
     TextView collection, style,txt_store;
     List<String> collectionList, list;
-    ArrayList<String> arrayList, articleOptionList,storeList, collectionCode_list, articleOptionCode_list;
-    static ArrayList<String> newcollectionList;
+    ArrayList<String> storeList, collectionCode_list, articleOptionCode_list;
+    public static ArrayList<StyleModel> arrayList,articleOptionList;
+    static ArrayList<StyleModel> newcollectionList;
     String userId, bearertoken;
     View view;
     String collectionNM, optionName, from,store_name, collectionCode, articleOptionCode;
@@ -99,8 +104,9 @@ public class StyleActivity extends AppCompatActivity
     private ReaderManager mReaderManager;
     private IntentFilter filter;
     public static StyleActivity styleactivity;
-
+    private StyleModel styleModel;
     String barcode;
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,16 +128,17 @@ public class StyleActivity extends AppCompatActivity
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        gson = new Gson();
         storeList =new ArrayList<String>();
         collectionList = new ArrayList<String>();
-        arrayList = new ArrayList<String>();
+        arrayList = new ArrayList<StyleModel>();
         collectionCode_list = new ArrayList<String>();
         articleOptionCode_list = new ArrayList<String>();
         list = new ArrayList<>();
 //        seloptionName = null;
 //        selStoreName = null;
 //        selcollectionName = null;
-        articleOptionList = new ArrayList<>();
+        articleOptionList = new ArrayList<StyleModel>();
         stylemainlayout = (LinearLayout) findViewById(R.id.stylemainlayout);
         stylemainlayout.setVisibility(View.VISIBLE);
         collectionLayout = (LinearLayout) findViewById(R.id.collectionLayout);
@@ -183,11 +190,9 @@ public class StyleActivity extends AppCompatActivity
         }
 
 //        storeAdapter.notifyDataSetChanged();
-        collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
-        //attach the adapter to the list
-        listCollection.setAdapter(collectionAdapter);
-        listCollection.setTextFilterEnabled(true);
-        collectionAdapter.notifyDataSetChanged();
+
+//        listCollection.setTextFilterEnabled(true);
+//        collectionAdapter.notifyDataSetChanged();
         listOption = (ListView) findViewById(R.id.listOption);
         optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
         listOption.setAdapter(optionAdapter);
@@ -306,17 +311,20 @@ public class StyleActivity extends AppCompatActivity
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                collectionAdapter.getFilter().filter(s);
+//                collectionAdapter.getFilter().filter(s);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                collectionAdapter.getFilter().filter(s);
-            }
+                String searchData = edtsearchCollection.getText().toString();
+                collectionAdapter.getFilter().filter(searchData);
+               // collectionAdapter.notifyDataSetChanged();
+              }
 
             @Override
             public void afterTextChanged(Editable s) {
-                collectionAdapter.getFilter().filter(s);
+
+//                collectionAdapter.getFilter().filter(s);
             }
         });
 
@@ -397,12 +405,13 @@ public class StyleActivity extends AppCompatActivity
                 offsetvalue = 0;
                 count = 0;
                 //
-                collectionNM = (String) collectionAdapter.getItem(position);
-                collectionCode = collectionCode_list.get(position-1);
-
+                Log.e("onItemClick: ",""+arrayList.size());
+                collectionNM = arrayList.get(position).getCollectionName();
+                collectionCode = arrayList.get(position).getCollectionCode();
+                Log.e("onItemClick: ",""+collectionNM + collectionCode);
                 selcollectionName = collectionNM;
                 collection.setText(selcollectionName);
-                Log.e("collect_name ", " "+collect_name);
+                Log.e("collect_name ", " "+collect_name +selcollectionName +"-----"+collectionNM);
                 //harshada
                 seloptionName = null;
                 optionName = "";
@@ -441,7 +450,7 @@ public class StyleActivity extends AppCompatActivity
                         limit = 100;
                         count = 0;
                         store_name = store_name.substring(0,4);
-                        articleOptionList = new ArrayList<String>();
+                        articleOptionList = new ArrayList<StyleModel>();
                         optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
                         listOption.setAdapter(optionAdapter);
                         Log.e("collectionCode "," "+collectionNM+ " , "+store_name);
@@ -460,8 +469,8 @@ public class StyleActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                optionName = (String) optionAdapter.getItem(position);
-                articleOptionCode = articleOptionCode_list.get(position-1);
+                optionName = articleOptionList.get(position).getArticleOptions();
+                articleOptionCode = articleOptionList.get(position).getArticleOptionCode();
                 Log.e("", "articleOptionCode: "+articleOptionCode);
 
                 //seloptionName = optionName;
@@ -514,7 +523,8 @@ public class StyleActivity extends AppCompatActivity
 
     private void TimeUP()
     {
-        if (Reusable_Functions.chkStatus(StyleActivity.this)) {
+        if (Reusable_Functions.chkStatus(StyleActivity.this))
+        {
             Reusable_Functions.hDialog();
             Reusable_Functions.sDialog(StyleActivity.this, "Loading data...");
             requestStyleDetailsAPI(barcode, "barcode", store_name, articleOptionCode);
@@ -621,13 +631,18 @@ public class StyleActivity extends AppCompatActivity
 
     private String capitalize(String s)
     {
-        if (s == null || s.length() == 0) {
+        if (s == null || s.length() == 0)
+        {
             return "";
         }
         char first = s.charAt(0);
-        if (Character.isUpperCase(first)) {
+        if (Character.isUpperCase(first))
+        {
             return s;
-        } else {
+        }
+        else
+
+        {
             return Character.toUpperCase(first) + s.substring(1);
         }
     }
@@ -638,7 +653,7 @@ public class StyleActivity extends AppCompatActivity
         if (check.equals("optionname"))
         {
             url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + articleOptionCode.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+store_name;
-            Log.e("", "requestCollectionAPI: "+url);
+            Log.e("", "requestStyleDetailsAPI: "+url);
         }
         else if (check.equals("barcode"))
         {
@@ -765,7 +780,7 @@ public class StyleActivity extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("onResponse: ","" + response.length()+"=== "+response);
+//                        Log.e("onResponse: ","" + response.length()+"=== "+response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 )
                             {
@@ -833,11 +848,11 @@ public class StyleActivity extends AppCompatActivity
                                         collectionList.clear();
                                         store_name = store_name.substring(0,4);
                                         // harshada
-                                        arrayList = new ArrayList<String>();
+                                        arrayList = new ArrayList<StyleModel>();
                                         collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
                                         listCollection.setAdapter(collectionAdapter);
 
-                                        articleOptionList = new ArrayList<String>();
+                                        articleOptionList = new ArrayList<StyleModel>();
                                         optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
                                         listOption.setAdapter(optionAdapter);
                                         //
@@ -945,11 +960,11 @@ public class StyleActivity extends AppCompatActivity
                                             collectionList.clear();
                                             store_name = store_name.substring(0,4);
                                             // harshada
-                                            arrayList = new ArrayList<String>();
+                                            arrayList = new ArrayList<StyleModel>();
                                             collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
                                             listCollection.setAdapter(collectionAdapter);
 
-                                            articleOptionList = new ArrayList<String>();
+                                            articleOptionList = new ArrayList<StyleModel>();
                                             optionAdapter = new ListAdapter1(articleOptionList, StyleActivity.this);
                                             listOption.setAdapter(optionAdapter);
                                             //
@@ -1039,7 +1054,7 @@ public class StyleActivity extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("collection response "," "+response.length() +" "+collectioncount+" ");
+//                        Log.e("collection response "," "+response.length() +" "+collectioncount+" ");
                         Log.e("collection response "," "+response.toString());
 
                         try {
@@ -1053,21 +1068,26 @@ public class StyleActivity extends AppCompatActivity
                             {
 
                                 // harshada
-                                Collections.sort(arrayList);
-                                arrayList.add(0, "Select Collection");
+//                                Collections.sort(arrayList);
+                                styleModel = new StyleModel();
+                                styleModel.setCollectionName("Select Collection");
+                                arrayList.add(0, styleModel);
                                 collectionAdapter.notifyDataSetChanged();
                                 Reusable_Functions.hDialog();
-                                newcollectionList = new ArrayList();
+                                newcollectionList = new ArrayList<StyleModel>();
                                 newcollectionList.addAll(arrayList);
                             }
                             else if (response.length() == collectionlimit)
                             {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
-                                    collectionNM = collectionName.getString("collectionName");
-                                    collectionCode = collectionName.getString("collectionCode");
-                                    arrayList.add(collectionNM);
-                                    collectionCode_list.add(collectionCode);
+                                    styleModel = gson.fromJson(response.get(i).toString(), StyleModel.class);
+
+//                                    collectionNM = collectionName.getString("collectionName");
+//                                    collectionCode = collectionName.getString("collectionCode");
+                                    arrayList.add(styleModel);
+//
+//                                    collectionCode_list.add(collectionCode);
                                 }
                                 collectionoffset = (collectionlimit * collectioncount) + collectionlimit;
                                 collectioncount++;
@@ -1077,18 +1097,28 @@ public class StyleActivity extends AppCompatActivity
                             {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject collectionName = response.getJSONObject(i);
-                                    collectionNM = collectionName.getString("collectionName");
-                                    collectionCode = collectionName.getString("collectionCode");
-                                    arrayList.add(collectionNM);
-                                    collectionCode_list.add(collectionCode);
+                                    styleModel = gson.fromJson(response.get(i).toString(), StyleModel.class);
+
+//                                    collectionNM = collectionName.getString("collectionName");
+//                                    collectionCode = collectionName.getString("collectionCode");
+                                    arrayList.add(styleModel);
+//                                    collectionNM = collectionName.getString("collectionName");
+//                                    collectionCode = collectionName.getString("collectionCode");
+//                                    arrayList.add(collectionNM);
+//                                    collectionCode_list.add(collectionCode);
                                 }
                                 // harshada
-                                Collections.sort(arrayList);
-                                Collections.sort(collectionCode_list);
-                                arrayList.add(0, "Select Collection");
+//                                Collections.sort(arrayList);
+//                                Collections.sort(collectionCode_list);
+                                styleModel = new StyleModel();
+                                styleModel.setCollectionName("Select Collection");
+                                arrayList.add(0, styleModel);
+                                collectionAdapter = new ListAdapter(arrayList, StyleActivity.this);
+                                //attach the adapter to the list
+                                listCollection.setAdapter(collectionAdapter);
                                 collectionAdapter.notifyDataSetChanged();
                                 Reusable_Functions.hDialog();
-                                newcollectionList = new ArrayList();
+                                newcollectionList = new ArrayList<StyleModel>();
                                 newcollectionList.addAll(arrayList);
                             }
 
@@ -1183,16 +1213,21 @@ public class StyleActivity extends AppCompatActivity
 
                         try
                         {
-                            if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                                articleOptionList.add(0, "Select Option");
+                            if (response.equals("") || response == null || response.length() == 0 && count == 0)
+                            {
+                                styleModel = new StyleModel();
+                                styleModel.setArticleOptions("Select Option");
+                                articleOptionList.add(0, styleModel);
                                 style.setEnabled(false);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(StyleActivity.this, "No options data found", Toast.LENGTH_LONG).show();
                             }
                             if (response.equals("") || response == null || response.length() == 0 && count > 0)
                             {
-                                Collections.sort(articleOptionList);
-                                articleOptionList.add(0, "Select Option");
+//                                Collections.sort(articleOptionList);
+                                styleModel = new StyleModel();
+                                styleModel.setArticleOptions("Select Option");
+                                articleOptionList.add(0, styleModel);
                                 style.setEnabled(true);
                                 SnapDashboardActivity._collectionitems = new ArrayList();
                                 SnapDashboardActivity._collectionitems.addAll(articleOptionList);
@@ -1202,11 +1237,12 @@ public class StyleActivity extends AppCompatActivity
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     JSONObject jsonResponse = response.getJSONObject(i);
-                                    String collectionNames = jsonResponse.getString("collectionNames");
-                                    String articleOptions = jsonResponse.getString("articleOptions");
-                                    String articleOptionCode = jsonResponse.getString("articleOptionCode");
-                                    articleOptionList.add(articleOptions);
-                                    articleOptionCode_list.add(articleOptionCode);
+//                                    String collectionNames = jsonResponse.getString("collectionNames");
+//                                    String articleOptions = jsonResponse.getString("articleOptions");
+//                                    String articleOptionCode = jsonResponse.getString("articleOptionCode");
+                                    styleModel = gson.fromJson(response.get(i).toString(), StyleModel.class);
+                                    articleOptionList.add(styleModel);
+//                                    articleOptionCode_list.add(articleOptionCode);
                                 }
                                 offsetvalue = (limit * count) + limit;
                                 count++;
@@ -1217,18 +1253,22 @@ public class StyleActivity extends AppCompatActivity
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     JSONObject jsonResponse = response.getJSONObject(i);
-                                    String collectionNames = jsonResponse.getString("collectionNames");
-                                    String articleOptions = jsonResponse.getString("articleOptions");
-                                    String articleOptionCode = jsonResponse.getString("articleOptionCode");
-                                    articleOptionList.add(articleOptions);
-                                    articleOptionCode_list.add(articleOptionCode);
+//                                    String collectionNames = jsonResponse.getString("collectionNames");
+//                                    String articleOptions = jsonResponse.getString("articleOptions");
+//                                    String articleOptionCode = jsonResponse.getString("articleOptionCode");
+//                                    articleOptionList.add(articleOptions);
+//                                    articleOptionCode_list.add(articleOptionCode);
+                                    styleModel = gson.fromJson(response.get(i).toString(), StyleModel.class);
+                                    articleOptionList.add(styleModel);
 
                                 }
 
 //                                Collections.sort(articleOptionList);
 //                                Collections.sort(articleOptionCode_list);
 
-                                articleOptionList.add(0, "Select Option");
+                                styleModel = new StyleModel();
+                                styleModel.setArticleOptions("Select Option");
+                                articleOptionList.add(0, styleModel);
                                 style.setEnabled(true);
                                 Reusable_Functions.hDialog();
                                 SnapDashboardActivity._collectionitems = new ArrayList();
@@ -1333,7 +1373,9 @@ public class StyleActivity extends AppCompatActivity
             selStoreName = null;
             selcollectionName = null;
             seloptionName = null;
-            newcollectionList= new ArrayList();
+            newcollectionList= new ArrayList<StyleModel>();
+            arrayList = new ArrayList<StyleModel>();
+            articleOptionList = new ArrayList<StyleModel>();
             SnapDashboardActivity._collectionitems = new ArrayList();
             finish();
         }
