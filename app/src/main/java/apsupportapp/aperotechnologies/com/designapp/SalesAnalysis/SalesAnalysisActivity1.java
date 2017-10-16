@@ -1856,12 +1856,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
     {
         String salespva_planclass_listurl = "";
         salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-        Log.e("salespva_planclass_listurl "," "+salespva_planclass_listurl);
+//        Log.e("salespva_planclass_listurl "," "+salespva_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+//                        Log.e(TAG, "onResponse: ", );
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
