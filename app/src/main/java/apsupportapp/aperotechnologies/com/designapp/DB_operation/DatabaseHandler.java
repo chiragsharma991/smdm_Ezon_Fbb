@@ -20,7 +20,7 @@ import apsupportapp.aperotechnologies.com.designapp.model.TestModel;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
 
     private static final String DATABASE_NAME = "storeDetails";
 
@@ -51,13 +51,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_ONE + " VARCHAR,"
                 + KEY_TWO + " VARCHAR," + KEY_THREE + " VARCHAR,"+ KEY_FOUR + " VARCHAR,"
-                + KEY_FIVE + " VARCHAR"+ KEY_SIX + " VARCHAR"+")";
+                + KEY_FIVE + " VARCHAR,"+ KEY_SIX + " VARCHAR" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.e(TAG, "onUpgrade: ---" );
+        Log.e(TAG, "onUpgrade: -old ver--"+oldVersion+" new ver "+newVersion );
+
+        /*if (newVersion > oldVersion) {
+            db.execSQL("ALTER TABLE storeMapping ADD COLUMN hierarchyLevels VARCHAR");
+        }*/
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         // Create tables again
@@ -70,7 +74,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void db_AddData(ArrayList<Login_StoreList> loginStoreArray) {
 
-        Log.e(TAG, "db_AddData: size"+loginStoreArray.size()+" "+loginStoreArray.get(0).getHierarchyLevels() );
         SQLiteDatabase db = this.getWritableDatabase();
 
         for (int i = 0; i <loginStoreArray.size(); i++) {

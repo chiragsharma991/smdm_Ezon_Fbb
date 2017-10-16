@@ -289,8 +289,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 {
                                     login_storeList = gson.fromJson(response.get(i).toString(),Login_StoreList.class);
                                     loginStoreArray.add(login_storeList);
-                                    Log.i(TAG, "loginStoreArray sizes: "+loginStoreArray.size());
                                 }
+                                Log.i(TAG, "loginStoreArray sizes: "+loginStoreArray.size());
                                 //database storeage
                                 db.deleteAllData();
                                 db.db_AddData(loginStoreArray);
@@ -411,19 +411,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             }
                             Reusable_Functions.hDialog();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("hierarchyLevels", loginStoreArray.get(0).getHierarchyLevels());
+                            editor.apply();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
                             String kpi_id = loginStoreArray.get(0).getKpiId();
-//                            StringBuilder s = new StringBuilder(kpi_id);
-//                            s.append(",030");
-//                            Log.i(TAG, "onResponse: Kpi Id--"+s.toString() );
-//
-
                             String[] kpiIdArray = kpi_id.toString().split(",");
-                            String[] HierarchyLevels = loginStoreArray.get(0).getHierarchyLevels().split(",");
                             intent.putExtra("kpiId", kpiIdArray);
-                            intent.putExtra("hierarchyLevels", HierarchyLevels);
-                            //Log.e(TAG, "onResponse: "+kpiIdArray.length + kpiIdArray[i]);
                             intent.putExtra("BACKTO", "login");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

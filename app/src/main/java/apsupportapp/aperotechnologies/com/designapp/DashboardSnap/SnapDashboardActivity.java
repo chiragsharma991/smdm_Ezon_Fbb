@@ -131,6 +131,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private View viewpart;
     private RecyclerView lobList;
     private ArrayList<String> lobData = null, conceptData = null, conceptDesc = null;
+    private String hierarchyLevels;
 
   /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
             020. 021,  022, 023, 026, 027, 028*/
@@ -142,13 +143,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
      Floor Avl, Target Stock Exc, Sell Thru Exc,
      Running Promo, Upcoming Promo, Expiring Promo, Best/Worst Promo, Key Product PVA, Stock Transfer, Stock Transfer Status, Best Worst Feedback, Best Worst Feedback List, Season Catalogue, Customer Eng, Hourly Performance
  */
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(TAG, "onCreate: SnapDashboardActivity");
         super.onCreate(savedInstanceState);
         context = this;
         statusbar();
+        gson = new Gson();
         m_config = MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
@@ -156,16 +157,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         geoLeveLDesc = sharedPreferences.getString("conceptDesc", "");
         lobName = sharedPreferences.getString("lobname", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
+        hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
-        String[] hierarchyLevels = getIntent().getStringArrayExtra("hierarchyLevels");
-        Log.e(TAG, "onCreate: hierarchyLevels" + hierarchyLevels.length);
-        Log.e(TAG, "userId :--" + userId);
-        Log.e(TAG, "pushtoken :--" + pushtoken.toString());
+
+        Log.e(TAG, "onCreate: hierarchyLevels" +hierarchyLevels +" kpi id"+gson.toJson(kpiIdArray));
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        gson = new Gson();
         if (userId.equals("")) {
             Intent intent = new Intent(this, LoginActivity1.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -380,7 +379,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(), LinearLayoutManager.VERTICAL, false));
         final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptDesc, context, conceptchecked);
         conceptList.setAdapter(conceptMappingAdapter);
-
         conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -514,7 +512,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
 
     private void setupAdapter(List<String> kpiIdArray) {
-        Log.i(TAG, "kpiIdArray: " + kpiIdArray.toString());
+        pushtoken = sharedPreferences.getString("hierarchyLevels", "");
+
+        Log.i(TAG, "selected kpiIdArray: " + kpiIdArray.toString()+" selected hierarchyLevels "+sharedPreferences.getString("hierarchyLevels", ""));
 
        /* Mapping
         001 - Product Info
