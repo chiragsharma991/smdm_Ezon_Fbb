@@ -50,6 +50,9 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusA
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookupActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CompetitorStoreExtActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.ExternalHistoryActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.FGStoreExtActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneBestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneFreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1;
@@ -71,6 +74,11 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Superviso
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.CompetitorStoreActivity;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ExternalAudReviewActivity;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.FGStoreActivity;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.InspectionHistory;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ReportActivity;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
 import apsupportapp.aperotechnologies.com.designapp.ListAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -156,35 +164,35 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(HourlyPerformence);
                     break;
                 case "006":
-                    Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
+                    Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);  //  FGStoreActivity
                     startActivity(FreshnessIndexActivity);
                     break;
                 case "007":
-                    Intent OptionEfficiencyActivity = new Intent(context, OptionEfficiencyActivity.class);
+                    Intent OptionEfficiencyActivity = new Intent(context, OptionEfficiencyActivity.class); //  CompetitorStoreActivity
                     startActivity(OptionEfficiencyActivity);
                     break;
                 case "008":
-                    Intent SkewedSizesActivity = new Intent(context, SkewedSizesActivity.class);
+                    Intent SkewedSizesActivity = new Intent(context, SkewedSizesActivity.class);   //   ExternalAudReviewActivity
                     startActivity(SkewedSizesActivity);
                     break;
                 case "009":
-                    Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);
+                    Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);   //   InspectionHistory
                     startActivity(BestPerformerInventory);
                     break;
                 case "010":
-                    Intent StockAgeingActivity = new Intent(context, StockAgeingActivity.class);
+                    Intent StockAgeingActivity = new Intent(context, StockAgeingActivity.class);  //   ReportActivity
                     startActivity(StockAgeingActivity);
                     break;
                 case "011":
-                    Intent FloorAvailabilityActivity = new Intent(context, FloorAvailabilityActivity.class);
+                    Intent FloorAvailabilityActivity = new Intent(context, FloorAvailabilityActivity.class);   //   FGStoreExtActivity
                     startActivity(FloorAvailabilityActivity);
                     break;
                 case "012":
-                    Intent TargetStockExceptionActivity = new Intent(context, TargetStockExceptionActivity.class);
+                    Intent TargetStockExceptionActivity = new Intent(context, TargetStockExceptionActivity.class);  //   CompetitorStoreExtActivity
                     startActivity(TargetStockExceptionActivity);
                     break;
                 case "013":
-                    Intent SaleThruInventory = new Intent(context, SaleThruInventory.class);
+                    Intent SaleThruInventory = new Intent(context, SaleThruInventory.class);  // ExternalHistoryActivity
                     startActivity(SaleThruInventory);
                     break;
 

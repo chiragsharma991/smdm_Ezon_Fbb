@@ -1,8 +1,8 @@
-package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
+package apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,16 +24,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.Overallratings;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-//import com.marcinmoskala.arcseekbar.ArcSeekBar;
-
-//import apsupportapp.aperotechnologies.com.designapp.R;
-
-public class CompetitorStoreActivity extends AppCompatActivity {
+public class CompetitorStoreExtActivity extends AppCompatActivity {
 
     private Context context;
-    private EditText edt_name_author, edt_dateofVisit, edt_dayofweek, edt_timeofVisit, edt_auditorType, edt_observations, edt_suggestions, edt_name_supervisor, edt_time_supervisor,  edt_product_name, edt_customer_name, edt_mobile, edt_keytakeaway;
+    private EditText edt_name_author, edt_dateofVisit, edt_dayofweek, edt_timeofVisit, edt_auditorType, edt_observations, edt_suggestions, edt_name_supervisor, edt_time_supervisor,  edt_product_name, edt_customer_name, edt_mobile, edt_keytakeaway, edt_agencyname;
     private List<Overallratings> list_overallratings;
     private List<Overallratings> list_billing_experience;
     private List<Overallratings> list_staffing;
@@ -49,7 +46,7 @@ public class CompetitorStoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_competitor_store);
+        setContentView(R.layout.activity_competitor_store_ext);
         getSupportActionBar().hide();
 
         context = this;
@@ -62,8 +59,6 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         list_storelookfeel = new ArrayList<>();
         list_storeservices = new ArrayList<>();
         list_vm = new ArrayList<>();
-
-
 
         final LinearLayout lin_lay_overall_ratings = (LinearLayout) findViewById(R.id.lin_lay_overall_ratings);
         create_Smiley(lin_lay_overall_ratings, "overallratings.json", list_overallratings, "overallratings");
@@ -96,8 +91,9 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         edt_name_author = (EditText) findViewById(R.id.edt_name_author);
         edt_dateofVisit = (EditText) findViewById(R.id.edt_dateofVisit);
         edt_dayofweek = (EditText) findViewById(R.id.edt_dayofweek);
-        edt_timeofVisit = (EditText) findViewById(R.id.edt_timeofVisit);
+       // edt_timeofVisit = (EditText) findViewById(R.id.edt_timeofVisit);
         edt_auditorType = (EditText) findViewById(R.id.edt_auditorType);
+        edt_agencyname = (EditText) findViewById(R.id.edt_agencyname);
         edt_observations = (EditText) findViewById(R.id.edt_observations);
         edt_suggestions = (EditText) findViewById(R.id.edt_suggestions);
         edt_name_supervisor = (EditText) findViewById(R.id.edt_name_supervisor);
@@ -110,13 +106,13 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         radio_no_supervisor = (RadioButton) findViewById(R.id.radio_no_supervisor);
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
 
-
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
 
         Button btn_Reset = (Button) findViewById(R.id.btn_reset);
         btn_Reset.setOnClickListener(new View.OnClickListener() {
@@ -155,8 +151,9 @@ public class CompetitorStoreActivity extends AppCompatActivity {
                 edt_name_author.setText("");
                 edt_dateofVisit.setText("");
                 edt_dayofweek.setText("");
-                edt_timeofVisit.setText("");
+               // edt_timeofVisit.setText("");
                 edt_auditorType.setText("");
+                edt_agencyname.setText("");
                 edt_observations.setText("");
                 edt_suggestions.setText("");
                 edt_name_supervisor.setText("");
@@ -171,8 +168,9 @@ public class CompetitorStoreActivity extends AppCompatActivity {
                 edt_name_author.clearFocus();
                 edt_dateofVisit.clearFocus();
                 edt_dayofweek.clearFocus();
-                edt_timeofVisit.clearFocus();
+              //  edt_timeofVisit.clearFocus();
                 edt_auditorType.clearFocus();
+                edt_agencyname.clearFocus();
                 edt_observations.clearFocus();
                 edt_suggestions.clearFocus();
                 edt_name_supervisor.clearFocus();
@@ -187,13 +185,6 @@ public class CompetitorStoreActivity extends AppCompatActivity {
 
             }
         });
-
-//        ArcSeekBar arc = (ArcSeekBar) findViewById(R.id.seekArc);
-//
-//        int[] intArray = getResources().getIntArray(R.array.progressGradientColors);
-//        arc.setProgressGradient(intArray);
-       
-
 
         Button btn_Submit = (Button) findViewById(R.id.btn_submit);
         btn_Submit.setOnClickListener(new View.OnClickListener() {
@@ -269,10 +260,7 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         });
 
 
-
-
     }
-
 
     public String loadJSONFromAsset(String json_file)
     {
@@ -291,8 +279,7 @@ public class CompetitorStoreActivity extends AppCompatActivity {
 
         return json;
     }
-    
-    
+
     public void create_Smiley(LinearLayout lin_layout, String json_file, final List<Overallratings> list_ratings, String fromWhere)
     {
         JSONArray m_jArry = null;
@@ -659,4 +646,5 @@ public class CompetitorStoreActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }

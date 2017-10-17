@@ -1,35 +1,31 @@
-package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
+package apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ExternalAuditReviewAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.InspectionHistoryZonalRatings;
 
 /**
- * Created by hasai on 26/09/17.
+ * Created by rkanawade on 16/10/17.
  */
 
-public class ExternalAuditReviewAdapter extends BaseAdapter
-{
+public class ExternalHistoryAdapter extends BaseAdapter {
+
     List<InspectionHistoryZonalRatings> arr_zonalratings;
     Context context;
 
 
-    public ExternalAuditReviewAdapter(List<InspectionHistoryZonalRatings> arr_zonalratings, Context context, ListView list_externalauditorreview)
+    public ExternalHistoryAdapter(List<InspectionHistoryZonalRatings> arr_zonalratings, Context context, ListView list_externalauditorreview)
     {
         this.arr_zonalratings = arr_zonalratings;
         this.context = context;
@@ -62,7 +58,7 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
 
-        final  Holder viewHolder;
+        final Holder viewHolder;
         LayoutInflater mInflater;
 
         if (view == null) {
@@ -75,7 +71,6 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
             viewHolder.txt_2 = (TextView) view.findViewById(R.id.txt_2);
             viewHolder.txt_3 = (TextView) view.findViewById(R.id.txt_3);
             viewHolder.txt_4 = (TextView) view.findViewById(R.id.txt_4);
-            viewHolder.card_extrenalaudrev = (CardView) view.findViewById(R.id.card_extrenalaudrev);
 
             Log.e("i "," "+i);
 
@@ -83,21 +78,12 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
             viewHolder.txt_2.setText(arr_zonalratings.get(i).getAvg_rating());
             viewHolder.txt_3.setText(arr_zonalratings.get(i).getAudit_done());
             viewHolder.txt_4.setText(arr_zonalratings.get(i).getCount_fg_audit());
-
-            viewHolder.card_extrenalaudrev.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent fg_store = new Intent(context, FGStoreDataAcitivity.class);
-                    context.startActivity(fg_store);
-                }
-            });
-
             view.setTag(viewHolder);
 
         } else
         {
             viewHolder = (Holder) view.getTag();
+
         }
 
         return view;
@@ -106,7 +92,6 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
     private class Holder
     {
         TextView txt_1, txt_2, txt_3, txt_4;
-        CardView card_extrenalaudrev;
 
     }
 }

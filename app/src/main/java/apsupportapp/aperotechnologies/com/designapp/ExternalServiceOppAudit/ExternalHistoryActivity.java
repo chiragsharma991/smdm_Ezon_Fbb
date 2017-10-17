@@ -1,10 +1,9 @@
-package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
+package apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -14,34 +13,28 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ExternalAuditReviewAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.model.InspectionHistoryZonalRatings;
 
-
-/**
- * Created by hasai on 10/10/17.
- */
-
-public class ExternalAudReviewActivity  extends AppCompatActivity {
+public class ExternalHistoryActivity extends AppCompatActivity {
 
     private Context context;
+    private RelativeLayout imageBtnBack1;
     TabLayout tab_fg_competitor_store, tab_fg_competitor_storeupdates;
-    CheckBox chckbox_All, chckbox_Pending, chckbox_Approved;
+    CheckBox chckbox_All, chckbox_rejected, chckbox_Approved, chckbox_underreview;
     String update_of_yes_week_mon = "Yesterday";
     String rev_selection = "All";
     List<InspectionHistoryZonalRatings> arr_zonalratings;
     ListView list_externalauditorreview;
-    ExternalAuditReviewAdapter adp_externalauditorreview;
+    ExternalHistoryAdapter externalHistoryAdapter;
     String store_type;
-    private RelativeLayout imageBtnBack1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_externalaudrev);
+        setContentView(R.layout.activity_external_history);
         getSupportActionBar().hide();
-
         context = this;
         store_type = "FgStore";
         arr_zonalratings = new ArrayList<>();
@@ -56,14 +49,15 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
         tab_fg_competitor_storeupdates.addTab(tab_fg_competitor_storeupdates.newTab().setText("Last Month"));
 
         chckbox_All = (CheckBox) findViewById(R.id.chckbox_All);
-        chckbox_Pending = (CheckBox) findViewById(R.id.chckbox_Pending);
+        chckbox_rejected = (CheckBox) findViewById(R.id.chckbox_rejected);
         chckbox_Approved = (CheckBox) findViewById(R.id.chckbox_Approved);
+        chckbox_underreview = (CheckBox) findViewById(R.id.chckbox_underreview);
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
 
         list_externalauditorreview = (ListView) findViewById(R.id.list_externalauditorreview);
         arr_zonalratings = new ArrayList<>();
-        adp_externalauditorreview = new ExternalAuditReviewAdapter(arr_zonalratings, context, list_externalauditorreview);
-        list_externalauditorreview.setAdapter(adp_externalauditorreview);
+        externalHistoryAdapter = new ExternalHistoryAdapter(arr_zonalratings, context, list_externalauditorreview);
+        list_externalauditorreview.setAdapter(externalHistoryAdapter);
         setLastWeek("FBB 001", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
@@ -73,12 +67,15 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
             }
         });
 
+
         chckbox_All.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chckbox_All.setChecked(true);
-                chckbox_Pending.setChecked(false);
+                chckbox_rejected.setChecked(false);
                 chckbox_Approved.setChecked(false);
+                chckbox_underreview.setChecked(false);
+
                 rev_selection = "All";
 
                 Log.e("chckbox_All click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
@@ -88,13 +85,15 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
             }
         });
 
-        chckbox_Pending.setOnClickListener(new View.OnClickListener() {
+        chckbox_rejected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chckbox_Pending.setChecked(true);
+                chckbox_rejected.setChecked(true);
                 chckbox_All.setChecked(false);
                 chckbox_Approved.setChecked(false);
-                rev_selection = "Pending";
+                chckbox_underreview.setChecked(false);
+
+                rev_selection = "Rejected";
 
                 Log.e("chckbox_Pending click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
                 setListAdpter();
@@ -107,13 +106,30 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 chckbox_Approved.setChecked(true);
-                chckbox_Pending.setChecked(false);
+                chckbox_rejected.setChecked(false);
                 chckbox_All.setChecked(false);
+                chckbox_underreview.setChecked(false);
                 rev_selection = "Approved";
 
                 Log.e("chckbox_Approved click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
                 setListAdpter();
                 setLastWeek("FBB 008", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
+
+            }
+        });
+
+        chckbox_underreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chckbox_underreview.setChecked(true);
+                chckbox_rejected.setChecked(false);
+                chckbox_All.setChecked(false);
+                chckbox_Approved.setChecked(false);
+                rev_selection = "Under Review";
+
+                Log.e("chckbox_Approved click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
+                setListAdpter();
+                setLastWeek("FBB 009", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
             }
         });
@@ -153,7 +169,6 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
             }
         });
 
-
         tab_fg_competitor_storeupdates.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -180,8 +195,6 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                     Log.e("Last Month click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
                     setListAdpter();
                     setLastWeek("FBB 005", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
-
-
                 }
 
             }
@@ -202,8 +215,8 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
     public void setListAdpter()
     {
         arr_zonalratings = new ArrayList<>();
-        adp_externalauditorreview = new ExternalAuditReviewAdapter(arr_zonalratings, context, list_externalauditorreview);
-        list_externalauditorreview.setAdapter(adp_externalauditorreview);
+        externalHistoryAdapter = new ExternalHistoryAdapter(arr_zonalratings, context, list_externalauditorreview);
+        list_externalauditorreview.setAdapter(externalHistoryAdapter);
     }
 
     public  void setLastWeek(String txt1, String txt2, String txt3, String txt4)
@@ -218,7 +231,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
         arr_zonalratings.add(inspectionHistoryZonalRatings);
 
         Log.e("--- "," "+arr_zonalratings.get(0).getZone_name());
-        adp_externalauditorreview.notifyDataSetChanged();
+        externalHistoryAdapter.notifyDataSetChanged();
 
     }
 

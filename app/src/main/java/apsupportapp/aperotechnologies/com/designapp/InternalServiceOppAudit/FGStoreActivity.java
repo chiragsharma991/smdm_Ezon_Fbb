@@ -29,7 +29,7 @@ import java.util.List;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-public class FGStoreExtActivity extends AppCompatActivity {
+public class FGStoreActivity extends AppCompatActivity {
 
     private Context context;
     private EditText edt_name_author, edt_dateofVisit, edt_dayofweek, edt_timeofVisit, edt_auditorType, edt_observations, edt_suggestions, edt_name_supervisor, edt_time_supervisor,  edt_product_name, edt_customer_name, edt_mobile, edt_keytakeaway;
@@ -43,11 +43,14 @@ public class FGStoreExtActivity extends AppCompatActivity {
     private List<Overallratings> list_storeservices;
     private List<Overallratings> list_vm;
     private RadioButton radio_yes_supervisor, radio_no_supervisor;
+    private RelativeLayout imageBtnBack1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fgstore);
+        getSupportActionBar().hide();
+
         context = this;
         list_overallratings = new ArrayList<>();
         list_billing_experience = new ArrayList<>();
@@ -104,8 +107,15 @@ public class FGStoreExtActivity extends AppCompatActivity {
         edt_keytakeaway = (EditText) findViewById(R.id.edt_keytakeaway);
         radio_yes_supervisor = (RadioButton) findViewById(R.id.radio_yes_supervisor);
         radio_no_supervisor = (RadioButton) findViewById(R.id.radio_no_supervisor);
+        imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
 
 
+        imageBtnBack1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         Button btn_Reset = (Button) findViewById(R.id.btn_reset);

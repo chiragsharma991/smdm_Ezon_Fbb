@@ -112,7 +112,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:gravity="bottom"
@@ -168,7 +168,7 @@
                                 android:background="@drawable/edittext_border"
                                 app:hintTextAppearance="@style/CustomTextAppearance"
                                 android:layout_width="match_parent"
-                                android:textColorHint="@color/hinttextcolor"
+                                android:textColorHint="@color/ezfb_black"
                                 android:layout_height="44dp"
                                 android:gravity="bottom"
                                 android:clipToPadding="false"
@@ -216,7 +216,7 @@
                                 android:background="@drawable/edittext_border"
                                 app:hintTextAppearance="@style/CustomTextAppearance"
                                 android:layout_width="match_parent"
-                                android:textColorHint="@color/hinttextcolor"
+                                android:textColorHint="@color/ezfb_black"
                                 android:layout_height="44dp"
                                 android:gravity="bottom"
                                 android:clipToPadding="false"
@@ -261,7 +261,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:gravity="bottom"
@@ -290,7 +290,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:gravity="bottom"
@@ -319,7 +319,7 @@
                         android:layout_below="@+id/input_auditorType"
                         android:layout_marginTop="10dp"
                         android:text="Store format : "
-                        android:textColor="@color/hinttextcolor"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="14sp"/>
 
                     <Spinner
@@ -341,7 +341,7 @@
                         android:layout_below="@+id/spinner_store_format"
                         android:layout_marginTop="10dp"
                         android:text="Store Name : "
-                        android:textColor="@color/hinttextcolor"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="14sp"/>
 
                     <Spinner
@@ -370,6 +370,7 @@
                             android:text="Overall Rating of the visit experience"
                             android:layout_marginTop="6dp"
                             android:layout_marginLeft="6dp"
+                            android:textColor="@color/ezfb_black"
                             android:textSize="14sp"/>
 
 
@@ -404,6 +405,7 @@
                         android:text="Overall Rating of Shopping Attributes"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="14sp"/>
 
 
@@ -428,6 +430,7 @@
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Comments/Observations:"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
 
@@ -437,6 +440,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Observations"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="13sp"/>
@@ -459,6 +463,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Suggestions"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="13sp"/>
@@ -507,6 +512,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Billing Experience :"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
@@ -565,6 +571,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Staffing :"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
@@ -624,6 +631,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Scenarios :"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="14sp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
@@ -644,7 +652,7 @@
                         android:layout_marginLeft="6dp"
                         android:text="Supervisor availability"
                         android:textSize="13sp"
-                        android:textColor="@color/darker_grey"
+                        android:textColor="@color/ezfb_black"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -679,7 +687,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
@@ -695,7 +703,6 @@
                             android:textSize="13sp"
                             android:textColor="#000000"
                             android:inputType="textPersonName"
-                           
                             android:paddingLeft="2dp"
                             android:paddingTop="8dp"
                             android:paddingBottom="2dp"
@@ -709,7 +716,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
@@ -769,6 +776,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Brand Promoter helpfulness :"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
@@ -799,8 +807,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
+                        android:textColor="@color/ezfb_black"
                         android:text="Name of the brand"
-                        android:textColor="@color/hinttextcolor"
                         android:textSize="14sp"/>
 
                     <Spinner
@@ -822,7 +830,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:text="Name of Category"
-                        android:textColor="@color/hinttextcolor"
+                        android:textColor="@color/ezfb_black"
                         android:textSize="14sp"/>
 
                     <Spinner
@@ -872,6 +880,7 @@
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Price &amp; Promotion"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
 
@@ -900,7 +909,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
@@ -958,6 +967,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Store Facilities"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
@@ -1016,6 +1026,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Store Look &amp; Feel"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
@@ -1074,6 +1085,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Store Services"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
@@ -1133,6 +1145,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="VM"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
@@ -1191,6 +1204,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rel_ratingbar"
                         android:text="Personal interaction with customer"
+                        android:textColor="@color/ezfb_black"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
                         android:textSize="14sp"/>
@@ -1211,7 +1225,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
@@ -1240,7 +1254,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
@@ -1271,7 +1285,7 @@
                         android:background="@drawable/edittext_border"
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/hinttextcolor"
+                        android:textColorHint="@color/ezfb_black"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="6dp"
@@ -1318,7 +1332,7 @@
                 android:weightSum="1"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="40dp">
 
                 <Button
                     android:id="@+id/btn_reset"

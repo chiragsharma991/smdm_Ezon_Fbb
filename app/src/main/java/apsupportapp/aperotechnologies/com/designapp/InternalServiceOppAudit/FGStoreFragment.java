@@ -57,14 +57,16 @@ public class FGStoreFragment extends Fragment {
         String[] headingTitle = new String[] { "         ", "Auditor Name", "Overall Audit Score", "Fashion Quotient(Display looks fashionable" };
 
         TableRow tableRow = new TableRow(context);
+        tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                300, TableLayout.LayoutParams.WRAP_CONTENT);
+                260, TableLayout.LayoutParams.WRAP_CONTENT);
        // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
 
         for (int i = 0; i < headingTitle.length; i++) {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
             textView.setLayoutParams(params);
+            textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
             tableRow.addView(textView);
         }
@@ -129,7 +131,7 @@ public class FGStoreFragment extends Fragment {
         TableRow tableRow = new TableRow(context);
         tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                300, 120);
+                260, 120);
         // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
 
         for (int i = 0; i < headingTitle.length; i++) {
@@ -150,7 +152,7 @@ public class FGStoreFragment extends Fragment {
         TableRow tableRow = new TableRow(context);
         tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                300, 120);
+                260, 120);
         // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
 
         for (int i = 0; i < headingTitle.length; i++) {
@@ -171,7 +173,7 @@ public class FGStoreFragment extends Fragment {
         TableRow tableRow = new TableRow(context);
         tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                300, 120);
+                260, 120);
         // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
 
         for (int i = 0; i < headingTitle.length; i++) {
