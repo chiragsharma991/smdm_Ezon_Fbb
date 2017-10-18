@@ -261,8 +261,8 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         loc_listDataChild = new HashMap<String, List<String>>();
         prod_listDataChild = new HashMap<String, List<String>>();
 
-        prod_listDataHeader.add("" +
-                "");
+        prod_listDataHeader.add("Department");
+
         prod_listDataHeader.add("Category");
         prod_listDataHeader.add("Class");
         prod_listDataHeader.add("Brand");

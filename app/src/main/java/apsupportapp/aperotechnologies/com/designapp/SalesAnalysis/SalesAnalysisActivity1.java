@@ -1240,7 +1240,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 startActivity(intent);
                 break;
             case R.id.imgReset :
-                salesAnalysisClassArrayList= new ArrayList<SalesAnalysisListDisplay>();
+                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                 header_value = "";
                 drill_down_val = "";
                 selFirstPositionValue = 0;firstVisibleItem = 0;
@@ -1257,6 +1257,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     relprevbtn.setVisibility(View.INVISIBLE);
                     relnextbtn.setVisibility(View.VISIBLE);
                     txtheaderplanclass.setText("Department");
+                    selectedsegValue = "WTD";
                     Tabview.getTabAt(0).select();
                     requestSalesListDisplayAPI();
                 }
