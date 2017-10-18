@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_fgstore"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.InspectionHistory">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/linear_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <android.support.v7.widget.Toolbar
+                android:background="@color/white"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_header_height"
+                android:layout_alignParentTop="true"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:background="@drawable/button_click"
+                        android:layout_marginLeft="0dp"
+                        android:id="@+id/imageBtnBack1"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true">
+
+                        <Button
+                            android:clickable="false"
+                            android:background="@mipmap/ic_arrow_back_black"
+                            android:layout_width="@dimen/arrow_back_icon_width"
+                            android:layout_height="@dimen/arrow_back_icon_height"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/inspectionhistory"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imageBtnBack1"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/ezfbb_black"
+                        android:textSize="@dimen/smdm_header_title_normal"
+                        android:id="@+id/toolbar_title" />
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+        </LinearLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_fg_competitor_store"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/ezfb_Red"
+            app:tabSelectedTextColor="@color/ezfb_Red"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextColor="@color/ezfb_Red"/>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_fg_competitor_storeupdates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/ezfb_Red"
+            app:tabSelectedTextColor="@color/ezfb_Red"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextColor="@color/ezfb_Red"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+
+            <CheckBox
+                android:id="@+id/chckbox_All"
+                android:layout_gravity="center_vertical"
+                android:checked="true"
+                android:text="All"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp" />
+
+            <CheckBox
+                android:id="@+id/chckbox_rejected"
+                android:layout_gravity="center_vertical"
+                android:checked="false"
+                android:text="Pending Review"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp" />
+
+            <CheckBox
+                android:id="@+id/chckbox_underreview"
+                android:layout_gravity="center_vertical"
+                android:checked="false"
+                android:text="Under Review"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp" />
+
+            <CheckBox
+                android:id="@+id/chckbox_Approved"
+                android:layout_gravity="center_vertical"
+                android:checked="false"
+                android:text="Approved"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp" />
+
+
+        </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <ListView
+            android:id="@+id/list_externalauditorreview"
+            android:divider="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+
+
+
+        <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/viewpager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"  />-->
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
