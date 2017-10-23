@@ -416,6 +416,8 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Details.this, To_Do.class);
                                     intent.putExtra("from",store_code);
+                                    intent.putExtra("selectTab","");
+
                                     startActivity(intent);
                                     Reusable_Functions.hDialog();
                                     activity.finish();

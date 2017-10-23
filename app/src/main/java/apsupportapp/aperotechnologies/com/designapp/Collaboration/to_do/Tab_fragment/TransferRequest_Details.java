@@ -58,6 +58,7 @@ import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment.store_Code;
 import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do.activity;
 
+
 /**
  * Created by pamrutkar on 08/03/17.
  */
@@ -229,7 +230,7 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 TransferDetailProcess.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
-                                TransferDetailProcess.setVisibility(View.GONE);
+
                                 Toast.makeText(TransferRequest_Details.this, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
 
@@ -771,10 +772,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(TransferRequest_Details.this, To_Do.class);
                                     intent.putExtra("from",store_Code);
+                                    intent.putExtra("selectTab","tabOne");
                                     startActivity(intent);
                                     activity.finish();
                                     transferDetailsAdapter.notifyDataSetChanged();
-                                    requestSenderDetails();
+//                                    requestSenderDetails();
 //
 //                                    switch (id){
 //                                        case 0:

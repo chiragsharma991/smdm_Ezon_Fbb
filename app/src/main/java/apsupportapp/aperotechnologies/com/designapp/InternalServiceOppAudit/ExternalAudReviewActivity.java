@@ -3,7 +3,6 @@ package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +33,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
     ExternalAuditReviewAdapter adp_externalauditorreview;
     String store_type;
     private RelativeLayout imageBtnBack1;
+    private String tab = "";
 
 
     @Override
@@ -62,7 +62,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
 
         list_externalauditorreview = (ListView) findViewById(R.id.list_externalauditorreview);
         arr_zonalratings = new ArrayList<>();
-        adp_externalauditorreview = new ExternalAuditReviewAdapter(arr_zonalratings, context, list_externalauditorreview);
+        adp_externalauditorreview = new ExternalAuditReviewAdapter(arr_zonalratings, context, list_externalauditorreview, tab);
         list_externalauditorreview.setAdapter(adp_externalauditorreview);
         setLastWeek("FBB 001", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
@@ -82,7 +82,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                 rev_selection = "All";
 
                 Log.e("chckbox_All click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
-                setListAdpter();
+                setListAdpter("");
                 setLastWeek("FBB 006", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
             }
@@ -97,7 +97,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                 rev_selection = "Pending";
 
                 Log.e("chckbox_Pending click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
-                setListAdpter();
+                setListAdpter("");
                 setLastWeek("FBB 007", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
             }
@@ -112,7 +112,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                 rev_selection = "Approved";
 
                 Log.e("chckbox_Approved click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
-                setListAdpter();
+                setListAdpter("");
                 setLastWeek("FBB 008", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
             }
@@ -127,7 +127,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                 {
                     Log.e("here ","0");
                     store_type = "FgStore";
-                    setListAdpter();
+                    setListAdpter("FgStore");
                     Log.e("tab1 click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
                     setLastWeek("FBB 001", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
                 }
@@ -135,7 +135,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                 {
                     Log.e("here ","1");
                     store_type = "CompetitorStore";
-                    setListAdpter();
+                    setListAdpter("CompetitorStore");
                     Log.e("tab2 click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
                     setLastWeek("FBB 002", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
                 }
@@ -162,7 +162,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                 {
                     update_of_yes_week_mon = "Yesterday";
                     Log.e("Yesterday click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
-                    setListAdpter();
+                    setListAdpter("");
                     setLastWeek("FBB 003", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
                 }
@@ -170,7 +170,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                 {
                     update_of_yes_week_mon = "Last Week";
                     Log.e("Last Week click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
-                    setListAdpter();
+                    setListAdpter("");
                     setLastWeek("FBB 004", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
                 }
@@ -178,7 +178,7 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
                 {
                     update_of_yes_week_mon = "Last Month";
                     Log.e("Last Month click ", " "+rev_selection+" "+update_of_yes_week_mon+" "+store_type);
-                    setListAdpter();
+                    setListAdpter("");
                     setLastWeek("FBB 005", "FBB ABC Mall","Kandiwali Mumbai 400088","Thursday, August 31, 2017");
 
 
@@ -199,10 +199,10 @@ public class ExternalAudReviewActivity  extends AppCompatActivity {
 
     }
 
-    public void setListAdpter()
+    public void setListAdpter(String tab)
     {
         arr_zonalratings = new ArrayList<>();
-        adp_externalauditorreview = new ExternalAuditReviewAdapter(arr_zonalratings, context, list_externalauditorreview);
+        adp_externalauditorreview = new ExternalAuditReviewAdapter(arr_zonalratings, context, list_externalauditorreview, tab);
         list_externalauditorreview.setAdapter(adp_externalauditorreview);
     }
 

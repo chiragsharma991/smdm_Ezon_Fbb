@@ -97,9 +97,7 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private ArrayList<String> ageing;
     private ArrayList<String> ageing_val;
     private AgeingAdapter listAdapter ;
-
     private ListView listAgeing;
-
 
 
     @Override

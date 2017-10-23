@@ -268,32 +268,32 @@
 
 
                     <!--<android.support.design.widget.TextInputLayout-->
-                        <!--android:id="@+id/input_timeofVisit"-->
-                        <!--android:layout_below="@+id/lin_dateday"-->
-                        <!--android:background="@drawable/edittext_border"-->
-                        <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:textColorHint="@color/hinttextcolor"-->
-                        <!--android:layout_height="44dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:gravity="bottom"-->
-                        <!--android:clipToPadding="false" >-->
+                    <!--android:id="@+id/input_timeofVisit"-->
+                    <!--android:layout_below="@+id/lin_dateday"-->
+                    <!--android:background="@drawable/edittext_border"-->
+                    <!--app:hintTextAppearance="@style/CustomTextAppearance"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:textColorHint="@color/hinttextcolor"-->
+                    <!--android:layout_height="44dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:gravity="bottom"-->
+                    <!--android:clipToPadding="false" >-->
 
-                        <!--<EditText-->
-                            <!--android:id="@+id/edt_timeofVisit"-->
-                            <!--android:background="@android:color/transparent"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="44dp"-->
-                            <!--android:maxLines="1"-->
-                            <!--android:textSize="13sp"-->
-                            <!--android:textColor="#000000"-->
-                            <!--android:inputType="textPersonName"-->
-                            <!--android:paddingLeft="2dp"-->
-                            <!--android:paddingTop="8dp"-->
-                            <!--android:paddingBottom="2dp"-->
-                            <!--android:imeOptions="actionNext"-->
-                            <!--android:nextFocusDown="@+id/input_dateofVisit"-->
-                            <!--android:hint="Time of Visit" />-->
+                    <!--<EditText-->
+                    <!--android:id="@+id/edt_timeofVisit"-->
+                    <!--android:background="@android:color/transparent"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="44dp"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:inputType="textPersonName"-->
+                    <!--android:paddingLeft="2dp"-->
+                    <!--android:paddingTop="8dp"-->
+                    <!--android:paddingBottom="2dp"-->
+                    <!--android:imeOptions="actionNext"-->
+                    <!--android:nextFocusDown="@+id/input_dateofVisit"-->
+                    <!--android:hint="Time of Visit" />-->
                     <!--</android.support.design.widget.TextInputLayout>-->
 
 
@@ -380,72 +380,72 @@
 
                     </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/lin_agency"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_below="@+id/lin_city_mallname"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_auditorType"
-                        android:background="@drawable/edittext_border"
-                        app:hintTextAppearance="@style/CustomTextAppearance"
+                    <LinearLayout
+                        android:id="@+id/lin_agency"
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/ezfbb_black"
                         android:layout_height="44dp"
-                        android:layout_weight="1"
+                        android:layout_below="@+id/lin_city_mallname"
                         android:layout_marginTop="10dp"
-                        android:gravity="bottom"
-                        android:clipToPadding="false" >
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
-                        <EditText
-                            android:id="@+id/edt_auditorType"
-                            android:background="@android:color/transparent"
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/input_auditorType"
+                            android:background="@drawable/edittext_border"
+                            app:hintTextAppearance="@style/CustomTextAppearance"
                             android:layout_width="match_parent"
+                            android:textColorHint="@color/ezfbb_black"
                             android:layout_height="44dp"
-                            android:maxLines="1"
-                            android:textSize="13sp"
-                            android:textColor="#000000"
-                            android:inputType="textPersonName"
-                            android:paddingLeft="2dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="2dp"
-                            android:imeOptions="actionDone"
-                            android:hint="Auditor type" />
-                    </android.support.design.widget.TextInputLayout>
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:gravity="bottom"
+                            android:clipToPadding="false" >
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_agencyname"
-                        android:background="@drawable/edittext_border"
-                        app:hintTextAppearance="@style/CustomTextAppearance"
-                        android:layout_width="match_parent"
-                        android:textColorHint="@color/ezfbb_black"
-                        android:layout_height="44dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:gravity="bottom"
-                        android:clipToPadding="false" >
+                            <EditText
+                                android:id="@+id/edt_auditorType"
+                                android:background="@android:color/transparent"
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:maxLines="1"
+                                android:textSize="13sp"
+                                android:textColor="#000000"
+                                android:inputType="textPersonName"
+                                android:paddingLeft="2dp"
+                                android:paddingTop="8dp"
+                                android:paddingBottom="2dp"
+                                android:imeOptions="actionDone"
+                                android:hint="Auditor type" />
+                        </android.support.design.widget.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/edt_agencyname"
-                            android:background="@android:color/transparent"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/input_agencyname"
+                            android:background="@drawable/edittext_border"
+                            app:hintTextAppearance="@style/CustomTextAppearance"
                             android:layout_width="match_parent"
+                            android:textColorHint="@color/ezfbb_black"
                             android:layout_height="44dp"
-                            android:maxLines="1"
-                            android:textSize="13sp"
-                            android:textColor="#000000"
-                            android:inputType="textPersonName"
-                            android:paddingLeft="2dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="2dp"
-                            android:imeOptions="actionDone"
-                            android:hint="Agency Name" />
-                    </android.support.design.widget.TextInputLayout>
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="bottom"
+                            android:clipToPadding="false" >
+
+                            <EditText
+                                android:id="@+id/edt_agencyname"
+                                android:background="@android:color/transparent"
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:maxLines="1"
+                                android:textSize="13sp"
+                                android:textColor="#000000"
+                                android:inputType="textPersonName"
+                                android:paddingLeft="2dp"
+                                android:paddingTop="8dp"
+                                android:paddingBottom="2dp"
+                                android:imeOptions="actionDone"
+                                android:hint="Agency Name" />
+                        </android.support.design.widget.TextInputLayout>
 
 
                     </LinearLayout>
@@ -466,16 +466,15 @@
                             android:textSize="14sp"/>
 
 
-                        <com.appyvet.rangebar.RangeBar
-                            android:id="@+id/rangebar"
-                            app:tickInterval="1"
-                            app:tickStart="0"
-                            app:tickEnd="10"
-                            app:pinColor="@color/ezfbb_red"
+                        <LinearLayout
+                            android:id="@+id/lin1"
                             android:layout_width="match_parent"
-                            android:layout_height="72dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"/>
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -1418,6 +1417,7 @@
                 android:layout_below="@+id/card_details_10"
                 android:orientation="horizontal"
                 android:weightSum="1"
+                android:layout_margin="5dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">

@@ -651,6 +651,10 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             }
 
+                List<App> apps = getProduct(101, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
+
+
 
         }
         Recycler_verticalView.setAdapter(snapAdapter);
@@ -751,7 +755,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         final String tmDevice, tmSerial, androidId;
         tmDevice = "" + tm.getDeviceId();
         tmSerial = "" + tm.getSimSerialNumber();
-        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+        androidId = "" + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         Log.e("TAG", "tmDevice: " + tmDevice + "tm serial" + tmSerial + "android id" + androidId);
 
         UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());

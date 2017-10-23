@@ -23,7 +23,7 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 
 public class CompetitorStoreFragment extends Fragment {
 
-    private Spinner spinner_storeformat, spinner_storename;
+    private Spinner spinner_storeformat, spinner_city, spinner_mallname;
     private Context context;
     private ListView list_audit;
     FGStoreAdapter fgStoreAdapter;
@@ -38,7 +38,8 @@ public class CompetitorStoreFragment extends Fragment {
         context = v.getContext();
 
         spinner_storeformat = (Spinner) v.findViewById(R.id.spinner_storeformat);
-        spinner_storename = (Spinner) v.findViewById(R.id.spinner_storename);
+        spinner_city = (Spinner) v.findViewById(R.id.spinner_city);
+        spinner_mallname = (Spinner) v.findViewById(R.id.spinner_mallname);
 
 //        list_audit = (ListView) v.findViewById(R.id.list_audit1);
 //

@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +28,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CustomSeekBar;
 import apsupportapp.aperotechnologies.com.designapp.R;
+
+import static apsupportapp.aperotechnologies.com.designapp.Constants.overall_progress;
 
 public class FGStoreActivity extends AppCompatActivity {
 
@@ -61,7 +65,7 @@ public class FGStoreActivity extends AppCompatActivity {
         list_storelookfeel = new ArrayList<>();
         list_storeservices = new ArrayList<>();
         list_vm = new ArrayList<>();
-
+        overall_progress = 0;
 
 
         final LinearLayout lin_lay_overall_ratings = (LinearLayout) findViewById(R.id.lin_lay_overall_ratings);
@@ -109,7 +113,6 @@ public class FGStoreActivity extends AppCompatActivity {
         radio_no_supervisor = (RadioButton) findViewById(R.id.radio_no_supervisor);
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
 
-
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +120,10 @@ public class FGStoreActivity extends AppCompatActivity {
             }
         });
 
+        LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
+        CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
+        customSeekBar.addSeekBar(mSeekLin);
+        Log.e("=== "," "+overall_progress);
 
         Button btn_Reset = (Button) findViewById(R.id.btn_reset);
         btn_Reset.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +195,6 @@ public class FGStoreActivity extends AppCompatActivity {
             }
         });
 
-        RangeBar arc = (RangeBar) findViewById(R.id.rangebar);
 
         Button btn_Submit = (Button) findViewById(R.id.btn_submit);
         btn_Submit.setOnClickListener(new View.OnClickListener() {

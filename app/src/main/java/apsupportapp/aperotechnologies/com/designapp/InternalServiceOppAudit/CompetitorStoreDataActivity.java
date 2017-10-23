@@ -1,11 +1,13 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +24,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CustomSeekBar;
 import apsupportapp.aperotechnologies.com.designapp.R;
+
+import static apsupportapp.aperotechnologies.com.designapp.Constants.overall_progress;
 
 public class CompetitorStoreDataActivity extends AppCompatActivity {
 
@@ -39,6 +44,7 @@ public class CompetitorStoreDataActivity extends AppCompatActivity {
     private List<Overallratings> list_vm;
     private RadioButton radio_yes_supervisor, radio_no_supervisor;
     private RelativeLayout imageBtnBack1;
+    private Button btn_approve, btn_reject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class CompetitorStoreDataActivity extends AppCompatActivity {
         list_storelookfeel = new ArrayList<>();
         list_storeservices = new ArrayList<>();
         list_vm = new ArrayList<>();
+        overall_progress = 0;
 
         final LinearLayout lin_lay_overall_ratings = (LinearLayout) findViewById(R.id.lin_lay_overall_ratings);
         create_Smiley(lin_lay_overall_ratings, "overallratings.json", list_overallratings, "overallratings");
@@ -95,6 +102,8 @@ public class CompetitorStoreDataActivity extends AppCompatActivity {
         txt_mobile = (TextView) findViewById(R.id.txt_mobile);
         txt_keytakeawys = (TextView) findViewById(R.id.txt_keytakeawys);
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+        btn_approve = (Button) findViewById(R.id.btn_approve);
+        btn_reject = (Button) findViewById(R.id.btn_reject);
 
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +111,11 @@ public class CompetitorStoreDataActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
+        CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
+        customSeekBar.addSeekBar(mSeekLin);
+        Log.e("=== "," "+overall_progress);
 
     }
 
@@ -159,8 +173,6 @@ public class CompetitorStoreDataActivity extends AppCompatActivity {
                 final ImageView img_3_selected = (ImageView) rel_layout_header_smiley.findViewById(R.id.img_3_selected);
                 final ImageView img_4_selected = (ImageView) rel_layout_header_smiley.findViewById(R.id.img_4_selected);
                 final ImageView img_5_selected = (ImageView) rel_layout_header_smiley.findViewById(R.id.img_5_selected);
-
-
 
                 final ImageView[] img_last_selected = new ImageView[1];
                 final ImageView[] img_last_unselected = new ImageView[1];

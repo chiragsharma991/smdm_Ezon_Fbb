@@ -30,6 +30,8 @@ import java.util.List;
 import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.Overallratings;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
+import static apsupportapp.aperotechnologies.com.designapp.Constants.overall_progress;
+
 public class FGStoreExtActivity extends AppCompatActivity {
 
     private Context context;
@@ -54,7 +56,7 @@ public class FGStoreExtActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fgextstore);
-//        getSupportActionBar().hide();
+        getSupportActionBar().hide();
         context = this;
         list_overallratings = new ArrayList<>();
         list_billing_experience = new ArrayList<>();
@@ -70,6 +72,7 @@ public class FGStoreExtActivity extends AppCompatActivity {
         list_storelookfeel = new ArrayList<>();
         list_storeservices = new ArrayList<>();
         list_vm = new ArrayList<>();
+        overall_progress = 0;
 
 
 
@@ -144,7 +147,7 @@ public class FGStoreExtActivity extends AppCompatActivity {
         LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
         CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
         customSeekBar.addSeekBar(mSeekLin);
-        Log.e("=== "," "+customSeekBar.mSeekBar.getProgress());
+        Log.e("=== "," "+overall_progress);
 
 
         Button btn_Reset = (Button) findViewById(R.id.btn_reset);
@@ -244,7 +247,7 @@ public class FGStoreExtActivity extends AppCompatActivity {
             }
         });
 
-        RangeBar arc = (RangeBar) findViewById(R.id.rangebar);
+
 
         Button btn_Submit = (Button) findViewById(R.id.btn_submit);
         btn_Submit.setOnClickListener(new View.OnClickListener() {
@@ -375,8 +378,8 @@ public class FGStoreExtActivity extends AppCompatActivity {
 
         return json;
     }
-    
-    
+
+
     public void create_Smiley(LinearLayout lin_layout, String json_file, final List<Overallratings> list_ratings, String fromWhere)
     {
         JSONArray m_jArry = null;

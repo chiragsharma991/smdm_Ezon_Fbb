@@ -59,13 +59,14 @@ public class FGStoreFragment extends Fragment {
         TableRow tableRow = new TableRow(context);
         tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                260, TableLayout.LayoutParams.WRAP_CONTENT);
+                260, TableLayout.LayoutParams.WRAP_CONTENT);  //120   table border
        // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
 
         for (int i = 0; i < headingTitle.length; i++) {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
             textView.setLayoutParams(params);
+          //  textView.setBackground(getResources().getDrawable(R.drawable.cell_shape)); // table border
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
             tableRow.addView(textView);

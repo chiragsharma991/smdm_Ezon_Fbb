@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +44,8 @@ public class FGStoreDataActivity extends AppCompatActivity {
     private List<Overallratings> list_vm;
     private RadioButton radio_yes_supervisor, radio_no_supervisor;
     private RelativeLayout imageBtnBack1;
+    private Button btn_reject, btn_approve;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,10 @@ public class FGStoreDataActivity extends AppCompatActivity {
         txt_mobile = (TextView) findViewById(R.id.txt_mobile);
         txt_keytakeawys = (TextView) findViewById(R.id.txt_keytakeawys);
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+
+        btn_reject = (Button) findViewById(R.id.btn_reject);
+        btn_approve = (Button) findViewById(R.id.btn_approve);
+
 
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override

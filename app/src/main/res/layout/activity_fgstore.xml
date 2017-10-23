@@ -374,18 +374,26 @@
                             android:textSize="14sp"/>
 
 
-                        <com.appyvet.rangebar.RangeBar
-                            android:id="@+id/rangebar"
-                            app:tickInterval="1"
-                            app:tickStart="0"
-                            app:tickEnd="10"
-                            app:pinColor="@color/ezfbb_red"
+                        <!--<com.appyvet.rangebar.RangeBar-->
+                            <!--android:id="@+id/rangebar"-->
+                            <!--app:tickInterval="1"-->
+                            <!--app:tickStart="0"-->
+                            <!--app:tickEnd="10"-->
+                            <!--app:pinColor="@color/ezfbb_red"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="72dp"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:layout_marginRight="16dp"/>-->
+
+                        <LinearLayout
+                            android:id="@+id/lin1"
                             android:layout_width="match_parent"
-                            android:layout_height="72dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"/>
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
 
-
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -1330,6 +1338,7 @@
                 android:layout_below="@+id/card_details_10"
                 android:orientation="horizontal"
                 android:weightSum="1"
+                android:layout_margin="5dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">

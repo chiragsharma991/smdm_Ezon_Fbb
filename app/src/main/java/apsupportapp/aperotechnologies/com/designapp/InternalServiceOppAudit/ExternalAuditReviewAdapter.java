@@ -8,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -27,12 +25,15 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
 {
     List<InspectionHistoryZonalRatings> arr_zonalratings;
     Context context;
+    String tab;
 
 
-    public ExternalAuditReviewAdapter(List<InspectionHistoryZonalRatings> arr_zonalratings, Context context, ListView list_externalauditorreview)
+    public ExternalAuditReviewAdapter(List<InspectionHistoryZonalRatings> arr_zonalratings, Context context, ListView list_externalauditorreview, String tab)
     {
         this.arr_zonalratings = arr_zonalratings;
         this.context = context;
+        this.tab = tab;
+
 
     }
 
@@ -88,8 +89,20 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
                 @Override
                 public void onClick(View v) {
 
-                    Intent fg_store = new Intent(context, FGStoreDataAcitivity.class);
-                    context.startActivity(fg_store);
+                    if(tab.equals("FgStore"))
+                    {
+                        Intent fg_store = new Intent(context, FGStoreDataActivity.class);
+                        context.startActivity(fg_store);
+                    }
+                    else if(tab.equals("CompetitorStore"))
+                    {
+                        Intent comp_store = new Intent(context, CompetitorStoreDataActivity.class);
+                        context.startActivity(comp_store);
+                    }else
+                    {
+                        Intent fg_store = new Intent(context, FGStoreDataActivity.class);
+                        context.startActivity(fg_store);
+                    }
                 }
             });
 

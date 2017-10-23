@@ -85,7 +85,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
     SharedPreferences sharedPreferences;
     RequestQueue queue;
     static String an_str_checkFrom;
-    private int filter_level = 0;
+    public int filter_level = 0;
     private StringBuilder build = new StringBuilder();
 
 
@@ -262,6 +262,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         prod_listDataChild = new HashMap<String, List<String>>();
 
         prod_listDataHeader.add("Department");
+
         prod_listDataHeader.add("Category");
         prod_listDataHeader.add("Class");
         prod_listDataHeader.add("Brand");
@@ -419,6 +420,15 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
 
                     if (build.length() != 0) {
                         TargetStockExceptionActivity.targetStockException.finish();
+                    }
+                    callback(build);
+                }
+                else if (getIntent().getStringExtra("checkfrom").equals("visualAssort"))
+                {
+                    intent = new Intent(SalesAnalysisFilter.this, VisualAssortmentActivity.class);
+
+                    if (build.length() != 0) {
+                        VisualAssortmentActivity.Visual_Assortment_Activity.finish();
                     }
                     callback(build);
                 }
@@ -1009,7 +1019,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e("store response :", "" + response);
+//                        Log.e("store response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();

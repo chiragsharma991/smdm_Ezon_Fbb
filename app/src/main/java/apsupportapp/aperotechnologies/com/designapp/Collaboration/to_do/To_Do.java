@@ -33,7 +33,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     SharedPreferences sharedPreferences;
     private TextView txtStoreCode,txtStoreName;
     public static String deviceId;
-    String from ;
+    String from ,details,selectTab;
     public static Activity activity;
 
 
@@ -55,8 +55,11 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
+
         if(getIntent().getExtras() != null) {
             from = getIntent().getExtras().getString("from");
+//            details = getIntent().getExtras().getString("checkfrom");
+
             if (from == null) {
                 if (getIntent().getExtras().getString("storeCode") != null) {
                     storeCode = getIntent().getExtras().getString("storeCode");
@@ -68,8 +71,11 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
             else
             {
                 store_Code = getIntent().getExtras().getString("from");
+                selectTab = getIntent().getExtras().getString("selectTab");
+
             }
         }
+
         if(isMultiStore.equals("Yes"))
         {
             txtStoreCode.setText("Concept : ");
@@ -86,6 +92,10 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         ToDo_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();
+        viewPager=(ViewPager)findViewById(R.id.to_do_viewpager);
+        setupViewPager(viewPager);
+        tab = (TabLayout) findViewById(R.id.tabs_toDo);
+        tab.setupWithViewPager(viewPager);
    }
 
 
@@ -104,10 +114,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
            // finally change the color
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
-        viewPager=(ViewPager)findViewById(R.id.to_do_viewpager);
-        setupViewPager(viewPager);
-        tab = (TabLayout) findViewById(R.id.tabs_toDo);
-        tab.setupWithViewPager(viewPager);
+
     }
 
     public static void StartIntent(Context c) {
@@ -116,7 +123,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private void setupViewPager(ViewPager viewPager) {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StockPullFragment(store_Code, from), "Pull from Stores");
+        adapter.addFragment(new StockPullFragment(store_Code, from, details), "Pull from Stores");
         adapter.addFragment(new TransferRequestFragment(store_Code), "Requested by Stores");
         viewPager.setAdapter(adapter);
     }
