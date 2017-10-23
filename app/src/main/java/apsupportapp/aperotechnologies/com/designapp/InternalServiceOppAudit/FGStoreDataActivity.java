@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,9 +23,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CustomSeekBar;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-public class FGStoreDataAcitivity extends AppCompatActivity {
+import static apsupportapp.aperotechnologies.com.designapp.Constants.overall_progress;
+
+public class FGStoreDataActivity extends AppCompatActivity {
 
     private Context context;
     private TextView txt_nameofauditor, txt_dateofvisit, txt_dayofweek, txt_auditortype, txt_agencyname, txt_custname, txt_mobile, txt_keytakeawys;
@@ -78,7 +82,12 @@ public class FGStoreDataAcitivity extends AppCompatActivity {
         list_storelookfeel = new ArrayList<>();
         list_storeservices = new ArrayList<>();
         list_vm = new ArrayList<>();
+        overall_progress = 0;
 
+        LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
+        CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
+        customSeekBar.addSeekBar(mSeekLin);
+        Log.e("=== "," "+overall_progress);
 
         final LinearLayout lin_lay_overall_ratings = (LinearLayout) findViewById(R.id.lin_lay_overall_ratings);
         create_Smiley(lin_lay_overall_ratings, "overallratings.json", list_overallratings, "overallratings");

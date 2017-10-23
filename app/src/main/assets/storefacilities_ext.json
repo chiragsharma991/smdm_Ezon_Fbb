@@ -1,0 +1,36 @@
+[{
+  "header" : "Trial Room Maintenance",
+  "code" :  "1",
+  "smiley" : "0"
+
+},
+  {
+    "header" : "Overall Cleanliness",
+    "code" :  "2",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Lift & Escalators Cleanliness and Working",
+    "code" :  "3",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Washroom Experience",
+    "code" :  "4",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Air Conditioning Comfort",
+    "code" :  "5",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Drinking Water Availability",
+    "code" :  "6",
+    "smiley" : "0"
+  },
+  {
+    "header" : "Adequate Seating Arrangements",
+    "code" :  "7",
+    "smiley" : "0"
+  }]
