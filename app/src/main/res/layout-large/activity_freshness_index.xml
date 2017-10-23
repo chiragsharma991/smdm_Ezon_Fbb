@@ -68,10 +68,10 @@
                         />
 
                     <RelativeLayout
+                        android:layout_toLeftOf="@+id/freshnessIndex_btnReset"
                         android:id="@+id/freshnessIndex_imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="0dp"
                         android:background="@drawable/button_click">
@@ -84,6 +84,24 @@
                             android:clickable="false" />
 
                     </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/freshnessIndex_btnReset"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click">
+
+                        <Button
+                            android:layout_width="@dimen/icon_width"
+                            android:layout_height="@dimen/icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/resetbtn"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
 
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
@@ -98,24 +116,22 @@
 
 
                 <!--<TextView-->
-                    <!--android:id="@+id/tstoreCode"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/store"-->
-                    <!--android:textColor="@color/ezfb_black"-->
-                    <!--android:textSize="@dimen/smdm_store_title_normal"-->
-                    <!--/>-->
+                <!--android:id="@+id/tstoreCode"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text=" "-->
+                <!--android:textColor="@color/ezfb_black"-->
+                <!--android:textSize="@dimen/smdm_store_title_normal"-->
+                <!--/>-->
 
                 <TextView
                     android:id="@+id/txtStoreCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/tstoreCode"
                     android:hint=""
                     android:textColor="@color/ezfb_black"
                     android:textSize="@dimen/smdm_store_title_normal"
-
                     />
 
                 <TextView
@@ -217,7 +233,7 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/fIndex_pieChart"
                     android:layout_width="match_parent"
-                    android:layout_height="320dp" />
+                    android:layout_height="220dp" />
 
                 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"

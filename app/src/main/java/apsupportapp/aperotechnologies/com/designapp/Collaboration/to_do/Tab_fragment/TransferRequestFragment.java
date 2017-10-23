@@ -85,6 +85,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
     private Button submit;
     TransferRequestAdapter transferRequestAdapter;
     private ArrayList<String> selectedCaseNo;
+    private boolean submitFlag = false;
 
     public TransferRequestFragment(String storeCode) {
         // Required empty public constructor
@@ -140,6 +141,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
         context = view.getContext();
         SenderSummaryList=new ArrayList<Transfer_Request_Model>();
         recache = "true";
+        submitFlag = false;
         initialise();
         MainMethod();
         return view;
@@ -178,7 +180,9 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
-//                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    if(submitFlag) {
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    }
                                     checkNetworkFalse=true;
                                     return;
                                 }
@@ -218,7 +222,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                     }
                                 });
                                 senderSummary_recyclerView.setAdapter(transferRequestAdapter );
-
+                                submitFlag = false;
                                 Reusable_Functions.hDialog();
 
                             } catch (Exception e)
@@ -370,8 +374,13 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                     SenderSummaryList.clear();
                                     transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), null);
                                     senderSummary_recyclerView.setAdapter(transferRequestAdapter);
-//                                    transferRequestAdapter.notifyDataSetChanged();
-//                                    requestTransferRequestsummary();
+                                    transferRequestAdapter.notifyDataSetChanged();
+                                    Reusable_Functions.sDialog(context, "Loading...");
+                                    submitFlag = true;
+                                    requestTransferRequestsummary();
+
+
+
 //                                    switch (id){
 //                                        case 0:
 //                                            String selectCase=jsonarray.getJSONObject(0).get("caseNo").toString();

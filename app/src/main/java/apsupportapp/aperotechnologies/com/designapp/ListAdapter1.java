@@ -10,19 +10,23 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleModel;
+
+import static apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity.articleOptionList;
 
 
 public class ListAdapter1 extends BaseAdapter implements Filterable {
 
-    private List mStringList;
-    private List mStringFilterList;
+    private ArrayList<StyleModel> mStringList;
+    private ArrayList<StyleModel> mStringFilterList;
     private LayoutInflater mInflater;
     private ValueFilter valueFilter;
 
-    public ListAdapter1(List mStringList, Context context) {
+    public ListAdapter1(ArrayList<StyleModel> mStringList, Context context)
+    {
         this.mStringList = mStringList;
         this.mStringFilterList = mStringList;
         mInflater = LayoutInflater.from(context);
@@ -32,14 +36,14 @@ public class ListAdapter1 extends BaseAdapter implements Filterable {
     //How many items are in the data set represented by this Adapter.
     @Override
     public int getCount() {
-        return mStringList.size();
+        return articleOptionList.size();
     }
 
     //Get the data item associated with the specified position in the data set.
     @Override
     public Object getItem(int position) {
 
-        return mStringList.get(position);
+        return articleOptionList.get(position);
     }
 
     //Get the row id associated with the specified position in the list.
@@ -60,7 +64,7 @@ public class ListAdapter1 extends BaseAdapter implements Filterable {
         } else {
             viewHolder = (Holder) convertView.getTag();
         }
-        viewHolder.nameTv.setText(mStringList.get(position).toString());
+        viewHolder.nameTv.setText(articleOptionList.get(position).getArticleOptions());
         return convertView;
     }
 
@@ -85,15 +89,17 @@ public class ListAdapter1 extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             if (constraint != null && constraint.length() > 0) {
-                List filterList = new ArrayList<String>();
+                ArrayList<StyleModel> filterList = new ArrayList<StyleModel>();
                 for (int i = 0; i < mStringFilterList.size(); i++) {
-                    if (mStringFilterList.get(i).toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                    if (mStringFilterList.get(i).getArticleOptions().toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         filterList.add(mStringFilterList.get(i));
                     }
                 }
                 results.count = filterList.size();
                 results.values = filterList;
-            } else {
+            }
+            else
+            {
                 results.count = mStringFilterList.size();
                 results.values = mStringFilterList;
             }
@@ -104,9 +110,9 @@ public class ListAdapter1 extends BaseAdapter implements Filterable {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint,
-                                      FilterResults results) {
-
-            mStringList = (ArrayList<String>) results.values;
+                                      FilterResults results)
+        {
+            articleOptionList = (ArrayList<StyleModel>) results.values;
             notifyDataSetChanged();
         }
     }

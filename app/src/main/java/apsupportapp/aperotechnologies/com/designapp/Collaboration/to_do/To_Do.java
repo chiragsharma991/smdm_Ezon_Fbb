@@ -27,13 +27,13 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toobar;
     private ViewPager viewPager;
-    public static TabLayout tab;
+    private TabLayout tab;
     RelativeLayout ToDo_imageBtnBack;
     String userId, bearertoken, storeDescription, geoLeveLDesc, isMultiStore, value, storeCode,store_Code;
     SharedPreferences sharedPreferences;
     private TextView txtStoreCode,txtStoreName;
     public static String deviceId;
-    String from ,details;
+    String from ,details,selectTab;
     public static Activity activity;
 
 
@@ -55,6 +55,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
+
         if(getIntent().getExtras() != null) {
             from = getIntent().getExtras().getString("from");
 //            details = getIntent().getExtras().getString("checkfrom");
@@ -70,7 +71,8 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
             else
             {
                 store_Code = getIntent().getExtras().getString("from");
-                details = getIntent().getExtras().getString("checkfrom");
+                selectTab = getIntent().getExtras().getString("selectTab");
+
             }
         }
 
@@ -90,6 +92,10 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         ToDo_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();
+        viewPager=(ViewPager)findViewById(R.id.to_do_viewpager);
+        setupViewPager(viewPager);
+        tab = (TabLayout) findViewById(R.id.tabs_toDo);
+        tab.setupWithViewPager(viewPager);
    }
 
 
@@ -108,10 +114,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
            // finally change the color
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
-        viewPager=(ViewPager)findViewById(R.id.to_do_viewpager);
-        setupViewPager(viewPager);
-        tab = (TabLayout) findViewById(R.id.tabs_toDo);
-        tab.setupWithViewPager(viewPager);
+
     }
 
     public static void StartIntent(Context c) {

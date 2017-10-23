@@ -131,6 +131,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private View viewpart;
     private RecyclerView lobList;
     private ArrayList<String> lobData = null, conceptData = null, conceptDesc = null;
+    String[] kpiIdArray;
     private String hierarchyLevels;
 
   /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
@@ -161,12 +162,17 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
 
         Log.e(TAG, "onCreate: hierarchyLevels" +hierarchyLevels +" kpi id"+gson.toJson(kpiIdArray));
+
+        kpiIdArray = getIntent().getStringArrayExtra("kpiId");
+        Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
+        Log.e(TAG, "userId :--" + userId);
+        Log.e(TAG, "pushtoken :--" + pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
         if (userId.equals("")) {
-            Intent intent = new Intent(this, LoginActivity1.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
