@@ -53,6 +53,7 @@ import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerL
 import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CompetitorStoreExtActivity;
 import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.ExternalHistoryActivity;
 import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.FGStoreExtActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.ReportsExtActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneBestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneFreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1;
@@ -164,35 +165,35 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(HourlyPerformence);
                     break;
                 case "006":
-                    Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);  //  FGStoreActivity
+                    Intent FreshnessIndexActivity = new Intent(context, FGStoreActivity.class);  // FreshnessIndexActivity
                     startActivity(FreshnessIndexActivity);
                     break;
                 case "007":
-                    Intent OptionEfficiencyActivity = new Intent(context, OptionEfficiencyActivity.class); //  CompetitorStoreActivity
+                    Intent OptionEfficiencyActivity = new Intent(context, CompetitorStoreActivity.class); // OptionEfficiencyActivity
                     startActivity(OptionEfficiencyActivity);
                     break;
                 case "008":
-                    Intent SkewedSizesActivity = new Intent(context, SkewedSizesActivity.class);   //   ExternalAudReviewActivity
+                    Intent SkewedSizesActivity = new Intent(context, ExternalAudReviewActivity.class);   //  SkewedSizesActivity
                     startActivity(SkewedSizesActivity);
                     break;
                 case "009":
-                    Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);   //   InspectionHistory
+                    Intent BestPerformerInventory = new Intent(context, InspectionHistory.class);   //  BestPerformerInventory
                     startActivity(BestPerformerInventory);
                     break;
                 case "010":
-                    Intent StockAgeingActivity = new Intent(context, StockAgeingActivity.class);  //   ReportActivity
+                    Intent StockAgeingActivity = new Intent(context, ReportActivity.class);  //  StockAgeingActivity
                     startActivity(StockAgeingActivity);
                     break;
                 case "011":
-                    Intent FloorAvailabilityActivity = new Intent(context, FloorAvailabilityActivity.class);   //   FGStoreExtActivity
+                    Intent FloorAvailabilityActivity = new Intent(context, FGStoreExtActivity.class);   //  FloorAvailabilityActivity
                     startActivity(FloorAvailabilityActivity);
                     break;
                 case "012":
-                    Intent TargetStockExceptionActivity = new Intent(context, TargetStockExceptionActivity.class);  //   CompetitorStoreExtActivity
+                    Intent TargetStockExceptionActivity = new Intent(context, CompetitorStoreExtActivity.class);  //  TargetStockExceptionActivity
                     startActivity(TargetStockExceptionActivity);
                     break;
                 case "013":
-                    Intent SaleThruInventory = new Intent(context, SaleThruInventory.class);  // ExternalHistoryActivity
+                    Intent SaleThruInventory = new Intent(context, ExternalHistoryActivity.class);  //SaleThruInventory
                     startActivity(SaleThruInventory);
                     break;
 
@@ -287,7 +288,7 @@ public class SwitchingActivity extends AppCompatActivity
                     commentDialog("InspectionHistoryActivity");
                     break;
                 case "026":
-                    Intent mpm_activity = new Intent(context, mpm_activity.class);
+                    Intent mpm_activity = new Intent(context, ReportsExtActivity.class);   //mpm_activity
                     startActivity(mpm_activity);
                     break;
                 case "027":
