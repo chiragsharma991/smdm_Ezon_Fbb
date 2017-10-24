@@ -1737,8 +1737,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 limit = 100;
                                 count = 0;
                             }
-                            Reusable_Functions.hDialog();
-                            processBar.setVisibility(View.GONE);
+
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
@@ -1867,6 +1866,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 oe_listView.setAdapter(null);
                                 processBar.setVisibility(View.GONE);
                                 OnItemClick = false;
+                                return;
+
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
                                     optionEfficiencyDetails = gson.fromJson(response.get(i).toString(), OptionEfficiencyDetails.class);
@@ -2274,6 +2275,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 OnItemClick = false;
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No Category data found", Toast.LENGTH_SHORT).show();
+                                return;
+
                             } else if (response.length() == limit) {
 
 
@@ -2461,6 +2464,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 Reusable_Functions.hDialog();
                                 OnItemClick = false;
                                 Toast.makeText(context, "No Class data found", Toast.LENGTH_SHORT).show();
+                                return;
+
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -2544,6 +2549,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 OnItemClick = false;
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No Brand data found", Toast.LENGTH_SHORT).show();
+                                return;
+
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -2629,6 +2636,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 OnItemClick = false;
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
+                                return;
 
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
@@ -2690,11 +2698,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void requestOEPieChart() {
-//        if(oe_FirstVisibleItem.equals("All"))
-//        {
-//            requestHeaderPieChart();
-//            return;
-//        }
+        if(oe_FirstVisibleItem.equals("All"))
+        {
+            requestHeaderPieChart();
+            return;
+        }
         String url = "";
         txtNoChart.setVisibility(View.GONE);
         oe_FirstVisibleItem = oe_FirstVisibleItem.replace("%", "%25");
@@ -2739,7 +2747,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response OEP "," "+response);
+                        Log.e("response OEP.. "," "+response);
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -2751,6 +2759,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 oe_pieChart.invalidate();
                                 Reusable_Functions.hDialog();
                                 processBar.setVisibility(View.GONE);
+                                return;
 
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
