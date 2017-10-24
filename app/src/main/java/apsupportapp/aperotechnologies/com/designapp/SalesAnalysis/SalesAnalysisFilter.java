@@ -90,6 +90,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
 
 
     static List<String> an_storeList, an_deptList, an_categryList, an_classList, an_brandList, an_mcList;
+    private String[] hierarchyList;
     // git 09-06-17
 
 
@@ -105,6 +106,11 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLevel2Code = sharedPreferences.getString("concept", "");
         lobId = sharedPreferences.getString("lobid", "");
+        String hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
+        hierarchyList = hierarchyLevels.split(",");
+        for (int i = 0; i <hierarchyList.length ; i++) {
+            hierarchyList[i]=hierarchyList[i].trim();
+        }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -261,17 +267,16 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         loc_listDataChild = new HashMap<String, List<String>>();
         prod_listDataChild = new HashMap<String, List<String>>();
 
-        prod_listDataHeader.add("Department");
-
-        prod_listDataHeader.add("Category");
-        prod_listDataHeader.add("Class");
-        prod_listDataHeader.add("Brand");
-        prod_listDataHeader.add("Brand Class");
+        prod_listDataHeader.add(hierarchyList[0]);
+        prod_listDataHeader.add(hierarchyList[1]);
+        prod_listDataHeader.add(hierarchyList[2]);
+        prod_listDataHeader.add(hierarchyList[3]);
+        prod_listDataHeader.add(hierarchyList[4]);
         loc_listDataHeader.add("Store");
 
         if (Reusable_Functions.chkStatus(SalesAnalysisFilter.this))
         {
-            if (prod_listDataHeader.get(0).equals("Department")) {
+            if (prod_listDataHeader.get(0).equals(hierarchyList[0])) {
                 rel_an_process_filter.setVisibility(View.VISIBLE);
                 offset = 0;
                 limit = 100;
@@ -480,7 +485,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         }
         if (SalesAnalysisLocationAdapter.an_store_str.length() != 0) {
             String store = SalesAnalysisLocationAdapter.an_store_str;
-          //  String updateStore = store.replace(" ", "%20").replace("&", "%26");
+            //  String updateStore = store.replace(" ", "%20").replace("&", "%26");
             String Store;
             Store = "storeCode=" + store;
             build.append("&");
@@ -497,8 +502,8 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         }
         else
         {
-           callFilterLevelSales();
-           intent.putExtra("selectedStringVal", build.toString());
+            callFilterLevelSales();
+            intent.putExtra("selectedStringVal", build.toString());
             Log.e("TAG", "callback:  selectedStringVal" + build.toString());
             intent.putExtra("selectedlevelVal", filter_level);
             Log.e("TAG", "callback:  selectedlevelVal" + filter_level);
@@ -564,8 +569,8 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
 
 
     //------------------------------------API Declaration--------------------------------------//
-   
-  
+
+
     // Department List
     public void requestDepartment(int offsetvalue1, int limit1)
     {
@@ -600,7 +605,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                                     an_deptList.add(plandept);
                                 }
                                 rel_an_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(1).equals("Category")) {
+                                if (prod_listDataHeader.get(1).equals(hierarchyList[1])) {
                                     rel_an_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -616,7 +621,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                         } finally {
                             if (response.equals("") || response == null || response.length() == 0) {
 
-                                if (prod_listDataHeader.get(1).equals("Category")) {
+                                if (prod_listDataHeader.get(1).equals(hierarchyList[1])) {
                                     rel_an_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -685,7 +690,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                                     an_categryList.add(planCategory);
                                 }
                                 rel_an_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(2).equals("Class")) {
+                                if (prod_listDataHeader.get(2).equals(hierarchyList[2])) {
                                     rel_an_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -701,7 +706,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                         } finally {
                             if (response.equals("") || response == null || response.length() == 0) {
 
-                                if (prod_listDataHeader.get(2).equals("Class")) {
+                                if (prod_listDataHeader.get(2).equals(hierarchyList[2])) {
                                     rel_an_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -773,7 +778,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                                 }
                                 rel_an_process_filter.setVisibility(View.GONE);
 
-                                if (prod_listDataHeader.get(3).equals("Brand")) {
+                                if (prod_listDataHeader.get(3).equals(hierarchyList[3])) {
                                     rel_an_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -789,7 +794,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                         } finally {
                             if (response.equals("") || response == null || response.length() == 0) {
 
-                                if (prod_listDataHeader.get(3).equals("Brand")) {
+                                if (prod_listDataHeader.get(3).equals(hierarchyList[3])) {
                                     rel_an_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -861,15 +866,15 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                                     String brandName = productName1.getString("brandName");
                                     an_brandList.add(brandName);
                                 }
-                                    rel_an_process_filter.setVisibility(View.GONE);
-                                     if (prod_listDataHeader.get(4).equals("Brand Class")) {
-                                        rel_an_process_filter.setVisibility(View.VISIBLE);
-                                        offset = 0;
-                                        limit = 100;
-                                        count = 0;
-                                        prod_level = 5;
-                                        requestBrandPlanClass(offset, limit);
-                                    }
+                                rel_an_process_filter.setVisibility(View.GONE);
+                                if (prod_listDataHeader.get(4).equals(hierarchyList[4])) {
+                                    rel_an_process_filter.setVisibility(View.VISIBLE);
+                                    offset = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    prod_level = 5;
+                                    requestBrandPlanClass(offset, limit);
+                                }
 
                             }
                         } catch (Exception e) {
@@ -880,15 +885,15 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                         finally {
                             if (response.equals("") || response == null || response.length() == 0) {
 
-                                    rel_an_process_filter.setVisibility(View.GONE);
-                                       if (prod_listDataHeader.get(4).equals("Brand Class")) {
-                                        rel_an_process_filter.setVisibility(View.VISIBLE);
-                                        offset = 0;
-                                        limit = 100;
-                                        count = 0;
-                                        prod_level = 5;
-                                        requestBrandPlanClass(offset, limit);
-                                    }
+                                rel_an_process_filter.setVisibility(View.GONE);
+                                if (prod_listDataHeader.get(4).equals(hierarchyList[4])) {
+                                    rel_an_process_filter.setVisibility(View.VISIBLE);
+                                    offset = 0;
+                                    limit = 100;
+                                    count = 0;
+                                    prod_level = 5;
+                                    requestBrandPlanClass(offset, limit);
+                                }
 
                             }
 
@@ -1049,7 +1054,7 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                             rel_an_process_filter.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
-                         }
+                    }
 
 
                 },

@@ -162,9 +162,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
 
         Log.e(TAG, "onCreate: hierarchyLevels" +hierarchyLevels +" kpi id"+gson.toJson(kpiIdArray));
-
-        kpiIdArray = getIntent().getStringArrayExtra("kpiId");
-        Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
         Log.e(TAG, "userId :--" + userId);
         Log.e(TAG, "pushtoken :--" + pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
@@ -172,7 +169,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         queue = new RequestQueue(cache, network);
         queue.start();
         if (userId.equals("")) {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity1.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
@@ -661,6 +658,10 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             }
 
+                List<App> apps = getProduct(101, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
+
+
 
         }
         Recycler_verticalView.setAdapter(snapAdapter);
@@ -761,7 +762,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         final String tmDevice, tmSerial, androidId;
         tmDevice = "" + tm.getDeviceId();
         tmSerial = "" + tm.getSimSerialNumber();
-        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+        androidId = "" + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         Log.e("TAG", "tmDevice: " + tmDevice + "tm serial" + tmSerial + "android id" + androidId);
 
         UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());

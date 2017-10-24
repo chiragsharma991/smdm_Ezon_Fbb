@@ -131,7 +131,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         hierarchyList = hierarchyLevels.split(",");
         for (int i = 0; i <hierarchyList.length ; i++) {
             hierarchyList[i]=hierarchyList[i].trim();
-            Log.e(TAG, "hierarchyList: "+hierarchyList[i]);
+            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
         }
 
 
@@ -1128,7 +1128,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                     LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             listViewFIndex.setOnFlingListener(null);
                             new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-                            freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
+                            freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG,hierarchyList);
                             listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
                             fIndexFirstVisibleItem = "All";  // when you drill down then fst you get all
                             txtfIndexDeptName.setText(hierarchy(name.replaceAll("%20", " ").replaceAll("%26", "&")));
@@ -1212,7 +1212,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 listViewFIndex.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-                                freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
+                                freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG,hierarchyList);
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
 
                                 offsetvalue = 0;
@@ -1269,7 +1269,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
         listViewFIndex.setOnFlingListener(null);
         new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-        freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
+        freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG,hierarchyList);
         listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
         fIndexFirstVisibleItem = "All";
 
@@ -1600,7 +1600,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     private void Fbb_collection() {
 
         Log.e(TAG, "Fbb_collection: log");
-        fromWhere = "Department";
+        fromWhere = hierarchyList[0];
         fIndexFirstVisibleItem = "";
         freshnessIndex_ClickedVal = "";
         FreshnessIndexValue = "";
@@ -1684,7 +1684,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     }
 
                 }
-               else if(txtFIndexClass.getText().toString().equals(hierarchyList[3])){
+                else if(txtFIndexClass.getText().toString().equals(hierarchyList[3])){
                     txtFIndexClass.setText(hierarchyList[2]);
                     fromWhere = hierarchyList[2];
                     level = 3;
@@ -1977,7 +1977,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 Reusable_Functions.hDialog();
                                             }
                                         }
-                                       else if(txtFIndexClass.getText().toString().equals(hierarchyList[0])){
+                                        else if(txtFIndexClass.getText().toString().equals(hierarchyList[0])){
                                             btnFIndexPrev.setVisibility(View.VISIBLE);
                                             txtFIndexClass.setText(hierarchyList[1]);
                                             freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
@@ -2009,7 +2009,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 Reusable_Functions.hDialog();
                                             }
                                         }
-                                       else if(txtFIndexClass.getText().toString().equals(hierarchyList[1])){
+                                        else if(txtFIndexClass.getText().toString().equals(hierarchyList[1])){
                                             txtFIndexClass.setText(hierarchyList[2]);
                                             freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
                                             fromWhere = hierarchyList[2];
@@ -2038,7 +2038,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 Reusable_Functions.hDialog();
                                             }
                                         }
-                                       else if(txtFIndexClass.getText().toString().equals(hierarchyList[2])){
+                                        else if(txtFIndexClass.getText().toString().equals(hierarchyList[2])){
                                             txtFIndexClass.setText(hierarchyList[3]);
                                             freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
                                             fromWhere = hierarchyList[3];
@@ -2068,7 +2068,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 Reusable_Functions.hDialog();
                                             }
                                         }
-                                       else if(txtFIndexClass.getText().toString().equals(hierarchyList[3])){
+                                        else if(txtFIndexClass.getText().toString().equals(hierarchyList[3])){
                                             btnFIndexNext.setVisibility(View.INVISIBLE);
                                             txtFIndexClass.setText(hierarchyList[4]);
                                             freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();

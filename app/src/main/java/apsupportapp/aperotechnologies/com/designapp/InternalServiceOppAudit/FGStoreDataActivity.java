@@ -1,12 +1,12 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,9 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-
-import com.appyvet.rangebar.RangeBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,12 +24,15 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CustomSeekBar;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-public class FGStoreExtActivity extends AppCompatActivity {
+import static apsupportapp.aperotechnologies.com.designapp.Constants.overall_progress;
+
+public class FGStoreDataActivity extends AppCompatActivity {
 
     private Context context;
-    private EditText edt_name_author, edt_dateofVisit, edt_dayofweek, edt_timeofVisit, edt_auditorType, edt_observations, edt_suggestions, edt_name_supervisor, edt_time_supervisor,  edt_product_name, edt_customer_name, edt_mobile, edt_keytakeaway;
+    private TextView txt_nameofauditor, txt_dateofvisit, txt_dayofweek, txt_auditortype, txt_agencyname, txt_custname, txt_mobile, txt_keytakeawys;
     private List<Overallratings> list_overallratings;
     private List<Overallratings> list_billing_experience;
     private List<Overallratings> list_staffing;
@@ -43,12 +43,43 @@ public class FGStoreExtActivity extends AppCompatActivity {
     private List<Overallratings> list_storeservices;
     private List<Overallratings> list_vm;
     private RadioButton radio_yes_supervisor, radio_no_supervisor;
+    private RelativeLayout imageBtnBack1;
+    private Button btn_reject, btn_approve;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fgstore);
+        setContentView(R.layout.activity_fgstore_data_acitivity);
+        getSupportActionBar().hide();
         context = this;
+
+        initializeUI();
+    }
+
+    private void initializeUI() {
+
+        txt_nameofauditor = (TextView) findViewById(R.id.txt_nameofauditor);
+        txt_dateofvisit = (TextView) findViewById(R.id.txt_dateofvisit);
+        txt_dayofweek = (TextView) findViewById(R.id.txt_dayofweek);
+        txt_auditortype = (TextView) findViewById(R.id.txt_auditortype);
+        txt_agencyname = (TextView) findViewById(R.id.txt_agencyname);
+        txt_custname = (TextView) findViewById(R.id.txt_custname);
+        txt_mobile = (TextView) findViewById(R.id.txt_mobile);
+        txt_keytakeawys = (TextView) findViewById(R.id.txt_keytakeawys);
+        imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+
+        btn_reject = (Button) findViewById(R.id.btn_reject);
+        btn_approve = (Button) findViewById(R.id.btn_approve);
+
+
+        imageBtnBack1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         list_overallratings = new ArrayList<>();
         list_billing_experience = new ArrayList<>();
         list_staffing = new ArrayList<>();
@@ -58,8 +89,12 @@ public class FGStoreExtActivity extends AppCompatActivity {
         list_storelookfeel = new ArrayList<>();
         list_storeservices = new ArrayList<>();
         list_vm = new ArrayList<>();
+        overall_progress = 0;
 
-
+        LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
+        CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
+        customSeekBar.addSeekBar(mSeekLin);
+        Log.e("=== "," "+overall_progress);
 
         final LinearLayout lin_lay_overall_ratings = (LinearLayout) findViewById(R.id.lin_lay_overall_ratings);
         create_Smiley(lin_lay_overall_ratings, "overallratings.json", list_overallratings, "overallratings");
@@ -87,177 +122,7 @@ public class FGStoreExtActivity extends AppCompatActivity {
 
         final LinearLayout lin_lay_vm = (LinearLayout) findViewById(R.id.lin_lay_vm);
         create_Smiley(lin_lay_vm, "vm.json", list_vm, "vm");
-
-
-        edt_name_author = (EditText) findViewById(R.id.edt_name_author);
-        edt_dateofVisit = (EditText) findViewById(R.id.edt_dateofVisit);
-        edt_dayofweek = (EditText) findViewById(R.id.edt_dayofweek);
-        edt_timeofVisit = (EditText) findViewById(R.id.edt_timeofVisit);
-        edt_auditorType = (EditText) findViewById(R.id.edt_auditorType);
-        edt_observations = (EditText) findViewById(R.id.edt_observations);
-        edt_suggestions = (EditText) findViewById(R.id.edt_suggestions);
-        edt_name_supervisor = (EditText) findViewById(R.id.edt_name_supervisor);
-        edt_time_supervisor  = (EditText) findViewById(R.id.edt_time_supervisor);
-        edt_product_name = (EditText) findViewById(R.id.edt_product_name);
-        edt_customer_name = (EditText) findViewById(R.id.edt_customer_name);
-        edt_mobile = (EditText) findViewById(R.id.edt_mobile);
-        edt_keytakeaway = (EditText) findViewById(R.id.edt_keytakeaway);
-        radio_yes_supervisor = (RadioButton) findViewById(R.id.radio_yes_supervisor);
-        radio_no_supervisor = (RadioButton) findViewById(R.id.radio_no_supervisor);
-
-
-
-
-        Button btn_Reset = (Button) findViewById(R.id.btn_reset);
-        btn_Reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                lin_lay_overall_ratings.removeAllViews();
-                lin_lay_billing_experience.removeAllViews();
-                lin_lay_staffing.removeAllViews();
-                lin_lay_brandpromoterhelpfulness.removeAllViews();
-                lin_lay_pricemismatch.removeAllViews();
-                lin_lay_storefacilities.removeAllViews();
-                lin_lay_storelookfeel.removeAllViews();
-                lin_lay_storeservices.removeAllViews();
-                lin_lay_vm.removeAllViews();
-
-                list_overallratings = new ArrayList<>();
-                list_billing_experience = new ArrayList<>();
-                list_staffing = new ArrayList<>();
-                list_brandpromoterhelpfulness = new ArrayList<>();
-                list_pricemismatch = new ArrayList<>();
-                list_storefacilities = new ArrayList<>();
-                list_storelookfeel = new ArrayList<>();
-                list_storeservices = new ArrayList<>();
-                list_vm = new ArrayList<>();
-
-                create_Smiley(lin_lay_overall_ratings, "overallratings.json", list_overallratings, "overallratings");
-                create_Smiley(lin_lay_billing_experience, "billingexperience.json", list_billing_experience, "billingexperience");
-                create_Smiley(lin_lay_staffing, "staffing.json", list_staffing, "staffing");
-                create_Smiley(lin_lay_brandpromoterhelpfulness, "brandpromoterhelpfulness.json", list_brandpromoterhelpfulness, "brandpromoterhelpfulness");
-                create_Smiley(lin_lay_pricemismatch, "pricemismatch.json", list_pricemismatch, "pricemismatch");
-                create_Smiley(lin_lay_storefacilities, "storefacilities.json", list_storefacilities, "storefacilities");
-                create_Smiley(lin_lay_storelookfeel, "storelookfeel.json", list_storelookfeel, "storelookfeel");
-                create_Smiley(lin_lay_storeservices, "storeservices.json", list_storeservices, "storeservices");
-                create_Smiley(lin_lay_vm, "vm.json", list_vm, "vm");
-
-                edt_name_author.setText("");
-                edt_dateofVisit.setText("");
-                edt_dayofweek.setText("");
-                edt_timeofVisit.setText("");
-                edt_auditorType.setText("");
-                edt_observations.setText("");
-                edt_suggestions.setText("");
-                edt_name_supervisor.setText("");
-                edt_time_supervisor.setText("");
-                edt_product_name.setText("");
-                edt_customer_name.setText("");
-                edt_mobile.setText("");
-                edt_keytakeaway.setText("");
-                radio_yes_supervisor.setChecked(false);
-                radio_no_supervisor.setChecked(false);
-
-                edt_name_author.clearFocus();
-                edt_dateofVisit.clearFocus();
-                edt_dayofweek.clearFocus();
-                edt_timeofVisit.clearFocus();
-                edt_auditorType.clearFocus();
-                edt_observations.clearFocus();
-                edt_suggestions.clearFocus();
-                edt_name_supervisor.clearFocus();
-                edt_time_supervisor.clearFocus();
-                edt_product_name.clearFocus();
-                edt_customer_name.clearFocus();
-                edt_mobile.clearFocus();
-                edt_keytakeaway.clearFocus();
-
-                InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
-
-            }
-        });
-
-        RangeBar arc = (RangeBar) findViewById(R.id.rangebar);
-
-        Button btn_Submit = (Button) findViewById(R.id.btn_submit);
-        btn_Submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e("", "onClick: "+list_overallratings.size());
-                Log.e("", "onClick: "+list_billing_experience.size());
-
-
-                for(int i = 0; i < list_overallratings.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_overallratings.get(i).getHeader());
-//                    Log.e("getCode "," "+list_overallratings.get(i).getCode());
-                    Log.e("getSmiley "," "+list_overallratings.get(i).getSmiley());
-                }
-
-                for(int i = 0; i < list_billing_experience.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_billing_experience.get(i).getHeader());
-//                    Log.e("getCode "," "+list_billing_experience.get(i).getCode());
-                    Log.e("getSmiley "," "+list_billing_experience.get(i).getSmiley());
-                }
-
-                for(int i = 0; i < list_staffing.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_staffing.get(i).getHeader());
-//                    Log.e("getCode "," "+list_staffing.get(i).getCode());
-                    Log.e("getSmiley "," "+list_staffing.get(i).getSmiley());
-                }
-
-                for(int i = 0; i < list_brandpromoterhelpfulness.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_brandpromoterhelpfulness.get(i).getHeader());
-//                    Log.e("getCode "," "+list_brandpromoterhelpfulness.get(i).getCode());
-                    Log.e("getSmiley "," "+list_brandpromoterhelpfulness.get(i).getSmiley());
-                }
-
-                for(int i = 0; i < list_pricemismatch.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_pricemismatch.get(i).getHeader());
-//                    Log.e("getCode "," "+list_pricemismatch.get(i).getCode());
-                    Log.e("getSmiley "," "+list_pricemismatch.get(i).getSmiley());
-                }
-
-                for(int i = 0; i < list_storefacilities.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_storefacilities.get(i).getHeader());
-//                    Log.e("getCode "," "+list_storefacilities.get(i).getCode());
-                    Log.e("getSmiley "," "+list_storefacilities.get(i).getSmiley());
-                }
-
-                for(int i = 0; i < list_storelookfeel.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_storelookfeel.get(i).getHeader());
-//                    Log.e("getCode "," "+list_storelookfeel.get(i).getCode());
-                    Log.e("getSmiley "," "+list_storelookfeel.get(i).getSmiley());
-                }
-
-                for(int i = 0; i < list_storeservices.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_storeservices.get(i).getHeader());
-//                    Log.e("getCode "," "+list_storeservices.get(i).getCode());
-                    Log.e("getSmiley "," "+list_storeservices.get(i).getSmiley());
-                }
-
-                for(int i = 0; i < list_vm.size(); i++)
-                {
-                    Log.e("getHeader "," "+list_vm.get(i).getHeader());
-//                    Log.e("getCode "," "+list_vm.get(i).getCode());
-                    Log.e("getSmiley "," "+list_vm.get(i).getSmiley());
-                }
-            }
-        });
-
-
-
-
     }
-
 
     public String loadJSONFromAsset(String json_file)
     {
@@ -276,8 +141,8 @@ public class FGStoreExtActivity extends AppCompatActivity {
 
         return json;
     }
-    
-    
+
+
     public void create_Smiley(LinearLayout lin_layout, String json_file, final List<Overallratings> list_ratings, String fromWhere)
     {
         JSONArray m_jArry = null;

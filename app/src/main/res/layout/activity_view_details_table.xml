@@ -55,7 +55,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fg_store_audit"
+                    android:text="@string/inspectionhistory"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/imageBtnBack1"
                     android:layout_marginLeft="20dp"
@@ -106,7 +106,7 @@
                     android:id="@+id/txt_avg_rating"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="6dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="7dp"
                     android:text="4.5"
                     android:textSize="13sp"
                     android:textColor="@color/ezfbb_red"
@@ -132,11 +132,12 @@
                     android:id="@+id/txt_audit_done"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/txt_avg_rating"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginRight="40dp"
                     android:layout_marginBottom="6dp"
                     android:text="No of Audit : 5"
                     android:textSize="13sp"
                     android:gravity="right"
+                    android:textColor="@color/ezfb_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -164,7 +165,7 @@
         android:layout_below="@+id/rel_desc"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/bel_grey_text"
+        android:background="@color/bel_lightgrey_text"
         android:layout_marginTop="10dp"/>
 
 

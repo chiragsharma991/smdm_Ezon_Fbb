@@ -9,6 +9,7 @@
         android:id="@+id/header_smiley"
         android:textSize="14sp"
         android:text="Text"
+        android:textColor="@color/ezfbb_black"
         android:maxLines="1"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="10dp"
