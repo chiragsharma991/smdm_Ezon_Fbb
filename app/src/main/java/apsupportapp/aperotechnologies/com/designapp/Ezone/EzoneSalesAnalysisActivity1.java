@@ -246,9 +246,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (!ez_sclickedVal.equals("All")) {
                                                     ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
                                                     ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&department=" + ez_sclickedVal;
+                                                    if(!header_value.contains("&department=" + ez_sclickedVal))
+                                                    {
+                                                        header_value = "&department=" + ez_sclickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 ez_fromWhere = "Subdept";
                                                 if (ez_linear_dots != null) {
@@ -287,9 +290,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (!ez_sclickedVal.equals("All")) {
                                                     ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
                                                     ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&category=" + ez_sclickedVal;
+                                                    if(!header_value.contains("&category=" + ez_sclickedVal))
+                                                    {
+                                                        header_value += "&category=" + ez_sclickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 ez_fromWhere = "Class";
                                                 if (ez_linear_dots != null) {
@@ -327,9 +333,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (!ez_sclickedVal.equals("All")) {
                                                     ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
                                                     ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&class=" + ez_sclickedVal;
+                                                    if(!header_value.contains("&class=" + ez_sclickedVal))
+                                                    {
+                                                        header_value += "&class=" + ez_sclickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 ez_fromWhere = "Subclass";
                                                 if (ez_linear_dots != null) {
@@ -399,9 +408,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (!ez_sclickedVal.equals("All")) {
                                                     ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
                                                     ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&regionDescription=" + ez_sclickedVal;
+                                                    if(!header_value.contains("&regionDescription=" + ez_sclickedVal))
+                                                    {
+                                                        header_value += "&regionDescription=" + ez_sclickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 ez_fromWhere = "Store";
                                                 if (ez_linear_dots != null) {
@@ -707,7 +719,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             txt_ez_header.setText("Class");
                             ez_fromWhere = "Class";
                             ezone_level = 3;
-                            header_value = "";
+//                            header_value = "";
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                             recyclevw_ez_sales.removeAllViews();
                             val_hierarchy = " ";
@@ -739,7 +751,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             txt_ez_header.setText("Subdept");
                             ez_fromWhere = "Subdept";
                             ezone_level = 2;
-                            header_value = "";
+//                            header_value = "";
                             val_hierarchy = " ";
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                             recyclevw_ez_sales.removeAllViews();
@@ -771,7 +783,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             txt_ez_header.setText("Department");
                             ez_fromWhere = "Department";
                             ezone_level = 1;
-                            header_value = "";
+//                            header_value = "";
                             val_hierarchy = " ";
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                             recyclevw_ez_sales.removeAllViews();
@@ -804,7 +816,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             ez_linear_hierarchy.setVisibility(View.GONE);
                             txt_ez_header.setText("Region");
                             ez_fromWhere = "Region";
-                            header_value = "";
+//                            header_value = "";
                             ezone_level = 7;
                             val_hierarchy = " ";
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
@@ -853,7 +865,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             ez_linear_hierarchy.setVisibility(View.GONE);
                             ez_fromWhere = "Store";
                             ezone_level = 9;
-                            header_value = "";
+//                            header_value = "";
                             val_hierarchy = " ";
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                             recyclevw_ez_sales.removeAllViews();
@@ -886,7 +898,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             ez_linear_hierarchy.setVisibility(View.GONE);
                             ez_fromWhere = "Subdept";
                             ezone_level = 2;
-                            header_value = "";
+//                            header_value = "";
                             val_hierarchy = " ";
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                             recyclevw_ez_sales.removeAllViews();
@@ -917,7 +929,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             if (ez_linear_dots != null) {
                                 ez_linear_dots.removeAllViews();
                             }
-                            header_value = "";
+//                            header_value = "";
                             ez_currentVmPos = ez_viewpager.getCurrentItem();
                             ez_linear_hierarchy.setVisibility(View.GONE);
                             ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
@@ -946,7 +958,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             txt_ez_header.setText("Subclass");
                             ez_fromWhere = "Subclass";
                             ezone_level = 4;
-                            header_value = "";
+//                            header_value = "";
                             val_hierarchy = " ";
                             if (ez_linear_dots != null) {
                                 ez_linear_dots.removeAllViews();
@@ -1271,7 +1283,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         limit = 100;
                         count = 0;
                         val_hierarchy = "";
-                        header_value = "";
+//                        header_value = "";
                         if (filterSelectedString == null) {
                             requestEzoneSalesDetailAPI();
                         } else {
@@ -1308,7 +1320,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         limit = 100;
                         count = 0;
                         val_hierarchy = "";
-                        header_value = "";
+//                        header_value = "";
                         if (filterSelectedString == null) {
                             requestEzoneSalesDetailAPI();
                         } else {
@@ -1345,7 +1357,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         limit = 100;
                         count = 0;
                         val_hierarchy = "";
-                        header_value = "";
+//                        header_value = "";
                         if (filterSelectedString == null) {
 
                             requestEzoneSalesDetailAPI();
@@ -1382,7 +1394,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         limit = 100;
                         count = 0;
                         val_hierarchy = "";
-                        header_value = "";
+//                        header_value = "";
                         if (filterSelectedString == null) {
 
                             requestEzoneSalesDetailAPI();
@@ -2940,7 +2952,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     limit = 100;
                     count = 0;
                     val_hierarchy = "";
-                    header_value = "";
+//                    header_value = "";
 //                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
 //                        ez_filter_toggleClick = false;
 //                        retainEzoneSegVal();
@@ -2985,7 +2997,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     limit = 100;
                     count = 0;
                     val_hierarchy = "";
-                    header_value = "";
+//                    header_value = "";
 //                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
 //                        ez_filter_toggleClick = false;
 //                        retainEzoneSegVal();
@@ -3030,7 +3042,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     limit = 100;
                     count = 0;
                     val_hierarchy = "";
-                    header_value = "";
+//                    header_value = "";
 //                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
 //                        ez_filter_toggleClick = false;
 //                        retainEzoneSegVal();
@@ -3074,7 +3086,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     limit = 100;
                     count = 0;
                     val_hierarchy = "";
-                    header_value = "";
+//                    header_value = "";
 //                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
 //                        ez_filter_toggleClick = false;
 //                        retainEzoneSegVal();

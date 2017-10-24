@@ -133,26 +133,26 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="5sp"
-                android:layout_marginRight="5sp"
-                android:layout_marginTop="12dp"
-                android:background="#000000" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginLeft="5sp"-->
+                <!--android:layout_marginRight="5sp"-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--android:background="#000000" />-->
 
-            <TextView
-                android:id="@+id/searchablespinnerlibraryStore"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:clickable="true"
-                android:drawableRight="@mipmap/search_option_dropdown_arrow"
-                android:gravity="left|center"
-                android:layout_marginRight="70dp"
-                android:padding="5dp"
-                android:singleLine="true"
-                android:textColor="@color/ezfbb_black"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/searchablespinnerlibraryStore"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="55dp"-->
+                <!--android:clickable="true"-->
+                <!--android:drawableRight="@mipmap/search_option_dropdown_arrow"-->
+                <!--android:gravity="left|center"-->
+                <!--android:layout_marginRight="70dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:singleLine="true"-->
+                <!--android:textColor="@color/ezfbb_black"-->
+                <!--android:textSize="16sp" />-->
 
             <View
                 android:layout_width="match_parent"

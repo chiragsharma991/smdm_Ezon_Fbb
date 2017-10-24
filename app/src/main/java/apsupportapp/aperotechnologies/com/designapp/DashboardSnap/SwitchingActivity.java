@@ -133,8 +133,10 @@ public class SwitchingActivity extends AppCompatActivity
             switch (value) {
 
                 case "001":
-                    Intent StyleActivity = new Intent(context, StyleActivity.class);
-                    startActivity(StyleActivity);
+//                    Intent StyleActivity = new Intent(context, StyleActivity.class);
+//                    startActivity(StyleActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("StyleActivity");
                     break;
                 case "002":
 //                    Intent VisualAssortmentActivity = new Intent(context, VisualAssortmentActivity.class);
@@ -917,6 +919,12 @@ public class SwitchingActivity extends AppCompatActivity
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
+                                    else if(from.equals("StyleActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, StyleActivity.class);
+                                        intent.putExtra("from", "dashBoard");
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
                                 }
                                 else {
                                     for (int i = 0; i < response.length(); i++) {
@@ -1067,6 +1075,12 @@ public class SwitchingActivity extends AppCompatActivity
 
                                     else if(from.equals("SupervisiorStaff")){
                                         Intent intent = new Intent(SwitchingActivity.this, SupervisiorStaff.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+                                    else if(from.equals("StyleActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, StyleActivity.class);
+                                        intent.putExtra("from", "dashBoard");
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }

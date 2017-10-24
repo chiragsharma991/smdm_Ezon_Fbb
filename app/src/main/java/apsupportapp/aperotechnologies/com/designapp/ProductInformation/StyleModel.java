@@ -6,6 +6,13 @@ package apsupportapp.aperotechnologies.com.designapp.ProductInformation;
 
 public class StyleModel
 {
+
+    String collectionName;
+    String collectionCode;
+    String collectionNames;
+    String articleOptions;
+    String articleOptionCode;
+
     public String getCollectionName() {
         return collectionName;
     }
@@ -21,12 +28,6 @@ public class StyleModel
     public void setCollectionCode(String collectionCode) {
         this.collectionCode = collectionCode;
     }
-
-    String collectionName;
-
-
-
-    String collectionCode;
 
     public String getCollectionNames() {
         return collectionNames;
@@ -51,8 +52,4 @@ public class StyleModel
     public void setArticleOptionCode(String articleOptionCode) {
         this.articleOptionCode = articleOptionCode;
     }
-
-    String collectionNames;
-    String articleOptions;
-    String articleOptionCode;
 }

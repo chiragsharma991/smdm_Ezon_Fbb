@@ -1001,8 +1001,14 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
     private void requestAll() {
         String fIdetails;
+        if(!header_value.equals("")) {
+            fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + ""+header_value;
 
-        fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        }else
+        {
+            fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+
+        }
 
 
         Log.e(TAG, "requestAll URL: " + fIdetails);
@@ -1642,7 +1648,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     return;
                 }
                 FreshnessIndexValue = "";
-                header_value = "";
+//                header_value = "";
                 switch (txtFIndexClass.getText().toString()) {
 
 
@@ -1789,7 +1795,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     return;
                 }
                 FreshnessIndexValue = "";
-                header_value = "";
+//                header_value = "";
                 switch (txtFIndexClass.getText().toString()) {
 
                     case "Department":
@@ -1953,9 +1959,9 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&regionDescription=" + freshnessIndex_ClickedVal;
+                                                    header_value += "&regionDescription=" + freshnessIndex_ClickedVal;
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
 
                                                 if (Reusable_Functions.chkStatus(context)) {
@@ -1988,9 +1994,13 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&department=" + freshnessIndex_ClickedVal;
+
+                                                    if(!header_value.contains("&department=" + freshnessIndex_ClickedVal))
+                                                    {
+                                                        header_value = "&department=" + freshnessIndex_ClickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
 
                                                 if (Reusable_Functions.chkStatus(context)) {
@@ -2020,9 +2030,13 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&category=" + freshnessIndex_ClickedVal;
+                                                    if(!header_value.contains("&category=" + freshnessIndex_ClickedVal))
+                                                    {
+                                                        header_value += "&category=" + freshnessIndex_ClickedVal;
+                                                    }
+
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
@@ -2050,9 +2064,12 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&class=" + freshnessIndex_ClickedVal;
+                                                    if(!header_value.contains("&class=" + freshnessIndex_ClickedVal))
+                                                    {
+                                                        header_value += "&class=" + freshnessIndex_ClickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
@@ -2083,9 +2100,13 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&brand=" + freshnessIndex_ClickedVal;
+
+                                                    if(!header_value.contains("&brand=" + freshnessIndex_ClickedVal))
+                                                    {
+                                                        header_value += "&brand=" + freshnessIndex_ClickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
