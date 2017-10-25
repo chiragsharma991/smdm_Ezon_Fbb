@@ -374,9 +374,9 @@ public class SwitchingActivity extends AppCompatActivity
                         startActivity( LaunchIntent );
                     }
                     break;
+
                    //Internal/External Audit
                 case "102":
-
                     Intent fgstore = new Intent(context, FGStoreActivity.class);
                     startActivity(fgstore);
                     break;

@@ -84,7 +84,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     SharedPreferences sharedPreferences;
     int offsetvalue = 0, limit = 100;
     int count = 0;
-    RequestQueue queue;
+    RequestQueue queue;//
     RadioButton btn_WTD, btn_LW;
     private static String salesPvA_SegmentClick = "WTD", ez_tabClick = "WTD";
     ArrayList<SalesAnalysisListDisplay> salesAnalysisClassArrayList;
@@ -315,7 +315,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                         salesAnalysisClassArrayList.clear();
                                         arrayList.clear();
                                         //* requestHeaderAPI("");
-                                        requestSalesPvAPlanClassListAPI(txtPvAClickedValue);//*
+                                       // requestSalesPvAPlanClassListAPI(txtPvAClickedValue);//*
                                         categry_clickVal = txtPvAClickedValue;
                                         requestHeaderAPI(hierarchyList[2]);
                                         // planCategory = txtPvAClickedValue;
@@ -1596,6 +1596,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                 offsetvalue = (limit * count) + limit;
                                 count++;
                                 requestSalesPvAPlanClassListAPI(category);
+
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
