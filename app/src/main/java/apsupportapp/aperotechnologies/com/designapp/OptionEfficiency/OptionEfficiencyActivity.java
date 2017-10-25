@@ -258,7 +258,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     return;
                 }
                 OptionefficiencyValue = "";
-                header_value = "";
+//                header_value = "";
 
                 if(oe_txtHeaderClass.getText().toString().equals(hierarchyList[4])){
 
@@ -574,6 +574,8 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
 
             /*    switch (oe_txtHeaderClass.getText().toString()) {
+//                header_value = "";
+                switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Department":
                         oe_btnPrev.setVisibility(View.VISIBLE);
@@ -878,14 +880,18 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 fromWhere = "Category";
                                 level = 2;
                                 seasonGroup = "Current";
-                                if(!oe_ClickedVal.equals("All")) {
+                                if(!oe_ClickedVal.equals("All"))
+                                {
                                     oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                    header_value = "&department=" + oe_ClickedVal;
+                                    if(!header_value.contains("&department=" + oe_ClickedVal))
+                                    {
+                                        header_value = "&department=" + oe_ClickedVal;
+                                    }
                                 }
                                 else
                                 {
-                                    header_value = "";
+//                                    header_value = "";
                                 }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.hDialog();
@@ -918,11 +924,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 if(!oe_ClickedVal.equals("All")) {
                                     oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                    header_value = "&category=" + oe_ClickedVal;
+                                    if(!header_value.contains("&category=" + oe_ClickedVal))
+                                    {
+                                        header_value += "&category=" + oe_ClickedVal;
+                                    }
                                 }
                                 else
                                 {
-                                    header_value = "";
+//                                    header_value = "";
                                 }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
@@ -954,11 +963,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 {
                                     oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                    header_value = "&class=" + oe_ClickedVal;
+                                    if(!header_value.contains("&class=" + oe_ClickedVal))
+                                    {
+                                        header_value += "&class=" + oe_ClickedVal;
+                                    }
                                 }
                                 else
                                 {
-                                    header_value = "";
+//                                    header_value = "";
                                 }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
@@ -991,11 +1003,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 {
                                     oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                    header_value = "&brand="+oe_ClickedVal;
+                                    if(!header_value.contains("&brand=" + oe_ClickedVal))
+                                    {
+                                        header_value += "&brand=" + oe_ClickedVal;
+                                    }
                                 }
                                 else
                                 {
-                                    header_value = "";
+//                                    header_value = "";
                                 }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
@@ -1026,13 +1041,12 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         }*/
 
+                        }
                     }
                 }
 
-
-            }
         }));
-    }
+}
 
     private void maintainQuickFilterValues() {
         Log.e("TAG", "maintainQuickFilterValues: " + checkValueIs + " and " + seasonGroup);
