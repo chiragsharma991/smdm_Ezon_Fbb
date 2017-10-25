@@ -288,7 +288,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                         arrayList.clear();
                                         Log.e(TAG, "click on: " + txtPvAClickedValue);
                                         dept_clickVal = txtPvAClickedValue;
-                                        requestHeaderAPI("category");
+                                        requestHeaderAPI(hierarchyList[1]);
                                         //  planDept = txtPvAClickedValue;
 
 
@@ -317,7 +317,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                         //* requestHeaderAPI("");
                                         requestSalesPvAPlanClassListAPI(txtPvAClickedValue);//*
                                         categry_clickVal = txtPvAClickedValue;
-                                        requestHeaderAPI("class");
+                                        requestHeaderAPI(hierarchyList[2]);
                                         // planCategory = txtPvAClickedValue;
                                     } else {
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -343,12 +343,43 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                         salesAnalysisClassArrayList.clear();
                                         arrayList.clear();
                                         class_clickVal = txtPvAClickedValue;
-                                        requestHeaderAPI("brand");
+                                        requestHeaderAPI(hierarchyList[3]);
                                         // requestSalesPvABrandListAPI(txtPvAClickedValue);
                                         //  planClass = txtPvAClickedValue;
                                     } else {
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                     }
+                                }
+                                else if(txtheaderplanclass.getText().toString().equals("Region")){
+
+                                    btnSalesNext.setVisibility(View.INVISIBLE);
+                                    btnSalesPrev.setVisibility(View.VISIBLE);
+                                    txtheaderplanclass.setText("Store");
+                                    txtPvAClickedValue = salesAnalysisClassArrayList.get(position).getLevel();
+                                    fromWhere = "Store";
+                                    level = 9;
+                                    if (Reusable_Functions.chkStatus(context)) {
+                                        if (postRequest != null) {
+                                            postRequest.cancel();
+                                        }
+                                        Reusable_Functions.hDialog();
+                                        Reusable_Functions.sDialog(context, "Loading data...");
+                                        pva_progressBar.setVisibility(View.GONE);
+                                        offsetvalue = 0;
+                                        limit = 100;
+                                        count = 0;
+                                        salesAnalysisClassArrayList.clear();
+                                        region_clickVal = txtPvAClickedValue;
+                                        requestHeaderAPI("store");
+                                    } else {
+                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                else{
+
+                                    Reusable_Functions.hDialog();
+                                    Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                    onItemClickFlag = false;
                                 }
 
 
@@ -892,7 +923,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
             salespva_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
         }
 
-        Log.e(TAG, "requestSalesListDisplayAPI: Details Url" + salespva_listurl);
+        Log.e(TAG, "requestSalesListDisplayAPI: Details Url " + salespva_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2576,6 +2607,33 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                         limit = 100;
                         count = 0;
                         requestSalesViewPagerValueAPI();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                else if(txtheaderplanclass.getText().toString().equals("Region")){
+                    btnSalesNext.setVisibility(View.INVISIBLE);
+                    btnSalesPrev.setVisibility(View.VISIBLE);
+                    txtheaderplanclass.setText("Store");
+                    fromWhere = "Store";
+                    level = 9;
+                    pvaVal = " ";
+                    header_value= "";
+                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                    arrayList.clear();
+                    listViewSalesPvA.removeAllViews();
+                    llpvahierarchy.setVisibility(View.GONE);
+
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        pva_progressBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        requestSalesViewPagerValueAPI();
+
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }

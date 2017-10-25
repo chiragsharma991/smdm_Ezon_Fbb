@@ -36,11 +36,12 @@ public class Details_Fragment extends Fragment implements View.OnClickListener
     ProgressBar progressBar;
     LinearLayout linear_prodDetails;
     Button btn_cd_more,btn_cd_less;
-    private String storeDescription;
+    private String selStoreName;
     SharedPreferences sharedPreferences;
-    public Details_Fragment()
+    public Details_Fragment(String selStoreName)
     {
         // Required empty public constructor
+        this.selStoreName  = selStoreName;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class Details_Fragment extends Fragment implements View.OnClickListener
         articleOption = bundle.getString("articleOption");
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
      //   storeDescription = sharedPreferences.getString("storeDescription","");
-        Log.e( "onCreate: ",""+storeDescription );
+        Log.e( "onCreate: ",""+selStoreName);
     }
 
     @Override
@@ -61,6 +62,7 @@ public class Details_Fragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         txtStoreCode =(TextView)view.findViewById(R.id.txtStoreCode);
         txtStoreDesc =(TextView)view.findViewById(R.id.txtStoreName);
+        txtStoreDesc.setText(selStoreName);
         txtArticleOption = (TextView) view.findViewById(R.id.txtArticle);
         txtArticleOption.setText(articleOption);
         txtProductName = (TextView) view.findViewById(R.id.txtProductName);
@@ -142,10 +144,9 @@ public class Details_Fragment extends Fragment implements View.OnClickListener
         {
             imgKeyProduct.setImageResource(R.mipmap.option_detail_indicator_green);
         }
-//        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-//        txtStoreDesc.setText(storeDescription.substring(5));
-        txtStoreCode.setText(styleDetailsBean.getStoreCode());
-        txtStoreDesc.setText(styleDetailsBean.getStoreDesc());
+
+//        txtStoreCode.setText(styleDetailsBean.getStoreCode());
+//        txtStoreDesc.setText(styleDetailsBean.getStoreDesc());
         txtProductName.setText(styleDetailsBean.getProductName());
         txtCollcetion.setText(styleDetailsBean.getCollectionName());
         txtFabric.setText(styleDetailsBean.getProductFabricDesc());

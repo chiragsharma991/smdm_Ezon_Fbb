@@ -69,6 +69,7 @@
 
 
                     <RelativeLayout
+                        android:layout_toLeftOf="@+id/optione_btnReset"
                         android:id="@+id/optionEfficiency_imgfilter"
                         android:layout_width="@dimen/header_clickable_width"
                         android:layout_height="@dimen/header_clickable_height"
@@ -85,6 +86,25 @@
                             android:clickable="false"/>
 
                     </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/optione_btnReset"
+                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click">
+
+                        <Button
+                            android:layout_width="@dimen/icon_width"
+                            android:layout_height="@dimen/icon_height"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/resetbtn"
+                            android:clickable="false" />
+
+                    </RelativeLayout>
+
 
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
