@@ -200,7 +200,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         try {
                             if (response == null || response.equals(null)) {
 //                                Reusable_Functions.hDialog();
-                                Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show();
+                                return;
 
                             } else
                             {
@@ -273,14 +274,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e(TAG, "requestUserStore -***- onResponse: "+response);
+//                        Log.e(TAG, "requestUserStore -***- onResponse: "+response);
 //                        Log.e(TAG, "requestUserStore - onResponse: "+response.length());
                         try
                         {
                             if (response.equals("") || response == null)
                             {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "Dashboard could not be loaded. Please try again.", Toast.LENGTH_LONG).show();
                                 return;
                             }
                             else
@@ -290,6 +291,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     login_storeList = gson.fromJson(response.get(i).toString(),Login_StoreList.class);
                                     loginStoreArray.add(login_storeList);
                                 }
+                                Log.i(TAG, "loginStoreArray sizes: "+loginStoreArray.size());
                                 //database storeage
                                 db.deleteAllData();
                                 db.db_AddData(loginStoreArray);
@@ -302,6 +304,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("lobid", loginStoreArray.get(0).getLobId());
                                 editor.putString("lobname", loginStoreArray.get(0).getLobName());
                                 editor.putString("kpi_id",loginStoreArray.get(0).getKpiId());
+                                editor.putString("hierarchyLevels",loginStoreArray.get(0).getHierarchyLevels());
                                 editor.putString("isMultiStore", loginStoreArray.get(0).getIsMultiStore());
                                 editor.apply();
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
@@ -376,7 +379,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void requestUserStoreConcept()
     {
-
         String url = ConstsCore.web_url + "/v1/login/userstoreorconcept/" + userId +"?geoLevel2Code="+loginStoreArray.get(0).getGeoLevel2Code()+"&lobId="+loginStoreArray.get(0).getLobId(); //ConstsCore.web_url+ + "/v1/login/userId";
         Log.e("Login", "requestUserStoreConcept: " + url);
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -409,17 +411,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             }
                             Reusable_Functions.hDialog();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("hierarchyLevels", loginStoreArray.get(0).getHierarchyLevels());
+                            editor.apply();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
                             String kpi_id = loginStoreArray.get(0).getKpiId();
-//                            StringBuilder s = new StringBuilder(kpi_id);
-//                            s.append(",030");
-//                            Log.i(TAG, "onResponse: Kpi Id--"+s.toString() );
-//
-
                             String[] kpiIdArray = kpi_id.toString().split(",");
                             intent.putExtra("kpiId", kpiIdArray);
-                            //Log.e(TAG, "onResponse: "+kpiIdArray.length + kpiIdArray[i]);
                             intent.putExtra("BACKTO", "login");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

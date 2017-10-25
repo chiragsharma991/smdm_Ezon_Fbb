@@ -59,13 +59,14 @@ public class FGStoreFragment extends Fragment {
         TableRow tableRow = new TableRow(context);
         tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                260, TableLayout.LayoutParams.WRAP_CONTENT);
+                260, TableLayout.LayoutParams.WRAP_CONTENT);  //120   table border
        // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
 
         for (int i = 0; i < headingTitle.length; i++) {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
             textView.setLayoutParams(params);
+          //  textView.setBackground(getResources().getDrawable(R.drawable.cell_shape)); // table border
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
             tableRow.addView(textView);
@@ -129,6 +130,7 @@ public class FGStoreFragment extends Fragment {
         String[] headingTitle = new String[] {"Audit 1", "Ketan Mokal", "2.1", "2" };
 
         TableRow tableRow = new TableRow(context);
+        tableRow.setBackgroundColor(Color.parseColor("#a8a8a8"));
         tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 260, 120);
@@ -138,6 +140,7 @@ public class FGStoreFragment extends Fragment {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
             textView.setLayoutParams(params);
+            textView.setBackground(getResources().getDrawable(R.drawable.cell_shape));
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
             tableRow.addView(textView);
@@ -159,6 +162,7 @@ public class FGStoreFragment extends Fragment {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
             textView.setLayoutParams(params);
+            textView.setBackground(getResources().getDrawable(R.drawable.cell_shape));
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
             tableRow.addView(textView);
@@ -172,6 +176,7 @@ public class FGStoreFragment extends Fragment {
 
         TableRow tableRow = new TableRow(context);
         tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
+        tableRow.setBackgroundColor(Color.parseColor("#a8a8a8"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 260, 120);
         // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
@@ -180,6 +185,7 @@ public class FGStoreFragment extends Fragment {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
             textView.setLayoutParams(params);
+            textView.setBackground(getResources().getDrawable(R.drawable.cell_shape));
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
             tableRow.addView(textView);

@@ -1,5 +1,5 @@
 package apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit;
- 
+
 import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
@@ -10,23 +10,25 @@ import android.widget.TextView;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
 
+import static apsupportapp.aperotechnologies.com.designapp.Constants.overall_progress;
+
 public class CustomSeekBar {
- 
+
     int maxCount, textColor;
     Context mContext;
     LinearLayout mSeekLin, mSeekLin1;
     SeekBar mSeekBar;
- 
+
     public CustomSeekBar(Context context, int maxCount, int textColor) {
         this.mContext = context;
         this.maxCount = maxCount;
         this.textColor = textColor;
     }
- 
+
     public void addSeekBar(LinearLayout parent) {
- 
+
         if (parent instanceof LinearLayout) {
- 
+
             parent.setOrientation(LinearLayout.VERTICAL);
 
             // Add LinearLayout for labels above SeekBar
@@ -51,6 +53,8 @@ public class CustomSeekBar {
                 public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                     mSeekLin1.removeAllViews();
                     addLabelsAboveSeekBar(seekBar.getProgress());
+                    overall_progress = seekBar.getProgress();
+                    Log.e("overall_progress "," "+ overall_progress);
                 }
 
                 @Override
@@ -80,15 +84,15 @@ public class CustomSeekBar {
             parent.addView(mSeekLin1);
             parent.addView(mSeekBar);
             parent.addView(mSeekLin);
- 
+
         } else {
- 
+
             Log.e("CustomSeekBar", " Parent is not a LinearLayout");
- 
+
         }
- 
+
     }
- 
+
     private void addLabelsBelowSeekBar()
     {
         for (int count = 0; count < maxCount; count++)
@@ -120,11 +124,11 @@ public class CustomSeekBar {
 
 
     }
- 
+
     LinearLayout.LayoutParams getLayoutParams(float weight) {
         return new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, weight);
     }
- 
+
 }

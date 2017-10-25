@@ -5,6 +5,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ReportsAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
@@ -13,6 +15,7 @@ public class ReportsExtActivity extends AppCompatActivity {
 
     private Context context;
     TabLayout tab_reports;
+    private RelativeLayout imageBtnBack1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +25,17 @@ public class ReportsExtActivity extends AppCompatActivity {
 
         context = this;
 
+        imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         tab_reports = (TabLayout) findViewById(R.id.tab_reports);
         tab_reports.addTab(tab_reports.newTab().setText("FG store"));
         tab_reports.addTab(tab_reports.newTab().setText("Competitor store"));
+
+        imageBtnBack1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         final ReportsAdapter adapter = new ReportsAdapter

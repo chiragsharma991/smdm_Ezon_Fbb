@@ -131,6 +131,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private View viewpart;
     private RecyclerView lobList;
     private ArrayList<String> lobData = null, conceptData = null, conceptDesc = null;
+    String[] kpiIdArray;
+    private String hierarchyLevels;
 
   /*  001, 002, 003, 004, 005, 006, 007, 008, 009,010, 011, 012, 013, 014, 015, 016, 017, 018,
             020. 021,  022, 023, 026, 027, 028*/
@@ -142,13 +144,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
      Floor Avl, Target Stock Exc, Sell Thru Exc,
      Running Promo, Upcoming Promo, Expiring Promo, Best/Worst Promo, Key Product PVA, Stock Transfer, Stock Transfer Status, Best Worst Feedback, Best Worst Feedback List, Season Catalogue, Customer Eng, Hourly Performance
  */
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(TAG, "onCreate: SnapDashboardActivity");
         super.onCreate(savedInstanceState);
         context = this;
         statusbar();
+        gson = new Gson();
         m_config = MySingleton.getInstance(context);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
@@ -156,15 +158,16 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         geoLeveLDesc = sharedPreferences.getString("conceptDesc", "");
         lobName = sharedPreferences.getString("lobname", "");
         pushtoken = sharedPreferences.getString("push_tokken", "");
+        hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
-        Log.e(TAG, "onCreate: kpi id" + kpiIdArray.length);
+
+        Log.e(TAG, "onCreate: hierarchyLevels" +hierarchyLevels +" kpi id"+gson.toJson(kpiIdArray));
         Log.e(TAG, "userId :--" + userId);
         Log.e(TAG, "pushtoken :--" + pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        gson = new Gson();
         if (userId.equals("")) {
             Intent intent = new Intent(this, LoginActivity1.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -379,7 +382,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(), LinearLayoutManager.VERTICAL, false));
         final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptDesc, context, conceptchecked);
         conceptList.setAdapter(conceptMappingAdapter);
-
         conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -440,43 +442,39 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<Login_StoreList> list = db.db_GetListMulipleWhereClause(selectLob, selectconcept);
                 Log.i(TAG, "db_GetListMulipleWhereClause sizes are: " + list.size() + " and " + gson.toJson(list));
                 Login_StoreList model = list.get(0);
+                Log.i(TAG, "model: "+model.getGeoLevel2Desc()+" "+model.getLobName());
                 Reusable_Functions.showSnackbar(viewpart, "Mapping success !");
                 lob_name_txt.setText(selectLob);
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                if (model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") && model.getLobName().equals("FASHION")) {
+                if(model.getLobName().equals("FASHION") && model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") ) {
+                    Log.i(TAG, "after done model: "+model.getGeoLevel2Desc()+" "+model.getLobName());
                     editor.putString("concept", "BB,FBB");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
                     editor.putString("lobname", model.getLobName());
                     editor.putString("kpi_id", model.getKpiId());
+                    editor.putString("hierarchyLevels", model.getHierarchyLevels());
                     editor.apply();
 
-                } else if (model.getGeoLevel2Code().equals("EZ")) {
+                } else if (model.getLobName().equals("ELECTRONICS")) {
 
-                    editor.putString("concept", "BB,EZ");
+                    editor.putString("concept", "BB,EZ,CT,HT");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
                     editor.putString("lobname", "ELECTRONICS");
                     editor.putString("kpi_id", model.getKpiId());
+                    editor.putString("hierarchyLevels", model.getHierarchyLevels());
                     editor.apply();
 
-                } else if (model.getGeoLevel2Code().equals("BB") && model.getLobName().equals("ELECTRONICS")) {
-
-                    editor.putString("concept", "BB,EZ");
-                    editor.putString("conceptDesc", model.getGeoLevel2Desc());
-                    editor.putString("lobid", model.getLobId());
-                    editor.putString("lobname", "ELECTRONICS");
-                    editor.putString("kpi_id", model.getKpiId());
-                    editor.apply();
-
-                } else {
+                }  else {
                     editor.putString("concept", model.getGeoLevel2Code());
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
                     editor.putString("lobname", model.getLobName());
                     editor.putString("kpi_id", model.getKpiId());
+                    editor.putString("hierarchyLevels", model.getHierarchyLevels());
                     editor.apply();
                 }
 
@@ -517,7 +515,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
 
     private void setupAdapter(List<String> kpiIdArray) {
-        Log.i(TAG, "kpiIdArray: " + kpiIdArray.toString());
+        pushtoken = sharedPreferences.getString("hierarchyLevels", "");
+
+        Log.i(TAG, "selected kpiIdArray: " + kpiIdArray.toString()+" selected hierarchyLevels "+sharedPreferences.getString("hierarchyLevels", ""));
 
        /* Mapping
         001 - Product Info
@@ -609,7 +609,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<App> apps = getProduct(1, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
             }
-            if (kpiIdArray.contains("004") || kpiIdArray.contains("005") || kpiIdArray.contains("018") || kpiIdArray.contains("028")) {
+            if (kpiIdArray.contains("004") || kpiIdArray.contains("005") || kpiIdArray.contains("018") ) {
                 List<App> apps = getProduct(2, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
             }
@@ -657,6 +657,10 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<App> apps = getProduct(14, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             }
+
+                List<App> apps = getProduct(101, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
+
 
 
         }
@@ -758,7 +762,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         final String tmDevice, tmSerial, androidId;
         tmDevice = "" + tm.getDeviceId();
         tmSerial = "" + tm.getSimSerialNumber();
-        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+        androidId = "" + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         Log.e("TAG", "tmDevice: " + tmDevice + "tm serial" + tmSerial + "android id" + androidId);
 
         UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());

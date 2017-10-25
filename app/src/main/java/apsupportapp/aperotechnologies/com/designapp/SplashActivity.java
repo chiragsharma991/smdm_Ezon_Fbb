@@ -154,12 +154,15 @@ public class SplashActivity extends AppCompatActivity {
                             startActivity(i);
                             progressbar.setVisibility(View.GONE);
                             finish();
+
                         }
                         catch (Exception e)
                         {
                             e.printStackTrace();
                             Reusable_Functions.hDialog();
                         }
+
+
                     }
                 },
                 new Response.ErrorListener()

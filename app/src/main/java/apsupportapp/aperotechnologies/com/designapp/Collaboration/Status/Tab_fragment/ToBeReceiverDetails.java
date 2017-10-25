@@ -120,6 +120,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
     private void requestReceiverStatusDetails() {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level + "&senderStoreCode=" + senderStoreCode + "&caseNo=" + caseNo + "&recache=" + recache;
+        Log.e("TAG", "requestReceiverStatusDetails: "+url );
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -244,6 +245,7 @@ public class ToBeReceiverDetails extends AppCompatActivity implements View.OnCli
 
     private void requestReceiverStatusSubDetails(final int position) {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + option_level + "&senderStoreCode=" + senderStoreCode + "&caseNo=" + caseNo + "&option=" + option.replaceAll(" ", "%20") + "&recache=" + recache;
+        Log.e("TAG", "requestReceiverStatusDetails: "+url );
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

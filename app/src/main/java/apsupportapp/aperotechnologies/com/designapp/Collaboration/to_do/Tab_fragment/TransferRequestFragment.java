@@ -47,6 +47,7 @@ import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 
+
 import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.Tab_fragment.StockPullFragment.store_Code;
 
 /**
@@ -54,7 +55,7 @@ import static apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.T
  * Activities that contain this fragment must implement the
  * {@link TransferRequestFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TransferRequestFragment#newInstance} factory method to
+ * Use the {@link TransferRequestFragment#} factory method to
  * create an instance of this fragment.
  */
 public class TransferRequestFragment extends Fragment implements View.OnClickListener{
@@ -84,6 +85,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
     private Button submit;
     TransferRequestAdapter transferRequestAdapter;
     private ArrayList<String> selectedCaseNo;
+    private boolean submitFlag = false;
 
     public TransferRequestFragment(String storeCode) {
         // Required empty public constructor
@@ -105,14 +107,14 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
     }
 
     //TODO: Rename and change types and number of parameters
-    public static StockPullFragment newInstance(String param1, String param2) {
-        StockPullFragment fragment = new StockPullFragment(store_Code);
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static StockPullFragment newInstance(String param1, String param2) {
+//        StockPullFragment fragment = new StockPullFragment(store_Code, from);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -139,6 +141,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
         context = view.getContext();
         SenderSummaryList=new ArrayList<Transfer_Request_Model>();
         recache = "true";
+        submitFlag = false;
         initialise();
         MainMethod();
         return view;
@@ -172,12 +175,14 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                         @Override
                         public void onResponse(JSONArray response)
                         {
-                            Log.i(TAG, "onResponse: sendersummary "+response );
+//                            Log.i(TAG, "onResponse: sendersummary "+response );
                             try
                             {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
-//                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    if(submitFlag) {
+                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    }
                                     checkNetworkFalse=true;
                                     return;
                                 }
@@ -217,7 +222,7 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                     }
                                 });
                                 senderSummary_recyclerView.setAdapter(transferRequestAdapter );
-
+                                submitFlag = false;
                                 Reusable_Functions.hDialog();
 
                             } catch (Exception e)
@@ -369,8 +374,13 @@ public class TransferRequestFragment extends Fragment implements View.OnClickLis
                                     SenderSummaryList.clear();
                                     transferRequestAdapter = new TransferRequestAdapter(SenderSummaryList,selectMc,getActivity(), null);
                                     senderSummary_recyclerView.setAdapter(transferRequestAdapter);
-//                                    transferRequestAdapter.notifyDataSetChanged();
-//                                    requestTransferRequestsummary();
+                                    transferRequestAdapter.notifyDataSetChanged();
+                                    Reusable_Functions.sDialog(context, "Loading...");
+                                    submitFlag = true;
+                                    requestTransferRequestsummary();
+
+
+
 //                                    switch (id){
 //                                        case 0:
 //                                            String selectCase=jsonarray.getJSONObject(0).get("caseNo").toString();

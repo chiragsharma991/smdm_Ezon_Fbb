@@ -47,6 +47,7 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
+import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.VisualAssort;
 
@@ -84,7 +85,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
    JsonArrayRequest postRequest;
     public static Activity Visual_Assortment_Activity;
     String recache = "", isMultiStore, value;
-    int maxCharactes ;
+    int maxCharactes , filter_level ;
 
 
     @Override
@@ -309,7 +310,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         vassort_imgFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VisualAssortmentActivity.this, SalesFilterActivity.class);
+                Intent intent = new Intent(VisualAssortmentActivity.this, SalesAnalysisFilter.class);
                 intent.putExtra("checkfrom", "visualAssort");
 
                 startActivity(intent);
@@ -334,11 +335,12 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 postRequest.cancel();
             }
            visualassortmentlist = new ArrayList<VisualAssort>();
-            if (getIntent().getStringExtra("selectedDept") == null) {
+            if (getIntent().getStringExtra("selectedStringVal") == null) {
                 vassort_from_filter=false;
             }
-            else if(getIntent().getStringExtra("selectedDept") != null) {
-               selectedString  = getIntent().getStringExtra("selectedDept");
+            else if(getIntent().getStringExtra("selectedStringVal") != null) {
+               selectedString  = getIntent().getStringExtra("selectedStringVal");
+                filter_level = getIntent().getIntExtra("selectedlevelVal",0);
                 vassort_from_filter=true;
 
             }
@@ -617,7 +619,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         String url;
         if (vassort_from_filter)
         {
-            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + SalesFilterActivity.level_filter + selectedString +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
+            url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg + "&level=" + filter_level+ selectedString +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
         }
         else
         {

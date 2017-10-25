@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,8 @@ import java.util.List;
 import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.Overallratings;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
+import static apsupportapp.aperotechnologies.com.designapp.Constants.overall_progress;
+
 public class CompetitorStoreExtActivity extends AppCompatActivity {
 
     private Context context;
@@ -41,6 +44,7 @@ public class CompetitorStoreExtActivity extends AppCompatActivity {
     private List<Overallratings> list_storeservices;
     private List<Overallratings> list_vm;
     private RadioButton radio_yes_supervisor, radio_no_supervisor;
+    private RelativeLayout imageBtnBack1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class CompetitorStoreExtActivity extends AppCompatActivity {
         list_storelookfeel = new ArrayList<>();
         list_storeservices = new ArrayList<>();
         list_vm = new ArrayList<>();
+        overall_progress = 0;
 
         final LinearLayout lin_lay_overall_ratings = (LinearLayout) findViewById(R.id.lin_lay_overall_ratings);
         create_Smiley(lin_lay_overall_ratings, "overallratings.json", list_overallratings, "overallratings");
@@ -90,7 +95,7 @@ public class CompetitorStoreExtActivity extends AppCompatActivity {
         edt_name_author = (EditText) findViewById(R.id.edt_name_author);
         edt_dateofVisit = (EditText) findViewById(R.id.edt_dateofVisit);
         edt_dayofweek = (EditText) findViewById(R.id.edt_dayofweek);
-       // edt_timeofVisit = (EditText) findViewById(R.id.edt_timeofVisit);
+        // edt_timeofVisit = (EditText) findViewById(R.id.edt_timeofVisit);
         edt_auditorType = (EditText) findViewById(R.id.edt_auditorType);
         edt_agencyname = (EditText) findViewById(R.id.edt_agencyname);
         edt_observations = (EditText) findViewById(R.id.edt_observations);
@@ -103,6 +108,19 @@ public class CompetitorStoreExtActivity extends AppCompatActivity {
         edt_keytakeaway = (EditText) findViewById(R.id.edt_keytakeaway);
         radio_yes_supervisor = (RadioButton) findViewById(R.id.radio_yes_supervisor);
         radio_no_supervisor = (RadioButton) findViewById(R.id.radio_no_supervisor);
+        imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
+
+        imageBtnBack1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
+        CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
+        customSeekBar.addSeekBar(mSeekLin);
+        Log.e("=== "," "+overall_progress);
 
 
         Button btn_Reset = (Button) findViewById(R.id.btn_reset);
@@ -142,7 +160,7 @@ public class CompetitorStoreExtActivity extends AppCompatActivity {
                 edt_name_author.setText("");
                 edt_dateofVisit.setText("");
                 edt_dayofweek.setText("");
-               // edt_timeofVisit.setText("");
+                // edt_timeofVisit.setText("");
                 edt_auditorType.setText("");
                 edt_agencyname.setText("");
                 edt_observations.setText("");
@@ -159,7 +177,7 @@ public class CompetitorStoreExtActivity extends AppCompatActivity {
                 edt_name_author.clearFocus();
                 edt_dateofVisit.clearFocus();
                 edt_dayofweek.clearFocus();
-              //  edt_timeofVisit.clearFocus();
+                //  edt_timeofVisit.clearFocus();
                 edt_auditorType.clearFocus();
                 edt_agencyname.clearFocus();
                 edt_observations.clearFocus();

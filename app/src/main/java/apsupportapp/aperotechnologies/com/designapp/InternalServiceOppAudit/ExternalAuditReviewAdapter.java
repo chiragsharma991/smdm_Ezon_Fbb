@@ -1,15 +1,14 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -26,12 +25,15 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
 {
     List<InspectionHistoryZonalRatings> arr_zonalratings;
     Context context;
+    String tab;
 
 
-    public ExternalAuditReviewAdapter(List<InspectionHistoryZonalRatings> arr_zonalratings, Context context, ListView list_externalauditorreview)
+    public ExternalAuditReviewAdapter(List<InspectionHistoryZonalRatings> arr_zonalratings, Context context, ListView list_externalauditorreview, String tab)
     {
         this.arr_zonalratings = arr_zonalratings;
         this.context = context;
+        this.tab = tab;
+
 
     }
 
@@ -74,6 +76,7 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
             viewHolder.txt_2 = (TextView) view.findViewById(R.id.txt_2);
             viewHolder.txt_3 = (TextView) view.findViewById(R.id.txt_3);
             viewHolder.txt_4 = (TextView) view.findViewById(R.id.txt_4);
+            viewHolder.card_extrenalaudrev = (CardView) view.findViewById(R.id.card_extrenalaudrev);
 
             Log.e("i "," "+i);
 
@@ -81,6 +84,28 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
             viewHolder.txt_2.setText(arr_zonalratings.get(i).getAvg_rating());
             viewHolder.txt_3.setText(arr_zonalratings.get(i).getAudit_done());
             viewHolder.txt_4.setText(arr_zonalratings.get(i).getCount_fg_audit());
+
+            viewHolder.card_extrenalaudrev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(tab.equals("FgStore"))
+                    {
+                        Intent fg_store = new Intent(context, FGStoreDataActivity.class);
+                        context.startActivity(fg_store);
+                    }
+                    else if(tab.equals("CompetitorStore"))
+                    {
+                        Intent comp_store = new Intent(context, CompetitorStoreDataActivity.class);
+                        context.startActivity(comp_store);
+                    }else
+                    {
+                        Intent fg_store = new Intent(context, FGStoreDataActivity.class);
+                        context.startActivity(fg_store);
+                    }
+                }
+            });
+
             view.setTag(viewHolder);
 
         } else
@@ -94,6 +119,7 @@ public class ExternalAuditReviewAdapter extends BaseAdapter
     private class Holder
     {
         TextView txt_1, txt_2, txt_3, txt_4;
+        CardView card_extrenalaudrev;
 
     }
 }

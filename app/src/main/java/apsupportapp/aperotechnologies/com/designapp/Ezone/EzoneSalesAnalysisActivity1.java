@@ -661,6 +661,9 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 if (ez_progessBar.getVisibility() == View.VISIBLE) {
                     return;
                 } else {
+                    ez_sFirstPosVal = 0;
+                    ez_firstVisible_no = 0;
+
                     switch (txt_ez_header.getText().toString()) {
 //                        case "Brand Class":
 //                            rel_ez_next.setVisibility(View.VISIBLE);
@@ -836,6 +839,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 if (ez_progessBar.getVisibility() == View.VISIBLE) {
                     return;
                 } else {
+                    ez_sFirstPosVal = 0;
+                    ez_firstVisible_no = 0;
                     switch (txt_ez_header.getText().toString()) {
                         case "Region":
                             rel_ez_prev.setVisibility(View.VISIBLE);
@@ -1054,6 +1059,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 limit = 100;
                 offsetvalue = 0;
                 count = 0;
+                ez_sFirstPosVal = 0;
+                ez_firstVisible_no = 0;
                 requestEzoneSalesDetailAPI();
                 rel_ez_viewBy.setVisibility(View.GONE);
 
@@ -1091,6 +1098,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 limit = 100;
                 offsetvalue = 0;
                 count = 0;
+                ez_sFirstPosVal = 0;
+                ez_firstVisible_no = 0;
                 requestEzoneSalesDetailAPI();
                 rel_ez_viewBy.setVisibility(View.GONE);
 

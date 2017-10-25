@@ -26,7 +26,7 @@ public class ReportActivity extends AppCompatActivity {
 
         tab_reports = (TabLayout) findViewById(R.id.tab_reports);
         tab_reports.addTab(tab_reports.newTab().setText("FG store"));
-        tab_reports.addTab(tab_reports.newTab().setText("Competitor store"));
+        tab_reports.addTab(tab_reports.newTab().setText("Competitor Store"));
 
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
 

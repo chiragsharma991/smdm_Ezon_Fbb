@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,12 +33,15 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
     SharedPreferences sharedPreferences;
     private TextView txtStoreCode,txtStoreName;
     public static String deviceId;
+    String from ,details,selectTab;
+    public static Activity activity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
+        activity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
@@ -51,13 +55,27 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView)findViewById(R.id.txtStoreName);
-        if(getIntent().getExtras().getString("storeCode") != null )
-        {
-            storeCode = getIntent().getExtras().getString("storeCode");
-            store_Code = storeCode.substring(0,4);
 
-            //  Log.i(TAG, "storeCode: "+storeCode );
+        if(getIntent().getExtras() != null) {
+            from = getIntent().getExtras().getString("from");
+//            details = getIntent().getExtras().getString("checkfrom");
+
+            if (from == null) {
+                if (getIntent().getExtras().getString("storeCode") != null) {
+                    storeCode = getIntent().getExtras().getString("storeCode");
+                    store_Code = storeCode.substring(0, 4);
+
+                    //  Log.i(TAG, "storeCode: "+storeCode );
+                }
+            }
+            else
+            {
+                store_Code = getIntent().getExtras().getString("from");
+                selectTab = getIntent().getExtras().getString("selectTab");
+
+            }
         }
+
         if(isMultiStore.equals("Yes"))
         {
             txtStoreCode.setText("Concept : ");
@@ -74,6 +92,10 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         ToDo_imageBtnBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
         checkCollapsing();
+        viewPager=(ViewPager)findViewById(R.id.to_do_viewpager);
+        setupViewPager(viewPager);
+        tab = (TabLayout) findViewById(R.id.tabs_toDo);
+        tab.setupWithViewPager(viewPager);
    }
 
 
@@ -92,10 +114,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
            // finally change the color
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
-        viewPager=(ViewPager)findViewById(R.id.to_do_viewpager);
-        setupViewPager(viewPager);
-        tab = (TabLayout) findViewById(R.id.tabs_toDo);
-        tab.setupWithViewPager(viewPager);
+
     }
 
     public static void StartIntent(Context c) {
@@ -104,7 +123,7 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
 
     private void setupViewPager(ViewPager viewPager) {
         ToDoViewPagerAdapter adapter = new ToDoViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StockPullFragment(store_Code), "Pull from Stores");
+        adapter.addFragment(new StockPullFragment(store_Code, from, details), "Pull from Stores");
         adapter.addFragment(new TransferRequestFragment(store_Code), "Requested by Stores");
         viewPager.setAdapter(adapter);
     }

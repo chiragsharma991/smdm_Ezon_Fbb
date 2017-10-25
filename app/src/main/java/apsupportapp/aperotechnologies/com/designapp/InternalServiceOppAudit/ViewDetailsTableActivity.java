@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -64,6 +65,7 @@ public class ViewDetailsTableActivity extends AppCompatActivity {
 
         TableRow tableRow = new TableRow(context);
         tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
+        tableRow.setBackgroundColor(Color.parseColor("#a8a8a8"));
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 250, 120);
         // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
@@ -72,6 +74,7 @@ public class ViewDetailsTableActivity extends AppCompatActivity {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
             textView.setLayoutParams(params);
+            textView.setBackground(getResources().getDrawable(R.drawable.cell_shape));
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
             tableRow.addView(textView);
@@ -93,6 +96,7 @@ public class ViewDetailsTableActivity extends AppCompatActivity {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
             textView.setLayoutParams(params);
+            textView.setBackground(getResources().getDrawable(R.drawable.cell_shape));
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
             tableRow.addView(textView);
@@ -109,7 +113,8 @@ public class ViewDetailsTableActivity extends AppCompatActivity {
         int bottomMargin=2;
 
         TableRow tableRow = new TableRow(context);
-        tableRow.setGravity(Gravity.CENTER_HORIZONTAL);
+        tableRow.setBackgroundColor(Color.parseColor("#a8a8a8"));
+        tableRow.setGravity(Gravity.CENTER);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 250, 120);
         // tableRow.setBackgroundColor(getResources().getColor(android.R.color.black));
@@ -118,9 +123,10 @@ public class ViewDetailsTableActivity extends AppCompatActivity {
         for (int i = 0; i < headingTitle.length; i++) {
             TextView textView = new TextView(context);
             textView.setText(headingTitle[i]);
-            textView.setLayoutParams(params);
+            textView.setBackground(getResources().getDrawable(R.drawable.cell_shape));
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextColor(getResources().getColor(android.R.color.black));
+            textView.setLayoutParams(params);
             tableRow.addView(textView);
         }
         table_reports.addView(tableRow);

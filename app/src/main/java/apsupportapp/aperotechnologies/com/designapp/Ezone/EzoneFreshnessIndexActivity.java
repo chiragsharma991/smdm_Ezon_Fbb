@@ -116,6 +116,8 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     private int selectedlevel;
     private int filter_level;
     private String header_value;
+    public int x=0;
+    private String[] hierarchyList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,6 +126,16 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
+        String hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
+        // replace all labels using hierarchyList
+        hierarchyList = hierarchyLevels.split(",");
+        for (int i = 0; i <hierarchyList.length ; i++) {
+            hierarchyList[i]=hierarchyList[i].trim();
+            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
+        }
+
+
+
         context = this;
         header_value = "";
         if (getIntent().getExtras() != null) {
@@ -165,6 +177,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
             public void onScrollStateChanged(RecyclerView recyclerView, final int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
+                Log.i(TAG, "onScrollStateChanged: "+firstVisibleItem);
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
@@ -191,21 +204,21 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
 
     private void TestItem() {
-        if (txtFIndexClass.getText().toString().equals("Department")) {
+        if (txtFIndexClass.getText().toString().equals(hierarchyList[0])) {
             level = 1;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
-        } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
+        } else if (txtFIndexClass.getText().toString().equals(hierarchyList[1])) {
             level = 2;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
 
-        } else if (txtFIndexClass.getText().toString().equals("Class")) {
+        } else if (txtFIndexClass.getText().toString().equals(hierarchyList[2])) {
             level = 3;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
 
-        } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+        } else if (txtFIndexClass.getText().toString().equals(hierarchyList[3])) {
             level = 4;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
-        } else if (txtFIndexClass.getText().toString().equals("MC")) {
+        } else if (txtFIndexClass.getText().toString().equals(hierarchyList[4])) {
             level = 5;
             fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(0).getLevel().toString();
         } else if (txtFIndexClass.getText().toString().equals("Region")) {
@@ -223,19 +236,19 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         if (freshnessIndexDetailsArrayList.size() != 0) {
             if (firstVisibleItem < freshnessIndexDetailsArrayList.size() && !OnItemClick) {
                 //10<10 where footer is call then it goes else condition
-                if (txtFIndexClass.getText().toString().equals("Department")) {
+                if (txtFIndexClass.getText().toString().equals(hierarchyList[0])) {
                     level = 1;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
-                } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
+                } else if (txtFIndexClass.getText().toString().equals(hierarchyList[1])) {
                     level = 2;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
-                } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                } else if (txtFIndexClass.getText().toString().equals(hierarchyList[2])) {
                     level = 3;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
-                } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+                } else if (txtFIndexClass.getText().toString().equals(hierarchyList[3])) {
                     level = 4;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
-                } else if (txtFIndexClass.getText().toString().equals("MC")) {
+                } else if (txtFIndexClass.getText().toString().equals(hierarchyList[4])) {
                     level = 5;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
                 } else if (txtFIndexClass.getText().toString().equals("Region")) {
@@ -245,7 +258,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     level = 9;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
                 }
-                Log.i(TAG, "fIndexFirstVisibleItem: " + fIndexFirstVisibleItem);
 
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.hDialog();
@@ -272,19 +284,19 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
                 llm.scrollToPosition(firstVisibleItem);
 
-                if (txtFIndexClass.getText().toString().equals("Department")) {
+                if (txtFIndexClass.getText().toString().equals(hierarchyList[0])) {
                     level = 1;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
-                } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
+                } else if (txtFIndexClass.getText().toString().equals(hierarchyList[1])) {
                     level = 2;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
-                } else if (txtFIndexClass.getText().toString().equals("Class")) {
+                } else if (txtFIndexClass.getText().toString().equals(hierarchyList[2])) {
                     level = 3;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
-                } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+                } else if (txtFIndexClass.getText().toString().equals(hierarchyList[3])) {
                     level = 4;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
-                } else if (txtFIndexClass.getText().toString().equals("MC")) {
+                } else if (txtFIndexClass.getText().toString().equals(hierarchyList[4])) {
                     level = 5;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel().toString();
                 } else if (txtFIndexClass.getText().toString().equals("Region")) {
@@ -358,6 +370,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
 
     }
+    private void testmethod(){}
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -381,6 +394,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 OnItemClick = false;
                                 Reusable_Functions.hDialog();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 return;
                             } else if (response.length() == limit) {
                                 for (i = 0; i < response.length(); i++) {
@@ -843,15 +857,15 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         fIndexFirstVisibleItem = fIndexFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
 
         if (!header_value_filter.equals("")) {
-            if (txtFIndexClass.getText().toString().equals("Department")) {
+            if (txtFIndexClass.getText().toString().equals(hierarchyList[0])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&department=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value_filter;
-            } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
+            } else if (txtFIndexClass.getText().toString().equals(hierarchyList[1])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&category=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value_filter;
-            } else if (txtFIndexClass.getText().toString().equals("Class")) {
+            } else if (txtFIndexClass.getText().toString().equals(hierarchyList[2])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&class=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value_filter;
-            } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+            } else if (txtFIndexClass.getText().toString().equals(hierarchyList[3])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&brand=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value_filter;
-            } else if (txtFIndexClass.getText().toString().equals("MC")) {
+            } else if (txtFIndexClass.getText().toString().equals(hierarchyList[4])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value_filter;
             } else if (txtFIndexClass.getText().toString().equals("Region")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&regionDescription=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value_filter;
@@ -859,15 +873,15 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&storeCode=" + fIndexFirstVisibleItem.substring(0,4) + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value_filter;
             }
         } else {
-            if (txtFIndexClass.getText().toString().equals("Department")) {
+            if (txtFIndexClass.getText().toString().equals(hierarchyList[0])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&department=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-            } else if (txtFIndexClass.getText().toString().equals("Subdept")) {
+            } else if (txtFIndexClass.getText().toString().equals(hierarchyList[1])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&category=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-            } else if (txtFIndexClass.getText().toString().equals("Class")) {
+            } else if (txtFIndexClass.getText().toString().equals(hierarchyList[2])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&class=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-            } else if (txtFIndexClass.getText().toString().equals("Subclass")) {
+            } else if (txtFIndexClass.getText().toString().equals(hierarchyList[3])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&brand=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-            } else if (txtFIndexClass.getText().toString().equals("MC")) {
+            } else if (txtFIndexClass.getText().toString().equals(hierarchyList[4])) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&brandclass=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             } else if (txtFIndexClass.getText().toString().equals("Region")) {
                 url = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&regionDescription=" + fIndexFirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
@@ -1114,7 +1128,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                     LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                             listViewFIndex.setOnFlingListener(null);
                             new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-                            freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
+                            freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG,hierarchyList);
                             listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
                             fIndexFirstVisibleItem = "All";  // when you drill down then fst you get all
                             txtfIndexDeptName.setText(hierarchy(name.replaceAll("%20", " ").replaceAll("%26", "&")));
@@ -1198,7 +1212,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 listViewFIndex.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-                                freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
+                                freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG,hierarchyList);
                                 listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
 
                                 offsetvalue = 0;
@@ -1255,7 +1269,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
         listViewFIndex.setOnFlingListener(null);
         new GravitySnapHelper(48).attachToRecyclerView(listViewFIndex);
-        freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG);
+        freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG,hierarchyList);
         listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
         fIndexFirstVisibleItem = "All";
 
@@ -1293,24 +1307,24 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                         Log.e(TAG, "requestFreshnessIndexFilterVal: response " + response);
 
                         if (inv_filter_level == 2) {
-                            txtFIndexClass.setText("Subdept");
-                            fromWhere = "Subdept";
+                            txtFIndexClass.setText(hierarchyList[1]);
+                            fromWhere = hierarchyList[1];
                             level = 2;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
 
                         } else if (inv_filter_level == 3) {
-                            txtFIndexClass.setText("Class");
-                            fromWhere = "Class";
+                            txtFIndexClass.setText(hierarchyList[2]);
+                            fromWhere = hierarchyList[2];
                             level = 3;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
                         } else if (inv_filter_level == 4) {
-                            txtFIndexClass.setText("Subclass");
-                            fromWhere = "Subclass";
+                            txtFIndexClass.setText(hierarchyList[3]);
+                            fromWhere = hierarchyList[3];
                             level = 4;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
                         } else if (inv_filter_level == 5) {
-                            txtFIndexClass.setText("MC");
-                            fromWhere = "MC";
+                            txtFIndexClass.setText(hierarchyList[4]);
+                            fromWhere = hierarchyList[4];
                             level = 5;
                             btnFIndexPrev.setVisibility(View.VISIBLE);
                             btnFIndexNext.setVisibility(View.INVISIBLE);
@@ -1469,11 +1483,13 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 Log.e(TAG, "sortFunction: true...");
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading data...");
+                    OveridePositionValue = 0;
+                    firstVisibleItem = 0;
                     listViewFIndex.setVisibility(View.VISIBLE);
                     llfIndexhierarchy.setVisibility(View.GONE);
                     FreshnessIndexValue = "";
                     preValue = postValue;
-                    txtFIndexClass.setText("Department");
+                    txtFIndexClass.setText(hierarchyList[0]);
                     freshnessIndex_ClickedVal = "All";
                     FreshnessIndexValue = "";
                     level = 1;
@@ -1492,6 +1508,8 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading data...");
+                    OveridePositionValue = 0;
+                    firstVisibleItem = 0;
                     listViewFIndex.setVisibility(View.VISIBLE);
                     FreshnessIndexValue = "";
                     llfIndexhierarchy.setVisibility(View.GONE);
@@ -1582,10 +1600,11 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     private void Fbb_collection() {
 
         Log.e(TAG, "Fbb_collection: log");
-        fromWhere = "Department";
+        fromWhere = hierarchyList[0];
         fIndexFirstVisibleItem = "";
         freshnessIndex_ClickedVal = "";
         FreshnessIndexValue = "";
+        txtFIndexClass.setText(hierarchyList[0]);
         level = 1;
         selFirstPositionValue = 0;
         initializeUI();
@@ -1639,135 +1658,127 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 }
                 FreshnessIndexValue = "";
                 header_value = "";
-                switch (txtFIndexClass.getText().toString()) {
 
+                if(txtFIndexClass.getText().toString().equals(hierarchyList[4])){
+                    btnFIndexNext.setVisibility(View.VISIBLE);
+                    txtFIndexClass.setText(hierarchyList[3]);
+                    fromWhere = hierarchyList[3];
+                    level = 4;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
 
-                    case "Store":
-                        btnFIndexNext.setVisibility(View.VISIBLE);
-                        btnFIndexPrev.setVisibility(View.INVISIBLE);
-                        txtFIndexClass.setText("Region");
-                        fromWhere = "Region";
-                        level = 7;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
 
-                            requestFreshnessIndexDetails();
-
-
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-
-                    case "MC":
-                        btnFIndexNext.setVisibility(View.VISIBLE);
-                        txtFIndexClass.setText("Subclass");
-                        fromWhere = "Subclass";
-                        level = 4;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-
-                    case "Subclass":
-                        txtFIndexClass.setText("Class");
-                        fromWhere = "Class";
-                        level = 3;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-
-
-                    case "Class":
-                        txtFIndexClass.setText("Subdept");
-                        fromWhere = "Subdept";
-                        level = 2;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-
-                    case "Subdept":
-                        btnFIndexPrev.setVisibility(View.INVISIBLE);
-                        txtFIndexClass.setText("Department");
-                        fromWhere = "Department";
-                        level = 1;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                    default:
                 }
+                else if(txtFIndexClass.getText().toString().equals(hierarchyList[3])){
+                    txtFIndexClass.setText(hierarchyList[2]);
+                    fromWhere = hierarchyList[2];
+                    level = 3;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
+
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if(txtFIndexClass.getText().toString().equals(hierarchyList[2])){
+                    txtFIndexClass.setText(hierarchyList[1]);
+                    fromWhere = hierarchyList[1];
+                    level = 2;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if(txtFIndexClass.getText().toString().equals(hierarchyList[1])){
+                    btnFIndexPrev.setVisibility(View.INVISIBLE);
+                    txtFIndexClass.setText(hierarchyList[0]);
+                    fromWhere = hierarchyList[0];
+                    level = 1;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if(txtFIndexClass.getText().toString().equals("Store")){
+                    btnFIndexNext.setVisibility(View.VISIBLE);
+                    btnFIndexPrev.setVisibility(View.INVISIBLE);
+                    txtFIndexClass.setText("Region");
+                    fromWhere = "Region";
+                    level = 7;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+
+                        requestFreshnessIndexDetails();
+
+
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+
             }
 
         });
@@ -1786,130 +1797,126 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 }
                 FreshnessIndexValue = "";
                 header_value = "";
-                switch (txtFIndexClass.getText().toString()) {
 
-                    case "Department":
-                        btnFIndexPrev.setVisibility(View.VISIBLE);
-                        txtFIndexClass.setText("Subdept");
-                        fromWhere = "Subdept";
-                        level = 2;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-
-                    case "Subdept":
-                        fromWhere = "Class";
-                        txtFIndexClass.setText("Class");
-                        level = 3;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-
-                    case "Class":
-                        txtFIndexClass.setText("Subclass");
-                        fromWhere = "Subclass";
-                        level = 4;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-
-                    case "Subclass":
-                        btnFIndexNext.setVisibility(View.INVISIBLE);
-                        txtFIndexClass.setText("MC");
-                        fromWhere = "MC";
-                        level = 5;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-
-                    case "Region":
-                        btnFIndexNext.setVisibility(View.INVISIBLE);
-                        btnFIndexPrev.setVisibility(View.VISIBLE);
-                        txtFIndexClass.setText("Store");
-                        fromWhere = "Store";
-                        level = 9;
-                        freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                        if (Reusable_Functions.chkStatus(context)) {
-                            Reusable_Functions.hDialog();
-                            Reusable_Functions.sDialog(context, "Loading data...");
-                            processBar.setVisibility(View.GONE);
-                            offsetvalue = 0;
-                            limit = 100;
-                            count = 0;
-                            fIndexPlanDept = " ";
-                            fIndexCategory = " ";
-                            fIndexPlanClass = " ";
-                            fIndexBrand = " ";
-                            requestFreshnessIndexDetails();
-                        } else {
-                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-
-
-                    default:
+                if(txtFIndexClass.getText().toString().equals(hierarchyList[0])){
+                    btnFIndexPrev.setVisibility(View.VISIBLE);
+                    txtFIndexClass.setText(hierarchyList[1]);
+                    fromWhere = hierarchyList[1];
+                    level = 2;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+                else if(txtFIndexClass.getText().toString().equals(hierarchyList[1])){
+
+                    fromWhere = hierarchyList[2];
+                    txtFIndexClass.setText(hierarchyList[2]);
+                    level = 3;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+                else if(txtFIndexClass.getText().toString().equals(hierarchyList[2])){
+
+                    txtFIndexClass.setText(hierarchyList[3]);
+                    fromWhere = hierarchyList[3];
+                    level = 4;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
+
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if(txtFIndexClass.getText().toString().equals(hierarchyList[3])){
+
+                    btnFIndexNext.setVisibility(View.INVISIBLE);
+                    txtFIndexClass.setText(hierarchyList[4]);
+                    fromWhere = hierarchyList[4];
+                    level = 5;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
+
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if(txtFIndexClass.getText().toString().equals("Region")){
+
+                    btnFIndexNext.setVisibility(View.INVISIBLE);
+                    btnFIndexPrev.setVisibility(View.VISIBLE);
+                    txtFIndexClass.setText("Store");
+                    fromWhere = "Store";
+                    level = 9;
+                    freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                    if (Reusable_Functions.chkStatus(context)) {
+                        Reusable_Functions.hDialog();
+                        Reusable_Functions.sDialog(context, "Loading data...");
+                        processBar.setVisibility(View.GONE);
+                        offsetvalue = 0;
+                        limit = 100;
+                        count = 0;
+                        fIndexPlanDept = " ";
+                        fIndexCategory = " ";
+                        fIndexPlanClass = " ";
+                        fIndexBrand = " ";
+                        requestFreshnessIndexDetails();
+                    } else {
+                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
 
@@ -1935,180 +1942,170 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
                                     if (position < freshnessIndexDetailsArrayList.size()) {
                                         // TestItem();
-                                        switch (txtFIndexClass.getText().toString()) {
 
-                                            case "Region":
-                                                btnFIndexPrev.setVisibility(View.VISIBLE);
-                                                btnFIndexNext.setVisibility(View.INVISIBLE);
-                                                txtFIndexClass.setText("Store");
-                                                FreshnessIndexValue = ""; // clear text for hierarchy
-                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
-                                                fromWhere = "Store";
-                                                level = 9;
+                                        if(txtFIndexClass.getText().toString().equals("Region")){
+                                            btnFIndexPrev.setVisibility(View.VISIBLE);
+                                            btnFIndexNext.setVisibility(View.INVISIBLE);
+                                            txtFIndexClass.setText("Store");
+                                            FreshnessIndexValue = ""; // clear text for hierarchy
+                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
+                                            fromWhere = "Store";
+                                            level = 9;
 
-                                                if (!freshnessIndex_ClickedVal.equals("All")) {
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&regionDescription=" + freshnessIndex_ClickedVal;
-                                                } else {
-                                                    header_value = "";
+                                            if (!freshnessIndex_ClickedVal.equals("All")) {
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                header_value = "&regionDescription=" + freshnessIndex_ClickedVal;
+                                            } else {
+                                                header_value = "";
+                                            }
+
+                                            if (Reusable_Functions.chkStatus(context)) {
+                                                if (postRequest != null) {
+                                                    postRequest.cancel();
                                                 }
-
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    processBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    freshnessIndexDetailsArrayList.clear();
-                                                    request_FreshnessIndex_ProductAndLocation(freshnessIndex_ClickedVal);
-                                                    fIndexregion = freshnessIndex_ClickedVal;
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                    Reusable_Functions.hDialog();
-                                                }
-
-                                                break;
-
-
-                                            case "Department":
-                                                btnFIndexPrev.setVisibility(View.VISIBLE);
-                                                txtFIndexClass.setText("Subdept");
-                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
-                                                fromWhere = "Subdept";
-                                                level = 2;
-
-                                                if (!freshnessIndex_ClickedVal.equals("All")) {
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&department=" + freshnessIndex_ClickedVal;
-                                                } else {
-                                                    header_value = "";
-                                                }
-
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    processBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    freshnessIndexDetailsArrayList.clear();
-                                                    request_FreshnessIndex_CategoryList(freshnessIndex_ClickedVal);
-                                                    fIndexPlanDept = freshnessIndex_ClickedVal;
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                    Reusable_Functions.hDialog();
-                                                }
-
-                                                break;
-
-                                            case "Subdept":
-                                                txtFIndexClass.setText("Class");
-                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
-                                                fromWhere = "Class";
-                                                level = 3;
-                                                if (!freshnessIndex_ClickedVal.equals("All")) {
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&category=" + freshnessIndex_ClickedVal;
-                                                } else {
-                                                    header_value = "";
-                                                }
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    processBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    freshnessIndexDetailsArrayList.clear();
-                                                    fIndexCategory = freshnessIndex_ClickedVal;
-                                                    request_FreshnessIndex_PlanClassList(fIndexPlanDept, fIndexCategory);
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                    Reusable_Functions.hDialog();
-                                                }
-                                                break;
-
-                                            case "Class":
-                                                txtFIndexClass.setText("Subclass");
-                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
-                                                fromWhere = "Subclass";
-                                                level = 4;
-                                                if (!freshnessIndex_ClickedVal.equals("All")) {
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&class=" + freshnessIndex_ClickedVal;
-                                                } else {
-                                                    header_value = "";
-                                                }
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    processBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    freshnessIndexDetailsArrayList.clear();
-                                                    fIndexPlanClass = freshnessIndex_ClickedVal;
-                                                    request_FreshnessIndex_BrandList(fIndexPlanDept, fIndexCategory, fIndexPlanClass);
-
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                    Reusable_Functions.hDialog();
-                                                }
-                                                break;
-
-
-                                            case "Subclass":
-                                                btnFIndexNext.setVisibility(View.INVISIBLE);
-                                                txtFIndexClass.setText("MC");
-                                                freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
-                                                fromWhere = "MC";
-                                                level = 5;
-                                                if (!freshnessIndex_ClickedVal.equals("All")) {
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
-                                                    freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&brand=" + freshnessIndex_ClickedVal;
-                                                } else {
-                                                    header_value = "";
-                                                }
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (postRequest != null) {
-                                                        postRequest.cancel();
-                                                    }
-                                                    Reusable_Functions.sDialog(context, "Loading data...");
-                                                    processBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    freshnessIndexDetailsArrayList.clear();
-                                                    fIndexBrand = freshnessIndex_ClickedVal;
-                                                    request_FreshnessIndex_BrandPlanList(fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand);
-
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                    Reusable_Functions.hDialog();
-                                                }
-                                                break;
-
-                                            default:
+                                                Reusable_Functions.sDialog(context, "Loading data...");
+                                                processBar.setVisibility(View.GONE);
+                                                offsetvalue = 0;
+                                                limit = 100;
+                                                count = 0;
+                                                freshnessIndexDetailsArrayList.clear();
+                                                request_FreshnessIndex_ProductAndLocation(freshnessIndex_ClickedVal);
+                                                fIndexregion = freshnessIndex_ClickedVal;
+                                            } else {
+                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                                 Reusable_Functions.hDialog();
-                                                Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
-                                                OnItemClick = false;
-                                                break;
-
+                                            }
                                         }
+                                        else if(txtFIndexClass.getText().toString().equals(hierarchyList[0])){
+                                            btnFIndexPrev.setVisibility(View.VISIBLE);
+                                            txtFIndexClass.setText(hierarchyList[1]);
+                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
+                                            fromWhere = hierarchyList[1];
+                                            level = 2;
+
+                                            if (!freshnessIndex_ClickedVal.equals("All")) {
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                header_value = "&department=" + freshnessIndex_ClickedVal;
+                                            } else {
+                                                header_value = "";
+                                            }
+
+                                            if (Reusable_Functions.chkStatus(context)) {
+                                                if (postRequest != null) {
+                                                    postRequest.cancel();
+                                                }
+                                                Reusable_Functions.sDialog(context, "Loading data...");
+                                                processBar.setVisibility(View.GONE);
+                                                offsetvalue = 0;
+                                                limit = 100;
+                                                count = 0;
+                                                freshnessIndexDetailsArrayList.clear();
+                                                request_FreshnessIndex_CategoryList(freshnessIndex_ClickedVal);
+                                                fIndexPlanDept = freshnessIndex_ClickedVal;
+                                            } else {
+                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                Reusable_Functions.hDialog();
+                                            }
+                                        }
+                                        else if(txtFIndexClass.getText().toString().equals(hierarchyList[1])){
+                                            txtFIndexClass.setText(hierarchyList[2]);
+                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
+                                            fromWhere = hierarchyList[2];
+                                            level = 3;
+                                            if (!freshnessIndex_ClickedVal.equals("All")) {
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                header_value = "&category=" + freshnessIndex_ClickedVal;
+                                            } else {
+                                                header_value = "";
+                                            }
+                                            if (Reusable_Functions.chkStatus(context)) {
+                                                if (postRequest != null) {
+                                                    postRequest.cancel();
+                                                }
+                                                Reusable_Functions.sDialog(context, "Loading data...");
+                                                processBar.setVisibility(View.GONE);
+                                                offsetvalue = 0;
+                                                limit = 100;
+                                                count = 0;
+                                                freshnessIndexDetailsArrayList.clear();
+                                                fIndexCategory = freshnessIndex_ClickedVal;
+                                                request_FreshnessIndex_PlanClassList(fIndexPlanDept, fIndexCategory);
+                                            } else {
+                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                Reusable_Functions.hDialog();
+                                            }
+                                        }
+                                        else if(txtFIndexClass.getText().toString().equals(hierarchyList[2])){
+                                            txtFIndexClass.setText(hierarchyList[3]);
+                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
+                                            fromWhere = hierarchyList[3];
+                                            level = 4;
+                                            if (!freshnessIndex_ClickedVal.equals("All")) {
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                header_value = "&class=" + freshnessIndex_ClickedVal;
+                                            } else {
+                                                header_value = "";
+                                            }
+                                            if (Reusable_Functions.chkStatus(context)) {
+                                                if (postRequest != null) {
+                                                    postRequest.cancel();
+                                                }
+                                                Reusable_Functions.sDialog(context, "Loading data...");
+                                                processBar.setVisibility(View.GONE);
+                                                offsetvalue = 0;
+                                                limit = 100;
+                                                count = 0;
+                                                freshnessIndexDetailsArrayList.clear();
+                                                fIndexPlanClass = freshnessIndex_ClickedVal;
+                                                request_FreshnessIndex_BrandList(fIndexPlanDept, fIndexCategory, fIndexPlanClass);
+
+                                            } else {
+                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                Reusable_Functions.hDialog();
+                                            }
+                                        }
+                                        else if(txtFIndexClass.getText().toString().equals(hierarchyList[3])){
+                                            btnFIndexNext.setVisibility(View.INVISIBLE);
+                                            txtFIndexClass.setText(hierarchyList[4]);
+                                            freshnessIndex_ClickedVal = freshnessIndexDetailsArrayList.get(position).getLevel();
+                                            fromWhere = hierarchyList[4];
+                                            level = 5;
+                                            if (!freshnessIndex_ClickedVal.equals("All")) {
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
+                                                freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
+                                                header_value = "&brand=" + freshnessIndex_ClickedVal;
+                                            } else {
+                                                header_value = "";
+                                            }
+                                            if (Reusable_Functions.chkStatus(context)) {
+                                                if (postRequest != null) {
+                                                    postRequest.cancel();
+                                                }
+                                                Reusable_Functions.sDialog(context, "Loading data...");
+                                                processBar.setVisibility(View.GONE);
+                                                offsetvalue = 0;
+                                                limit = 100;
+                                                count = 0;
+                                                freshnessIndexDetailsArrayList.clear();
+                                                fIndexBrand = freshnessIndex_ClickedVal;
+                                                request_FreshnessIndex_BrandPlanList(fIndexPlanDept, fIndexCategory, fIndexPlanClass, fIndexBrand);
+
+                                            } else {
+                                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                Reusable_Functions.hDialog();
+                                            }
+                                        }
+
+                                        else {
+                                            Reusable_Functions.hDialog();
+                                            Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                            OnItemClick = false;
+                                        }
+
                                     } else {
                                         Reusable_Functions.hDialog();
                                     }
