@@ -149,8 +149,8 @@ public class Style_Fragment extends Fragment {
         Reusable_Functions.sDialog(context, "Loading Sizes data");
         String url;
         if(check.equals("barcode")) {
-//        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOptionCode.replace(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
-            url = ConstsCore.web_url + "/v1/display/sizes/" + userId + "?eanNumber=" + content+"&offset=" + offsetvalue + "&limit=" + limit1+"&storeCode="+storeCode;
+
+            url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?eanNumber=" + content+ "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
 
         }else{
             if(articleOptionCode == null)
@@ -304,7 +304,7 @@ public class Style_Fragment extends Fragment {
         String url;
         if(check.equals("barcode"))
         {
-            url = ConstsCore.web_url + "/v1/display/styles/" + userId + "?eanNumber=" + content+"&storeCode="+storeCode;
+            url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?eanNumber=" + content+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
 
         }
         else
@@ -380,6 +380,7 @@ public class Style_Fragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
+
                     }
                 }
 
