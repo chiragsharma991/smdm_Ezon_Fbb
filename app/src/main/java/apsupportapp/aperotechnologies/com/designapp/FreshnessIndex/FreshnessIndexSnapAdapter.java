@@ -29,7 +29,6 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
 
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
-    private  String[] hierarchyList;
     private  String TAG;
     private ArrayList<mpm_model> freshnessIndexDetails_ez_arrayList;
     private ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList;
@@ -49,14 +48,13 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
         }
     };
 
-    public FreshnessIndexSnapAdapter(ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex,String TAG , String[] hierarchyList)
+    public FreshnessIndexSnapAdapter(ArrayList<FreshnessIndexDetails> freshnessIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex,String TAG)
     {
         this.context = context;
         this.freshnessIndexDetailsArrayList = freshnessIndexDetailsArrayList;
         this.fromWhere = fromWhere;
         this.listViewFIndex = listViewFIndex;
         this.TAG = TAG;
-        this.hierarchyList = hierarchyList;
         gson = new Gson();
     }
 
@@ -133,7 +131,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                 double stkGitQty = Double.parseDouble(String.format("%.1f", freshnessIndexDetails.getStkGitQty()));
 
 
-                if (fromWhere.equals(hierarchyList[0]))
+                if (fromWhere.equals("Department"))
                 {
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanDept());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
@@ -141,14 +139,14 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(stkGitQty));
 
 
-                } else if (fromWhere.equals(hierarchyList[1])) {
+                } else if (fromWhere.equals("Category")) {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanCategory());
                     ((FreshnessHolder) viewHolder).txtfindexSOH.setText("" + formatter.format(freshnessIndexDetails.getStkOnhandQty()));
                     ((FreshnessHolder) viewHolder).txtfindexSOH_U.setText(" " + String.format("%.1f", freshnessIndexDetails.getStkOnhandQtyCount()));
                     ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(stkGitQty));
 
-                } else if (fromWhere.equals(hierarchyList[2]))
+                } else if (fromWhere.equals("Class"))
                 {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getPlanClass());
@@ -158,7 +156,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
 
 
                 }
-                else if (fromWhere.equals(hierarchyList[3]))
+                else if (fromWhere.equals("Brand"))
                 {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandName());
@@ -168,7 +166,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
 
 
                 }
-                else if (fromWhere.equals(hierarchyList[4]))
+                else if (fromWhere.equals("Brand Class"))
                 {
 
                     ((FreshnessHolder) viewHolder).txtfindexClass.setText(freshnessIndexDetails.getBrandplanClass());

@@ -246,11 +246,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
-                                                        header_value = "&department=" + txtSalesClickedValue;
+                                                        if(!header_value.contains("&department=" + txtSalesClickedValue))
+                                                        {
+                                                            header_value = "&department=" + txtSalesClickedValue;
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        header_value = "";
+//                                                        header_value = "";
                                                     }
                                                     if (lldots != null) {
                                                         lldots.removeAllViews();
@@ -282,11 +285,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
-                                                        header_value = "&category=" + txtSalesClickedValue;
+                                                        if(!header_value.contains("&category=" + txtSalesClickedValue)) {
+                                                            header_value += "&category=" + txtSalesClickedValue;
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        header_value = "";
+//                                                        header_value = "";
                                                     }
                                                     fromWhere = "Class";
                                                     if (lldots != null) {
@@ -319,11 +324,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
-                                                        header_value = "&class=" + txtSalesClickedValue;
+                                                        if(!header_value.contains("&class=" + txtSalesClickedValue))
+                                                        {
+                                                            header_value += "&class=" + txtSalesClickedValue;
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        header_value = "";
+//                                                        header_value = "";
                                                     }
                                                     fromWhere = "Brand";
                                                     if (lldots != null) {
@@ -357,11 +365,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
-                                                        header_value = "&brand=" + txtSalesClickedValue;
+                                                        if(!header_value.contains("&brand=" + txtSalesClickedValue)) {
+                                                            header_value += "&brand=" + txtSalesClickedValue;
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        header_value = "";
+//                                                        header_value = "";
                                                     }
                                                     fromWhere = "Brand Class";
                                                     if (lldots != null) {
@@ -2707,7 +2717,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         limit = 100;
                         count = 0;
                         val = "";
-                        header_value="";
+//                        header_value="";
 //                        if (getIntent().getStringExtra("selectedStringVal") == null)
 //                        {
 //                            filter_toggleClick = false;

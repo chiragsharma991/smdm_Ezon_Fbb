@@ -375,7 +375,7 @@ public class SwitchingActivity extends AppCompatActivity
                     }
                     break;
                    //Internal/External Audit
-                case "102":
+             /*   case "102":
 
                     Intent fgstore = new Intent(context, FGStoreActivity.class);
                     startActivity(fgstore);
@@ -411,7 +411,7 @@ public class SwitchingActivity extends AppCompatActivity
                 case "110":
                     Intent reportext = new Intent(context, ReportsExtActivity.class);
                     startActivity(reportext);
-                    break;
+                    break; */
 
 
             }
@@ -683,20 +683,20 @@ public class SwitchingActivity extends AppCompatActivity
 
                 break;
 
-            case 101 :
-
-
-                apps.add(new App("FG Store", R.mipmap.freshnessindex,"102"));
-                apps.add(new App("Competitor Store", R.mipmap.bestworstperformers,"103"));
-                apps.add(new App("External Auditor Review", R.mipmap.bestworstperformers,"104"));
-                apps.add(new App("History", R.mipmap.bestworstperformers,"105"));
-                apps.add(new App("Reports", R.mipmap.bestworstperformers,"106"));
-                apps.add(new App("FG Store Ext", R.mipmap.bestworstperformers,"107"));
-                apps.add(new App("Competitor Store Ext", R.mipmap.bestworstperformers,"108"));
-                apps.add(new App("History Ext", R.mipmap.bestworstperformers,"109"));
-                apps.add(new App("Reports Ext", R.mipmap.bestworstperformers,"110"));
-
-                break;
+//            case 101 :
+//
+//
+//                apps.add(new App("FG Store", R.mipmap.freshnessindex,"102"));
+//                apps.add(new App("Competitor Store", R.mipmap.bestworstperformers,"103"));
+//                apps.add(new App("External Auditor Review", R.mipmap.bestworstperformers,"104"));
+//                apps.add(new App("History", R.mipmap.bestworstperformers,"105"));
+//                apps.add(new App("Reports", R.mipmap.bestworstperformers,"106"));
+//                apps.add(new App("FG Store Ext", R.mipmap.bestworstperformers,"107"));
+//                apps.add(new App("Competitor Store Ext", R.mipmap.bestworstperformers,"108"));
+//                apps.add(new App("History Ext", R.mipmap.bestworstperformers,"109"));
+//                apps.add(new App("Reports Ext", R.mipmap.bestworstperformers,"110"));
+//
+//                break;
 
             default:
                 Log.e("TAG", "not found: Activity");
