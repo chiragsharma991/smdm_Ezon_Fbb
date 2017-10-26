@@ -25,7 +25,6 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
     private final ArrayList<OptionEfficiencyDetails> OptionIndexDetailsArrayList;
-    private final String[] hierarchyList;
     RecyclerView listViewFIndex;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 2;
@@ -41,13 +40,12 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     };
 
-    public OptionIndexSnapAdapter(ArrayList<OptionEfficiencyDetails> OptionIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex,String[] hierarchyList) {
+    public OptionIndexSnapAdapter(ArrayList<OptionEfficiencyDetails> OptionIndexDetailsArrayList, Context context, String fromWhere, RecyclerView listViewFIndex) {
 
         this.context = context;
         this.OptionIndexDetailsArrayList = OptionIndexDetailsArrayList;
         this.fromWhere = fromWhere;
         this.listViewFIndex = listViewFIndex;
-        this.hierarchyList = hierarchyList;
 
         gson = new Gson();
     }
@@ -101,55 +99,7 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 OptionEfficiencyDetails optionEfficiencyDetails = OptionIndexDetailsArrayList.get(position);
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
-                if(fromWhere.toString().equals(hierarchyList[0])){
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanDept());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
-
-                }
-                else if(fromWhere.toString().equals(hierarchyList[1])){
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanCategory());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
-
-                }
-                else if(fromWhere.toString().equals(hierarchyList[2])){
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanClass());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
-
-                }
-                else if(fromWhere.toString().equals(hierarchyList[3])){
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandName());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
-
-                }
-                else if(fromWhere.toString().equals(hierarchyList[4])){
-
-                    ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getBrandplanClass());
-                    ((OptionHolder) viewHolder).oe_txtOption.setText("" + formatter.format(optionEfficiencyDetails.getOptionCount()));
-                    ((OptionHolder) viewHolder).oe_txtOption_Perc.setText("" + String.format("%.1f", optionEfficiencyDetails.getFullSizeCount()));
-                    ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
-                    ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
-
-                }
-
-
-
-              /*  switch (fromWhere) {
+                switch (fromWhere) {
                     case "Department":
 
                         ((OptionHolder) viewHolder).oe_txtPlanClass.setText(optionEfficiencyDetails.getPlanDept());
@@ -197,7 +147,7 @@ public class OptionIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         ((OptionHolder) viewHolder).oe_txtSOH_U.setText("" + formatter.format(Math.round(optionEfficiencyDetails.getStkOnhandQty())));
                         ((OptionHolder) viewHolder).oe_txtSOH_Prec.setText(" " + String.format("%.1f", optionEfficiencyDetails.getSohCountFullSize()));
                         break;
-                }*/
+                }
             }
         }
 

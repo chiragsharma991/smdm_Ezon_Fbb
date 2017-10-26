@@ -3099,7 +3099,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
                     listViewSalesPvA.removeAllViews();
                     llpvahierarchy.setVisibility(View.GONE);
-                    header_value= "";
+//                    header_value= "";
 
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();

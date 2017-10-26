@@ -57,6 +57,7 @@ import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPos
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisSnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesPagerAdapter;
+import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 import apsupportapp.aperotechnologies.com.designapp.model.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisViewPagerValue;
@@ -70,7 +71,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     SalesAnalysisListDisplay salesAnalysisClass, ez_sales_detail_model;
     SalesAnalysisSnapAdapter salesadapter;
     EzoneSalesAdapter ez_sales_adapter;
-    public
     SalesAnalysisViewPagerValue salesAnalysis, ez_sales_header_model;
     SalesPagerAdapter pageradapter;
     EzoneSalesPagerAdapter ez_sales_pager_adapter;
@@ -85,8 +85,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     RecyclerView listView_SalesAnalysis;
     SharedPreferences sharedPreferences;
     String userId, bearertoken, geoLeveLDesc, storeDescription, geoLevel2Code, lobId, selectedString;
-
-
     String saleFirstVisibleItem, fromWhere = "Department", val, txtSalesClickedValue, all_from_val;
     TextView txtheaderplanclass, txthDeptName;
 
@@ -101,7 +99,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     // Ezone Elements Declaration
     public static String ez_segment_val = "LD";
     SegmentedGroup ez_segmentgrp;
-    RelativeLayout rel_ez_back, rel_ez_sort, rel_ez_filter, rel_ez_next, rel_ez_prev, rel_ez_viewBy, relStoreLayout;
+    RelativeLayout rel_ez_back, rel_ez_sort, rel_ez_filter, rel_ez_next, rel_ez_prev, rel_ez_viewBy, relStoreLayout, ezonesales_btnReset;
     RadioButton btn_ez_LD, btn_ez_WTD, btn_ez_MTD, btn_ez_YTD, rb_ez_viewBy_ProductChk, rb_ez_viewBy_LocatnChk;
     TextView txt_ez_header, ez_txt_hierarchy_nm;
     RecyclerView recyclevw_ez_sales;
@@ -123,6 +121,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ezone_sales);
+        getSupportActionBar().hide();
         context = this;
         Ezone_SalesAnalysisActivity = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -159,8 +159,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         }
 
         //when geoLevelDesc is Ezone
-        setContentView(R.layout.activity_ezone_sales);
-        getSupportActionBar().hide();
+
         initialize_ez_ui();
         filterSelectedString = getIntent().getStringExtra("selectedStringVal");
         filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
@@ -675,6 +674,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         rel_ez_back = (RelativeLayout) findViewById(R.id.rel_ez_back);
         rel_ez_filter = (RelativeLayout) findViewById(R.id.rel_ez_filter);
         rel_ez_sort = (RelativeLayout) findViewById(R.id.rel_ez_sort);
+        ezonesales_btnReset = (RelativeLayout) findViewById(R.id.ezonesales_btnReset);
         lin_ez_Product = (LinearLayout) findViewById(R.id.lin_ez_Product);
         lin_ez_Location = (LinearLayout) findViewById(R.id.lin_ez_location);
         ez_tabView = (TabLayout) findViewById(R.id.tabview_ezone_sales);
@@ -703,6 +703,51 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         rel_ez_viewBy.setOnClickListener(this);
         lin_ez_Location.setOnClickListener(this);
         lin_ez_Product.setOnClickListener(this);
+
+        ezonesales_btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
+                salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
+                analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
+                header_value = "";
+                ez_fromWhere = hierarchyList[0];
+                ez_firstVisible_no = 0;
+                ez_sFirstPosVal = 0;
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    ez_progessBar.setVisibility(View.GONE);
+                    ez_linear_hierarchy.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    ezone_level = 1;
+                    header_value = "";
+                    ez_txt_hierarchy_nm.setText(" ");
+                    rel_ez_prev.setVisibility(View.INVISIBLE);
+                    rel_ez_next.setVisibility(View.VISIBLE);
+                    txt_ez_header.setText(hierarchyList[0]);
+                    ez_segment_val = "LD";
+                    ez_tabView.getTabAt(0).select();
+                    ez_filter_toggleClick = false;
+                   // retainEzoneSegVal();
+                    requestEzoneSalesDetailAPI();
+//                      retainEzoneSegVal();
+//                    requestSalesViewPagerValueAPI();
+                   // requestEzoneSalesHeaderAPI();
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    ez_progessBar.setVisibility(View.GONE);
+                    Reusable_Functions.hDialog();
+                }
+
+
+            }
+        });
 
     }
 
@@ -1902,7 +1947,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 onClickFlag = false;
-                                progressBar1.setVisibility(View.GONE);
+                                ez_progessBar.setVisibility(View.GONE);
                             } else if (response.length() == limit) {
                                 for (int i = 0; i < response.length(); i++) {
 
@@ -1927,12 +1972,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             pageradapter.notifyDataSetChanged();
                             onClickFlag = false;
                             Reusable_Functions.hDialog();
-                            progressBar1.setVisibility(View.GONE);
+                            ez_progessBar.setVisibility(View.GONE);
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             onClickFlag = false;
-                            progressBar1.setVisibility(View.GONE);
+                            ez_progessBar.setVisibility(View.GONE);
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
@@ -1943,7 +1988,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         onClickFlag = false;
-                        progressBar1.setVisibility(View.GONE);
+                        ez_progessBar.setVisibility(View.GONE);
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
@@ -2262,8 +2307,9 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 //                Log.e("Ezone detail api response :", "" + response);
                 try {
                     int i;
+                    Reusable_Functions.hDialog();
+
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
-                        Reusable_Functions.hDialog();
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         ezone_onClickflg = false;
                         ez_progessBar.setVisibility(View.GONE);
@@ -3195,14 +3241,20 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
     // Api for display All value - Api SalesheaderEz
     private void requestEzoneSalesHeaderAPI() {
+        Log.e("here header "," ");
+
         String url="";
         if (!header_value.equals(""))
         {
-           url  = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + ez_segment_val  + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + header_value;
+            Log.e("here header if "," ");
+
+            url  = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + ez_segment_val  + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + header_value;
 
         }
         else
         {
+            Log.e("here header else "," ");
+
             url  = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + ez_segment_val  + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
         Log.e("Ezone Header url :", "" + url);
@@ -3285,7 +3337,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
     // Api for change view pager value on scroll - Api SalesDetailEz
     private void requestEzoneSalesPagerOnScrollAPI() {
-
+        Log.e("here "," ");
         String url = " ";
         ez_sale_first_item = ez_sale_first_item.replace("%", "%25");
         ez_sale_first_item = ez_sale_first_item.replace(" ", "%20").replace("&", "%26");

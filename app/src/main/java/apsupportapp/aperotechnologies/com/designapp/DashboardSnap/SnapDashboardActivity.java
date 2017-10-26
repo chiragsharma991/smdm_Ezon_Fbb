@@ -658,8 +658,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             }
 
-                List<App> apps = getProduct(101, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
+//                List<App> apps = getProduct(101, kpiIdArray);
+//                snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
 
 
 
