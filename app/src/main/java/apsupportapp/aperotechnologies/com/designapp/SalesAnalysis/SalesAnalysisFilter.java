@@ -1016,8 +1016,10 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
         queue.add(postRequest);
     }
     private void requestStore(int offsetval, int limitval) {
+
+
         String store_url = "";
-        store_url = ConstsCore.web_url + "/v1/display/storehierarchyEZNew/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + an_level_filter + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        store_url = ConstsCore.web_url + "/v1/display/storeselection/" + userId  + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         Log.e("store url :", "" + store_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, store_url,
                 new Response.Listener<JSONArray>() {
@@ -1030,11 +1032,24 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                                 Reusable_Functions.hDialog();
                                 rel_an_process_filter.setVisibility(View.GONE);
                                 Toast.makeText(SalesAnalysisFilter.this, "no data found in store ", Toast.LENGTH_LONG).show();
-                            } else if (response.length() == limit) {
+
+                            }
+
+                            else {
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject productName1 = response.getJSONObject(i);
+                                    String store = productName1.getString("storeCode");
+                                    an_storeList.add(store);
+                                }
+                                rel_an_process_filter.setVisibility(View.GONE);
+                            }
+                            
+
+                         /*   else if (response.length() == limit) {
                                 Reusable_Functions.hDialog();
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
-                                    String store = productName1.getString("descEz");
+                                    String store = productName1.getString("storeCode");
                                     an_storeList.add(store);
                                 }
                                 offset = (limit * count) + limit;
@@ -1043,12 +1058,13 @@ public class SalesAnalysisFilter extends AppCompatActivity implements View.OnCli
                             } else if (response.length() < limit) {
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
-                                    String store = productName1.getString("descEz");
+                                    String store = productName1.getString("storeCode");
                                     an_storeList.add(store);
                                 }
                                 rel_an_process_filter.setVisibility(View.GONE);
 
-                            }
+                            }*/
+
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             rel_an_process_filter.setVisibility(View.GONE);
