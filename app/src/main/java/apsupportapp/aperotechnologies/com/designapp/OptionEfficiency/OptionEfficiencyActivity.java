@@ -519,7 +519,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
                                     if(!header_value.contains("&department=" + oe_ClickedVal))
                                     {
-                                        header_value = "&department=" + oe_ClickedVal;
+                                        header_value += "&department=" + oe_ClickedVal;
                                     }
                                 }
                                 else

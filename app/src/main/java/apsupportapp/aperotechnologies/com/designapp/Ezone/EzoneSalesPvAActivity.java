@@ -1558,7 +1558,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getLevel();
                                 if(!header_value.contains("&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26"))) {
 
-                                    header_value = "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                    header_value += "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
                                 }
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 if (pvaFirstVisibleItem.equals("All")) {
@@ -2513,7 +2513,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                         }
                     } else {
                         from_filter = true;
-                        requestSalesViewPagerValueAPI();
+                        //requestSalesViewPagerValueAPI();
+                        requestHeaderAPI("filter");
                     }
 
 
@@ -2552,7 +2553,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                         }
                     } else {
                         from_filter = true;
-                        requestSalesViewPagerValueAPI();
+                        //requestSalesViewPagerValueAPI();
+                        requestHeaderAPI("filter");
                     }
 
 
