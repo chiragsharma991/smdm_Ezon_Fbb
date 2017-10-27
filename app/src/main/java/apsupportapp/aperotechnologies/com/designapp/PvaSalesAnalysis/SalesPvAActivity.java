@@ -2112,8 +2112,10 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                             count = 0;
 //
                             pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanCategory();
+                            if(!header_value.contains("&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26"))) {
 
-                            header_value = "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                header_value += "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
+                            }
                             drill_down_val = "";
                             drill_down_val = "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26");
                             if (pvaFirstVisibleItem.equals("All")) {
@@ -2229,8 +2231,10 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
 //
 //                                    } else {
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanClass();
+                                if(!header_value.contains("&department=" + category.replaceAll(" ", "%20").replaceAll("&", "%26"))) {
 
-                                header_value += "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                    header_value += "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                }
                                 drill_down_val = drill_down_val + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26");
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 if (pvaFirstVisibleItem.equals("All")) {
@@ -2345,8 +2349,10 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 salesPvAAnalysisWeekArrayList.clear();
 
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandName();                                 pvaFirstVisibleItem = pvaFirstVisibleItem.replace("%", "%25");
+                                if(!header_value.contains("&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26"))) {
 
-                                header_value += "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                    header_value += "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                }
                                 drill_down_val +=  "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26");
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 if (pvaFirstVisibleItem.equals("All")) {
@@ -2460,8 +2466,10 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                                 salesPvAAnalysisWeekArrayList.clear();
 
                                 pvaFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandplanClass();
+                                if(!header_value.contains("&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26"))) {
 
-                                header_value += "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                    header_value += "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26");
+                                }
                                 drill_down_val += "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26");
                                 salesPvAAnalysisWeekArrayList = new ArrayList<SalesPvAAnalysisWeek>();
                                 if (pvaFirstVisibleItem.equals("All")) {
