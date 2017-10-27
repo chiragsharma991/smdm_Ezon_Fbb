@@ -177,7 +177,6 @@ public class RunningPromoDetail extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + bearertoken);
-                Log.e("params ", " " + params);
                 return params;
             }
         };

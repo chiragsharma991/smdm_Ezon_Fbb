@@ -115,7 +115,6 @@ public class CompetitorStoreDataActivity extends AppCompatActivity {
         LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
         CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
         customSeekBar.addSeekBar(mSeekLin);
-        Log.e("=== "," "+overall_progress);
 
     }
 
@@ -145,7 +144,6 @@ public class CompetitorStoreDataActivity extends AppCompatActivity {
         try {
             m_jArry = new JSONArray(loadJSONFromAsset(json_file));
             JSONObject jsonObject;
-            Log.e("m_jArry.length() "," "+m_jArry.length());
 
             for (int i = 0; i < m_jArry.length(); i++)
             {

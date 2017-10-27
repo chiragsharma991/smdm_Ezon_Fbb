@@ -16,8 +16,6 @@ public class HourlyPerformence_Model extends CustomModel {
     double salesContr;
     double saleTotQty;
 
-
-
     public double getSaleNetVal() {
         return this.saleNetVal;
     }

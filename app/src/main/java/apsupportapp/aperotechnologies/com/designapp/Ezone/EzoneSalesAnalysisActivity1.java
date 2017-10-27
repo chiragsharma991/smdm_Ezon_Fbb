@@ -139,9 +139,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         hierarchyList = hierarchyLevels.split(",");
         for (int i = 0; i <hierarchyList.length ; i++) {
             hierarchyList[i]=hierarchyList[i].trim();
-            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
         }
-        Log.e("lobId ", " " + lobId);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -164,7 +162,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         filterSelectedString = getIntent().getStringExtra("selectedStringVal");
         filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
 
-        Log.e("filterSelectedString :", " " + filterSelectedString);
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.progressDialog = new ProgressDialog(context);
@@ -189,7 +186,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
             } else if (getIntent().getStringExtra("selectedStringVal") != null) {
                 header_value = getIntent().getStringExtra("selectedStringVal");
                 filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
-                Log.e("welcome----", "=======");
                 ez_filter_toggleClick = true;
                 retainEzoneSegVal();
                 requestEzoneFilterSelectedVal(header_value, filter_level);
@@ -204,9 +200,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
-                Log.e("on scroll ","");
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE  && !ezone_onClickflg) {
-                    Log.e("on scroll if","");
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
@@ -874,7 +868,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     limit = 100;
                     count = 0;
                     ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
-                    Log.e("TimeUP: ",""+ez_sFirstPosVal + ez_firstVisible_no );
 
                     if (ez_firstVisible_no != ez_sFirstPosVal) {
                         if (ez_postRequest != null) {
@@ -1939,7 +1932,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestSalesViewPagerValueAPI() {
         String url = " ";
         url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + ez_segment_val + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("Sales Analysis", "requestSalesViewPagerValueAPI: " + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2043,7 +2035,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + ez_segment_val + "&brand=" + planBrandNm + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
 
-        Log.e("Sales Analysis", "requestSalesViewPagerValueAPI: " + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2118,11 +2109,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
     // APi to display view pager value on scroll
     private void requestSalesPagerOnScrollAPI() {
-//        if (saleFirstVisibleItem.equals("All")) {
-//            Log.e("welcome----", "");
-//            requestSalesViewPagerValueAPI();
-//            return;
-//        }
+
 
         String url = " ";
         saleFirstVisibleItem = saleFirstVisibleItem.replace("%", "%25");
@@ -2139,7 +2126,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
             url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + ez_segment_val + "&level=" + level + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-        Log.e("Sales Analysis", "requestSalesPagerOnScrollAPI: " + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2223,7 +2209,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         } else {
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + ez_segment_val + selectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-        Log.e("Sales Analysis", "requestSalesViewPagerValueAPI: " + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2301,7 +2286,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     // Api calling functionality for E-zone module...
     private void requestEzoneSalesDetailAPI() {
         String url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("Ezone Detail Url ", "" + url);
         //  String url £= ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
@@ -2373,7 +2357,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                         recyclevw_ez_sales.setOnFlingListener(null);
                         new GravitySnapHelper(48).attachToRecyclerView(recyclevw_ez_sales);
-                        Log.e("onResponse in detail: ", "" + ez_sales_detail_model.getPvaAchieved());
                         ez_sales_adapter = new EzoneSalesAdapter(ez_sales_detalis_array, context, ez_firstVisible_no, ez_fromWhere, recyclevw_ez_sales,hierarchyList);
                         recyclevw_ez_sales.setAdapter(ez_sales_adapter);
 
@@ -2475,7 +2458,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneFilterSelectedVal(final String filterSelectedString, final int filter_level) {
 
         String ezone_filter_url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + filter_level + filterSelectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("ezone filter url :", "" + ezone_filter_url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ezone_filter_url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2685,12 +2667,10 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesCategoryList(final String ez_sclickedVal) {
         String ez_scategory_listurl;
         ez_scategory_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&department=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("Ezone Category list url :", "" + ez_scategory_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_scategory_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("Ezone category a[pi response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -2802,12 +2782,10 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesPlanClassList(final String ez_sclickedVal) {
         String ez_splanclass_listurl;
         ez_splanclass_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&category=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("Ezone planclass url :", "" + ez_splanclass_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_splanclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("Ezone planclass response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -2916,12 +2894,10 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesBrandList(final String ez_sclickedVal) {
         String ez_sbrand_listurl;
         ez_sbrand_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&class=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("Ezone Brand List :", "" + ez_sbrand_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sbrand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("Ezone Brand List response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -3028,12 +3004,10 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesBrandPlanList(final String ez_sclickedVal) {
         String ez_sbrandplan_listurl;
         ez_sbrandplan_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brand=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("Ezone BrandPlan List :", "" + ez_sbrandplan_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sbrandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("Ezone BrandPlan List response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -3130,12 +3104,10 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesStoreList(final String ez_sclickedVal) {
         String ez_sstore_listurl;
         ez_sstore_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&regionDescription=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("Ezone Store List :", "" + ez_sstore_listurl);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sstore_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("Ezone BrandPlan List response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -3243,28 +3215,23 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
     // Api for display All value - Api SalesheaderEz
     private void requestEzoneSalesHeaderAPI() {
-        Log.e("here header "," ");
 
         String url="";
         if (!header_value.equals(""))
         {
-            Log.e("here header if "," ");
 
             url  = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + ez_segment_val  + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + header_value;
 
         }
         else
         {
-            Log.e("here header else "," ");
 
             url  = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + ez_segment_val  + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-        Log.e("Ezone Header url :", "" + url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("Ezone Header response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -3277,7 +3244,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                     ez_sales_header_model = gson.fromJson(response.get(i).toString(), SalesAnalysisViewPagerValue.class);
                                     ez_sales_header_array.add(ez_sales_header_model);
                                 }
-                            Log.e("onResponse in header: ", "" + ez_sales_header_model.getPvaAchieved());
 
                             ez_sales_pager_adapter = new EzoneSalesPagerAdapter(context, ez_sales_header_array, ez_firstVisible_no, ez_viewpager, ez_linear_dots, ez_sales_adapter, recyclevw_ez_sales, ez_sales_detalis_array, ez_fromWhere, ez_sales_pager_adapter);
                             ez_viewpager.setAdapter(ez_sales_pager_adapter);
@@ -3339,7 +3305,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
     // Api for change view pager value on scroll - Api SalesDetailEz
     private void requestEzoneSalesPagerOnScrollAPI() {
-        Log.e("here "," ");
         String url = " ";
         ez_sale_first_item = ez_sale_first_item.replace("%", "%25");
         ez_sale_first_item = ez_sale_first_item.replace(" ", "%20").replace("&", "%26");
@@ -3361,12 +3326,10 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         } else if (txt_ez_header.getText().toString().equals("Store")) {
             url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&storeCode=" + ez_sale_first_item.substring(0,4) + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-        Log.e("Ezone On Scroll Api :", "" + url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("Ezone On Scroll Response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -3448,7 +3411,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        Log.e("TAG", "onTabSelected: " + tab.getPosition() + filter_toggleClick);
+
         int checkedId = tab.getPosition();
 
 //            if (!ez_filter_toggleClick) {

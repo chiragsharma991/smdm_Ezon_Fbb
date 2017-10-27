@@ -119,7 +119,6 @@ public class InspectionHistoryActivity extends AppCompatActivity implements View
 
     private void requestInspectionSummary() {
         String url = ConstsCore.web_url + "/v1/display/storeinspectionsummary/" + userId + "?storeCode=" + store_Code + "&recache=" + recache;
-        Log.e("", "requestInspectionSummary: "+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

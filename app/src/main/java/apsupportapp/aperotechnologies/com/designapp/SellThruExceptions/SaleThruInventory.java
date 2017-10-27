@@ -194,7 +194,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
                     url = ConstsCore.web_url + "/v1/display/sellthruexceptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             }
-            Log.e("TAG", "requestSellThru: "+url );
 
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
@@ -865,7 +864,6 @@ public class SaleThruInventory extends AppCompatActivity implements View.OnClick
     public void onTabSelected(TabLayout.Tab tab) {
 
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: "+filter_toggleClick );
 
 //        if (filter_toggleClick == false) {
             switch (checkedId) {

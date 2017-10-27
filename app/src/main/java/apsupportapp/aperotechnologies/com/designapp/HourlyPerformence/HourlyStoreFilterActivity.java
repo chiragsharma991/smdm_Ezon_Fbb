@@ -138,7 +138,6 @@ public class HourlyStoreFilterActivity extends AppCompatActivity implements View
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(et_search.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
                 s = et_search.getText().toString();
-                Log.e("s :", "" + s);
                 hourlyLocationAdapter.filterData(s.toString());
 
             }
@@ -243,7 +242,6 @@ public class HourlyStoreFilterActivity extends AppCompatActivity implements View
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 //Send selected hierarchy level to selected activity
                 selectbuild();
-                Log.e("came here == "," " +getIntent().getStringExtra("checkfrom"));
                 if (getIntent().getStringExtra("checkfrom").equals("HourlyPerformance"))
                 {
                     intent = new Intent(HourlyStoreFilterActivity.this, HourlyPerformence.class);
@@ -274,7 +272,6 @@ public class HourlyStoreFilterActivity extends AppCompatActivity implements View
 
 
         if (HourlyLocationAdapter.hr_store_str.length() != 0) {
-            Log.e("came here 1","");
             String store = HourlyLocationAdapter.hr_store_str;//.substring(0,4);
             String Store;
             Store = "storeCode=" + store;
@@ -293,7 +290,6 @@ public class HourlyStoreFilterActivity extends AppCompatActivity implements View
         else
         {
             intent.putExtra("selectedStringVal", build.toString());
-            Log.e("TAG", "callback:  selectedStringVal" + build.toString());
 
         }
         startActivity(intent);
@@ -319,13 +315,11 @@ public class HourlyStoreFilterActivity extends AppCompatActivity implements View
 
         String store_url = "";
         store_url = ConstsCore.web_url + "/v1/display/storeselection/" + userId  + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("store url :", "" + store_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, store_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e("store response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();

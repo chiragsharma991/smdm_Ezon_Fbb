@@ -146,7 +146,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
  */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.e(TAG, "onCreate: SnapDashboardActivity");
         super.onCreate(savedInstanceState);
         context = this;
         statusbar();
@@ -161,9 +160,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
 
-        Log.e(TAG, "onCreate: hierarchyLevels" +hierarchyLevels +" kpi id"+gson.toJson(kpiIdArray));
-        Log.e(TAG, "userId :--" + userId);
-        Log.e(TAG, "pushtoken :--" + pushtoken.toString());
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -178,8 +174,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         initalise();
         eventUrlList = new ArrayList<>();
 
-
-        Log.e("harshada geoLeveLDesc", " " + geoLeveLDesc);
 
         /*if (geoLeveLDesc.equals("E ZONE")) {
             Log.e("TAG", "Ezone login");
@@ -196,7 +190,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         //-------------------------------------------------------------//
 
         else {*/
-        Log.e("TAG", "FBB login");
         loginFromFbb = true;
         _collectionitems = new ArrayList();
         arrayList = new ArrayList<>();
@@ -237,11 +230,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     protected void onResume() {
         super.onResume();
         String device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        Log.e(TAG, "onResume: device id: " + device_id + "  and token: " + FirebaseInstanceId.getInstance().getToken());
         if (!tokenProcess) {
             if (TokenRefresh.pushToken != null && !device_id.equals("") && device_id != null)
                 requestSubmitAPI(context, getObject());
-            Log.e(TAG, "onResume: !tokenProcess");
         }
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -252,7 +243,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.e(TAG, "onNewIntent: ");
     }
 
     private void statusbar() {
@@ -394,7 +384,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
                 conceptMappingAdapter.notifyDataSetChanged();
                 List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
-                Log.i(TAG, "db_GetListWhereClause sizes are: " + list.size());
                 lobData = new ArrayList<>();
                 for (Login_StoreList data : list) {
                     lobData.add(data.getLobName());
@@ -440,16 +429,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 }
 
                 List<Login_StoreList> list = db.db_GetListMulipleWhereClause(selectLob, selectconcept);
-                Log.i(TAG, "db_GetListMulipleWhereClause sizes are: " + list.size() + " and " + gson.toJson(list));
                 Login_StoreList model = list.get(0);
-                Log.i(TAG, "model: "+model.getGeoLevel2Desc()+" "+model.getLobName());
                 Reusable_Functions.showSnackbar(viewpart, "Mapping success !");
                 lob_name_txt.setText(selectLob);
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 if(model.getLobName().equals("FASHION") && model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") ) {
-                    Log.i(TAG, "after done model: "+model.getGeoLevel2Desc()+" "+model.getLobName());
                     editor.putString("concept", "BB,FBB");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
@@ -516,8 +502,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void setupAdapter(List<String> kpiIdArray) {
         pushtoken = sharedPreferences.getString("hierarchyLevels", "");
-
-        Log.i(TAG, "selected kpiIdArray: " + kpiIdArray.toString()+" selected hierarchyLevels "+sharedPreferences.getString("hierarchyLevels", ""));
 
        /* Mapping
         001 - Product Info
@@ -670,8 +654,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     @Override
     public void onclickView(int group_position, int child_position, String kpiID) {
-        Log.e(TAG, "group_position: " + group_position + "child_position" + child_position + " tag is " + kpiID);
-        Log.e("loginFromFbb ", "== " + loginFromFbb);
+
         int value = Integer.parseInt("" + group_position + "" + child_position);
         moveTo(kpiID, context);
     }
@@ -679,14 +662,12 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void RefreshTimeAPI() {
         String url = ConstsCore.web_url + "/v1/display/etlstatus/" + userId;
-        Log.e("Refreshtime Url :", "" + url);
         etlStatusList = new ArrayList<EtlStatus>();
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("refresh time response :", "" + response);
                         try {
                             if (response == null || response.equals("")) {
 
@@ -746,10 +727,8 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         if (checkDeviceId) {
 
             if (Reusable_Functions.checkPermission(android.Manifest.permission.READ_PHONE_STATE, this)) {
-                Log.e("TAG", ":check permission is okk");
                 getDeviceId();
             } else {
-                Log.e("TAG", ":check permission calling");
                 requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
             }
         }
@@ -763,11 +742,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         tmDevice = "" + tm.getDeviceId();
         tmSerial = "" + tm.getSimSerialNumber();
         androidId = "" + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-        Log.e("TAG", "tmDevice: " + tmDevice + "tm serial" + tmSerial + "android id" + androidId);
 
         UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
         String deviceId = deviceUuid.toString();
-        Log.e("TAG", "deviceId: " + deviceId);
 
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString("device_id", deviceId);
@@ -786,7 +763,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "jsonobject: " + jsonObject.toString());
 
         return jsonObject;
     }
@@ -796,19 +772,15 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     {
         if (Reusable_Functions.chkStatus(mcontext)) {
             String url = ConstsCore.web_url + "/v1/submit/deviceID/" + userId;
-            Log.e(TAG, "requestSubmitAPI: " + url);
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.e(TAG, "onResponse: from token" + response);
                             try {
                                 if (response == null || response.equals("")) {
-                                    Log.e(TAG, "onResponse token: null");
                                 } else {
                                     String result = response.getString("status");
                                     tokenProcess = true;
-                                    Log.e(TAG, "onResponse token: success " + result);
 
                                 }
                             } catch (Exception e) {
@@ -855,18 +827,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Constants.REQUEST_PERMISSION_WRITE_STORAGE) {
-            Log.e("TAG", "onRequestPermissionsResult: " + grantResults[0]);
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                Log.e("TAG", "onRequestPermissionsResult: Granted");
                 getDeviceId();
 
 
             } else {
 
-                Log.e("TAG", "onRequestPermissionsResult: Declined");
                 boolean should = ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, android.Manifest.permission.READ_PHONE_STATE);
-                Log.e(TAG, "oncheck permission.. " + should);
                 if (should) {
                     showAlert();
                 } else {
@@ -892,7 +860,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 .setPositiveButton("RE-TRY", new DialogInterface.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.M)
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.e("Click of I m sure", ", permission request Retry");
                         requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE}, Constants.REQUEST_PERMISSION_WRITE_STORAGE);
 
                     }
@@ -900,7 +867,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 .setNegativeButton("I'M SURE", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // do nothing
-                        Log.e("Click of I m sure", ", permission request is denied");
 
                     }
                 })
@@ -911,16 +877,13 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
         geoLeveLDesc = sharedPreferences.getString("concept", "");
         String url = ConstsCore.web_url + "/v1/display/dashboardNew/" + userId + "?geoLevel2Code=" + geoLeveLDesc;
-        Log.e(TAG, "requestMarketingEventsAPI: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Event Response: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
-                                Log.e(TAG, "Event Response: null");
                                 Reusable_Functions.hDialog();
                                 // Toast.makeText(SnapDashboardActivity.this, "No data found", Toast.LENGTH_LONG).show();
                             } else {
@@ -937,7 +900,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
-                            Log.e(TAG, "Event catch: " + e.getMessage());
                         }
                     }
                 },

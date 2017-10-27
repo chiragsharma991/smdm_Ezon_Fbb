@@ -292,8 +292,6 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
             String url;
             if (from_filter)
             {
-                Log.e("from_filter","" );
-
                 if (coreSelection)
                 {
                     //core selection without season params
@@ -349,12 +347,10 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                     }
                 }
             }
-            Log.e("TAG", "requestStockAgeingApi: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.e("response "," "+response.toString());
                             StockAgListView.setVisibility(View.VISIBLE);
                             ageing.clear();
                             try {
@@ -566,8 +562,6 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
 
                 if (Reusable_Functions.chkStatus(context))
                 {
-
-                    Log.e("checkedValue_StockAgeing"," "+checkedValue_StockAgeing);
 
 
                     String[] array = (String[]) checkedValue_StockAgeing.toArray(new String[0]);
@@ -859,7 +853,6 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     public void onTabSelected(TabLayout.Tab tab) {
 
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAG", "onTabSelected: " );
 
 //        if (toggleClick == false) {  // toggleClick is use when you retain tab button that time it will call .
 //            from_filter=false;
@@ -918,14 +911,11 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
     private void stockageband_api(){
 
         String url = ConstsCore.web_url + "/v1/display/stockageband/" + userId + "?lobId=" + lobId ; //+"&stockageband="+stockageband
-
-        Log.e("TAG", "stockageband: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
-                        Log.e("stockageband response "," "+response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -941,7 +931,6 @@ public class StockAgeingActivity extends AppCompatActivity implements View.OnCli
                                 listAdapter = new AgeingAdapter(ageing_val, context);
                                 listAgeing.setAdapter( listAdapter );
                             }
-                            Log.e("ageing_val "," "+ageing_val);
                         } catch (Exception e) {
 
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();

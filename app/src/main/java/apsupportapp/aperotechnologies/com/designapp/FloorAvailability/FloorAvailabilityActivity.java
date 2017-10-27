@@ -190,7 +190,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
                     url = ConstsCore.web_url + "/v1/display/flooravailabilityNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasongroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             }
-            Log.e("TAG", "requestFloorAvailabilityApi: "+url );
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -597,7 +596,6 @@ public class FloorAvailabilityActivity extends AppCompatActivity implements View
     public void onTabSelected(TabLayout.Tab tab) {
 
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: "+checkedId );
 
 //        if (toggleClick == false)
 //        {

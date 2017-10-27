@@ -141,7 +141,6 @@ public class RunningPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onSnap(int position) {
-        Log.d("Snapped: ", position + "");
     }
 
     public static class Holder extends RecyclerView.ViewHolder {

@@ -106,7 +106,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
 //        storeDescription = sharedPreferences.getString("storeDescription","");
-        Log.e("isMultiStore in skewed sizes "," "+ isMultiStore);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -132,7 +131,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
             from_filter = true;
             filter_toggleClick = true;
         }
-        Log.e("TAG", "Selected string: "+selectedString+" "+from_filter);
         retainValuesFilter();
         if(Tabview.getTabAt(0).isSelected())
         {
@@ -169,7 +167,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
 
         if (Reusable_Functions.chkStatus(context)) {
 
-            Log.e("TAG", "From filter: "+ from_filter);
             String url;
 
             if (from_filter) {
@@ -209,13 +206,11 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                     url = ConstsCore.web_url + "/v1/display/skewedsizesNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
                 }
             }
-            Log.e("url:",""+url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
                             SkewedSizeListview.setVisibility(View.VISIBLE);
-                            Log.e("response "," "+response);
                             try {
                                 if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -722,7 +717,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: "+checkedId );
 
 //        if (!filter_toggleClick)   // from filter is use when you retain tab button that time it will call .
 //        {
@@ -740,7 +734,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(this, "Loading.......");
                     coreSelection = true;
-                    Log.e("selected string "," "+selectedString);
                     requestRunningPromoApi(selectedString, filter_level);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -760,7 +753,6 @@ public class SkewedSizesActivity extends AppCompatActivity implements View.OnCli
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(this, "Loading.......");
                     coreSelection = false;
-                    Log.e("selected string "," "+selectedString);
                     requestRunningPromoApi(selectedString, filter_level);
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();

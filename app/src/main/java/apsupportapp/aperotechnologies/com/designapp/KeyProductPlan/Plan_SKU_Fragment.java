@@ -645,7 +645,6 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: " );
 
         switch (checkedId) {
             case 0 :   //WTD selection
@@ -750,12 +749,10 @@ public class Plan_SKU_Fragment extends Fragment implements TabLayout.OnTabSelect
 
     private void requestPlanSkuAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + sku_seg_clk + "&level=" + planlevel +"&option=" + optionName.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e("TAG", "requestPlan_SKU: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("TAG", "responsePlan_SKU: "+response );
 
                         try {
                             int i;

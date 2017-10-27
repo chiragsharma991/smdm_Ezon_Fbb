@@ -60,7 +60,6 @@ public class SwitchingTabActivity extends AppCompatActivity {
                 check = getIntent().getExtras().getString("check");
                 content = getIntent().getExtras().getString("content");
 
-                Log.e("storeCode switching", " "+storeCode);
 
             }
 
@@ -189,7 +188,6 @@ public class SwitchingTabActivity extends AppCompatActivity {
 
 
 
-            Log.e("selStoreName "," "+getIntent().getExtras().getString("selStoreName"));
             startActivity(intent);
             finish();
         }

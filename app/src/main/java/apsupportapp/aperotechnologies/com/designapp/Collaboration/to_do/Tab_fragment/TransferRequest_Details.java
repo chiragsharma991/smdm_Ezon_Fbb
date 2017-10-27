@@ -135,12 +135,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     private void requestReceiversChildDetails(final int position) {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&option=" + option.replaceAll(" ", "%20") + "&caseNo=" + detail_CaseNo + "&reqStoreCode=" + detl_reqStoreCode + "&recache=" + recache + "&senderStoreCode=" + store_Code;
-        Log.e(TAG, "requestReceiversChildDetails: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestReceiversChildDetails: onResponse " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -220,12 +218,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private void requestSenderDetails() {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderdetail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&caseNo=" + detail_CaseNo + "&reqStoreCode=" + detl_reqStoreCode + "&recache=" + recache + "&senderStoreCode=" + store_Code;
-        Log.e(TAG, "requestSenderDetails--: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "requestSenderDetails: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 TransferDetailProcess.setVisibility(View.GONE);
@@ -515,7 +511,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
     @Override
     public void passData(String barcode, Context context) {
-        Log.e(TAG, "passData: " + barcode);
 
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading data...");
@@ -556,12 +551,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     public void requestScanDetailsAPI(String contents, final Context context) {
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/senderscan/scan/" + userId + "?eanNumber=" + contents + "&recache=true";
-        Log.e(TAG, "requestScanDetailsAPI: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -663,12 +656,10 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
     private void requestforSap() {
 
         String url = ConstsCore.web_url + "/v1/display/pulltransfersapsubmit/" + userId + "?caseNo=" + detail_CaseNo + "&recache=true";
-        Log.e(TAG, "requestforSap: " + url);
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e(TAG, "onResponse: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -682,7 +673,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Log.e(TAG, "onResponse: error" + e.getMessage());
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
@@ -693,7 +683,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e(TAG, "onErrorResponse: " + error.getMessage());
                         Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
@@ -741,7 +730,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
                 Reusable_Functions.sDialog(mcontext, "Submitting data…");
                 url = ConstsCore.web_url + "/v1/save/stocktransfer/sendersubmit/" + userId;//+"?recache="+recache
                 postofData = jsonarray.toString();
-                Log.e(TAG, "requestSenderSubmitAPI: " + postofData);
 
             }
 //            else if (id==1){
@@ -749,13 +737,11 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 //                postofData=jsonobject.toString();
 //
 //            }
-            Log.e(TAG, "requestSenderSubmitAPI: " + url);
 
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, postofData,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.e(TAG, "requestSenderSubmitAPI onResponse: " + response);
                             Reusable_Functions.hDialog();
 
                             try {
@@ -768,7 +754,6 @@ public class TransferRequest_Details extends AppCompatActivity implements OnPres
 //                                    tr_recyclerView.setAdapter(transferDetailsAdapter);
 
                                     String result = response.getString("status");
-                                    Log.e(TAG, "onResponse: " + result);
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(TransferRequest_Details.this, To_Do.class);
                                     intent.putExtra("from",store_Code);

@@ -50,7 +50,6 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
             storeCode = getIntent().getExtras().getString("storeCode");
             store_Code = storeCode.substring(0,4);
 
-            Log.e( "storeCode : in status activity", " " +store_Code );
         }
         initialise();
 
