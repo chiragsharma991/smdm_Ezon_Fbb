@@ -27,7 +27,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -50,14 +49,11 @@ import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexDetails;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexSnapAdapter;
@@ -65,7 +61,6 @@ import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPositionHelper;
-import apsupportapp.aperotechnologies.com.designapp.model.FreshnessIndex_Ez_Model;
 
 /**
  * Created by pamrutkar on 22/11/16.
@@ -113,7 +108,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     private RadioButton product_radiobtn, location_radiobtn;
     private boolean from_filter;
     private String selectedString, geoLevel2Code, lobId, isMultiStore, value;
-    private int selectedlevel;
     private int filter_level;
     private String header_value;
     public int x=0;
@@ -177,7 +171,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
             public void onScrollStateChanged(RecyclerView recyclerView, final int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
-                Log.i(TAG, "onScrollStateChanged: "+firstVisibleItem);
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE && currentState == RecyclerView.SCROLL_STATE_IDLE) {
                     Handler h = new Handler();
                     h.postDelayed(new Runnable() {
@@ -370,7 +363,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
 
     }
-    private void testmethod(){}
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -524,7 +516,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     // For Category List on click of Dept Value
     private void request_FreshnessIndex_CategoryList(final String deptName) {
         String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e(TAG, "request_FreshnessIndex_CategoryList: " + freshnessindex_category_listurl);
+        Log.e(TAG, "request_FreshnessIndex_CategoryList: " + freshnessindex_category_listurl );
 
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
                 new Response.Listener<JSONArray>() {
@@ -1272,18 +1264,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         freshnessIndexSnapAdapter = new FreshnessIndexSnapAdapter(freshnessIndexDetailsArrayList, context, fromWhere, listViewFIndex, TAG,hierarchyList);
         listViewFIndex.setAdapter(freshnessIndexSnapAdapter);
         fIndexFirstVisibleItem = "All";
-
-    /*    if (txtFIndexClass.getText().toString().equals("Department")) {
-            level = 1;
-            fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
-            Log.i(TAG, "retain tab: "+firstVisibleItem+" fIndexFirstVisibleItem "+fIndexFirstVisibleItem);
-            for (int j = 0; j < freshnessIndexDetailsArrayList.size(); j++) {
-                if (freshnessIndexDetailsArrayList.get(j).getLevel().contentEquals(fIndexFirstVisibleItem)) {
-                    LinearLayoutManager llm = (LinearLayoutManager) listViewFIndex.getLayoutManager();
-                    llm.scrollToPosition(firstVisibleItem);
-                }
-            }
-        }*/
         offsetvalue = 0;
         limit = 100;
         count = 0;
@@ -1477,10 +1457,8 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         // post value changes according to click
 
         if (!(postValue == preValue)) {
-            Log.e(TAG, "sortFunction: post value is" + postValue + " and prevalue" + preValue);
 
             if (postValue == 1) {
-                Log.e(TAG, "sortFunction: true...");
                 if (Reusable_Functions.chkStatus(context)) {
                     Reusable_Functions.sDialog(context, "Loading data...");
                     OveridePositionValue = 0;
@@ -1602,7 +1580,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
     private void Fbb_collection() {
 
-        Log.e(TAG, "Fbb_collection: log");
         fromWhere = hierarchyList[0];
         fIndexFirstVisibleItem = "";
         freshnessIndex_ClickedVal = "";
@@ -1632,7 +1609,6 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
 
                 filter_toggleClick = true;
-                Log.e(TAG, "Selected values: " + selectedString);
                 retainValuesFilter();
                 requestFreshnessIndexFilterVal(selectedString, filter_level);
 
@@ -1668,6 +1644,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     fromWhere = hierarchyList[3];
                     level = 4;
                     freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Loading data...");
