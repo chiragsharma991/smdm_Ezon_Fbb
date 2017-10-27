@@ -413,7 +413,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                     } else {
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                                     }
-                                }
+                                }//
                                 else{
 
                                     Reusable_Functions.hDialog();
@@ -557,6 +557,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
     private void initializeEzoneUI() {
         btnFilter = (RelativeLayout) findViewById(R.id.imgfilter);
+
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
