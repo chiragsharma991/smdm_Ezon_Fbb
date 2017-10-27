@@ -69,15 +69,15 @@
 
                     <RelativeLayout
                         android:id="@+id/freshnessIndex_imgfilter"
-                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_width="35dp"
                         android:layout_height="@dimen/header_clickable_height"
-                        android:layout_toLeftOf="@+id/freshnessIndex_Ez_moreVertical"
+                        android:layout_toLeftOf="@+id/ezonefreshness_btnReset"
                         android:layout_marginRight="0dp"
                         android:background="@drawable/button_click">
 
                         <Button
-                            android:layout_width="@dimen/icon_width"
-                            android:layout_height="@dimen/icon_height"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/iconfilter"
                             android:clickable="false" />
@@ -85,8 +85,27 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/ezonefreshness_btnReset"
+                        android:layout_toLeftOf="@+id/freshnessIndex_Ez_moreVertical"
+                        android:layout_width="35dp"
+                        android:layout_height="@dimen/header_clickable_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/button_click">
+
+                        <Button
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/resetbtn"
+                            android:clickable="false"
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
                         android:id="@+id/freshnessIndex_Ez_moreVertical"
-                        android:layout_width="@dimen/header_clickable_width"
+                        android:layout_width="35dp"
                         android:layout_height="@dimen/header_clickable_height"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
@@ -95,8 +114,8 @@
                         >
 
                         <Button
-                            android:layout_width="@dimen/icon_width"
-                            android:layout_height="@dimen/icon_height"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_centerInParent="true"
                             android:background="@mipmap/iconmore"
                             android:clickable="false" />

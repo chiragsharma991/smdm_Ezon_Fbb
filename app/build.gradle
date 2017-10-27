@@ -28,14 +28,14 @@ repositories
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '23.0.0'
+    buildToolsVersion '26.0.2'
     defaultConfig
             {
                 applicationId "apsupportapp.aperotechnologies.com.designapp"
                 minSdkVersion 17
                 targetSdkVersion 25
-                versionCode 130
-                versionName "2.4"
+                versionCode 133
+                versionName "2.5"
             }
     buildTypes
             {

@@ -23,6 +23,7 @@ public class Login_StoreList
     String roleName;
     String lobId;
     String lobName;
+    String hierarchyLevels;
 
 
 
@@ -36,8 +37,9 @@ public class Login_StoreList
     public Login_StoreList() {
         // empty constructor for set params.
     }
-
-
+    public String getHierarchyLevels() {
+        return hierarchyLevels;
+    }
     public String getLoginName() {
         return loginName;
     }
@@ -170,6 +172,9 @@ public class Login_StoreList
         return lobId;
     }
 
+    public void setHierarchyLevels(String hierarchyLevels) {
+        this.hierarchyLevels = hierarchyLevels;
+    }
     public void setLobId(String lobId) {
         this.lobId = lobId;
     }

@@ -58,6 +58,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
+import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexDetails;
 import apsupportapp.aperotechnologies.com.designapp.R;
 import apsupportapp.aperotechnologies.com.designapp.RecyclerItemClickListener;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -99,7 +100,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     OptionEfficiencyHeader optionEfficiencyHeader;
     OptionIndexSnapAdapter optionIndexSnapAdapter;
     RelativeLayout optionEfficiency_imageBtnBack, optionEfficiency_imgfilter, quickFilterPopup, quickFilter_baseLayout;
-    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout, quickFilter_BorderLayout;
+    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout, quickFilter_BorderLayout, optione_btnReset;
     Gson gson;
     RelativeLayout oe_quickFilter;
     PieData pieData;
@@ -249,7 +250,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     return;
                 }
                 OptionefficiencyValue = "";
-                header_value = "";
+//                header_value = "";
 
                 switch (oe_txtHeaderClass.getText().toString()) {
 
@@ -367,7 +368,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     return;
                 }
                 OptionefficiencyValue = "";
-                header_value = "";
+//                header_value = "";
                 switch (oe_txtHeaderClass.getText().toString()) {
 
                     case "Department":
@@ -512,14 +513,18 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 fromWhere = "Category";
                                 level = 2;
                                 seasonGroup = "Current";
-                                if(!oe_ClickedVal.equals("All")) {
+                                if(!oe_ClickedVal.equals("All"))
+                                {
                                     oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                    header_value = "&department=" + oe_ClickedVal;
+                                    if(!header_value.contains("&department=" + oe_ClickedVal))
+                                    {
+                                        header_value = "&department=" + oe_ClickedVal;
+                                    }
                                 }
                                 else
                                 {
-                                    header_value = "";
+//                                    header_value = "";
                                 }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.hDialog();
@@ -552,11 +557,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 if(!oe_ClickedVal.equals("All")) {
                                     oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                    header_value = "&category=" + oe_ClickedVal;
+                                    if(!header_value.contains("&category=" + oe_ClickedVal))
+                                    {
+                                        header_value += "&category=" + oe_ClickedVal;
+                                    }
                                 }
                                 else
                                 {
-                                    header_value = "";
+//                                    header_value = "";
                                 }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
@@ -588,11 +596,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 {
                                     oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                    header_value = "&class=" + oe_ClickedVal;
+                                    if(!header_value.contains("&class=" + oe_ClickedVal))
+                                    {
+                                        header_value += "&class=" + oe_ClickedVal;
+                                    }
                                 }
                                 else
                                 {
-                                    header_value = "";
+//                                    header_value = "";
                                 }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
@@ -625,11 +636,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 {
                                     oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                     oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                    header_value = "&brand="+oe_ClickedVal;
+                                    if(!header_value.contains("&brand=" + oe_ClickedVal))
+                                    {
+                                        header_value += "&brand=" + oe_ClickedVal;
+                                    }
                                 }
                                 else
                                 {
-                                    header_value = "";
+//                                    header_value = "";
                                 }
                                 if (Reusable_Functions.chkStatus(context)) {
                                     if (postRequest != null) {
@@ -657,13 +671,9 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 OnItemClick = false;
 
                                 break;
-
                         }
-
                     }
                 }
-
-
             }
         }));
     }
@@ -841,6 +851,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_btnPrev = (RelativeLayout) findViewById(R.id.oe_btnPrev);
         oe_btnPrev.setVisibility(View.INVISIBLE);
         oe_btnNext = (RelativeLayout) findViewById(R.id.oe_btnNext);
+        optione_btnReset = (RelativeLayout) findViewById(R.id.optione_btnReset);
         //   optionEfficiency_segmentedGrp = (SegmentedGroup) findViewById(R.id.optionEfficiency_segmentedGrp);
         //   optionEfficiency_segmentedGrp.setOnCheckedChangeListener(this);
         //   oe_btnCore = (RadioButton) findViewById(R.id.oe_btnCore);
@@ -864,6 +875,50 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         checkUpcoming.setOnClickListener(this);
         qfDoneLayout.setOnClickListener(this);
         quickFilter_BorderLayout.setOnClickListener(this);
+
+        optione_btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fromWhere = "Department";
+                oe_FirstVisibleItem = "All";
+                oe_ClickedVal = "";
+                header_value = "";
+                OptionefficiencyValue = "";
+                focusposition = 0;
+                oe_FirstPositionValue = 0;
+                optionArrayList = new ArrayList<OptionEfficiencyDetails>();
+                headerList = new ArrayList<OptionEfficiencyDetails>();
+                oeHeaderList = new ArrayList<OptionEfficiencyHeader>();
+                entries = new ArrayList<PieEntry>();
+                OveridePositionValue = 0;
+                optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    processBar.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 1;
+                    oe_txtDeptName.setText(hierarchy(""));
+                    oe_txtHeaderClass.setText("Department");
+                    oe_btnNext.setVisibility(View.VISIBLE);
+                    oe_btnPrev.setVisibility(View.INVISIBLE);
+                    OEfficiency_SegmentClick = "Fashion";
+                    Tabview.getTabAt(0).select();
+                    oe_llayouthierarchy.setVisibility(View.GONE);
+                    requestOptionEfficiencyDetails();
+                    requestHearderAPI();
+
+
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    llayoutOEfficiency.setVisibility(View.GONE);
+
+                }
+
+            }
+        });
     }
 
     private void retainValuesFilter() {
@@ -2049,14 +2104,23 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     public String hierarchy(String freshnessIndex_ClickedVal) {
 
-        if (OptionefficiencyValue == null || OptionefficiencyValue.equals("")) {
-
-            OptionefficiencyValue = freshnessIndex_ClickedVal;
-
-        } else {
-
-            OptionefficiencyValue += " > " + freshnessIndex_ClickedVal;
+        if(freshnessIndex_ClickedVal.equals(""))
+        {
+            OptionefficiencyValue = null;
         }
+        else
+        {
+            if (OptionefficiencyValue == null || OptionefficiencyValue.equals("")) {
+
+                OptionefficiencyValue = freshnessIndex_ClickedVal;
+
+            } else {
+
+                OptionefficiencyValue += " > " + freshnessIndex_ClickedVal;
+            }
+
+        }
+
 
 
         return OptionefficiencyValue;
@@ -2275,7 +2339,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                                 optionEfficiencyDetails = new OptionEfficiencyDetails();
                                 if (oe_txtHeaderClass.getText().toString().equals("Brand Class")) {
                                     optionEfficiencyDetails.setBrandplanClass("All");
-                               }
+                                }
                                 setHeaderValue(brandnm, optionEfficiencyDetails, 5);
                             }
 
@@ -2645,7 +2709,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
         optionIndexSnapAdapter = new OptionIndexSnapAdapter(optionEfficiencyDetailsArrayList, context, fromWhere, oe_listView);
         oe_listView.setAdapter(optionIndexSnapAdapter);
-
+        Log.e("name "," "+name);
         oe_txtDeptName.setText(hierarchy(name.replaceAll("%20"," ").replaceAll("%26","&")));//deptName));
         oe_llayouthierarchy.setVisibility(View.VISIBLE);
 

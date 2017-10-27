@@ -25,6 +25,7 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
+    private  String[] hierarchyList;
     ArrayList<SalesAnalysisViewPagerValue> ez_sales_header_array;
     EzoneSalesPagerAdapter ezone_pageradapter;
     SalesAnalysisListDisplay ezone_sales_details;
@@ -45,12 +46,13 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
 
 
-    public EzoneSalesAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis) {
+    public EzoneSalesAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis,String[] hierarchyList) {
 
         this.mSnaps = arrayList;
         this.context = context;
         this.fromwhere = fromwhere;
         this.rv_ez_sales = listView_SalesAnalysis;
+        this.hierarchyList = hierarchyList;
         mInflater = LayoutInflater.from(context);
         this.currentIndex = currentIndex;
         level = 1;
@@ -118,7 +120,33 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
 
-                switch (fromwhere)
+                if(fromwhere.equals(hierarchyList[0])){
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                }
+                else if(fromwhere.equals(hierarchyList[1])){
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                }
+                else if(fromwhere.equals(hierarchyList[2])){
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                }
+                else if(fromwhere.equals(hierarchyList[3])){
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                }
+                else if(fromwhere.equals("Region")){
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                }
+                else if(fromwhere.equals("Store")){
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
+                    ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
+                }
+
+
+               /* switch (fromwhere)
                 {
                     case "Department":
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_name.setText(productNameBean.getLevel());
@@ -154,7 +182,7 @@ public class EzoneSalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         ((EzoneSalesViewHolder) viewHolder).txt_ez_sPvAValue.setText("" + Math.round(productNameBean.getPvaAchieved()) + "%");
 
                         break;
-                }
+                }*/
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc
                 int planVal = 100; // planned value from API

@@ -111,6 +111,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
     public int sales_filter_level;
     private String header_value,drill_down_val;
+    private String[] hierarchyList;
+    private String TAG="SalesAnalysisActivity1";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -127,6 +129,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         lobId = sharedPreferences.getString("lobid","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
+        final String hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
+        // replace all labels using hierarchyList
+        hierarchyList = hierarchyLevels.split(",");
+        for (int i = 0; i <hierarchyList.length ; i++) {
+            hierarchyList[i]=hierarchyList[i].trim();
+            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
+        }
         Log.e("lobId "," "+lobId);
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -236,8 +245,170 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 Handler h = new Handler();
                                 h.postDelayed(new Runnable() {
                                     public void run() {
+
                                         if (position < salesAnalysisClassArrayList.size()) {
-                                            switch (txtheaderplanclass.getText().toString()) {
+
+
+                                            if(txtheaderplanclass.getText().toString().equals(hierarchyList[0])){
+
+                                                relprevbtn.setVisibility(View.VISIBLE);
+                                                txtheaderplanclass.setText(hierarchyList[1]);
+                                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanDept();
+                                                fromWhere = hierarchyList[1];
+                                                if(!txtSalesClickedValue.equals("All")) {
+                                                    txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
+                                                    txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&department=" + txtSalesClickedValue;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
+                                                if (lldots != null) {
+                                                    lldots.removeAllViews();
+                                                }
+                                                currentVmPos = vwpagersales.getCurrentItem();
+                                                level = 2;
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    Reusable_Functions.hDialog();
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    progressBar1.setVisibility(View.GONE);
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    salesAnalysisClassArrayList.clear();
+                                                    requestSalesCategoryList(txtSalesClickedValue);
+                                                    planDept = txtSalesClickedValue;
+
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                }
+
+                                            }
+                                            else if(txtheaderplanclass.getText().toString().equals(hierarchyList[1])){
+
+                                                txtheaderplanclass.setText(hierarchyList[2]);
+                                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanCategory();
+                                                if(!txtSalesClickedValue.equals("All")) {
+                                                    txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
+                                                    txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&category=" + txtSalesClickedValue;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
+                                                fromWhere = hierarchyList[2];
+                                                if (lldots != null) {
+                                                    lldots.removeAllViews();
+                                                }
+                                                currentVmPos = vwpagersales.getCurrentItem();
+                                                level = 3;
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    Reusable_Functions.hDialog();
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    progressBar1.setVisibility(View.GONE);
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    salesAnalysisClassArrayList.clear();
+                                                    requestSalesPlanClassListAPI(txtSalesClickedValue);
+                                                    planCategory = txtSalesClickedValue;
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                }
+
+                                            }
+                                            else if(txtheaderplanclass.getText().toString().equals(hierarchyList[2])){
+
+                                                txtheaderplanclass.setText(hierarchyList[3]);
+                                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getPlanClass();
+                                                if(!txtSalesClickedValue.equals("All")) {
+                                                    txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
+                                                    txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&class=" + txtSalesClickedValue;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
+                                                fromWhere = hierarchyList[3];
+                                                if (lldots != null) {
+                                                    lldots.removeAllViews();
+                                                }
+                                                currentVmPos = vwpagersales.getCurrentItem();
+                                                level = 4;
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    Reusable_Functions.hDialog();
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    progressBar1.setVisibility(View.GONE);
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    salesAnalysisClassArrayList.clear();
+                                                    requestSalesBrandListAPI(txtSalesClickedValue);
+                                                    planClass = txtSalesClickedValue;
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                }
+
+                                            }
+
+                                            else if(txtheaderplanclass.getText().toString().equals(hierarchyList[3])){
+
+                                                relnextbtn.setVisibility(View.INVISIBLE);
+                                                txtheaderplanclass.setText(hierarchyList[4]);
+                                                txtSalesClickedValue = salesAnalysisClassArrayList.get(position).getBrandName();
+                                                if(!txtSalesClickedValue.equals("All")) {
+                                                    txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
+                                                    txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
+                                                    header_value = "&brand=" + txtSalesClickedValue;
+                                                }
+                                                else
+                                                {
+                                                    header_value = "";
+                                                }
+                                                fromWhere = hierarchyList[4];
+                                                if (lldots != null) {
+                                                    lldots.removeAllViews();
+                                                }
+                                                currentVmPos = vwpagersales.getCurrentItem();
+                                                level = 5;
+                                                if (Reusable_Functions.chkStatus(context)) {
+                                                    if (postRequest != null) {
+                                                        postRequest.cancel();
+                                                    }
+                                                    Reusable_Functions.hDialog();
+                                                    Reusable_Functions.sDialog(context, "Loading data...");
+                                                    progressBar1.setVisibility(View.GONE);
+                                                    offsetvalue = 0;
+                                                    limit = 100;
+                                                    count = 0;
+                                                    salesAnalysisClassArrayList.clear();
+                                                    requestSalesBrandPlanListAPI(txtSalesClickedValue);
+                                                } else {
+                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                                                }
+
+                                            }
+                                            else{
+
+                                                Reusable_Functions.hDialog();
+                                                Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
+                                                onClickFlag = false;
+                                            }
+
+
+                                           /* switch (txtheaderplanclass.getText().toString()) {
                                                 case "Department":
                                                     relprevbtn.setVisibility(View.VISIBLE);
                                                     txtheaderplanclass.setText("Category");
@@ -246,11 +417,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
-                                                        header_value = "&department=" + txtSalesClickedValue;
+                                                        if(!header_value.contains("&department=" + txtSalesClickedValue))
+                                                        {
+                                                            header_value = "&department=" + txtSalesClickedValue;
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        header_value = "";
+//                                                        header_value = "";
                                                     }
                                                     if (lldots != null) {
                                                         lldots.removeAllViews();
@@ -282,11 +456,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
-                                                        header_value = "&category=" + txtSalesClickedValue;
+                                                        if(!header_value.contains("&category=" + txtSalesClickedValue)) {
+                                                            header_value += "&category=" + txtSalesClickedValue;
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        header_value = "";
+//                                                        header_value = "";
                                                     }
                                                     fromWhere = "Class";
                                                     if (lldots != null) {
@@ -319,11 +495,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
-                                                        header_value = "&class=" + txtSalesClickedValue;
+                                                        if(!header_value.contains("&class=" + txtSalesClickedValue))
+                                                        {
+                                                            header_value += "&class=" + txtSalesClickedValue;
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        header_value = "";
+//                                                        header_value = "";
                                                     }
                                                     fromWhere = "Brand";
                                                     if (lldots != null) {
@@ -357,11 +536,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     if(!txtSalesClickedValue.equals("All")) {
                                                         txtSalesClickedValue = txtSalesClickedValue.replace("%", "%25");
                                                         txtSalesClickedValue = txtSalesClickedValue.replace(" ", "%20").replace("&", "%26");
-                                                        header_value = "&brand=" + txtSalesClickedValue;
+                                                        if(!header_value.contains("&brand=" + txtSalesClickedValue)) {
+                                                            header_value += "&brand=" + txtSalesClickedValue;
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        header_value = "";
+//                                                        header_value = "";
                                                     }
                                                     fromWhere = "Brand Class";
                                                     if (lldots != null) {
@@ -390,7 +571,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                                     Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
                                                     onClickFlag = false;
                                                     break;
-                                            }
+                                            }*/
                                         }
                                     }
                                 }, 700);
@@ -403,7 +584,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
 
     private void initialize_fbb_ui() {
-        fromWhere = "Department";
+        fromWhere = hierarchyList[0];
         txtSalesClickedValue = " ";
         val = "";
         firstVisibleItem = 0;
@@ -452,7 +633,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         relnextbtn.setOnClickListener(this);
         txtheaderplanclass = (TextView) findViewById(R.id.headerplanclass);
         progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
-        txtheaderplanclass.setText("Department");
+        txtheaderplanclass.setText(hierarchyList[0]);
         salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
         analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
         salesList = new ArrayList<SalesAnalysisViewPagerValue>();
@@ -517,9 +698,9 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     level = 1;
                     relprevbtn.setVisibility(View.INVISIBLE);
                     relnextbtn.setVisibility(View.VISIBLE);
-                    txtheaderplanclass.setText("Department");
+                    txtheaderplanclass.setText(hierarchyList[0]);
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    fromWhere = "Department";
+                    fromWhere = hierarchyList[0];
                     retainSegmentValuesFilter();
                     if(!drill_down_val.equals(""))
                     {
@@ -557,7 +738,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             public void onClick(View view) {
 
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                fromWhere = "Category";
+                fromWhere = hierarchyList[1];
                 selFirstPositionValue = 0; firstVisibleItem = 0;
 
                 if (Reusable_Functions.chkStatus(context))
@@ -579,7 +760,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     level = 2;
                     relprevbtn.setVisibility(View.VISIBLE);
                     relnextbtn.setVisibility(View.VISIBLE);
-                    txtheaderplanclass.setText("Category");
+                    txtheaderplanclass.setText(hierarchyList[1]);
                     retainSegmentValuesFilter();
                     if(!drill_down_val.equals(""))
                     {
@@ -615,7 +796,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             public void onClick(View view) {
 
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                fromWhere = "Class";
+                fromWhere = hierarchyList[2];
                 selFirstPositionValue = 0; firstVisibleItem = 0;
 
                 if (Reusable_Functions.chkStatus(context))
@@ -637,7 +818,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     level = 3;
                     relprevbtn.setVisibility(View.VISIBLE);
                     relnextbtn.setVisibility(View.VISIBLE);
-                    txtheaderplanclass.setText("Class");
+                    txtheaderplanclass.setText(hierarchyList[2]);
                     retainSegmentValuesFilter();
                     if(!drill_down_val.equals(""))
                     {
@@ -675,7 +856,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 if (Reusable_Functions.chkStatus(context))
                 {
                     salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    fromWhere = "Brand";
+                    fromWhere = hierarchyList[3];
                     selFirstPositionValue = 0; firstVisibleItem = 0;
 
                     Reusable_Functions.sDialog(context, "Loading...");
@@ -695,7 +876,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     level = 4;
                     relprevbtn.setVisibility(View.VISIBLE);
                     relnextbtn.setVisibility(View.VISIBLE);
-                    txtheaderplanclass.setText("Brand");
+                    txtheaderplanclass.setText(hierarchyList[3]);
                     retainSegmentValuesFilter();
                     if(!drill_down_val.equals(""))
                     {
@@ -731,7 +912,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             public void onClick(View view) {
 
                 salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                fromWhere = "Brand Class";
+                fromWhere = hierarchyList[4];
                 selFirstPositionValue = 0; firstVisibleItem = 0;
 
                 if (Reusable_Functions.chkStatus(context))
@@ -753,7 +934,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     level = 5;
                     relprevbtn.setVisibility(View.VISIBLE);
                     relnextbtn.setVisibility(View.INVISIBLE);
-                    txtheaderplanclass.setText("Brand Class");
+                    txtheaderplanclass.setText(hierarchyList[4]);
                     retainSegmentValuesFilter();
                     if(!drill_down_val.equals(""))
                     {
@@ -860,19 +1041,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
             {
                 if (firstVisibleItem < salesAnalysisClassArrayList.size() && !onClickFlag) {
 
-                    if (txtheaderplanclass.getText().toString().equals("Department")) {
+                    if (txtheaderplanclass.getText().toString().equals(hierarchyList[0])) {
                         level = 1;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
-                    } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                    } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1])) {
                         level = 2;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
-                    } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                    } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                         level = 3;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
-                    } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                    } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                         level = 4;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
-                    } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                    } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
                         level = 5;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                     }
@@ -912,19 +1093,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     firstVisibleItem = salesAnalysisClassArrayList.size() - 1;
                     LinearLayoutManager llm = (LinearLayoutManager) listView_SalesAnalysis.getLayoutManager();
                     llm.scrollToPosition(firstVisibleItem);
-                    if (txtheaderplanclass.getText().toString().equals("Department")) {
+                    if (txtheaderplanclass.getText().toString().equals(hierarchyList[0])) {
                         level = 1;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
-                    } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                    } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1])) {
                         level = 2;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
-                    } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                    } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                         level = 3;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
-                    } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                    } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                         level = 4;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
-                    } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                    } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
                         level = 5;
                         saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                     }
@@ -980,7 +1161,130 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     return;
                 } else {
                     drill_down_val = "";
-                    switch (txtheaderplanclass.getText().toString())
+
+                   if(txtheaderplanclass.getText().toString().equals(hierarchyList[4])){
+
+                       relnextbtn.setVisibility(View.VISIBLE);
+                       if (lldots != null) {
+                           lldots.removeAllViews();
+                       }
+                       currentVmPos = vwpagersales.getCurrentItem();
+                       llhierarchy.setVisibility(View.GONE);
+                       txtheaderplanclass.setText(hierarchyList[3]);
+                       fromWhere = hierarchyList[3];
+                       level = 4;
+                       val = "";
+//                            header_value = "";
+                       salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                       if (Reusable_Functions.chkStatus(context))
+                       {
+
+                           Reusable_Functions.hDialog();
+                           Reusable_Functions.sDialog(context, "Loading data...");
+                           progressBar1.setVisibility(View.GONE);
+                           offsetvalue = 0;
+                           limit = 100;
+                           count = 0;
+                           requestSalesListDisplayAPI();
+                       } else {
+                           Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                       }
+
+                   }
+                   else if(txtheaderplanclass.getText().toString().equals(hierarchyList[3])){
+
+                       if (lldots != null) {
+                           lldots.removeAllViews();
+                       }
+                       currentVmPos = vwpagersales.getCurrentItem();
+                       llhierarchy.setVisibility(View.GONE);
+                       txtheaderplanclass.setText(hierarchyList[2]);
+                       fromWhere = hierarchyList[2];
+                       level = 3;
+                       val ="";
+//                            header_value = "";
+                       salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                       listView_SalesAnalysis.removeAllViews();
+                       val = " ";
+                       if (Reusable_Functions.chkStatus(context))
+                       {
+                           Reusable_Functions.hDialog();
+                           Reusable_Functions.sDialog(context, "Loading data...");
+                           progressBar1.setVisibility(View.GONE);
+                           offsetvalue = 0;
+                           limit = 100;
+                           count = 0;
+                           requestSalesListDisplayAPI();
+                       }
+                       else
+                       {
+                           Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                       }
+
+                   }
+                   else if(txtheaderplanclass.getText().toString().equals(hierarchyList[2])){
+
+                       if (lldots != null)
+                       {
+                           lldots.removeAllViews();
+                       }
+                       currentVmPos = vwpagersales.getCurrentItem();
+                       llhierarchy.setVisibility(View.GONE);
+                       txtheaderplanclass.setText(hierarchyList[1]);
+                       fromWhere = hierarchyList[1];
+                       level = 2;
+//                            header_value = "";
+                       val = " ";
+                       salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                       listView_SalesAnalysis.removeAllViews();
+                       if (Reusable_Functions.chkStatus(context)) {
+                           Reusable_Functions.hDialog();
+                           Reusable_Functions.sDialog(context, "Loading data...");
+                           progressBar1.setVisibility(View.GONE);
+                           offsetvalue = 0;
+                           limit = 100;
+                           count = 0;
+                           requestSalesListDisplayAPI();
+                       } else {
+                           Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                       }
+
+                   }
+                   else if(txtheaderplanclass.getText().toString().equals(hierarchyList[1])){
+
+                       relprevbtn.setVisibility(View.INVISIBLE);
+                       if (lldots != null)
+                       {
+                           lldots.removeAllViews();
+                       }
+                       currentVmPos = vwpagersales.getCurrentItem();
+                       llhierarchy.setVisibility(View.GONE);
+                       txtheaderplanclass.setText(hierarchyList[0]);
+                       fromWhere = hierarchyList[0];
+                       level = 1;
+                       val = " ";
+//                            header_value = "";
+                       salesAnalysisClassArrayList.clear();
+                       listView_SalesAnalysis.removeAllViews();
+                       if (Reusable_Functions.chkStatus(context)) {
+                           Reusable_Functions.hDialog();
+                           Reusable_Functions.sDialog(context, "Loading data...");
+                           progressBar1.setVisibility(View.GONE);
+                           offsetvalue = 0;
+                           limit = 100;
+                           count = 0;
+                           requestSalesListDisplayAPI();
+                       }
+                       else
+                       {
+                           Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                       }
+
+                   }
+
+
+
+                 /*   switch (txtheaderplanclass.getText().toString())
                     {
                         case "Brand Class":
                             relnextbtn.setVisibility(View.VISIBLE);
@@ -1099,7 +1403,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             break;
                         default:
                             break;
-                    }
+                    }*/
                 }
                 break;
             case R.id.nextplanclass:
@@ -1117,7 +1421,115 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 else
                 {
                     drill_down_val = "";
-                    switch (txtheaderplanclass.getText().toString())
+
+
+                    if(txtheaderplanclass.getText().toString().equals(hierarchyList[0])){
+                        relprevbtn.setVisibility(View.VISIBLE);
+                        txtheaderplanclass.setText(hierarchyList[1]);
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        llhierarchy.setVisibility(View.GONE);
+                        fromWhere = hierarchyList[1];
+                        level = 2;
+//                            header_value = "";
+                        val = " ";
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        listView_SalesAnalysis.removeAllViews();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            requestSalesListDisplayAPI();
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else if(txtheaderplanclass.getText().toString().equals(hierarchyList[1])){
+                        fromWhere = hierarchyList[2];
+                        txtheaderplanclass.setText(hierarchyList[2]);
+                        level = 3;
+//                            header_value = "";
+                        val = " ";
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        llhierarchy.setVisibility(View.GONE);
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        listView_SalesAnalysis.removeAllViews();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            requestSalesListDisplayAPI();
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else if(txtheaderplanclass.getText().toString().equals(hierarchyList[2])){
+                        txtheaderplanclass.setText(hierarchyList[3]);
+                        fromWhere = hierarchyList[3];
+                        level = 4;
+                        val = " ";
+//                            header_value = "";
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        llhierarchy.setVisibility(View.GONE);
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        listView_SalesAnalysis.removeAllViews();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            requestSalesListDisplayAPI();
+
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else if(txtheaderplanclass.getText().toString().equals(hierarchyList[3])){
+                        txtheaderplanclass.setText(hierarchyList[4]);
+
+                        relnextbtn.setVisibility(View.INVISIBLE);
+                        if (lldots != null) {
+                            lldots.removeAllViews();
+                        }
+//                            header_value = "";
+                        currentVmPos = vwpagersales.getCurrentItem();
+                        llhierarchy.setVisibility(View.GONE);
+                        fromWhere = hierarchyList[4];
+                        level = 5;
+                        val = " ";
+                        salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
+                        listView_SalesAnalysis.removeAllViews();
+                        if (Reusable_Functions.chkStatus(context)) {
+                            Reusable_Functions.hDialog();
+                            Reusable_Functions.sDialog(context, "Loading data...");
+                            progressBar1.setVisibility(View.GONE);
+                            offsetvalue = 0;
+                            limit = 100;
+                            count = 0;
+                            requestSalesListDisplayAPI();
+                        } else {
+                            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+
+                    /*switch (txtheaderplanclass.getText().toString())
                     {
                         case "Department":
                             relprevbtn.setVisibility(View.VISIBLE);
@@ -1228,7 +1640,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                             break;
                         default:
                             break;
-                    }
+                    }*/
                 }
                 break;
             case R.id.imgfilter:
@@ -1253,10 +1665,10 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                     limit = 100;
                     count = 0;
                     level = 1;
-                    fromWhere = "Department";
+                    fromWhere = hierarchyList[0];
                     relprevbtn.setVisibility(View.INVISIBLE);
                     relnextbtn.setVisibility(View.VISIBLE);
-                    txtheaderplanclass.setText("Department");
+                    txtheaderplanclass.setText(hierarchyList[0]);
                     selectedsegValue = "WTD";
                     Tabview.getTabAt(0).select();
                     requestSalesListDisplayAPI();
@@ -1335,20 +1747,20 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                         // For Add "All"
                         salesAnalysisClass = new SalesAnalysisListDisplay();
-                        if (txtheaderplanclass.getText().toString().equals("Department")) {
+                        if (txtheaderplanclass.getText().toString().equals(hierarchyList[0])) {
                             salesAnalysisClass.setPlanDept("All");
 
-                        } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                        } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1])) {
                             salesAnalysisClass.setPlanCategory("All");
 
-                        } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                        } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                             salesAnalysisClass.setPlanClass("All");
 
-                        } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                        } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                             salesAnalysisClass.setBrandName("All");
 
                         }
-                        else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                        else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
                             salesAnalysisClass.setBrandplanClass("All");
 
                         }
@@ -1364,27 +1776,27 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         listView_SalesAnalysis.setOnFlingListener(null);
                         new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
 
-                        salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
+                        salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis,hierarchyList);
                         listView_SalesAnalysis.setAdapter(salesadapter);
 
                         //Retain Values.....
                         for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
 
-                            if (txtheaderplanclass.getText().toString().equals("Department")) {
+                            if (txtheaderplanclass.getText().toString().equals(hierarchyList[0])) {
                                 level = 1;
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
                                 if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept().equals(saleFirstVisibleItem)) {
                                     listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                 }
 
-                            } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                            } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1])) {
                                 level = 2;
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
                                 if (salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory().equals(saleFirstVisibleItem)) {
                                     listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                 }
 
-                            } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                            } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
 
                                 level = 3;
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
@@ -1392,7 +1804,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                     listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                 }
 
-                            } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                            } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
 
                                 level = 4;
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
@@ -1400,7 +1812,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                     listView_SalesAnalysis.getLayoutManager().scrollToPosition(firstVisibleItem);
                                 }
 
-                            } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                            } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
 
                                 level = 5;
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
@@ -1574,23 +1986,23 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         saleFirstVisibleItem = saleFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
         if(!header_value.equals(""))
         {
-            if (txtheaderplanclass.getText().toString().equals("Department"))
+            if (txtheaderplanclass.getText().toString().equals(hierarchyList[0]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId + header_value;
             }
-            else if (txtheaderplanclass.getText().toString().equals("Category"))
+            else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId + header_value;
             }
-            else if (txtheaderplanclass.getText().toString().equals("Class"))
+            else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&class=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId + header_value;
             }
-            else if (txtheaderplanclass.getText().toString().equals("Brand"))
+            else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brand=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId + header_value;
             }
-            else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+            else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId + header_value;
             }
@@ -1602,23 +2014,23 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         }
         else
         {
-            if (txtheaderplanclass.getText().toString().equals("Department"))
+            if (txtheaderplanclass.getText().toString().equals(hierarchyList[0]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
-            else if (txtheaderplanclass.getText().toString().equals("Category"))
+            else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
-            else if (txtheaderplanclass.getText().toString().equals("Class"))
+            else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&class=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
-            else if (txtheaderplanclass.getText().toString().equals("Brand"))
+            else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brand=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
-            else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+            else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4]))
             {
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brandclass=" + saleFirstVisibleItem.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
@@ -1757,25 +2169,25 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                if (txtheaderplanclass.getText().toString().equals(hierarchyList[0]))
                                 {
                                     salesAnalysisClass.setPlanDept("All");
 
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1]))
                                 {
                                     salesAnalysisClass.setPlanCategory("All");
 
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Class"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2]))
                                 {
                                     salesAnalysisClass.setPlanClass("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand"))
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3]))
                                 {
                                     salesAnalysisClass.setBrandName("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4]))
                                 {
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
@@ -1785,7 +2197,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 listView_SalesAnalysis.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
 
-                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis,hierarchyList);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
 
                                 val = "";
@@ -1906,19 +2318,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                if (txtheaderplanclass.getText().toString().equals(hierarchyList[0])) {
                                     salesAnalysisClass.setPlanDept("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1])) {
                                     salesAnalysisClass.setPlanCategory("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                                     salesAnalysisClass.setPlanClass("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                                     salesAnalysisClass.setBrandName("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
@@ -1928,7 +2340,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 listView_SalesAnalysis.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
 
-                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis,hierarchyList);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
 
                                 val += " > " + category.replaceAll("%20"," ").replaceAll("%26","&");
@@ -2050,19 +2462,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                if (txtheaderplanclass.getText().toString().equals(hierarchyList[0])) {
                                     salesAnalysisClass.setPlanDept("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1])) {
                                     salesAnalysisClass.setPlanCategory("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                                     salesAnalysisClass.setPlanClass("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                                     salesAnalysisClass.setBrandName("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
@@ -2072,7 +2484,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 listView_SalesAnalysis.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
 
-                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis,hierarchyList);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
                                 val += " > " +  planclass.replaceAll("%20"," ").replaceAll("%26","&");
@@ -2191,19 +2603,19 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 img.setImageResource(R.mipmap.dots_selected);
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department")) {
+                                if (txtheaderplanclass.getText().toString().equals(hierarchyList[0])) {
                                     salesAnalysisClass.setPlanDept("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Category")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1])) {
                                     salesAnalysisClass.setPlanCategory("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                                     salesAnalysisClass.setPlanClass("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                                     salesAnalysisClass.setBrandName("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
                                 salesAnalysisClassArrayList.add(0, salesAnalysisClass);
@@ -2213,7 +2625,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 listView_SalesAnalysis.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
 
-                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis,hierarchyList);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
                                 val += " > " + brandnm.replaceAll("%20"," ").replaceAll("%26","&");
@@ -2303,35 +2715,35 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                         if (sales_filter_level == 2)
                         {
-                            txtheaderplanclass.setText("Category");
-                            fromWhere = "Category";
+                            txtheaderplanclass.setText(hierarchyList[1]);
+                            fromWhere = hierarchyList[1];
                             relprevbtn.setVisibility(View.VISIBLE);
                         }
                         else if (sales_filter_level == 3)
                         {
-                            txtheaderplanclass.setText("Class");
-                            fromWhere = "Class";
+                            txtheaderplanclass.setText(hierarchyList[2]);
+                            fromWhere = hierarchyList[2];
                             relprevbtn.setVisibility(View.VISIBLE);
 
                         }
                         else if (sales_filter_level == 4)
                         {
-                            txtheaderplanclass.setText("Brand");
-                            fromWhere = "Brand";
+                            txtheaderplanclass.setText(hierarchyList[3]);
+                            fromWhere = hierarchyList[3];
                             relprevbtn.setVisibility(View.VISIBLE);
 
                         }
                         else if (sales_filter_level == 5)
                         {
-                            txtheaderplanclass.setText("Brand Class");
-                            fromWhere = "Brand Class";
+                            txtheaderplanclass.setText(hierarchyList[4]);
+                            fromWhere = hierarchyList[4];
                             relprevbtn.setVisibility(View.VISIBLE);
                             relnextbtn.setVisibility(View.INVISIBLE);
                         }
                         else if (sales_filter_level == 5)
                         {
-                            txtheaderplanclass.setText("Brand Class");
-                            fromWhere = "Brand Class";
+                            txtheaderplanclass.setText(hierarchyList[4]);
+                            fromWhere = hierarchyList[4];
                             relprevbtn.setVisibility(View.VISIBLE);
                             relnextbtn.setVisibility(View.INVISIBLE);
                         }
@@ -2375,25 +2787,25 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                if (txtheaderplanclass.getText().toString().equals(hierarchyList[0]))
                                 {
                                     salesAnalysisClass.setPlanDept("All");
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1]))
                                 {
                                     salesAnalysisClass.setPlanCategory("All");
 
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Class"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2]))
                                 {
                                     salesAnalysisClass.setPlanClass("All");
 
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Brand"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3]))
                                 {
                                     salesAnalysisClass.setBrandName("All");
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4]))
                                 {
                                     salesAnalysisClass.setBrandplanClass("All");
 
@@ -2409,7 +2821,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                         LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
                                 listView_SalesAnalysis.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
-                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis,hierarchyList);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
                                 salesadapter.notifyDataSetChanged();
                                 offsetvalue = 0;
@@ -2418,25 +2830,25 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 from_filter = true;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
 
-                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                if (txtheaderplanclass.getText().toString().equals(hierarchyList[0]))
                                 {
                                     level = 1;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanDept();
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1]))
                                 {
                                     level = 2;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanCategory();
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                                     level = 3;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getPlanClass();
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Brand")) {
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                                     level = 4;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandName();
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Brand Class")) {
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4])) {
                                     level = 5;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(firstVisibleItem).getBrandplanClass();
                                 }
@@ -2550,24 +2962,24 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
 
                                 // For Add "All"
                                 salesAnalysisClass = new SalesAnalysisListDisplay();
-                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                if (txtheaderplanclass.getText().toString().equals(hierarchyList[0]))
                                 {
                                     salesAnalysisClass.setPlanDept("All");
 
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1]))
                                 {
                                     salesAnalysisClass.setPlanCategory("All");
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Class"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2]))
                                 {
                                     salesAnalysisClass.setPlanClass("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand"))
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3]))
                                 {
                                     salesAnalysisClass.setBrandName("All");
 
-                                } else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+                                } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4]))
                                 {
                                     salesAnalysisClass.setBrandplanClass("All");
                                 }
@@ -2581,33 +2993,33 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 listView_SalesAnalysis.setOnFlingListener(null);
                                 new GravitySnapHelper(48).attachToRecyclerView(listView_SalesAnalysis);
 
-                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis);
+                                salesadapter = new SalesAnalysisSnapAdapter(salesAnalysisClassArrayList, context, firstVisibleItem, fromWhere, listView_SalesAnalysis,hierarchyList);
                                 listView_SalesAnalysis.setAdapter(salesadapter);
 
                                 offsetvalue = 0;
                                 limit = 100;
                                 count = 0;
                                 analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                                if (txtheaderplanclass.getText().toString().equals("Department"))
+                                if (txtheaderplanclass.getText().toString().equals(hierarchyList[0]))
                                 {
                                     level = 1;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanDept();
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Category"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1]))
                                 {
                                     level = 2;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanCategory();
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Class")) {
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                                     level = 3;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getPlanClass();
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Brand"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3]))
                                 {
                                     level = 4;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandName();
                                 }
-                                else if (txtheaderplanclass.getText().toString().equals("Brand Class"))
+                                else if (txtheaderplanclass.getText().toString().equals(hierarchyList[4]))
                                 {
                                     level = 5;
                                     saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandplanClass();
@@ -2707,7 +3119,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         limit = 100;
                         count = 0;
                         val = "";
-                        header_value="";
+//                        header_value="";
 //                        if (getIntent().getStringExtra("selectedStringVal") == null)
 //                        {
 //                            filter_toggleClick = false;

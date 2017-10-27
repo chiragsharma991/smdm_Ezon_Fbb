@@ -72,6 +72,7 @@ public class ViewDetailsAdapter extends BaseAdapter {
             mInflater = LayoutInflater.from(context);
             view = mInflater.inflate(R.layout.adapter_view_details, null);
 
+            viewHolder.card_viewdetails = (CardView) view.findViewById(R.id.card_viewdetails);
             viewHolder.txt_mallName = (TextView) view.findViewById(R.id.txt_mallName);
             viewHolder.txt_mallName1 =  (TextView) view.findViewById(R.id.txt_mallName1);
             viewHolder.txt_location = (TextView) view.findViewById(R.id.txt_location);
@@ -90,6 +91,15 @@ public class ViewDetailsAdapter extends BaseAdapter {
             viewHolder.txt_location1.setText(arr_viewDetails.get(i).getLocation());
             viewHolder.txt_rating1.setText("Average Rating : "+arr_viewDetails.get(i).getRating());
             viewHolder.txt_noOfAudit1.setText("No. of Audit : "+arr_viewDetails.get(i).getCount_of_audit());
+
+            viewHolder.card_viewdetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent view_tables = new Intent(context, ViewDetailsTableActivity.class);
+                    context.startActivity(view_tables);
+                }
+            });
+
             view.setTag(viewHolder);
 
         }
@@ -104,5 +114,6 @@ public class ViewDetailsAdapter extends BaseAdapter {
     private class Holder
     {
         TextView txt_mallName, txt_mallName1, txt_location, txt_location1, txt_rating, txt_rating1, txt_noOfAudit, txt_noOfAudit1, txt_title;
+        CardView card_viewdetails;
     }
 }

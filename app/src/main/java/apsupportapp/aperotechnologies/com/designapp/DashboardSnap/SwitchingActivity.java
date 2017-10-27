@@ -50,6 +50,10 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusA
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookupActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CompetitorStoreExtActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.ExternalHistoryActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.FGStoreExtActivity;
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.ReportsExtActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneBestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneFreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1;
@@ -71,6 +75,11 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Superviso
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.CompetitorStoreActivity;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ExternalAudReviewActivity;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.FGStoreActivity;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.InspectionHistory;
+import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ReportActivity;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
 import apsupportapp.aperotechnologies.com.designapp.ListAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
@@ -124,8 +133,10 @@ public class SwitchingActivity extends AppCompatActivity
             switch (value) {
 
                 case "001":
-                    Intent StyleActivity = new Intent(context, StyleActivity.class);
-                    startActivity(StyleActivity);
+//                    Intent StyleActivity = new Intent(context, StyleActivity.class);
+//                    startActivity(StyleActivity);
+                    Reusable_Functions.sDialog(context, "Fetching...");
+                    commentDialog("StyleActivity");
                     break;
                 case "002":
 //                    Intent VisualAssortmentActivity = new Intent(context, VisualAssortmentActivity.class);
@@ -157,37 +168,38 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(HourlyPerformence);
                     break;
                 case "006":
-                    Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);
+                    Intent FreshnessIndexActivity = new Intent(context, FreshnessIndexActivity.class);  // FreshnessIndexActivity
                     startActivity(FreshnessIndexActivity);
                     break;
                 case "007":
-                    Intent OptionEfficiencyActivity = new Intent(context, OptionEfficiencyActivity.class);
+                    Intent OptionEfficiencyActivity = new Intent(context, OptionEfficiencyActivity.class); // OptionEfficiencyActivity
                     startActivity(OptionEfficiencyActivity);
                     break;
                 case "008":
-                    Intent SkewedSizesActivity = new Intent(context, SkewedSizesActivity.class);
+                    Intent SkewedSizesActivity = new Intent(context, SkewedSizesActivity.class);   //  SkewedSizesActivity
                     startActivity(SkewedSizesActivity);
                     break;
                 case "009":
-                    Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);
+                    Intent BestPerformerInventory = new Intent(context, BestPerformerInventory.class);   //  BestPerformerInventory
                     startActivity(BestPerformerInventory);
                     break;
                 case "010":
-                    Intent StockAgeingActivity = new Intent(context, StockAgeingActivity.class);
+                    Intent StockAgeingActivity = new Intent(context, StockAgeingActivity.class);  //  StockAgeingActivity
                     startActivity(StockAgeingActivity);
                     break;
                 case "011":
-                    Intent FloorAvailabilityActivity = new Intent(context, FloorAvailabilityActivity.class);
+                    Intent FloorAvailabilityActivity = new Intent(context, FloorAvailabilityActivity.class);   //  FloorAvailabilityActivity
                     startActivity(FloorAvailabilityActivity);
                     break;
                 case "012":
-                    Intent TargetStockExceptionActivity = new Intent(context, TargetStockExceptionActivity.class);
+                    Intent TargetStockExceptionActivity = new Intent(context, TargetStockExceptionActivity.class);  //  TargetStockExceptionActivity
                     startActivity(TargetStockExceptionActivity);
                     break;
                 case "013":
-                    Intent SaleThruInventory = new Intent(context, SaleThruInventory.class);
+                    Intent SaleThruInventory = new Intent(context, SaleThruInventory.class);  //SaleThruInventory
                     startActivity(SaleThruInventory);
                     break;
+
                 case "014":
                     Intent RunningPromoActivity = new Intent(context, RunningPromoActivity.class);
                     startActivity(RunningPromoActivity);
@@ -279,7 +291,7 @@ public class SwitchingActivity extends AppCompatActivity
                     commentDialog("InspectionHistoryActivity");
                     break;
                 case "026":
-                    Intent mpm_activity = new Intent(context, mpm_activity.class);
+                    Intent mpm_activity = new Intent(context, mpm_activity.class);   //mpm_activity
                     startActivity(mpm_activity);
                     break;
                 case "027":
@@ -326,7 +338,6 @@ public class SwitchingActivity extends AppCompatActivity
                     Reusable_Functions.sDialog(context, "Fetching...");
                     commentDialog("SupervisiorStaff");
                     break;
-
                 case "042":
                     SalesAnalysisActivity1 = new Intent(context, EzoneSalesAnalysisActivity1.class);
                     startActivity(SalesAnalysisActivity1);
@@ -363,6 +374,46 @@ public class SwitchingActivity extends AppCompatActivity
                         startActivity( LaunchIntent );
                     }
                     break;
+
+                   //Internal/External Audit
+             /*   case "102":
+
+                case "102":
+                    Intent fgstore = new Intent(context, FGStoreActivity.class);
+                    startActivity(fgstore);
+                    break;
+                case "103":
+                    Intent compstore = new Intent(context, CompetitorStoreActivity.class);
+                    startActivity(compstore);
+                    break;
+                case "104":
+                    Intent extaudrview = new Intent(context, ExternalAudReviewActivity.class);
+                    startActivity(extaudrview);
+                    break;
+                case "105":
+                    Intent insphistory = new Intent(context, InspectionHistory.class);
+                    startActivity(insphistory);
+                    break;
+                case "106":
+                    Intent report = new Intent(context, ReportActivity.class);
+                    startActivity(report);
+                    break;
+                case "107":
+                    Intent fgstoreext = new Intent(context, FGStoreExtActivity.class);
+                    startActivity(fgstoreext);
+                    break;
+                case "108":
+                    Intent compstoreext = new Intent(context, CompetitorStoreExtActivity.class);
+                    startActivity(compstoreext);
+                    break;
+                case "109":
+                    Intent exthistory = new Intent(context, ExternalHistoryActivity.class);
+                    startActivity(exthistory);
+                    break;
+                case "110":
+                    Intent reportext = new Intent(context, ReportsExtActivity.class);
+                    startActivity(reportext);
+                    break; */
 
 
             }
@@ -619,6 +670,9 @@ public class SwitchingActivity extends AppCompatActivity
                 if (kpiIdArray.contains("043"))
                     apps.add(new App("PvA Ezone", R.mipmap.planvsactual,"043"));
 
+                if (kpiIdArray.contains("028"))
+                    apps.add(new App("Hourly Performance", R.mipmap.hourlyperformance,"028"));
+
                 break;
 
             case 14 :
@@ -631,6 +685,20 @@ public class SwitchingActivity extends AppCompatActivity
 
                 break;
 
+//            case 101 :
+//
+//
+//                apps.add(new App("FG Store", R.mipmap.freshnessindex,"102"));
+//                apps.add(new App("Competitor Store", R.mipmap.bestworstperformers,"103"));
+//                apps.add(new App("External Auditor Review", R.mipmap.bestworstperformers,"104"));
+//                apps.add(new App("History", R.mipmap.bestworstperformers,"105"));
+//                apps.add(new App("Reports", R.mipmap.bestworstperformers,"106"));
+//                apps.add(new App("FG Store Ext", R.mipmap.bestworstperformers,"107"));
+//                apps.add(new App("Competitor Store Ext", R.mipmap.bestworstperformers,"108"));
+//                apps.add(new App("History Ext", R.mipmap.bestworstperformers,"109"));
+//                apps.add(new App("Reports Ext", R.mipmap.bestworstperformers,"110"));
+//
+//                break;
 
             default:
                 Log.e("TAG", "not found: Activity");
@@ -856,6 +924,12 @@ public class SwitchingActivity extends AppCompatActivity
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
+                                    else if(from.equals("StyleActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, StyleActivity.class);
+                                        intent.putExtra("from", "dashBoard");
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
                                 }
                                 else {
                                     for (int i = 0; i < response.length(); i++) {
@@ -1006,6 +1080,12 @@ public class SwitchingActivity extends AppCompatActivity
 
                                     else if(from.equals("SupervisiorStaff")){
                                         Intent intent = new Intent(SwitchingActivity.this, SupervisiorStaff.class);
+                                        intent.putExtra("storeCode", storeCode);
+                                        startActivity(intent);
+                                    }
+                                    else if(from.equals("StyleActivity")){
+                                        Intent intent = new Intent(SwitchingActivity.this, StyleActivity.class);
+                                        intent.putExtra("from", "dashBoard");
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }

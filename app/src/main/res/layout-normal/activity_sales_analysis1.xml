@@ -480,45 +480,41 @@
         android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/float_button"
+        android:layout_alignEnd="@+id/float_button"
         fab:fab_addButtonColorNormal="@android:color/transparent"
         fab:fab_addButtonColorPressed="@android:color/transparent"
         fab:fab_addButtonPlusIconColor="@android:color/transparent"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp">
+        fab:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_icon="@drawable/fabicon_department"
             fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
             fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_department"
             fab:fab_title="Department" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_icon="@drawable/fabicon_category"
             fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
             fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_category"
             fab:fab_title="Category" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_icon="@drawable/fabicon_class"
             fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
             fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_class"
             fab:fab_title="Class" />
 
 
@@ -526,10 +522,10 @@
             android:id="@+id/action_brand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_icon="@drawable/fabicon_brand"
             fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
             fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_brand"
             fab:fab_title="Brand" />
 
 
@@ -537,22 +533,21 @@
             android:id="@+id/action_brandclass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_icon="@drawable/fabicon_brand_class"
             fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
             fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_brand_class"
             fab:fab_title="Brand Class" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_icon="@drawable/fabicon_store"
             fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
             fab:fab_colorPressed="#f1f1f1"
-            fab:fab_title="Store"
-            />
+            fab:fab_icon="@drawable/fabicon_store"
+            fab:fab_title="Store" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

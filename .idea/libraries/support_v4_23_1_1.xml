@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="support-v4-23.1.1">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/library/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/e73b815fa7c34748b9eeca1cc1327d2a3ced097b/output/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/library/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/library/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/res" />
-      <root url="jar://$PROJECT_DIR$/library/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/e73b815fa7c34748b9eeca1cc1327d2a3ced097b/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/e73b815fa7c34748b9eeca1cc1327d2a3ced097b/output/jars/libs/internal_impl-23.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/e73b815fa7c34748b9eeca1cc1327d2a3ced097b/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

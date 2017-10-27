@@ -85,7 +85,7 @@ public class Style_Fragment extends Fragment {
     int offsetvalue = 0, limit = 100;
     int count = 0;
     String TA = "StyleActivity";
-    String storeCode;
+    String storeCode, selStoreName;
     // set the header titles
     String headers[] =
             {
@@ -97,13 +97,17 @@ public class Style_Fragment extends Fragment {
             };
 
     int headerCellsWidth[] = new int[headers.length];
-    private String TAG = "StyleActivity";
+    private String TAG = "StyleActivity", check, content;
     private LinearLayout LinearTable;
     private RelativeLayout Style_loadingBar;
 
-    public Style_Fragment(String storeCode, String articleOptionCode) {
+    public Style_Fragment(String storeCode, String articleOptionCode, String check, String content, String selStoreName) {
         this.storeCode = storeCode;
         this.articleOptionCode = articleOptionCode;
+        this.check = check;
+        this.content = content;
+        this.selStoreName  = selStoreName;
+
 
     }
 
@@ -143,7 +147,21 @@ public class Style_Fragment extends Fragment {
 
     private void requestStyleColorDetailsAPI(int offsetvalue1, final int limit1) {
         Reusable_Functions.sDialog(context, "Loading Sizes data");
-        String url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOptionCode.replace(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+        String url;
+        if(check.equals("barcode")) {
+
+            url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?eanNumber=" + content+ "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+
+        }else{
+            if(articleOptionCode == null)
+            {
+                Toast.makeText(context,"Unable to fetch size data. Please try again later",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOptionCode.replace(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+
+        }
         Log.e("sizesNew url "," "+url.toString());
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -182,7 +200,9 @@ public class Style_Fragment extends Fragment {
 
                                 offsetvalue = (limit * count) + limit;
                                 count++;
+
                                 requestStyleColorDetailsAPI(offsetvalue, limit);
+
 
                             } else if (response.length() < limit) {
                                 Reusable_Functions.hDialog();
@@ -281,8 +301,26 @@ public class Style_Fragment extends Fragment {
     }
 
     private void requestStyleSizeDetailsAPI() {
+        String url;
+        if(check.equals("barcode"))
+        {
+            url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?eanNumber=" + content+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
 
-        String url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOptionCode.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+        }
+        else
+        {
+            if(articleOptionCode == null)
+            {
+                Toast.makeText(context,"Unable to fetch style data. Please try again later",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            url = ConstsCore.web_url + "/v1/display/stylesNew/" + userId + "?articleOption=" + articleOptionCode.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c")+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
+
+        }
+//
+
+
         Log.e(TAG, "requestStyleSizeDetailsAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -312,8 +350,8 @@ public class Style_Fragment extends Fragment {
                                     double sellThruUnitsRcpt = styleDetails.getDouble("sellThruUnitsRcpt");
                                     double ros = styleDetails.getDouble("ros");
                                     double stkOnhandQty = styleDetails.getDouble("stkOnhandQty");
-                                     txtStoreCode.setText(storeCode);
-                                    txtStoreName.setText(storeDesc);
+//                                    txtStoreCode.setText(storeCode);
+//                                    txtStoreName.setText(storeDesc);
                                     //  txtSales.setText(": "+"\u20B9" + Sales);
                                     txtarticleOption.setText("" + articleOption);
                                     txttwSalesUnit.setText(" " + Math.round(twSaleTotQty));
@@ -326,9 +364,11 @@ public class Style_Fragment extends Fragment {
                                     txtsalesThruUnit.setText("" +  String.format("%.1f",sellThruUnitsRcpt)+"%");
                                     txtROS.setText("" + String.format("%.1f",ros));
 
-                                    requestStyleColorDetailsAPI(offsetvalue, limit);
+
 
                                 }
+
+                                requestStyleColorDetailsAPI(offsetvalue, limit);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -340,6 +380,7 @@ public class Style_Fragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
+
                     }
                 }
 
@@ -371,7 +412,7 @@ public class Style_Fragment extends Fragment {
         txtStoreCode = (TextView) view.findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView) view.findViewById(R.id.txtStoreName);
 //        txtStoreCode.setText(storeDescription.trim().substring(0,4));
-//        txtStoreName.setText(storeDescription.substring(5));
+        txtStoreName.setText(selStoreName);
         txttwSalesUnit = (TextView) view.findViewById(R.id.txttwSalesUnit);
         txtlwSales = (TextView) view.findViewById(R.id.txtlwSales);
         txtytdSales = (TextView) view.findViewById(R.id.txtytdSales);

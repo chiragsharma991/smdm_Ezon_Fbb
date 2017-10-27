@@ -45,6 +45,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import apsupportapp.aperotechnologies.com.designapp.BuildConfig;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DB_operation.DatabaseHandler;
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
@@ -189,7 +191,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void requestLoginAPI()
     {
-        String url = ConstsCore.web_url + "/v1/login"; //ConstsCore.web_url+ + "/v1/login/userId";
+        String url =ConstsCore.web_url + "/v1/login" ; //ConstsCore.web_url+ + "/v1/login/userId";
         Log.e(TAG, "requestLoginAPI: "+url);
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>()
@@ -291,6 +293,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     login_storeList = gson.fromJson(response.get(i).toString(),Login_StoreList.class);
                                     loginStoreArray.add(login_storeList);
                                 }
+                                Log.i(TAG, "loginStoreArray sizes: "+loginStoreArray.size());
                                 //database storeage
                                 db.deleteAllData();
                                 db.db_AddData(loginStoreArray);
@@ -303,6 +306,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("lobid", loginStoreArray.get(0).getLobId());
                                 editor.putString("lobname", loginStoreArray.get(0).getLobName());
                                 editor.putString("kpi_id",loginStoreArray.get(0).getKpiId());
+                                editor.putString("hierarchyLevels",loginStoreArray.get(0).getHierarchyLevels());
                                 editor.putString("isMultiStore", loginStoreArray.get(0).getIsMultiStore());
                                 editor.apply();
                                 Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
@@ -409,17 +413,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             }
                             Reusable_Functions.hDialog();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("hierarchyLevels", loginStoreArray.get(0).getHierarchyLevels());
+                            editor.apply();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
                             String kpi_id = loginStoreArray.get(0).getKpiId();
-//                            StringBuilder s = new StringBuilder(kpi_id);
-//                            s.append(",030");
-//                            Log.i(TAG, "onResponse: Kpi Id--"+s.toString() );
-//
-
                             String[] kpiIdArray = kpi_id.toString().split(",");
                             intent.putExtra("kpiId", kpiIdArray);
-                            //Log.e(TAG, "onResponse: "+kpiIdArray.length + kpiIdArray[i]);
                             intent.putExtra("BACKTO", "login");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

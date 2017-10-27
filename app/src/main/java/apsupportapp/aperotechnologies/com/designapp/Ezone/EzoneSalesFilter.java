@@ -85,6 +85,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
 
     static List<String> ez_regionList, ez_storeList, ez_deptList, ez_categryList, ez_classList, ez_brandList, ez_mcList;
+    private String[] hierarchyList;
     // git 09-06-17
 
 
@@ -100,6 +101,11 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLevel2Code = sharedPreferences.getString("concept", "");
         lobId = sharedPreferences.getString("lobid","");
+        String hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
+        hierarchyList = hierarchyLevels.split(",");
+        for (int i = 0; i <hierarchyList.length ; i++) {
+            hierarchyList[i]=hierarchyList[i].trim();
+        }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -257,16 +263,16 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
         loc_listDataHeader.add("Region");
         loc_listDataHeader.add("Store");
         if (getIntent().getStringExtra("checkfrom").equals("ezoneSales") || getIntent().getStringExtra("checkfrom").equals("ezonepvaAnalysis")) {
-            prod_listDataHeader.add("Department");
-            prod_listDataHeader.add("Subdept");
-            prod_listDataHeader.add("Class");
-            prod_listDataHeader.add("Subclass");
+            prod_listDataHeader.add(hierarchyList[0]);
+            prod_listDataHeader.add(hierarchyList[1]);
+            prod_listDataHeader.add(hierarchyList[2]);
+            prod_listDataHeader.add(hierarchyList[3]);
         } else {
-            prod_listDataHeader.add("Department");
-            prod_listDataHeader.add("Subdept");
-            prod_listDataHeader.add("Class");
-            prod_listDataHeader.add("Subclass");
-            prod_listDataHeader.add("MC");
+            prod_listDataHeader.add(hierarchyList[0]);
+            prod_listDataHeader.add(hierarchyList[1]);
+            prod_listDataHeader.add(hierarchyList[2]);
+            prod_listDataHeader.add(hierarchyList[3]);
+            prod_listDataHeader.add(hierarchyList[4]);
         }
 
         if (Reusable_Functions.chkStatus(EzoneSalesFilter.this)) {
@@ -698,7 +704,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     ez_storeList.add(store);
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(0).equals("Department")) {
+                                if (prod_listDataHeader.get(0).equals(hierarchyList[0])) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -717,7 +723,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         {
                             if(response.equals("") || response == null || response.length()==0) {
 
-                                if (prod_listDataHeader.get(0).equals("Department")) {
+                                if (prod_listDataHeader.get(0).equals(hierarchyList[0])) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -799,7 +805,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     ez_deptList.add(plandept);
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
-                                if (prod_listDataHeader.get(1).equals("Subdept")) {
+                                if (prod_listDataHeader.get(1).equals(hierarchyList[1])) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -818,7 +824,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         {
                             if(response.equals("") || response == null || response.length()==0) {
 
-                                if (prod_listDataHeader.get(1).equals("Subdept")) {
+                                if (prod_listDataHeader.get(1).equals(hierarchyList[1])) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -916,7 +922,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         {
                             if(response.equals("") || response == null || response.length()==0) {
 
-                                if (prod_listDataHeader.get(2).equals("Class")) {
+                                if (prod_listDataHeader.get(2).equals(hierarchyList[2])) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -998,7 +1004,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                 }
                                 rel_ez_process_filter.setVisibility(View.GONE);
 
-                                if (prod_listDataHeader.get(3).equals("Subclass")) {
+                                if (prod_listDataHeader.get(3).equals(hierarchyList[3])) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -1017,7 +1023,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                         {
                             if(response.equals("") || response == null || response.length()==0) {
 
-                                if (prod_listDataHeader.get(3).equals("Subclass")) {
+                                if (prod_listDataHeader.get(3).equals(hierarchyList[3])) {
                                     rel_ez_process_filter.setVisibility(View.VISIBLE);
                                     offset = 0;
                                     limit = 100;
@@ -1104,7 +1110,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     rel_ez_process_filter.setVisibility(View.GONE);
                                 } else {
                                     rel_ez_process_filter.setVisibility(View.GONE);
-                                    if (prod_listDataHeader.get(4).equals("MC")) {
+                                    if (prod_listDataHeader.get(4).equals(hierarchyList[4])) {
                                         rel_ez_process_filter.setVisibility(View.VISIBLE);
                                         offset = 0;
                                         limit = 100;
@@ -1127,7 +1133,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                                     rel_ez_process_filter.setVisibility(View.GONE);
                                 } else {
                                     rel_ez_process_filter.setVisibility(View.GONE);
-                                    if (prod_listDataHeader.get(4).equals("MC")) {
+                                    if (prod_listDataHeader.get(4).equals(hierarchyList[4])) {
                                         rel_ez_process_filter.setVisibility(View.VISIBLE);
                                         offset = 0;
                                         limit = 100;

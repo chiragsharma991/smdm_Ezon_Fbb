@@ -91,7 +91,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     FreshnessIndexDetails freshnessIndexDetails;
     public static FreshnessIndexDetails freshnessIndexDetail;
     RelativeLayout freshnessIndex_imageBtnBack, freshnessIndex_imgfilter, FreshnessIndex_Ez_moreVertical;
-    RelativeLayout btnFIndexPrev, btnFIndexNext;  //small arrow key to change department.
+    RelativeLayout btnFIndexPrev, btnFIndexNext, ezonefreshness_btnReset;  //small arrow key to change department.
     Gson gson;
     FreshnessIndexSnapAdapter freshnessIndexSnapAdapter;
     PieData pieData;
@@ -120,11 +120,14 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ezone_freshness_index);
+        getSupportActionBar().hide();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         context = this;
+        Log.e("Ezone freshness","");
         header_value = "";
         if (getIntent().getExtras() != null) {
             if (getIntent().getExtras().getString("selectedStringVal") != null) {
@@ -145,8 +148,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        setContentView(R.layout.activity_ezone_freshness_index);
-        getSupportActionBar().hide();
+
         TAG = "FreshnessIndex_Ez_Activity";
         common_intializeUI();
         Fbb_collection();  // start Fbb collection.
@@ -187,6 +189,8 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 onBackPressed();
             }
         });
+
+
 
     }
 
@@ -1001,8 +1005,14 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
     private void requestAll() {
         String fIdetails;
+        if(!header_value.equals("")) {
+            fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + ""+header_value;
 
-        fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        }else
+        {
+            fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+
+        }
 
 
         Log.e(TAG, "requestAll URL: " + fIdetails);
@@ -1642,7 +1652,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     return;
                 }
                 FreshnessIndexValue = "";
-                header_value = "";
+//                header_value = "";
                 switch (txtFIndexClass.getText().toString()) {
 
 
@@ -1789,7 +1799,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     return;
                 }
                 FreshnessIndexValue = "";
-                header_value = "";
+//                header_value = "";
                 switch (txtFIndexClass.getText().toString()) {
 
                     case "Department":
@@ -1953,9 +1963,9 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&regionDescription=" + freshnessIndex_ClickedVal;
+                                                    header_value += "&regionDescription=" + freshnessIndex_ClickedVal;
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
 
                                                 if (Reusable_Functions.chkStatus(context)) {
@@ -1988,9 +1998,13 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&department=" + freshnessIndex_ClickedVal;
+
+                                                    if(!header_value.contains("&department=" + freshnessIndex_ClickedVal))
+                                                    {
+                                                        header_value = "&department=" + freshnessIndex_ClickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
 
                                                 if (Reusable_Functions.chkStatus(context)) {
@@ -2020,9 +2034,13 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&category=" + freshnessIndex_ClickedVal;
+                                                    if(!header_value.contains("&category=" + freshnessIndex_ClickedVal))
+                                                    {
+                                                        header_value += "&category=" + freshnessIndex_ClickedVal;
+                                                    }
+
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
@@ -2050,9 +2068,12 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&class=" + freshnessIndex_ClickedVal;
+                                                    if(!header_value.contains("&class=" + freshnessIndex_ClickedVal))
+                                                    {
+                                                        header_value += "&class=" + freshnessIndex_ClickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
@@ -2083,9 +2104,13 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                                                 if (!freshnessIndex_ClickedVal.equals("All")) {
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                     freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    header_value = "&brand=" + freshnessIndex_ClickedVal;
+
+                                                    if(!header_value.contains("&brand=" + freshnessIndex_ClickedVal))
+                                                    {
+                                                        header_value += "&brand=" + freshnessIndex_ClickedVal;
+                                                    }
                                                 } else {
-                                                    header_value = "";
+//                                                    header_value = "";
                                                 }
                                                 if (Reusable_Functions.chkStatus(context)) {
                                                     if (postRequest != null) {
@@ -2139,7 +2164,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         txtFIndexClass = (TextView) findViewById(R.id.txtFIndexClass);
         freshnessIndex_imageBtnBack = (RelativeLayout) findViewById(R.id.freshnessIndex_imageBtnBack);
         freshnessIndex_imgfilter = (RelativeLayout) findViewById(R.id.freshnessIndex_imgfilter);
-
+        ezonefreshness_btnReset = (RelativeLayout) findViewById(R.id.ezonefreshness_btnReset);
 
         freshnessIndex_imgfilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2150,6 +2175,43 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
             }
         });
+
+
+        ezonefreshness_btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("in reset onclick","");
+                header_value = "";
+                fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
+                selFirstPositionValue = 0;
+                firstVisibleItem = 0;
+                freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading data...");
+                    processBar.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 1;
+                    txtfIndexDeptName.setText(hierarchy(""));
+                    txtFIndexClass.setText("Department");
+                    fromWhere = "Department";
+                    btnFIndexNext.setVisibility(View.VISIBLE);
+                    btnFIndexPrev.setVisibility(View.INVISIBLE);
+                    //FIndex_SegmentClick = "Fashion";
+                    //Tabview.getTabAt(0).select();
+                    llfIndexhierarchy.setVisibility(View.GONE);
+                    requestFreshnessIndexDetails();
+
+                } else {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    llfreshnessIndex.setVisibility(View.GONE);
+
+                }
+            }
+        });
+
     }
 
 

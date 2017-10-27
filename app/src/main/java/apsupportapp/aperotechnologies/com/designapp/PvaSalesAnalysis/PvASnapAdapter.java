@@ -35,6 +35,7 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 2;
     private final String geoLeveLDesc;
+    private final String[] hierarchyList;
     int curerntindex;
     private Context context;
     String fromWhere;
@@ -45,13 +46,14 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private String department;
 
 
-    public PvASnapAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList, Context context, int currentIndex, String fromWhere, RecyclerView listViewSalesPvA, String geoLeveLDesc) {
+    public PvASnapAdapter(ArrayList<SalesAnalysisListDisplay> salesAnalysisListDisplayArrayList, Context context, int currentIndex, String fromWhere, RecyclerView listViewSalesPvA, String geoLeveLDesc, String[] hierarchyList) {
         this.context = context;
         this.mSnaps = salesAnalysisListDisplayArrayList;
         this.fromWhere = fromWhere;
         this.listViewSalesPvA = listViewSalesPvA;
         this.curerntindex = currentIndex;
         this.geoLeveLDesc = geoLeveLDesc;
+        this.hierarchyList = hierarchyList;
         level = 1;
         gson = new Gson();
     }
@@ -113,57 +115,57 @@ public class PvASnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("", "in"));
 
 
-                    if (fromWhere.equals("Department")) {
+                if (fromWhere.equals(hierarchyList[0])) {
 
-                        department=productNameBean.getPlanDept();
+                    department=productNameBean.getPlanDept();
 
-                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                    ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
-                    } else if (fromWhere.equals("Category")) {
+                } else if (fromWhere.equals(hierarchyList[1])) {
 
-                        department=productNameBean.getPlanCategory();
+                    department=productNameBean.getPlanCategory();
 
-                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                    ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
-                    } else if (fromWhere.equals("Class")) {
+                } else if (fromWhere.equals(hierarchyList[2])) {
 
-                        department=productNameBean.getPlanClass();
+                    department=productNameBean.getPlanClass();
 
-                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                    ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
 
-                    } else if (fromWhere.equals("Brand"))
-                    {
-                        department=productNameBean.getBrandName();
+                } else if (fromWhere.equals(hierarchyList[3]))
+                {
+                    department=productNameBean.getBrandName();
 
-                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
-                    }
-                    else if (fromWhere.equals("Brand Class"))
-                    {
-                        department=productNameBean.getBrandplanClass();
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                    ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+                }
+                else if (fromWhere.equals(hierarchyList[4]))
+                {
+                    department=productNameBean.getBrandplanClass();
 
-                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
-                    }
-                    else if (fromWhere.equals("Store"))
-                    {
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                    ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+                }
+                else if (fromWhere.equals("Store"))
+                {
 
-                        department=productNameBean.getBrandplanClass();
+                    department=productNameBean.getBrandplanClass();
 
-                        ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
-                        ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
-                        ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtPlanClass.setText(department);
+                    ((PvAViewHolder) viewHolder).txtPlanSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getPlanSaleNetVal())));
+                    ((PvAViewHolder) viewHolder).txtNetSales.setText("\u20B9 " + formatter.format(Math.round(productNameBean.getSaleNetVal())));
 
-                    }
+                }
 
                 double singlePercVal = 0.5;//50/100;// width divide by 100 perc
 

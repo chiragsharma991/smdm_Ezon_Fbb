@@ -395,6 +395,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     limit = 100;
                     count = 0;
                     level = 1;
+                    txtfIndexDeptName.setText(hierarchy(""));
                     txtFIndexClass.setText("Department");
                     fromWhere = "Department";
                     btnFIndexNext.setVisibility(View.VISIBLE);
@@ -2626,16 +2627,23 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     public String hierarchy(String freshnessIndex_ClickedVal){
 
-        if(FreshnessIndexValue==null || FreshnessIndexValue.equals(""))
+        if(freshnessIndex_ClickedVal.equals(""))
         {
 
-            FreshnessIndexValue =  freshnessIndex_ClickedVal;
-
-        }else{
-
-            FreshnessIndexValue += " > " + freshnessIndex_ClickedVal;
+            FreshnessIndexValue = null;
         }
+        else
+        {
 
+            if (FreshnessIndexValue == null || FreshnessIndexValue.equals("")) {
+
+                FreshnessIndexValue = freshnessIndex_ClickedVal;
+
+            } else {
+
+                FreshnessIndexValue += " > " + freshnessIndex_ClickedVal;
+            }
+        }
 
         return FreshnessIndexValue;
 
@@ -3135,9 +3143,9 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 //
 //                }else{
 
-                    Intent intent = new Intent(FreshnessIndexActivity.this, SalesAnalysisFilter.class);
-                    intent.putExtra("checkfrom", "freshnessIndex");
-                    startActivity(intent);
+                Intent intent = new Intent(FreshnessIndexActivity.this, SalesAnalysisFilter.class);
+                intent.putExtra("checkfrom", "freshnessIndex");
+                startActivity(intent);
 //                }
 
             }

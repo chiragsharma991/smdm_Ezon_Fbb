@@ -191,9 +191,9 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
                 ((FreshnessHolder) viewHolder).txtfindexGIT.setText("" + formatter.format(stkGitQty));
 
             }
-            }
-
         }
+
+    }
 
 
 
@@ -211,13 +211,13 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
     }
 }
 
-    class ProgressViewHolder extends RecyclerView.ViewHolder {
-        TextView txtView;
+class ProgressViewHolder extends RecyclerView.ViewHolder {
+    TextView txtView;
 
-        public ProgressViewHolder(View footerView) {
-            super(footerView);
-            txtView = (TextView) footerView.findViewById(R.id.txtView);
-        }
+    public ProgressViewHolder(View footerView) {
+        super(footerView);
+        txtView = (TextView) footerView.findViewById(R.id.txtView);
     }
+}
 
 

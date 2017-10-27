@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,7 +25,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CustomSeekBar;
 import apsupportapp.aperotechnologies.com.designapp.R;
+
+import static apsupportapp.aperotechnologies.com.designapp.Constants.overall_progress;
 
 //import com.marcinmoskala.arcseekbar.ArcSeekBar;
 
@@ -44,11 +48,14 @@ public class CompetitorStoreActivity extends AppCompatActivity {
     private List<Overallratings> list_storeservices;
     private List<Overallratings> list_vm;
     private RadioButton radio_yes_supervisor, radio_no_supervisor;
+    private RelativeLayout imageBtnBack1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_competitor_store);
+        getSupportActionBar().hide();
+
         context = this;
         list_overallratings = new ArrayList<>();
         list_billing_experience = new ArrayList<>();
@@ -59,7 +66,7 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         list_storelookfeel = new ArrayList<>();
         list_storeservices = new ArrayList<>();
         list_vm = new ArrayList<>();
-
+        overall_progress = 0;
 
 
         final LinearLayout lin_lay_overall_ratings = (LinearLayout) findViewById(R.id.lin_lay_overall_ratings);
@@ -105,9 +112,20 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         edt_keytakeaway = (EditText) findViewById(R.id.edt_keytakeaway);
         radio_yes_supervisor = (RadioButton) findViewById(R.id.radio_yes_supervisor);
         radio_no_supervisor = (RadioButton) findViewById(R.id.radio_no_supervisor);
+        imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
 
 
+        imageBtnBack1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
+        LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
+        CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
+        customSeekBar.addSeekBar(mSeekLin);
+        Log.e("=== "," "+overall_progress);
 
         Button btn_Reset = (Button) findViewById(R.id.btn_reset);
         btn_Reset.setOnClickListener(new View.OnClickListener() {

@@ -39,7 +39,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
     public static ViewPager viewPager;
     public static TabLayout tabLayout;
     SharedPreferences sharedPreferences;
-    String kpi_id, storeCode, articleOptionCode;
+    String kpi_id, storeCode, articleOptionCode, check, content;
 
 
     @Override
@@ -57,7 +57,10 @@ public class SwitchingTabActivity extends AppCompatActivity {
             {
                 storeCode = getIntent().getExtras().getString("storeCode");
                 articleOptionCode = getIntent().getExtras().getString("articleOptionCode");
-                Log.e("articleOptionCode ", " "+articleOptionCode);
+                check = getIntent().getExtras().getString("check");
+                content = getIntent().getExtras().getString("content");
+
+                Log.e("storeCode switching", " "+storeCode);
 
             }
 
@@ -106,7 +109,7 @@ public class SwitchingTabActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         viewPager = (ViewPager) findViewById(R.id.pager);
-        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), storeCode, articleOptionCode);
+        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), storeCode, articleOptionCode, check, content, getIntent().getExtras().getString("selStoreName"));
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -176,12 +179,17 @@ public class SwitchingTabActivity extends AppCompatActivity {
         {
           finish();
         }
-        else if(getIntent().getStringExtra("checkFrom").equals("styleActivity")){
+        else if(getIntent().getStringExtra("checkFrom").equals("styleActivity"))
+        {
             Intent intent = new Intent(SwitchingTabActivity.this, StyleActivity.class);
+            intent.putExtra("from", "");
+            intent.putExtra("selStoreName",getIntent().getExtras().getString("selStoreName"));
             intent.putExtra("selCollectionname", getIntent().getExtras().getString("selCollectionname"));
             intent.putExtra("selOptionName", getIntent().getExtras().getString("selOptionName"));
-            intent.putExtra("selStoreName",getIntent().getExtras().getString("selStoreName"));
 
+
+
+            Log.e("selStoreName "," "+getIntent().getExtras().getString("selStoreName"));
             startActivity(intent);
             finish();
         }

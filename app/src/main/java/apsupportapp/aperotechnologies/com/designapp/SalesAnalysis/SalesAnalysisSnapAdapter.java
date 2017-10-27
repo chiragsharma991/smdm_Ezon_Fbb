@@ -28,6 +28,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
+    private  String[] hierarchyList;
     ArrayList<SalesAnalysisViewPagerValue> analysisArrayList;
     SalesPagerAdapter pageradapter;
     SalesAnalysisListDisplay salesAnalysisListDisplay;
@@ -50,12 +51,13 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
     // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
 
 
-    public SalesAnalysisSnapAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis) {
+    public SalesAnalysisSnapAdapter(ArrayList<SalesAnalysisListDisplay> arrayList, Context context, int currentIndex, String fromwhere, RecyclerView listView_SalesAnalysis, String[] hierarchyList) {
 
         this.mSnaps = arrayList;
         this.context = context;
         this.fromwhere = fromwhere;
         this.listView_SalesAnalysis = listView_SalesAnalysis;
+        this.hierarchyList = hierarchyList;
         mInflater = LayoutInflater.from(context);
         this.currentIndex = currentIndex;
         level = 1;
@@ -126,7 +128,35 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
             {
                 SalesAnalysisListDisplay productNameBean = mSnaps.get(position);
 
-                switch (fromwhere)
+
+                if(fromwhere.equals(hierarchyList[0])){
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanDept());
+
+                }
+                else if(fromwhere.equals(hierarchyList[1])){
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanCategory());
+
+                }
+                else if(fromwhere.equals(hierarchyList[2])){
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getPlanClass());
+
+                }
+                else if(fromwhere.equals(hierarchyList[3])){
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandName());
+
+                }
+
+                else if(fromwhere.equals(hierarchyList[4])){
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
+
+                }
+                else if(fromwhere.equals("Store")){
+                    ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
+
+                }
+
+
+              /*  switch (fromwhere)
                 {
                     case "Department":
 //                        Log.e("onBindViewHolder: ","reset calling" );
@@ -149,7 +179,7 @@ public class SalesAnalysisSnapAdapter extends RecyclerView.Adapter<RecyclerView.
                     case "Store":
                         ((SalesViewHolder) viewHolder).nameTv.setText(productNameBean.getBrandplanClass());
                         break;
-                }
+                }*/
 
                 ((SalesViewHolder) viewHolder).txtPvAValue.setText(" " + Math.round(productNameBean.getPvaAchieved()) + "%");
 
