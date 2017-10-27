@@ -78,8 +78,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     public static Activity Ezone_SalesAnalysisActivity;
     Context context;
     String planDept, planCategory, planClass;
-    // Fashion At BB Elements Declaration
-    SegmentedGroup segmentedGroupSales;
     ViewPager vwpagersales;
     LinearLayout lldots, llhierarchy, llayoutSalesAnalysis;
     RecyclerView listView_SalesAnalysis;
@@ -87,7 +85,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     String userId, bearertoken, geoLeveLDesc, storeDescription, geoLevel2Code, lobId, selectedString;
     String saleFirstVisibleItem, fromWhere = "Department", val, txtSalesClickedValue, all_from_val;
     TextView txtheaderplanclass, txthDeptName;
-
     public static int level = 1;
     RequestQueue queue;
     RelativeLayout relimgrank, relimgfilter, relprevbtn, relnextbtn, relLayoutSales, btnBack;
@@ -155,14 +152,13 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         } else {
             header_value = "";
         }
-
         //when geoLevelDesc is Ezone
-
         initialize_ez_ui();
         filterSelectedString = getIntent().getStringExtra("selectedStringVal");
         filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
 
 
+        Log.e("filterSelectedString :", " " + filterSelectedString);
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.progressDialog = new ProgressDialog(context);
             Reusable_Functions.progressDialog.setCancelable(false);
@@ -170,7 +166,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 Reusable_Functions.progressDialog.show();
             }
             Reusable_Functions.progressDialog.setMessage("Loading...");
-            //Reusable_Functions.sDialog(context, "Loading...");
             ez_progessBar.setVisibility(View.GONE);
             ez_linear_hierarchy.setVisibility(View.GONE);
             rel_ez_prev.setVisibility(View.INVISIBLE);
@@ -237,18 +232,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         else
                         {
                             ezone_onClickflg = true;
-//                            Handler h = new Handler();
-//                            h.postDelayed(new Runnable() {
-//                                public void run() {
+
                                     if (position < ez_sales_detalis_array.size()) {
-
-
                                         if(txt_ez_header.getText().toString().equals(hierarchyList[0])){
-
                                             rel_ez_prev.setVisibility(View.VISIBLE);
                                             txt_ez_header.setText(hierarchyList[1]);
                                             ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
-
                                             if (!ez_sclickedVal.equals("All")) {
                                                 ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
                                                 ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
@@ -269,8 +258,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (ez_postRequest != null) {
                                                     ez_postRequest.cancel();
                                                 }
-                                                // Reusable_Functions.hDialog();
-                                                // Reusable_Functions.sDialog(context, "Loading data...");
                                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
                                                 if (!Reusable_Functions.progressDialog.isShowing()) {
                                                     Reusable_Functions.progressDialog.show();
@@ -289,10 +276,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                             }
                                         }
                                         else if(txt_ez_header.getText().toString().equals(hierarchyList[1])){
-
                                             txt_ez_header.setText(hierarchyList[2]);
                                             ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
-
                                             if (!ez_sclickedVal.equals("All")) {
                                                 ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
                                                 ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
@@ -313,8 +298,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (ez_postRequest != null) {
                                                     ez_postRequest.cancel();
                                                 }
-                                                // Reusable_Functions.hDialog();
-                                                // Reusable_Functions.sDialog(context, "Loading data...");
                                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
                                                 if (!Reusable_Functions.progressDialog.isShowing()) {
                                                     Reusable_Functions.progressDialog.show();
@@ -356,8 +339,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (ez_postRequest != null) {
                                                     ez_postRequest.cancel();
                                                 }
-//                                                        Reusable_Functions.hDialog();
-//                                                        Reusable_Functions.sDialog(context, "Loading data...");
                                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
                                                 if (!Reusable_Functions.progressDialog.isShowing()) {
                                                     Reusable_Functions.progressDialog.show();
@@ -375,7 +356,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                             }
                                         }
                                         else if(txt_ez_header.getText().toString().equals("Region")){
-
                                             rel_ez_prev.setVisibility(View.VISIBLE);
                                             rel_ez_next.setVisibility(View.INVISIBLE);
                                             txt_ez_header.setText("Store");
@@ -400,8 +380,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 if (ez_postRequest != null) {
                                                     ez_postRequest.cancel();
                                                 }
-//                                                        Reusable_Functions.hDialog();
-//                                                        Reusable_Functions.sDialog(context, "Loading data...");
                                                 Reusable_Functions.progressDialog = new ProgressDialog(context);
                                                 if (!Reusable_Functions.progressDialog.isShowing()) {
                                                     Reusable_Functions.progressDialog.show();
@@ -423,224 +401,9 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                             Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
                                             ezone_onClickflg = false;
                                         }
-
-
-                                      /*  switch (txt_ez_header.getText().toString()) {
-                                            case "Department":
-                                                rel_ez_prev.setVisibility(View.VISIBLE);
-                                                txt_ez_header.setText("Subdept");
-                                                ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
-
-                                                if (!ez_sclickedVal.equals("All")) {
-                                                    ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
-                                                    ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    if(!header_value.contains("&department=" + ez_sclickedVal))
-                                                    {
-                                                        header_value = "&department=" + ez_sclickedVal;
-                                                    }
-                                                } else {
-//                                                    header_value = "";
-                                                }
-                                                ez_fromWhere = "Subdept";
-                                                if (ez_linear_dots != null) {
-                                                    ez_linear_dots.removeAllViews();
-                                                }
-                                                ez_currentVmPos = ez_viewpager.getCurrentItem();
-                                                ezone_level = 2;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (ez_postRequest != null) {
-                                                        ez_postRequest.cancel();
-                                                    }
-                                                    // Reusable_Functions.hDialog();
-                                                    // Reusable_Functions.sDialog(context, "Loading data...");
-                                                    Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                                    if (!Reusable_Functions.progressDialog.isShowing()) {
-                                                        Reusable_Functions.progressDialog.show();
-                                                    }
-                                                    Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                                    ez_progessBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                                                    requestEzoneSalesCategoryList(ez_sclickedVal);
-                                                    planDept = ez_sclickedVal;
-
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-                                                break;
-
-                                            case "Subdept":
-                                                txt_ez_header.setText("Class");
-                                                ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
-
-                                                if (!ez_sclickedVal.equals("All")) {
-                                                    ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
-                                                    ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    if(!header_value.contains("&category=" + ez_sclickedVal))
-                                                    {
-                                                        header_value += "&category=" + ez_sclickedVal;
-                                                    }
-                                                } else {
-//                                                    header_value = "";
-                                                }
-                                                ez_fromWhere = "Class";
-                                                if (ez_linear_dots != null) {
-                                                    ez_linear_dots.removeAllViews();
-                                                }
-                                                ez_currentVmPos = ez_viewpager.getCurrentItem();
-                                                ezone_level = 3;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (ez_postRequest != null) {
-                                                        ez_postRequest.cancel();
-                                                    }
-                                                    // Reusable_Functions.hDialog();
-                                                    // Reusable_Functions.sDialog(context, "Loading data...");
-                                                    Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                                    if (!Reusable_Functions.progressDialog.isShowing()) {
-                                                        Reusable_Functions.progressDialog.show();
-                                                    }
-                                                    Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                                    ez_progessBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                                                    requestEzoneSalesPlanClassList(ez_sclickedVal);
-                                                    planCategory = ez_sclickedVal;
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-                                                break;
-
-                                            case "Class":
-                                                rel_ez_next.setVisibility(View.INVISIBLE);
-                                                txt_ez_header.setText("Subclass");
-                                                ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
-                                                if (!ez_sclickedVal.equals("All")) {
-                                                    ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
-                                                    ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    if(!header_value.contains("&class=" + ez_sclickedVal))
-                                                    {
-                                                        header_value += "&class=" + ez_sclickedVal;
-                                                    }
-                                                } else {
-//                                                    header_value = "";
-                                                }
-                                                ez_fromWhere = "Subclass";
-                                                if (ez_linear_dots != null) {
-                                                    ez_linear_dots.removeAllViews();
-                                                }
-                                                ez_currentVmPos = ez_viewpager.getCurrentItem();
-                                                ezone_level = 4;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (ez_postRequest != null) {
-                                                        ez_postRequest.cancel();
-                                                    }
-//                                                        Reusable_Functions.hDialog();
-//                                                        Reusable_Functions.sDialog(context, "Loading data...");
-                                                    Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                                    if (!Reusable_Functions.progressDialog.isShowing()) {
-                                                        Reusable_Functions.progressDialog.show();
-                                                    }
-                                                    Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                                    ez_progessBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                                                    requestEzoneSalesBrandList(ez_sclickedVal);
-                                                    planClass = ez_sclickedVal;
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-                                                break;
-
-                                            case "Brand":
-//                                                    txt_ez_header.setText("Brand Class");
-//                                                    ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
-//                                                    ez_fromWhere = "Brand Class";
-//                                                    if (ez_linear_dots != null) {
-//                                                        ez_linear_dots.removeAllViews();
-//                                                    }
-//                                                    ez_currentVmPos = ez_viewpager.getCurrentItem();
-//                                                    ezone_level = 5;
-//                                                    if (Reusable_Functions.chkStatus(context)) {
-//                                                        if (ez_postRequest != null) {
-//                                                            ez_postRequest.cancel();
-//                                                        }
-//                                                        Reusable_Functions.hDialog();
-//                                                        Reusable_Functions.sDialog(context, "Loading data...");
-//                                                        Reusable_Functions.progressDialog = new ProgressDialog(context);
-//                                                        if (!Reusable_Functions.progressDialog.isShowing()) {
-//                                                            Reusable_Functions.progressDialog.show();
-//                                                        }
-//                                                        Reusable_Functions.progressDialog.setMessage("Loading data...");
-//                                                        ez_progessBar.setVisibility(View.GONE);
-//                                                        offsetvalue = 0;
-//                                                        limit = 100;
-//                                                        count = 0;
-//                                                        ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-//                                                        requestEzoneSalesBrandPlanList(ez_sclickedVal);
-//                                                    } else {
-//                                                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                                                    }
-//                                                    break;
-
-                                            case "Region":
-                                                rel_ez_prev.setVisibility(View.VISIBLE);
-                                                rel_ez_next.setVisibility(View.INVISIBLE);
-                                                txt_ez_header.setText("Store");
-                                                ez_sclickedVal = ez_sales_detalis_array.get(position).getLevel();
-                                                if (!ez_sclickedVal.equals("All")) {
-                                                    ez_sclickedVal = ez_sclickedVal.replace("%", "%25");
-                                                    ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
-                                                    if(!header_value.contains("&regionDescription=" + ez_sclickedVal))
-                                                    {
-                                                        header_value += "&regionDescription=" + ez_sclickedVal;
-                                                    }
-                                                } else {
-//                                                    header_value = "";
-                                                }
-                                                ez_fromWhere = "Store";
-                                                if (ez_linear_dots != null) {
-                                                    ez_linear_dots.removeAllViews();
-                                                }
-                                                ez_currentVmPos = ez_viewpager.getCurrentItem();
-                                                ezone_level = 9;
-                                                if (Reusable_Functions.chkStatus(context)) {
-                                                    if (ez_postRequest != null) {
-                                                        ez_postRequest.cancel();
-                                                    }
-//                                                        Reusable_Functions.hDialog();
-//                                                        Reusable_Functions.sDialog(context, "Loading data...");
-                                                    Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                                    if (!Reusable_Functions.progressDialog.isShowing()) {
-                                                        Reusable_Functions.progressDialog.show();
-                                                    }
-                                                    Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                                    ez_progessBar.setVisibility(View.GONE);
-                                                    offsetvalue = 0;
-                                                    limit = 100;
-                                                    count = 0;
-                                                    ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                                                    requestEzoneSalesStoreList(ez_sclickedVal);
-                                                } else {
-                                                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                                                }
-                                                break;
-                                            default:
-                                                Reusable_Functions.hDialog();
-                                                Toast.makeText(context, " You are at the last level of hierarchy", Toast.LENGTH_SHORT).show();
-                                                ezone_onClickflg = false;
-                                                break;
-                                        }*/
                                     }
                                 }
 
-//                            }, 700);
-//                        }
                     }
                 }));
 
@@ -679,11 +442,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         ez_tabView.addTab(ez_tabView.newTab().setText("MTD"), 2);
         ez_tabView.addTab(ez_tabView.newTab().setText("YTD"), 3);
         ez_tabView.setOnTabSelectedListener(this);
-
-//        btn_ez_LD = (RadioButton)findViewById(R.id.btn_ez_Ld);
-//        btn_ez_MTD = (RadioButton)findViewById(R.id.btn_ez_Mtd);
-//        btn_ez_WTD = (RadioButton)findViewById(R.id.btn_ez_Wtd);
-//        btn_ez_YTD = (RadioButton)findViewById(R.id.btn_ez_Ytd);
         rb_ez_viewBy_LocatnChk = (RadioButton) findViewById(R.id.rb_ez_viewBy_LocatnChk);
         rb_ez_viewBy_ProductChk = (RadioButton) findViewById(R.id.rb_ez_viewBy_ProductChk);
         TabLayout tab = (TabLayout) findViewById(R.id.ez_dotTab);
@@ -728,11 +486,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ez_segment_val = "LD";
                     ez_tabView.getTabAt(0).select();
                     ez_filter_toggleClick = false;
-                   // retainEzoneSegVal();
                     requestEzoneSalesDetailAPI();
-//                      retainEzoneSegVal();
-//                    requestSalesViewPagerValueAPI();
-                   // requestEzoneSalesHeaderAPI();
                 }
                 else
                 {
@@ -768,7 +522,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     }
 
     private void TimeUP() {
-//        if (geoLeveLDesc.equals("E ZONE")) {
         if (ez_sales_detalis_array.size() != 0) {
             if (ez_firstVisible_no < ez_sales_detalis_array.size() && !ezone_onClickflg) {
 
@@ -787,11 +540,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ezone_level = 4;
                     ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                 }
-//                    else if (txt_ez_header.getText().toString().equals("Brand Class"))
-//                    {
-//                        ezone_level = 5;
-//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-//                    }
                 //location is checked in view by
                 else if (txt_ez_header.getText().toString().equals("Region")) {
                     ezone_level = 7;
@@ -801,7 +549,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                 }
                 if (Reusable_Functions.chkStatus(context)) {
-//                        Reusable_Functions.hDialog();
                     ez_currentVmPos = ez_viewpager.getCurrentItem();
                     offsetvalue = 0;
                     limit = 100;
@@ -848,10 +595,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ezone_level = 4;
                     ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                 }
-//                    else if (txt_ez_header.getText().toString().equals("Brand Class")) {
-//                        ezone_level = 5;
-//                        ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-//                    }
                 // when location is checked in view by
                 else if (txt_ez_header.getText().toString().equals("Region")) {
                     ezone_level = 7;
@@ -922,19 +665,16 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         txt_ez_header.setText(hierarchyList[2]);
                         ez_fromWhere = hierarchyList[2];
                         ezone_level = 3;
-//                            header_value = "";
                         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                         recyclevw_ez_sales.removeAllViews();
                         val_hierarchy = " ";
                         if (Reusable_Functions.chkStatus(context)) {
-                            // Reusable_Functions.hDialog();
                             Reusable_Functions.progressDialog = new ProgressDialog(context);
                             Reusable_Functions.progressDialog.setCancelable(false);
                             if (!Reusable_Functions.progressDialog.isShowing()) {
                                 Reusable_Functions.progressDialog.show();
                             }
                             Reusable_Functions.progressDialog.setMessage("Loading data...");
-                            // Reusable_Functions.sDialog(context, "Loading data...");
                             ez_progessBar.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -956,19 +696,16 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         txt_ez_header.setText(hierarchyList[1]);
                         ez_fromWhere = hierarchyList[1];
                         ezone_level = 2;
-//                            header_value = "";
                         val_hierarchy = " ";
                         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                         recyclevw_ez_sales.removeAllViews();
                         if (Reusable_Functions.chkStatus(context)) {
-                            // Reusable_Functions.hDialog();
                             Reusable_Functions.progressDialog = new ProgressDialog(context);
                             Reusable_Functions.progressDialog.setCancelable(false);
                             if (!Reusable_Functions.progressDialog.isShowing()) {
                                 Reusable_Functions.progressDialog.show();
                             }
                             Reusable_Functions.progressDialog.setMessage("Loading data...");
-                            // Reusable_Functions.sDialog(context, "Loading data...");
                             ez_progessBar.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -991,19 +728,16 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         txt_ez_header.setText(hierarchyList[0]);
                         ez_fromWhere = hierarchyList[0];
                         ezone_level = 1;
-//                            header_value = "";
                         val_hierarchy = " ";
                         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                         recyclevw_ez_sales.removeAllViews();
                         if (Reusable_Functions.chkStatus(context)) {
-                            // Reusable_Functions.hDialog();
                             Reusable_Functions.progressDialog = new ProgressDialog(context);
                             Reusable_Functions.progressDialog.setCancelable(false);
                             if (!Reusable_Functions.progressDialog.isShowing()) {
                                 Reusable_Functions.progressDialog.show();
                             }
                             Reusable_Functions.progressDialog.setMessage("Loading data...");
-                            // Reusable_Functions.sDialog(context, "Loading data...");
                             ez_progessBar.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -1026,20 +760,17 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         ez_linear_hierarchy.setVisibility(View.GONE);
                         txt_ez_header.setText("Region");
                         ez_fromWhere = "Region";
-//                            header_value = "";
                         ezone_level = 7;
                         val_hierarchy = " ";
                         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                         recyclevw_ez_sales.removeAllViews();
                         if (Reusable_Functions.chkStatus(context)) {
-                            // Reusable_Functions.hDialog();
                             Reusable_Functions.progressDialog = new ProgressDialog(context);
                             Reusable_Functions.progressDialog.setCancelable(false);
                             if (!Reusable_Functions.progressDialog.isShowing()) {
                                 Reusable_Functions.progressDialog.show();
                             }
                             Reusable_Functions.progressDialog.setMessage("Loading data...");
-                            // Reusable_Functions.sDialog(context, "Loading data...");
                             ez_progessBar.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -1049,175 +780,9 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
 
-
                     }
-
-                  /*  switch (txt_ez_header.getText().toString()) {
-//                        case "Brand Class":
-//                            rel_ez_next.setVisibility(View.VISIBLE);
-//                            if (ez_linear_dots != null) {
-//                                ez_linear_dots.removeAllViews();
-//                            }
-//                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-//                            ez_linear_hierarchy.setVisibility(View.GONE);
-//                            txt_ez_header.setText("Brand");
-//                            ez_fromWhere = "Brand";
-//                            ezone_level = 4;
-//                            val_hierarchy = "";
-//                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-//                            if (Reusable_Functions.chkStatus(context)) {
-//
-//                                // Reusable_Functions.hDialog();
-//                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-//                                Reusable_Functions.progressDialog.setCancelable(false);
-//                                if (!Reusable_Functions.progressDialog.isShowing()) {
-//                                    Reusable_Functions.progressDialog.show();
-//                                }
-//                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-//                                // Reusable_Functions.sDialog(context, "Loading data...");
-//                                ez_progessBar.setVisibility(View.GONE);
-//                                offsetvalue = 0;
-//                                limit = 100;
-//                                count = 0;
-//                                requestEzoneSalesDetailAPI();
-//                            } else {
-//                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                            }
-//                            break;
-
-                        case "Subclass":
-                            rel_ez_next.setVisibility(View.VISIBLE);
-                            if (ez_linear_dots != null) {
-                                ez_linear_dots.removeAllViews();
-                            }
-                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-                            ez_linear_hierarchy.setVisibility(View.GONE);
-                            txt_ez_header.setText("Class");
-                            ez_fromWhere = "Class";
-                            ezone_level = 3;
-//                            header_value = "";
-                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                            recyclevw_ez_sales.removeAllViews();
-                            val_hierarchy = " ";
-                            if (Reusable_Functions.chkStatus(context)) {
-                                // Reusable_Functions.hDialog();
-                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                Reusable_Functions.progressDialog.setCancelable(false);
-                                if (!Reusable_Functions.progressDialog.isShowing()) {
-                                    Reusable_Functions.progressDialog.show();
-                                }
-                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                // Reusable_Functions.sDialog(context, "Loading data...");
-                                ez_progessBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestEzoneSalesDetailAPI();
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-
-                        case "Class":
-                            if (ez_linear_dots != null) {
-                                ez_linear_dots.removeAllViews();
-                            }
-                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-                            ez_linear_hierarchy.setVisibility(View.GONE);
-                            txt_ez_header.setText("Subdept");
-                            ez_fromWhere = "Subdept";
-                            ezone_level = 2;
-//                            header_value = "";
-                            val_hierarchy = " ";
-                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                            recyclevw_ez_sales.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-                                // Reusable_Functions.hDialog();
-                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                Reusable_Functions.progressDialog.setCancelable(false);
-                                if (!Reusable_Functions.progressDialog.isShowing()) {
-                                    Reusable_Functions.progressDialog.show();
-                                }
-                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                // Reusable_Functions.sDialog(context, "Loading data...");
-                                ez_progessBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestEzoneSalesDetailAPI();
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-                        case "Subdept":
-                            rel_ez_prev.setVisibility(View.INVISIBLE);
-                            if (ez_linear_dots != null) {
-                                ez_linear_dots.removeAllViews();
-                            }
-                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-                            ez_linear_hierarchy.setVisibility(View.GONE);
-                            txt_ez_header.setText("Department");
-                            ez_fromWhere = "Department";
-                            ezone_level = 1;
-//                            header_value = "";
-                            val_hierarchy = " ";
-                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                            recyclevw_ez_sales.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-                                // Reusable_Functions.hDialog();
-                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                Reusable_Functions.progressDialog.setCancelable(false);
-                                if (!Reusable_Functions.progressDialog.isShowing()) {
-                                    Reusable_Functions.progressDialog.show();
-                                }
-                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                // Reusable_Functions.sDialog(context, "Loading data...");
-                                ez_progessBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestEzoneSalesDetailAPI();
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-
-                        case "Store":
-                            rel_ez_prev.setVisibility(View.INVISIBLE);
-                            rel_ez_next.setVisibility(View.VISIBLE);
-                            if (ez_linear_dots != null) {
-                                ez_linear_dots.removeAllViews();
-                            }
-                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-                            ez_linear_hierarchy.setVisibility(View.GONE);
-                            txt_ez_header.setText("Region");
-                            ez_fromWhere = "Region";
-//                            header_value = "";
-                            ezone_level = 7;
-                            val_hierarchy = " ";
-                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                            recyclevw_ez_sales.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-                                // Reusable_Functions.hDialog();
-                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                Reusable_Functions.progressDialog.setCancelable(false);
-                                if (!Reusable_Functions.progressDialog.isShowing()) {
-                                    Reusable_Functions.progressDialog.show();
-                                }
-                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                // Reusable_Functions.sDialog(context, "Loading data...");
-                                ez_progessBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestEzoneSalesDetailAPI();
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-                        default:
-                            break;
-                    }*/
                 }
+
                 break;
 
             case R.id.rel_ez_next:
@@ -1242,19 +807,16 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         ez_linear_hierarchy.setVisibility(View.GONE);
                         ez_fromWhere = "Store";
                         ezone_level = 9;
-//                            header_value = "";
                         val_hierarchy = " ";
                         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                         recyclevw_ez_sales.removeAllViews();
                         if (Reusable_Functions.chkStatus(context)) {
-                            //  Reusable_Functions.hDialog();
                             Reusable_Functions.progressDialog = new ProgressDialog(context);
                             Reusable_Functions.progressDialog.setCancelable(false);
                             if (!Reusable_Functions.progressDialog.isShowing()) {
                                 Reusable_Functions.progressDialog.show();
                             }
                             Reusable_Functions.progressDialog.setMessage("Loading data...");
-                            // Reusable_Functions.sDialog(context, "Loading data...");
                             ez_progessBar.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -1276,19 +838,16 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         ez_linear_hierarchy.setVisibility(View.GONE);
                         ez_fromWhere = hierarchyList[1];
                         ezone_level = 2;
-//                            header_value = "";
                         val_hierarchy = " ";
                         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                         recyclevw_ez_sales.removeAllViews();
                         if (Reusable_Functions.chkStatus(context)) {
-                            //  Reusable_Functions.hDialog();
                             Reusable_Functions.progressDialog = new ProgressDialog(context);
                             Reusable_Functions.progressDialog.setCancelable(false);
                             if (!Reusable_Functions.progressDialog.isShowing()) {
                                 Reusable_Functions.progressDialog.show();
                             }
                             Reusable_Functions.progressDialog.setMessage("Loading data...");
-                            // Reusable_Functions.sDialog(context, "Loading data...");
                             ez_progessBar.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -1308,20 +867,17 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         if (ez_linear_dots != null) {
                             ez_linear_dots.removeAllViews();
                         }
-//                            header_value = "";
                         ez_currentVmPos = ez_viewpager.getCurrentItem();
                         ez_linear_hierarchy.setVisibility(View.GONE);
                         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                         recyclevw_ez_sales.removeAllViews();
                         if (Reusable_Functions.chkStatus(context)) {
-                            // Reusable_Functions.hDialog();
                             Reusable_Functions.progressDialog = new ProgressDialog(context);
                             Reusable_Functions.progressDialog.setCancelable(false);
                             if (!Reusable_Functions.progressDialog.isShowing()) {
                                 Reusable_Functions.progressDialog.show();
                             }
                             Reusable_Functions.progressDialog.setMessage("Loading data...");
-                            //  Reusable_Functions.sDialog(context, "Loading data...");
                             ez_progessBar.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -1337,7 +893,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         txt_ez_header.setText(hierarchyList[3]);
                         ez_fromWhere = hierarchyList[3];
                         ezone_level = 4;
-//                            header_value = "";
                         val_hierarchy = " ";
                         if (ez_linear_dots != null) {
                             ez_linear_dots.removeAllViews();
@@ -1347,14 +902,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                         recyclevw_ez_sales.removeAllViews();
                         if (Reusable_Functions.chkStatus(context)) {
-                            // Reusable_Functions.hDialog();
                             Reusable_Functions.progressDialog = new ProgressDialog(context);
                             Reusable_Functions.progressDialog.setCancelable(false);
                             if (!Reusable_Functions.progressDialog.isShowing()) {
                                 Reusable_Functions.progressDialog.show();
                             }
                             Reusable_Functions.progressDialog.setMessage("Loading data...");
-                            // Reusable_Functions.sDialog(context, "Loading data...");
                             ez_progessBar.setVisibility(View.GONE);
                             offsetvalue = 0;
                             limit = 100;
@@ -1364,177 +917,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                         }
                     }
-
-
-
-                /*    switch (txt_ez_header.getText().toString()) {
-                        case "Region":
-                            rel_ez_prev.setVisibility(View.VISIBLE);
-                            rel_ez_next.setVisibility(View.INVISIBLE);
-                            txt_ez_header.setText("Store");
-                            if (ez_linear_dots != null) {
-                                ez_linear_dots.removeAllViews();
-                            }
-                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-                            ez_linear_hierarchy.setVisibility(View.GONE);
-                            ez_fromWhere = "Store";
-                            ezone_level = 9;
-//                            header_value = "";
-                            val_hierarchy = " ";
-                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                            recyclevw_ez_sales.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-                                //  Reusable_Functions.hDialog();
-                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                Reusable_Functions.progressDialog.setCancelable(false);
-                                if (!Reusable_Functions.progressDialog.isShowing()) {
-                                    Reusable_Functions.progressDialog.show();
-                                }
-                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                // Reusable_Functions.sDialog(context, "Loading data...");
-                                ez_progessBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestEzoneSalesDetailAPI();
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-
-                        case "Department":
-                            rel_ez_prev.setVisibility(View.VISIBLE);
-                            txt_ez_header.setText("Subdept");
-                            if (ez_linear_dots != null) {
-                                ez_linear_dots.removeAllViews();
-                            }
-                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-                            ez_linear_hierarchy.setVisibility(View.GONE);
-                            ez_fromWhere = "Subdept";
-                            ezone_level = 2;
-//                            header_value = "";
-                            val_hierarchy = " ";
-                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                            recyclevw_ez_sales.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-                                //  Reusable_Functions.hDialog();
-                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                Reusable_Functions.progressDialog.setCancelable(false);
-                                if (!Reusable_Functions.progressDialog.isShowing()) {
-                                    Reusable_Functions.progressDialog.show();
-                                }
-                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                // Reusable_Functions.sDialog(context, "Loading data...");
-                                ez_progessBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestEzoneSalesDetailAPI();
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-
-                        case "Subdept":
-                            ez_fromWhere = "Class";
-                            txt_ez_header.setText("Class");
-                            ezone_level = 3;
-                            val_hierarchy = " ";
-                            if (ez_linear_dots != null) {
-                                ez_linear_dots.removeAllViews();
-                            }
-//                            header_value = "";
-                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-                            ez_linear_hierarchy.setVisibility(View.GONE);
-                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                            recyclevw_ez_sales.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-                                // Reusable_Functions.hDialog();
-                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                Reusable_Functions.progressDialog.setCancelable(false);
-                                if (!Reusable_Functions.progressDialog.isShowing()) {
-                                    Reusable_Functions.progressDialog.show();
-                                }
-                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                //  Reusable_Functions.sDialog(context, "Loading data...");
-                                ez_progessBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestEzoneSalesDetailAPI();
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-
-                        case "Class":
-                            rel_ez_next.setVisibility(View.INVISIBLE);
-                            txt_ez_header.setText("Subclass");
-                            ez_fromWhere = "Subclass";
-                            ezone_level = 4;
-//                            header_value = "";
-                            val_hierarchy = " ";
-                            if (ez_linear_dots != null) {
-                                ez_linear_dots.removeAllViews();
-                            }
-                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-                            ez_linear_hierarchy.setVisibility(View.GONE);
-                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-                            recyclevw_ez_sales.removeAllViews();
-                            if (Reusable_Functions.chkStatus(context)) {
-                                // Reusable_Functions.hDialog();
-                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-                                Reusable_Functions.progressDialog.setCancelable(false);
-                                if (!Reusable_Functions.progressDialog.isShowing()) {
-                                    Reusable_Functions.progressDialog.show();
-                                }
-                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-                                // Reusable_Functions.sDialog(context, "Loading data...");
-                                ez_progessBar.setVisibility(View.GONE);
-                                offsetvalue = 0;
-                                limit = 100;
-                                count = 0;
-                                requestEzoneSalesDetailAPI();
-                            } else {
-                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-
-//                        case "Subclass":
-//                            txt_ez_header.setText("Brand Class");
-//                            rel_ez_next.setVisibility(View.INVISIBLE);
-//                            if (ez_linear_dots != null) {
-//                                ez_linear_dots.removeAllViews();
-//                            }
-//                            ez_currentVmPos = ez_viewpager.getCurrentItem();
-//                            ez_linear_hierarchy.setVisibility(View.GONE);
-//                            ez_fromWhere = "Brand Class";
-//                            ezone_level = 5;
-//                            val_hierarchy = " ";
-//                            ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
-//                            recyclevw_ez_sales.removeAllViews();
-//                            if (Reusable_Functions.chkStatus(context)) {
-//                                // Reusable_Functions.hDialog();
-//                                Reusable_Functions.progressDialog = new ProgressDialog(context);
-//                                Reusable_Functions.progressDialog.setCancelable(false);
-//                                if (!Reusable_Functions.progressDialog.isShowing()) {
-//                                    Reusable_Functions.progressDialog.show();
-//                                }
-//                                Reusable_Functions.progressDialog.setMessage("Loading data...");
-//                                //  Reusable_Functions.sDialog(context, "Loading data...");
-//                                ez_progessBar.setVisibility(View.GONE);
-//                                offsetvalue = 0;
-//                                limit = 100;
-//                                count = 0;
-//                                requestEzoneSalesDetailAPI();
-//                            } else {
-//                                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-//                            }
-//                            break;
-                        default:
-                            break;
-                    }*/
                 }
+
                 break;
             case R.id.rel_ez_sort:
                 rel_ez_viewBy.setVisibility(View.VISIBLE);
@@ -1549,11 +933,9 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 viewBy_Product();
                 break;
             case R.id.rel_ez_filter:
-                // new EzoneSalesFilter().StartIntent(SalesAnalysisActivity1.this);
                 Intent filter_intent = new Intent(EzoneSalesAnalysisActivity1.this, EzoneSalesFilter.class);
                 filter_intent.putExtra("checkfrom", "ezoneSales");
                 startActivity(filter_intent);
-                // finish();
                 break;
 
         }
@@ -1581,7 +963,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     Reusable_Functions.progressDialog.show();
                 }
                 Reusable_Functions.progressDialog.setMessage("Loading data...");
-                // Reusable_Functions.sDialog(this, "Loading...");
                 limit = 100;
                 offsetvalue = 0;
                 count = 0;
@@ -1620,7 +1001,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     Reusable_Functions.progressDialog.show();
                 }
                 Reusable_Functions.progressDialog.setMessage("Loading data...");
-                // Reusable_Functions.sDialog(this, "Loading...");
                 limit = 100;
                 offsetvalue = 0;
                 count = 0;
@@ -1639,136 +1019,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     // on Check change listener on Segment Listener(WTD, YTD,LW and L4W)
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        /*if (!filter_toggleClick) {
-            switch (checkedId) {
-                case R.id.btnWTD:
-                    if (selectedsegValue.equals("WTD"))
-                        break;
-                    selectedsegValue = "WTD";
-                    if (lldots != null) {
-                        lldots.removeAllViews();
-                    }
-                    llhierarchy.setVisibility(View.GONE);
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        progressBar1.setVisibility(View.GONE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        val = "";
-                        if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestSalesListDisplayAPI();
-                        } else {
-                            String str = getIntent().getStringExtra("selectedDept");
-                            requestSalesSelectedFilterVal(str, sales_filter_level);
-                        }
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
 
-                case R.id.btnLW:
-                    if (selectedsegValue.equals("LW"))
-                        break;
-                    selectedsegValue = "LW";
-                    if (lldots != null) {
-                        lldots.removeAllViews();
-                    }
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    llhierarchy.setVisibility(View.GONE);
-                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        progressBar1.setVisibility(View.GONE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        val = "";
-                        if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestSalesListDisplayAPI();
-
-                        } else {
-                            String str = getIntent().getStringExtra("selectedDept");
-                            requestSalesSelectedFilterVal(str, sales_filter_level);
-                        }
-
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-
-                case R.id.btnL4W:
-                    if (selectedsegValue.equals("L4W"))
-                        break;
-                    selectedsegValue = "L4W";
-                    if (lldots != null) {
-                        lldots.removeAllViews();
-                    }
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    llhierarchy.setVisibility(View.GONE);
-                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        progressBar1.setVisibility(View.GONE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        val = "";
-                        if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestSalesListDisplayAPI();
-                        } else {
-                            String str = getIntent().getStringExtra("selectedDept");
-                            requestSalesSelectedFilterVal(str, sales_filter_level);
-                        }
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-
-                case R.id.btnYTD:
-                    if (selectedsegValue.equals("STD"))
-                        break;
-                    selectedsegValue = "STD";
-                    if (lldots != null) {
-                        lldots.removeAllViews();
-                    }
-                    currentVmPos = vwpagersales.getCurrentItem();
-                    llhierarchy.setVisibility(View.GONE);
-                    salesAnalysisClassArrayList = new ArrayList<SalesAnalysisListDisplay>();
-                    analysisArrayList = new ArrayList<SalesAnalysisViewPagerValue>();
-
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading data...");
-                        progressBar1.setVisibility(View.GONE);
-                        offsetvalue = 0;
-                        limit = 100;
-                        count = 0;
-                        val = "";
-                        if (getIntent().getStringExtra("selectedDept") == null) {
-                            requestSalesListDisplayAPI();
-                        } else {
-                            String str = getIntent().getStringExtra("selectedDept");
-                            requestSalesSelectedFilterVal(str, sales_filter_level);
-                        }
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            filter_toggleClick = false;
-        }*/
         if (!ez_filter_toggleClick) {
             switch (checkedId) {
                 case R.id.btn_ez_Ld:
@@ -1784,8 +1035,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                     ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
                     if (Reusable_Functions.chkStatus(context)) {
-                        // Reusable_Functions.hDialog();
-                        // Reusable_Functions.sDialog(context, "Loading data...");
                         Reusable_Functions.progressDialog = new ProgressDialog(context);
                         Reusable_Functions.progressDialog.setCancelable(false);
                         if (!Reusable_Functions.progressDialog.isShowing()) {
@@ -1797,7 +1046,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         limit = 100;
                         count = 0;
                         val_hierarchy = "";
-//                        header_value = "";
                         if (filterSelectedString == null) {
                             requestEzoneSalesDetailAPI();
                         } else {
@@ -1820,21 +1068,17 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                     ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
                     if (Reusable_Functions.chkStatus(context)) {
-                        // Reusable_Functions.hDialog();
                         Reusable_Functions.progressDialog = new ProgressDialog(context);
                         Reusable_Functions.progressDialog.setCancelable(false);
-
                         if (!Reusable_Functions.progressDialog.isShowing()) {
                             Reusable_Functions.progressDialog.show();
                         }
                         Reusable_Functions.progressDialog.setMessage("Loading data...");
-                        // Reusable_Functions.sDialog(context, "Loading data...");
                         ez_progessBar.setVisibility(View.GONE);
                         offsetvalue = 0;
                         limit = 100;
                         count = 0;
                         val_hierarchy = "";
-//                        header_value = "";
                         if (filterSelectedString == null) {
                             requestEzoneSalesDetailAPI();
                         } else {
@@ -1857,7 +1101,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                     ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
                     if (Reusable_Functions.chkStatus(context)) {
-                        //  Reusable_Functions.hDialog();
                         Reusable_Functions.progressDialog = new ProgressDialog(context);
                         Reusable_Functions.progressDialog.setCancelable(false);
 
@@ -1865,15 +1108,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             Reusable_Functions.progressDialog.show();
                         }
                         Reusable_Functions.progressDialog.setMessage("Loading data...");
-                        // Reusable_Functions.sDialog(context, "Loading data...");
                         ez_progessBar.setVisibility(View.GONE);
                         offsetvalue = 0;
                         limit = 100;
                         count = 0;
                         val_hierarchy = "";
-//                        header_value = "";
                         if (filterSelectedString == null) {
-
                             requestEzoneSalesDetailAPI();
                         } else {
                             requestEzoneFilterSelectedVal(filterSelectedString, filter_level);
@@ -1894,7 +1134,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                     ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
                     if (Reusable_Functions.chkStatus(context)) {
-                        // Reusable_Functions.hDialog();
                         Reusable_Functions.progressDialog = new ProgressDialog(context);
                         Reusable_Functions.progressDialog.setCancelable(false);
 
@@ -1902,13 +1141,11 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             Reusable_Functions.progressDialog.show();
                         }
                         Reusable_Functions.progressDialog.setMessage("Loading data...");
-                        // Reusable_Functions.sDialog(context, "Loading data...");
                         ez_progessBar.setVisibility(View.GONE);
                         offsetvalue = 0;
                         limit = 100;
                         count = 0;
                         val_hierarchy = "";
-//                        header_value = "";
                         if (filterSelectedString == null) {
 
                             requestEzoneSalesDetailAPI();
@@ -2111,6 +1348,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestSalesPagerOnScrollAPI() {
 
 
+
+
         String url = " ";
         saleFirstVisibleItem = saleFirstVisibleItem.replace("%", "%25");
         saleFirstVisibleItem = saleFirstVisibleItem.replace(" ", "%20").replace("&", "%26");
@@ -2287,10 +1526,10 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesDetailAPI() {
         String url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         //  String url £= ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
+
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-//                Log.e("Ezone detail api response :", "" + response);
                 try {
                     int i;
                     Reusable_Functions.hDialog();
@@ -2343,7 +1582,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             ez_sales_detail_model.setLevel("All");
 
                         }
-//
                         else if (txt_ez_header.getText().toString().equals("Region")) {
                             ez_sales_detail_model.setLevel("All");
                         } else if (txt_ez_header.getText().toString().equals("Store")) {
@@ -2485,22 +1723,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             rel_ez_next.setVisibility(View.INVISIBLE);
 
                         }
-//                        else if (filter_level == 5) {
-//                            rb_ez_viewBy_ProductChk.setChecked(true);
-//                            rb_ez_viewBy_LocatnChk.setChecked(false);
-//                            txt_ez_header.setText("Brand Class");
-//                            ez_fromWhere = "Brand Class";
-//                            rel_ez_prev.setVisibility(View.VISIBLE);
-//                            rel_ez_next.setVisibility(View.INVISIBLE);
-//                        }
-//                        else if (filter_level == 6) {
-//                            rb_ez_viewBy_ProductChk.setChecked(true);
-//                            rb_ez_viewBy_LocatnChk.setChecked(false);
-//                            txt_ez_header.setText("Brand Class");
-//                            ez_fromWhere = "Brand Class";
-//                            rel_ez_prev.setVisibility(View.VISIBLE);
-//                            rel_ez_next.setVisibility(View.INVISIBLE);
-//                        }
+
                         else if (filter_level == 9) {
                             rb_ez_viewBy_LocatnChk.setChecked(true);
                             rb_ez_viewBy_ProductChk.setChecked(false);
@@ -2559,9 +1782,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                     ez_sales_detail_model.setLevel("All");
 
                                 }
-//                                else if (txt_ez_header.getText().toString().equals("Brand Class")) {
-//                                    ez_sales_detail_model.setLevel("All");
-//                                }
+
                                 else if (txt_ez_header.getText().toString().equals("Region")) {
                                     ez_sales_detail_model.setLevel("All");
                                 } else if (txt_ez_header.getText().toString().equals("Store")) {
@@ -2598,10 +1819,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                     ezone_level = 4;
                                     ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
                                 }
-//                                else if (txt_ez_header.getText().toString().equals("Brand Class")) {
-//                                    ezone_level = 5;
-//                                    ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
-//                                }
                                 else if (txt_ez_header.getText().toString().equals("Region")) {
                                     ezone_level = 7;
                                     ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
@@ -3261,7 +2478,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 }
 
                             }
-                            // ez_sales_pager_adapter.notifyDataSetChanged();
                             ezone_onClickflg = false;
                             Reusable_Functions.hDialog();
                             ez_progessBar.setVisibility(View.GONE);
@@ -3318,9 +2534,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         } else if (txt_ez_header.getText().toString().equals(hierarchyList[3])) {
             url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brand=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-//        else if (txt_ez_header.getText().toString().equals("Brand Class")) {
-//            url = ConstsCore.web_url + "/v1/display/salesDetailEZ/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brandclass=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit;
-//        }
         else if (txt_ez_header.getText().toString().equals("Region")) {
             url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&regionDescription=" + ez_sale_first_item.replace(" ", "%20") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         } else if (txt_ez_header.getText().toString().equals("Store")) {
@@ -3359,7 +2572,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 ez_sales_pager_adapter = new EzoneSalesPagerAdapter(context, ez_sales_header_array, ez_firstVisible_no, ez_viewpager, ez_linear_dots, ez_sales_adapter, recyclevw_ez_sales, ez_sales_detalis_array, ez_fromWhere, ez_sales_pager_adapter);
                                 ez_viewpager.setAdapter(ez_sales_pager_adapter);
                                 ez_viewpager.setCurrentItem(ez_currentVmPos);
-//                                ez_sales_pager_adapter.notifyDataSetChanged();
                                 ezone_onClickflg = false;
                                 Reusable_Functions.hDialog();
                                 ez_progessBar.setVisibility(View.GONE);
@@ -3414,7 +2626,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
         int checkedId = tab.getPosition();
 
-//            if (!ez_filter_toggleClick) {
         switch (checkedId) {
             case 0:
 
@@ -3442,22 +2653,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                     limit = 100;
                     count = 0;
                     val_hierarchy = "";
-//                    header_value = "";
-//                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
-//                        ez_filter_toggleClick = false;
-//                        retainEzoneSegVal();
-
-                      //  requestEzoneSalesDetailAPI();
                     requestEzoneFilterSelectedVal(filterSelectedString , filter_level);
 
-//                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-//                        header_value = getIntent().getStringExtra("selectedStringVal");
-//                        filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
-//                        Log.e("welcome----", "=======");
-//                        ez_filter_toggleClick = true;
-//                        retainEzoneSegVal();
-//                        requestEzoneFilterSelectedVal(header_value, filter_level);
-//                    }
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
@@ -3475,7 +2672,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                 ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
                 if (Reusable_Functions.chkStatus(context)) {
-                    // Reusable_Functions.hDialog();
                     Reusable_Functions.progressDialog = new ProgressDialog(context);
                     Reusable_Functions.progressDialog.setCancelable(false);
 
@@ -3483,27 +2679,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         Reusable_Functions.progressDialog.show();
                     }
                     Reusable_Functions.progressDialog.setMessage("Loading data...");
-                    // Reusable_Functions.sDialog(context, "Loading data...");
                     ez_progessBar.setVisibility(View.GONE);
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
                     val_hierarchy = "";
-//                    header_value = "";
-//                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
-//                        ez_filter_toggleClick = false;
-//                        retainEzoneSegVal();
-
-                      //  requestEzoneSalesDetailAPI();
                     requestEzoneFilterSelectedVal(filterSelectedString , filter_level);
-//                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-//                        header_value = getIntent().getStringExtra("selectedStringVal");
-//                        filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
-//                        Log.e("welcome----", "=======");
-//                        ez_filter_toggleClick = true;
-//                        retainEzoneSegVal();
-//                        requestEzoneFilterSelectedVal(header_value, filter_level);
-//                    }
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
@@ -3521,7 +2702,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                 ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
                 if (Reusable_Functions.chkStatus(context)) {
-                    //  Reusable_Functions.hDialog();
                     Reusable_Functions.progressDialog = new ProgressDialog(context);
                     Reusable_Functions.progressDialog.setCancelable(false);
 
@@ -3529,26 +2709,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         Reusable_Functions.progressDialog.show();
                     }
                     Reusable_Functions.progressDialog.setMessage("Loading data...");
-                    // Reusable_Functions.sDialog(context, "Loading data...");
                     ez_progessBar.setVisibility(View.GONE);
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
                     val_hierarchy = "";
-//                    header_value = "";
-//                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
-//                        ez_filter_toggleClick = false;
-//                        retainEzoneSegVal();
-                       // requestEzoneSalesDetailAPI();
                     requestEzoneFilterSelectedVal(filterSelectedString , filter_level);
-//                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-//                        header_value = getIntent().getStringExtra("selectedStringVal");
-//                        filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
-//                        Log.e("welcome----", "=======");
-//                        ez_filter_toggleClick = true;
-//                        retainEzoneSegVal();
-//                        requestEzoneFilterSelectedVal(header_value, filter_level);
-//                    }
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
@@ -3566,7 +2732,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 ez_sales_detalis_array = new ArrayList<SalesAnalysisListDisplay>();
                 ez_sales_header_array = new ArrayList<SalesAnalysisViewPagerValue>();
                 if (Reusable_Functions.chkStatus(context)) {
-                    // Reusable_Functions.hDialog();
                     Reusable_Functions.progressDialog = new ProgressDialog(context);
                     Reusable_Functions.progressDialog.setCancelable(false);
 
@@ -3574,36 +2739,17 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                         Reusable_Functions.progressDialog.show();
                     }
                     Reusable_Functions.progressDialog.setMessage("Loading data...");
-                    // Reusable_Functions.sDialog(context, "Loading data...");
                     ez_progessBar.setVisibility(View.GONE);
                     offsetvalue = 0;
                     limit = 100;
                     count = 0;
                     val_hierarchy = "";
-//                    header_value = "";
-//                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
-//                        ez_filter_toggleClick = false;
-//                        retainEzoneSegVal();
-                      //  requestEzoneSalesDetailAPI();
                     requestEzoneFilterSelectedVal(filterSelectedString , filter_level);
-//                    }
-//                    else if(getIntent().getStringExtra("selectedStringVal") != null)
-//                    {
-//                        header_value = getIntent().getStringExtra("selectedStringVal");
-//                        filter_level = getIntent().getIntExtra("selectedlevelVal",0);
-//                        Log.e("welcome----", "=======");
-//                        ez_filter_toggleClick = true;
-//                        retainEzoneSegVal();
-//                        requestEzoneFilterSelectedVal(header_value,filter_level);
-//                    }
                 } else {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
-//            } else {
-//                ez_filter_toggleClick = false;
-//            }
 
 
     }

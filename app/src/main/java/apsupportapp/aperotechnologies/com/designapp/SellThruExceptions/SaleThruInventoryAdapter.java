@@ -180,6 +180,8 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
         String userId = sharedPreferences.getString("userId", "");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        String geoLevel2Code = sharedPreferences.getString("concept", "");
+        String lobId = sharedPreferences.getString("lobid", "");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
@@ -187,7 +189,7 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
 
         String url;
 
-        url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offset + "&limit=" + limit;
+        url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
