@@ -204,15 +204,17 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 currentState = newState;
+                Log.e("on scroll ","");
                 if (prevState != RecyclerView.SCROLL_STATE_IDLE  && !ezone_onClickflg) {
-//                    Handler h = new Handler();
-//                    h.postDelayed(new Runnable() {
-//                        public void run() {
+                    Log.e("on scroll if","");
+                    Handler h = new Handler();
+                    h.postDelayed(new Runnable() {
+                        public void run() {
                             if (!ezone_onClickflg) {
                                 TimeUP();
                             }
-//                        }
-//                    }, 700);
+                        }
+                    }, 700);
                 }
                 prevState = currentState;
             }
@@ -258,7 +260,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                                 ez_sclickedVal = ez_sclickedVal.replace(" ", "%20").replace("&", "%26");
                                                 if(!header_value.contains("&department=" + ez_sclickedVal))
                                                 {
-                                                    header_value = "&department=" + ez_sclickedVal;
+                                                    header_value += "&department=" + ez_sclickedVal;
                                                 }
                                             } else {
 //                                                    header_value = "";
@@ -3482,7 +3484,9 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 //                        ez_filter_toggleClick = false;
 //                        retainEzoneSegVal();
 
-                        requestEzoneSalesDetailAPI();
+                      //  requestEzoneSalesDetailAPI();
+                    requestEzoneFilterSelectedVal(filterSelectedString , filter_level);
+
 //                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
 //                        header_value = getIntent().getStringExtra("selectedStringVal");
 //                        filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
@@ -3527,7 +3531,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 //                        ez_filter_toggleClick = false;
 //                        retainEzoneSegVal();
 
-                        requestEzoneSalesDetailAPI();
+                      //  requestEzoneSalesDetailAPI();
+                    requestEzoneFilterSelectedVal(filterSelectedString , filter_level);
 //                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
 //                        header_value = getIntent().getStringExtra("selectedStringVal");
 //                        filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
@@ -3571,7 +3576,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 //                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
 //                        ez_filter_toggleClick = false;
 //                        retainEzoneSegVal();
-                        requestEzoneSalesDetailAPI();
+                       // requestEzoneSalesDetailAPI();
+                    requestEzoneFilterSelectedVal(filterSelectedString , filter_level);
 //                    } else if (getIntent().getStringExtra("selectedStringVal") != null) {
 //                        header_value = getIntent().getStringExtra("selectedStringVal");
 //                        filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
@@ -3615,7 +3621,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 //                    if (getIntent().getExtras().getString("selectedStringVal") == null) {
 //                        ez_filter_toggleClick = false;
 //                        retainEzoneSegVal();
-                        requestEzoneSalesDetailAPI();
+                      //  requestEzoneSalesDetailAPI();
+                    requestEzoneFilterSelectedVal(filterSelectedString , filter_level);
 //                    }
 //                    else if(getIntent().getStringExtra("selectedStringVal") != null)
 //                    {

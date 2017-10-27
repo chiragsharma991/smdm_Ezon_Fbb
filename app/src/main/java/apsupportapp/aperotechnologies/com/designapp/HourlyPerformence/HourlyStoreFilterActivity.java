@@ -336,7 +336,7 @@ public class HourlyStoreFilterActivity extends AppCompatActivity implements View
                             else{
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject productName1 = response.getJSONObject(i);
-                                    String store = productName1.getString("descEz");
+                                    String store = productName1.getString("storeCode");
                                     hr_storeList.add(store);
                                 }
                                 rel_process_filter.setVisibility(View.GONE);

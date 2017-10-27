@@ -1489,14 +1489,15 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     llfIndexhierarchy.setVisibility(View.GONE);
                     FreshnessIndexValue = "";
                     preValue = postValue;
-                    txtFIndexClass.setText(hierarchyList[0]);
+                    txtFIndexClass.setText("Department");
                     freshnessIndex_ClickedVal = "All";
                     FreshnessIndexValue = "";
                     level = 1;
                     btnFIndexPrev.setVisibility(View.INVISIBLE);
                     btnFIndexNext.setVisibility(View.VISIBLE);
                     freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                    requestFreshnessIndexDetails();
+                    //  requestFreshnessIndexDetails();
+                    requestFreshnessIndexFilterVal(selectedString, filter_level);
 
 
                 } else {
@@ -1521,7 +1522,9 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     btnFIndexPrev.setVisibility(View.INVISIBLE);
                     btnFIndexNext.setVisibility(View.VISIBLE);
                     freshnessIndexDetailsArrayList = new ArrayList<FreshnessIndexDetails>();
-                    requestFreshnessIndexDetails();
+                    //requestFreshnessIndexDetails();
+                    requestFreshnessIndexFilterVal(selectedString, filter_level);
+
 
                 } else {
                     product_radiobtn.setChecked(true);
@@ -1625,7 +1628,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                 retainValuesFilter();
                 requestFreshnessIndexDetails();
             } else if (getIntent().getStringExtra("selectedStringVal") != null) {
-                String selectedString = getIntent().getStringExtra("selectedStringVal");
+                selectedString = getIntent().getStringExtra("selectedStringVal");
                 filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
 
                 filter_toggleClick = true;
