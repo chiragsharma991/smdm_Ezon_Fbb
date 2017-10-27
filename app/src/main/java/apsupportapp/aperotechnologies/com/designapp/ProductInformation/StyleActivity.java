@@ -193,8 +193,6 @@ public class StyleActivity extends AppCompatActivity
                 } else {
                     if (Reusable_Functions.chkStatus(context)) {
                         Reusable_Functions.hDialog();
-//                        Log.e("store name "," "+store_name+" "+store_name.substring(0,4));
-//                        Log.e("articleOptionCode "," "+articleOptionCode);
 
                         store_name = store_name.substring(0,4);
                         Reusable_Functions.sDialog(context, "Loading  data...");
@@ -212,7 +210,6 @@ public class StyleActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Log.e("selcollectionName "," "+selcollectionName+" seloptionName "+seloptionName+" collectionNM "+collectionNM+" optionName "+optionName);
 
                 if (isAMobileModel())
                 {
@@ -544,17 +541,14 @@ public class StyleActivity extends AppCompatActivity
 
 
                     barcode = intent.getStringExtra(GeneralString.BcReaderData);
-                    Log.e("onReceive: ", " " + barcode);
                     android.os.Handler h = new android.os.Handler();
                     h.postDelayed(new Runnable() {
                         public void run() {
-                            Log.e("run: ", "" + barcode);
                             if (!barcode.equals(" "))
                             {
                                 Toast.makeText(StyleActivity.this, "Barcode scanned : " + barcode, Toast.LENGTH_SHORT).show();
                                 TimeUP();
                             } else {
-                                Log.e("come", "here");
                                 View view = findViewById(android.R.id.content);
                                 Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
                             }
@@ -610,13 +604,11 @@ public class StyleActivity extends AppCompatActivity
         {
             url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?eanNumber=" + content +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId+"&storeCode="+store_name;
         }
-        Log.e("", "requestStyleDetailsAPI: "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("productdetailsNew res "," "+response.toString());
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
@@ -689,9 +681,6 @@ public class StyleActivity extends AppCompatActivity
                                 intent.putExtra("content", content);
 
 
-
-                                Log.e("selStoreName "," "+selStoreName+" selCollectionname "+collectionNM+" selOptionName"+optionName);
-
                                 startActivity(intent);
                                 finish();
                             }
@@ -743,12 +732,10 @@ public class StyleActivity extends AppCompatActivity
     private void requestCollectionAPI(final String storeName)
     {
         String url = ConstsCore.web_url + "/v1/display/collectionsNew/" + userId + "?offset=" + collectionoffset + "&limit=" + collectionlimit+"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeName;
-        Log.e("", "requestCollectionAPI: "+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("collection response "," "+response.toString());
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && collectioncount == 0)
@@ -774,13 +761,10 @@ public class StyleActivity extends AppCompatActivity
                                 {
                                     collection.setText("Select Collection");
                                     style.setText("Select Option");
-                                    Log.e("in if : first", " ");
                                 }
 
                                 else
                                 {
-
-                                    Log.e("here in else : ", " ");
 
                                     for(int i = 0; i < arrayList.size(); i++)
                                     {
@@ -849,13 +833,10 @@ public class StyleActivity extends AppCompatActivity
                                 {
                                     collection.setText("Select Collection");
                                     style.setText("Select Option");
-                                    Log.e("in if : first", " ");
                                 }
 
                                 else
                                 {
-
-                                    Log.e("here in else : ", " ");
 
                                     for(int i = 0; i < arrayList.size(); i++)
                                     {
@@ -926,14 +907,11 @@ public class StyleActivity extends AppCompatActivity
     {
         String url;
         url = ConstsCore.web_url + "/v1/display/collectionoptionsNew/" + userId + "?prodLevel6Code=" + collectionCode.replaceAll(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+store_name;
-        Log.e("requestArticleOptionsAPI url ", "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-
-//                        Log.e("option response "," "+response.toString());
 
                         try
                         {
@@ -1037,7 +1015,6 @@ public class StyleActivity extends AppCompatActivity
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();
-                            Log.e("catch log", "" + e.getMessage());
                             e.printStackTrace();
                         }
                     }

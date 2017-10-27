@@ -701,7 +701,6 @@ public class SwitchingActivity extends AppCompatActivity
 //                break;
 
             default:
-                Log.e("TAG", "not found: Activity");
                 break;
         }
 
@@ -772,10 +771,8 @@ public class SwitchingActivity extends AppCompatActivity
         userId = sharedPreferences.getString("userId","");
         bearertoken = sharedPreferences.getString("bearerToken","");
         geoLevel2Code = sharedPreferences.getString("concept","");
-        Log.e("geoLevel2Code:", "" + geoLevel2Code);
 
         lobId = sharedPreferences.getString("lobid","");
-        Log.e("lobId :", "" + lobId);
 
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -783,12 +780,10 @@ public class SwitchingActivity extends AppCompatActivity
         queue.start();
         String url = ConstsCore.web_url + "/v1/display/storeselection/" + userId +"?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
                  //ConstsCore.web_url+ + "/v1/login/userId";  // + "?geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId
-        Log.e("url store :", "" + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("response "," "+response);
                         Reusable_Functions.hDialog();
                         try {
                             if (response.equals("") || response == null || response.length() == 0 )
@@ -803,7 +798,6 @@ public class SwitchingActivity extends AppCompatActivity
                                     JSONObject collectionName = response.getJSONObject(0);
                                     storeCode = collectionName.getString("storeCode");
                                     body_geoLevel2Code = collectionName.getString("geoLevel2Code");
-                                    Log.e("storeCode "," "+storeCode);
 
                                     if(from.equals("VisualAssortmentActivity")) {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualAssortmentActivity.class);
@@ -946,8 +940,7 @@ public class SwitchingActivity extends AppCompatActivity
 
 //                            Collections.sort(arrayList);
 //                            Collections.sort(arrayListbody);
-//                            Log.e("arrayList "," "+arrayList.toString());
-//                            Log.e("arrayListbody "," "+arrayListbody.toString());
+
 
                             // arrayList.add(0, "Select Storecode");
                             spinnerArrayAdapter.notifyDataSetChanged();
@@ -960,9 +953,6 @@ public class SwitchingActivity extends AppCompatActivity
 
                                     storeCode = (String) spinnerArrayAdapter.getItem(position);
                                     body_geoLevel2Code = arrayListbody.get(position);
-                                    Log.e("storeCode "," "+storeCode);
-                                    Log.e("body_geoLevel2Code "," "+body_geoLevel2Code);
-
                                     dialog.dismiss();
                                     if(from.equals("VisualAssortmentActivity")) {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualAssortmentActivity.class);

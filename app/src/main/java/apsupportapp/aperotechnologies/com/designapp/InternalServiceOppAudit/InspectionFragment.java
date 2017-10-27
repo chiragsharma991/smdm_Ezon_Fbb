@@ -48,7 +48,6 @@ public class InspectionFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
 
-        Log.e("instance =="," "+instance);
         super.setUserVisibleHint(isVisibleToUser);
     }
 

@@ -117,7 +117,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         option = option.replace(" ", "%20").replace("&", "%26");
 
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId + "?storeCode=" +store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MC_name_code +"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20")+"&option=" + option.replaceAll(" ", "%20") +"&recache=true";
-        Log.e("TAG", "requestReceiversChildDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -202,7 +201,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         MC_name_code = MC_name_code.replace(" ", "%20").replace("&", "%26");
       //  MCCodeDesc = MCCodeDesc.replace(" ", "%20").replace("&", "%26");
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/receiverdetail/" + userId +"?storeCode="+store_code+ "&offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption + "&MCCodeDesc=" + MC_name_code+"&prodLevel3Desc=" + prodLevel3Desc.replaceAll(" ","%20") +"&recache=true";
-        Log.e("TAG", "requestReceiversDetails: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -302,7 +300,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         MCCodeDesc = mc; //MCCodeDesc = "2257-Ladies Ethnic Kurta" ; // this is used to disaply values //  - this is actual value
         prodLevel3Desc = subcategory; // prodLevel3Desc = "BF011C-BF - Ladies ethnicwear"; // - to display values  // - this is actual value
         MCCode = (Math.round(data2));
-        Log.e("initalise: "," " + MCCode);
         btn_selectAll = (Button)findViewById(R.id.btn_stock_selectAll);
         btn_reset = (Button)findViewById(R.id.btn_stock_reset);
         recyclerView = (RecyclerView) findViewById(R.id.stockDetail_list);
@@ -355,7 +352,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
         intent.putExtra("MCCodeDesc", mc);
         intent.putExtra("storeCode", storeCode);
         intent.putExtra("MCCode",mc_name_code);
-        Log.e( "StartActivity: ",""+subcategory + "\t" +mc + data2 );
         intent.putExtra("AvlQty", data2);
         context.startActivity(intent);
     }
@@ -396,12 +392,10 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
 
             String url = ConstsCore.web_url + "/v1/save/stocktransfer/receiversubmitdetail/" + userId;//+"?recache="+recache
-            Log.e("requestReceiverSubmitAPI: ",""+url + "\t" + object.toString() );
             JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.e("receiversubmitdetail: ",""+response);
 
                             try {
                                 if (response == null || response.equals("")) {
@@ -412,7 +406,6 @@ public class Details extends AppCompatActivity implements OnPress, View.OnClickL
                                 else
                                 {
                                     String result = response.getString("status");
-                                    Log.e("onResponse: ",""+result);
                                     Toast.makeText(mcontext, "" + result, Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Details.this, To_Do.class);
                                     intent.putExtra("from",store_code);

@@ -669,7 +669,6 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: " );
 
         if (!opttoggleClick){
             switch (checkedId) {
@@ -782,12 +781,10 @@ public class Plan_Option_Fragment extends Fragment implements TabLayout.OnTabSel
     private void requestPlanOptionAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + option_seg_clk + "&level=" + planlevel +"&productName=" + prod_Name.replaceAll(" ", "%20").replaceAll("&", "%26") +"&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
-        Log.e("TAG", "requestPlanOption: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("TAG", "responsePlan_Option: "+response );
 
                         try {
                             int i;

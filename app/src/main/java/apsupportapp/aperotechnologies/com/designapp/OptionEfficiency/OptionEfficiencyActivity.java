@@ -164,7 +164,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         hierarchyList = hierarchyLevels.split(",");
         for (int i = 0; i <hierarchyList.length ; i++) {
             hierarchyList[i]=hierarchyList[i].trim();
-            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
         }
 //        storeDescription = sharedPreferences.getString("storeDescription", "");
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
@@ -710,7 +709,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         if(oe_txtHeaderClass.getText().toString().equals(hierarchyList[0])){
 
-                            Log.e("here came"," ");
                             oe_btnPrev.setVisibility(View.VISIBLE);
                             oe_txtHeaderClass.setText(hierarchyList[1]);
                             oe_ClickedVal = optionEfficiencyDetailsArrayList.get(position).getPlanDept();
@@ -1035,7 +1033,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void maintainQuickFilterValues() {
-        Log.e("TAG", "maintainQuickFilterValues: " + checkValueIs + " and " + seasonGroup);
         if (checkValueIs == null) {
             checkCurrent.setChecked(true);
             checkPrevious.setChecked(false);
@@ -1419,14 +1416,12 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
         }
 
-        Log.e("requestHearderAPI url"," "+url);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Log.e("requestHearderAPI response"," "+response);
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1503,7 +1498,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             //     fashion select with season params
             oedetails = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
-        Log.e("TAG", "requestOptionEfficiencyDetails: "+oedetails );
         postRequest = new JsonArrayRequest(Request.Method.GET, oedetails,
                 new Response.Listener<JSONArray>() {
 
@@ -1807,13 +1801,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
             }
         }
-        Log.e("TAG", "requestOptionEfficiencyFilterVal: " + oe_filterval_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_filterval_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
-                        Log.e("TAG", "requestOptionEfficiencyFilterVal: response  " + response);
 
                         if (filter_level == 2)
                         {
@@ -1892,7 +1883,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
-                            Log.e("", "onResponse: "+e.getMessage());
                             Toast.makeText(context, "no data found"+e.getMessage(), Toast.LENGTH_SHORT).show();
                             processBar.setVisibility(View.GONE);
                             OnItemClick = false;
@@ -1929,7 +1919,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
 
     private void setFilterHeaderValue()
     {
-        Log.e("come","here");
         String url = "";
         if (coreSelection) {
             //core selection without season params
@@ -1952,14 +1941,12 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             {
                 url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             }
-            Log.e("TAG", "setFilterHeaderValue: "+url);
 
         }
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e( "onResponse:All Api ",""+response );
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -2104,13 +2091,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             }
         }
 
-        Log.e( "requestHeaderPieChart: url ",""+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
-                        Log.e("requestHeaderPieChart response "," "+response);
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -2263,7 +2248,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             oe_category_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
         }
-        Log.e("TAG", "request_OE_CategoryList: "+oe_category_listurl);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_category_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2367,13 +2351,11 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + OptionEfficiencyActivity.level + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
         }
-        Log.e("setHeaderValue url "," "+url);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e( "onResponse:setHeaderValue ",""+response );
 
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -2451,7 +2433,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         } else {
             oe_planclass_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
-        Log.e("TAG", "request_OE_PlanClassList: "+oe_planclass_listurl);
 
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_planclass_listurl,
@@ -2537,7 +2518,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         } else {
             oe_brand_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
-        Log.e("TAG", "request_OE_BrandList: "+oe_brand_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brand_listurl,
                 new Response.Listener<JSONArray>() {
@@ -2623,7 +2603,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         {
             oe_brandplan_listurl = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
-        Log.e("TAG", "request_OE_BrandPlanList: "+oe_brandplan_listurl);
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, oe_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
@@ -2740,14 +2719,12 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             }
         }
-        Log.e("TAG", "requestOEPieChart: "+url);
 
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response OEP.. "," "+response);
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -2899,7 +2876,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         int checkedId = Tabview.getSelectedTabPosition();
-        Log.e("TAG", "onTabSelected: ");
 
         OnItemClick = true;
         OptionefficiencyValue = "";
@@ -3020,7 +2996,6 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         oe_listView.setLayoutManager(new LinearLayoutManager(context));
         this.optionEfficiencyDetails = optionEfficiencyDetailsArrayList.get(0);
 
-        Log.e("=== "," "+ this.optionEfficiencyDetails.getOptionCount());
 
         oe_listView.setLayoutManager(new LinearLayoutManager(
                 oe_listView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?

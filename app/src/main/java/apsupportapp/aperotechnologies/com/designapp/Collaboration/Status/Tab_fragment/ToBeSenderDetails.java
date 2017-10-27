@@ -100,13 +100,10 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
     private void requestStatusReceiversDetails()
     {
         String url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/detail/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&level=" + levelOfOption+"&senderStoreCode="+str_storeCode+"&caseNo="+caseNo+"&recache="+recache;
-        Log.e("url ",""+url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
-                        Log.e("response details ",""+response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -236,7 +233,6 @@ public class ToBeSenderDetails extends AppCompatActivity implements View.OnClick
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response subdetails ",""+response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {

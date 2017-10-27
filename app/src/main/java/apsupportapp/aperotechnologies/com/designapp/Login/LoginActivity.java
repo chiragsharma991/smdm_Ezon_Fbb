@@ -45,8 +45,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import apsupportapp.aperotechnologies.com.designapp.BuildConfig;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.DB_operation.DatabaseHandler;
 import apsupportapp.aperotechnologies.com.designapp.DashboardSnap.SnapDashboardActivity;
@@ -140,7 +138,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             LocalNotificationReceiver.logoutAlarm = false;
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.cancel(LocalNotificationReceiver.notId);
-            Log.e("TAG", "notification id:-- " + LocalNotificationReceiver.notId);
         }
     }
 
@@ -191,14 +188,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void requestLoginAPI()
     {
-        String url =ConstsCore.web_url + "/v1/login" ; //ConstsCore.web_url+ + "/v1/login/userId";
-        Log.e(TAG, "requestLoginAPI: "+url);
+        String url = ConstsCore.web_url + "/v1/login"; //ConstsCore.web_url+ + "/v1/login/userId";
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("Login Response   ", response.toString());
                         try {
                             if (response == null || response.equals(null)) {
 //                                Reusable_Functions.hDialog();
@@ -236,7 +231,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -254,7 +248,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 auth_code = "Basic " + Base64.encodeToString((uname + ":" + password).getBytes(), Base64.NO_WRAP); //Base64.NO_WRAP flag
-                Log.i("Auth Code", auth_code);
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", auth_code);
                 return params;
@@ -269,15 +262,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void requestUserStore()
     {
         String url = ConstsCore.web_url + "/v1/login/userstoresNew/" + userId ;//+"?geoLevel2Code="+login_storeList.getGeoLevel2Code()+"&recache="+recache; //ConstsCore.web_url+ + "/v1/login/userId";
-        Log.e("Login", "requestUserStore: " + url);
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-//                        Log.e(TAG, "requestUserStore -***- onResponse: "+response);
-//                        Log.e(TAG, "requestUserStore - onResponse: "+response.length());
+
                         try
                         {
                             if (response.equals("") || response == null)
@@ -293,7 +284,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     login_storeList = gson.fromJson(response.get(i).toString(),Login_StoreList.class);
                                     loginStoreArray.add(login_storeList);
                                 }
-                                Log.i(TAG, "loginStoreArray sizes: "+loginStoreArray.size());
                                 //database storeage
                                 db.deleteAllData();
                                 db.db_AddData(loginStoreArray);
@@ -309,12 +299,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.putString("hierarchyLevels",loginStoreArray.get(0).getHierarchyLevels());
                                 editor.putString("isMultiStore", loginStoreArray.get(0).getIsMultiStore());
                                 editor.apply();
-                                Log.e(TAG, "onResponse: "+login_storeList.getIsMultiStore().equals("NO"));
                                 Reusable_Functions.hDialog();
                                 if(response.length() == 1 ) // for single response save storecode
                                 {
-                                    Log.e(TAG, "requestUserStore - in if 1: " );
-
                                     if (Reusable_Functions.chkStatus(context))
                                     {
                                         Reusable_Functions.sDialog(context, "Fetching store code and concept...");
@@ -327,8 +314,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                                 else // for multiple response save concept (geoLevelDesc)
                                 {
-                                    Log.e(TAG, "requestUserStore - in else multiple: " );
-
                                     if (Reusable_Functions.chkStatus(context))
                                     {
                                         Reusable_Functions.sDialog(context, "Fetching store code and concept...");
@@ -382,14 +367,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void requestUserStoreConcept()
     {
         String url = ConstsCore.web_url + "/v1/login/userstoreorconcept/" + userId +"?geoLevel2Code="+loginStoreArray.get(0).getGeoLevel2Code()+"&lobId="+loginStoreArray.get(0).getLobId(); //ConstsCore.web_url+ + "/v1/login/userId";
-        Log.e("Login", "requestUserStoreConcept: " + url);
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e(TAG, "requestUserStoreConcept - onResponse: "+response);
                         try {
                             if (response.equals("") || response == null)
                             {
@@ -406,7 +389,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     JSONObject jsonObject = response.getJSONObject(i);
                                      value  = jsonObject.getString("value");
                                 }
-                                Log.e(TAG, "requestUserStoreConcept - onResponse: "+value);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("value", value);
                                 editor.apply();
@@ -442,7 +424,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onErrorResponse(VolleyError error)
                     {
                         Reusable_Functions.hDialog();
-                        Log.e(TAG, "onErrorResponse: "+error);
                         Toast.makeText(context, "Invalid user", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }

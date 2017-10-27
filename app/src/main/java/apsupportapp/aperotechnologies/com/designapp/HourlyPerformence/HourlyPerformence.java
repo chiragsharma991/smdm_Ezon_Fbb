@@ -351,8 +351,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         addleggend.removeAllViewsInLayout();
         for (int i = 0; i < piechart_list.size(); i++) {
 
-            Log.e(TAG, "callPiechart: " + piechart_list.get(0).getLevel());
-
             if (piechart_list.size() <= 10) {
                 int usecolor = colors[i];
                 pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(), usecolor));
@@ -408,7 +406,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         leveLDesc = concept_toggle == true ? "geoLevel2Desc=" + piechart_list.get(_Position).getLevel().replace(" ", "%20").replace("&", "%26").replace("%", "%25") : "geoLevel3Desc=" + piechart_list.get(_Position).getLevel().replace(" ", "%20").replace("&", "%26").replace("%", "%25");
         if (Reusable_Functions.chkStatus(context)) {
             if (ApiRequest.getRequest != null) {
-                Log.e(TAG, ": cancel request>>>>>>>");
                 ApiRequest.getRequest.cancel();
             }
             mpm_model model = new mpm_model();
@@ -529,7 +526,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         switch (id) {
 
             case 0:
-                Log.e(TAG, "Total list: " + list.size());
                 netSales.setText("₹" + thousandSaperator.format((int) list.get(0).getSaleNetVal()));
                 archPercent.setText(""+String.format("%.1f", list.get(0).getSalesAch()) + "%");
                 units.setText(String.format("%.1f", list.get(0).getUnitsBill()));
@@ -544,7 +540,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 piechart_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     piechart_list.add(data);
-                Log.e(TAG, "pie chart list: " + piechart_list.size());
 
                 model = new mpm_model();
                 ApiCallBack(model, 2);  //calling for line chart
@@ -555,7 +550,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 barchart_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     barchart_list.add(data);
-                Log.e(TAG, "Barchart_list: " + barchart_list.size());
 
                 model = new mpm_model();
                 ApiCallBack(model, 3);  //calling for line chart
@@ -566,7 +560,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 store_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     store_list.add(data);
-                Log.e(TAG, "Store_list: " + store_list.size());
                 // hrl_pi_Process.setVisibility(View.GONE);
                 Reusable_Functions.animateScaleIn(hrl_pi_Process);
                 setPerform();
@@ -579,7 +572,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 piechart_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     piechart_list.add(data);
-                Log.e(TAG, "zone pie chart list: " + piechart_list.size());
                 callPiechart();
                 Reusable_Functions.hDialog();
                 break;
@@ -589,7 +581,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 piechart_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     piechart_list.add(data);
-                Log.e(TAG, "Concept pie chart list: " + piechart_list.size());
                 callPiechart();
                 Reusable_Functions.hDialog();
                 break;
@@ -606,7 +597,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     public void nodatafound() {
 
         try {
-            Log.e(TAG, "nodatafound: in hourly");
             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
             Reusable_Functions.animateScaleIn(hrl_pi_Process);
             netSales.setText("₹" + "0");
@@ -638,7 +628,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
 
         } catch (NullPointerException e) {
-            Log.e(TAG, "nodatafound: error " + e.getMessage());
         }
 
 
@@ -686,7 +675,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     public void onTabSelected(TabLayout.Tab tab) {
 
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: " );
         String url;
         ApiRequest api_request;
         focusOnPie = false;
@@ -700,7 +688,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 dupfocusPosition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
                     if (ApiRequest.getRequest != null) {
-                        Log.e(TAG, ": cancel request>>>>>>>");
                         ApiRequest.getRequest.cancel();
                     }
                     Reusable_Functions.animateScaleIn(hrl_pi_Process);
@@ -717,7 +704,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 dupfocusPosition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
                     if (ApiRequest.getRequest != null) {
-                        Log.e(TAG, ": cancel request>>>>>>>");
                         ApiRequest.getRequest.cancel();
                     }
                     Reusable_Functions.animateScaleIn(hrl_pi_Process);

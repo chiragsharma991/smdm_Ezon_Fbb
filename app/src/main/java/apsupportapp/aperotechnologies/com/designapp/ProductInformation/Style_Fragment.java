@@ -125,7 +125,6 @@ public class Style_Fragment extends Fragment {
         articleCode = bundle.getString("articleCode");
         articleOption = bundle.getString("articleOption");
         storeCode = bundle.getString("storeCode");
-        Log.e(TAG, "onCreate: "+storeCode);
         context = getContext();
         styleColorBeanList = new ArrayList<>();
         m_config = MySingleton.getInstance(context);
@@ -134,7 +133,6 @@ public class Style_Fragment extends Fragment {
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
-        Log.e(TAG, "onCreate: ");
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.sDialog(context, "Loading Styles data");
             requestStyleSizeDetailsAPI();
@@ -162,13 +160,11 @@ public class Style_Fragment extends Fragment {
             url = ConstsCore.web_url + "/v1/display/sizesNew/" + userId + "?articleOption=" + articleOptionCode.replace(" ", "%20").replaceAll("&", "%26").replaceAll(",", "%2c") + "&offset=" + offsetvalue + "&limit=" + limit1 +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId +"&storeCode="+storeCode;
 
         }
-        Log.e("sizesNew url "," "+url.toString());
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("sizesNew res "," "+response.toString());
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
@@ -321,12 +317,10 @@ public class Style_Fragment extends Fragment {
 //
 
 
-        Log.e(TAG, "requestStyleSizeDetailsAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "stylesNew onResponse: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();

@@ -54,7 +54,6 @@ public class Details_Fragment extends Fragment implements View.OnClickListener
         articleOption = bundle.getString("articleOption");
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
      //   storeDescription = sharedPreferences.getString("storeDescription","");
-        Log.e( "onCreate: ",""+selStoreName);
     }
 
     @Override

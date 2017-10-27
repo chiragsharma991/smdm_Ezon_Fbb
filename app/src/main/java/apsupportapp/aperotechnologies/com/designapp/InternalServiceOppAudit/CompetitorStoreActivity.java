@@ -125,7 +125,6 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
         CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
         customSeekBar.addSeekBar(mSeekLin);
-        Log.e("=== "," "+overall_progress);
 
         Button btn_Reset = (Button) findViewById(R.id.btn_reset);
         btn_Reset.setOnClickListener(new View.OnClickListener() {
@@ -208,8 +207,6 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         btn_Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("", "onClick: "+list_overallratings.size());
-                Log.e("", "onClick: "+list_billing_experience.size());
 
 
                 for(int i = 0; i < list_overallratings.size(); i++)
@@ -309,7 +306,6 @@ public class CompetitorStoreActivity extends AppCompatActivity {
         try {
             m_jArry = new JSONArray(loadJSONFromAsset(json_file));
             JSONObject jsonObject;
-            Log.e("m_jArry.length() "," "+m_jArry.length());
 
             for (int i = 0; i < m_jArry.length(); i++)
             {

@@ -9,11 +9,133 @@
     android:background="@color/white"
     tools:context="apsupportapp.aperotechnologies.com.designapp.ProductInformation.StyleActivity">
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <RelativeLayout
+        android:id="@+id/style_loadingBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:keepScreenOn="true"
+            android:padding="10dp"></ProgressBar>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_overlay"
+        android:clickable="false"
+        android:visibility="gone"
+        android:alpha="0.9"
+        android:background="#f0f0f0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_colorNormal="@color/ezfb_Red"
+        fab:fab_icon="@drawable/fabicon_view"
+        fab:fab_title=""
+        fab:fab_colorPressed="#f1f1f1"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/float_button"
+        android:layout_alignEnd="@+id/float_button"
+        fab:fab_addButtonColorNormal="@android:color/transparent"
+        fab:fab_addButtonColorPressed="@android:color/transparent"
+        fab:fab_addButtonPlusIconColor="@android:color/transparent"
+        fab:fab_labelStyle="@style/menu_labels_style">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
+            fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_department"
+            fab:fab_title="Department" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
+            fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_category"
+            fab:fab_title="Category" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
+            fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_class"
+            fab:fab_title="Class" />
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
+            fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_brand"
+            fab:fab_title="Brand" />
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_brandclass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
+            fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_brand_class"
+            fab:fab_title="Brand Class" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fabSize="mini"
+            fab:fab_colorNormal="@color/ezfb_Red"
+            fab:fab_colorPressed="#f1f1f1"
+            fab:fab_icon="@drawable/fabicon_store"
+            fab:fab_title="Store" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,10 +152,10 @@
                 android:contentInsetLeft="0dp"
                 android:contentInsetRight="0dp"
                 android:contentInsetStart="0dp"
-                app:contentInsetEnd="0dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp">
+                fab:contentInsetEnd="0dp"
+                fab:contentInsetLeft="0dp"
+                fab:contentInsetRight="0dp"
+                fab:contentInsetStart="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -152,10 +274,10 @@
             android:id="@+id/tabview_sales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/ezfb_Red"
-            app:tabSelectedTextColor="@color/ezfb_Red"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-            app:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
+            fab:tabIndicatorColor="@color/ezfb_Red"
+            fab:tabSelectedTextColor="@color/ezfb_Red"
+            fab:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            fab:tabTextColor="@color/ezfb_Red"></android.support.design.widget.TabLayout>
 
 
         <info.hoang8f.android.segmented.SegmentedGroup
@@ -430,127 +552,6 @@
 
 
     </LinearLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/style_loadingBar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:visibility="gone">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:keepScreenOn="true"
-            android:padding="10dp"></ProgressBar>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rel_overlay"
-        android:clickable="false"
-        android:visibility="gone"
-        android:alpha="0.9"
-        android:background="#f0f0f0"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </RelativeLayout>
-
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/float_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        fab:fab_colorNormal="@color/ezfb_Red"
-        fab:fab_icon="@drawable/fabicon_view"
-        fab:fab_title=""
-        fab:fab_colorPressed="#f1f1f1"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"/>
-
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/float_button"
-        android:layout_alignEnd="@+id/float_button"
-        fab:fab_addButtonColorNormal="@android:color/transparent"
-        fab:fab_addButtonColorPressed="@android:color/transparent"
-        fab:fab_addButtonPlusIconColor="@android:color/transparent"
-        fab:fab_labelStyle="@style/menu_labels_style">
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_department"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fabSize="mini"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_colorPressed="#f1f1f1"
-            fab:fab_icon="@drawable/fabicon_department"
-            fab:fab_title="Department" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fabSize="mini"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_colorPressed="#f1f1f1"
-            fab:fab_icon="@drawable/fabicon_category"
-            fab:fab_title="Category" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_class"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fabSize="mini"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_colorPressed="#f1f1f1"
-            fab:fab_icon="@drawable/fabicon_class"
-            fab:fab_title="Class" />
-
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_brand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fabSize="mini"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_colorPressed="#f1f1f1"
-            fab:fab_icon="@drawable/fabicon_brand"
-            fab:fab_title="Brand" />
-
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_brandclass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fabSize="mini"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_colorPressed="#f1f1f1"
-            fab:fab_icon="@drawable/fabicon_brand_class"
-            fab:fab_title="Brand Class" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_store"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fabSize="mini"
-            fab:fab_colorNormal="@color/ezfb_Red"
-            fab:fab_colorPressed="#f1f1f1"
-            fab:fab_icon="@drawable/fabicon_store"
-            fab:fab_title="Store" />
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
 
 
 </RelativeLayout>

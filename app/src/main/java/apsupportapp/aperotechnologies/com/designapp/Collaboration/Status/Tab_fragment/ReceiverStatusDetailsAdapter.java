@@ -52,7 +52,6 @@ public class ReceiverStatusDetailsAdapter extends RecyclerView.Adapter<RecyclerV
             if(position < rec_status_dtllist.size()) {
                 //receiverDetailProcess.setVisibility(View.GONE);
 
-                Log.e(TAG,"position"+position);
                 HandlePositionOnSet(holder,position);
                // HandlePositionOnSet(holder,position);
                 ((ReceiverStatusDetailsAdapter.Holder)holder).OptionLevel.setText(rec_status_dtllist.get(position).getLevel());

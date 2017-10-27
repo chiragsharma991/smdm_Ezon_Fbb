@@ -78,8 +78,6 @@ public class ExternalHistoryAdapter extends BaseAdapter {
             viewHolder.txt_4 = (TextView) view.findViewById(R.id.txt_4);
             viewHolder.card_extrenalaudrev = (CardView) view.findViewById(R.id.card_extrenalaudrev);
 
-            Log.e("i "," "+i);
-
             viewHolder.txt_1.setText(arr_zonalratings.get(i).getZone_name());
             viewHolder.txt_2.setText(arr_zonalratings.get(i).getAvg_rating());
             viewHolder.txt_3.setText(arr_zonalratings.get(i).getAudit_done());

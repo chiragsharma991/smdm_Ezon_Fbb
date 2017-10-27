@@ -176,7 +176,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     {
 
         if (mReaderManager != null) {
-            Log.e("onClick: ", "------");
             BcReaderType myReaderType = mReaderManager.GetReaderType();
             //  edit_barcode.setText(myReaderType.toString());
         }
@@ -214,7 +213,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
                 barcode = intent.getStringExtra(GeneralString.BcReaderData);
-                Log.e("onReceive: ", " " + barcode);
 //                android.os.Handler h = new android.os.Handler();
 //                h.postDelayed(new Runnable() {
 //                    public void run() {
@@ -226,7 +224,6 @@ public class TransferDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         }
                         else
                         {
-                            Log.e("come", "here");
                             View view =((Activity)context).findViewById(android.R.id.content);
                             Snackbar.make(view, "No barcode found. Please try again.", Snackbar.LENGTH_LONG).show();
                         }

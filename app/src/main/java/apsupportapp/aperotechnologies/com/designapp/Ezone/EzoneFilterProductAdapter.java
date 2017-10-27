@@ -226,13 +226,11 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                                           rel_ez_process_filter.setVisibility(View.GONE);
                                                        }
                                                    }
-                                                   Log.e("salesListchecked :", "" + salesList);
                                                    BuildUP(ez_level);
                                                } else if (cb.isChecked())
                                                {
                                                    salesList.remove(mListDataGroup.get(groupPosition) + "." + txtClickedVal);
                                                    cb.setChecked(false);
-                                                   Log.e("salesListunchecked :", "" + salesList);
                                                    removeBuildUP(ez_level);
                                                }
                                            }
@@ -247,12 +245,10 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
 
         if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis"))
         {
-            Log.e("removeBuildUP: ","Sales" );
             removeDataforSales(filterLevel);
         }
         else
         {
-            Log.e("removeBuildUP: ","Inventory" );
             removeDataforInventory(filterLevel);
         }
 
@@ -461,11 +457,9 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         filterLevel = prod_level;
         if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis"))
         {
-            Log.e("BuildUP: ","Sales" );
             buildUpdataSales(filterLevel);
         } else
         {
-            Log.e("BuildUP: ","Inventory" );
             buildUpdataInventory(filterLevel);
         }
     }
@@ -743,7 +737,6 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     for (int k = 0; k < dublicate_listDataChild2.get(mListDataGroup.get(j)).size(); k++) {
                         if (dublicate_listDataChild2.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText)) {
                             arrayList1.add(dublicate_listDataChild2.get(mListDataGroup.get(j)).get(k));
-                            Log.e("array list size 1 :", "" + arrayList1.size());
 
                         }
                     }
@@ -762,7 +755,6 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                     for (int k = 0; k < dublicate_listDataChild2.get(mListDataGroup.get(j)).size(); k++) {
                         if (dublicate_listDataChild2.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText)) {
                             arrayList1.add(dublicate_listDataChild2.get(mListDataGroup.get(j)).get(k));
-                            Log.e("array list size 1 :", "" + arrayList1.size());
 
                         }
                     }
@@ -802,7 +794,6 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         String search_url = " ";
         if (str_checkFrom.equals("ezoneSales") || str_checkFrom.equals("ezonepvaAnalysis")) {
             if (prod_level == 2) {
-                Log.e("str in global search :", "" + str);
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&department=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
             } else if (prod_level == 3) {
@@ -816,7 +807,6 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
         } else {
             if (prod_level == 2)
             {
-                Log.e("str in global search :", "" + str);
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&department=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
 
             } else if (prod_level == 3) {
@@ -830,12 +820,10 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                 search_url = ConstsCore.web_url + "/v1/display/globalsearchNew/" + userId + "?level=" + prod_level + "&brand=" + str.replaceAll("&", "%26").replace(" ", "%20")+ "&geoLevel2Code=" + geoLevel2Code+ "&lobId="+ lobId;
             }
         }
-        Log.e("search url:", "" + search_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, search_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -895,7 +883,6 @@ public class EzoneFilterProductAdapter extends BaseExpandableListAdapter {
                                     try {
                                         mListDataChild.put(mListDataGroup.get(i), drillDownList);
                                     } catch (IndexOutOfBoundsException e) {
-                                        Log.e("onResponse: ", "" + e.getMessage());
                                     }
                                     for (int k = prod_level - 1; k < mListDataGroup.size(); k++) {
                                         explv_ez_prod.expandGroup(k);

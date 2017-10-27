@@ -110,7 +110,6 @@ public class ExpiringPromoSnapAdapter extends RecyclerView.Adapter<RecyclerView.
 
     @Override
     public void onSnap(int position) {
-        Log.d("Snapped: ", position + "");
     }
 
     public static class ExpireHolder extends RecyclerView.ViewHolder {

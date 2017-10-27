@@ -70,7 +70,6 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
   {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_mpm_activity);
-      Log.e("here in season","");
       context = this;
       checkCollapsing();
       intialise();
@@ -149,7 +148,6 @@ public class mpm_activity extends AppCompatActivity implements HttpResponse,View
 
   @Override
   public void response(ArrayList<mpm_model> list,int id) {
-      Log.e(TAG, "response: "+ list.get(2).getMpmPath());
       listener = (DownloadFile.Listener) context;
       this.list = list;
       mpmAdapter = new mpm_adapter(context, list);

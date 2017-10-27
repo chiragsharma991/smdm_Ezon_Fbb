@@ -91,14 +91,12 @@ public class SnapChildAdapter extends RecyclerView.Adapter<SnapChildAdapter.View
             int height = displayMetrics.heightPixels;
             int width = displayMetrics.widthPixels;
 
-//            Log.e( "ViewHolder: ",""+width );
             Snap_child_imageView = (ImageView) itemView.findViewById(R.id.snap_child_imageView);
             Snap_child_subtitle = (TextView) itemView.findViewById(R.id.snap_child_subtitle);
             linear_snap = (LinearLayout)itemView.findViewById(R.id.linear_snap);
             if(mApps.size() > 3)
             {
                 double update_width = width / 3.5;
-//                Log.e(TAG, "ViewHolderin if: "+update_width);
                 LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams((int) update_width,LinearLayout.LayoutParams.WRAP_CONTENT);
                 linear_snap.setLayoutParams(parms);
             }

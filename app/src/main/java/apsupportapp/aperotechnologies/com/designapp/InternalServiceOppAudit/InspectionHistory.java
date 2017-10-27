@@ -51,7 +51,6 @@ public class InspectionHistory extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int check_pos = tab.getPosition();
-//                Log.e("check_pos "," "+check_pos);
                 viewPager.setCurrentItem(check_pos);
 
             }

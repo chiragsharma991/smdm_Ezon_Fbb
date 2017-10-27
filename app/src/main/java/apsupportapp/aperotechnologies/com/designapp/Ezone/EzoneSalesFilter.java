@@ -170,7 +170,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(et_ez_search.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
                 s = et_ez_search.getText().toString();
-                Log.e("s :", "" + s);
                 locatn_list_adapter.filterData(s.toString());
                 prod_list_adapter.filterData(s.toString());
             }
@@ -378,7 +377,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     intent = new Intent(EzoneSalesFilter.this, EzoneFreshnessIndexActivity.class);
                     if (build.length() != 0) {
                         EzoneFreshnessIndexActivity.ezone_freshness_Index.finish();
-                        Log.e("TAG", "freshnessIndex:  call finish ");
 
 
                     }
@@ -389,7 +387,6 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
                     intent = new Intent(EzoneSalesFilter.this, EzoneSalesPvAActivity.class);
                     if (build.length() != 0) {
                         EzoneSalesPvAActivity.Ezone_Sales_Pva_Activity.finish();
-                        Log.e("TAG", "freshnessIndex:  call finish ");
 
 
                     }
@@ -495,9 +492,7 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 
             }
             intent.putExtra("selectedStringVal", build.toString());
-            Log.e("TAG", "callback:  selectedStringVal" + build.toString());
             intent.putExtra("selectedlevelVal", filter_level);
-            Log.e("TAG", "callback:  selectedlevelVal" + filter_level);
         }
         startActivity(intent);
         EzoneFilterProductAdapter.department_text = "";
@@ -573,12 +568,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //            region_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
 //
 //        }
-        Log.e("region url :", "" + region_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, region_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("region response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -675,12 +668,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //            store_url = ConstsCore.web_url + "/v1/display/storehierarchyEZ/" + userId + "?offset=" + offset + "&limit=" + limit + "&level=" + ez_level_filter;
 //
 //        }
-        Log.e("store url :", "" + store_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, store_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("store response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -777,12 +768,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //            dept_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
 //
 //        }
-        Log.e("dept_url :", "" + dept_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, dept_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("dept response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -874,12 +863,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //            category_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level ;
 //
 //        }
-        Log.e("categry_url :", "" + category_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, category_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("categry response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -974,12 +961,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //            class_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
 //
 //        }
-            Log.e("class_url :", "" + class_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, class_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("class response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1075,12 +1060,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //            brand_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
 //
 //        }
-            Log.e("brand_url :", "" + brand_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, brand_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-//                        Log.e("brand response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1184,12 +1167,10 @@ public class EzoneSalesFilter extends AppCompatActivity implements View.OnClickL
 //            //without geoLevel2code field
 //            mc_url = ConstsCore.web_url + "/v1/display/salesanalysishierarchy/" + userId + "?offset=" + offsetvalue1 + "&limit=" + limit1 + "&level=" + ez_prod_level;
 //        }
-            Log.e("mc_url :", "" + mc_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, mc_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        //Log.e("mc response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
