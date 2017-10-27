@@ -116,20 +116,20 @@ public class FloorAvailabilityAdapter extends BaseAdapter
         holder.floor_option.setText(arrayList.get(position).getOption());
 
         //Option Click event to get detail information
-        holder.floor_option.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (Reusable_Functions.chkStatus(context)) {
-                    Reusable_Functions.hDialog();
-                    Reusable_Functions.sDialog(context, "Loading  data...");
-                    requestOptionDetailsAPI(arrayList.get(position).getOption());
-                } else
-                {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        holder.floor_option.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (Reusable_Functions.chkStatus(context)) {
+//                    Reusable_Functions.hDialog();
+//                    Reusable_Functions.sDialog(context, "Loading  data...");
+//                    requestOptionDetailsAPI(arrayList.get(position).getOption());
+//                } else
+//                {
+//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
         holder.floor_SOH_U.setText(""+Math.round(arrayList.get(position).getStkOnhandQty()));
         holder.floor_NoofDays.setText(arrayList.get(position).getNoDaysPassed());
         holder.floor_ReceiptDate.setText(arrayList.get(position).getFirstReceiptDate());
@@ -167,12 +167,14 @@ public class FloorAvailabilityAdapter extends BaseAdapter
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
         String userId = sharedPreferences.getString("userId", "");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        String geoLevel2Code = sharedPreferences.getString("concept", "");
+        String lobId = sharedPreferences.getString("lobid", "");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
         String url ;
-        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
+        url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

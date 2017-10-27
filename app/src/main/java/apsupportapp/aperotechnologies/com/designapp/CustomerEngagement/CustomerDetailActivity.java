@@ -96,11 +96,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         context = this;
         unique_Customer = getIntent().getStringExtra("uniqueCustomer");
-        Log.e("unique_Customer", "" + unique_Customer);
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
-      //  update_userId = userId.substring(0, userId.length() - 5);
-        Log.e("update_userId", "" + update_userId);
+
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         geoLevel2Code = sharedPreferences.getString("concept","");
@@ -245,11 +244,11 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
     private void requestCustomerDetailsAPI() {
         String url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e("cust details  url ", "" + url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("response details:", "" + response);
+
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -307,11 +306,11 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private void requestResetCustomerDetailAPI()
     {
         String url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e("cust details  url ", "" + url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("response details:", "" + response);
+
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -385,11 +384,11 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
     private void requestCustomerRecomdtn() {
         String url = ConstsCore.web_url + "/v1/display/customerreco/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&recache=" + recache+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e("cust summary url ", "" + url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("response :", "" + response);
+
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -399,7 +398,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
                         for (i = 0; i < 3; i++) {
                             customerRecomdtn = gson.fromJson(response.get(i).toString(), CustomerRecomdtn.class);
                             customerDetailArrayList.add(customerRecomdtn);
-                            Log.e("cust recomdtn :", "" + customerDetailArrayList.size());
+
                         }
                     }
                     if (Reusable_Functions.chkStatus(context)) {
@@ -453,7 +452,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
         pieChart.setOnItemFocusChangedListener(new IOnItemFocusChangedListener() {
             @Override
             public void onItemFocusChanged(int _Position) {
-                Log.e("onItemFocusChanged: ", "" + _Position);
+
                 switch (_Position) {
                     case 0:
                         //  pieChart.setInnerValueString("" + Math.round(customerDetailsarray.get(0).getFoodContr()) + "%");
@@ -564,12 +563,12 @@ public class CustomerDetailActivity extends AppCompatActivity {
         } else if (businessCcb.equals("Electronics")) {
             url = ConstsCore.web_url + "/v1/display/customercontribution/" + userId + "?engagementFor=" + engagementFor + "&uniqueCustomer=" + unique_Customer + "&businessCcb=" + businessCcb+"&geoLevel2Code="+ geoLevel2Code;
         }
-        Log.e("pie on focus ", "" + url);
+
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("pie on focus response :", "" + response);
+
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {

@@ -46,19 +46,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.e("TAG", "Notification Body:-- " + remoteMessage.getNotification().getBody());
+
         }
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.e("TAG", "Data Payload: --" + remoteMessage.getData().toString());
+
 
             try {
                 Map<String, String> params = remoteMessage.getData();
                 JSONObject json = new JSONObject(params);
                 handleDataMessage(json);
             } catch (Exception e) {
-                Log.e("TAG", "Exception: " + e.getMessage());
+
             }
         }
     }
@@ -73,7 +73,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService
 
         }
         catch (JSONException e) {
-            Log.e("TAG", "JSONException: "+e.getMessage() );
+
             e.printStackTrace();
         }
 

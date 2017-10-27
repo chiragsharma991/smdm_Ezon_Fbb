@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,7 +132,6 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
         if(TAG.equals("BestPerformer_Ez_Inventory")){
 
-            Log.e(TAG, "getProdImageUrl: "+arrayList.get(position).getProdImageUrl() );
             if (arrayList.get(position).getProdImageUrl()!=null) {
 
                 Glide.with(this.context)
@@ -154,7 +152,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
                         .into(holder.BestInvent_image_child);
 
             } else {
-                Log.e("here ezone else","");
+
 
                 if(arrayList.get(position).getOption().equals("SAMSUNG G615F GXY J7 MAX 4GB/32GB-GOLD"))
                 {
@@ -193,7 +191,7 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         }
         else{
 
-            Log.e("here else","");
+
             if (!arrayList.get(position).getProdImageURL().equals("")) {
 
                 Glide.with(this.context)
@@ -224,21 +222,20 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
             }
 
 
-            Log.e(TAG, "getView: Detail calling" );
             //Option Click event to get detail information
-            holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (Reusable_Functions.chkStatus(context)) {
-                        Reusable_Functions.hDialog();
-                        Reusable_Functions.sDialog(context, "Loading  data...");
-                        Log.e("select item", arrayList.get(position).getOption());
-                        requestOptionDetailsAPI(arrayList.get(position).getOption());
-                    } else {
-                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+//            holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (Reusable_Functions.chkStatus(context)) {
+//                        Reusable_Functions.hDialog();
+//                        Reusable_Functions.sDialog(context, "Loading  data...");
+//
+//                        requestOptionDetailsAPI(arrayList.get(position).getOption());
+//                    } else {
+//                        Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            });
         }
 
 
@@ -252,23 +249,24 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
         String userId = sharedPreferences.getString("userId", "");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        String geoLevel2Code = sharedPreferences.getString("concept", "");
+        String lobId = sharedPreferences.getString("lobid", "");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
         queue.start();
         String url = " ";
-        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offset + "&limit=" + limit;
-        Log.e(TAG, "requestStyleDetailsAPI  " + url);
+        url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, " requestStyleDetailsAPI :   " + response.toString());
+
                         try {
                             int i;
                             if (response.equals(null) || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();
-                                Toast.makeText(context, "No data found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "no data found", Toast.LENGTH_LONG).show();
                             } else if (response.length() < limit) {
                                 Reusable_Functions.hDialog();
                                 for (i = 0; i < response.length(); i++) {
@@ -278,17 +276,17 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
 
                                 }
 
-                                Log.e(TAG, "intent calling: ");
+
                                 Intent intent = new Intent(context, SwitchingTabActivity.class);
                                 intent.putExtra("checkFrom", "bestInventory");
                                 intent.putExtra("articleCode", styleDetailsBean.getArticleCode());
                                 intent.putExtra("articleOption", styleDetailsBean.getArticleOption());
-                                Log.e("Article Option :", "" + styleDetailsBean.getArticleOption());
+
                                 intent.putExtra("styleDetailsBean", styleDetailsBean);
                                 context.startActivity(intent);
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
+
                             e.printStackTrace();
                         }
                     }
@@ -297,7 +295,6 @@ public class BestPerformerInventoryAdapter extends BaseAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("", "" + error.networkResponse + "");
                         Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }

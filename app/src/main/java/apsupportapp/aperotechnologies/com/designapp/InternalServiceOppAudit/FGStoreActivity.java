@@ -278,14 +278,17 @@ public class FGStoreActivity extends AppCompatActivity {
     public String loadJSONFromAsset(String json_file)
     {
         String json = null;
-        try {
+        try
+        {
             InputStream is = context.getAssets().open(json_file);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             ex.printStackTrace();
             return null;
         }
@@ -361,8 +364,6 @@ public class FGStoreActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
 
 //                        Boolean exist = false;
 

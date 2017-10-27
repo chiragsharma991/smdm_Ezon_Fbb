@@ -33,7 +33,7 @@ public class FetchNewRefreshToken extends IntentService {
 
 
             // Now manually call onTokenRefresh()
-            Log.e(TAG, "Getting new token");
+
             FirebaseInstanceId.getInstance().getToken();
         } catch (Exception e) {
             e.printStackTrace();

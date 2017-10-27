@@ -209,7 +209,7 @@ public class ReturnDetailActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Log.e("radio_value "," "+radio_value);
+
                             alertDialog.dismiss();
                             Intent i = new Intent(ReturnDetailActivity.this, ReturnCatalogueActivity.class);
                             i.putExtra("from","return_detail");

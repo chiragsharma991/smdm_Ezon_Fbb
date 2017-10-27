@@ -142,7 +142,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
        // update_userId = userId.substring(0, userId.length() - 5);
-        Log.e("update_userId", "" + update_userId);
+
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLevel2Code = sharedPreferences.getString("concept","");
         lobId = sharedPreferences.getString("lobid","");
@@ -157,7 +157,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
         update_userId = userId.substring(0, userId.length() - 5);
-        Log.e("update_userId", "" + update_userId);
+
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
@@ -165,7 +165,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         queue = new RequestQueue(cache, network);
         queue.start();
         gson = new Gson();
-        Log.e("test", "onCreateView: page one");
+
         initialise();
         if (Reusable_Functions.chkStatus(context))
         {
@@ -245,11 +245,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         }
 
 
-        Log.e("cust summary url ", "" + url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("responseCustomerLoyaltySummary :", "" + response);
+
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -345,11 +345,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         {
             url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;//+ "&offset=" + offsetval + "&limit=" + limit;
         }
-        Log.e("cust summary url ", "" + url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("responseCustomerPlanEngagement :", "" + response);
+
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0)
@@ -458,11 +458,11 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
             url = ConstsCore.web_url + "/v1/display/customerplanengagement/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&level=" + level+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;//+ "&offset=" + offsetval + "&limit=" + limit;
         }
 
-        Log.e("cust summary url 1", "" + url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("responseLifeStage 1 :", "" + response);
+
                 try {
                     int i = 0;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -565,10 +565,8 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                 @Override
                 public void onClick(View v) {
                     int position = (int) v.getTag();
-                    Log.e("", "onClick: " + position);
+                    e_bandnm = planengagementArrayList.get(position).getLevel();
 
-                            e_bandnm = planengagementArrayList.get(position).getLevel();
-                            Log.e("e_bandnm :",""+e_bandnm);
                     bandClick = true;
                     engagemntBandClick.communicatefrag1(e_bandnm,bandClick,context,userId,bearertoken);
                     CustomerLookupActivity.mViewPager.setCurrentItem(1);
@@ -655,10 +653,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                 @Override
                 public void onClick(View v) {
                     int position = (int) v.getTag();
-                    Log.e("", "onClick: " + position);
+
 
                     e_bandnm = planengagementArrayList.get(position).getLevel();
-                    Log.e("e_bandnm :",""+e_bandnm);
+
                     bandClick = true;
                     engagemntBandClick.communicatefrag1(e_bandnm,bandClick,context,userId,bearertoken);
                     CustomerLookupActivity.mViewPager.setCurrentItem(1);
@@ -742,10 +740,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                 @Override
                 public void onClick(View v) {
                     int position = (int) v.getTag();
-                    Log.e("", "onClick: " + position);
+
 
                     e_bandnm = actualengagementArrayList.get(position).getLevel();
-                    Log.e("e_bandnm :",""+e_bandnm);
+
                     bandClick = false;
                     engagemntBandClick.communicatefrag1(e_bandnm,bandClick,context,userId,bearertoken);
                     CustomerLookupActivity.mViewPager.setCurrentItem(1);
@@ -834,10 +832,10 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                 @Override
                 public void onClick(View v) {
                     int position = (int) v.getTag();
-                    Log.e("", "onClick: " + position);
+
 
                     e_bandnm = actualengagementArrayList.get(position).getLevel();
-                    Log.e("e_bandnm :",""+e_bandnm);
+
                     bandClick = false;
                     engagemntBandClick.communicatefrag1(e_bandnm,bandClick,context,userId,bearertoken);
                     CustomerLookupActivity.mViewPager.setCurrentItem(1);
@@ -876,12 +874,12 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
         {
             url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offsetval + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
-        }Log.e("detail url 1:", "" + url);
+        }
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response page one:", "" + response + " size "+response.length());
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -900,7 +898,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
 
 
                                 }
-                                Log.e( "array size: ",""+customerDetailsList.size());
+
 
                                 CustomerLookupActivity.mViewPager.setCurrentItem(1);
 
@@ -910,7 +908,7 @@ public class CustomerLookup_PageOne extends Fragment implements CompoundButton.O
                         catch (Exception e)
                         {
                             Reusable_Functions.hDialog();
-                            Log.e("exception :", "" + e.getMessage());
+
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();

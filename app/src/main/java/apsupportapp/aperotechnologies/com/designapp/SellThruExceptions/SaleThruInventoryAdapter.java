@@ -125,20 +125,21 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
         holder.bestInvent_zonalSell.setText(String.format("%.1f", arrayList.get(position).getSellthruUnitsZonal()));
         holder.BestInvent_Sale.setText("" + arrayList.get(position).getSaleTotQty());
         holder.BestInvent_option.setText(arrayList.get(position).getOption());
-        //Option Click event to get detail information
-        holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Reusable_Functions.chkStatus(context)) {
-                    Reusable_Functions.hDialog();
-                    Reusable_Functions.sDialog(context, "Loading  data...");
-                    requestOptionDetailsAPI(arrayList.get(position).getOption());
-                } else {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                }
 
-            }
-        });
+        //Option Click event to get detail information
+//        holder.BestInvent_option.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (Reusable_Functions.chkStatus(context)) {
+//                    Reusable_Functions.hDialog();
+//                    Reusable_Functions.sDialog(context, "Loading  data...");
+//                    requestOptionDetailsAPI(arrayList.get(position).getOption());
+//                } else {
+//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+//                }
+//
+//            }
+//        });
 
 
         if (!arrayList.get(position).getProdImageURL().equals("")) {
@@ -186,7 +187,7 @@ public class SaleThruInventoryAdapter extends BaseAdapter {
 
         String url;
 
-        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offset + "&limit=" + limit;
+        url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offset + "&limit=" + limit;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

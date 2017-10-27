@@ -1433,8 +1433,6 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 else
                 {
                     drill_down_val = "";
-
-
                     if(txtheaderplanclass.getText().toString().equals(hierarchyList[0])){
                         relprevbtn.setVisibility(View.VISIBLE);
                         txtheaderplanclass.setText(hierarchyList[1]);

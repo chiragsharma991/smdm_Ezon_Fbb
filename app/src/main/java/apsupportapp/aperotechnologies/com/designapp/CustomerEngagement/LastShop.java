@@ -28,7 +28,7 @@ public class LastShop extends android.support.v4.app.Fragment
         context = root.getContext();
         customerDetailArrayList = new ArrayList<CustomerDetail>();
         customerDetailArrayList = CustomerDetailActivity.customerDetailsarray;
-        Log.e("array size",""+CustomerDetailActivity.customerDetailsarray.size());
+
         lv_productList = (ListView)root.findViewById(R.id.lv_productList);
         dataAdapter = new LastShopDataAdapter(context,customerDetailArrayList);
         lv_productList.setAdapter(dataAdapter);
