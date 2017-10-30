@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="eazegraph-1.2.2">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/d67ac43cccc8821ff93cf6686cce1bb5a9dff0a7/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/d67ac43cccc8821ff93cf6686cce1bb5a9dff0a7/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.blackfizz/eazegraph/1.2.2/f2030f485ba1ed34eb6f698cecb9ba5192551062/eazegraph-1.2.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
