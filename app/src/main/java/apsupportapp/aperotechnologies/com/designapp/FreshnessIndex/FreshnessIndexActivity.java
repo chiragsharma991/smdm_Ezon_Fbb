@@ -335,7 +335,6 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             txtStoreDesc.setText(value);
         }
 //        String code = storeDescription.substring(0,4);
-//
 //        txtStoreDesc.setText(storeDescription.substring(5));
         processBar = (ProgressBar) findViewById(R.id.progressBar);
         pieChart = (PieChart) findViewById(R.id.fIndex_pieChart);
@@ -2010,11 +2009,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                             if(!freshnessIndex_ClickedVal.equals("All")) {
                                                 freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                 freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                header_value = "&department=" + freshnessIndex_ClickedVal;
+                                                if(!header_value.contains("&department=" + freshnessIndex_ClickedVal))
+                                                {
+                                                    header_value += "&department=" + freshnessIndex_ClickedVal;
+
+                                                }
                                             }
                                             else
                                             {
-                                                header_value = "";
+//                                                header_value = "";
                                             }
 
                                             if (Reusable_Functions.chkStatus(context)) {
@@ -2044,11 +2047,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                             if(!freshnessIndex_ClickedVal.equals("All")) {
                                                 freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                 freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                header_value += "&category=" + freshnessIndex_ClickedVal;
+                                                if(!header_value.contains("&category=" + freshnessIndex_ClickedVal))
+                                                {
+                                                    header_value += "&category=" + freshnessIndex_ClickedVal;
+
+                                                }
                                             }
                                             else
                                             {
-                                                header_value = "";
+//                                                header_value = "";
                                             }
                                             if (Reusable_Functions.chkStatus(context)) {
                                                 if (postRequest != null) {
@@ -2077,11 +2084,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                             if(!freshnessIndex_ClickedVal.equals("All")) {
                                                 freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                 freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                header_value += "&class=" + freshnessIndex_ClickedVal;
+                                                if(header_value.contains("&class=" + freshnessIndex_ClickedVal))
+                                                {
+                                                    header_value += "&class=" + freshnessIndex_ClickedVal;
+
+                                                }
                                             }
                                             else
                                             {
-                                                header_value = "";
+//                                                header_value = "";
                                             }
                                             if (Reusable_Functions.chkStatus(context)) {
                                                 if (postRequest != null) {
@@ -2112,11 +2123,15 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                                             if(!freshnessIndex_ClickedVal.equals("All")) {
                                                 freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace("%", "%25");
                                                 freshnessIndex_ClickedVal = freshnessIndex_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                                header_value += "&brand=" + freshnessIndex_ClickedVal;
+                                                if(!header_value.contains("&brand=" + freshnessIndex_ClickedVal))
+                                                {
+                                                    header_value += "&brand=" + freshnessIndex_ClickedVal;
+
+                                                }
                                             }
                                             else
                                             {
-                                                header_value = "";
+//                                                header_value = "";
                                             }
                                             if (Reusable_Functions.chkStatus(context)) {
                                                 if (postRequest != null) {

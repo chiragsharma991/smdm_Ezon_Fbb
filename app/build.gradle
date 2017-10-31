@@ -34,7 +34,7 @@ android {
                 applicationId "apsupportapp.aperotechnologies.com.designapp"
                 minSdkVersion 17
                 targetSdkVersion 25
-                versionCode 134
+                versionCode 135
                 versionName "2.5"
             }
     buildTypes
@@ -45,7 +45,8 @@ android {
                             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
                         }
             }
-    repositories {
+    repositories
+            {
         mavenCentral()
         maven { url 'https://jitpack.io' }
     }
@@ -70,8 +71,6 @@ dependencies
             //compile 'com.google.firebase:firebase-core:10.2.0'
             //compile 'com.github.barteksc:android-pdf-viewer:2.5.1'
             compile project(path: ':library')
-
-
             compile 'com.github.bumptech.glide:glide:3.5.2'
             compile 'com.android.support:appcompat-v7:25.1.1'
             compile 'com.android.support:design:25.1.1'

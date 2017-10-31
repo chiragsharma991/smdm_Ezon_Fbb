@@ -60,6 +60,7 @@ import apsupportapp.aperotechnologies.com.designapp.RunningPromo.RecyclerViewPos
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyDetails;
 import apsupportapp.aperotechnologies.com.designapp.model.OptionEfficiencyHeader;
+import apsupportapp.aperotechnologies.com.designapp.model.SalesAnalysisListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 /**
@@ -92,7 +93,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     OptionEfficiencyHeader optionEfficiencyHeader;
     OptionIndexSnapAdapter optionIndexSnapAdapter;
     RelativeLayout optionEfficiency_imageBtnBack, optionEfficiency_imgfilter, quickFilterPopup, quickFilter_baseLayout;
-    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout, quickFilter_BorderLayout;
+    RelativeLayout oe_btnPrev, oe_btnNext, qfDoneLayout, quickFilter_BorderLayout,optione_btnReset;
     Gson gson;
     RelativeLayout oe_quickFilter;
     PieData pieData;
@@ -183,14 +184,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
             }
             else if (getIntent().getStringExtra("selectedStringVal") != null)
             {
-                String selectedString = getIntent().getStringExtra("selectedStringVal");
+                header_value = getIntent().getStringExtra("selectedStringVal");
                 filter_level=getIntent().getIntExtra("selectedlevelVal",0);
 
                 // filter_toggleClick = true;
                 coreSelection = true;
                 retainValuesFilter();
                 optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                requestOptionEfficiencyFilterVal(selectedString,filter_level);
+                requestOptionEfficiencyFilterVal(header_value,filter_level);
             }
         }
         else
@@ -249,7 +250,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     return;
                 }
                 OptionefficiencyValue = "";
-                header_value = "";
+//                header_value = "";
 
                 if(oe_txtHeaderClass.getText().toString().equals(hierarchyList[4])){
 
@@ -365,7 +366,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                     return;
                 }
                 OptionefficiencyValue = "";
-                header_value = "";
+//                header_value = "";
 
                 if(oe_txtHeaderClass.getText().toString().equals(hierarchyList[0])){
 
@@ -513,7 +514,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             if(!oe_ClickedVal.equals("All")) {
                                 oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                 oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                header_value = "&department=" + oe_ClickedVal;
+                                if(!header_value.contains("&department=" + oe_ClickedVal))
+                                {
+                                    header_value += "&department=" + oe_ClickedVal;
+                                }
                             }
                             else
                             {
@@ -550,7 +554,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             if(!oe_ClickedVal.equals("All")) {
                                 oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                 oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                header_value = "&category=" + oe_ClickedVal;
+                                if(!header_value.contains("&category=" + oe_ClickedVal))
+                                {
+                                    header_value += "&category=" + oe_ClickedVal;
+                                }
                             }
                             else
                             {
@@ -586,7 +593,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             {
                                 oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                 oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                header_value = "&class=" + oe_ClickedVal;
+                                if(!header_value.contains("&class=" + oe_ClickedVal))
+                                {
+                                    header_value += "&class=" + oe_ClickedVal;
+                                }
                             }
                             else
                             {
@@ -622,7 +632,10 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                             {
                                 oe_ClickedVal = oe_ClickedVal.replace("%", "%25");
                                 oe_ClickedVal = oe_ClickedVal.replace(" ", "%20").replace("&", "%26");
-                                header_value = "&brand="+oe_ClickedVal;
+                                if(!header_value.contains("&brand=" + oe_ClickedVal))
+                                {
+                                    header_value += "&brand=" + oe_ClickedVal;
+                                }
                             }
                             else
                             {
@@ -846,6 +859,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         checkPrevious = (CheckBox) findViewById(R.id.checkPrevious);
         checkOld = (CheckBox) findViewById(R.id.checkOld);
         checkUpcoming = (CheckBox) findViewById(R.id.checkUpcoming);
+        optione_btnReset = (RelativeLayout)findViewById(R.id.optione_btnReset);
         oe_txtHeaderClass.setText(hierarchyList[0]);
         fromWhere = hierarchyList[0];
         Tabview.setOnTabSelectedListener(this);
@@ -854,6 +868,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         checkOld.setOnClickListener(this);
         checkUpcoming.setOnClickListener(this);
         qfDoneLayout.setOnClickListener(this);
+        optione_btnReset.setOnClickListener(this);
         quickFilter_BorderLayout.setOnClickListener(this);
     }
 
@@ -933,7 +948,34 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 checkOld.setChecked(false);
                 checkPrevious.setChecked(false);
                 break;
-
+            case R.id.optione_btnReset:
+                optionArrayList = new ArrayList<OptionEfficiencyDetails>();
+                optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+                header_value = "";
+                focusposition = 0;OveridePositionValue = 0;
+                if (Reusable_Functions.chkStatus(context))
+                {
+                    Reusable_Functions.sDialog(context, "Loading...");
+                    processBar.setVisibility(View.GONE);
+                    oe_llayouthierarchy.setVisibility(View.GONE);
+                    offsetvalue = 0;
+                    limit = 100;
+                    count = 0;
+                    level = 1;
+                    fromWhere = hierarchyList[0];
+                    oe_btnPrev.setVisibility(View.INVISIBLE);
+                    oe_btnNext.setVisibility(View.VISIBLE);
+                    oe_txtHeaderClass.setText(hierarchyList[0]);
+                    OEfficiency_SegmentClick = "Fashion";
+                    Tabview.getTabAt(0).select();
+                    requestOptionEfficiencyDetails();
+                }
+                else
+                {
+                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
+                    processBar.setVisibility(View.GONE);
+                    Reusable_Functions.hDialog();
+                }
         }
     }
 
@@ -1111,16 +1153,30 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     // API 1.33
     private void requestOptionEfficiencyDetails() {
         String oedetails;
-        if (coreSelection) {
-
+        if (coreSelection)
+        {
             //core selection without season params
-            oedetails = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-
-        } else {
-
-            //     fashion select with season params
-            oedetails = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+          if(!header_value.equals(""))
+          {
+              oedetails = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+          }
+            else
+          {
+              oedetails = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+          }
+         } else
+        {
+         // fashion select with season params
+            if(!header_value.equals(""))
+            {
+                oedetails = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+            }
+            else
+            {
+                oedetails = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+            }
         }
+        Log.e(TAG, "requestOptionEfficiencyDetails: "+oedetails);
         postRequest = new JsonArrayRequest(Request.Method.GET, oedetails,
                 new Response.Listener<JSONArray>() {
 
@@ -1713,7 +1769,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
         }
-
+        Log.e(TAG, "requestHeaderPieChart: "+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2299,50 +2355,88 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
     }
 
     private void requestOEPieChart() {
-        if(oe_FirstVisibleItem.equals("All"))
-        {
-            requestHeaderPieChart();
-            return;
-        }
+//        if(oe_FirstVisibleItem.equals("All"))
+//        {
+//            requestHeaderPieChart();
+//            return;
+//        }
         String url = "";
         txtNoChart.setVisibility(View.GONE);
         oe_FirstVisibleItem = oe_FirstVisibleItem.replace("%", "%25");
         oe_FirstVisibleItem = oe_FirstVisibleItem.replace(" ", "%20").replace("&", "%26");
-
-        if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[0])) {
-            if (coreSelection) {
-                //core selection without seasongroup
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&department=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            } else {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&department=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        if(!header_value.equals(""))
+        {
+            if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[0])) {
+                if (coreSelection) {
+                    //core selection without seasongroup
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&department=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&department=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId +header_value;
+                }
+            } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[1])) {
+                if (coreSelection) {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                }
+            } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[2])) {
+                if (coreSelection) {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                }
+            } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[3])) {
+                if (coreSelection) {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                }
+            } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[4])) {
+                if (coreSelection) {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + header_value;
+                }
             }
-        } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[1])) {
-            if (coreSelection) {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            } else {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            }
-        } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[2])) {
-            if (coreSelection) {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            } else {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            }
-        } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[3])) {
-            if (coreSelection) {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            } else {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            }
-        } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[4])) {
-            if (coreSelection) {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-            } else {
-                url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+        }
+        else
+        {
+            if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[0])) {
+                if (coreSelection) {
+                    //core selection without seasongroup
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&department=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&department=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                }
+            } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[1])) {
+                if (coreSelection) {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&category=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                }
+            } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[2])) {
+                if (coreSelection) {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&class=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                }
+            } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[3])) {
+                if (coreSelection) {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brand=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                }
+            } else if (oe_txtHeaderClass.getText().toString().equals(hierarchyList[4])) {
+                if (coreSelection) {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                } else {
+                    url = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&brandclass=" + oe_FirstVisibleItem + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
+                }
             }
         }
 
 
+        Log.e(TAG, "requestOEPieChart: "+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2516,15 +2610,15 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         limit = 100;
                         count = 0;
                         coreSelection = true;
-                        if (getIntent().getStringExtra("selectedDept") == null) {
+//                        if (getIntent().getStringExtra("selectedDept") == null) {
                             requestHearderAPI();
-                            Handler h = new Handler();
-                        } else if (getIntent().getStringExtra("selectedDept") != null) {
-                            String selectedString = getIntent().getStringExtra("selectedDept");
-                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                            requestOptionEfficiencyFilterVal(selectedString, filter_level);
-
-                        }
+//                            Handler h = new Handler();
+//                        } else if (getIntent().getStringExtra("selectedDept") != null) {
+//                            String selectedString = getIntent().getStringExtra("selectedDept");
+//                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+//                            requestOptionEfficiencyFilterVal(selectedString, filter_level);
+//
+//                        }
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                     }
@@ -2543,14 +2637,14 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                         count = 0;
                         coreSelection = false;
 
-                        if (getIntent().getStringExtra("selectedDept") == null) {
+//                        if (getIntent().getStringExtra("selectedDept") == null) {
                             requestHearderAPI();
 
-                        } else if (getIntent().getStringExtra("selectedDept") != null) {
-                            String selectedString = getIntent().getStringExtra("selectedDept");
-                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
-                            requestOptionEfficiencyFilterVal(selectedString, filter_level);
-                        }
+//                        } else if (getIntent().getStringExtra("selectedDept") != null) {
+//                            String selectedString = getIntent().getStringExtra("selectedDept");
+//                            optionEfficiencyDetailsArrayList = new ArrayList<OptionEfficiencyDetails>();
+//                            requestOptionEfficiencyFilterVal(selectedString, filter_level);
+//                        }
 
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
