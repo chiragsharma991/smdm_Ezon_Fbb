@@ -48,23 +48,19 @@ public class ApiPostRequest {
         this.id = id;
         this.object = object;
         setApi(context);
-        Log.e(TAG, "ResposeInterface" + ResposeInterface);
 
 
     }
 
     private void setApi(final Context context) {
 
-        Log.e(TAG, "final_setApi: URL " + URL);
         Reusable_Functions.sDialog(context,"Submitting data…");
-        Log.e("object.toString() "," "+object.toString());
-        Log.e("URL "," "+URL);
+
         postRequest = new JsonObjectRequest(Request.Method.POST, URL, object.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        Log.e("response post ",""+response);
                         try {
 
                             if (response.equals("") || response == null || response.length() == 0) {
@@ -84,7 +80,6 @@ public class ApiPostRequest {
 
                         } catch (Exception e) {
                             Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG, "onResponse catch: " + e.getMessage());
                             Reusable_Functions.hDialog();
                             ResposeInterface.PostDataNotFound();
                         }
@@ -95,9 +90,7 @@ public class ApiPostRequest {
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
                         Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Server not found...: " + error.getMessage());
                         ResposeInterface.PostDataNotFound();
-                        Log.e(TAG, "onErrorResponse: " );
                         error.printStackTrace();
                     }
 

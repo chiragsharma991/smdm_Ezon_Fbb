@@ -36,7 +36,6 @@ public class TargetStockExcepAdapter extends BaseAdapter {
         this.arrayList = arrayList;
         this.context = context;
         this.mlevel = level;
-        Log.e("TargetStockExcepAdapter: ",""+mlevel);
         mInflater = LayoutInflater.from(context);
     }
 
@@ -70,7 +69,6 @@ public class TargetStockExcepAdapter extends BaseAdapter {
 
         final TargetStockExcepAdapter.Holder holder;
         if (convertView == null) {
-            Log.e( "getView: ","" );
             holder = new TargetStockExcepAdapter.Holder();
             convertView = mInflater.inflate(R.layout.activity_target_exception_child, null);
             holder.target_SOH_U = (TextView) convertView.findViewById(R.id.target_SOH_U);

@@ -49,7 +49,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("TAG", "onCreate: splash-- " );
         Fabric.with(this, new Crashlytics());
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);

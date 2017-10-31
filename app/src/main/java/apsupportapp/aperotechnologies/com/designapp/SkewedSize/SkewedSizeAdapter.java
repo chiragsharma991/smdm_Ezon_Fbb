@@ -125,7 +125,7 @@ public class SkewedSizeAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        //Log.e("in ","getview");
+
 
         Position = position;
 
@@ -172,7 +172,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
             int value=SOH.intValue();
             holder.skewed_SOHU.setText(""+value);
         } catch(NumberFormatException e) {
-            Log.e("TAG","Could not parse " + e);
         }
         int totalSOH=calculation(arrayList.get(position).getStkOnhandQty());
         product=new ArrayList<String>();
@@ -268,7 +267,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
                             }
 
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -277,7 +275,6 @@ public class SkewedSizeAdapter extends BaseAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Reusable_Functions.hDialog();
-                        Log.e("", "" + error.networkResponse + "");
                         Toast.makeText(context, "Network connectivity fail", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }

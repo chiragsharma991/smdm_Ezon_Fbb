@@ -83,7 +83,6 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
         {
             storeCode = getIntent().getExtras().getString("storeCode");
             store_Code = storeCode.substring(0,4);
-            Log.i(TAG, "storeCode: "+storeCode );
         }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
@@ -135,12 +134,10 @@ public class VisualReportActivity extends AppCompatActivity implements View.OnCl
     private void requestVisualReportAPI() {
 
       String  url = ConstsCore.web_url + "/v1/display/visualassortmentoptiondetails/" + userId  + "?recache="+ recache +"&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId +"&storeCode=" +store_Code;//+"&offset=" + offset + "&limit=" + limit ;
-        Log.e(TAG, "requestVisualReportAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: "+response);
                         try {
 
                             int i;

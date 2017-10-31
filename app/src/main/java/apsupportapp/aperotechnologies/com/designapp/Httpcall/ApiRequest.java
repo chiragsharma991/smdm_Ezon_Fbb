@@ -115,12 +115,10 @@ public class ApiRequest  {
             URL=Url+ "&offset=" + offsetvalue + "&limit=" +limit;
 
         }
-        Log.e(TAG, "final_setApi: URL "+URL );
         getRequest = new JsonArrayRequest(Request.Method.GET, URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public  void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: "+response );
                         Reusable_Functions.hDialog();
 
                         try {
@@ -135,7 +133,6 @@ public class ApiRequest  {
                                     ResposeInterface.nodatafound();
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                 }else{
-                                    Log.e("no data found","");
                                 //    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     Reusable_Functions.hDialog();
 
@@ -159,7 +156,6 @@ public class ApiRequest  {
 
                             }
                             else if (response.length() == limit) {
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
                                     mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
@@ -173,7 +169,6 @@ public class ApiRequest  {
                                 setApi(context);
 
                             } else if (response.length() < limit) {
-                                Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++)
                                 {
                                     mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
@@ -191,7 +186,6 @@ public class ApiRequest  {
                             }else{
                                 ResposeInterface.nodatafound();
                             }
-                            Log.e(TAG, "onResponse catch: "+e.getMessage() );
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
                         }
@@ -200,7 +194,6 @@ public class ApiRequest  {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "onErrorResponse : "+error.getMessage() );
 
                         if(TAG.equals("FreshnessIndex_Ez_Activity")) {
                             FreshnessIndexActivity.listViewFIndex.setVisibility(View.GONE);
@@ -213,7 +206,6 @@ public class ApiRequest  {
                         }
                         Reusable_Functions.hDialog();
                      //   Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Server not found..."+error.getMessage() );
                         error.printStackTrace();
                     }
                 }
