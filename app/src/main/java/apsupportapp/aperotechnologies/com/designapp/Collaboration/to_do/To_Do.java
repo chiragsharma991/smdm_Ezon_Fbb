@@ -50,7 +50,6 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
         deviceId = sharedPreferences.getString("device_id","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
-        Log.e( "onCreate: ",""+deviceId );
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_to_do);
         ToDo_imageBtnBack = (RelativeLayout)findViewById(R.id.toDo_imageBtnBack);
         txtStoreCode= (TextView)findViewById(R.id.txtStoreCode);
@@ -64,8 +63,6 @@ public class To_Do extends AppCompatActivity implements View.OnClickListener {
                 if (getIntent().getExtras().getString("storeCode") != null) {
                     storeCode = getIntent().getExtras().getString("storeCode");
                     store_Code = storeCode.substring(0, 4);
-
-                    //  Log.i(TAG, "storeCode: "+storeCode );
                 }
             }
             else

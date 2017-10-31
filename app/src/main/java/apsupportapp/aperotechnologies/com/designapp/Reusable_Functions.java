@@ -39,7 +39,6 @@ public class Reusable_Functions  {
 
     public static void hDialog() {
 
-        Log.e("progressDialog hDialog "," "+progressDialog);
         if (progressDialog != null) {
             if (progressDialog.isShowing()) {
                 progressDialog.dismiss();
@@ -51,7 +50,6 @@ public class Reusable_Functions  {
 
     public static void sDialog(Context cont, String message)
     {
-        Log.e("progressDialog sDialog "," "+progressDialog);
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(cont);//R.style.AlertDialog_Theme);
             progressDialog.setIndeterminate(true);

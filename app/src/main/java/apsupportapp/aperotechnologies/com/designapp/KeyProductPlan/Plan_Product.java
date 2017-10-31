@@ -679,7 +679,6 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     public void onTabSelected(TabLayout.Tab tab) {
 
         int checkedId = Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: ");
 
         if (!plantoggleClick) {
 
@@ -827,7 +826,6 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
     private void requestFilterProductAPI(final int offset, int limit1) {
         String url = null;
 
-        Log.e("== "," "+filterProductValues+" == "+from);
         if(from != null && !filterProductValues.equals(""))
         {
             url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&productName=" + filterProductValues.replace(" ", "%20").replaceAll("&", "%26") + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId+""+storeCode;
@@ -845,13 +843,10 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
         }
 
 
-        Log.e("TAG", "requestPlan_product: " + url);
-
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("TAG", "responsePlan_product: " + response);
                         try {
                             int i;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -966,7 +961,6 @@ public class Plan_Product extends Fragment implements TabLayout.OnTabSelectedLis
 
     private void requestPlanProductAPI(final int offset, int limit1) {
         String url = ConstsCore.web_url + "/v1/display/keyproductsplanNew/" + userId + "?view=" + prodsegClick + "&level=" + planlevel + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e("TAG", "requestPlanProductAPI: " + url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

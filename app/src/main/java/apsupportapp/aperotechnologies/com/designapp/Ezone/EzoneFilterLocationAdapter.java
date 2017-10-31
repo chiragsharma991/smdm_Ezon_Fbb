@@ -235,7 +235,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 
         if (level == 0)
         {
-            Log.e("welcome,","------------"+region_list.size());
             region_list.remove(txtClickedVal.trim());
             String[] array = (String[]) region_list.toArray(new String[0]);
             String str1 = Arrays.toString(array);
@@ -243,7 +242,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ", ",");
             region_str = str1;
-            Log.e("remove build up :", "" + region_list.size());
             if (region_list.size() == 0) {
                 salesList.clear();
                 mListDataChild.putAll(dublicate_listDataChild);
@@ -259,7 +257,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
         }
         if (level == 1)
         {
-            Log.e("remove in store---","");
             store_List.remove(txtClickedVal.substring(0,4).trim());
             String[] array = (String[]) store_List.toArray(new String[0]);
             String str1 = Arrays.toString(array);
@@ -267,7 +264,7 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ", ",");
             store_str = str1;
-            Log.e("remove build up store:", "" + store_List.size());
+
         }
 
     }
@@ -288,7 +285,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                 str_dept = str_dept.replace(", ", ",");
                 region_str = str_dept;
                 level = 3;
-                Log.e("Build up region in if:", "" + level + region_str);
                 requestLocationHierarchy(level, region_str);
             }
             else
@@ -301,13 +297,12 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                 str_dept = str_dept.replace(", ", ",");
                 region_str = str_dept;
                 level = 3;
-                Log.e("Build up region in else:", "" + level + region_str);
+
                 requestLocationHierarchy(level, region_str);
             }
         }
         if (level == 1) {
             if (!store_flg) {
-                Log.e("come ", "----------");
                 store_List.add(txtClickedVal.substring(0,4).trim());
                 region_flg = false;
                 store_flg = true;
@@ -317,7 +312,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                 str_brndcls = str_brndcls.replace("]", "");
                 str_brndcls = str_brndcls.replace(", ", ",");
                 store_str = str_brndcls;
-                Log.e("Build up store in if:", "" + store_str+store_List.size());
 
             } else
             {
@@ -328,7 +322,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                 str_brndcls = str_brndcls.replace("]", "");
                 str_brndcls = str_brndcls.replace(", ", ",");
                 store_str = str_brndcls;
-                Log.e("Build up store in else:", "" + store_str);
 
             }
         }
@@ -357,12 +350,10 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 //
 //        }
 
-        Log.e("search url:", "" + loc_search_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, loc_search_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0)
                             {
@@ -372,7 +363,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 
                             } else {
                                 for (int i = mGroupPosition+1; i < mListDataChild.size(); i++) {
-                                    Log.e("i :", "" + i);
                                     if (mGroupPosition + 1 == i) {
                                         for (int j = i; j < mListDataChild.size(); j++) {
                                             mListDataChild.remove(i);
@@ -388,7 +378,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
 
                                         String store = obj.getString("descEz");
                                         drillDownList.add(store);
-//                                        Log.e("drilldown list:", "" + drillDownList.size());
                                     }
 
                                     Set<String> setValue = new HashSet<>();
@@ -400,7 +389,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                                     try {
                                         mListDataChild.put(mListDataGroup.get(1), drillDownList);
                                     } catch (IndexOutOfBoundsException e) {
-                                        Log.e("onResponse: ", "" + e.getMessage());
                                     }
 
                                         explv_ez_locatn.expandGroup(1);
@@ -483,7 +471,6 @@ public class EzoneFilterLocationAdapter extends BaseExpandableListAdapter {
                 for (int k = 0; k < dublicate_listDataChild.get(mListDataGroup.get(j)).size(); k++) {
                     if (dublicate_listDataChild.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText)) {
                         arrayList.add(dublicate_listDataChild.get(mListDataGroup.get(j)).get(k));
-                        Log.e("array list size  :", "" + arrayList.size());
                     }
                 }
                 mListDataChild.put(mListDataGroup.get(j), arrayList);

@@ -139,7 +139,7 @@ public class Callback_OurStoreServices extends AppCompatActivity implements Http
     @Override
     public void response(ArrayList<mpm_model> list, int id)
     {
-        Log.e(TAG, "response: sucess"+id );
+
         switch (id) {
             // case 0 and 1 will follow like first api call and set view in case 0;
             case 0:

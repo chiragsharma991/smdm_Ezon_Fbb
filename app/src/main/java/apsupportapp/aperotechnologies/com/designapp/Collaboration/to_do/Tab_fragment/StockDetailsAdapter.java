@@ -216,8 +216,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
 //       }
-
-       Log.e("OnSubmit------: ", "size List" + selectedSizeList + "\n" + "optionList " + selectedOptionList);
         // for option List converted to string array to string
         String[] optionArray = (String[]) selectedOptionList.toArray(new String[0]);
         String optionList = Arrays.toString(optionArray);
@@ -241,7 +239,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             JSONObject obj = new JSONObject();
             if(!sizeList.equals(""))
             {
-                Log.e("OnSubmit: ","in if" );
+
                 obj.put("option",optionList);
                 obj.put("prodAttribute4",sizeList);
                 obj.put("prodLevel6Code",Mc_name_code);//MCCodeDesc
@@ -253,7 +251,7 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else
             {
-                Log.e("OnSubmit: ","in else" );
+
                 obj.put("option",optionList);
 //                obj.put("prodAttribute4",sizeList);
                 obj.put("prodLevel6Code",Mc_name_code);//MCCodeDesc

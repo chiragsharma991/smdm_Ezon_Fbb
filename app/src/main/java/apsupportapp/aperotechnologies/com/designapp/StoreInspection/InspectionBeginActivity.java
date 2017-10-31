@@ -1811,18 +1811,14 @@ public class InspectionBeginActivity extends AppCompatActivity implements View.O
             if (Reusable_Functions.chkStatus(context)) {
                 Reusable_Functions.hDialog();
                 Reusable_Functions.sDialog(context, "Submitting data…");
-                Log.e("jsonarray storeinspection "," "+jsonarray);
 
                 String url;
                 url = ConstsCore.web_url + "/v1/save/storeinspection/submit/" + userId; // + "&storeCode=" + store_Code;//+"?recache="+recache
-                Log.e("url storeinspection "," "+url);
-                //Log.e("url storeinspection "," "+url);
 
                 JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonarray.toString(),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Log.e("response storeinspection "," "+response);
 
                                 try {
                                     if (response == null || response.equals("")) {

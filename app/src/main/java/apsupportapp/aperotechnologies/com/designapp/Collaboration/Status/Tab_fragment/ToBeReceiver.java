@@ -242,13 +242,12 @@ public class ToBeReceiver extends Fragment  implements OnclickStatus{
     {
         String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache + "&reqStoreCode=" + storeCode;
      //   String receiver_case_url = ConstsCore.web_url + "/v1/display/stocktransfer/receivercasestatus/summary/"+ userId + "?offset=" + offsetval + "&limit=" +limit + "&recache="+recache; //+ "&senderStoreCode=" + storeCode;
-        Log.e("TAG", "requestReceiverCaseStatusSummary: "+receiver_case_url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, receiver_case_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e("TAG", "onResponse: "+response );
+
                     try
                         {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {

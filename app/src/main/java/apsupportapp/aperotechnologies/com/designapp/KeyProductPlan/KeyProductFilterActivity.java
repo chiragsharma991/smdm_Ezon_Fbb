@@ -222,7 +222,6 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
 
 
         if (HourlyLocationAdapter.hr_store_str.length() != 0) {
-            Log.e("came here 1","");
             String store = HourlyLocationAdapter.hr_store_str;//.substring(0,4);
             String Store;
             Store = "storeCode=" + store;
@@ -393,13 +392,11 @@ public class KeyProductFilterActivity extends AppCompatActivity implements View.
 
         String store_url = "";
         store_url = ConstsCore.web_url + "/v1/display/storeselection/" + userId  + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e("store url :", "" + store_url);
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, store_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response)
                     {
-                        Log.e("store response :", "" + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0)
                             {

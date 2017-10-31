@@ -135,7 +135,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
         getSupportActionBar().hide();
         context = this;
         TAG = "BestPerformer_Ez_Inventory";
-        Log.e(TAG, "Ezone login ... ");
         common_intializeUI();
         intializeUIofEzon();
         Ezon_collection();  // start method for ezon collection
@@ -151,7 +150,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
             level = 7;
             preValue = 1;
             //  BestInvent_fashion.toggle();
-            Log.e(TAG, "checkfromFilter: null");
 
         } else if (getIntent().getStringExtra("selectedStringVal") != null)
         {
@@ -159,7 +157,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
             selectedlevel = getIntent().getIntExtra("selectedlevelVal", 0);
             from_filter = true;
             setChangeViewBy(selectedlevel);
-            Log.e(TAG, "checkfromFilter: ok " + selectedlevel + " " + selectedString);
         }
 
         show_popup();
@@ -385,22 +382,18 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
         if (Reusable_Functions.chkStatus(context)) {
             String url;
             if (postRequest != null) {
-                Log.e(TAG, ": cancel request>>>>>>>");
                 postRequest.cancel();
                 //     bestPerformerInventoryAdapter.notifyDataSetChanged();
             }
 
 
             url = get_ez_url();
-            Log.e("url ezone ",""+url);
 
 
             postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-
-                            Log.e("response ezone ",""+response);
 
                             BestInventListview.setVisibility(View.VISIBLE);
                             try {
@@ -420,7 +413,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
 
                                     for (int i = 0; i < response.length(); i++) {
 
-                                        Log.e(TAG, "onResponse:list size is " + BestInventList.size() + "response length" + response.length());
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
                                         BestInventList.add(BestInventSizeListDisplay);
                                     }
@@ -428,7 +420,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                                     top = top + 10;
 
                                 } else if (response.length() < limit) {
-                                    Log.e(TAG, "promo /= limit");
                                     for (int i = 0; i < response.length(); i++) {
 
                                         BestInventSizeListDisplay = gson.fromJson(response.get(i).toString(), RunningPromoListDisplay.class);
@@ -448,7 +439,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                                 {
                                     bestPerformerInventoryAdapter = new BestPerformerInventoryAdapter(BestInventList, context, TAG);
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
-                                    Log.e(TAG, "onResponse: list size is" + BestInventList.size());
 
 
                                 }
@@ -459,7 +449,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                                 BestInventListview.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                                Log.e(TAG, "catch: " + e.getMessage());
                                 BestInventListview.removeFooterView(footer);
                                 BestInventListview.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
@@ -565,8 +554,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
     private String getUrl() {
 
         String url = "";
-
-        Log.e(TAG, "getUrl: "+"from filter"+from_filter+" and from coreselection"+coreSelection );
 
         if (from_filter) {
             if (coreSelection) {
@@ -893,7 +880,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
                 try {
                     orderbycol = "fwdWeekCover,sellThruUnits";
                     orderbycol =  URLEncoder.encode(orderbycol, "UTF-8");
-                    Log.i(TAG, "coverNsellPopUp: "+orderbycol);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -1096,7 +1082,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        Log.e(TAG, "onCheckedChanged: " + toggleClick);
         if (!toggleClick) {
 
 
@@ -1159,8 +1144,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-
-        Log.e(TAG, "onCheckedChanged: " );
         switch (buttonView.getId()) {
             case R.id.bestNworstswitch:
                 from_filter = false;
@@ -1304,7 +1287,6 @@ public class EzoneBestPerformerInventory extends AppCompatActivity implements Vi
     public String get_ez_url() {
 
         String url;
-        Log.e(TAG, "getUrl: "+"from filter"+from_filter+" and from coreselection"+coreSelection );
 
 
    /*     if (from_filter) {

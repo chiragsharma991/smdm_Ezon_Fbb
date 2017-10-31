@@ -12,10 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -59,7 +56,6 @@ import java.util.Map;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesAnalysisFilter;
-import apsupportapp.aperotechnologies.com.designapp.SalesAnalysis.SalesFilterActivity;
 import apsupportapp.aperotechnologies.com.designapp.model.RunningPromoListDisplay;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -130,13 +126,11 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         lobId = sharedPreferences.getString("lobid","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
-//        storeDescription = sharedPreferences.getString("storeDescription","");
 
         setContentView(R.layout.activity_best_performer_inventory);
         getSupportActionBar().hide();
         context = this;
         TAG = "BestPerformerInventory";
-        Log.e(TAG, "FBB login ... ");
         common_intializeUI();
         initalise();
         Fbb_collection();   // start Fbb collection.
@@ -180,7 +174,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         }
 
-        Log.e("here "," "+from_filter);
+
         RetainFromMain_filter();
 
         if(Tabview.getTabAt(0).isSelected())
@@ -194,7 +188,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private void common_intializeUI() {
 
         bestperoformer = BestPerformerInventory.this;
-
         // toggleClick = true;  // you set toggle on segment button so you have to handle this flag.
         BestInventListview = (ListView) findViewById(R.id.bestInvent_ListView);
         Toolbar_title = (TextView) findViewById(R.id.toolbar_title);
@@ -224,12 +217,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         Tabview = (TabLayout) findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Fashion"));
         Tabview.addTab(Tabview.newTab().setText("Core"));
-
-
         BaseLayoutInventory.setVisibility(View.GONE);
         quickFilterPopup.setVisibility(View.GONE);
-
-
         BestAndWorst = (Switch) findViewById(R.id.bestNworstswitch);
         BestInventList = new ArrayList<RunningPromoListDisplay>();
         BestInventListview.setTag("FOOTER");
@@ -403,14 +392,13 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
             url = getUrl();
 
-            Log.e(TAG, "requestRunningPromoApi: " + url);
+
 
             postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
 
-//                            Log.e("response ezone ",""+response);
 
                             BestInventListview.setVisibility(View.VISIBLE);
                             try {
@@ -457,7 +445,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 {
                                     bestPerformerInventoryAdapter = new BestPerformerInventoryAdapter(BestInventList, context, TAG);
                                     BestInventListview.setAdapter(bestPerformerInventoryAdapter);
-//                                    Log.e(TAG, "onResponse: list size is" + BestInventList.size());
 
 
                                 }
@@ -468,7 +455,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                                 BestInventListview.setVisibility(View.GONE);
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-//                                Log.e(TAG, "catch: " + e.getMessage());
                                 BestInventListview.removeFooterView(footer);
                                 BestInventListview.setTag("FOOTER_REMOVE");
                                 e.printStackTrace();
@@ -575,9 +561,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
 
         String url = "";
 
-//        Log.e(TAG, "getUrl: "+"from filter"+from_filter+" and from coreselection"+coreSelection );
-        Log.e( ": ","from filter"+from_filter+" "+filter_level+" "+selectedString);
-
         if (from_filter)
         {
             if (coreSelection) {
@@ -627,8 +610,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         rel_store_layout = (RelativeLayout)findViewById(R.id.rel_store_layout);
         BestInvent_txtStoreCode = (TextView) findViewById(R.id.bestInvent_txtStoreCode);
         BestInvent_txtStoreName = (TextView) findViewById(R.id.bestInvent_txtStoreName);
-//        BestInvent_txtStoreCode.setText(storeDescription.trim().substring(0,4));
-//        BestInvent_txtStoreName.setText(storeDescription.substring(5));
+
         if(isMultiStore.equals("Yes"))
         {
             BestInvent_txtStoreCode.setText("Concept : ");
@@ -640,7 +622,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
             BestInvent_txtStoreCode.setText("Store : ");
             BestInvent_txtStoreName.setText(value);
         }
-    //    rel_store_layout.setVisibility(View.VISIBLE);
         Toggle_bestInvent_fav = (ToggleButton) findViewById(R.id.toggle_bestInvent_fav);
         BestCheckCurrent = (CheckBox) findViewById(R.id.bestCheckCurrent);
         BestCheckPrevious = (CheckBox) findViewById(R.id.bestCheckPrevious);
@@ -696,14 +677,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 break;
             case R.id.bestInvent_imgfilter:
 
-//                if (TAG.equals("BestPerformer_Ez_Inventory")) {
-//
-//                    Intent intent = new Intent(this, EzoneSalesFilter.class);
-//                    intent.putExtra("checkfrom", "bestPerformers");
-//                    startActivity(intent);
-//                    break;
-//
-//                } else {
+
                     Intent intent = new Intent(this, SalesAnalysisFilter.class);
                     intent.putExtra("checkfrom", "bestPerformers");
                     startActivity(intent);
@@ -947,7 +921,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
                 try {
                     orderbycol = "fwdWeekCover,sellThruUnits";
                     orderbycol =  URLEncoder.encode(orderbycol, "UTF-8");
-                    Log.i(TAG, "coverNsellPopUp: "+orderbycol);
+
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -1150,7 +1124,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-//        Log.e(TAG, "onCheckedChanged: " + toggleClick);
         if (!toggleClick) {
 
 
@@ -1218,7 +1191,7 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
 
-        Log.e(TAG, "onCheckedChanged: " );
+
         switch (buttonView.getId()) {
             case R.id.bestNworstswitch:
                 from_filter = false;
@@ -1323,193 +1296,10 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         }
     }
 
-    private void setChangeViewBy(int filter_level) {
-
-        switch (filter_level) {
-
-            case 9:
-                preValue = 2;
-                break;
-
-            default:
-                preValue = 1;
-                break;
-
-        }
-
-
-    }
-
-    private void Ezon_collection() {
-        BestInventListview.setVisibility(View.VISIBLE);
-
-
-        if (Reusable_Functions.chkStatus(context)) {
-            limit = 10;
-            offsetvalue = 0;
-            top = 10;
-            Reusable_Functions.sDialog(context, "Loading data...");
-            checkfromFilter();
-            //requestRunningPromoApi(selectedString);
-
-        } else {
-            Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
-
-    public String get_ez_url() {
-
-        String url;
-//        Log.e(TAG, "getUrl: "+"from filter"+from_filter+" and from coreselection"+coreSelection );
-
-
-   /*     if (from_filter) {
-            url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&view=" + view + "&level=" + selectedlevel + selectedString;
-
-        } else {
-            url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZ/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&view=" + view + "&level=" + level;
-
-        }*/
-
-        if (from_filter) {
-            if (coreSelection) {
-
-                //core selection without season params
-
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
-            } else {
-
-                // fashion select with season params
-
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&level=" + SalesFilterActivity.level_filter + selectedString + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
-            }
-        } else {
-            if (coreSelection) {
-
-                //core selection without season params
-
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&view=" + view+"&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
-            } else {
-
-                // fashion select with season params
-
-                url = ConstsCore.web_url + "/v1/display/inventorybestworstperformersEZNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&orderby=" + orderby + "&orderbycol=" + orderbycol + "&top=" + top + "&corefashion=" + corefashion + "&seasongroup=" + seasonGroup + "&view=" + view+"&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
-            }
-        }
-        return url;
-    }
-
-    public void show_popup() {
-
-        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View popupView = layoutInflater.inflate(R.layout.activity_ezon_sorting, null);
-
-        popupWindow = new PopupWindow(
-                popupView,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        LinearLayout location = (LinearLayout) popupView.findViewById(R.id.lin_ez_location);
-        LinearLayout product = (LinearLayout) popupView.findViewById(R.id.lin_ez_Product);
-        product_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_ProductChk);
-        location_radiobtn = (RadioButton) popupView.findViewById(R.id.rb_ez_viewBy_LocatnChk);
-        if (preValue == 1) {
-            product_radiobtn.setChecked(true);
-        } else {
-            location_radiobtn.setChecked(true);
-        }
-
-
-        location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (Reusable_Functions.chkStatus(context)) {
-                    postValue = 2;
-                    level = 9;
-                    from_filter = false;
-                    location_radiobtn.setChecked(true);
-                    product_radiobtn.setChecked(false);
-                    popupWindow.dismiss();
-                    ViewByFunction();
-
-                } else {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-        product.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (Reusable_Functions.chkStatus(context)) {
-                    postValue = 1;
-                    level = 7;
-                    from_filter = false;
-                    product_radiobtn.setChecked(true);
-                    location_radiobtn.setChecked(false);
-                    popupWindow.dismiss();
-                    ViewByFunction();
-
-                } else {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-        popupWindow.setOutsideTouchable(true);
-        //   popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setFocusable(true);  //focus as a side background
-
-        // Removes default black background
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                //TODO do sth here on dismiss
-                popupWindow.dismiss();
-
-
-            }
-        });
-
-
-    }
-
-    private void ViewByFunction() {
-
-        if (postValue != preValue) {
-            preValue = postValue;
-
-            if (Reusable_Functions.chkStatus(context)) {
-                Reusable_Functions.hDialog();
-                limit = 10;
-                offsetvalue = 0;
-                top = 10;
-                BestInventList.clear();
-                Reusable_Functions.sDialog(this, "Loading...");
-                requestRunningPromoApi();
-
-            } else {
-                Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
-    }
-
-
-    @Override
+   @Override
     public void onTabSelected(TabLayout.Tab tab) {
 
         int checkedId = Tabview.getSelectedTabPosition();
-        Log.e("onTabSelected "," "+checkedId);
-
-
         switch (checkedId) {
                 case 1 :   //core selection
                     limit = 10;

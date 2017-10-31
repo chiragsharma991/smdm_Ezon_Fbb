@@ -279,7 +279,6 @@ public class HourlyLocationAdapter extends BaseExpandableListAdapter {
 
         if (level == 0)
         {
-            Log.e("remove in store---","");
             store_List.remove(txtClickedVal.substring(0,4).trim());
             String[] array = (String[]) store_List.toArray(new String[0]);
             String str1 = Arrays.toString(array);
@@ -287,7 +286,6 @@ public class HourlyLocationAdapter extends BaseExpandableListAdapter {
             str1 = str1.replace("]", "");
             str1 = str1.replace(", ", ",");
             hr_store_str = str1;
-            Log.e("remove build up store:", "" + store_List.size());
         }
 
     }
@@ -296,7 +294,6 @@ public class HourlyLocationAdapter extends BaseExpandableListAdapter {
 
         if (level == 0) {
             if (!store_flg) {
-                Log.e("come ", "----------");
                 store_List.add(txtClickedVal.substring(0,4).trim());
                 region_flg = false;
                 store_flg = true;
@@ -306,7 +303,6 @@ public class HourlyLocationAdapter extends BaseExpandableListAdapter {
                 str_brndcls = str_brndcls.replace("]", "");
                 str_brndcls = str_brndcls.replace(", ", ",");
                 hr_store_str = str_brndcls;
-                Log.e("Build up store in if:", "" + hr_store_str+" "+store_List.size());
 
             } else
             {
@@ -317,7 +313,6 @@ public class HourlyLocationAdapter extends BaseExpandableListAdapter {
                 str_brndcls = str_brndcls.replace("]", "");
                 str_brndcls = str_brndcls.replace(", ", ",");
                 hr_store_str = str_brndcls;
-                Log.e("Build up store in else:", "" + hr_store_str);
 
             }
         }
@@ -364,7 +359,6 @@ public class HourlyLocationAdapter extends BaseExpandableListAdapter {
                 {
                     if (dublicate_listDataChild.get(mListDataGroup.get(j)).get(k).toLowerCase(Locale.getDefault()).contains(charText)) {
                         arrayList.add(dublicate_listDataChild.get(mListDataGroup.get(j)).get(k));
-                        Log.e("array list size  :", "" + arrayList.size());
                     }
                 }
                 mListDataChild.put(mListDataGroup.get(j), arrayList);

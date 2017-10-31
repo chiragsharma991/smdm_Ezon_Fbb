@@ -114,12 +114,12 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         geoLevel2Code = sharedPreferences.getString("concept","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
-        if (geoLeveLDesc.equals("E ZONE")) {
-            userId = sharedPreferences.getString("userId", "");       //E zone userid =username
-        } else {
+//        if (geoLeveLDesc.equals("E ZONE")) {
+//            userId = sharedPreferences.getString("userId", "");       //E zone userid =username
+//        } else {
             userId = sharedPreferences.getString("userId", "");       //FBB userid = username+store code
             // userId = userId.substring(0, userId.length() - 5);     // Hourly works only userid = username;
-        }
+//        }
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -138,26 +138,23 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         functionality();
     }
 
-    private void functionality() {
-
+    private void functionality()
+    {
         if (Reusable_Functions.chkStatus(context)) {
             mpm_model model = new mpm_model();
-            ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
-
+            ApiCallBack(model, 0);
+            //requestRunningPromoApi(selectedString);
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-
-
     }
-
 
     private synchronized void ApiCallBack(mpm_model model, int id) {
         String url;
         ApiRequest api_request;
 
-        switch (id) {
-
+        switch (id)
+        {
             case 0:   //total values
                 level = 5;
                 if (focusOnPie) {
@@ -205,10 +202,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                     }
                         api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1);  // 1 is id for identification
                 }
-
-
                 break;
-
             case 2:   //Bar values
                 level = 1;
                 if (focusOnPie) {
@@ -263,11 +257,8 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
 
             default:
                 break;
-
-
         }
     }
-
 
     private void callBarchart() {
         barChart.clear();
@@ -294,7 +285,7 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         //  leftAxis.setEnabled(false);
 
 
-        //    leftAxis.setValueFormatter(new MyvalueFormatter(1));
+        //  leftAxis.setValueFormatter(new MyvalueFormatter(1));
         // leftAxis.setAxisMaxValue(4f);
         //  leftAxis.setAxisMinValue(0f);
 
@@ -351,8 +342,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         addleggend.removeAllViewsInLayout();
         for (int i = 0; i < piechart_list.size(); i++) {
 
-            Log.e(TAG, "callPiechart: " + piechart_list.get(0).getLevel());
-
             if (piechart_list.size() <= 10) {
                 int usecolor = colors[i];
                 pieChart.addPieSlice(new PieModel(piechart_list.get(i).getLevel(), (int) piechart_list.get(i).getSalesContr(), usecolor));
@@ -408,7 +397,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         leveLDesc = concept_toggle == true ? "geoLevel2Desc=" + piechart_list.get(_Position).getLevel().replace(" ", "%20").replace("&", "%26").replace("%", "%25") : "geoLevel3Desc=" + piechart_list.get(_Position).getLevel().replace(" ", "%20").replace("&", "%26").replace("%", "%25");
         if (Reusable_Functions.chkStatus(context)) {
             if (ApiRequest.getRequest != null) {
-                Log.e(TAG, ": cancel request>>>>>>>");
                 ApiRequest.getRequest.cancel();
             }
             mpm_model model = new mpm_model();
@@ -417,24 +405,19 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         } else {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
-    private void callList() {
-
-
+    private void callList()
+    {
         listView.setLayoutManager(new LinearLayoutManager(context));
         listView.setLayoutManager(new LinearLayoutManager(listView.getContext(), 48 == Gravity.CENTER_HORIZONTAL ?
                 LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
         hourlyAdapter = new HourlyAdapter(store_list, context, thousandSaperator);
         listView.setAdapter(hourlyAdapter);
-
     }
 
     private void intialise()
     {
-
         thousandSaperator = NumberFormat.getNumberInstance(new Locale("", "in"));
         //segmentButton = (SegmentedGroup) findViewById(R.id.hrl_segmented);
         pieChart = (PieChart) findViewById(R.id.hrl_piechart);
@@ -476,7 +459,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         });
 
     }
-
 
     // this method is used to create data for line graph<br />
     public LineData LineData() {
@@ -529,7 +511,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
         switch (id) {
 
             case 0:
-                Log.e(TAG, "Total list: " + list.size());
                 netSales.setText("₹" + thousandSaperator.format((int) list.get(0).getSaleNetVal()));
                 archPercent.setText(""+String.format("%.1f", list.get(0).getSalesAch()) + "%");
                 units.setText(String.format("%.1f", list.get(0).getUnitsBill()));
@@ -544,7 +525,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 piechart_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     piechart_list.add(data);
-                Log.e(TAG, "pie chart list: " + piechart_list.size());
 
                 model = new mpm_model();
                 ApiCallBack(model, 2);  //calling for line chart
@@ -555,7 +535,6 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 barchart_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     barchart_list.add(data);
-                Log.e(TAG, "Barchart_list: " + barchart_list.size());
 
                 model = new mpm_model();
                 ApiCallBack(model, 3);  //calling for line chart
@@ -566,20 +545,17 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 store_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     store_list.add(data);
-                Log.e(TAG, "Store_list: " + store_list.size());
                 // hrl_pi_Process.setVisibility(View.GONE);
                 Reusable_Functions.animateScaleIn(hrl_pi_Process);
                 setPerform();
                 Reusable_Functions.hDialog();
                 break;
 
-
             case 4:
                 // zone perform
                 piechart_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     piechart_list.add(data);
-                Log.e(TAG, "zone pie chart list: " + piechart_list.size());
                 callPiechart();
                 Reusable_Functions.hDialog();
                 break;
@@ -589,11 +565,9 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                 piechart_list = new ArrayList<mpm_model>();
                 for (mpm_model data : list)
                     piechart_list.add(data);
-                Log.e(TAG, "Concept pie chart list: " + piechart_list.size());
                 callPiechart();
                 Reusable_Functions.hDialog();
                 break;
-
 
             default:
                 Reusable_Functions.hDialog();
@@ -603,10 +577,10 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     }
 
     @Override
-    public void nodatafound() {
-
-        try {
-            Log.e(TAG, "nodatafound: in hourly");
+    public void nodatafound()
+    {
+        try
+        {
             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
             Reusable_Functions.animateScaleIn(hrl_pi_Process);
             netSales.setText("₹" + "0");
@@ -637,11 +611,11 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             }
 
 
-        } catch (NullPointerException e) {
-            Log.e(TAG, "nodatafound: error " + e.getMessage());
         }
+        catch (NullPointerException e)
+        {
 
-
+        }
     }
 
     private void setPerform() {
@@ -665,18 +639,13 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
                             }
                         }
                     }, 1200);
-
-
                 }
                 // Disallow the touch request for parent scroll on touch of child view
                 v.getParent().requestDisallowInterceptTouchEvent(true);
                 return false;
             }
         });
-
-
     }
-
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int id) {
@@ -686,28 +655,27 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
     public void onTabSelected(TabLayout.Tab tab) {
 
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: " );
         String url;
         ApiRequest api_request;
         focusOnPie = false;
-
-
-
 
         switch (checkedId) {
             case 0 : // Concept Performance
                 concept_toggle = true;
                 dupfocusPosition = 0;
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     if (ApiRequest.getRequest != null) {
-                        Log.e(TAG, ": cancel request>>>>>>>");
                         ApiRequest.getRequest.cancel();
                     }
                     Reusable_Functions.animateScaleIn(hrl_pi_Process);
                     mpm_model model = new mpm_model();
-                    ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
+                    ApiCallBack(model, 0);
+                    //requestRunningPromoApi(selectedString);
 
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -715,16 +683,18 @@ public class HourlyPerformence extends AppCompatActivity implements HttpResponse
             case 1 : // Zone performance
                 concept_toggle = false;
                 dupfocusPosition = 0;
-                if (Reusable_Functions.chkStatus(context)) {
+                if (Reusable_Functions.chkStatus(context))
+                {
                     if (ApiRequest.getRequest != null) {
-                        Log.e(TAG, ": cancel request>>>>>>>");
                         ApiRequest.getRequest.cancel();
                     }
                     Reusable_Functions.animateScaleIn(hrl_pi_Process);
                     mpm_model model = new mpm_model();
                     ApiCallBack(model, 0);            //requestRunningPromoApi(selectedString);
 
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
                 break;

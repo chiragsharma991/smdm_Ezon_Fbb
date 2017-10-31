@@ -98,7 +98,7 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
         {
             storeCode = getIntent().getExtras().getString("storeCode");
             store_Code = storeCode.substring(0,4);
-            Log.i(TAG, "storeCode: "+storeCode );
+
         }
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         input_remarks = (TextInputLayout) findViewById(R.id.input_remarks);
@@ -149,7 +149,7 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
-                Log.e("===","remarks_text "+remarks_text);
+
                 if(!remarks_text.equals("")){
                     edt_remark_dialog.setText(remarks_text);
                 }
@@ -171,7 +171,7 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         remark = edt_remark_dialog.getText().toString().trim();
-                        Log.e("remark ",""+remark);
+
                         edt_remarks.setText(remark);
                         edt_remarks.setSelection(edt_remarks.getText().length());
                         edt_first_name.requestFocus();
@@ -202,7 +202,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
                 remarks_text = edt_remarks.getText().toString().trim();
-                Log.e("===","remarks_text "+remarks_text);
 
                 if(!remarks_text.equals("")){
                     edt_remark_dialog.setText(remarks_text);
@@ -225,7 +224,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         remark = edt_remark_dialog.getText().toString().trim();
-                        Log.e("remark ",""+remark);
                         edt_remarks.setText(remark);
                         edt_remarks.setSelection(edt_remarks.getText().length());
                         edt_first_name.requestFocus();
@@ -252,7 +250,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
                         } else {
                             remarks_text = edt_remarks.getText().toString().trim();
-                            Log.e("===","remarks_text "+remarks_text);
                             incorrect_phone.setVisibility(View.GONE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                             InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
@@ -289,7 +286,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                                     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                     remark = edt_remark_dialog.getText().toString().trim();
-                                    Log.e("remark ",""+remark);
                                     edt_remarks.setText(remark);
                                     edt_remarks.setSelection(edt_remarks.getText().length());
                                     edt_first_name.requestFocus();
@@ -303,7 +299,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                     }
                     else{
                         remarks_text = edt_remarks.getText().toString().trim();
-                        Log.e("===","remarks_text "+remarks_text);
                         incorrect_phone.setVisibility(View.GONE);
                         edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                         InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
@@ -340,7 +335,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
                                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                 remark = edt_remark_dialog.getText().toString().trim();
-                                Log.e("remark ",""+remark);
                                 edt_remarks.setText(remark);
                                 edt_remarks.setSelection(edt_remarks.getText().length());
                                 edt_first_name.requestFocus();
@@ -427,11 +421,7 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
-        Log.e("userId"," "+userId);
-       // store = sharedPreferences.getString("storeDescription", "");
-      //  SelectedStoreCode = store.trim().substring(0, 4);
-        Log.e("store"," "+store);
-      //  storedescription.setText(store);
+
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
 
@@ -504,7 +494,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
             incorrect_phone.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
-            Log.e("submitData: json is "," " + getObject().toString());
             if (Reusable_Functions.chkStatus(context))
             {
                 mpm_model model = new mpm_model();
@@ -562,7 +551,6 @@ public class OurStoreServices extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void PostResponse(JSONObject response) {
-        Log.e(TAG, "PostResponse: success");
         String result = null;
         try {
             result = response.getString("status");

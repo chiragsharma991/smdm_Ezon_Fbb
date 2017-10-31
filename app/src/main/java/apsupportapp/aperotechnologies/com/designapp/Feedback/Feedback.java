@@ -108,10 +108,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             storeCode = getIntent().getExtras().getString("storeCode");
             body_geoLevel2Code = getIntent().getExtras().getString("body_geoLevel2Code");
             store_Code = storeCode.substring(0,4);
-            Log.e("body_geoLevel2Code "," "+body_geoLevel2Code);
-            Log.i(TAG, "storeCode: "+storeCode );
+
+
         }
-        Log.e(TAG, "userID and token" + userId + "and this is" + bearertoken);
+
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
@@ -206,12 +206,12 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
               //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
             }
-            Log.e( TAG, "requestFeedbackApi: "+url );
+
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.d(TAG, "onResponse: "+response );
+
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -434,7 +434,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                         Reusable_Functions.hDialog();
                         Reusable_Functions.sDialog(context, "Submitting data…");
                         JSONObject jsonObject = OnSubmit();
-                        Log.e(TAG, "jsonObject: " + jsonObject.toString());
+
                         requestReceiverSubmitAPI(context, jsonObject);
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
@@ -456,10 +456,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     private void feedbackDetails(final int position, final int Listposition) {
 
-        Log.e(TAG, "feedbackDetails: " );
-
-        Log.e("position feedbackDetails"," "+position);
-        // firstView.setVisibility(View.GONE);
+         // firstView.setVisibility(View.GONE);
         // secondView.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= 21) {
             Reusable_Functions.ViewGone(firstView);
@@ -497,35 +494,34 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 //get 0 is depend on next and pre button
                 {
                     x = ((double) feedbackReportList.get(Listposition).getFittingCntPer() / 100) * width;
-                    Log.e("x "," getFittingCntPer"+x);
+
                 } else if (position == 1) {
                     x = ((double) feedbackReportList.get(Listposition).getPricingCntPer() / 100) * width;
-                    Log.e("x "," getPricingCntPer"+x);
+
 
                 } else if (position == 2) {
                     x = ((double) feedbackReportList.get(Listposition).getColorsCntPer() / 100) * width;
-                    Log.e("x "," getColorsCntPer"+x);
+
 
                 } else if (position == 3) {
                     x = ((double) feedbackReportList.get(Listposition).getPrintCntPer() / 100) * width;
-                    Log.e("x "," getPrintCntPer"+x);
+
 
                 } else if (position == 4) {
                     x = ((double) feedbackReportList.get(Listposition).getStylingCntPer() / 100) * width;
-                    Log.e("x "," getStylingCntPer"+x);
+
 
                 } else if (position == 5) {
                     x = ((double) feedbackReportList.get(Listposition).getFabricQualityCntPer() / 100) * width;
-                    Log.e("x "," getFabricQualityCntPer"+x);
+
 
                 } else if (position == 6) {
                     x = ((double) feedbackReportList.get(Listposition).getGarmentQualityCntPer() / 100) * width;
-                    Log.e("x "," getGarmentQualityCntPer"+x);
+
 
                 }
 
                 int percentage = (int) x;
-                Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackReportList.get(0).getFittingCntPer() + "and values are" + percentage);
                 View lp = new View(context);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                 lp.setLayoutParams(layoutParams);
@@ -557,13 +553,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void AddText(int position, int Listposition) {
-        Log.e("position "," "+position);
-        Log.e("Listposition "," "+Listposition);
-
-
         // starting title text
-        Log.e(TAG, "AddText: " );
-
         final TextView textView1 = new TextView(context);
         textView1.setText("" + optionList.get(position));
         textView1.setTextColor(Color.parseColor("#000000"));
@@ -598,7 +588,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         // another text
 
         final TextView textView2 = new TextView(context);
-        Log.e("position "," "+position);
+
         // get percentage for all list & 0 will be change according to next pre button
         if (position == 0) {
             textView2.setText("" + String.format("%.1f", +feedbackReportList.get(Listposition).getFittingCntPer()) + " %");
@@ -699,15 +689,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             Reusable_Functions.sDialog(mcontext, "Submitting data…");
             String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetailsNew/" + userId  ;//+"?geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId
            // String url = ConstsCore.web_url + "/v1/save/worstperformerfeedbackdetails/" + userId + "?geoLevel2Code="+ geoLevel2Code ;//+"?recache="+recache
-            Log.e(TAG, "requestReceiverSubmitAPI: "+object.toString());
-            Log.e(TAG, "requestReceiverSubmitAPI url: "+url.toString());
-
-            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
+           JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, object.toString(),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response)
                         {
-                            Log.e("response requestReceiverSubmitAPI "," "+response);
                             try {
                                 if (response == null || response.equals(null)) {
                                     Reusable_Functions.hDialog();
@@ -731,7 +717,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
                                 }
                             } catch (Exception e) {
-                                Log.e("Exception e", e.toString() + "");
                                 e.printStackTrace();
                                 Reusable_Functions.hDialog();
 

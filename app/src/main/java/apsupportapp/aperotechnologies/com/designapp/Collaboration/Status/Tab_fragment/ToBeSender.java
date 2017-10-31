@@ -145,7 +145,7 @@ public class ToBeSender extends Fragment implements OnclickStatus {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: "+response );
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -272,12 +272,10 @@ public class ToBeSender extends Fragment implements OnclickStatus {
         {
             url = ConstsCore.web_url + "/v1/display/stocktransfer/sendercasestatus/grn/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&caseNo=" + caseNo + "&senderStoreCode=" + storeCode + "&recache=" + recache;
         }
-        Log.e(TAG, "requestSenderCaseStatus: " + url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestSenderCaseStatus - onResponse: "+response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();

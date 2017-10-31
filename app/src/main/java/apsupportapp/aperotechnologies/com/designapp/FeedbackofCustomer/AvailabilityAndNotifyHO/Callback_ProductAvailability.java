@@ -147,13 +147,13 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
     @Override
     public void response(ArrayList<mpm_model> list, int id)
     {
-        Log.e(TAG, "response: sucess"+id );
+
         switch (id) {
             // case 0 and 1 will follow like first api call and set view in case 0;
             case 0:
                 callbacklist = new ArrayList<mpm_model>();
                 callbacklist.addAll(list);
-                Log.e(TAG, "callbacklist "+list.size());
+
                 setlist(callbacklist);
                 processBar.setVisibility(View.GONE);
                 break;
@@ -193,7 +193,6 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
     @Override
     public void nodatafound()
     {
-        Log.e(TAG, "response: null" );
         txt_ean_number.setText("");
         txt_store_number.setText("");
         txt_cust_name.setText("");
@@ -219,6 +218,6 @@ public class Callback_ProductAvailability extends AppCompatActivity implements H
         context.startActivity(new Intent(context, Callback_ProductAvailability.class)
         .putExtra("view_params",view_params).putExtra("attribute14",attribute14).putExtra("feedbackKey",feedbackKey).putExtra("attribute1",attribute1).putExtra("arcDate",arcDate).putExtra("callback_header",cf_Text)
         );
-        Log.e( "startScreen: ", ""+cf_Text);
+
     }
 }

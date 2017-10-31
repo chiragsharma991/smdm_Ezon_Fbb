@@ -122,13 +122,13 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.e(TAG, "setUserVisibleHint: " + isVisibleToUser);
+
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e(TAG, "onCreateView: ");
+
         context = getContext();
         View view = inflater.inflate(R.layout.fragment_productavailability_reports, container, false);
         return view;
@@ -137,7 +137,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e(TAG, "onActivityCreated: ");
         ActivityCreated = true;
         v = getView();
         initialiseUI();
@@ -197,14 +196,12 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
             case 0:
                 card_productAvail.setVisibility(View.GONE);
                 relFIndexTablelayout_productavail.setVisibility(View.GONE);
-                Log.e("here","case 0");
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummaryNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&storeCode=" +store_code ; //Pie chart Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 1, this, data);  // 1 is id for new api response
                 break;
             case 1:
                 card_productAvail.setVisibility(View.GONE);
                 relFIndexTablelayout_productavail.setVisibility(View.GONE);
-                Log.e("here","case 1");
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 0, this, data);  // 0 is id for call finish response.
 
@@ -212,14 +209,12 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
             case 2:  // this is for only change list
                 card_productAvail.setVisibility(View.GONE);
                 relFIndexTablelayout_productavail.setVisibility(View.GONE);
-                Log.e("here","case 2");
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaysummarydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 api_request = new ApiRequest(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
             case 3:  // this is for only change list
                 card_productAvail.setVisibility(View.GONE);
                 relFIndexTablelayout_productavail.setVisibility(View.GONE);
-                Log.e("here","case 3");
                 url = ConstsCore.web_url + "/v1/display/feedbackdisplaydetailNew/" + userId + "?feedbackKey="+feedbackKey + "&view=" + view_params + "&recache=true" + "&attribute14=" + attribute14 + "&storeCode=" +store_code; //Details list Api
                 ApiRequestNew_product api_request_new = new ApiRequestNew_product(context, bearertoken, url, TAG, queue, model, 2, this, data);  // 1 is id for call another api after response
                 break;
@@ -231,14 +226,13 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
 
     @Override
     public void response(ArrayList<mpm_model> list, int id) {
-        Log.e(TAG, "response: sucess"+id );
         switch (id) {
             // case 0 and 1 will follow like first api call and set view in case 0;
             case 0:
                 card_productAvail.setVisibility(View.VISIBLE);
                 relFIndexTablelayout_productavail.setVisibility(View.VISIBLE);
                 text_no_data_product.setVisibility(View.GONE);
-                Log.e(TAG, "callback list log: " );
+
                 callbacklist = new ArrayList<>();
                 callbacklist.addAll(list);
                 setlistView(callbacklist);
@@ -249,7 +243,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
 //                card_productAvail.setVisibility(View.VISIBLE);
 //                relFIndexTablelayout_productavail.setVisibility(View.VISIBLE);
                 text_no_data_product.setVisibility(View.GONE);
-                Log.e(TAG, "Pie chart list log: " );
+
                 piechartList = new ArrayList<>();
                 piechartList.addAll(list);
                 setPiechart(piechartList);
@@ -279,7 +273,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         totalFeedbackCount = (float) piechartList.get(0).getTotalFeedbackCount();
         callbackFeedbackCount = (float) piechartList.get(0).getCallbackFeedbackCount();
         nocallbackFeedbackCount = (float) piechartList.get(0).getNoCallbackFeedbackCount();
-        Log.e(TAG, "Piechart: "+totalFeedbackCount+" "+callbackFeedbackCount+" "+nocallbackFeedbackCount );
+
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(Color.parseColor("#e8112d"));    //#20b5d3
         colors.add(Color.parseColor("#c6c4c4"));    //#21d24c
@@ -318,7 +312,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     public void onValueSelected(Entry e, Highlight h) {
 
         PieEntry pe = (PieEntry) e;
-        Log.e("-----", "" + pe.getLabel());
+
         switch (pe.getLabel()) {
             case "Feedback with Callback":
                 if (attribute14.equals("NO"))
@@ -355,7 +349,6 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
 
     @Override
     public void onclickList(int position) {
-        Log.e(TAG, "onclickList: "+position );
 
         Callback_ProductAvailability.startScreen(context,view_params,attribute14,feedbackKey,
                 callbacklist.get(position).getAttribute1(),callbacklist.get(position).getArcDate(),callback_header);
@@ -392,17 +385,17 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
 
     @Override
     public void nodatafound() {
-        Log.e(TAG, "response: null");
+
         Reusable_Functions.hDialog();
         if (attribute14.equals("YES")) {
-            Log.e("","inside if no data found");
+
             attribute14 = "NO";
             cf_text.setText("No Callback Required");
 //            card_productAvail.setVisibility(View.VISIBLE);
 //            relFIndexTablelayout_productavail.setVisibility(View.VISIBLE);
             Apicallback(3, false, "Feedback");
         }else if(attribute14.equals("NO")){
-            Log.e("","inside else no data found");
+
             attribute14 = "YES";
             cf_text.setText("Callback Required from CSD");
 //            card_productAvail.setVisibility(View.VISIBLE);
@@ -427,7 +420,8 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "nodatafound: catch error " + e.getMessage());
+
+
         }
     }
 
@@ -455,7 +449,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
     {
         int checkedId = Tabview.getSelectedTabPosition();
 
-        Log.e(TAG, "onTabSelected: " + checkedId);
+
         switch (checkedId) {
             case 0: // Yesterday
                 view_params = "LD";
@@ -539,7 +533,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
         int k = 0;
         while (k < 2)
         {
-            Log.e(TAG, "addViewLayout: " + k);
+
             ViewGroup view = (ViewGroup) layoutInflater.inflate(R.layout.activity_band_hrl_legend, null);
             TextView txt_legend_color = (TextView) view.findViewById(R.id.txt_legend_color);
             TextView txt_legend_name = (TextView) view.findViewById(R.id.txt_legend);
@@ -549,7 +543,7 @@ public class ProductAvailability_Reports extends Fragment implements TabLayout.O
                 @Override
                 public void onClick(View view) {
                     int position = (int) view.getTag();
-                    Log.e(TAG, "onClick: " + position);
+
                     switch (position) {
                         case 0:
                             if (attribute14.equals("NO")){
@@ -679,12 +673,10 @@ class ApiRequestNew_product {
             URL = Url + "&offset=" + offsetvalue + "&limit=" + limit;
 
         }
-        Log.e(TAG, " new final_setApi: URL " + URL);
         getRequest = new JsonArrayRequest(Request.Method.GET, URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: case 3 " + response);
 
                         try {
 
@@ -706,7 +698,6 @@ class ApiRequestNew_product {
                                 relFIndexTablelayout_productavail.setVisibility(View.VISIBLE);
                                 text_no_data_product.setVisibility(View.GONE);
 
-                                Log.e(TAG, "promo eql limit");
                                 for (int i = 0; i < response.length(); i++) {
 
                                     mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
@@ -726,7 +717,6 @@ class ApiRequestNew_product {
                                 relFIndexTablelayout_productavail.setVisibility(View.VISIBLE);
                                 text_no_data_product.setVisibility(View.GONE);
 
-                                Log.e(TAG, "promo /= limit");
                                 for (int i = 0; i < response.length(); i++) {
                                     mpm_modelClass = gson.fromJson(response.get(i).toString(), mpm_model.class);
                                     list.add(mpm_modelClass);
@@ -744,7 +734,6 @@ class ApiRequestNew_product {
                             relFIndexTablelayout_productavail.setVisibility(View.VISIBLE);
                             text_no_data_product.setVisibility(View.GONE);
 
-                            Log.e(TAG, "onResponse catch: " + e.getMessage());
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "data failed...", Toast.LENGTH_SHORT).show();
                         }
@@ -753,7 +742,6 @@ class ApiRequestNew_product {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "onErrorResponse : " + error.getMessage());
                         card_productAvail.setVisibility(View.VISIBLE);
                         relFIndexTablelayout_productavail.setVisibility(View.VISIBLE);
                         text_no_data_product.setVisibility(View.GONE);
@@ -763,8 +751,7 @@ class ApiRequestNew_product {
 
                         Reusable_Functions.hDialog();
                       //  Toast.makeText(context, "Server not found...", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Server not found..." + error.getMessage());
-                        error.printStackTrace();
+                           error.printStackTrace();
                     }
                 }
         ) {

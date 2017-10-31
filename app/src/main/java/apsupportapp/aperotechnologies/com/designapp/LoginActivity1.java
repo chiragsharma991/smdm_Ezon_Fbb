@@ -172,7 +172,6 @@ public class LoginActivity1 extends AppCompatActivity
             LocalNotificationReceiver.logoutAlarm = false;
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.cancel(LocalNotificationReceiver.notId);
-            Log.e("TAG", "notification id:-- "+LocalNotificationReceiver.notId );
         }
     }
 
@@ -183,7 +182,6 @@ public class LoginActivity1 extends AppCompatActivity
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("Login Response   ", response.toString());
                         try {
                             if (response == null || response.equals(null)) {
                                 Reusable_Functions.hDialog();
@@ -191,9 +189,7 @@ public class LoginActivity1 extends AppCompatActivity
                             // Login condition check for Ezone
                             if (response.getString("geoLeveLDesc").equals("E ZONE"))
                             {
-                                Log.e("Ezone login....", "");
                                 Long notificationTime = System.currentTimeMillis() + 1800000; //30 minutes
-                                Log.e("notificationTime", "onResponse: " + notificationTime);
                                 setLocalnotification(context, notificationTime);
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");
@@ -201,7 +197,6 @@ public class LoginActivity1 extends AppCompatActivity
                                 String bearerToken = response.getString("bearerToken");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
                                 geoLevel2Code = response.getString("geoLevel2Code");
-                                Log.e("Ezone login", "onResponse: "+geoLevel2Code);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", username);
                                 editor.putString("password", password);
@@ -216,7 +211,6 @@ public class LoginActivity1 extends AppCompatActivity
                                 {
                                     editor.putBoolean("log_flag", true);
                                     editor.putString("authcode", auth_code);
-                                    Log.e("authcode ", " --- " + username + " " + password + " " + auth_code);
                                     editor.apply();
                                 }
                                 Intent intent = new Intent(LoginActivity1.this, SnapDashboardActivity.class);
@@ -231,10 +225,8 @@ public class LoginActivity1 extends AppCompatActivity
                             // Login condition check for Fashion At BB
                             else
                             {
-                                Log.e("Fashion At BB login...", "");
                                 if (Reusable_Functions.chkStatus(context)) {
                                     Reusable_Functions.sDialog(context, "Fetching store code...");
-                                    Log.e("Username :", "" + uname);
                                     SelectedStoreCode = uname;
                                     firstLogin = false;
                                     requestLoginWithStoreAPI();
@@ -245,7 +237,6 @@ public class LoginActivity1 extends AppCompatActivity
                                 }
                             }
                         } catch (Exception e) {
-                            Log.e("Exception e", e.toString() + "");
                             e.printStackTrace();
                         }
                     }
@@ -262,7 +253,6 @@ public class LoginActivity1 extends AppCompatActivity
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 auth_code = "Basic " + Base64.encodeToString((uname + ":" + password).getBytes(), Base64.NO_WRAP); //Base64.NO_WRAP flag
-                Log.i("Auth Code", auth_code);
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", auth_code);
                 return params;
@@ -279,12 +269,10 @@ public class LoginActivity1 extends AppCompatActivity
     private void requestLoginWithStoreAPI()
     {
         String url = ConstsCore.web_url + "/v1/login?storeCode=" + SelectedStoreCode.replace(" ", "%20"); //ConstsCore.web_url+ + "/v1/login/userId";
-        Log.e("url store :", "" + url);
         final JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("Store response :", "" + response);
                         try {
                             if (response == null || response.equals(""))
                             {
@@ -295,7 +283,6 @@ public class LoginActivity1 extends AppCompatActivity
                             // when store code fetched it will go second condition.
                             if (!firstLogin)
                             {
-                                Log.e("if conditon", "onResponse:  "+response.length());
                                 String username = response.getString("loginName");
                                 String password = response.getString("password");
                                 String userId = response.getString("userId");
@@ -306,7 +293,6 @@ public class LoginActivity1 extends AppCompatActivity
                             }
                             else
                             {
-                                Log.e("else condition", "onResponse:  "+response.length());
 
                                 Long notificationTime = System.currentTimeMillis() + 18000000; //300 minutes
                                 setLocalnotification(context, notificationTime);
@@ -315,7 +301,6 @@ public class LoginActivity1 extends AppCompatActivity
                                 userId = response.getString("userId");
                                 String geoLeveLDesc = response.getString("geoLeveLDesc");
                                 geoLevel2Code = response.getString("geoLevel2Code");
-                                Log.e("geoLeveLDesc :", "" + geoLeveLDesc + geoLevel2Code);
                                 String bearerToken = response.getString("bearerToken");
                                // userId = userId + "-" + SelectedStoreCode;
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -326,7 +311,6 @@ public class LoginActivity1 extends AppCompatActivity
                                 editor.putString("geoLeveLDesc", geoLeveLDesc);
                                 editor.putString("geoLevel2Code",geoLevel2Code);
                                 editor.putString("storeDescription",storeDescription);
-                                Log.e("onResponse---: ","store desc"+storeDescription);
                                 editor.putString("device_id", "");
                                 //editor.putString("push_tokken", "");
                                 editor.apply();
@@ -382,7 +366,6 @@ public class LoginActivity1 extends AppCompatActivity
     private void requestLoginFBBAPI(final String bearerToken, String userId)
     {
         String url = ConstsCore.web_url + "/v1/login/userstores/" + userId +"?geoLevel2Code="+geoLevel2Code; //ConstsCore.web_url+ + "/v1/login/userId";
-        Log.e("Login", "requestLoginFBBAPI: " + url);
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -562,46 +545,5 @@ public class LoginActivity1 extends AppCompatActivity
 
     }
 
-    // --------- Adapter-----------
 
-//    public class StoreListAdapter extends BaseAdapter
-//    {
-//        private final Context context;
-//        private final ArrayList<String> storelist_data;
-//
-//        public StoreListAdapter(Context context, ArrayList<String> storelist_data)
-//        {
-//            this.context=context;
-//            this.storelist_data=storelist_data;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return storelist_data.size();
-//        }
-//
-//        @Override
-//        public Object getItem(int i)
-//        {
-//            return i;
-//        }
-//
-//        @Override
-//        public long getItemId(int i)
-//        {
-//            return i;
-//        }
-//
-//        @Override
-//        public View getView(int i, View view, ViewGroup viewGroup)
-//        {
-//            LayoutInflater inflater = getLayoutInflater();
-//            View row;
-//            row = inflater.inflate(R.layout.simple_list_item, null, false);
-//            TextView title, detail;
-//            title = (TextView) row.findViewById(R.id.storeList);
-//            title.setText(storelist_data.get(i));
-//            return (row);
-//        }
-//    }
 }

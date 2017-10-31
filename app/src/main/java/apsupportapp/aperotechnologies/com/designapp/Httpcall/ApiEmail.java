@@ -89,13 +89,11 @@ public class ApiEmail {
             url = "https://smdm.manthan.com/v1/notification/email/" + userId + "?storecode="+storecode+ "&emailtype=EMAIL_TYPE_1";
         }
         // String url = "https://smdm.manthan.com/v1/notification/email/"+userId+"?storecode=2663&emailtype=EMAIL_TYPE_1";
-        Log.e("email url ", "" + url);
         StringRequest emailrequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response)
                     {
-                        Log.e("email api ", " " + response.toString());
                         //  Reusable_Functions.displayToast(context, response.toString());
                     }
                 },
@@ -103,7 +101,6 @@ public class ApiEmail {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Log.e("sms api ", " " + error.toString());
 
                     }
                 }) {

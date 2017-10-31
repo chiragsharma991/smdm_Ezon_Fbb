@@ -60,13 +60,7 @@ public class FreshnessIndexSnapAdapter extends RecyclerView.Adapter<RecyclerView
         gson = new Gson();
     }
 
-    public FreshnessIndexSnapAdapter(ArrayList<mpm_model> freshnessIndexDetails_ez_arrayList, Context context, RecyclerView listViewFIndex,String TAG) {
-        this.context = context;
-        this.freshnessIndexDetails_ez_arrayList = freshnessIndexDetails_ez_arrayList;
-        this.listViewFIndex = listViewFIndex;
-        this.TAG = TAG;
 
-    }
 
     @Override
     public int getItemViewType(int position)

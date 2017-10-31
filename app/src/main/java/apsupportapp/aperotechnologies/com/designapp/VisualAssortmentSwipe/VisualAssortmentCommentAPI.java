@@ -49,12 +49,11 @@ public class VisualAssortmentCommentAPI {
 
        // userId = userId.substring(0,userId.length()-5);
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId ; //+"?storeCode=" +storeCode + "&geoLevel2Code="+geoLevel2Code
-        Log.e("post url :",""+url +"\n"+obj);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("post response :",""+response);
+
                         try {
                             if (response == null || response.equals("")) {
                                 Reusable_Functions.hDialog();
@@ -102,12 +101,10 @@ public class VisualAssortmentCommentAPI {
         }
        // userId = userId.substring(0,userId.length()-5);
         String url = ConstsCore.web_url + "/v1/save/visualassortmentcomment/" + userId ;  //+"?storeCode=" +storeCode+ "?geoLevel2Code="+geoLevel2Code
-        Log.e("put request :",""+url + "\n"+obj);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.PUT, url, obj.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("put response :",""+response);
                         try {
                             if (response == null || response.equals("")) {
                                 Reusable_Functions.hDialog();

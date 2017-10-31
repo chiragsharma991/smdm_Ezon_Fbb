@@ -94,7 +94,6 @@ public class FGStoreDataActivity extends AppCompatActivity {
         LinearLayout mSeekLin = (LinearLayout) findViewById(R.id.lin1);
         CustomSeekBar customSeekBar = new CustomSeekBar(this, 10, Color.BLACK);
         customSeekBar.addSeekBar(mSeekLin);
-        Log.e("=== "," "+overall_progress);
 
         final LinearLayout lin_lay_overall_ratings = (LinearLayout) findViewById(R.id.lin_lay_overall_ratings);
         create_Smiley(lin_lay_overall_ratings, "overallratings.json", list_overallratings, "overallratings");
@@ -150,7 +149,6 @@ public class FGStoreDataActivity extends AppCompatActivity {
         try {
             m_jArry = new JSONArray(loadJSONFromAsset(json_file));
             JSONObject jsonObject;
-            Log.e("m_jArry.length() "," "+m_jArry.length());
 
             for (int i = 0; i < m_jArry.length(); i++)
             {
@@ -502,8 +500,6 @@ public class FGStoreDataActivity extends AppCompatActivity {
                     overallratings.setSmiley(jsonObject.getString("smiley"));
                     list_vm.add(overallratings);
                 }
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();

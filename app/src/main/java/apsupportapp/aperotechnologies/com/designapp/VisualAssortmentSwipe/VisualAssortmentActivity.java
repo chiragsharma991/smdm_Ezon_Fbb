@@ -99,12 +99,10 @@ public class VisualAssortmentActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId","");
         geoLevel2Code = sharedPreferences.getString("concept","");
-        Log.e("geoLevel2Code "," "+geoLevel2Code);
         lobId = sharedPreferences.getString("lobid","");
         isMultiStore = sharedPreferences.getString("isMultiStore","");
         value = sharedPreferences.getString("value","");
 //        userId = userId.substring(0,userId.length()-5);
-//        Log.e("userId",""+userId);
         bearertoken = sharedPreferences.getString("bearerToken","");
        // storeCode = sharedPreferences.getString("storeDescription","");
         if(getIntent().getExtras().getString("storeCode") != null )
@@ -112,8 +110,7 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             storeCode = getIntent().getExtras().getString("storeCode");
             body_geoLevel2Code = getIntent().getExtras().getString("body_geoLevel2Code");
             store_Code = storeCode.substring(0,4);
-            Log.e("body_geoLevel2Code "," "+body_geoLevel2Code);
-            Log.i(TAG, "storeCode: "+storeCode );
+
         }
 
         reloverlay = (RelativeLayout) findViewById(R.id.reloverlay);
@@ -409,7 +406,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Log.e("came ","here");
                 }
             }
 
@@ -422,7 +418,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     VisualAssort visualAssort1 = visualassortmentlist.get(position);
                     if(VisualAssortmentActivity.layoutBuy.getVisibility()==View.VISIBLE)
                     {
-                        Log.e("edit Text visible","=====");
 
                             Reusable_Functions.sDialog(context, "Loading..");
                             String articleOption = visualAssort1.getArticleOption();
@@ -459,7 +454,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Log.e("edit Text invisible","=====");
                         relbuy.setEnabled(true);
                         String articleOption = visualAssort1.getArticleOption();
                         String checkLikedislike = visualAssort1.getLikeDislikeFlg();
@@ -507,7 +501,6 @@ public class VisualAssortmentActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Log.e("Completed","-------");
                 }
             }
 
@@ -626,12 +619,10 @@ public class VisualAssortmentActivity extends AppCompatActivity {
             url = ConstsCore.web_url + "/v1/display/visualassortments/" + userId + "?offset=" + offsetvalue + "&limit=" + limit + "&likedislike=" + likeDislikeFlg +"&recache="+ recache + "&geoLevel2Code=" + geoLevel2Code + "&lobId="+ lobId;
         }
 
-      Log.e("visual assort url :",""+url);
       postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("va response :",""+response);
                        try
                         {
                             int i;

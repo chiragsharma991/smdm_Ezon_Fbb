@@ -100,8 +100,6 @@ public class InspectionHistoryAdapter extends BaseAdapter
                 @Override
                 public void onClick(View view) {
 
-                    Log.e("== "," "+lastSelectedPos +" "+list_inspectionHistory.getChildAt(lastSelectedPos));
-
 
                     if(i != lastSelectedPos)
                     {
@@ -121,7 +119,6 @@ public class InspectionHistoryAdapter extends BaseAdapter
                     }
 
                     lastSelectedPos = i;
-                    Log.e("pos[0] "," "+lastSelectedPos);
                 }
             });
 

@@ -79,8 +79,8 @@ public class HourlyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
                 final mpm_model data = store_list.get(position);
-                Log.e("===","store_list "+store_list.toString());
-                Log.e("===","data "+data.toString());
+//                Log.e("===","store_list "+store_list.toString());
+//                Log.e("===","data "+data.toString());
 
                 ((HourlyViewHolder) viewHolder).Hrl_root_Name.setText(data.getLevel());
                 ((HourlyViewHolder) viewHolder).Hrl_root_netsales.setText("" + thousandSaperator.format((int) data.getSaleNetVal()));

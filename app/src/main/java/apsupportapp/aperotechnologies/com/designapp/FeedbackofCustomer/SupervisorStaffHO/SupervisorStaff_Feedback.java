@@ -13,7 +13,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,7 +139,6 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
-                Log.e("===","remarks_text "+remarks_text);
                 if(!remarks_text.equals("")){
                     edt_remark_dialog.setText(remarks_text);
                 }
@@ -161,7 +160,6 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         remark = edt_remark_dialog.getText().toString().trim();
-                        Log.e("remark ",""+remark);
                         edt_remarks.setText(remark);
                         edt_remarks.setSelection(edt_remarks.getText().length());
                         edt_first_name.requestFocus();
@@ -192,7 +190,6 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
                 remarks_text = edt_remarks.getText().toString().trim();
-                Log.e("===","remarks_text "+remarks_text);
 
                 if(!remarks_text.equals("")){
                     edt_remark_dialog.setText(remarks_text);
@@ -215,7 +212,6 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         remark = edt_remark_dialog.getText().toString().trim();
-                        Log.e("remark ",""+remark);
                         edt_remarks.setText(remark);
                         edt_remarks.setSelection(edt_remarks.getText().length());
                         edt_first_name.requestFocus();
@@ -242,7 +238,7 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
                         } else {
                             remarks_text = edt_remarks.getText().toString().trim();
-                            Log.e("===","remarks_text "+remarks_text);
+
                             incorrect_phone.setVisibility(View.GONE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                             InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
@@ -279,7 +275,7 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                                     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                     remark = edt_remark_dialog.getText().toString().trim();
-                                    Log.e("remark ",""+remark);
+
                                     edt_remarks.setText(remark);
                                     edt_remarks.setSelection(edt_remarks.getText().length());
                                     edt_first_name.requestFocus();
@@ -293,7 +289,7 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                     }
                     else{
                         remarks_text = edt_remarks.getText().toString().trim();
-                        Log.e("===","remarks_text "+remarks_text);
+
                         incorrect_phone.setVisibility(View.GONE);
                         edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                         InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
@@ -330,7 +326,7 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
                                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                 remark = edt_remark_dialog.getText().toString().trim();
-                                Log.e("remark ",""+remark);
+
                                 edt_remarks.setText(remark);
                                 edt_remarks.setSelection(edt_remarks.getText().length());
                                 edt_first_name.requestFocus();
@@ -409,11 +405,11 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         userId = sharedPreferences.getString("userId", "");
-        Log.e("userId"," "+userId);
+
         store = sharedPreferences.getString("storeDescription", "");
 //        SelectedStoreCode = store.trim().substring(0, 4);
 //
-//        Log.e("store"," "+store);
+//         .e("store"," "+store);
         store_code = storeCode.substring(0, 4);
 
         storedescription.setText(storeCode);
@@ -504,7 +500,7 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
             incorrect_phone.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
-            Log.e("submitData: json is "," " + getObject().toString());
+
             if (Reusable_Functions.chkStatus(context)) {
                 mpm_model model = new mpm_model();
                 ApiCallBack(getObject(), 0);// id is zero.
@@ -563,7 +559,7 @@ public class SupervisorStaff_Feedback extends Fragment implements View.OnClickLi
 
     @Override
     public void PostResponse(JSONObject response) {
-        Log.e(TAG, "PostResponse: success");
+
         String result = null;
         try {
             result = response.getString("status");

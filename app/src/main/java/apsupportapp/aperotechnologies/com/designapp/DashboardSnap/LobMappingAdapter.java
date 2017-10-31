@@ -73,13 +73,11 @@ public class LobMappingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (viewHolder instanceof MappingViewHolder) {
             if (position < lobList.size()) {
 
-                Log.e("TAG", "onBindViewHolder: "+lobchecked[position]);
                 ((MappingViewHolder) viewHolder).radio_chk.setChecked(lobchecked[position] ? true : false );
                 ((MappingViewHolder) viewHolder).title.setText(lobList.get(position));
                 ((MappingViewHolder) viewHolder).parent_view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.e("TAG", "onClick: "+position );
                         for (int i = 0; i < lobchecked.length; i++) {
                             if (position == i) lobchecked[i] = true;
                             else lobchecked[i] = false;

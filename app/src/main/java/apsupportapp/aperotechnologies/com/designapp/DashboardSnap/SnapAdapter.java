@@ -186,7 +186,6 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
 
     @Override
     public void onSnap(int position) {
-        Log.d("Snapped: ", position + "");
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

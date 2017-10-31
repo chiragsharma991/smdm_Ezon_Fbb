@@ -225,7 +225,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
                 }
             }
 
-            Log.e(TAG, "requestTargetStockExcepApi: "+url);
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -958,7 +957,6 @@ public class TargetStockExceptionActivity extends AppCompatActivity implements V
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         int checkedId= Tabview.getSelectedTabPosition();
-        Log.e("TAB", "onTabSelected: " );
 
         switch (checkedId) {
             case 1 :   //core selection

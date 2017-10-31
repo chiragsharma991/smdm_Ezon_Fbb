@@ -96,7 +96,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         {
             storeCode = getIntent().getExtras().getString("storeCode");
             store_Code = storeCode.substring(0,4);
-            Log.i(TAG, "storeCode: "+storeCode );
+
         }
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -173,13 +173,11 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
             String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId  + "?offset=" + offsetvalue + "&limit=" + limit + "&recache=true"+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId +"&storeCode=" +store_Code;
           //  String url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&recache=true";
 
-            Log.e(TAG, "requestFeedbackApi: "+url);
-
-            final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
+          final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            Log.d(TAG, "onResponse: "+response );
+
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
@@ -288,10 +286,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.feedbackList_next:
 
-                Log.e("dd option ", ""+ optionList.size());
-                Log.e("dd feedbackListData ", ""+ feedbackListData.size());
-
-//                if(feedbackListData.size() == 1){
+             //    if(feedbackListData.size() == 1){
 //                    Log.e("here ", "inside if");
 //
 //                   // nextCount++;
@@ -425,7 +420,6 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                     }
 
                     int percentage = (int) x;
-                    Log.e("TAG", "view width:................ " + width + "and percentage is " + feedbackListData.get(0).getFittingCntPer() + "and values are" + percentage);
                     View lp = new View(context);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(percentage, LinearLayout.LayoutParams.MATCH_PARENT);
                     lp.setLayoutParams(layoutParams);

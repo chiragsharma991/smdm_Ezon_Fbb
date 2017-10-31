@@ -46,7 +46,7 @@ public class CustomSeekBar {
 
             mSeekBar = new SeekBar(mContext);
             mSeekBar.setMax(maxCount - 1);
-            mSeekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.seekbar));
+           // mSeekBar.setProgressDrawable(mContext.getResources().getDrawable(R.drawable.seekbar));
 
             mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
