@@ -37,7 +37,6 @@ public class ApiSMS
         queue.start();
         final Gson gson = new Gson();
       //  url = "https://smdm.manthan.com/v1/notification/sms/" + userId + "?smstype=SMS_TYPE_1&mobilenumber=" + customerNumber;
-        Log.e("callback ",""+callback);
         if(callback.equals("YES"))
         {
             url = "https://smdm.manthan.com/v1/notification/sms/" + userId + "?smstype=Callback&mobilenumber=" + customerNumber;
@@ -46,13 +45,11 @@ public class ApiSMS
         {
             url = "https://smdm.manthan.com/v1/notification/sms/" + userId + "?smstype=NoCallback&mobilenumber=" + customerNumber;
         }
-        Log.e("sms url ", "" + url);
         StringRequest smsrequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.e("sms api ", " " + response.toString());
                         req_email_API(userId, context, bearertoken, from,storecode);
                         // Reusable_Functions.displayToast(context, response.toString());
                     }
@@ -61,7 +58,6 @@ public class ApiSMS
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        Log.e("sms api ", " " + error.toString());
                     }
                 }) {
             @Override

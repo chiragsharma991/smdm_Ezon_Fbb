@@ -127,7 +127,6 @@ public class ListAdapter extends BaseAdapter implements Filterable
                                       FilterResults results)
         {
             arrayList = (ArrayList<StyleModel>) results.values;
-            Log.e("performFiltering: ",""+arrayList.size());
             notifyDataSetChanged();
         }
     }

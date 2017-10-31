@@ -67,7 +67,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         if(customerDetailsList.get(position)  == null)
         {
-            Log.e( "getItemViewType: ", ""+position);
+
             return VIEW_PROG;
 
         }
@@ -196,7 +196,7 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         protected FilterResults performFiltering(CharSequence constraint)
         {
             FilterResults results = new FilterResults();
-            Log.e("char :",""+constraint);
+
             if (constraint != null && constraint.length() > 0)
             {
                 ArrayList<CustomerDetail> filterList = new ArrayList<CustomerDetail>();
@@ -205,7 +205,6 @@ public class CustomerDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     if(detailFilterList.get(i).getFullName().toString().toLowerCase().contains(constraint.toString().toLowerCase()))
                     {
                         filterList.add(detailFilterList.get(i));
-                        Log.e("filter list size :",""+filterList.size());
                     }
                 }
                 results.count = filterList.size() ;

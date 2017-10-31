@@ -144,21 +144,21 @@ public class SwipeDeckAdapter extends BaseAdapter {
         final VisualAssort visualAssort = visualassortmentlist.get(position);
         txtName.setText(visualAssort.getArticleOption());
         //Option Click event to get detail information
-        txtName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                if (Reusable_Functions.chkStatus(context))
-                {
-                    Reusable_Functions.hDialog();
-                    Reusable_Functions.sDialog(context, "Loading  data...");
-                    requestOptionDetailsAPI(visualAssort.getArticleOption());
-                } else
-                {
-                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        txtName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                if (Reusable_Functions.chkStatus(context))
+//                {
+//                    Reusable_Functions.hDialog();
+//                    Reusable_Functions.sDialog(context, "Loading  data...");
+//                    requestOptionDetailsAPI(visualAssort.getArticleOption());
+//                } else
+//                {
+//                    Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
         txtSeason.setText("" + visualAssort.getSeasonName());
         txtColor.setText(" " + visualAssort.getColor());
         txtFabric.setText("" + visualAssort.getProductFabricDesc());
@@ -257,15 +257,18 @@ public class SwipeDeckAdapter extends BaseAdapter {
             public void onClick(View v) {
                  if(VisualAssortmentActivity.likeDislikeFlg.equals("Pending"))
                  {
-                     if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE) {
+                     if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE)
+                     {
                          VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
                      }
 
-                     if (VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE) {
+                     if (VisualAssortmentActivity.layoutBuy.getVisibility() == View.VISIBLE)
+                     {
                          VisualAssortmentActivity.layoutBuy.setVisibility(View.GONE);
                      }
                      InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                     if (inputManager != null) {
+                     if (inputManager != null)
+                     {
                          inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextComment.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                          inputManager.hideSoftInputFromWindow(VisualAssortmentActivity.edtTextSets.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                      }
@@ -302,7 +305,8 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 VisualAssortmentActivity.edtTextSets.setText("");
                 pos = position;
 
-                if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE) {
+                if (VisualAssortmentActivity.layoutComment.getVisibility() == View.VISIBLE)
+                {
                     VisualAssortmentActivity.layoutComment.setVisibility(View.GONE);
                 }
 
@@ -354,7 +358,9 @@ public class SwipeDeckAdapter extends BaseAdapter {
 //                        obj.put("likeDislikeFlg", checkLikedislike);
 //                        obj.put("feedback", checkFeedback);
 //                        obj.put("sizeSet", Integer.parseInt(VisualAssortmentActivity.edtTextSets.getText().toString()));
-//                    } catch (JSONException e) {
+//                    }
+//                    catch (JSONException e)
+//                    {
 //                        e.printStackTrace();
 //                    }
 //
@@ -478,6 +484,8 @@ public class SwipeDeckAdapter extends BaseAdapter {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
         String userId = sharedPreferences.getString("userId", "");
         final String bearertoken = sharedPreferences.getString("bearerToken", "");
+        String geoLevel2Code = sharedPreferences.getString("concept", "");
+        String lobId = sharedPreferences.getString("lobid", "");
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
         BasicNetwork network = new BasicNetwork(new HurlStack());
         RequestQueue queue = new RequestQueue(cache, network);
@@ -485,7 +493,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
 
         String url;
 
-        url = ConstsCore.web_url + "/v1/display/productdetails/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26")+"&offset="+offset+"&limit="+limit ;
+        url = ConstsCore.web_url + "/v1/display/productdetailsNew/" + userId + "?articleOption=" + option.replaceAll(" ", "%20").replaceAll("&", "%26") +"&geoLevel2Code="+geoLevel2Code + "&lobId="+lobId;
 
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

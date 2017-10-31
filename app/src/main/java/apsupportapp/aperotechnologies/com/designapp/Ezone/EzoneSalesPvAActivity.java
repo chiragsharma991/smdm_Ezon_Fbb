@@ -170,7 +170,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 arrayList = new ArrayList<SalesAnalysisViewPagerValue>();
                 barChart.invalidate();
                 header_value = "";
-               // drill_down_val = "";
+                // drill_down_val = "";
 
 
                 selFirstPositionValue = 0;
@@ -349,7 +349,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                         salesAnalysisClassArrayList.clear();
                                         arrayList.clear();
                                         //* requestHeaderAPI("");
-                                       // requestSalesPvAPlanClassListAPI(txtPvAClickedValue);//*
+                                        // requestSalesPvAPlanClassListAPI(txtPvAClickedValue);//*
                                         categry_clickVal = txtPvAClickedValue;
                                         requestHeaderAPI(hierarchyList[2]);
                                         // planCategory = txtPvAClickedValue;
@@ -950,7 +950,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
             salespva_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
         }
 
-
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1178,7 +1177,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        // Log.e(TAG, "onResponse: "+response);
+//                        Log.e("requestPvAChartAPI ", " " + response);
                         try {
 
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1297,6 +1297,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+//                        Log.e(TAG, "requestSalesWeekChart: " + response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1599,6 +1600,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+//                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1775,6 +1777,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                             Reusable_Functions.hDialog();
                             onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
+                            Log.e(TAG, "onResponse in store: "+e.getMessage());
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
@@ -1815,6 +1818,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                     @Override
                     public void onResponse(JSONArray response)
                     {
+//                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -1923,10 +1927,12 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
         salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
 
 
+
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+//                        Log.e(TAG, "requestSalesPvAPlanClassListAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
@@ -2071,6 +2077,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+//                        Log.e(TAG, "requestSalesViewPagerValueAPI: " + response);
 
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {

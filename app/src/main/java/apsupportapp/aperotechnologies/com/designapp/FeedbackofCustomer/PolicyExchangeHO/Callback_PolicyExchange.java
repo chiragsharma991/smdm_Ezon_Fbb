@@ -142,7 +142,7 @@ public class Callback_PolicyExchange extends AppCompatActivity implements HttpRe
 
     public void response(ArrayList<mpm_model> list, int id)
     {
-        Log.e(TAG, "response: sucess"+id );
+
         switch (id) {
             // case 0 and 1 will follow like first api call and set view in case 0;
             case 0:
@@ -175,8 +175,6 @@ public class Callback_PolicyExchange extends AppCompatActivity implements HttpRe
 
     public void nodatafound()
     {
-        Log.e(TAG, "response: null" );
-
         txt_mobile_number.setText(""); ;
         txt_exchange .setText("");
         txt_product_verified.setText("");

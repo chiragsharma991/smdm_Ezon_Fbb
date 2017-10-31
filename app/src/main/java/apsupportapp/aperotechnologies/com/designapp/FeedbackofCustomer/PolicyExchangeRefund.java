@@ -117,7 +117,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         {
             storeCode = getIntent().getExtras().getString("storeCode");
             store_Code = storeCode.substring(0,4);
-            Log.i(TAG, "storeCode: "+storeCode );
+
         }
         imageBtnBack1 = (RelativeLayout) findViewById(R.id.imageBtnBack1);
         input_remarks = (TextInputLayout) findViewById(R.id.input_remarks);
@@ -177,7 +177,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                 final Button btn_submit = (Button) dialogView.findViewById(R.id.btn_submit);
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
                 remarks_text = edt_remarks.getText().toString().trim();
-                Log.e("===","remarks_text "+remarks_text);
+
                 if(!remarks_text.equals("")){
                     edt_remark_dialog.setText(remarks_text);
                 }
@@ -199,7 +199,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         remark = edt_remark_dialog.getText().toString().trim();
-                        Log.e("remark ",""+remark);
+
                         edt_remarks.setText(remark);
                         edt_remarks.setSelection(edt_remarks.getText().length());
                         edt_first_name.requestFocus();
@@ -230,7 +230,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                 final RelativeLayout rel_edt = (RelativeLayout) dialogView.findViewById(R.id.rel_edt);
 
                 remarks_text = edt_remarks.getText().toString().trim();
-                Log.e("===","remarks_text "+remarks_text);
+
 
                 if(!remarks_text.equals("")){
                     edt_remark_dialog.setText(remarks_text);
@@ -253,7 +253,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         remark = edt_remark_dialog.getText().toString().trim();
-                        Log.e("remark ",""+remark);
+
                         edt_remarks.setText(remark);
                         edt_remarks.setSelection(edt_remarks.getText().length());
                         edt_first_name.requestFocus();
@@ -280,7 +280,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_red_border);
                         } else {
                             remarks_text = edt_remarks.getText().toString().trim();
-                            Log.e("===","remarks_text "+remarks_text);
+
                             incorrect_phone.setVisibility(View.GONE);
                             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                             InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
@@ -317,7 +317,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                                     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                     remark = edt_remark_dialog.getText().toString().trim();
-                                    Log.e("remark ",""+remark);
+
                                     edt_remarks.setText(remark);
                                     edt_remarks.setSelection(edt_remarks.getText().length());
                                     edt_first_name.requestFocus();
@@ -331,7 +331,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                     }
                     else{
                         remarks_text = edt_remarks.getText().toString().trim();
-                        Log.e("===","remarks_text "+remarks_text);
+
                         incorrect_phone.setVisibility(View.GONE);
                         edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
                         InputMethodManager inputMethodManager =  (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
@@ -368,7 +368,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
                                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                 remark = edt_remark_dialog.getText().toString().trim();
-                                Log.e("remark ",""+remark);
+
                                 edt_remarks.setText(remark);
                                 edt_remarks.setSelection(edt_remarks.getText().length());
                                 edt_first_name.requestFocus();
@@ -650,7 +650,6 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
             txt_empty_product.setVisibility(View.GONE);
             edt_customer_mobile_number.setBackgroundResource(R.drawable.edittext_border);
             edt_remarks.setBackgroundResource(R.drawable.edittext_border);
-            Log.e("submitData: json is "," " + getObject().toString());
             if (Reusable_Functions.chkStatus(context))
             {
                 mpm_model model = new mpm_model();
@@ -708,7 +707,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
     @Override
     public void PostResponse(JSONObject response) {
-        Log.e(TAG, "PostResponse: success");
+
         String result = null;
         try {
             result = response.getString("status");
@@ -737,14 +736,13 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         final JSONObject[] jObj = {null};
         final Gson gson = new Gson();
         String url = "https://smdm.manthan.com/v1/display/returnreason/"+userId+"?feedbackKey=3&exchangeRequired=YES";
-        Log.e("sms url ",""+url);
+
 
         JsonArrayRequest smsrequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Log.e("sms api "," "+response.toString());
                         List<String> listist = new ArrayList<String>();
                         listist.add(0, "Reason for Exchange");
 
@@ -769,7 +767,6 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Log.e("sms api "," "+error.toString());
 
                     }
                 }) {
@@ -803,14 +800,12 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         final JSONObject[] jObj = {null};
         final Gson gson = new Gson();
         String url = "https://smdm.manthan.com/v1/display/returnreason/"+userId+"?feedbackKey=3&exchangeRequired=NO";
-        Log.e("sms url ",""+url);
 
         JsonArrayRequest smsrequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Log.e("sms api "," "+response.toString());
                         List<String> listist = new ArrayList<String>();
                         listist.add(0, "Reason for store refusal");
 
@@ -835,7 +830,6 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Log.e("sms api "," "+error.toString());
 
                     }
                 }) {

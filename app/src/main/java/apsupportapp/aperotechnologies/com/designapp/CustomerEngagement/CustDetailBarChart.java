@@ -395,7 +395,7 @@ public class CustDetailBarChart extends AppCompatActivity
         @Override
         public String getFormattedValue(float value, AxisBase axis)
         {
-            Log.e("value",""+value);
+
            // return String.valueOf(value);
             if (value == 0.0f)
             {
@@ -418,7 +418,7 @@ public class CustDetailBarChart extends AppCompatActivity
         @Override
         public String getFormattedValue(float value, AxisBase axis)
         {
-            Log.e("value",""+value);
+
            //  return String.valueOf(value);
             if (value == 0.0f)
             {

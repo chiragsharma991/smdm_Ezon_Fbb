@@ -27,7 +27,7 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_availability_notify_ho);
-        Log.e(TAG, "onCreate:>> " );
+
         getSupportActionBar().hide();
         getSupportActionBar().setElevation(0);
         context = this;
@@ -35,7 +35,7 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
         if(getIntent().getExtras().getString("storeCode") != null )
         {
             storeCode = getIntent().getExtras().getString("storeCode");
-            Log.i(TAG, "storeCode: "+storeCode );
+
         }
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -59,7 +59,7 @@ public class ProductAvailability_notify_HO extends AppCompatActivity implements 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.e(TAG, "onTabSelected: " );
+
                 View focus = getCurrentFocus();
                 if (focus != null) {
                     hiddenKeyboard(focus);

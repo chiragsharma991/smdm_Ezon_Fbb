@@ -104,7 +104,7 @@ public class CustomerLookup_PageTwo extends Fragment
         m_config = MySingleton.getInstance(getActivity());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         userId = sharedPreferences.getString("userId", "");
-        Log.e("update_userId", "" + userId);
+
         bearertoken = sharedPreferences.getString("bearerToken", "");
         geoLeveLDesc = sharedPreferences.getString("geoLeveLDesc", "");
        geoLevel2Code = sharedPreferences.getString("concept","");
@@ -133,7 +133,7 @@ public class CustomerLookup_PageTwo extends Fragment
         {
             Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
         }
-        Log.e("test", "onCreateView: page two");
+
 
 
         edt_cust_Search.setOnEditorActionListener(new TextView.OnEditorActionListener()
@@ -184,14 +184,14 @@ public class CustomerLookup_PageTwo extends Fragment
                 totalItemCount = mRecyclerViewHelper.getItemCount();
                 firstVisibleItem = mRecyclerViewHelper.findFirstVisibleItemPosition();
 
-                Log.e(" arr_count ", "" + arr_count);
+
 
                 if (arr_count == 100 && lazyScroll.equals("OFF"))
                 {
                     customerDetailsList.add(null);
                     customerDetailAdapter.notifyItemInserted(customerDetailsList.size() - 1);
                     pos = customerDetailsList.size() - 1;
-                    Log.e( "onScrollStateChanged: ", ""+pos);
+
                     arr_count = 0;
                     lazyScroll = "ON";
                     android.os.Handler h = new android.os.Handler();
@@ -201,13 +201,13 @@ public class CustomerLookup_PageTwo extends Fragment
                         {
                             if (flag == false)
                             {
-                                Log.e("run: ", "one");
+
                                 linear_engagement_type_nm.setVisibility(View.GONE);
                                 requestCustomerDetail();
                             }
                             else
                             {
-                                Log.e("run: ", "two");
+
                                 linear_engagement_type_nm.setVisibility(View.VISIBLE);
                                 requestEngagementBandDetail(context,userId,bearertoken);
 
@@ -230,7 +230,7 @@ public class CustomerLookup_PageTwo extends Fragment
             {
                 Intent intent = new Intent(context, CustomerDetailActivity.class);
                 intent.putExtra("uniqueCustomer", customerDetailsList.get(position).getUniqueCustomer());
-                Log.e("Customer Id ", "" + customerDetailsList.get(position).getUniqueCustomer());
+
                 startActivity(intent);
             }
         }));
@@ -248,7 +248,7 @@ public class CustomerLookup_PageTwo extends Fragment
     {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            Log.e("setUserVisibleHint: ", "" + isVisibleToUser);
+
             if (checkNetworkFalse) {
                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
             }
@@ -310,7 +310,6 @@ public class CustomerLookup_PageTwo extends Fragment
         context = mcontext;
         userId = user_id;
         bearertoken = bearer_token;
-        Log.e("fragmentCommunication: ", " " + band_Click + e_bandnm + userId + bearertoken);
         linear_engagement_type_nm.setVisibility(View.VISIBLE);
         txt_engagemnt_nm.setText(e_bandnm);
         if (Reusable_Functions.chkStatus(mcontext)) {
@@ -333,12 +332,12 @@ public class CustomerLookup_PageTwo extends Fragment
     private void requestCustomerDetail()
     {
         String url = ConstsCore.web_url + "/v1/display/customerdetails/" + userId + "?engagementFor=" + engagementFor + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e("detail url :", "" + url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response two:", "" + response);
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -351,7 +350,6 @@ public class CustomerLookup_PageTwo extends Fragment
                                 {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
-                                    Log.e("===two first", " " + customerDetailsList.get(i).getFullName() + "  " + customerDetailsList.get(i).getMbrPlanSaleNetVal());
 
                                 }
 
@@ -365,7 +363,6 @@ public class CustomerLookup_PageTwo extends Fragment
                                 for (int i = 0; i < response.length(); i++) {
                                     customerDetail = gson.fromJson(response.get(i).toString(), CustomerDetail.class);
                                     customerDetailsList.add(customerDetail);
-                                    Log.e("===two second", " " + customerDetailsList.get(i).getFullName() + "  " + customerDetailsList.get(i).getMbrPlanSaleNetVal());
 
                                 }
                                 arr_count = response.length();
@@ -398,7 +395,6 @@ public class CustomerLookup_PageTwo extends Fragment
                             customerDetailsList.remove(pos);
                             customerDetailAdapter.notifyDataSetChanged();
                              Reusable_Functions.hDialog();
-                            Log.e("exception :", "" + e.getMessage());
                             Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
@@ -455,12 +451,12 @@ public class CustomerLookup_PageTwo extends Fragment
         } else {
             url = ConstsCore.web_url + "/v1/display/customerdetails/" + user_id + "?engagementFor=" + engagementFor + "&lifeStage=" + e_bandnm.replace(" ", "%20") + "&recache=" + recache + "&offset=" + offset + "&limit=" + limit;
         }
-        Log.e("detail url 1:", "" + url);
+
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response page one:", "" + response + " size " + response.length());
+
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -475,7 +471,7 @@ public class CustomerLookup_PageTwo extends Fragment
 
                                 }
                                 arr_count = response.length();
-                                Log.e("array size: ", "" + customerDetailsList.size() + "\t"+ arr_count);
+
                                 flag = true;
                                 offset = offset + limit;
 
@@ -488,7 +484,7 @@ public class CustomerLookup_PageTwo extends Fragment
 
                                 }
                                 arr_count = response.length();
-                                Log.e("array size: ", "" + customerDetailsList.size() + "\t"+ arr_count);
+
                                 flag = true;
                                 offset = offset + limit;
 
@@ -513,7 +509,7 @@ public class CustomerLookup_PageTwo extends Fragment
                             customerDetailsList.remove(pos);
                             customerDetailAdapter.notifyDataSetChanged();
                             Reusable_Functions.hDialog();
-                            Log.e("exception :", "" + e.getMessage());
+
                             Toast.makeText(mcontext, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             e.printStackTrace();
