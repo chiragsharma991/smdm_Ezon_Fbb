@@ -705,8 +705,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
             }
         });
-
-
     }
 
     private void sortFunction() {
