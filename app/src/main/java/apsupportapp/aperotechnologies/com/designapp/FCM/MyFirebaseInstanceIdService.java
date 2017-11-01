@@ -14,7 +14,8 @@ public class MyFirebaseInstanceIdService  extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIIDService";
 
     @Override
-    public void onTokenRefresh() {
+    public void onTokenRefresh()
+    {
 
         //Getting registration token
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();

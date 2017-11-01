@@ -71,9 +71,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     private ArrayList<Feedback_model> feedbackList, feedbackReportList;
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
-    private TextView Pricing, Colours, Prints, Styling, Fabric_quality, Garment_quality;
+    private TextView Pricing, Colours, Prints, Styling, Fabric_quality, Garment_quality,text_no_data_price;
     private TextView Feedback_option, Fitting,txtStoreCode,txtStoreName;
     private EditText feedback_comment;
+    private LinearLayout linear_feedback;
     private AlertDialog dialog;
     private LinearLayout firstView;
     private Button  FeedbackNext;
@@ -129,9 +130,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    private void initalise() {
-
-
+    private void initalise()
+    {
         optionList = new ArrayList<>();
         optionList.add("Fitting");
         optionList.add("Pricing");
@@ -145,12 +145,14 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         Feedback_option = (TextView) findViewById(R.id.feedback_option);
         txtStoreCode = (TextView) findViewById(R.id.txtStoreCode);
         txtStoreName = (TextView) findViewById(R.id.txtStoreName);
-
+        text_no_data_price = (TextView)findViewById(R.id.text_no_data_price);
+        text_no_data_price.setVisibility(View.GONE);
+        linear_feedback = (LinearLayout)findViewById(R.id.linear_feedback);
+        linear_feedback.setVisibility(View.VISIBLE);
         if(isMultiStore.equals("Yes"))
         {
             txtStoreCode.setText("Concept : ");
             txtStoreName.setText(value);
-
         }
         else
         {
@@ -199,7 +201,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             {
                 url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId +"&storeCode=" +store_Code;
                // url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
-
             }
             else
             {
@@ -215,7 +216,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     feedbackReport = false;
-                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    linear_feedback.setVisibility(View.GONE);
+                                    text_no_data_price.setVisibility(View.VISIBLE);
                                     return;
                                 }
                                 else if (response.length() == limit)
@@ -240,11 +243,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         }
                                         offsetvalue = (limit * count) + limit;
                                         count++;
-
                                         requestFeedbackApi();
                                     }
                                     // if api call for last entry.
-
                                 }
                                 else if (response.length() < limit)
                                 {
@@ -288,6 +289,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
+                                text_no_data_price.setVisibility(View.GONE);
                                 Toast.makeText(context, "data failed..." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 feedbackReport = false;
@@ -299,6 +301,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
+                            text_no_data_price.setVisibility(View.GONE);
                             Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             feedbackReport = false;
@@ -358,15 +361,15 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
             default:
 
-                if(feedbackList.size()>0){
+//                if(feedbackList.size()>0){
                     TextView button = (TextView) view;
                     selectCategory = button.getText().toString();
                     commentDialog();
-                }
-                else
-                {
-                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
-                }
+//                }
+//                else
+//                {
+//                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+//                }
                 break;
         }
     }
