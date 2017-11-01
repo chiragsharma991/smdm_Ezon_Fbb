@@ -216,4 +216,3 @@ class ProgressViewHolder extends RecyclerView.ViewHolder {
     }
 }
 
-

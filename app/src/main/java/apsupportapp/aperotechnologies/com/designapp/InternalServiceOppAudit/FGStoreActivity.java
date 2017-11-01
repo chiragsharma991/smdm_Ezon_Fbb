@@ -265,12 +265,7 @@ public class FGStoreActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
     }
-
 
     public String loadJSONFromAsset(String json_file)
     {
@@ -309,7 +304,6 @@ public class FGStoreActivity extends AppCompatActivity {
                 lin_layout.addView(view);
 
                 jsonObject  = (JSONObject) m_jArry.get(i);
-
 
                 RelativeLayout rel_layout_header_smiley = (RelativeLayout) view.findViewById(R.id.rel_layout_header_smiley);
                 TextView txt_rel_layout_header_smiley = (TextView) rel_layout_header_smiley.findViewById(R.id.header_smiley);
@@ -650,8 +644,6 @@ public class FGStoreActivity extends AppCompatActivity {
                     overallratings.setSmiley(jsonObject.getString("smiley"));
                     list_vm.add(overallratings);
                 }
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();

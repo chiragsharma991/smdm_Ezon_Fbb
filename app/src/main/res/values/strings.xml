@@ -199,6 +199,9 @@
     <string name="customer_feedback_number">Please enter a mobile number</string>
     <string name="customer_feedback_digit">Please enter 10 digit mobile number</string>
     <string name="customer_feedback_remarks">Please enter remarks</string>
+    <string name="customer_feedback_name">Please enter first name</string>
+    <string name="customer_feedback_lastname">Please enter last name</string>
+
 
     <!--BORIS-->
 

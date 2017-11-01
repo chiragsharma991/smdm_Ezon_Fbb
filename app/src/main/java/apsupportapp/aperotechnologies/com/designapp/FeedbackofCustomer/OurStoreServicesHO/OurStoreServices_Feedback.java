@@ -68,7 +68,7 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
     private String remark;
     String remarks_text, SelectedStoreCode, storeCode, store_code;
     private String TAG = "OurStoreServices";
-    private TextView incorrect_phone, incorrect_remark, storedescription;
+    private TextView incorrect_phone, incorrect_remark, storedescription,txt_incorrect_lastname,txt_incorrect_name;
     private String userId, bearertoken, geoLeveLDesc, store;
     private String customerFeedback, customerNumber, customerRemarks, customerName, customerLastname,
             customerCallBack, customerArcDate, customerStoreName;
@@ -118,9 +118,13 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         incorrect_phone = (TextView) v.findViewById(R.id.txt_incorrect_phone);
         incorrect_remark = (TextView) v.findViewById(R.id.txt_incorrect_remark);
         storedescription = (TextView) v.findViewById(R.id.txtStoreCode);
+        txt_incorrect_lastname = (TextView) v.findViewById(R.id.txt_incorrect_lastname);
+        txt_incorrect_name = (TextView) v.findViewById(R.id.txt_incorrect_name);
 
         incorrect_phone.setVisibility(View.GONE);
         incorrect_remark.setVisibility(View.GONE);
+        txt_incorrect_lastname.setVisibility(View.GONE);
+        txt_incorrect_name.setVisibility(View.GONE);
 
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
@@ -377,6 +381,42 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
             }
         });
 
+        edt_first_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txt_incorrect_name.setVisibility(View.GONE);
+                edt_first_name.setBackgroundResource(R.drawable.edittext_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edt_last_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txt_incorrect_lastname.setVisibility(View.GONE);
+                edt_last_name.setBackgroundResource(R.drawable.edittext_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         MainMethod();
 
@@ -440,8 +480,10 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
         // prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
+        txt_incorrect_name.setVisibility(View.GONE);
+        txt_incorrect_lastname.setVisibility(View.GONE);
 
-        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null)) {
+        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null) || (customerLastname.equals("") || customerLastname == null) ||(customerName.equals("") || customerName == null)) {
 
             if(customerNumber.equals("") || customerNumber == null){
                 incorrect_phone.setText(context.getResources().getString(R.string.customer_feedback_number));
@@ -453,6 +495,17 @@ public class OurStoreServices_Feedback extends Fragment implements View.OnClickL
                 incorrect_remark.setText(context.getResources().getString(R.string.customer_feedback_remarks));
                 incorrect_remark.setVisibility(View.VISIBLE);
                 edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+            if(customerName.equals("") || customerName == null){
+                txt_incorrect_name.setText(context.getResources().getString(R.string.customer_feedback_name));
+                txt_incorrect_name.setVisibility(View.VISIBLE);
+                edt_first_name.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            if(customerLastname.equals("") || customerLastname == null){
+                txt_incorrect_lastname.setText(context.getResources().getString(R.string.customer_feedback_lastname));
+                txt_incorrect_lastname.setVisibility(View.VISIBLE);
+                edt_last_name.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
             if(!customerNumber.equals("")) {
