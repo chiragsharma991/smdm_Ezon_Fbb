@@ -412,6 +412,7 @@
                     android:visibility="gone"
                     android:id="@+id/txt_incorrect_name"
                     android:textColor="@color/ezfbb_red"
+                    android:layout_marginRight="10dp"
                     android:textSize="10sp"
                     android:gravity="right"
                     android:letterSpacing="0.1"
@@ -451,6 +452,7 @@
                 <TextView
                     android:layout_below="@+id/input_last_name"
                     android:visibility="gone"
+                    android:layout_marginRight="10dp"
                     android:id="@+id/txt_incorrect_lastname"
                     android:textColor="@color/ezfbb_red"
                     android:textSize="10sp"

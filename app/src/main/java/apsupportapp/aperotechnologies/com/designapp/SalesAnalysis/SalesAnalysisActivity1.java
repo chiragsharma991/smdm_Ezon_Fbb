@@ -1259,7 +1259,8 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         {
          url  = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
-//        Log.e("url sales in fbb:", "" + url);
+//       Log.e("url sales in fbb:", "" + url);
+
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -2195,7 +2196,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                                 saleFirstVisibleItem = salesAnalysisClassArrayList.get(0).getBrandplanClass();
                                 if(saleFirstVisibleItem.equals("All"))
                                 {
-                                    Log.e("in brand class api: ","header");
+//                                    Log.e("in brand class api: ","header");
                                     offsetvalue = 0;
                                     limit = 100;
                                     count = 0;
@@ -2699,6 +2700,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         limit = 100;
                         count = 0;
                         val = "";
+                        requestSalesListDisplayAPI();
 
                    } else
                     {
@@ -2725,6 +2727,7 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                         limit = 100;
                         count = 0;
                         val = "";
+                        requestSalesListDisplayAPI();
 
                     } else {
                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();

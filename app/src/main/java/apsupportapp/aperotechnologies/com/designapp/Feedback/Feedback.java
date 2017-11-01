@@ -195,36 +195,34 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         if (Reusable_Functions.chkStatus(context)) {
             String url;
 
-            if (!feedbackReport) {
+            if (!feedbackReport)
+            {
                 url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptionsNew/" + userId + "?offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId +"&storeCode=" +store_Code;
                // url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayoptions/" + userId + "?geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
 
-            } else {
-
+            }
+            else
+            {
                 String option = Feedback_option.getText().toString().replace("%", "%25").replace(" ", "%20").replace("&", "%26");
                 url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreportsNew/" + userId + "?storeCode=" + store_Code  + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId + "&articleOptionCode=" + feedbackList.get(listCount).getArticleOptionCode();
               //  url = ConstsCore.web_url + "/v1/display/worstperformerfeedback/displayreports/" + userId + "?option=" + option + "&geoLevel2Code="+ geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit;
-
             }
-
             final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
                                     feedbackReport = false;
                                     Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                                     return;
-
-
-                                } else if (response.length() == limit) {
-
+                                }
+                                else if (response.length() == limit)
+                                {
                                     // if api call for report then it will true
-                                    if (feedbackReport) {
-
+                                    if (feedbackReport)
+                                    {
                                         for (int i = 0; i < response.length(); i++) {
                                             feedback_model_report = gson.fromJson(response.get(i).toString(), Feedback_model.class);
                                             feedbackReportList.add(feedback_model_report);
@@ -233,7 +231,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                         count++;
                                         requestFeedbackApi();
 
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         for (int i = 0; i < response.length(); i++) {
                                             feedback_model = gson.fromJson(response.get(i).toString(), Feedback_model.class);
                                             feedbackList.add(feedback_model);
@@ -245,8 +245,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                                     }
                                     // if api call for last entry.
 
-                                } else if (response.length() < limit) {
-
+                                }
+                                else if (response.length() < limit)
+                                {
                                     // if api call for report then it will true
 
                                     if (feedbackReport) {
@@ -331,7 +332,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         switch (view.getId()) {
             case R.id.feedback_BtnBack:
                 finish();
@@ -356,9 +358,15 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
             default:
 
-                TextView button = (TextView) view;
-                selectCategory = button.getText().toString();
-                commentDialog();
+                if(feedbackList.size()>0){
+                    TextView button = (TextView) view;
+                    selectCategory = button.getText().toString();
+                    commentDialog();
+                }
+                else
+                {
+                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -454,14 +462,16 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     }
 
-    private void feedbackDetails(final int position, final int Listposition) {
-
-         // firstView.setVisibility(View.GONE);
+    private void feedbackDetails(final int position, final int Listposition)
+    {
+        // firstView.setVisibility(View.GONE);
         // secondView.setVisibility(View.VISIBLE);
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 21)
+        {
             Reusable_Functions.ViewGone(firstView);
             Reusable_Functions.ViewVisible(secondView);
-        } else {
+        }
+        else {
             firstView.setVisibility(View.GONE);
             secondView.setVisibility(View.VISIBLE);
         }
@@ -478,7 +488,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @SuppressWarnings("deprecation")
             @Override
-            public void onGlobalLayout() {
+            public void onGlobalLayout()
+            {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                     Fitting_relative.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 } else {
@@ -494,31 +505,30 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 //get 0 is depend on next and pre button
                 {
                     x = ((double) feedbackReportList.get(Listposition).getFittingCntPer() / 100) * width;
-
-                } else if (position == 1) {
+                }
+                else if (position == 1)
+                {
                     x = ((double) feedbackReportList.get(Listposition).getPricingCntPer() / 100) * width;
-
-
-                } else if (position == 2) {
+                }
+                else if (position == 2)
+                {
                     x = ((double) feedbackReportList.get(Listposition).getColorsCntPer() / 100) * width;
-
-
-                } else if (position == 3) {
+                }
+                else if (position == 3)
+                {
                     x = ((double) feedbackReportList.get(Listposition).getPrintCntPer() / 100) * width;
-
-
-                } else if (position == 4) {
+                }
+                else if (position == 4)
+                {
                     x = ((double) feedbackReportList.get(Listposition).getStylingCntPer() / 100) * width;
-
-
-                } else if (position == 5) {
+                }
+                else if (position == 5)
+                {
                     x = ((double) feedbackReportList.get(Listposition).getFabricQualityCntPer() / 100) * width;
-
-
-                } else if (position == 6) {
+                }
+                else if (position == 6)
+                {
                     x = ((double) feedbackReportList.get(Listposition).getGarmentQualityCntPer() / 100) * width;
-
-
                 }
 
                 int percentage = (int) x;
@@ -542,8 +552,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 } else if (position == 6) {
                     garment_relative.addView(lp);
                 }
-
-
                 AddText(position, Listposition);
 
             }
@@ -552,7 +560,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
     }
 
-    private void AddText(int position, int Listposition) {
+    private void AddText(int position, int Listposition)
+    {
         // starting title text
         final TextView textView1 = new TextView(context);
         textView1.setText("" + optionList.get(position));
@@ -567,7 +576,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         textView1.setLayoutParams(params1);
 
         // add text in list
-
         if (position == 0) {
             Fitting_relative.addView(textView1, params1);
         } else if (position == 1) {
@@ -583,10 +591,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         } else if (position == 6) {
             garment_relative.addView(textView1, params1);
         }
-
-
         // another text
-
         final TextView textView2 = new TextView(context);
 
         // get percentage for all list & 0 will be change according to next pre button
@@ -632,8 +637,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         } else if (position == 6) {
             garment_relative.addView(textView2, params2);
         }
-
-
     }
 
     @Override
@@ -643,9 +646,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
     }
 
 
-    public JSONObject OnSubmit() {
-
-
+    public JSONObject OnSubmit()
+    {
         // do not change this section because this is only hardcoded and case sensitive.
         int fitting = selectCategory.equals("Fitting") ? 1 : 0;
         int pricing = selectCategory.equals("Pricing") ? 1 : 0;
@@ -656,8 +658,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         int fabricQuality = selectCategory.equals("Garment Quality") ? 1 : 0;
 
 
+
         JSONObject jsonObject = new JSONObject();
-        try {
+        try
+        {
             jsonObject.put("option", Feedback_option.getText().toString());
             jsonObject.put("articleOptionCode", feedbackList.get(listCount).getArticleOptionCode());
             jsonObject.put("userId", userId);
@@ -674,7 +678,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             jsonObject.put("lobId", lobId);
             jsonObject.put("storeCode", store_Code);
 
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             e.printStackTrace();
         }
 
@@ -756,9 +762,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
             Toast.makeText(context, "Please check network connection...", Toast.LENGTH_SHORT).show();
 
         }
-
-
-
     }
 
 }
