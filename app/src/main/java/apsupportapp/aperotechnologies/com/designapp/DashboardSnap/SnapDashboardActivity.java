@@ -597,10 +597,19 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<App> apps = getProduct(2, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
             }
+            if (kpiIdArray.contains("042") || kpiIdArray.contains("043")) {
+                List<App> apps = getProduct(13, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+            }
             if (kpiIdArray.contains("006") || kpiIdArray.contains("007") || kpiIdArray.contains("008") || kpiIdArray.contains("009") || kpiIdArray.contains("010") || kpiIdArray.contains("011") || kpiIdArray.contains("012") || kpiIdArray.contains("013")) {
                 List<App> apps = getProduct(3, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             }
+            if (kpiIdArray.contains("044") || kpiIdArray.contains("045")) {
+                List<App> apps = getProduct(14, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+            }
+
             if (kpiIdArray.contains("014") || kpiIdArray.contains("015") || kpiIdArray.contains("016") || kpiIdArray.contains("017")) {
                 List<App> apps = getProduct(4, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
@@ -613,6 +622,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<App> apps = getProduct(6, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
             }
+            if (kpiIdArray.contains("036") || kpiIdArray.contains("037") || kpiIdArray.contains("038") || kpiIdArray.contains("039") || kpiIdArray.contains("040") || kpiIdArray.contains("041")) {
+                List<App> apps = getProduct(12, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback", apps));
+            }
+            if (kpiIdArray.contains("030") || kpiIdArray.contains("031") || kpiIdArray.contains("032") || kpiIdArray.contains("033") || kpiIdArray.contains("034") || kpiIdArray.contains("035")) {
+                List<App> apps = getProduct(11, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback HO", apps));
+            }
             if (kpiIdArray.contains("026")) {
                 List<App> apps = getProduct(7, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
@@ -624,22 +641,6 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             if (kpiIdArray.contains("029")) {
                 List<App> apps = getProduct(10, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "BORIS", apps));
-            }
-            if (kpiIdArray.contains("030") || kpiIdArray.contains("031") || kpiIdArray.contains("032") || kpiIdArray.contains("033") || kpiIdArray.contains("034") || kpiIdArray.contains("035")) {
-                List<App> apps = getProduct(11, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback HO", apps));
-            }
-            if (kpiIdArray.contains("036") || kpiIdArray.contains("037") || kpiIdArray.contains("038") || kpiIdArray.contains("039") || kpiIdArray.contains("040") || kpiIdArray.contains("041")) {
-                List<App> apps = getProduct(12, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback", apps));
-            }
-            if (kpiIdArray.contains("042") || kpiIdArray.contains("043")) {
-                List<App> apps = getProduct(13, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
-            }
-            if (kpiIdArray.contains("044") || kpiIdArray.contains("045")) {
-                List<App> apps = getProduct(14, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
             }
 
 //                List<App> apps = getProduct(101, kpiIdArray);
