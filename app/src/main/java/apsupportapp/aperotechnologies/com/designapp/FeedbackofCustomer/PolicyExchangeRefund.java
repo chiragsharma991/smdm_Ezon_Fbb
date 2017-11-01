@@ -94,7 +94,7 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
     private String userId, bearertoken, geoLeveLDesc, store, user_trim;
     private String customerFeedback, customerNumber, customerRemarks, customerName, customerLastname,
                    customerCallBack, customerExchangeDone, customerProductVerified, exchangeReason, customerArcDate;
-    private TextView incorrect_phone, incorrect_remark, storedescription;
+    private TextView incorrect_phone, incorrect_remark, storedescription, txt_incorrect_lastname, txt_incorrect_name;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -143,7 +143,10 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         txt_empty_exchange = (TextView) findViewById(R.id.txt_empty_exchange);
         spinner_reasons = (Spinner) findViewById(R.id.spinner_reasons);
         storedescription = (TextView) findViewById(R.id.txtStoreCode);
-     //   storedescription.setText(store);
+        txt_incorrect_lastname = (TextView) findViewById(R.id.txt_incorrect_lastname);
+        txt_incorrect_name = (TextView) findViewById(R.id.txt_incorrect_name);
+
+        //   storedescription.setText(store);
         linear_toolbar = (LinearLayout) findViewById(R.id.linear_toolbar);
         linear_toolbar.setVisibility(View.VISIBLE);
 
@@ -153,9 +156,10 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                 finish();
             }
         });
-
         incorrect_phone.setVisibility(View.GONE);
         incorrect_remark.setVisibility(View.GONE);
+        txt_incorrect_lastname.setVisibility(View.GONE);
+        txt_incorrect_name.setVisibility(View.GONE);
 
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
@@ -420,6 +424,41 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
 
             }
         });
+        edt_last_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txt_incorrect_lastname.setVisibility(View.GONE);
+                edt_last_name.setBackgroundResource(R.drawable.edittext_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        edt_first_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txt_incorrect_name.setVisibility(View.GONE);
+                edt_first_name.setBackgroundResource(R.drawable.edittext_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         radioExchangeYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -552,8 +591,9 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
         getDetails();
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
-
-        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null))
+        txt_incorrect_name.setVisibility(View.GONE);
+        txt_incorrect_lastname.setVisibility(View.GONE);
+        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null)|| (customerName.equals("") || customerName == null) || (customerLastname.equals("") || customerLastname == null))
         {
 
             if(customerNumber.equals("") || customerNumber == null)
@@ -570,6 +610,18 @@ public class PolicyExchangeRefund extends AppCompatActivity implements View.OnCl
                 edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
+
+            if(customerName.equals("") || customerName == null){
+                txt_incorrect_name.setText(context.getResources().getString(R.string.customer_feedback_name));
+                txt_incorrect_name.setVisibility(View.VISIBLE);
+                edt_first_name.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            if(customerLastname.equals("") || customerLastname == null){
+                txt_incorrect_lastname.setText(context.getResources().getString(R.string.customer_feedback_lastname));
+                txt_incorrect_lastname.setVisibility(View.VISIBLE);
+                edt_last_name.setBackgroundResource(R.drawable.edittext_red_border);
+            }
             if(!customerNumber.equals(""))
             {
 

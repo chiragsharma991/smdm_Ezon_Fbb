@@ -545,46 +545,5 @@ public class LoginActivity1 extends AppCompatActivity
 
     }
 
-    // --------- Adapter-----------
 
-//    public class StoreListAdapter extends BaseAdapter
-//    {
-//        private final Context context;
-//        private final ArrayList<String> storelist_data;
-//
-//        public StoreListAdapter(Context context, ArrayList<String> storelist_data)
-//        {
-//            this.context=context;
-//            this.storelist_data=storelist_data;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return storelist_data.size();
-//        }
-//
-//        @Override
-//        public Object getItem(int i)
-//        {
-//            return i;
-//        }
-//
-//        @Override
-//        public long getItemId(int i)
-//        {
-//            return i;
-//        }
-//
-//        @Override
-//        public View getView(int i, View view, ViewGroup viewGroup)
-//        {
-//            LayoutInflater inflater = getLayoutInflater();
-//            View row;
-//            row = inflater.inflate(R.layout.simple_list_item, null, false);
-//            TextView title, detail;
-//            title = (TextView) row.findViewById(R.id.storeList);
-//            title.setText(storelist_data.get(i));
-//            return (row);
-//        }
-//    }
 }

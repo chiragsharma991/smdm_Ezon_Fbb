@@ -125,7 +125,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         hierarchyList = hierarchyLevels.split(",");
         for (int i = 0; i <hierarchyList.length ; i++) {
             hierarchyList[i]=hierarchyList[i].trim();
-            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
+//            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
         }
 
 
@@ -259,7 +259,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     count = 0;
                     fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
 
-                    Log.i(TAG, "TimeUP: firstVisibleItem" + firstVisibleItem + " and  OveridePositionValue" + OveridePositionValue);
+//                    Log.i(TAG, "TimeUP: firstVisibleItem" + firstVisibleItem + " and  OveridePositionValue" + OveridePositionValue);
                     if (firstVisibleItem != OveridePositionValue) {
                         if (postRequest != null) {
                             postRequest.cancel();
@@ -300,7 +300,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                     level = 9;
                     fIndexFirstVisibleItem = freshnessIndexDetailsArrayList.get(firstVisibleItem).getLevel();
                 }
-                Log.i(TAG, "fIndexFirstVisibleItem: " + fIndexFirstVisibleItem);
+//                Log.i(TAG, "fIndexFirstVisibleItem: " + fIndexFirstVisibleItem);
 
 
                 if (Reusable_Functions.chkStatus(context)) {
@@ -384,12 +384,12 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
             fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
 
         }
-        Log.e(TAG, "requestFreshnessIndexDetails: " + fIdetails);
+//        Log.e(TAG, "requestFreshnessIndexDetails: " + fIdetails);
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "IndexDetails onResponse: " + response);
+//                        Log.i(TAG, "IndexDetails onResponse: " + response);
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -452,7 +452,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     // For Category List on click of Dept Value
     private void request_FreshnessIndex_ProductAndLocation(final String selectedRegion) {
         String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&regionDescription=" + selectedRegion.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e(TAG, "request_product and location: " + freshnessindex_category_listurl);
+//        Log.e(TAG, "request_product and location: " + freshnessindex_category_listurl);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
                 new Response.Listener<JSONArray>() {
@@ -525,7 +525,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     // For Category List on click of Dept Value
     private void request_FreshnessIndex_CategoryList(final String deptName) {
         String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e(TAG, "request_FreshnessIndex_CategoryList: " + freshnessindex_category_listurl );
+//        Log.e(TAG, "request_FreshnessIndex_CategoryList: " + freshnessindex_category_listurl );
 
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
                 new Response.Listener<JSONArray>() {
@@ -599,7 +599,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
         String freshnessIndex_planclass_listurl = null;
         freshnessIndex_planclass_listurl = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e(TAG, "request_FreshnessIndex_PlanClassList: " + freshnessIndex_planclass_listurl);
+//        Log.e(TAG, "request_FreshnessIndex_PlanClassList: " + freshnessIndex_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -667,7 +667,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     private void request_FreshnessIndex_BrandList(String deptName, String category, final String planclass) {
         String freshnessIndex_brand_listurl;
         freshnessIndex_brand_listurl = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e(TAG, "request_FreshnessIndex_BrandList: " + freshnessIndex_brand_listurl);
+//        Log.e(TAG, "request_FreshnessIndex_BrandList: " + freshnessIndex_brand_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -735,7 +735,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
 
         String freshnessIndex_brandplan_listurl = null;
         freshnessIndex_brandplan_listurl = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e(TAG, "request_FreshnessIndex_BrandPlanList: " + freshnessIndex_brandplan_listurl);
+//        Log.e(TAG, "request_FreshnessIndex_BrandPlanList: " + freshnessIndex_brandplan_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -811,7 +811,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         txtNoChart.setVisibility(View.GONE);
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
 
-        Log.e("header_value_filter ", " " + header_value_filter + " " + fIndexFirstVisibleItem);
+//        Log.e("header_value_filter ", " " + header_value_filter + " " + fIndexFirstVisibleItem);
 
         if (fIndexFirstVisibleItem.equals("All")) {
             Reusable_Functions.hDialog();
@@ -891,7 +891,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
             }
         }
 
-        Log.e("requestFIndexPieChart ", "  URL: " + url);
+//        Log.e("requestFIndexPieChart ", "  URL: " + url);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -1022,7 +1022,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         {
             fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-        Log.e(TAG, "requestAll URL: " + fIdetails);
+//        Log.e(TAG, "requestAll URL: " + fIdetails);
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1053,7 +1053,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG, "Data failed." + e.getMessage());
+//                            Log.e(TAG, "Data failed." + e.getMessage());
                             llfreshnessIndex.setVisibility(View.GONE);
                             Reusable_Functions.hDialog();
                             OnItemClick = false;
@@ -1095,7 +1095,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value;
 
 
-        Log.e(TAG, "requestHeader URL: " + fIdetails);
+//        Log.e(TAG, "requestHeader URL: " + fIdetails);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
@@ -1144,7 +1144,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG, "Data failed." + e.getMessage());
+//                            Log.e(TAG, "Data failed." + e.getMessage());
                             llfreshnessIndex.setVisibility(View.GONE);
                             OnItemClick = false;
                             e.printStackTrace();
@@ -1180,7 +1180,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
     private void requestFilterHeader() {
         String fIdetails = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentheaderEZNew/" + userId + "?geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId + "" + header_value;
 
-        Log.e(TAG, "requestFilterHeader URL: " + fIdetails);
+//        Log.e(TAG, "requestFilterHeader URL: " + fIdetails);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
@@ -1229,7 +1229,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG, "Data failed." + e.getMessage());
+//                            Log.e(TAG, "Data failed." + e.getMessage());
                             llfreshnessIndex.setVisibility(View.GONE);
                             OnItemClick = false;
                             e.printStackTrace();
@@ -1276,7 +1276,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         limit = 100;
         count = 0;
         llfIndexhierarchy.setVisibility(View.GONE);
-        Log.e(TAG, "fIndexFirstVisibleItem: " + fIndexFirstVisibleItem);
+//        Log.e(TAG, "fIndexFirstVisibleItem: " + fIndexFirstVisibleItem);
         requestFIndexPieChart("");
     }
 
@@ -1287,12 +1287,12 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         } else {
             freshnessindex_filterVal_listurl = ConstsCore.web_url + "/v1/display/inventoryassortmentnonassortmentlineEZNew/" + userId + "?" + selectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-        Log.e(TAG, "requestFreshnessIndexFilterVal: " + freshnessindex_filterVal_listurl);
+//        Log.e(TAG, "requestFreshnessIndexFilterVal: " + freshnessindex_filterVal_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_filterVal_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestFreshnessIndexFilterVal: response " + response);
+//                        Log.e(TAG, "requestFreshnessIndexFilterVal: response " + response);
 
                         if (inv_filter_level == 2) {
                             txtFIndexClass.setText(hierarchyList[1]);
@@ -2136,7 +2136,7 @@ public class EzoneFreshnessIndexActivity extends AppCompatActivity implements Ra
         ezonefreshness_btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("in reset onclick","");
+//                Log.e("in reset onclick","");
                 header_value = "";
                 fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
                 selFirstPositionValue = 0;

@@ -188,7 +188,6 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
     private void common_intializeUI() {
 
         bestperoformer = BestPerformerInventory.this;
-
         // toggleClick = true;  // you set toggle on segment button so you have to handle this flag.
         BestInventListview = (ListView) findViewById(R.id.bestInvent_ListView);
         Toolbar_title = (TextView) findViewById(R.id.toolbar_title);
@@ -218,12 +217,8 @@ public class BestPerformerInventory extends AppCompatActivity implements View.On
         Tabview = (TabLayout) findViewById(R.id.tabview);
         Tabview.addTab(Tabview.newTab().setText("Fashion"));
         Tabview.addTab(Tabview.newTab().setText("Core"));
-
-
         BaseLayoutInventory.setVisibility(View.GONE);
         quickFilterPopup.setVisibility(View.GONE);
-
-
         BestAndWorst = (Switch) findViewById(R.id.bestNworstswitch);
         BestInventList = new ArrayList<RunningPromoListDisplay>();
         BestInventListview.setTag("FOOTER");

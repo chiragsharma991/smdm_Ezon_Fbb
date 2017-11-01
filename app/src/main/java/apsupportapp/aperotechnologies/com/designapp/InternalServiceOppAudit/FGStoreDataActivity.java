@@ -500,8 +500,6 @@ public class FGStoreDataActivity extends AppCompatActivity {
                     overallratings.setSmiley(jsonObject.getString("smiley"));
                     list_vm.add(overallratings);
                 }
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();

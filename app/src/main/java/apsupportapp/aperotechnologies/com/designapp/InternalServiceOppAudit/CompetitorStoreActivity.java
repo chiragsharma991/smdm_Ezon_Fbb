@@ -211,65 +211,65 @@ public class CompetitorStoreActivity extends AppCompatActivity {
 
                 for(int i = 0; i < list_overallratings.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_overallratings.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_overallratings.get(i).getHeader());
 //                    Log.e("getCode "," "+list_overallratings.get(i).getCode());
-                    Log.e("getSmiley "," "+list_overallratings.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_overallratings.get(i).getSmiley());
                 }
 
                 for(int i = 0; i < list_billing_experience.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_billing_experience.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_billing_experience.get(i).getHeader());
 //                    Log.e("getCode "," "+list_billing_experience.get(i).getCode());
-                    Log.e("getSmiley "," "+list_billing_experience.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_billing_experience.get(i).getSmiley());
                 }
 
                 for(int i = 0; i < list_staffing.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_staffing.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_staffing.get(i).getHeader());
 //                    Log.e("getCode "," "+list_staffing.get(i).getCode());
-                    Log.e("getSmiley "," "+list_staffing.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_staffing.get(i).getSmiley());
                 }
 
                 for(int i = 0; i < list_brandpromoterhelpfulness.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_brandpromoterhelpfulness.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_brandpromoterhelpfulness.get(i).getHeader());
 //                    Log.e("getCode "," "+list_brandpromoterhelpfulness.get(i).getCode());
-                    Log.e("getSmiley "," "+list_brandpromoterhelpfulness.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_brandpromoterhelpfulness.get(i).getSmiley());
                 }
 
                 for(int i = 0; i < list_pricemismatch.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_pricemismatch.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_pricemismatch.get(i).getHeader());
 //                    Log.e("getCode "," "+list_pricemismatch.get(i).getCode());
-                    Log.e("getSmiley "," "+list_pricemismatch.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_pricemismatch.get(i).getSmiley());
                 }
 
                 for(int i = 0; i < list_storefacilities.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_storefacilities.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_storefacilities.get(i).getHeader());
 //                    Log.e("getCode "," "+list_storefacilities.get(i).getCode());
-                    Log.e("getSmiley "," "+list_storefacilities.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_storefacilities.get(i).getSmiley());
                 }
 
                 for(int i = 0; i < list_storelookfeel.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_storelookfeel.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_storelookfeel.get(i).getHeader());
 //                    Log.e("getCode "," "+list_storelookfeel.get(i).getCode());
-                    Log.e("getSmiley "," "+list_storelookfeel.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_storelookfeel.get(i).getSmiley());
                 }
 
                 for(int i = 0; i < list_storeservices.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_storeservices.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_storeservices.get(i).getHeader());
 //                    Log.e("getCode "," "+list_storeservices.get(i).getCode());
-                    Log.e("getSmiley "," "+list_storeservices.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_storeservices.get(i).getSmiley());
                 }
 
                 for(int i = 0; i < list_vm.size(); i++)
                 {
-                    Log.e("getHeader "," "+list_vm.get(i).getHeader());
+//                    Log.e("getHeader "," "+list_vm.get(i).getHeader());
 //                    Log.e("getCode "," "+list_vm.get(i).getCode());
-                    Log.e("getSmiley "," "+list_vm.get(i).getSmiley());
+//                    Log.e("getSmiley "," "+list_vm.get(i).getSmiley());
                 }
             }
         });

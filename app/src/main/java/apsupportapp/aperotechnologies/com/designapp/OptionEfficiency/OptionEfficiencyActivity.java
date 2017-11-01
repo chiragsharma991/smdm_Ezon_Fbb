@@ -1176,7 +1176,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 oedetails = ConstsCore.web_url + "/v1/display/optionefficiencydetailNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&seasongroup=" + seasonGroup + "&offset=" + offsetvalue + "&limit=" + limit+"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
             }
         }
-        Log.e(TAG, "requestOptionEfficiencyDetails: "+oedetails);
+//        Log.e(TAG, "requestOptionEfficiencyDetails: "+oedetails);
         postRequest = new JsonArrayRequest(Request.Method.GET, oedetails,
                 new Response.Listener<JSONArray>() {
 
@@ -1769,7 +1769,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
                 url = ConstsCore.web_url + "/v1/display/optionefficiencyheaderNew/" + userId + "?corefashion=" + OEfficiency_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&seasongroup=" + seasonGroup + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
         }
-        Log.e(TAG, "requestHeaderPieChart: "+url);
+//        Log.e(TAG, "requestHeaderPieChart: "+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2436,7 +2436,7 @@ public class OptionEfficiencyActivity extends AppCompatActivity implements Radio
         }
 
 
-        Log.e(TAG, "requestOEPieChart: "+url);
+//        Log.e(TAG, "requestOEPieChart: "+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

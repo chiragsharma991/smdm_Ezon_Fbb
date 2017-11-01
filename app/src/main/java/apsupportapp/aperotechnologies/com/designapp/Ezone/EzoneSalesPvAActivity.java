@@ -171,8 +171,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 barChart.invalidate();
                 header_value = "";
                 // drill_down_val = "";
-
-
                 selFirstPositionValue = 0;
                 focusposition = 0;
                 if (Reusable_Functions.chkStatus(context)) {
@@ -199,10 +197,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 }
             }
         });
-
-
     }
-
 
     private void commanListView() {
 
@@ -678,8 +673,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 sortFunction();
 
                 // popupWindow.dismiss();
-
-
             }
         });
 
@@ -699,8 +692,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
             }
         });
-
-
     }
 
     private void sortFunction() {
@@ -755,13 +746,17 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     }
 
 
-    private void retainSegmentValuesFilter() {
+    private void retainSegmentValuesFilter()
+    {
         filter_toggleClick = true;
-        if (salesPvA_SegmentClick.equals("WTD")) {
+        if (salesPvA_SegmentClick.equals("WTD"))
+        {
             //   btn_WTD.toggle();
             tabLayout.getTabAt(0).select();
 
-        } else if (salesPvA_SegmentClick.equals("LW")) {
+        }
+        else if (salesPvA_SegmentClick.equals("LW"))
+        {
             //  btn_LW.toggle();
             tabLayout.getTabAt(1).select();
 
@@ -773,11 +768,10 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 preValue=2;
             }
         }
-
-
     }
 
-    private void TimeUP() {
+    private void TimeUP()
+    {
 //        if (geoLeveLDesc.equals("E ZONE")) {
         if (salesAnalysisClassArrayList.size() != 0) {
             if (focusposition < salesAnalysisClassArrayList.size() - 1 && !onItemClickFlag) {
@@ -795,7 +789,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                     level = 3;
                     pvaFirstVisibleItem = salesAnalysisClassArrayList.get(focusposition).getLevel();
-
 
                 } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                     level = 4;
@@ -840,8 +833,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                 }
 
             } else {
-
-
                 focusposition = salesAnalysisClassArrayList.size() - 1;
                 LinearLayoutManager llm = (LinearLayoutManager) listViewSalesPvA.getLayoutManager();
                 llm.scrollToPosition(focusposition);
@@ -901,10 +892,10 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
                         }
                         selFirstPositionValue = focusposition;
-
                     }
-
-                } else {
+                }
+                else
+                {
                     Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
 
@@ -1038,7 +1029,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                         if (salesAnalysisClassArrayList.get(focusposition).getLevel().equals(pvaFirstVisibleItem)) {
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                         }
-
                                     }
                                 } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[1])) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
@@ -1047,7 +1037,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                         if (salesAnalysisClassArrayList.get(focusposition).getLevel().equals(pvaFirstVisibleItem)) {
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                         }
-
                                     }
                                 } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[2])) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
@@ -1056,7 +1045,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                         if (salesAnalysisClassArrayList.get(focusposition).getLevel().equals(pvaFirstVisibleItem)) {
                                             listViewSalesPvA.getLayoutManager().scrollToPosition(focusposition);
                                         }
-
                                     }
                                 } else if (txtheaderplanclass.getText().toString().equals(hierarchyList[3])) {
                                     for (int j = 0; j < salesAnalysisClassArrayList.size(); j++) {
@@ -1200,7 +1188,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
 
         }
 
-        Log.e(TAG, "requestPvAChartAPI: " + url);
+//        Log.e(TAG, "requestPvAChartAPI: " + url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -1285,7 +1273,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
             salespvaweekChart_url = ConstsCore.web_url + "/v1/display/salesanalysisPVA13WeekgraphEZNew/" + userId + "?view=" + salesPvA_SegmentClick + "&geoLevel2Code=" + geoLevel2Code  + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
 
         }
-        Log.e(TAG, "requestSalesWeekChart: "+salespvaweekChart_url);
+//        Log.e(TAG, "requestSalesWeekChart: "+salespvaweekChart_url);
 
 //        if (geoLeveLDesc.equals("E ZONE")) {
 //            //https://smdm.manthan.com/v1/display/salesanalysisPVA13WeekgraphEZ/1234
@@ -1395,7 +1383,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
     }
 
     public void multidatasetBarGraph(ArrayList<SalesPvAAnalysisWeek> salesPvAAnalysisWeekArrayList) {
-
         try {
             if (salesPvAAnalysisWeekArrayList != null & salesPvAAnalysisWeekArrayList.size() > 0) {
                 barChart.setDrawBarShadow(false);
@@ -1806,7 +1793,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                             Reusable_Functions.hDialog();
                             onItemClickFlag = false;
                             pva_progressBar.setVisibility(View.GONE);
-                            Log.e(TAG, "onResponse in store: "+e.getMessage());
+//                            Log.e(TAG, "onResponse in store: "+e.getMessage());
                             Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
@@ -1971,7 +1958,8 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                 Toast.makeText(context, "No Brand Class data found", Toast.LENGTH_SHORT).show();
 
                             } else if (response.length() == limit) {
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < response.length(); i++)
+                                {
 
                                     salesAnalysisListDisplay = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
                                     salesAnalysisClassArrayList.add(salesAnalysisListDisplay);
@@ -1997,9 +1985,7 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
                                 salesAnalysisListDisplay.setPlanSaleNetVal(Math.round(salesAnalysisViewPagerValue.getPlanSaleNetVal()));
                                 salesAnalysisListDisplay.setSaleNetVal(Math.round(salesAnalysisViewPagerValue.getSaleNetVal()));
                                 salesAnalysisListDisplay.setPvaAchieved(salesAnalysisViewPagerValue.getPvaAchieved());
-
                                 salesAnalysisClassArrayList.add(0, salesAnalysisListDisplay);
-
                                 salesPvAAdapter = new EzonePvASnapAdapter(salesAnalysisClassArrayList, context, currentIndex, fromWhere, listViewSalesPvA, geoLeveLDesc,hierarchyList);
                                 listViewSalesPvA.setAdapter(salesPvAAdapter);
                                 salesPvAAdapter.notifyDataSetChanged();
@@ -2101,7 +2087,6 @@ public class EzoneSalesPvAActivity extends AppCompatActivity implements TabLayou
             url = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + salesPvA_SegmentClick + selectedString + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
 
         }
-
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override

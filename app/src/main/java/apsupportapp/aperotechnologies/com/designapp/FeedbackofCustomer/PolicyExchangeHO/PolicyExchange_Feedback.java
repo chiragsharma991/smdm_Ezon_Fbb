@@ -75,7 +75,7 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
     private Context context;
     private EditText edt_customer_mobile_number, edt_remarks, edt_first_name, edt_last_name;
-    private TextView txt_empty_product, txt_empty_exchange;
+    private TextView txt_empty_product, txt_empty_exchange, txt_incorrect_lastname,txt_incorrect_name;
     private RadioGroup radioCallbacks, radioExchange, radioProduct;
     private RadioButton radioYes, radioNo, radioExchangeYes, radioExchangeNo, radioProductYes, radioProductNo;
     private Button btn_submit, btn_cancel;
@@ -142,6 +142,8 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         txt_empty_product = (TextView) v.findViewById(R.id.txt_empty_product);
         txt_empty_exchange = (TextView) v.findViewById(R.id.txt_empty_exchange);
         spinner_reasons = (Spinner) v.findViewById(R.id.spinner_reasons);
+        txt_incorrect_lastname = (TextView) v.findViewById(R.id.txt_incorrect_lastname);
+        txt_incorrect_name = (TextView) v.findViewById(R.id.txt_incorrect_name);
 
         storedescription.setText(store);
         linear_toolbar = (LinearLayout) v.findViewById(R.id.linear_toolbar);
@@ -149,6 +151,8 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
 
         incorrect_phone.setVisibility(View.GONE);
         incorrect_remark.setVisibility(View.GONE);
+        txt_incorrect_name.setVisibility(View.GONE);
+        txt_incorrect_lastname.setVisibility(View.GONE);
 
         btn_submit.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
@@ -445,6 +449,42 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
             }
         });
 
+        edt_first_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txt_incorrect_name.setVisibility(View.GONE);
+                edt_first_name.setBackgroundResource(R.drawable.edittext_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edt_last_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txt_incorrect_lastname.setVisibility(View.GONE);
+                edt_last_name.setBackgroundResource(R.drawable.edittext_border);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         radioExchangeYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -564,8 +604,10 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
         // prefocus = true;
         incorrect_remark.setVisibility(View.GONE);
         incorrect_phone.setVisibility(View.GONE);
+        txt_incorrect_name.setVisibility(View.GONE);
+        txt_incorrect_lastname.setVisibility(View.GONE);
 
-        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null)) {
+        if ((customerNumber.equals("") || customerNumber == null) || (customerRemarks.equals("") || customerRemarks == null) || (customerLastname.equals("") || customerLastname == null) ||(customerName.equals("") || customerName == null)) {
 
             if(customerNumber.equals("") || customerNumber == null){
                 incorrect_phone.setText(context.getResources().getString(R.string.customer_feedback_number));
@@ -579,6 +621,17 @@ public class PolicyExchange_Feedback extends Fragment implements View.OnClickLis
                 edt_remarks.setBackgroundResource(R.drawable.edittext_red_border);
             }
 
+            if(customerName.equals("") || customerName == null){
+                txt_incorrect_name.setText(context.getResources().getString(R.string.customer_feedback_name));
+                txt_incorrect_name.setVisibility(View.VISIBLE);
+                edt_first_name.setBackgroundResource(R.drawable.edittext_red_border);
+            }
+
+            if(customerLastname.equals("") || customerLastname == null){
+                txt_incorrect_lastname.setText(context.getResources().getString(R.string.customer_feedback_lastname));
+                txt_incorrect_lastname.setVisibility(View.VISIBLE);
+                edt_last_name.setBackgroundResource(R.drawable.edittext_red_border);
+            }
             if(!customerNumber.equals("")) {
 
                 if (customerNumber.length() < 10) {

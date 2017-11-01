@@ -124,7 +124,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         hierarchyList = hierarchyLevels.split(",");
         for (int i = 0; i <hierarchyList.length ; i++) {
             hierarchyList[i]=hierarchyList[i].trim();
-            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
+//            Log.i(TAG, "hierarchyList: "+hierarchyList[i]);
         }
         if(getIntent().getExtras() != null)
         {
@@ -260,7 +260,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                     count = 0;
                     fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
 
-                    Log.i(TAG, "TimeUP: firstVisibleItem"+firstVisibleItem+" and  OveridePositionValue"+OveridePositionValue);
+//                    Log.i(TAG, "TimeUP: firstVisibleItem"+firstVisibleItem+" and  OveridePositionValue"+OveridePositionValue);
                     if (firstVisibleItem != OveridePositionValue) {
                         if (postRequest != null) {
                             postRequest.cancel();
@@ -406,7 +406,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        Log.e(TAG,"toggle is "+filter_toggleClick);
+//        Log.e(TAG,"toggle is "+filter_toggleClick);
         int checkedId= Tabview.getSelectedTabPosition();
         OnItemClick = true;
         FreshnessIndexValue = "";
@@ -499,12 +499,12 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
             fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
 
         }
-        Log.e(TAG, "requestFreshnessIndexDetails: "+ fIdetails);
+//        Log.e(TAG, "requestFreshnessIndexDetails: "+ fIdetails);
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i(TAG, "Details onResponse: "+response);
+//                        Log.i(TAG, "Details onResponse: "+response);
                         int i;
                         try {
                             if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
@@ -532,7 +532,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                             }
 
                         } catch (Exception e) {
-                            Log.e(TAG, "onResponse: error"+e.getMessage() );
+//                            Log.e(TAG, "onResponse: error"+e.getMessage() );
                             OnItemClick = false;
                             Reusable_Functions.hDialog();
 
@@ -543,7 +543,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "VolleyError: "+error.getMessage() );
+//                        Log.e(TAG, "VolleyError: "+error.getMessage() );
                         OnItemClick = false;
                         Reusable_Functions.hDialog();
                         error.printStackTrace();
@@ -571,7 +571,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private void request_FreshnessIndex_CategoryList(final String deptName)
     {
         String freshnessindex_category_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e(TAG, "request_FreshnessIndex_CategoryList: "+ freshnessindex_category_listurl);
+//        Log.e(TAG, "request_FreshnessIndex_CategoryList: "+ freshnessindex_category_listurl);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_category_listurl,
                 new Response.Listener<JSONArray>() {
@@ -646,7 +646,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         String freshnessIndex_planclass_listurl = null;
         freshnessIndex_planclass_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e(TAG, "request_FreshnessIndex_PlanClassList: "+ freshnessIndex_planclass_listurl);
+//        Log.e(TAG, "request_FreshnessIndex_PlanClassList: "+ freshnessIndex_planclass_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -717,7 +717,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private void request_FreshnessIndex_BrandList(String deptName, String category, final String planclass) {
         String freshnessIndex_brand_listurl;
         freshnessIndex_brand_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e(TAG, "request_FreshnessIndex_BrandList: "+ freshnessIndex_brand_listurl);
+//        Log.e(TAG, "request_FreshnessIndex_BrandList: "+ freshnessIndex_brand_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -787,7 +787,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
         String freshnessIndex_brandplan_listurl = null;
         freshnessIndex_brandplan_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
-        Log.e(TAG, "request_FreshnessIndex_BrandPlanList: "+ freshnessIndex_brandplan_listurl);
+//        Log.e(TAG, "request_FreshnessIndex_BrandPlanList: "+ freshnessIndex_brandplan_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessIndex_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -863,7 +863,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         txtNoChart.setVisibility(View.GONE);
         fIndexArrayList = new ArrayList<FreshnessIndexDetails>();
 
-        Log.e("header_value_filter "," "+header_value_filter+" "+fIndexFirstVisibleItem);
+//        Log.e("header_value_filter "," "+header_value_filter+" "+fIndexFirstVisibleItem);
 
         if (fIndexFirstVisibleItem.equals("All"))
         {
@@ -979,13 +979,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
 
 
-        Log.e("requestFIndexPieChart ","  URL: "+ url);
+//        Log.e("requestFIndexPieChart ","  URL: "+ url);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("response requestFIndexPieChart "," "+response);
+//                        Log.e("response requestFIndexPieChart "," "+response);
 
                         try {
                             int i;
@@ -1190,13 +1190,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         }
 
 
-        Log.e(TAG, "requestAll URL: "+ fIdetails);
+//        Log.e(TAG, "requestAll URL: "+ fIdetails);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "onResponse: All"+response );
+//                        Log.e(TAG, "onResponse: All"+response );
 
 
                         int i;
@@ -1241,7 +1241,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG,"Data failed."+e.getMessage());
+//                            Log.e(TAG,"Data failed."+e.getMessage());
                             llfreshnessIndex.setVisibility(View.GONE);
                             OnItemClick = false;
                             e.printStackTrace();
@@ -1281,13 +1281,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexheaderNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
 
 
-        Log.e(TAG, "requestHeader URL: "+ fIdetails);
+//        Log.e(TAG, "requestHeader URL: "+ fIdetails);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestHeader onResponse: All"+response );
+//                        Log.e(TAG, "requestHeader onResponse: All"+response );
 
                         int i;
                         try {
@@ -1357,7 +1357,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         } catch (Exception e) {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG,"Data failed."+e.getMessage());
+//                            Log.e(TAG,"Data failed."+e.getMessage());
                             llfreshnessIndex.setVisibility(View.GONE);
                             OnItemClick = false;
                             e.printStackTrace();
@@ -1393,13 +1393,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
     private void requestFilterHeader() {
         String fIdetails = ConstsCore.web_url + "/v1/display/freshnessindexheaderNew/" + userId + "?corefashion=" + FIndex_SegmentClick + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId+""+header_value;
 
-        Log.e(TAG, "requestFilterHeader URL: "+ fIdetails);
+//        Log.e(TAG, "requestFilterHeader URL: "+ fIdetails);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, fIdetails,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, "requestHeader onResponse: All"+response );
+//                        Log.e(TAG, "requestHeader onResponse: All"+response );
 
 
                         int i;
@@ -1461,7 +1461,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                         {
                             Reusable_Functions.hDialog();
                             Toast.makeText(context, "Data failed...", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG,"Data failed."+e.getMessage());
+//                            Log.e(TAG,"Data failed."+e.getMessage());
                             llfreshnessIndex.setVisibility(View.GONE);
                             OnItemClick = false;
                             e.printStackTrace();
@@ -1571,13 +1571,13 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
         {
             freshnessindex_filterVal_listurl = ConstsCore.web_url + "/v1/display/freshnessindexdetailNew/" + userId + "?corefashion=" + FIndex_SegmentClick + selectedString + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
-        Log.e(TAG, "requestFreshnessIndexFilterVal: "+freshnessindex_filterVal_listurl );
+//        Log.e(TAG, "requestFreshnessIndexFilterVal: "+freshnessindex_filterVal_listurl );
         postRequest = new JsonArrayRequest(Request.Method.GET, freshnessindex_filterVal_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Reusable_Functions.hDialog();
-                        Log.e(TAG, "requestFreshnessIndexFilterVal: response "+response );
+//                        Log.e(TAG, "requestFreshnessIndexFilterVal: response "+response );
 
                         if (inv_filter_level == 2)
                         {
@@ -1702,7 +1702,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
 
 
     private void Fbb_collection() {
-        Log.e(TAG, "Fbb_collection: log");
+//        Log.e(TAG, "Fbb_collection: log");
         fromWhere = hierarchyList[0];
         txtFIndexClass.setText(hierarchyList[0]);
         fIndexFirstVisibleItem = "";
@@ -1731,7 +1731,7 @@ public class FreshnessIndexActivity extends AppCompatActivity implements RadioGr
                 filter_level = getIntent().getIntExtra("selectedlevelVal",0);
 
                 filter_toggleClick = true;
-                Log.e(TAG, "Selected values: "+header_value +"filter level "+filter_level);
+//                Log.e(TAG, "Selected values: "+header_value +"filter level "+filter_level);
                 retainValuesFilter();
                 requestFreshnessIndexFilterVal(header_value,filter_level);
 

@@ -157,7 +157,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         filter_level = getIntent().getIntExtra("selectedlevelVal", 0);
 
 
-        Log.e("filterSelectedString :", " " + filterSelectedString);
+//        Log.e("filterSelectedString :", " " + filterSelectedString);
         if (Reusable_Functions.chkStatus(context)) {
             Reusable_Functions.progressDialog = new ProgressDialog(context);
             Reusable_Functions.progressDialog.setCancelable(false);
@@ -1009,7 +1009,6 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
         }
     }
 
-
     // on Check change listener on Segment Listener(WTD, YTD,LW and L4W)
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -1170,7 +1169,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
             url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
         //  String url £= ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
-        Log.e(TAG, "requestEzoneSalesDetailAPI: " + url);
+//        Log.e(TAG, "requestEzoneSalesDetailAPI: " + url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -1270,7 +1269,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                                 }
 
                             }
-//
+
                             else if (txt_ez_header.getText().toString().equals("Region")) {
                                 ezone_level = 7;
                                 ez_sale_first_item = ez_sales_detalis_array.get(ez_firstVisible_no).getLevel();
@@ -1340,7 +1339,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneFilterSelectedVal(final String filterSelectedString, final int filter_level) {
 
         String ezone_filter_url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + filter_level + filterSelectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-        Log.e(TAG, "requestEzoneFilterSelectedVal: " +ezone_filter_url);
+//        Log.e(TAG, "requestEzoneFilterSelectedVal: " +ezone_filter_url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ezone_filter_url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2093,7 +2092,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
             url  = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + ez_segment_val  + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-        Log.e(TAG, "requestEzoneSalesHeaderAPI: "+url);
+//        Log.e(TAG, "requestEzoneSalesHeaderAPI: "+url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -2207,7 +2206,7 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&storeCode=" + ez_sale_first_item.substring(0,4) + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
         }
-        Log.e(TAG, "requestEzoneSalesPagerOnScrollAPI: "+url);
+//        Log.e(TAG, "requestEzoneSalesPagerOnScrollAPI: "+url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
