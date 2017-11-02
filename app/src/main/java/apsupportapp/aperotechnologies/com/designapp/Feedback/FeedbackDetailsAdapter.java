@@ -68,7 +68,8 @@ public class FeedbackDetailsAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void LineBar(final int position) {
+    private void LineBar(final int position)
+    {
         holder.Addviewchild.removeAllViewsInLayout();
 
         ViewTreeObserver vto = holder.Addviewchild.getViewTreeObserver();

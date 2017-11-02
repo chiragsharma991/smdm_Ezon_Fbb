@@ -68,9 +68,9 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
     private ImageView Feedback_image;
     private ProgressBar ImageLoader_feedback;
     private Button Pricing, Fitting, Colours, Prints, Styling, Fabric_quality, Garment_quality;
-    private TextView Feedback_option,txtStoreCode,txtStoreName;
+    private TextView Feedback_option,txtStoreCode,txtStoreName,text_no_data_price;
     private AlertDialog dialog;
-    private LinearLayout firstView;
+    private LinearLayout firstView,linear_feedbackList;
     private RelativeLayout secondView,FeedbackPre_layout,FeedbackNext_layout;
     private Button FeedbackNext, FeedbackPre;
     private RelativeLayout Fitting_relative, Pricing_relative, colours_relative, prints_relative, styling_relative, fabric_relative, garment_relative;
@@ -115,9 +115,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void initalise() {
-
-
+    private void initalise()
+    {
         optionList = new ArrayList<>();
         optionList.add("Fitting");
         optionList.add("Pricing");
@@ -135,21 +134,22 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         {
             txtStoreCode.setText("Concept : ");
             txtStoreName.setText(value);
-
         }
         else
         {
             txtStoreCode.setText("Store : ");
             txtStoreName.setText(value);
         }
+        text_no_data_price = (TextView)findViewById(R.id.text_no_data_price);
+        text_no_data_price.setVisibility(View.GONE);
+        linear_feedbackList = (LinearLayout)findViewById(R.id.linear_feedbackList);
+        linear_feedbackList.setVisibility(View.VISIBLE);
         ImageLoader_feedback = (ProgressBar) findViewById(R.id.imageLoader_feedbackList);
         FeedbackNext = (Button) findViewById(R.id.feedbackList_next);
         FeedbackPre = (Button) findViewById(R.id.feedbackList_pre);
-
         FeedbackPre_layout = (RelativeLayout) findViewById(R.id.feedbackList_pre_layout);
         FeedbackNext_layout = (RelativeLayout) findViewById(R.id.feedbackList_next_layout);
         FeedbackPre_layout.setVisibility(View.GONE);
-
         //all relative layout for add views
         Fitting_relative = (RelativeLayout) findViewById(R.id.fitting_relative);
         Pricing_relative = (RelativeLayout) findViewById(R.id.pricing_relative);
@@ -164,9 +164,8 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
         FeedbackPre.setOnClickListener(this);
     }
 
-    private void requestFeedbackApi() {
-
-
+    private void requestFeedbackApi()
+    {
         if (Reusable_Functions.chkStatus(context)) {
 
             //https://smdm.manthan.com/v1/display/worstperformerfeedback/displayreports/4813
@@ -181,7 +180,11 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                             try {
                                 if (response.equals(null) || response == null || response.length() == 0 && count == 0) {
                                     Reusable_Functions.hDialog();
-                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
+                                    text_no_data_price.setVisibility(View.VISIBLE);
+                                    linear_feedbackList.setVisibility(View.GONE);
+                                        FeedbackNext_layout.setVisibility(View.GONE);
+
                                     return;
 
                                 } else if (response.length() == limit) {
@@ -200,7 +203,9 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                                     {
                                         FeedbackNext_layout.setVisibility(View.GONE);
 
-                                    }else{
+                                    }
+                                    else
+                                    {
                                         FeedbackNext_layout.setVisibility(View.VISIBLE);
 
                                     }
@@ -233,6 +238,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
 
                             } catch (Exception e) {
                                 Reusable_Functions.hDialog();
+                                text_no_data_price.setVisibility(View.GONE);
                                 Toast.makeText(context, "data failed...." + e.toString(), Toast.LENGTH_SHORT).show();
                                 Reusable_Functions.hDialog();
                                 e.printStackTrace();
@@ -243,6 +249,7 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Reusable_Functions.hDialog();
+                            text_no_data_price.setVisibility(View.GONE);
                             Toast.makeText(context, "server not responding..", Toast.LENGTH_SHORT).show();
                             Reusable_Functions.hDialog();
                             error.printStackTrace();
@@ -298,32 +305,38 @@ public class FeedbackList extends AppCompatActivity implements View.OnClickListe
 //                    Log.e("here ", "inside else if");
 
                     nextCount++;
-                    if (nextCount != feedbackListData.size() - 1) {
+                    if (nextCount != feedbackListData.size() - 1)
+                    {
                         for (int i = 0; i < optionList.size(); i++) {
 
                             feedbackReport(i, nextCount);
                         }
                         FeedbackPre_layout.setVisibility(View.VISIBLE);
 
-                    } else {
-                        for (int i = 0; i < optionList.size(); i++) {
-
+                    }
+                    else
+                    {
+                        for (int i = 0; i < optionList.size(); i++)
+                        {
                             feedbackReport(i, nextCount);
                         }
                         FeedbackNext_layout.setVisibility(View.GONE);
                     }
-//                }
+
                 break;
             case R.id.feedbackList_pre:
                 nextCount--;
-                if (nextCount != 0) {
+                if (nextCount != 0)
+                {
                     for (int i = 0; i < optionList.size(); i++) {
 
                         feedbackReport(i, nextCount);
                     }
                     FeedbackNext_layout.setVisibility(View.VISIBLE);
 
-                } else {
+                }
+                else
+                {
                     for (int i = 0; i < optionList.size(); i++) {
 
                         feedbackReport(i, nextCount);
