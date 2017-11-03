@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.BigBazaar.ProductDetails;
 import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.PvASnapAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
@@ -67,7 +68,7 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onClick(View v)
                 {
-                    Intent intent = new Intent(mContext,ProductDetailsActivity.class);
+                    Intent intent = new Intent(mContext,ProductDetails.class);
                     mContext.startActivity(intent);
                 }
             });

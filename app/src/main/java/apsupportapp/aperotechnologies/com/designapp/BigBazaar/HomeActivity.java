@@ -3,7 +3,6 @@ package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
-import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.Adapter.ProductAvailability_ViewPagerAdapter;
+import apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter.HomeAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**

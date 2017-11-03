@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import apsupportapp.aperotechnologies.com.designapp.BigBazaar.ProductDetails;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
@@ -48,9 +49,9 @@ public class FragmentCategoriesAdapter extends RecyclerView.Adapter<RecyclerView
         categoriesHolder.cf_cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Toast.makeText(context, "position  "+position,Toast.LENGTH_SHORT).show();
-//                Intent prod_details = new Intent(context, ProductDetailsActivity.class);
-//                context.startActivity(prod_details);
+                Toast.makeText(context, "position  "+position,Toast.LENGTH_SHORT).show();
+                Intent prod_details = new Intent(context, ProductDetails.class);
+                context.startActivity(prod_details);
             }
         });
         if(position == 0){

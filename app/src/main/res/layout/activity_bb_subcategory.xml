@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_header_height"
+            android:layout_alignParentTop="true"
+            android:background="@color/ezfb_White"
+            android:contentInsetEnd="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetStart="0dp"
+            segmentedgroup:contentInsetEnd="0dp"
+            segmentedgroup:contentInsetLeft="0dp"
+            segmentedgroup:contentInsetRight="0dp"
+            segmentedgroup:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/hrl_BtnBack"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/button_click">
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/ic_arrow_back_black"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:maxLines="1"
+                    android:layout_toRightOf="@+id/hrl_BtnBack"
+                    android:layout_toLeftOf="@+id/imgfilter"
+                    android:text="Sub Category"
+                    android:textColor="@color/ezfb_black"
+                    android:textSize="@dimen/smdm_header_title_normal" />
+
+                <RelativeLayout
+                    android:id="@+id/imgfilter"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/button_click">
+
+                    <Button
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/ic_search_black_24dp"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
+
+
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+
+
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/smdm_divider"
+            android:background="@color/smdm_divider_Black">
+
+        </View>-->
+
+
+
+    </LinearLayout>
+
+
+  <!--  <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        >-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_verticalView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+<!--
+    </android.support.v4.widget.NestedScrollView>
+-->
+
+
+
+
+
+
+
+
+
+</LinearLayout>

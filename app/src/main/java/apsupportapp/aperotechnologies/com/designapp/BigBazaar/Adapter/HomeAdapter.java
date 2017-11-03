@@ -1,9 +1,11 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import apsupportapp.aperotechnologies.com.designapp.BigBazaar.FragmentCategories;
+import apsupportapp.aperotechnologies.com.designapp.BigBazaar.FragmentHome;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_Feedback;
 import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.AvailabilityAndNotifyHO.ProductAvailability_Reports;
 

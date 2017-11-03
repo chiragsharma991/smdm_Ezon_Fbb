@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter.CustomGrid;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
@@ -36,7 +37,6 @@ public class BabyCerealActivity extends AppCompatActivity implements View.OnClic
     private RecyclerView gridView;
     ArrayList<String> listProducts, listSort, listFilter;
     private ListView select_list;
-    private Sort_filter_Adapter spinnerAdapter;
     private AlertDialog dialog;
     private CustomGrid adapter;
     private String viewString;

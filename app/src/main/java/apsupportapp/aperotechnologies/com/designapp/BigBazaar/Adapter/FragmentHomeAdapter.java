@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
