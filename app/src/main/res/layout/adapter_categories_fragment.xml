@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cf_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/ezfb_White"
+        app:cardElevation="3dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+       >
+
+    <ImageView
+        android:id="@+id/img_categories"
+        android:layout_width="match_parent"
+        android:src="@mipmap/mi_max2_buy_now_app"
+        android:layout_height="100dp"
+
+       />
+
+        <TextView
+            android:id="@+id/txt_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nutritional Needs"
+            android:textSize="13sp"
+            android:background="@drawable/text_border"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"/>
+
+    </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
