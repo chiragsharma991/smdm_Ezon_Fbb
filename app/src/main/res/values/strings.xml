@@ -215,5 +215,8 @@
     <string name="externalaudrev">External Auditor Review</string>
     <string name="txt_store">Store</string>
     <string name="txt_reports">Reports</string>
+    <string name="grid_text">CERELAC WHT RCE MNGDL KHCHDI S1 6MT 300g</string>
+    <string name="grid_text1">₹ 151.24</string>
+    <string name="grid_text2">₹ 199 24% OFF</string>
 
 </resources>
