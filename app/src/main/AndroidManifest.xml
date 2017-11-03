@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".BigBazaar.SubCategory"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -436,7 +436,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ExternalServiceOppAudit.ReportsExtActivity" />
         <activity android:name=".InternalServiceOppAudit.FGStoreDataActivity" />
-        <activity android:name=".InternalServiceOppAudit.CompetitorStoreDataActivity"></activity>
+        <activity android:name=".InternalServiceOppAudit.CompetitorStoreDataActivity" />
+        <activity android:name=".BigBazaar.ProductDetails"></activity>
     </application>
 
 </manifest>
