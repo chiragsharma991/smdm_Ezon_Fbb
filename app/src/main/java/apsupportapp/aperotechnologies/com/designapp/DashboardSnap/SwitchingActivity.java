@@ -47,6 +47,7 @@ import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.BigBazaar.BabyCerealActivity;
+import apsupportapp.aperotechnologies.com.designapp.BigBazaar.HomeActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
@@ -157,7 +158,7 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(SalesAnalysisActivity1);
                     break;
                 case "005":
-                    Intent SalesPvAActivity = new Intent(context, SalesPvAActivity.class);
+                    Intent SalesPvAActivity = new Intent(context, HomeActivity.class);//SalesPvAActivity
                     startActivity(SalesPvAActivity);
                     break;
                 case "018":

@@ -85,7 +85,9 @@ public class CustomSeekBar {
             parent.addView(mSeekBar);
             parent.addView(mSeekLin);
 
-        } else {
+        }
+        else
+        {
 
             Log.e("CustomSeekBar", " Parent is not a LinearLayout");
 
