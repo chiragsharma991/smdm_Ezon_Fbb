@@ -159,6 +159,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         pushtoken = sharedPreferences.getString("push_tokken", "");
         hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
+        Log.i(TAG, "onCreate: kpiIdArray"+getIntent().getStringArrayExtra("kpiId").toString());
 
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -372,29 +373,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(), LinearLayoutManager.VERTICAL, false));
         final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptDesc, context, conceptchecked);
         conceptList.setAdapter(conceptMappingAdapter);
+        if(conceptDesc.size()==1)addlistnerOnConceptList(conceptMappingAdapter,0);
         conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
-                for (int i = 0; i < conceptDesc.size(); i++) {
-                    if (position == i) conceptchecked[i] = true;
-                    else conceptchecked[i] = false;
-
-                }
-
-                conceptMappingAdapter.notifyDataSetChanged();
-                List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
-                lobData = new ArrayList<>();
-                for (Login_StoreList data : list) {
-                    lobData.add(data.getLobName());
-                }
-                Set<String> set = new HashSet<>();
-                set.addAll(lobData);
-                lobData.clear();
-                lobData.addAll(set);  // remove dublicate values from list
-                displaylobName(lobData);
-
-
+                addlistnerOnConceptList(conceptMappingAdapter,position);
             }
         }));
 
@@ -482,6 +465,28 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         });
 
         dialog.show();
+
+    }
+
+    private void addlistnerOnConceptList(ConceptMappingAdapter conceptMappingAdapter, int position) {
+
+        for (int i = 0; i < conceptDesc.size(); i++) {
+            if (position == i) conceptchecked[i] = true;
+            else conceptchecked[i] = false;
+
+        }
+
+        conceptMappingAdapter.notifyDataSetChanged();
+        List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
+        lobData = new ArrayList<>();
+        for (Login_StoreList data : list) {
+            lobData.add(data.getLobName());
+        }
+        Set<String> set = new HashSet<>();
+        set.addAll(lobData);
+        lobData.clear();
+        lobData.addAll(set);  // remove dublicate values from list
+        displaylobName(lobData);
 
     }
 

@@ -1169,11 +1169,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
             url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
         //  String url £= ConstsCore.web_url + "/v1/display/salesanalysisoptedbytime/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit;
-//        Log.e(TAG, "requestEzoneSalesDetailAPI: " + url);
+        Log.e(TAG, "requestEzoneSalesDetailAPI: " + url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
+                    Log.i(TAG, "onResponse: "+response);
                     int i;
                     Reusable_Functions.hDialog();
 
@@ -1339,12 +1340,12 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneFilterSelectedVal(final String filterSelectedString, final int filter_level) {
 
         String ezone_filter_url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + filter_level + filterSelectedString + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
-//        Log.e(TAG, "requestEzoneFilterSelectedVal: " +ezone_filter_url);
+        Log.e(TAG, "requestEzoneFilterSelectedVal: " +ezone_filter_url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ezone_filter_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Log.i(TAG, "onResponse: "+response);
                         if (filter_level == 2) {
                             rb_ez_viewBy_ProductChk.setChecked(true);
                             rb_ez_viewBy_LocatnChk.setChecked(false);
@@ -1530,11 +1531,14 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesCategoryList(final String ez_sclickedVal) {
         String ez_scategory_listurl;
         ez_scategory_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&department=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        Log.e(TAG, "requestEzoneSalesCategoryList: "+ez_scategory_listurl );
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_scategory_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
+
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
@@ -1645,11 +1649,13 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesPlanClassList(final String ez_sclickedVal) {
         String ez_splanclass_listurl;
         ez_splanclass_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&category=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        Log.e(TAG, "requestEzoneSalesPlanClassList: "+ez_splanclass_listurl );
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_splanclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
@@ -1758,11 +1764,13 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     {
         String ez_sbrand_listurl;
         ez_sbrand_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&class=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        Log.e(TAG, "requestEzoneSalesBrandList: "+ez_sbrand_listurl );
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sbrand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
@@ -1868,11 +1876,13 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesBrandPlanList(final String ez_sclickedVal) {
         String ez_sbrandplan_listurl;
         ez_sbrandplan_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&brand=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        Log.e(TAG, "requestEzoneSalesBrandPlanList: "+ez_sbrandplan_listurl );
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sbrandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
@@ -1968,11 +1978,13 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
     private void requestEzoneSalesStoreList(final String ez_sclickedVal) {
         String ez_sstore_listurl;
         ez_sstore_listurl = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&regionDescription=" + ez_sclickedVal.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
+        Log.e(TAG, "requestEzoneSalesStoreList: "+ez_sstore_listurl );
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, ez_sstore_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
@@ -2092,12 +2104,13 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
 
             url  = ConstsCore.web_url + "/v1/display/salesheaderEZNew/" + userId + "?view=" + ez_segment_val  + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-//        Log.e(TAG, "requestEzoneSalesHeaderAPI: "+url);
+        Log.e(TAG, "requestEzoneSalesHeaderAPI: "+url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -2206,12 +2219,13 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 url = ConstsCore.web_url + "/v1/display/salesDetailEZNew/" + userId + "?view=" + ez_segment_val + "&level=" + ezone_level + "&storeCode=" + ez_sale_first_item.substring(0,4) + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
         }
-//        Log.e(TAG, "requestEzoneSalesPagerOnScrollAPI: "+url);
+        Log.e(TAG, "requestEzoneSalesPagerOnScrollAPI: "+url);
         ez_postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
