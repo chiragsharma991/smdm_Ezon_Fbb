@@ -1,5 +1,6 @@
 package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter.SubCategoryAdapter;
 import apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter.SubCategory_childAdapter;
@@ -52,11 +54,21 @@ public class SubCategory extends AppCompatActivity implements SubCategory_childA
 
 
     @Override
-    public void onclickPostion(int parent, int child) {
+    public void onclickPostion(int parent, int child , View view) {
         Log.e(TAG, "onclickPostion interface: "+parent+child );
-        listdata= new String[]{"Title one", "Title Two"};
-        subCategoryAdapter.notifyDataSetChanged();
+       // subCategoryAdapter.notifyDataSetChanged();
         Intent intent=new Intent(context,ProductDetails.class);
-        startActivity(intent);
+
+        ImageView sharedView = (ImageView) view;
+        String transitionName = "details";
+
+        ActivityOptions transitionActivityOptions = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(SubCategory.this, sharedView, transitionName);
+            startActivity(intent, transitionActivityOptions.toBundle());
+        }else{
+
+            startActivity(intent);
+        }
     }
 }
