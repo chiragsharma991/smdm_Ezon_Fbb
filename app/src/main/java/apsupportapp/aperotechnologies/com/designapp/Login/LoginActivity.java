@@ -262,12 +262,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void requestUserStore()
     {
         String url = ConstsCore.web_url + "/v1/login/userstoresNew/" + userId ;//+"?geoLevel2Code="+login_storeList.getGeoLevel2Code()+"&recache="+recache; //ConstsCore.web_url+ + "/v1/login/userId";
+        Log.e(TAG, "requestUserStore: "+url );
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
                     @Override
                     public void onResponse(JSONArray response)
                     {
+                        Log.i(TAG, "requestUserStore: "+response);
 
                         try
                         {
@@ -367,12 +369,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void requestUserStoreConcept()
     {
         String url = ConstsCore.web_url + "/v1/login/userstoreorconcept/" + userId +"?geoLevel2Code="+loginStoreArray.get(0).getGeoLevel2Code()+"&lobId="+loginStoreArray.get(0).getLobId(); //ConstsCore.web_url+ + "/v1/login/userId";
+        Log.e(TAG, "requestUserStoreConcept: "+url );
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
                     @Override
                     public void onResponse(JSONArray response)
                     {
+                        Log.i(TAG, "requestUserStoreConcept: "+response);
                         try {
                             if (response.equals("") || response == null)
                             {
