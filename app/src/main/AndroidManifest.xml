@@ -20,7 +20,8 @@
         <activity
             android:name=".BigBazaar.SubCategory"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,13 +36,13 @@
         </service>
         <service android:name=".FCM.ContCreateTokenService" />
         <service android:name=".FCM.FetchNewRefreshToken" />
+
         <!-- <service -->
         <service android:name=".FCM.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <activity
             android:name=".LoginActivity1"
             android:screenOrientation="portrait"
@@ -437,7 +438,12 @@
         <activity android:name=".ExternalServiceOppAudit.ReportsExtActivity" />
         <activity android:name=".InternalServiceOppAudit.FGStoreDataActivity" />
         <activity android:name=".InternalServiceOppAudit.CompetitorStoreDataActivity" />
-        <activity android:name=".BigBazaar.ProductDetails"></activity>
+        <activity android:name=".BigBazaar.ProductDetails"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
     </application>
 
 </manifest>

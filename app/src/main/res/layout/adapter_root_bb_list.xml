@@ -47,7 +47,9 @@
                         android:layout_marginTop="0dp"
                         android:adjustViewBounds="true"
                         android:src="@mipmap/placeholder"
+                        android:transitionName="details"
                         android:scaleType="fitCenter"
+
                         />
 
               <!--      <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
