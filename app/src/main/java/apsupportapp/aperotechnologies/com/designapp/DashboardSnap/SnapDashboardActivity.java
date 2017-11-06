@@ -552,13 +552,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         044 - Assortment Analysis Ezone
         045 - Best Worst Performer Ezone
         046 - VoC App
+        047 - Infant App
 
 
         */
 
         snapAdapter = new SnapAdapter(context, eventUrlList);
 
-        if (geoLeveLDesc.equals("E ZONE")) {
+//        if (geoLeveLDesc.equals("E ZONE")) {
     /*        for (int i = 0; i <kpiIdArray.size(); i++) {
                 Log.i(TAG, "kpiIdArray:"+kpiIdArray.get(i).toString() );
                 switch (kpiIdArray.get(i)){
@@ -583,7 +584,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
             */
 
-        } else {
+//        } else {
 
             if (kpiIdArray.contains("001")) {
                 List<App> apps = getProduct(0, kpiIdArray);
@@ -642,13 +643,17 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<App> apps = getProduct(10, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "BORIS", apps));
             }
+            if (kpiIdArray.contains("047")) {
+                List<App> apps = getProduct(15, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Infant App", apps));
+            }
 
 //                List<App> apps = getProduct(101, kpiIdArray);
 //                snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
 
 
 
-        }
+//        }
         Recycler_verticalView.setAdapter(snapAdapter);
     }
 

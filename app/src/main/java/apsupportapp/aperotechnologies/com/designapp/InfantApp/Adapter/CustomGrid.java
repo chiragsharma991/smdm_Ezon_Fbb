@@ -1,24 +1,31 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter;
+package apsupportapp.aperotechnologies.com.designapp.InfantApp.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.ProductDetails;
-import apsupportapp.aperotechnologies.com.designapp.PvaSalesAnalysis.PvASnapAdapter;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.ProductDetails;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
-import static apsupportapp.aperotechnologies.com.designapp.R.id.bst_cardView;
+import static apsupportapp.aperotechnologies.com.designapp.InfantApp.BabyCerealActivity.gridView;
+import static apsupportapp.aperotechnologies.com.designapp.R.id.gridview;
+import static apsupportapp.aperotechnologies.com.designapp.R.id.linear_snap;
 
 /**
  * Created by pamrutkar on 02/11/17.
@@ -44,12 +51,53 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if(viewString.equals("gridView"))
         {
             view = inflater.inflate(R.layout.custom_grid, parent, false);
+            final LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linear_snap);
             viewHolder = new CategoriesHolder(view);
+
+            ViewTreeObserver vto = gridView.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                        gridView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    } else {
+                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                    int height = gridView.getMeasuredHeight();
+                    Log.e("height "," "+height);
+                    linearLayout.getLayoutParams().height = height/2;
+                    linearLayout.requestLayout();
+
+
+                }
+            });
+
+
+
         }
         else if(viewString.equals("listView"))
         {
             view = inflater.inflate(R.layout.custom_list, parent, false);
+            final LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.custom_list);
             viewHolder = new CategoriesHolder(view);
+
+            ViewTreeObserver vto = gridView.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                        gridView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    } else {
+                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                    int height = gridView.getMeasuredHeight();
+                    Log.e("height "," "+height);
+                    linearLayout.getLayoutParams().height = height;
+                    linearLayout.requestLayout();
+
+
+                }
+            });
         }
 
         return viewHolder;
@@ -63,7 +111,13 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((CategoriesHolder) holder).textView1.setText(R.string.grid_text1);
             ((CategoriesHolder) holder).textView2.setText(R.string.grid_text2);
 
-            ((CategoriesHolder) holder).img_categories.setImageResource(R.mipmap.placeholder);
+//            ((CategoriesHolder) holder).img_categories.setImageResource(R.mipmap.placeholder);
+
+
+            Glide.with(mContext)
+                    .load("http://res.cloudinary.com/viintro/image/upload/v1509701631/v76ykp64hw3zwjckyzpp.jpg")
+                    .into(((CategoriesHolder) holder).img_categories);
+
             ((CategoriesHolder) holder).bst_cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v)
@@ -86,6 +140,7 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private ImageView img_categories;
         private TextView txt_desc,textView1,textView2;
         CardView bst_cardView;
+        public LinearLayout linear_snap;
 
 
         public CategoriesHolder(View v) {
@@ -94,11 +149,13 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             txt_desc = (TextView) v.findViewById(R.id.grid_text);
             textView1 = (TextView) v.findViewById(R.id.textView1);
             textView2 = (TextView) v.findViewById(R.id.textView2);
-            bst_cardView = (CardView) v.findViewById(R.id.bst_cardView);
+           bst_cardView = (CardView) v.findViewById(R.id.bst_cardView);
+            linear_snap = (LinearLayout) v.findViewById(R.id.linear_snap);
+
 
         }
 
-
     }
+
 
 }

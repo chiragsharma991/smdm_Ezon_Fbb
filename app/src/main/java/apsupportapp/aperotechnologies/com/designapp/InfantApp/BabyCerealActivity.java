@@ -1,6 +1,7 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.InfantApp;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -8,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +24,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter.CustomGrid;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.Adapter.CustomGrid;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 
@@ -30,11 +33,10 @@ import apsupportapp.aperotechnologies.com.designapp.R;
  */
 
 public class BabyCerealActivity extends AppCompatActivity implements View.OnClickListener {
-    private RelativeLayout rel_back, rel_changeView;
-    private LinearLayout sort_linear, filter_linear;
+    private RelativeLayout rel_back, rel_changeView,rel_filter,rel_sort;
     Context context;
     private Button btn_grid, btn_list;
-    private RecyclerView gridView;
+    public static RecyclerView gridView;
     ArrayList<String> listProducts, listSort, listFilter;
     private ListView select_list;
     private AlertDialog dialog;
@@ -53,21 +55,23 @@ public class BabyCerealActivity extends AppCompatActivity implements View.OnClic
 
     private void initialize_ui() {
         listProducts = new ArrayList<String>();
-        sort_linear = (LinearLayout) findViewById(R.id.sort_linear);
-        filter_linear = (LinearLayout) findViewById(R.id.filter_linear);
+        rel_filter = (RelativeLayout) findViewById(R.id.rel_filter);
+        rel_sort = (RelativeLayout) findViewById(R.id.rel_sort);
         rel_back = (RelativeLayout) findViewById(R.id.rel_back);
         rel_changeView = (RelativeLayout) findViewById(R.id.rel_changeView);
         rel_changeView.setTag(apperanceTag);
         btn_grid = (Button) findViewById(R.id.btn_grid);
 //        btn_list = (Button) findViewById(R.id.btn_list);
-        sort_linear.setOnClickListener(this);
+        rel_filter.setOnClickListener(this);
         rel_changeView.setOnClickListener(this);
         rel_back.setOnClickListener(this);
-        filter_linear.setOnClickListener(this);
+        rel_sort.setOnClickListener(this);
         apperanceTag = (int)rel_changeView.getTag();
         apperanceTag = 0;
         gridView = (RecyclerView) findViewById(R.id.gridview);
-        gridView.setLayoutManager(new GridLayoutManager(context, 2));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
+
+        gridView.setLayoutManager(gridLayoutManager);
         viewString = "gridView";
         adapter = new CustomGrid(context, listProducts, viewString);
         gridView.setAdapter(adapter);
@@ -76,15 +80,16 @@ public class BabyCerealActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch (v.getId()) {
-            case R.id.sort_linear:
+            case R.id.rel_sort:
                 sortFunction();
                 break;
             case R.id.rel_changeView:
                 changeViewFunction();
                 break;
-            case R.id.filter_linear:
+            case R.id.rel_filter:
                 filterFunction();
                 break;
             case R.id.rel_back:
@@ -251,4 +256,6 @@ public class BabyCerealActivity extends AppCompatActivity implements View.OnClic
         super.onBackPressed();
         finish();
     }
+
+
 }

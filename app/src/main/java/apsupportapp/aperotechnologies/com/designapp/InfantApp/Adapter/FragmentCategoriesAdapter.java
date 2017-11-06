@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter;
+package apsupportapp.aperotechnologies.com.designapp.InfantApp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.ProductDetails;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.BabyCerealActivity;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.ProductDetails;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.SubCategory;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
@@ -50,7 +52,7 @@ public class FragmentCategoriesAdapter extends RecyclerView.Adapter<RecyclerView
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "position  "+position,Toast.LENGTH_SHORT).show();
-                Intent prod_details = new Intent(context, ProductDetails.class);
+                Intent prod_details = new Intent(context, SubCategory.class);
                 context.startActivity(prod_details);
             }
         });

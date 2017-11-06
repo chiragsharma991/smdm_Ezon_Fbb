@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.InfantApp;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -10,12 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.VM;
 
 /**
  * Created by csuthar on 03/11/17.

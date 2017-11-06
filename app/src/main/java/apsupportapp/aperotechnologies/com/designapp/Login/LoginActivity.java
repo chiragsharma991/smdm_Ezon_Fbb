@@ -151,7 +151,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnLogin:
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                if(getCurrentFocus() != null)
+                {
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
                 uname = edtUserName.getText().toString().trim();
                 password = edtPassword.getText().toString().trim();
 
@@ -400,7 +403,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             editor.apply();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
-                            String kpi_id = loginStoreArray.get(0).getKpiId();
+                            String kpi_id = loginStoreArray.get(0).getKpiId().concat(",047");
+
+                            Log.e(TAG, "onResponse: " + kpi_id);
                             String[] kpiIdArray = kpi_id.toString().split(",");
                             intent.putExtra("kpiId", kpiIdArray);
                             intent.putExtra("BACKTO", "login");

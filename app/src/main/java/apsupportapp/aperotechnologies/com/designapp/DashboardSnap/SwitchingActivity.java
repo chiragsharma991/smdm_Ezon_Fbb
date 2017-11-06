@@ -11,7 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,17 +45,10 @@ import java.util.List;
 import java.util.Map;
 
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersInventory.BestPerformerInventory;
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.BabyCerealActivity;
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.HomeActivity;
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.SubCategory;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusActivity;
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookupActivity;
-import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.CompetitorStoreExtActivity;
-import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.ExternalHistoryActivity;
-import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.FGStoreExtActivity;
-import apsupportapp.aperotechnologies.com.designapp.ExternalServiceOppAudit.ReportsExtActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneBestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneFreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1;
@@ -78,13 +70,8 @@ import apsupportapp.aperotechnologies.com.designapp.FeedbackofCustomer.Superviso
 import apsupportapp.aperotechnologies.com.designapp.FloorAvailability.FloorAvailabilityActivity;
 import apsupportapp.aperotechnologies.com.designapp.FreshnessIndex.FreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.HourlyPerformence.HourlyPerformence;
-import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.CompetitorStoreActivity;
-import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ExternalAudReviewActivity;
-import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.FGStoreActivity;
-import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.InspectionHistory;
-import apsupportapp.aperotechnologies.com.designapp.InternalServiceOppAudit.ReportActivity;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.HomeActivity;
 import apsupportapp.aperotechnologies.com.designapp.KeyProductPlan.KeyProductPlanActivity;
-import apsupportapp.aperotechnologies.com.designapp.ListAdapter;
 import apsupportapp.aperotechnologies.com.designapp.Reusable_Functions;
 import apsupportapp.aperotechnologies.com.designapp.SeasonCatalogue.mpm_activity;
 import apsupportapp.aperotechnologies.com.designapp.OptionEfficiency.OptionEfficiencyActivity;
@@ -155,15 +142,15 @@ public class SwitchingActivity extends AppCompatActivity
                     break;
 
                 case "004":
-                    Intent SalesAnalysisActivity1 = new Intent(context,SubCategory.class);//SalesAnalysisActivity1
+                    Intent SalesAnalysisActivity1 = new Intent(context,SalesAnalysisActivity1.class);//
                     startActivity(SalesAnalysisActivity1);
                     break;
                 case "005":
-                    Intent SalesPvAActivity = new Intent(context, HomeActivity.class);//SalesPvAActivity
+                    Intent SalesPvAActivity = new Intent(context, SalesPvAActivity.class);//
                     startActivity(SalesPvAActivity);
                     break;
                 case "018":
-                    Intent KeyProductPlanActivity = new Intent(context, BabyCerealActivity.class); // KeyProductPlanActivity
+                    Intent KeyProductPlanActivity = new Intent(context, KeyProductPlanActivity.class); //
                     startActivity(KeyProductPlanActivity);
                     break;
                 case "028":
@@ -376,6 +363,10 @@ public class SwitchingActivity extends AppCompatActivity
                         Intent LaunchIntent = packageManager.getLaunchIntentForPackage(your_apppackagename);
                         startActivity( LaunchIntent );
                     }
+                    break;
+                case "047":
+                    Intent HomeActivity = new Intent(context, HomeActivity.class);
+                    startActivity(HomeActivity);
                     break;
 
                    //Internal/External Audit
@@ -687,7 +678,11 @@ public class SwitchingActivity extends AppCompatActivity
                     apps.add(new App("Best Worst Performer Ezone", R.mipmap.bestworstperformers,"045"));
 
                 break;
+            case 15 :
+                if (kpiIdArray.contains("047"))
+                    apps.add(new App("Home", R.mipmap.salesanalysis,"047"));
 
+               break;
 //            case 101 :
 //
 //

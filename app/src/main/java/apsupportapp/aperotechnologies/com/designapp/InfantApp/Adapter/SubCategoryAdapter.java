@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter;
+package apsupportapp.aperotechnologies.com.designapp.InfantApp.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.google.gson.Gson;
 
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter.SubCategory_childAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
