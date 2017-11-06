@@ -139,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Big Bazaar"
+            android:text="Baby Cereal/Baby Food"
             android:textColor="@color/ezfbb_black"
             android:textSize="19sp" />
 
