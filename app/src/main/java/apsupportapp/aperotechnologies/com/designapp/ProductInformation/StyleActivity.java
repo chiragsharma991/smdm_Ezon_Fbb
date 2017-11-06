@@ -1006,10 +1006,7 @@ public class StyleActivity extends AppCompatActivity
                                 }
                             }
 
-
-
-
-                            optionAdapter.notifyDataSetChanged();
+                           optionAdapter.notifyDataSetChanged();
 
                         }
                         catch (Exception e)
