@@ -33,20 +33,7 @@ public class ProductDetails extends AppCompatActivity {
 
     }
 
-    private void setupWindowAnimations() {
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-          /*  Fade fade = new Fade();
-            fade.setDuration(1000);
-            getWindow().setEnterTransition(fade);*/
-
-            Fade slide = new Fade();
-            slide.setDuration(1000);
-            getWindow().setReturnTransition(slide);
-        }
-
-
-    }
 
     private void intialiseUI() {
 
@@ -83,7 +70,7 @@ public class ProductDetails extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            finishAfterTransition();
+            supportFinishAfterTransition();
         }else{
             finish();
         }

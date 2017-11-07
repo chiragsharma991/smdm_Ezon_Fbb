@@ -41,64 +41,48 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:maxLines="3"
-                android:text="title description"
-                android:maxWidth="130dp"
-                android:textSize="12sp"></TextView>
+                android:gravity="center_horizontal"
+                android:textColor="@color/ezfb_black"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:text="title descriptions"
+                ></TextView>
 
 
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/subcategory_root_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="0.5"
-                    android:gravity="start"
-                    android:text="title one"
-                    android:textSize="10sp"></TextView>
+
 
 
                 <LinearLayout
+                    android:id="@+id/lin"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_weight="0.5"
-                    android:weightSum="2"
-                    >
+                    android:weightSum="1">
 
                     <TextView
+                        android:textColor="@color/ezfb_black"
+                        android:id="@+id/subcategory_root_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:gravity="end"
-                        android:layout_weight="1"
-                        android:text="title two"
-                        android:textSize="10sp"></TextView>
+                        android:layout_weight="0.6"
+                        android:gravity="bottom"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12sp"/>
 
                     <TextView
+                        android:textColor="@color/ezfb_black"
                         android:id="@+id/subcategory_root_cutofprice"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:gravity="end"
-                        android:text="title three"
-                        android:textSize="10sp"></TextView>
-
+                        android:layout_weight="0.4"
+                        android:gravity="bottom|right"
+                        android:layout_marginRight="10dp"
+                        android:textSize="12sp"/>
 
                 </LinearLayout>
-
-
-
-
-            </LinearLayout>
 
 
         </LinearLayout>
