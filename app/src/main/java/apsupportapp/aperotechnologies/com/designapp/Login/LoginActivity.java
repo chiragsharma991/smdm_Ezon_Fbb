@@ -329,10 +329,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         Toast.makeText(context, "Check your network connectivity", Toast.LENGTH_LONG).show();
                                     }
                                 }
-
-
-
-
                             }
                         }
                         catch (Exception e)
@@ -407,7 +403,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             editor.apply();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
-                            String kpi_id = loginStoreArray.get(0).getKpiId().concat(",047");
+                            String kpi_id = loginStoreArray.get(0).getKpiId().concat(",047,048,049,050,051");
                             Log.e(TAG, "onResponse: " + kpi_id);
                             String[] kpiIdArray = kpi_id.toString().split(",");
                             intent.putExtra("kpiId", kpiIdArray);

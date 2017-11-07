@@ -159,7 +159,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         pushtoken = sharedPreferences.getString("push_tokken", "");
         hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
-        Log.i(TAG, "onCreate: kpiIdArray"+getIntent().getStringArrayExtra("kpiId").toString());
+        Log.i(TAG, "onCreate: kpiIdArray" + getIntent().getStringArrayExtra("kpiId").toString());
 
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -373,11 +373,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(), LinearLayoutManager.VERTICAL, false));
         final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptDesc, context, conceptchecked);
         conceptList.setAdapter(conceptMappingAdapter);
-        if(conceptDesc.size()==1)addlistnerOnConceptList(conceptMappingAdapter,0);
+        if (conceptDesc.size() == 1) addlistnerOnConceptList(conceptMappingAdapter, 0);
         conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                addlistnerOnConceptList(conceptMappingAdapter,position);
+                addlistnerOnConceptList(conceptMappingAdapter, position);
             }
         }));
 
@@ -418,7 +418,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                if(model.getLobName().equals("FASHION") && model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB") ) {
+                if (model.getLobName().equals("FASHION") && model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB")) {
                     editor.putString("concept", "BB,FBB");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
@@ -437,7 +437,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                     editor.putString("hierarchyLevels", model.getHierarchyLevels());
                     editor.apply();
 
-                }  else {
+                } else {
                     editor.putString("concept", model.getGeoLevel2Code());
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
@@ -558,6 +558,10 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         045 - Best Worst Performer Ezone
         046 - VoC App
         047 - Infant App
+        048 - Basket Analysis
+        049 - Recency Frequency
+        050 - EDSC Performance
+        051 - Assortment
 
 
         */
@@ -591,71 +595,74 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
 //        } else {
 
-            if (kpiIdArray.contains("001")) {
-                List<App> apps = getProduct(0, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
-            }
-            if (kpiIdArray.contains("002") || kpiIdArray.contains("003")) {
-                List<App> apps = getProduct(1, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
-            }
-            if (kpiIdArray.contains("004") || kpiIdArray.contains("005") || kpiIdArray.contains("018") ) {
-                List<App> apps = getProduct(2, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
-            }
-            if (kpiIdArray.contains("042") || kpiIdArray.contains("043")) {
-                List<App> apps = getProduct(13, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
-            }
-            if (kpiIdArray.contains("006") || kpiIdArray.contains("007") || kpiIdArray.contains("008") || kpiIdArray.contains("009") || kpiIdArray.contains("010") || kpiIdArray.contains("011") || kpiIdArray.contains("012") || kpiIdArray.contains("013")) {
-                List<App> apps = getProduct(3, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
-            }
-            if (kpiIdArray.contains("044") || kpiIdArray.contains("045")) {
-                List<App> apps = getProduct(14, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
-            }
+        if (kpiIdArray.contains("001")) {
+            List<App> apps = getProduct(0, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Product Information", apps));
+        }
+        if (kpiIdArray.contains("002") || kpiIdArray.contains("003")) {
+            List<App> apps = getProduct(1, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Visual Assortment", apps));
+        }
+        if (kpiIdArray.contains("004") || kpiIdArray.contains("005") || kpiIdArray.contains("018")) {
+            List<App> apps = getProduct(2, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+        }
+        if (kpiIdArray.contains("042") || kpiIdArray.contains("043")) {
+            List<App> apps = getProduct(13, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Sales", apps));
+        }
+        if (kpiIdArray.contains("006") || kpiIdArray.contains("007") || kpiIdArray.contains("008") || kpiIdArray.contains("009") || kpiIdArray.contains("010") || kpiIdArray.contains("011") || kpiIdArray.contains("012") || kpiIdArray.contains("013")) {
+            List<App> apps = getProduct(3, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+        }
+        if (kpiIdArray.contains("044") || kpiIdArray.contains("045")) {
+            List<App> apps = getProduct(14, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Inventory", apps));
+        }
 
-            if (kpiIdArray.contains("014") || kpiIdArray.contains("015") || kpiIdArray.contains("016") || kpiIdArray.contains("017")) {
-                List<App> apps = getProduct(4, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
-            }
-            if (kpiIdArray.contains("020") || kpiIdArray.contains("021")) {
-                List<App> apps = getProduct(5, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
-            }
-            if (kpiIdArray.contains("022") || kpiIdArray.contains("023") || kpiIdArray.contains("024") || kpiIdArray.contains("025") || kpiIdArray.contains("046") ) {
-                List<App> apps = getProduct(6, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
-            }
-            if (kpiIdArray.contains("036") || kpiIdArray.contains("037") || kpiIdArray.contains("038") || kpiIdArray.contains("039") || kpiIdArray.contains("040") || kpiIdArray.contains("041")) {
-                List<App> apps = getProduct(12, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback", apps));
-            }
-            if (kpiIdArray.contains("030") || kpiIdArray.contains("031") || kpiIdArray.contains("032") || kpiIdArray.contains("033") || kpiIdArray.contains("034") || kpiIdArray.contains("035")) {
-                List<App> apps = getProduct(11, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback HO", apps));
-            }
-            if (kpiIdArray.contains("026")) {
-                List<App> apps = getProduct(7, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
-            }
-            if (kpiIdArray.contains("027")) {
-                List<App> apps = getProduct(8, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
-            }
-            if (kpiIdArray.contains("029")) {
-                List<App> apps = getProduct(10, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "BORIS", apps));
-            }
-            if (kpiIdArray.contains("047")) {
-                List<App> apps = getProduct(15, kpiIdArray);
-                snapAdapter.addSnap(new Snap(Gravity.START, "Infant App", apps));
-            }
+        if (kpiIdArray.contains("014") || kpiIdArray.contains("015") || kpiIdArray.contains("016") || kpiIdArray.contains("017")) {
+            List<App> apps = getProduct(4, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Promo Analysis", apps));
+        }
+        if (kpiIdArray.contains("020") || kpiIdArray.contains("021")) {
+            List<App> apps = getProduct(5, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
+        }
+        if (kpiIdArray.contains("022") || kpiIdArray.contains("023") || kpiIdArray.contains("024") || kpiIdArray.contains("025") || kpiIdArray.contains("046")) {
+            List<App> apps = getProduct(6, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
+        }
+        if (kpiIdArray.contains("036") || kpiIdArray.contains("037") || kpiIdArray.contains("038") || kpiIdArray.contains("039") || kpiIdArray.contains("040") || kpiIdArray.contains("041")) {
+            List<App> apps = getProduct(12, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback", apps));
+        }
+        if (kpiIdArray.contains("030") || kpiIdArray.contains("031") || kpiIdArray.contains("032") || kpiIdArray.contains("033") || kpiIdArray.contains("034") || kpiIdArray.contains("035")) {
+            List<App> apps = getProduct(11, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback HO", apps));
+        }
+        if (kpiIdArray.contains("026")) {
+            List<App> apps = getProduct(7, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Season Catalogue", apps));
+        }
+        if (kpiIdArray.contains("027")) {
+            List<App> apps = getProduct(8, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement", apps));
+        }
+        if (kpiIdArray.contains("029")) {
+            List<App> apps = getProduct(10, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "BORIS", apps));
+        }
+        if (kpiIdArray.contains("047")) {
+            List<App> apps = getProduct(15, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Infant App", apps));
+        }
+        if (kpiIdArray.contains("048") || kpiIdArray.contains("049") || kpiIdArray.contains("050") || kpiIdArray.contains("051")) {
+            List<App> apps = getProduct(16, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "Customer Engagement Report", apps));
+        }
 
 //                List<App> apps = getProduct(101, kpiIdArray);
 //                snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
-
 
 
 //        }

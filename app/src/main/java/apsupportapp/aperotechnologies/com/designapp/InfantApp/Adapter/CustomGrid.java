@@ -67,14 +67,10 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     Log.e("height "," "+height);
                     linearLayout.getLayoutParams().height = height/2;
                     linearLayout.requestLayout();
-
-
-                }
+               }
             });
 
-
-
-        }
+       }
         else if(viewString.equals("listView"))
         {
             view = inflater.inflate(R.layout.custom_list, parent, false);
@@ -94,7 +90,6 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     Log.e("height "," "+height);
                     linearLayout.getLayoutParams().height = height;
                     linearLayout.requestLayout();
-
 
                 }
             });

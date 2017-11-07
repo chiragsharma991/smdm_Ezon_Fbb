@@ -14,21 +14,17 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        >
+        android:layout_marginRight="10dp">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-       >
+        android:layout_height="110dp">
 
     <ImageView
         android:id="@+id/img_categories"
         android:layout_width="match_parent"
         android:src="@mipmap/mi_max2_buy_now_app"
-        android:layout_height="100dp"
-
-       />
+        android:layout_height="100dp"/>
 
         <TextView
             android:id="@+id/txt_desc"

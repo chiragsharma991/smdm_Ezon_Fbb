@@ -448,6 +448,22 @@
             android:name=".InfantApp.SubCategory"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CustomerEngagementReport.AssortmentActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CustomerEngagementReport.BasketAnalysis"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CustomerEngagementReport.EDSCPerformanceActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CustomerEngagementReport.RecencyFrequencyActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
 
 
         <activity android:name=".ExternalServiceOppAudit.ReportsExtActivity" />

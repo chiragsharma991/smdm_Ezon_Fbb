@@ -93,13 +93,16 @@ import apsupportapp.aperotechnologies.com.designapp.UpcomingPromo.UpcomingPromo;
 import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoActivity;
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.BORIS.MobileScreenActivity;
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.BasketAnalysis;
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.RecencyFrequencyActivity;
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.AssortmentActivity;
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.EDSCPerformanceActivity;
 
 /**
  * Created by csuthar on 10/07/17.
  */
 
 public class SwitchingActivity extends AppCompatActivity
-
 {
     boolean loginFromFbb;
     private Context context = this;
@@ -142,7 +145,7 @@ public class SwitchingActivity extends AppCompatActivity
                     break;
 
                 case "004":
-                    Intent SalesAnalysisActivity1 = new Intent(context,SalesAnalysisActivity1.class);//
+                    Intent SalesAnalysisActivity1 = new Intent(context,MobileScreenActivity.class);//SalesAnalysisActivity1
                     startActivity(SalesAnalysisActivity1);
                     break;
                 case "005":
@@ -368,6 +371,18 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent HomeActivity = new Intent(context, HomeActivity.class);
                     startActivity(HomeActivity);
                     break;
+                case "048":
+                    Intent BasketAnalysis = new Intent(context, BasketAnalysis.class);
+                    startActivity(BasketAnalysis);
+                case "049":
+                    Intent RecencyFrequncyActivity = new Intent(context, RecencyFrequencyActivity.class);
+                    startActivity(RecencyFrequncyActivity);
+                case "050":
+                    Intent EDSCPerformanceActivity = new Intent(context, EDSCPerformanceActivity.class);
+                    startActivity(EDSCPerformanceActivity);
+                case "051":
+                    Intent AssortmentActivity = new Intent(context, AssortmentActivity.class);
+                    startActivity(AssortmentActivity);
 
                    //Internal/External Audit
              /*   case "102":
@@ -550,7 +565,6 @@ public class SwitchingActivity extends AppCompatActivity
 
                 if (kpiIdArray.contains("017"))
                     apps.add(new App("Best/Worst Promo", R.mipmap.bestworstperformers,"017"));
-
                 break;
 
 
@@ -562,7 +576,6 @@ public class SwitchingActivity extends AppCompatActivity
 
                 if (kpiIdArray.contains("021"))
                     apps.add(new App("Stock Transfer Status", R.mipmap.stocktransfer,"021"));
-
 
                 break;
 
@@ -682,10 +695,19 @@ public class SwitchingActivity extends AppCompatActivity
                 if (kpiIdArray.contains("047"))
                     apps.add(new App("Home", R.mipmap.salesanalysis,"047"));
 
-               break;
+                break;
+            case 16 :
+                if (kpiIdArray.contains("048"))
+                    apps.add(new App("Basket Analysis", R.mipmap.product_quality_range,"048"));
+                if (kpiIdArray.contains("049"))
+                    apps.add(new App("Recency Frequency", R.mipmap.planvsactual,"049"));
+                if (kpiIdArray.contains("050"))
+                    apps.add(new App("EDSC Performance", R.mipmap.salesanalysis,"050"));
+                if (kpiIdArray.contains("051"))
+                    apps.add(new App("Assortment", R.mipmap.hourlyperformance,"051"));
+
+                break;
 //            case 101 :
-//
-//
 //                apps.add(new App("FG Store", R.mipmap.freshnessindex,"102"));
 //                apps.add(new App("Competitor Store", R.mipmap.bestworstperformers,"103"));
 //                apps.add(new App("External Auditor Review", R.mipmap.bestworstperformers,"104"));
@@ -797,133 +819,141 @@ public class SwitchingActivity extends AppCompatActivity
                                     storeCode = collectionName.getString("storeCode");
                                     body_geoLevel2Code = collectionName.getString("geoLevel2Code");
 
-                                    if(from.equals("VisualAssortmentActivity")) {
+                                    if(from.equals("VisualAssortmentActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualAssortmentActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
                                         startActivity(intent);
                                     }
-                                    else if(from.equals("VisualReportActivity")){
+                                    else if(from.equals("VisualReportActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualReportActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-                                    else if(from.equals("ProductAvailability_notify_HO")){
+                                    else if(from.equals("ProductAvailability_notify_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, ProductAvailability_notify_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
-
                                     }
-                                    else if(from.equals("PolicyExchangeRefund_HO")){
+                                    else if(from.equals("PolicyExchangeRefund_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, PolicyExchangeRefund_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
 
-                                    else if(from.equals("OurStoreServices_HO")){
+                                    else if(from.equals("OurStoreServices_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, OurStoreServices_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("ProductQualityRange_HO")){
+                                    else if(from.equals("ProductQualityRange_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, ProductQualityRange_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("PricePromotion_HO")){
+                                    else if(from.equals("PricePromotion_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, PricePromotion_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("SupervisorStaff_HO")){
+                                    else if(from.equals("SupervisorStaff_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, SupervisorStaff_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("Feedback")){
+                                    else if(from.equals("Feedback"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, Feedback.class);
                                         intent.putExtra("storeCode", storeCode);
                                         intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
                                         startActivity(intent);
                                     }
 
-                                    else if(from.equals("FeedbackList")){
+                                    else if(from.equals("FeedbackList"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, FeedbackList.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("To_Do")){
+                                    else if(from.equals("To_Do"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, To_Do.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("StatusActivity")){
+                                    else if(from.equals("StatusActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, StatusActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("InspectionBeginActivity")){
+                                    else if(from.equals("InspectionBeginActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, InspectionBeginActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("InspectionHistoryActivity")){
+                                    else if(from.equals("InspectionHistoryActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, InspectionHistoryActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("ProductAvailability_Notify")){
+                                    else if(from.equals("ProductAvailability_Notify"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, ProductAvailability_Notify.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("PolicyExchangeRefund")){
+                                    else if(from.equals("PolicyExchangeRefund"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, PolicyExchangeRefund.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
 
-                                    else if(from.equals("Price_Promotion")){
+                                    else if(from.equals("Price_Promotion"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, Price_Promotion.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("ProductQualityRange")){
+                                    else if(from.equals("ProductQualityRange"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, ProductQualityRange.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("OurStoreServices")){
+                                    else if(from.equals("OurStoreServices"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, OurStoreServices.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("SupervisiorStaff")){
+                                    else if(from.equals("SupervisiorStaff"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, SupervisiorStaff.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-                                    else if(from.equals("StyleActivity")){
+                                    else if(from.equals("StyleActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, StyleActivity.class);
                                         intent.putExtra("from", "dashBoard");
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
                                 }
-                                else {
+                                else
+                                {
                                     for (int i = 0; i < response.length(); i++) {
                                         JSONObject collectionName = response.getJSONObject(i);
                                         storeCode = collectionName.getString("storeCode");
@@ -936,142 +966,140 @@ public class SwitchingActivity extends AppCompatActivity
                                 }
                             }
 
-//                            Collections.sort(arrayList);
-//                            Collections.sort(arrayListbody);
-
-
-                            // arrayList.add(0, "Select Storecode");
                             spinnerArrayAdapter.notifyDataSetChanged();
                             select_storeList.setOnItemClickListener(new AdapterView.OnItemClickListener()
                             {
-
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                                 {
-
                                     storeCode = (String) spinnerArrayAdapter.getItem(position);
                                     body_geoLevel2Code = arrayListbody.get(position);
                                     dialog.dismiss();
-                                    if(from.equals("VisualAssortmentActivity")) {
+
+                                    if(from.equals("VisualAssortmentActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualAssortmentActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
                                         startActivity(intent);
                                     }
-                                    else if(from.equals("VisualReportActivity")){
+                                    else if(from.equals("VisualReportActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, VisualReportActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-                                    else if(from.equals("ProductAvailability_notify_HO")){
+                                    else if(from.equals("ProductAvailability_notify_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, ProductAvailability_notify_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
-
                                     }
-                                    else if(from.equals("PolicyExchangeRefund_HO")){
+                                    else if(from.equals("PolicyExchangeRefund_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, PolicyExchangeRefund_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("OurStoreServices_HO")){
+                                    else if(from.equals("OurStoreServices_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, OurStoreServices_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("ProductQualityRange_HO")){
+                                    else if(from.equals("ProductQualityRange_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, ProductQualityRange_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("PricePromotion_HO")){
+                                    else if(from.equals("PricePromotion_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, PricePromotion_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("SupervisorStaff_HO")){
+                                    else if(from.equals("SupervisorStaff_HO"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, SupervisorStaff_HO.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("Feedback")){
+                                    else if(from.equals("Feedback"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, Feedback.class);
                                         intent.putExtra("storeCode", storeCode);
                                         intent.putExtra("body_geoLevel2Code", body_geoLevel2Code);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("FeedbackList")){
+                                    else if(from.equals("FeedbackList"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, FeedbackList.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("To_Do")){
+                                    else if(from.equals("To_Do"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, To_Do.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("StatusActivity")){
+                                    else if(from.equals("StatusActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, StatusActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("InspectionBeginActivity")){
+                                    else if(from.equals("InspectionBeginActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, InspectionBeginActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("InspectionHistoryActivity")){
+                                    else if(from.equals("InspectionHistoryActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, InspectionHistoryActivity.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("ProductAvailability_Notify")){
+                                    else if(from.equals("ProductAvailability_Notify"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, ProductAvailability_Notify.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("PolicyExchangeRefund")){
+                                    else if(from.equals("PolicyExchangeRefund"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, PolicyExchangeRefund.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("Price_Promotion")){
+                                    else if(from.equals("Price_Promotion"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, Price_Promotion.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("ProductQualityRange")){
+                                    else if(from.equals("ProductQualityRange"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, ProductQualityRange.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("OurStoreServices")){
+                                    else if(from.equals("OurStoreServices"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, OurStoreServices.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-
-                                    else if(from.equals("SupervisiorStaff")){
+                                    else if(from.equals("SupervisiorStaff"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, SupervisiorStaff.class);
                                         intent.putExtra("storeCode", storeCode);
                                         startActivity(intent);
                                     }
-                                    else if(from.equals("StyleActivity")){
+                                    else if(from.equals("StyleActivity"))
+                                    {
                                         Intent intent = new Intent(SwitchingActivity.this, StyleActivity.class);
                                         intent.putExtra("from", "dashBoard");
                                         intent.putExtra("storeCode", storeCode);
@@ -1079,8 +1107,6 @@ public class SwitchingActivity extends AppCompatActivity
                                     }
                                 }
                             });
-
-
                         }
                         catch (Exception e)
                         {
