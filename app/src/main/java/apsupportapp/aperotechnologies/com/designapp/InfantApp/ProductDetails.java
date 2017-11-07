@@ -24,6 +24,7 @@ public class ProductDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setupWindowAnimations();
         setContentView(R.layout.activity_bb_product_details);
+        getSupportActionBar().hide();
         intialiseUI();
         dotIntialize();
         ProductSliderAdapter vmPagerAdapter = new ProductSliderAdapter(this,lldots,view_pager);
@@ -49,8 +50,8 @@ public class ProductDetails extends AppCompatActivity {
 
     private void intialiseUI() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         view_pager = (ViewPager) findViewById(R.id.view_pager);
         btnBack=(RelativeLayout)findViewById(R.id.btnBack);
         lldots = (LinearLayout) findViewById(R.id.dotIndicator);

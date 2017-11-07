@@ -149,7 +149,7 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             txt_desc = (TextView) v.findViewById(R.id.grid_text);
             textView1 = (TextView) v.findViewById(R.id.textView1);
             textView2 = (TextView) v.findViewById(R.id.textView2);
-           bst_cardView = (CardView) v.findViewById(R.id.bst_cardView);
+            bst_cardView = (CardView) v.findViewById(R.id.bst_cardView);
             linear_snap = (LinearLayout) v.findViewById(R.id.linear_snap);
 
 

@@ -96,16 +96,18 @@ public class SubCategory_childAdapter extends RecyclerView.Adapter<RecyclerView.
             });
         } else if (holder instanceof ViewHolder_Grid) {
 
+
             ((ViewHolder_Grid) holder).title.setText(listdata[position]);
             ((ViewHolder_Grid) holder).price.setText(listdata[position]);
             ((ViewHolder_Grid) holder).cutofprice.setText(listdata[position]);
             ((ViewHolder_Grid) holder).bst_cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     listner.onclickPostion(VIEW_LIST, position, v);
+
                 }
             });
+
         }
 
     }

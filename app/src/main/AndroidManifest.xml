@@ -454,7 +454,6 @@
         <activity android:name=".InternalServiceOppAudit.FGStoreDataActivity" />
         <activity android:name=".InternalServiceOppAudit.CompetitorStoreDataActivity" />
         <activity android:name=".InfantApp.ProductDetails"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
 

@@ -408,7 +408,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
                             String kpi_id = loginStoreArray.get(0).getKpiId().concat(",047");
-
                             Log.e(TAG, "onResponse: " + kpi_id);
                             String[] kpiIdArray = kpi_id.toString().split(",");
                             intent.putExtra("kpiId", kpiIdArray);
