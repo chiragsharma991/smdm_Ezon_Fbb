@@ -145,7 +145,7 @@ public class SwitchingActivity extends AppCompatActivity
                     break;
 
                 case "004":
-                    Intent SalesAnalysisActivity1 = new Intent(context,MobileScreenActivity.class);//SalesAnalysisActivity1
+                    Intent SalesAnalysisActivity1 = new Intent(context,SalesAnalysisActivity1.class);//
                     startActivity(SalesAnalysisActivity1);
                     break;
                 case "005":
@@ -374,15 +374,19 @@ public class SwitchingActivity extends AppCompatActivity
                 case "048":
                     Intent BasketAnalysis = new Intent(context, BasketAnalysis.class);
                     startActivity(BasketAnalysis);
+                    break;
                 case "049":
                     Intent RecencyFrequncyActivity = new Intent(context, RecencyFrequencyActivity.class);
                     startActivity(RecencyFrequncyActivity);
+                    break;
                 case "050":
                     Intent EDSCPerformanceActivity = new Intent(context, EDSCPerformanceActivity.class);
                     startActivity(EDSCPerformanceActivity);
+                    break;
                 case "051":
                     Intent AssortmentActivity = new Intent(context, AssortmentActivity.class);
                     startActivity(AssortmentActivity);
+                    break;
 
                    //Internal/External Audit
              /*   case "102":
