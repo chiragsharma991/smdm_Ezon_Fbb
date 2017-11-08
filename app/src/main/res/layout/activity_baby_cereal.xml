@@ -61,6 +61,44 @@
                     android:textColor="@color/ezfbb_black"
                     android:textSize="19sp" />
 
+            <RelativeLayout
+                android:id="@+id/rel_sort"
+                android:layout_toLeftOf="@+id/rel_filter"
+                android:layout_width="@dimen/header_clickable_width"
+                android:layout_height="@dimen/header_clickable_height"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/button_click">
+
+                <Button
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/iconsort"
+                    android:clickable="false" />
+
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_toLeftOf="@+id/btn_Search"
+                    android:id="@+id/rel_filter"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/button_click">
+
+                    <Button
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/iconfilter"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/btn_Search"
                     android:layout_width="@dimen/header_clickable_width"
@@ -89,146 +127,123 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp">
 
         <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentLeft="true"
             android:id="@+id/txt_baby_cereal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
             android:text="Baby Cereal/Baby Food"
-            android:textColor="@color/ezfb_black"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <LinearLayout
-            android:id="@+id/sort_linear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="@drawable/layout_border">
-
-            <RelativeLayout
-                android:id="@+id/rel_sort"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:gravity="center_vertical"
-                android:background="@drawable/button_click">
-
-                <Button
-                    android:layout_width="@dimen/arrow_back_icon_width"
-                    android:layout_height="@dimen/arrow_back_icon_height"
-                    android:layout_centerInParent="true"
-                    android:background="@mipmap/iconsort"
-                    android:clickable="false" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="SORT"
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/filter_linear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="0.3"
-            android:background="@drawable/layout_border">
-
-            <RelativeLayout
-                android:id="@+id/rel_filter"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:gravity="center_vertical"
-                android:background="@drawable/button_click">
-
-                <Button
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:layout_centerInParent="true"
-                    android:background="@mipmap/iconfilter"
-                    android:clickable="false" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_marginRight="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="FILTERS"
-                    android:textColor="@color/ezfb_black"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/changeView_linear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="0.4"
-            android:background="@drawable/layout_border">
+            android:textColor="@color/ezfbb_black"
+            android:textSize="19sp" />
 
 
-            <RelativeLayout
-                android:gravity="center"
-                android:id="@+id/rel_changeView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_click">
+        <RelativeLayout
+            android:id="@+id/rel_changeView"
+            android:layout_width="@dimen/header_clickable_width"
+            android:layout_height="@dimen/header_clickable_width"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_click">
 
-                <Button
-                    android:gravity="center"
-                    android:id="@+id/btn_grid"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@mipmap/barcodeicon"
-                    android:clickable="false" />
+            <Button
 
-
-            </RelativeLayout>
-
-        </LinearLayout>
+                android:id="@+id/btn_grid"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:background="@mipmap/barcodeicon"
+                android:clickable="false" />
 
 
-    </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="1">-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/sort_linear"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="0.3"-->
+            <!--android:background="@drawable/layout_border">-->
+
+        <!---->
+          <!---->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="SORT"-->
+                    <!--android:textColor="@color/ezfb_black"-->
+                    <!--android:textSize="15sp" />-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+
+        <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/filter_linear"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="0.3"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@drawable/layout_border">&ndash;&gt;-->
+
+          <!--&lt;!&ndash;&ndash;&gt;-->
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginRight="20dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="FILTERS"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/ezfb_black"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="15sp" />&ndash;&gt;-->
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/changeView_linear"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="0.4"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@drawable/layout_border">&ndash;&gt;-->
+
+
+          <!--&lt;!&ndash;&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+
+    <!--</LinearLayout>-->
 
     <LinearLayout
-        android:layout_margin="5dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -236,7 +251,10 @@
            <android.support.v7.widget.RecyclerView
             android:id="@+id/gridview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+           </android.support.v7.widget.RecyclerView>
+
     </LinearLayout>
 
 </LinearLayout>

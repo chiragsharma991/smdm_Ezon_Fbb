@@ -128,12 +128,13 @@
         <Button
             android:id="@+id/btn_search"
             android:text="Search"
+            android:gravity="center"
             android:background="@color/ezfb_Red"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="40dp" />
 
     </RelativeLayout>
 </RelativeLayout>

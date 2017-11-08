@@ -151,7 +151,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnLogin:
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                if(getCurrentFocus() != null)
+                {
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
                 uname = edtUserName.getText().toString().trim();
                 password = edtPassword.getText().toString().trim();
 
@@ -262,12 +265,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void requestUserStore()
     {
         String url = ConstsCore.web_url + "/v1/login/userstoresNew/" + userId ;//+"?geoLevel2Code="+login_storeList.getGeoLevel2Code()+"&recache="+recache; //ConstsCore.web_url+ + "/v1/login/userId";
+        Log.e(TAG, "requestUserStore: "+url );
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
                     @Override
                     public void onResponse(JSONArray response)
                     {
+                        Log.i(TAG, "requestUserStore: "+response);
 
                         try
                         {
@@ -367,12 +372,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void requestUserStoreConcept()
     {
         String url = ConstsCore.web_url + "/v1/login/userstoreorconcept/" + userId +"?geoLevel2Code="+loginStoreArray.get(0).getGeoLevel2Code()+"&lobId="+loginStoreArray.get(0).getLobId(); //ConstsCore.web_url+ + "/v1/login/userId";
+        Log.e(TAG, "requestUserStoreConcept: "+url );
         JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>()
                 {
                     @Override
                     public void onResponse(JSONArray response)
                     {
+                        Log.i(TAG, "requestUserStoreConcept: "+response);
                         try {
                             if (response.equals("") || response == null)
                             {
@@ -400,7 +407,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             editor.apply();
                             Intent intent = new Intent(context, SnapDashboardActivity.class);
                             intent.putExtra("from", "login");
-                            String kpi_id = loginStoreArray.get(0).getKpiId();
+                            String kpi_id = loginStoreArray.get(0).getKpiId().concat(",047");
+                            Log.e(TAG, "onResponse: " + kpi_id);
                             String[] kpiIdArray = kpi_id.toString().split(",");
                             intent.putExtra("kpiId", kpiIdArray);
                             intent.putExtra("BACKTO", "login");

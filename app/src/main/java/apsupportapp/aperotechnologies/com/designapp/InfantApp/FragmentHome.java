@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.InfantApp;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter.FragmentHomeAdapter;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.Adapter.FragmentHomeAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**

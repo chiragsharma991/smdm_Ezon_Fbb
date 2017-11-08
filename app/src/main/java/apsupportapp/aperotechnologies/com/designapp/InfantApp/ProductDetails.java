@@ -1,24 +1,22 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.InfantApp;
 
 import android.os.Build;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.transition.Fade;
-import android.transition.Slide;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import apsupportapp.aperotechnologies.com.designapp.R;
-import apsupportapp.aperotechnologies.com.designapp.RunningPromo.VM;
 
 public class ProductDetails extends AppCompatActivity {
 
     private ViewPager view_pager;
-    private RelativeLayout imageBtnBack;
+    private RelativeLayout btnBack;
     private LinearLayout lldots;
 
     @Override
@@ -26,6 +24,7 @@ public class ProductDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setupWindowAnimations();
         setContentView(R.layout.activity_bb_product_details);
+        getSupportActionBar().hide();
         intialiseUI();
         dotIntialize();
         ProductSliderAdapter vmPagerAdapter = new ProductSliderAdapter(this,lldots,view_pager);
@@ -51,11 +50,17 @@ public class ProductDetails extends AppCompatActivity {
 
     private void intialiseUI() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         view_pager = (ViewPager) findViewById(R.id.view_pager);
-        imageBtnBack=(RelativeLayout)findViewById(R.id.btnBack);
+        btnBack=(RelativeLayout)findViewById(R.id.btnBack);
         lldots = (LinearLayout) findViewById(R.id.dotIndicator);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
 

@@ -159,6 +159,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         pushtoken = sharedPreferences.getString("push_tokken", "");
         hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
+        Log.i(TAG, "onCreate: kpiIdArray"+getIntent().getStringArrayExtra("kpiId").toString());
 
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         Network network = new BasicNetwork(new HurlStack());
@@ -372,29 +373,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(), LinearLayoutManager.VERTICAL, false));
         final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptDesc, context, conceptchecked);
         conceptList.setAdapter(conceptMappingAdapter);
+        if(conceptDesc.size()==1)addlistnerOnConceptList(conceptMappingAdapter,0);
         conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
-                for (int i = 0; i < conceptDesc.size(); i++) {
-                    if (position == i) conceptchecked[i] = true;
-                    else conceptchecked[i] = false;
-
-                }
-
-                conceptMappingAdapter.notifyDataSetChanged();
-                List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
-                lobData = new ArrayList<>();
-                for (Login_StoreList data : list) {
-                    lobData.add(data.getLobName());
-                }
-                Set<String> set = new HashSet<>();
-                set.addAll(lobData);
-                lobData.clear();
-                lobData.addAll(set);  // remove dublicate values from list
-                displaylobName(lobData);
-
-
+                addlistnerOnConceptList(conceptMappingAdapter,position);
             }
         }));
 
@@ -485,6 +468,28 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     }
 
+    private void addlistnerOnConceptList(ConceptMappingAdapter conceptMappingAdapter, int position) {
+
+        for (int i = 0; i < conceptDesc.size(); i++) {
+            if (position == i) conceptchecked[i] = true;
+            else conceptchecked[i] = false;
+
+        }
+
+        conceptMappingAdapter.notifyDataSetChanged();
+        List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
+        lobData = new ArrayList<>();
+        for (Login_StoreList data : list) {
+            lobData.add(data.getLobName());
+        }
+        Set<String> set = new HashSet<>();
+        set.addAll(lobData);
+        lobData.clear();
+        lobData.addAll(set);  // remove dublicate values from list
+        displaylobName(lobData);
+
+    }
+
     private void displaylobName(final ArrayList<String> lobData) {
 
         lobchecked = new boolean[lobData.size()];
@@ -552,13 +557,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         044 - Assortment Analysis Ezone
         045 - Best Worst Performer Ezone
         046 - VoC App
+        047 - Infant App
 
 
         */
 
         snapAdapter = new SnapAdapter(context, eventUrlList);
 
-        if (geoLeveLDesc.equals("E ZONE")) {
+//        if (geoLeveLDesc.equals("E ZONE")) {
     /*        for (int i = 0; i <kpiIdArray.size(); i++) {
                 Log.i(TAG, "kpiIdArray:"+kpiIdArray.get(i).toString() );
                 switch (kpiIdArray.get(i)){
@@ -583,7 +589,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             }
             */
 
-        } else {
+//        } else {
 
             if (kpiIdArray.contains("001")) {
                 List<App> apps = getProduct(0, kpiIdArray);
@@ -642,13 +648,17 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 List<App> apps = getProduct(10, kpiIdArray);
                 snapAdapter.addSnap(new Snap(Gravity.START, "BORIS", apps));
             }
+            if (kpiIdArray.contains("047")) {
+                List<App> apps = getProduct(15, kpiIdArray);
+                snapAdapter.addSnap(new Snap(Gravity.START, "Infant App", apps));
+            }
 
 //                List<App> apps = getProduct(101, kpiIdArray);
 //                snapAdapter.addSnap(new Snap(Gravity.START, "Store Inspection", apps));
 
 
 
-        }
+//        }
         Recycler_verticalView.setAdapter(snapAdapter);
     }
 

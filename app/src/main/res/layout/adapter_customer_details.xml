@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/bst_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="false"
+        app:contentPadding="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rel_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:id="@+id/lin_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/txt_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="21"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="18sp"/>
+
+                        <TextView
+                            android:id="@+id/txt_month"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/txt_date"
+                            android:layout_marginLeft="4dp"
+                            android:text="Nov"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/txt_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_month"
+                            android:layout_toRightOf="@+id/txt_date"
+                            android:layout_marginLeft="4dp"
+                            android:text="2017"
+                            android:textSize="10sp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/txt_visit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Visit"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/txt_noofvisit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_visit"
+                            android:layout_marginLeft="4dp"
+                            android:text="10"
+                            android:textSize="10sp"/>
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/viewDivider"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/rel_1"
+                android:background="@android:color/holo_green_dark"
+                android:layout_width="1dp"
+                android:layout_height="80dp"/>
+
+            <RelativeLayout
+                android:id="@+id/rel_2"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/viewDivider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/lin_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/txt_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="John Doe"
+                            android:textColor="@color/ezfb_Red"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/txt_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_name"
+                            android:text="John.Doe@google.com"
+                            android:textColor="#7B68EE"
+                            android:textSize="12sp"/>
+
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/txt_avgSize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Avg. Basket Size"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/txt_noofSize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_avgSize"
+                            android:layout_marginLeft="4dp"
+                            android:text=" "
+                            android:textSize="10sp"/>
+
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_3"
+                android:layout_toRightOf="@+id/rel_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/lin_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    >
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/txt_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3823293213"
+                            android:textSize="16sp"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:id="@+id/txt_avgVisits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Avg. Frq. of Visits"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/txt_noofVisits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_avgVisits"
+                            android:layout_marginLeft="4dp"
+                            android:text="6 in last 3 Months"
+                            android:textSize="10sp"/>
+
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

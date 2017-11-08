@@ -68,7 +68,7 @@
                     android:textSize="@dimen/smdm_header_title_normal" />
 
                 <RelativeLayout
-                    android:id="@+id/imgfilter"
+                    android:id="@+id/imgSearch"
                     android:layout_width="@dimen/header_clickable_width"
                     android:layout_height="@dimen/header_clickable_height"
                     android:layout_alignParentRight="true"

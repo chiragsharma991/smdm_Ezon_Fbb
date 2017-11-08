@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.BigBazaar;
+package apsupportapp.aperotechnologies.com.designapp.InfantApp;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
-import apsupportapp.aperotechnologies.com.designapp.BigBazaar.Adapter.HomeAdapter;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.Adapter.HomeAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 /**
@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity{
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -93,5 +93,9 @@ public class HomeActivity extends AppCompatActivity{
         keyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

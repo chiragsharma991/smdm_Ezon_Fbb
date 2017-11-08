@@ -71,14 +71,7 @@
 
         </android.support.v7.widget.Toolbar>
 
-
-
-
-
-
     </LinearLayout>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -140,6 +133,68 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/title"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/subcategory_root_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/smdm_dark_Black"
+                        android:layout_weight="0.5"
+                        android:textSize="16sp"
+                        android:gravity="start"
+                        android:text="title one"
+                        ></TextView>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="0.5"
+                        android:weightSum="2"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:gravity="end"
+                            android:layout_weight="1"
+                            android:textColor="@color/smdm_dark_Black"
+                            android:text="title two"
+                            android:textSize="16sp"
+                            ></TextView>
+
+
+                        <TextView
+                            android:id="@+id/subcategory_root_cutofprice"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:textColor="@color/smdm_dark_Black"
+                            android:gravity="end"
+                            android:text="title three"
+                            android:textSize="16sp"></TextView>
+
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
 
             </RelativeLayout>
 
