@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linear_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_header_height"
+            android:layout_alignParentTop="true"
+            android:contentInsetEnd="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/filter"
+                    android:background="@drawable/button_click"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:clickable="false"
+                        android:background="@mipmap/iconfilter"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/imageBtnBack1"
+                    android:layout_width="@dimen/header_clickable_width"
+                    android:layout_height="@dimen/header_clickable_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/button_click">
+
+                    <Button
+                        android:layout_width="@dimen/arrow_back_icon_width"
+                        android:layout_height="@dimen/arrow_back_icon_height"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/ic_arrow_back_black"
+                        android:clickable="false" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/imageBtnBack1"
+                    android:text="Assortment"
+                    android:textColor="@color/ezfbb_black"
+                    android:textSize="19sp" />
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+    </LinearLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/ezfb_Red"
+        app:tabSelectedTextColor="@color/ezfb_Red"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="@color/ezfb_Red"
+        android:layout_below="@+id/linear_toolbar"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tab_layout"
+
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:scrollbars="none"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/parentview"
+                    >
+
+
+
+
+                </LinearLayout>
+
+
+                <Button
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:id="@+id/btnLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="showMoving"
+                    android:text="Show Moving"
+                    android:layout_gravity="right"
+                    android:textAllCaps="false"
+                    app:backgroundTint="@color/ezfb_Red"
+                    android:textColor="@color/ezfb_White"
+
+                    />
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

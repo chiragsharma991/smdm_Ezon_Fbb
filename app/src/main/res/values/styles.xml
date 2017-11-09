@@ -53,15 +53,15 @@
 
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/ezfbb_red</item>
     </style>
 
-    <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light">
+    <style name="MyTheme.Splash" parent="Theme.AppCompat.Light">
 
         <item name="android:windowNoTitle">true</item>
     </style>
@@ -71,7 +71,6 @@
         <item name="android:textCursorDrawable">@drawable/color_cursor</item>
         <item name="android:height">40sp</item>
     </style>
-
 
 
     <style name="Theme.Transparent" parent="android:Theme">

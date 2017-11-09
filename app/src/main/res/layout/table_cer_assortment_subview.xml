@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRunningPromo"
+        android:stretchColumns="*"
+        >
+
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:text="SKU  >"
+                android:id="@+id/txt_one"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="5dp"
+                android:background="@drawable/cell_shape"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_two"
+                android:text="Members (Count)"
+                android:gravity="start"
+                android:padding="5dp"
+                android:background="@drawable/cell_shape"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/txt_three"
+                android:text="Sales"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="5dp"
+                android:background="@drawable/cell_shape"
+                android:textSize="@dimen/smdm_rowInflaterLayout_normal"
+                android:textColor="@color/txt_color"
+                />
+
+
+
+
+        </TableRow>
+
+
+
+
+
+
+
+
+    </TableLayout>
+
+
+
+</RelativeLayout>

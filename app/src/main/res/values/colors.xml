@@ -71,7 +71,7 @@
     <color name="ezfb_statusbar">#808080</color>
 
     <color name="hinttextcolor">#b2b2b2</color>
-
+    <color name="viewcolor">#ff669900</color>
 
 
 </resources>

@@ -379,6 +379,7 @@ public class SwitchingActivity extends AppCompatActivity
                     Intent reportActivity = new Intent(context, ReportActivity.class);
                     startActivity(reportActivity);
                     break;
+
                 case "050":
                     Intent EDSCPerformanceActivity = new Intent(context, EDSCPerformanceActivity.class);
                     startActivity(EDSCPerformanceActivity);
