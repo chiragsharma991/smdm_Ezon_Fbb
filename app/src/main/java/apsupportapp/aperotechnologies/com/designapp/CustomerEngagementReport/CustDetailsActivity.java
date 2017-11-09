@@ -7,12 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.Adapter.CustomerDetailsAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 public class CustDetailsActivity extends AppCompatActivity {
@@ -30,6 +30,7 @@ public class CustDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_details);
+        getSupportActionBar().hide();
         context = this;
         initialise();
     }
@@ -62,7 +63,7 @@ public class CustDetailsActivity extends AppCompatActivity {
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -73,5 +74,11 @@ public class CustDetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

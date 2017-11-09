@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CustomerEngagementReport.RecencyFilterActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -476,17 +476,14 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".CustomerEngagementReport.EDSCPerformanceActivity"
+            android:name=".CustomerEngagementReport.EDSCPerformanceReportActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".CustomerEngagementReport.RecencyFrequencyActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".CustomerEngagementReport.EDSCPerformanceReportActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".SplashActivity"
+        <activity android:name=".CustomerEngagementReport.RecencyFilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
     </application>

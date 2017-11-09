@@ -6,42 +6,43 @@
             android:innerRadiusRatio="6"
             android:shape="ring"
             android:thicknessRatio="20.0"
-            android:useLevel="true">
+            android:useLevel="false">
 
-            <gradient
-                android:centerColor="#999999"
-                android:endColor="#999999"
-                android:startColor="#999999"
-                android:type="sweep" />
+            <!--<gradient-->
+                <!--android:centerColor="#999999"-->
+                <!--android:endColor="#999999"-->
+                <!--android:startColor="#999999"-->
+                <!--/>-->
+            <solid android:color="#999999" />
         </shape>
     </item>
 
-    <item android:id="@android:id/progress">
-        <rotate
-            android:fromDegrees="270"
-            android:pivotX="50%"
-            android:pivotY="50%"
-            android:toDegrees="270">
+    <!--<item android:id="@android:id/progress">-->
+        <!--<rotate-->
+            <!--android:fromDegrees="270"-->
+            <!--android:pivotX="50%"-->
+            <!--android:pivotY="50%"-->
+            <!--android:toDegrees="270">-->
 
-            <shape
-                android:innerRadiusRatio="6"
-                android:shape="ring"
-                android:thicknessRatio="20.0"
-                android:useLevel="true">
+            <!--<shape-->
+                <!--android:innerRadiusRatio="6"-->
+                <!--android:shape="ring"-->
+                <!--android:thicknessRatio="20.0"-->
+                <!--android:useLevel="true">-->
 
-                <rotate
-                    android:fromDegrees="0"
-                    android:pivotX="50%"
-                    android:pivotY="50%"
-                    android:toDegrees="270" />
+                <!--<rotate-->
+                    <!--android:fromDegrees="0"-->
+                    <!--android:pivotX="50%"-->
+                    <!--android:pivotY="50%"-->
+                    <!--android:toDegrees="270" />-->
 
-                <gradient
-                    android:centerColor="@color/colorPrimary"
-                    android:endColor="@color/colorPrimary"
-                    android:startColor="@color/colorPrimary"
-                    android:type="sweep" />
+                <!--<gradient-->
+                    <!--android:centerColor="@color/colorPrimary"-->
+                    <!--android:endColor="@color/colorPrimary"-->
+                    <!--android:startColor="@color/colorPrimary"-->
+                    <!--android:type="sweep" />-->
 
-            </shape>
-        </rotate>
-    </item>
+            <!--</shape>-->
+        <!--</rotate>-->
+    <!--</item>-->
 </layer-list>

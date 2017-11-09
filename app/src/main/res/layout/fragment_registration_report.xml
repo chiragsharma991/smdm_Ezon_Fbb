@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabview_regReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/ezfb_Red"
+        app:tabSelectedTextColor="@color/ezfb_Red"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="@color/ezfb_Red" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollv_basket"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabview_regReport"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:weightSum="1"
+            android:orientation="vertical"
+            android:id="@+id/rel_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:weightSum="1"
+                android:nestedScrollingEnabled="true"
+                android:id="@+id/lin_chart"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_weight="0.35"
+                    android:id="@+id/rel_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/regreport_pieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/regreport_progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="#0000"
+                    android:keepScreenOn="true"
+                    android:padding="10dp"
+                    android:theme="@style/ProgressBar"
+                    android:visibility="gone"/>
+
+
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_marginLeft="5dp"
+                    android:weightSum="4"
+                    android:orientation="vertical"
+                    android:id="@+id/rel_weeks"
+                    android:layout_weight="0.65"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:id="@+id/lin_week1"
+                        android:weightSum="1"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:id="@+id/txt_week1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1 W - 10"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="13sp"
+                            />
+
+                        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/progress_week1"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:progress="80"
+                            android:progressBackgroundTint="@color/ezfb_Red"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:progressDrawable="@drawable/circular"
+                            android:layout_weight="0.5"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:id="@+id/lin_week2"
+                        android:weightSum="1"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:id="@+id/txt_week2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 W - 10"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="13sp"
+                            />
+
+                        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/progress_week2"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:progressBackgroundTint="@color/ezfb_Red"
+                            android:progress="80"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:progressDrawable="@drawable/circular"
+                            android:layout_weight="0.5"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:id="@+id/lin_week3"
+                        android:weightSum="1"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:id="@+id/txt_week3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3 W - 10"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="13sp"
+                            />
+
+                        <ProgressBar
+                            android:id="@+id/progress_week3"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:progress="80"
+                            android:progressBackgroundTint="@color/ezfb_Red"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:progressDrawable="@drawable/circular"
+                            android:layout_weight="0.5"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:id="@+id/lin_week4"
+                        android:weightSum="1"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:id="@+id/txt_week4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4 W - 10"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="13sp"
+                            />
+
+                        <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/progress_week4"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:progress="80"
+                            android:progressBackgroundTint="@color/ezfb_Red"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:progressDrawable="@drawable/circular"
+                            android:layout_weight="0.5"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_below="@+id/lin_chart"
+                android:id="@+id/rel_regreport"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/regmember"
+                android:textColor="@color/ezfb_black"
+                android:layout_margin="5dp"
+                />
+
+                <android.support.v7.widget.RecyclerView
+                    android:nestedScrollingEnabled="true"
+                    android:id="@+id/recycler_regreport"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_below="@+id/txt_title"
+                    android:layout_alignStart="@+id/txt_title">
+
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
+    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

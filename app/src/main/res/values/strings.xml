@@ -219,6 +219,8 @@
     <string name="grid_text1">₹ 151.24</string>
     <string name="grid_text2">₹ 199 24% OFF</string>
 
+    <string name="regmember">Registered Members (60)</string>
+    <string name="edsc_report">EDSC Performance Report</string>
     <string name="cust_details">LM/ ₹ 750 - 1000</string>
     <string name="title_activity_recency_filter">RecencyFilterActivity</string>
     <string name="text_filter">Recency (Days)</string>

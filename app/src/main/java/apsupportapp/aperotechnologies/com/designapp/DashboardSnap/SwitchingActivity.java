@@ -96,7 +96,7 @@ import apsupportapp.aperotechnologies.com.designapp.BORIS.MobileScreenActivity;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.BasketAnalysis;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.RecencyFrequencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.AssortmentActivity;
-import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.EDSCPerformanceActivity;
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.EDSCPerformanceReportActivity;
 
 /**
  * Created by csuthar on 10/07/17.
@@ -380,7 +380,7 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(RecencyFrequncyActivity);
                     break;
                 case "050":
-                    Intent EDSCPerformanceActivity = new Intent(context, EDSCPerformanceActivity.class);
+                    Intent EDSCPerformanceActivity = new Intent(context, EDSCPerformanceReportActivity.class);
                     startActivity(EDSCPerformanceActivity);
                     break;
                 case "051":
