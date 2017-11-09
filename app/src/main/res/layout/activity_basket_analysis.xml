@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/ezfb_White"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linear_toolbar"
@@ -59,7 +60,6 @@
                     android:textSize="19sp" />
 
 
-
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
 
@@ -67,17 +67,18 @@
 
 
     <RelativeLayout
-        android:layout_below="@+id/linear_toolbar"
+        android:id="@+id/rel_switch"
         android:layout_width="match_parent"
         android:layout_height="25dp"
+        android:layout_below="@+id/linear_toolbar"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_marginRight="5dp"
-            android:id="@+id/txt_planEngagement"
+            android:id="@+id/txt_mbr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/mbrswitch"
             android:text="MBR"
             android:textColor="@color/ezfb_black"
@@ -85,25 +86,457 @@
             android:textStyle="normal" />
 
         <Switch
-            android:layout_centerInParent="true"
             android:id="@+id/mbrswitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_centerVertical="true"
 
             />
 
         <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/txt_switch_name"
+            android:id="@+id/txt_nonmbr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/mbrswitch"
             android:text="NONMBR"
             android:textSize="13sp" />
 
     </RelativeLayout>
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabview_basket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_switch"
+        app:tabIndicatorColor="@color/ezfb_Red"
+        app:tabSelectedTextColor="@color/ezfb_Red"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="@color/ezfb_Red" />
 
+
+    <ScrollView
+        android:id="@+id/scrollv_basket"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabview_basket"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rel_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_box1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/ezfb_White"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="false"
+                app:contentPadding="5dp">
+
+                <RelativeLayout
+                    android:id="@+id/rel_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txt_store_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_margin="5dp"
+                        android:text="Store Summary"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:id="@+id/lin_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_below="@+id/txt_store_summary"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:id="@+id/rel_br_netsales"
+                            android:layout_width="0dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_edittext3">
+
+
+                            <TextView
+                                android:id="@+id/txt_br_NetSalesVal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="10dp"
+                                android:text="₹	4,201,128"
+                                android:textColor="@color/ezfb_Red"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_br_NetSales"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_below="@+id/txt_br_NetSalesVal"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="Net Sale"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="13sp"
+                                android:textStyle="normal" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rel_br_customers"
+                            android:layout_width="0dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_edittext3">
+
+
+                            <TextView
+                                android:id="@+id/txt_br_custVal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="10dp"
+                                android:text="1,608"
+                                android:textColor="@color/ezfb_Red"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_br_cust"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_below="@+id/txt_br_custVal"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="Customers"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="13sp"
+                                android:textStyle="normal" />
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lin_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_below="@+id/lin_one"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:id="@+id/rel_br_atv"
+                            android:layout_width="0dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_edittext3">
+
+
+                            <TextView
+                                android:id="@+id/txt_br_atvVal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="10dp"
+                                android:text="₹	625"
+                                android:textColor="@color/ezfb_Red"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_br_atv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_below="@+id/txt_br_atvVal"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="ATV(ticket size)"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="13sp"
+                                android:textStyle="normal" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rel_br_upt"
+                            android:layout_width="0dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_edittext3">
+
+
+                            <TextView
+                                android:id="@+id/txt_br_uptVal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="10dp"
+                                android:text="10"
+                                android:textColor="@color/ezfb_Red"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_br_upt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_below="@+id/txt_br_uptVal"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="UPT(units per basket)"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="13sp"
+                                android:textStyle="normal" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lin_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_below="@+id/lin_two"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:id="@+id/rel_br_spc"
+                            android:layout_width="0dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_edittext3">
+
+
+                            <TextView
+                                android:id="@+id/txt_br_spcVal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="10dp"
+                                android:text="₹	2,789"
+                                android:textColor="@color/ezfb_Red"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_br_spc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_below="@+id/txt_br_spcVal"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="Sales Per Cust"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="13sp"
+                                android:textStyle="normal" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rel_br_upc"
+                            android:layout_width="0dp"
+                            android:layout_height="75dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_edittext3">
+
+
+                            <TextView
+                                android:id="@+id/txt_br_upcVal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="10dp"
+                                android:text="46.8"
+                                android:textColor="@color/ezfb_Red"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_br_upc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_below="@+id/txt_br_upcVal"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:text="Units Per Cust"
+                                android:textColor="@color/ezfb_black"
+                                android:textSize="13sp"
+                                android:textStyle="normal" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_box2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card_box1"
+                app:cardBackgroundColor="@color/ezfb_White"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="false"
+                app:contentPadding="5dp">
+
+                <RelativeLayout
+                    android:id="@+id/rel_box1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txt_store_cust"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_margin="5dp"
+                        android:text="Store customer basket size"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rel_switch_band"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_below="@+id/txt_store_cust"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_spendBand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:layout_toLeftOf="@+id/bandswitch"
+                            android:text="Spend band"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+
+                        <Switch
+                            android:id="@+id/bandswitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/txt_unitBand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/bandswitch"
+                            android:text="Unit's band"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/rel_rangeBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_below="@+id/rel_switch_band">
+
+                        <LinearLayout
+                            android:id="@+id/lin_range"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rel_rangeVal"
+                        android:layout_below="@+id/rel_rangeBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txt_minRangeVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="13sp"
+                        android:layout_alignParentLeft="true"/>
+
+
+                    <TextView
+                        android:id="@+id/txt_maxRangeVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="299"
+                        android:textColor="@color/ezfb_black"
+                        android:textSize="13sp"
+                        android:layout_alignParentRight="true"/>
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_below="@+id/rel_rangeVal"
+                        android:id="@+id/br_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
