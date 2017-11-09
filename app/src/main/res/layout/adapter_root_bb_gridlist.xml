@@ -69,6 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:gravity="bottom"
+                        android:singleLine="true"
                         android:layout_marginLeft="10dp"
                         android:textSize="12sp"/>
 
@@ -78,6 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
+                        android:singleLine="true"
                         android:gravity="bottom|right"
                         android:layout_marginRight="10dp"
                         android:textSize="12sp"/>

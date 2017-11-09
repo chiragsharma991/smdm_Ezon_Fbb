@@ -6,7 +6,8 @@
     android:background="@color/ezfb_activity_background"
     android:layout_height="match_parent"
     tools:context=".TopOptionCutSize.TopFullCut"
-    xmlns:app="http://schemas.android.com/apk/res-auto"    android:id="@+id/activity_top_full_cut"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_top_full_cut"
 
     >
 
