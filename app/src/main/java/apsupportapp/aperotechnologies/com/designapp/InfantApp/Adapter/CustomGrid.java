@@ -1,6 +1,7 @@
 package apsupportapp.aperotechnologies.com.designapp.InfantApp.Adapter;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -21,6 +22,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import apsupportapp.aperotechnologies.com.designapp.InfantApp.ProductDetails;
+import apsupportapp.aperotechnologies.com.designapp.InfantApp.SubCategory;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 import static apsupportapp.aperotechnologies.com.designapp.InfantApp.BabyCerealActivity.gridView;
@@ -66,11 +68,15 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     int height = gridView.getMeasuredHeight();
                     Log.e("height "," "+height);
                     linearLayout.getLayoutParams().height = height/2;
-                    linearLayout.requestLayout();
-               }
+                    linearLayout.requestLayout();//09033615500
+
+
+                }
             });
 
-       }
+
+
+        }
         else if(viewString.equals("listView"))
         {
             view = inflater.inflate(R.layout.custom_list, parent, false);
@@ -90,6 +96,7 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     Log.e("height "," "+height);
                     linearLayout.getLayoutParams().height = height;
                     linearLayout.requestLayout();
+
 
                 }
             });
@@ -118,7 +125,17 @@ public class CustomGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 public void onClick(View v)
                 {
                     Intent intent = new Intent(mContext,ProductDetails.class);
-                    mContext.startActivity(intent);
+                    CardView sharedView = (CardView) v;
+                    String transitionName = "details";
+
+                    ActivityOptions transitionActivityOptions = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, sharedView, transitionName);
+                        mContext.startActivity(intent, transitionActivityOptions.toBundle());
+                    }else{
+
+                        mContext.startActivity(intent);
+                    }
                 }
             });
         }

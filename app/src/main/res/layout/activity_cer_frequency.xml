@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ezfb_White"
+        android:id="@+id/tabview"
+        android:layout_below="@+id/linearToolbar"
+        app:tabIndicatorColor="@color/ezfb_Red"
+        app:tabTextColor="@color/ezfb_Red"
+        app:tabSelectedTextColor="@color/ezfb_Red"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        >
+
+    </android.support.design.widget.TabLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textColor="@color/smdm_dark_Black"
+        android:text="Frequency Report"
+        android:textSize="16sp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/title"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+</LinearLayout>

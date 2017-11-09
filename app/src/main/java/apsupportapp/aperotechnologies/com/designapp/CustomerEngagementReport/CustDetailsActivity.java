@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -56,7 +58,10 @@ public class CustDetailsActivity extends AppCompatActivity {
 
         }
 
+        int resId = R.anim.item_animation_from_right;
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
         recycler_custdetails.setLayoutManager(new LinearLayoutManager(context));
+        recycler_custdetails.setLayoutAnimation(animation);
         cusomerDetailsAdapter = new CustomerDetailsAdapter(context,  recycler_custdetails, listCustomer);
         recycler_custdetails.setAdapter(cusomerDetailsAdapter);
 

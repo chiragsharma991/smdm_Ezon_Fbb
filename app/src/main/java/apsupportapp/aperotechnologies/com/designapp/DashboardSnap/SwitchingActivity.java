@@ -49,6 +49,7 @@ import apsupportapp.aperotechnologies.com.designapp.Collaboration.Status.StatusA
 import apsupportapp.aperotechnologies.com.designapp.Collaboration.to_do.To_Do;
 import apsupportapp.aperotechnologies.com.designapp.ConstsCore;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagement.CustomerLookupActivity;
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.ReportActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneBestPerformerInventory;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneFreshnessIndexActivity;
 import apsupportapp.aperotechnologies.com.designapp.Ezone.EzoneSalesAnalysisActivity1;
@@ -94,7 +95,6 @@ import apsupportapp.aperotechnologies.com.designapp.ExpiringPromo.ExpiringPromoA
 import apsupportapp.aperotechnologies.com.designapp.BestPerformersPromo.BestPerformerActivity;
 import apsupportapp.aperotechnologies.com.designapp.BORIS.MobileScreenActivity;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.BasketAnalysis;
-import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.RecencyFrequencyActivity;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.AssortmentActivity;
 import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.EDSCPerformanceReportActivity;
 
@@ -145,7 +145,7 @@ public class SwitchingActivity extends AppCompatActivity
                     break;
 
                 case "004":
-                    Intent SalesAnalysisActivity1 = new Intent(context,SalesAnalysisActivity1.class);//
+                    Intent SalesAnalysisActivity1 = new Intent(context,MobileScreenActivity.class);//SalesAnalysisActivity1
                     startActivity(SalesAnalysisActivity1);
                     break;
                 case "005":
@@ -376,9 +376,10 @@ public class SwitchingActivity extends AppCompatActivity
                     startActivity(BasketAnalysis);
                     break;
                 case "049":
-                    Intent RecencyFrequncyActivity = new Intent(context, RecencyFrequencyActivity.class);
-                    startActivity(RecencyFrequncyActivity);
+                    Intent reportActivity = new Intent(context, ReportActivity.class);
+                    startActivity(reportActivity);
                     break;
+
                 case "050":
                     Intent EDSCPerformanceActivity = new Intent(context, EDSCPerformanceReportActivity.class);
                     startActivity(EDSCPerformanceActivity);

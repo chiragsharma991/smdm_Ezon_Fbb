@@ -70,18 +70,8 @@ public class SubCategory extends AppCompatActivity implements SubCategory_childA
         if(parent == 1)
         {
             Intent intent=new Intent(context,BabyCerealActivity.class);
+            startActivity(intent);
 
-            CardView sharedView = (CardView) view;
-            String transitionName = "details";
-
-            ActivityOptions transitionActivityOptions = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(SubCategory.this, sharedView, transitionName);
-                startActivity(intent, transitionActivityOptions.toBundle());
-            }else{
-
-                startActivity(intent);
-            }
         }
         else
         {

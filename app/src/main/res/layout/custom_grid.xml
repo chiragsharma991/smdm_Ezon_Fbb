@@ -30,8 +30,9 @@
 
             <ImageView
                 android:id="@+id/grid_image"
-                android:adjustViewBounds="true"
+                android:adjustViewBounds="false"
                 android:layout_width="wrap_content"
+                android:transitionName="details"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                />
@@ -50,7 +51,10 @@
             android:layout_marginBottom="10dp"
             android:maxLines="3"
             android:text="@string/grid_text"
-            android:textSize="12sp"></TextView>
+            android:textSize="12sp"
+            >
+
+        </TextView>
 
 
         <LinearLayout
