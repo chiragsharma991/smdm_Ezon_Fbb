@@ -116,8 +116,8 @@ public class RecencyFrequencyFragment extends Fragment
 
             @Override
             public void onClick(View view) {
-           //     Intent intent=new Intent(context,CustomerDetails.class);
-              //  startActivity(intent);
+                Intent intent=new Intent(context,CustDetailsActivity.class);
+                startActivity(intent);
             }
         }
 
