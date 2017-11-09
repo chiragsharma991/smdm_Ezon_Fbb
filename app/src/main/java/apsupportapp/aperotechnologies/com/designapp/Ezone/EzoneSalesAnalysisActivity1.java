@@ -1176,12 +1176,13 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                 try {
                     Log.i(TAG, "onResponse: "+response);
                     int i;
-                    Reusable_Functions.hDialog();
 
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                         Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
                         ezone_onClickflg = false;
                         ez_progessBar.setVisibility(View.GONE);
+                        Reusable_Functions.hDialog();
+
                     } else if (response.length() == limit) {
                         for (i = 0; i < response.length(); i++) {
                             ez_sales_detail_model = gson.fromJson(response.get(i).toString(), SalesAnalysisListDisplay.class);
@@ -1302,6 +1303,8 @@ public class EzoneSalesAnalysisActivity1 extends AppCompatActivity implements Ra
                             requestEzoneSalesPagerOnScrollAPI();
                         }
                     }
+
+
                 } catch (Exception e) {
                     Reusable_Functions.hDialog();
                     Toast.makeText(context, "no data found" + e.getMessage(), Toast.LENGTH_SHORT).show();

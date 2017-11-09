@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    >
 
     <android.support.v7.widget.CardView
         android:id="@+id/bst_cardView"
@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="3dp"
-        app:cardUseCompatPadding="false"
+        android:layout_margin="3dp"
+        app:cardUseCompatPadding="true"
         app:contentPadding="0dp">
 
         <RelativeLayout
@@ -35,7 +36,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="38dp"
                         >
 
                         <TextView
@@ -52,6 +53,7 @@
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/txt_date"
                             android:layout_marginLeft="4dp"
+                            android:textColor="@color/ezfb_black"
                             android:text="Nov"
                             android:textSize="10sp"/>
 
@@ -60,6 +62,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/txt_month"
+                            android:textColor="@color/ezfb_black"
                             android:layout_toRightOf="@+id/txt_date"
                             android:layout_marginLeft="4dp"
                             android:text="2017"
@@ -86,7 +89,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/txt_visit"
+                            android:layout_centerHorizontal="true"
                             android:layout_marginLeft="4dp"
+                            android:textColor="@color/ezfb_black"
                             android:text="10"
                             android:textSize="10sp"/>
 
@@ -101,6 +106,8 @@
             <View
                 android:id="@+id/viewDivider"
                 android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_toRightOf="@+id/rel_1"
                 android:background="@android:color/holo_green_dark"
                 android:layout_width="1dp"
@@ -123,7 +130,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="38dp"
                         android:layout_weight="2">
 
                         <TextView
@@ -170,6 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/txt_avgSize"
+                            android:textColor="@color/ezfb_black"
                             android:layout_marginLeft="4dp"
                             android:text=" "
                             android:textSize="10sp"/>
@@ -199,13 +207,14 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="38dp"
                         android:layout_weight="2">
 
                         <TextView
                             android:id="@+id/txt_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/ezfb_black"
                             android:text="3823293213"
                             android:textSize="16sp"/>
 
@@ -234,6 +243,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/txt_avgVisits"
                             android:layout_marginLeft="4dp"
+                            android:textColor="@color/ezfb_black"
                             android:text="6 in last 3 Months"
                             android:textSize="10sp"/>
 

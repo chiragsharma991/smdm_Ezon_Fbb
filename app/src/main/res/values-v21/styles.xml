@@ -10,8 +10,6 @@
     </style>
 
 
-
-
     <style name="customTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/ezfbb_red</item>
         <item name="textAllCaps">false</item>
@@ -22,8 +20,6 @@
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabSelectedTextColor">@color/ezfbb_red</item>
     </style>
-
-
 
 
 </resources>
