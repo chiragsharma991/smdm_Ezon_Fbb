@@ -1,20 +1,22 @@
 package apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.Adapter.CustomerDetailsAdapter;
 import apsupportapp.aperotechnologies.com.designapp.R;
 
 public class CustDetailsActivity extends AppCompatActivity {
@@ -24,7 +26,6 @@ public class CustDetailsActivity extends AppCompatActivity {
     private Button btn_sort;
     private TextView txt_title;
     private RelativeLayout imageBtnBack1, relative_sort;
-    private String from = "Basket";
     ArrayList<String> listCustomer;
     CustomerDetailsAdapter cusomerDetailsAdapter;
 
@@ -32,6 +33,7 @@ public class CustDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_details);
+        getSupportActionBar().hide();
         context = this;
         initialise();
     }
@@ -45,17 +47,19 @@ public class CustDetailsActivity extends AppCompatActivity {
         txt_title = (TextView) findViewById(R.id.txt_title);
         btn_sort = (Button) findViewById(R.id.btn_sort);
 
-        if(from.equals("Basket"))
-        {
-            txt_title.setText("Customer Details");
-            btn_sort.setBackgroundResource(R.mipmap.iconsort);
-        }
-        else
-        {
-            txt_title.setText("List of customers who have purchased in 0 to 7 Days");
-            btn_sort.setBackgroundResource(R.mipmap.iconfilter);
+        if(!getIntent().getExtras().getString("from").equals("")) {
 
+            if(getIntent().getExtras().getString("from").equals("Basket"))
+            {
+                txt_title.setText("Customer Details");
+                btn_sort.setBackgroundResource(R.mipmap.iconsort);
+            }
+            else{
+                txt_title.setText("List of customers who have purchased in 0 to 7 Days");
+                btn_sort.setBackgroundResource(R.mipmap.iconfilter);
+            }
         }
+
 
         int resId = R.anim.item_animation_from_right;
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
@@ -67,7 +71,7 @@ public class CustDetailsActivity extends AppCompatActivity {
         imageBtnBack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -76,7 +80,16 @@ public class CustDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent filter = new Intent(context, RecencyFilterActivity.class);
+                startActivity(filter);
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

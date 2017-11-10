@@ -57,12 +57,14 @@ public class BasketAnalysis extends AppCompatActivity implements View.OnClickLis
         rel_back = (RelativeLayout)findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         Tabview = (TabLayout) findViewById(R.id.tabview_basket);
+//        Tabview.setTabMode(TabLayout.MODE_SCROLLABLE);
         Tabview.addTab(Tabview.newTab().setText("LD"), 0);
         Tabview.addTab(Tabview.newTab().setText("WTD"), 1);
         Tabview.addTab(Tabview.newTab().setText("LW"), 2);
         Tabview.addTab(Tabview.newTab().setText("MTD"), 3);
         Tabview.addTab(Tabview.newTab().setText("LM"), 4);
         Tabview.addTab(Tabview.newTab().setText("YTD"), 5);
+
         Tabview.setOnTabSelectedListener(this);
         txt_br_NetSalesVal = (TextView)findViewById(R.id.txt_br_NetSalesVal);
         txt_br_custVal = (TextView)findViewById(R.id.txt_br_custVal);
@@ -81,10 +83,10 @@ public class BasketAnalysis extends AppCompatActivity implements View.OnClickLis
         mbrswitch.setOnCheckedChangeListener(this);
         bandswitch.setOnCheckedChangeListener(this);
         lin_range = (LinearLayout)findViewById(R.id.lin_range);
-//        br_recyclerView = (RecyclerView)findViewById(R.id.br_recyclerView);
-//        br_recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-//        basketAnalysisAdapter = new BasketAnalysisAdapter(context,  br_recyclerView);
-//        br_recyclerView.setAdapter(basketAnalysisAdapter);
+        br_recyclerView = (RecyclerView)findViewById(R.id.br_recyclerView);
+        br_recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+        basketAnalysisAdapter = new BasketAnalysisAdapter(context,  br_recyclerView);
+        br_recyclerView.setAdapter(basketAnalysisAdapter);
     }
     private void show_rangeBar()
     {
@@ -107,20 +109,24 @@ public class BasketAnalysis extends AppCompatActivity implements View.OnClickLis
 
                 for( i = 0; i < 5; i++)
                 {
-                    TextView text = new TextView(context);
-                    text.setText(""+i); // <-- does it rea
-                    // lly compile without the + sign?
+                    final TextView text = new TextView(context);
+//                    text.setText(""+i); // <-- does it really compile without the + sign?
                     text.setTextSize(12);
                     text.setBackgroundColor(colors[i]);
                     text.setLayoutParams(new LinearLayout.LayoutParams(width/5, height));
+                    text.setTag(i);
                     lin_range.addView(text);
+                    text.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(context,"Position :"+text.getTag(),Toast.LENGTH_SHORT).show();
+                            basketAnalysisAdapter.notifyDataSetChanged();
+                        }
+                    });
                 }
             }
         });
     }
-
-
-
     @Override
     public void onClick(View v)
     {
@@ -130,10 +136,10 @@ public class BasketAnalysis extends AppCompatActivity implements View.OnClickLis
                 onBackPressed();
                 break;
         }
-
     }
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         super.onBackPressed();
         finish();
     }
@@ -163,10 +169,7 @@ public class BasketAnalysis extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(context,"Position :"+tab.getPosition(),Toast.LENGTH_SHORT).show();
                 break;
 
-
         }
-
-
     }
 
     @Override
@@ -180,7 +183,8 @@ public class BasketAnalysis extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+    {
         switch (buttonView.getId())
         {
             case R.id.mbrswitch:

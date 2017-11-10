@@ -1,4 +1,4 @@
-package apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport;
+package apsupportapp.aperotechnologies.com.designapp.CustomerEngagementReport.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

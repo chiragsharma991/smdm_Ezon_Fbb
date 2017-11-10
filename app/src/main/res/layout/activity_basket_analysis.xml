@@ -82,7 +82,7 @@
             android:layout_toLeftOf="@+id/mbrswitch"
             android:text="MBR"
             android:textColor="@color/ezfb_black"
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:textStyle="normal" />
 
         <Switch
@@ -102,7 +102,7 @@
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/mbrswitch"
             android:text="NONMBR"
-            android:textSize="13sp" />
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
@@ -188,7 +188,7 @@
                                 android:layout_marginTop="10dp"
                                 android:text="₹	4,201,128"
                                 android:textColor="@color/ezfb_Red"
-                                android:textSize="20sp"
+                                android:textSize="21sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -226,7 +226,7 @@
                                 android:layout_marginTop="10dp"
                                 android:text="1,608"
                                 android:textColor="@color/ezfb_Red"
-                                android:textSize="20sp"
+                                android:textSize="21sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -276,7 +276,7 @@
                                 android:layout_marginTop="10dp"
                                 android:text="₹	625"
                                 android:textColor="@color/ezfb_Red"
-                                android:textSize="20sp"
+                                android:textSize="21sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -292,7 +292,6 @@
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
 
-
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -304,7 +303,6 @@
                             android:layout_weight="1"
                             android:background="@drawable/rounded_edittext3">
 
-
                             <TextView
                                 android:id="@+id/txt_br_uptVal"
                                 android:layout_width="match_parent"
@@ -314,7 +312,7 @@
                                 android:layout_marginTop="10dp"
                                 android:text="10"
                                 android:textColor="@color/ezfb_Red"
-                                android:textSize="20sp"
+                                android:textSize="21sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -329,7 +327,6 @@
                                 android:textColor="@color/ezfb_black"
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
-
 
                         </RelativeLayout>
                     </LinearLayout>
@@ -363,7 +360,7 @@
                                 android:layout_marginTop="10dp"
                                 android:text="₹	2,789"
                                 android:textColor="@color/ezfb_Red"
-                                android:textSize="20sp"
+                                android:textSize="21sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -379,7 +376,6 @@
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
 
-
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -391,7 +387,6 @@
                             android:layout_weight="1"
                             android:background="@drawable/rounded_edittext3">
 
-
                             <TextView
                                 android:id="@+id/txt_br_upcVal"
                                 android:layout_width="match_parent"
@@ -401,7 +396,7 @@
                                 android:layout_marginTop="10dp"
                                 android:text="46.8"
                                 android:textColor="@color/ezfb_Red"
-                                android:textSize="20sp"
+                                android:textSize="21sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -416,7 +411,6 @@
                                 android:textColor="@color/ezfb_black"
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
-
 
                         </RelativeLayout>
                     </LinearLayout>
@@ -466,7 +460,7 @@
                             android:layout_toLeftOf="@+id/bandswitch"
                             android:text="Spend band"
                             android:textColor="@color/ezfb_black"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             android:textStyle="normal" />
 
                         <Switch
@@ -486,57 +480,69 @@
                             android:layout_marginLeft="5dp"
                             android:layout_toRightOf="@+id/bandswitch"
                             android:text="Unit's band"
-                            android:textSize="13sp" />
+                            android:textSize="15sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:id="@+id/rel_rangeBar"
                         android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:layout_below="@+id/rel_switch_band">
+                        android:layout_height="18dp"
+                        android:layout_below="@+id/rel_switch_band"
+                        android:layout_margin="5dp">
 
                         <LinearLayout
                             android:id="@+id/lin_range"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
 
                     </RelativeLayout>
+
                     <RelativeLayout
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:id="@+id/rel_rangeVal"
-                        android:layout_below="@+id/rel_rangeBar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/txt_minRangeVal"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:layout_alignParentLeft="true"/>
+                        android:layout_below="@+id/rel_rangeBar">
+
+                        <TextView
+                            android:id="@+id/txt_minRangeVal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="2"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="13sp" />
 
 
-                    <TextView
-                        android:id="@+id/txt_maxRangeVal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="299"
-                        android:textColor="@color/ezfb_black"
-                        android:textSize="13sp"
-                        android:layout_alignParentRight="true"/>
+                        <TextView
+                            android:id="@+id/txt_maxRangeVal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="299"
+                            android:textColor="@color/ezfb_black"
+                            android:textSize="13sp" />
                     </RelativeLayout>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_below="@+id/rel_rangeVal"
-                        android:id="@+id/br_recyclerView"
+                    <RelativeLayout
+                        android:id="@+id/rel_recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/rel_rangeVal"
+                        android:layout_marginTop="5dp">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/br_recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </RelativeLayout>
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
         </RelativeLayout>
