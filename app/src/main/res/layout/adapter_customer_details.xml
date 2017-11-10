@@ -14,7 +14,9 @@
         app:cardElevation="3dp"
         android:layout_margin="3dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="0dp">
+        app:contentPadding="0dp"
+
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
