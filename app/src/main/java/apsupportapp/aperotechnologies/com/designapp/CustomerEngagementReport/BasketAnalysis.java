@@ -57,7 +57,7 @@ public class BasketAnalysis extends AppCompatActivity implements View.OnClickLis
         rel_back = (RelativeLayout)findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         Tabview = (TabLayout) findViewById(R.id.tabview_basket);
-        Tabview.setTabMode(TabLayout.MODE_SCROLLABLE);
+//        Tabview.setTabMode(TabLayout.MODE_SCROLLABLE);
         Tabview.addTab(Tabview.newTab().setText("LD"), 0);
         Tabview.addTab(Tabview.newTab().setText("WTD"), 1);
         Tabview.addTab(Tabview.newTab().setText("LW"), 2);

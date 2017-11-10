@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="eazegraph-1.2.2">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/ed8c2cde6cc5186191d45cc6171bb403d02f9f67/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/ed8c2cde6cc5186191d45cc6171bb403d02f9f67/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/8039e2b6e6809535a3f384d236979aa55d046e49/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/8039e2b6e6809535a3f384d236979aa55d046e49/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

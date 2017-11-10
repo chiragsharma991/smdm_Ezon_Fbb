@@ -97,6 +97,10 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
         this.dublicate_listDataChild.putAll(mListDataChild);
 
         salesFilterActivity = new SalesFilterActivity();
+        Log.e("mListDataGroup ", " "+mListDataGroup.toString());
+        Log.e("mListDataChild ", " "+mListDataChild.toString());
+
+
     }
 
     @Override
@@ -119,6 +123,8 @@ public class SalesFilterExpandableList extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         groupText = getGroup(groupPosition);
+
+
 
         if (convertView == null) {
 

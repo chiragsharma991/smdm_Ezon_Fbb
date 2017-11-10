@@ -52,6 +52,7 @@ public class BasketAnalysisAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             public void onClick(View v) {
                 Toast.makeText(context, "position  "+position,Toast.LENGTH_SHORT).show();
                 Intent cust_details = new Intent(context, CustDetailsActivity.class);
+                cust_details.putExtra("from","Basket");
                 context.startActivity(cust_details);
             }
         });
