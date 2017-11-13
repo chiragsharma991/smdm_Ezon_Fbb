@@ -296,6 +296,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 if(loginStoreArray.get(0).getGeoLevel2Code().equals("BB") || loginStoreArray.get(0).getGeoLevel2Code().equals("FBB") && loginStoreArray.get(0).getLobName().equals("FASHION") )
                                 editor.putString("concept","BB,FBB");
+                                else if (loginStoreArray.get(0).getLobName().equals("ELECTRONICS"))
+                                editor.putString("concept","BB,EZ,CT,HT");
                                 else editor.putString("concept", loginStoreArray.get(0).getGeoLevel2Code());
                                 editor.putString("conceptDesc", loginStoreArray.get(0).getGeoLevel2Desc());
                                 editor.putString("lobid", loginStoreArray.get(0).getLobId());

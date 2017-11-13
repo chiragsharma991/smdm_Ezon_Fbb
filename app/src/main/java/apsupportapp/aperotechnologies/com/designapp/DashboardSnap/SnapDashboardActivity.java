@@ -103,8 +103,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     private String TAG = "SnapDashboardActivity";
     private Context context;
     public static NestedScrollView nestedScrollview;
+    public Dialog dialog;
     RequestQueue queue;
-    String userId, bearertoken, geoLeveLDesc, pushtoken, lobName;
+    String userId, bearertoken, geoLeveLDesc,geoLeveLCode, pushtoken, lobName;
     SharedPreferences sharedPreferences;
     ArrayList<String> arrayList, eventUrlList;
     MySingleton m_config;
@@ -126,7 +127,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
     public static SnapAdapter snapAdapter;
     public static boolean tokenProcess = false;
     private DatabaseHandler db;
-    private AlertDialog dialog;
+    private Dialog mappingDialog=null;
     private boolean[] lobchecked, conceptchecked;
     private View viewpart;
     private RecyclerView lobList;
@@ -154,8 +155,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userId = sharedPreferences.getString("userId", "");
         bearertoken = sharedPreferences.getString("bearerToken", "");
-        geoLeveLDesc = sharedPreferences.getString("conceptDesc", "");
-        lobName = sharedPreferences.getString("lobname", "");
+        geoLeveLDesc = sharedPreferences.getString("conceptDesc", "").trim();
+        geoLeveLCode = sharedPreferences.getString("concept", "").trim();
+        lobName = sharedPreferences.getString("lobname", "").trim();
         pushtoken = sharedPreferences.getString("push_tokken", "");
         hierarchyLevels = sharedPreferences.getString("hierarchyLevels", "");
         String[] kpiIdArray = getIntent().getStringArrayExtra("kpiId");
@@ -306,7 +308,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             return true;
         } else if (id == R.id.mapping) {
 
-            selectConceptNLob();
+           selectConceptNLob();
 
 
         } else if (id == R.id.aboutus) {
@@ -330,13 +332,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             conceptData.add(data.getGeoLevel2Code());
             conceptDesc.add(data.getGeoLevel2Desc());
         }
-
         // Note: concept data is not useful because we are using concept desc to show list.
         Set<String> set = new HashSet<>();
         set.addAll(conceptData);
         conceptData.clear();
         conceptData.addAll(set);  // remove dublicate values from list
-
         set = new HashSet<>();
         set.addAll(conceptDesc);
         conceptDesc.clear();
@@ -348,32 +348,37 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void customAlert(final ArrayList<String> conceptDesc) {
 
-        final Dialog dialog = new Dialog(context, R.style.ThemeDialog);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.ThemeDialog;
-        Window window = dialog.getWindow();
+        mappingDialog = new Dialog(context, R.style.ThemeDialog);
+        mappingDialog.getWindow().getAttributes().windowAnimations = R.style.ThemeDialog;
+        Window window = mappingDialog.getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
         wlp.gravity = Gravity.BOTTOM;
         window.setAttributes(wlp);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.dashboard_dropdown);
-        dialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mappingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mappingDialog.setCancelable(true);
+        mappingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        mappingDialog.setContentView(R.layout.dashboard_dropdown);
+        mappingDialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-        lobList = (RecyclerView) dialog.findViewById(R.id.lobList);
-        final RecyclerView conceptList = (RecyclerView) dialog.findViewById(R.id.conceptList);
-        RelativeLayout qfDoneLayout = (RelativeLayout) dialog.findViewById(R.id.qfDoneLayout);
-        final TextView txt_incorrect = (TextView) dialog.findViewById(R.id.txt_incorrect);
+        lobList = (RecyclerView) mappingDialog.findViewById(R.id.lobList);
+        final RecyclerView conceptList = (RecyclerView) mappingDialog.findViewById(R.id.conceptList);
+        RelativeLayout qfDoneLayout = (RelativeLayout) mappingDialog.findViewById(R.id.qfDoneLayout);
+        final TextView txt_incorrect = (TextView) mappingDialog.findViewById(R.id.txt_incorrect);
         txt_incorrect.setVisibility(View.GONE);
         conceptchecked = new boolean[conceptDesc.size()];
+        int lastConceptPostion=0 ; //Get default position  ... you can add 0 also
         for (int i = 0; i < conceptDesc.size(); i++) {
-            conceptchecked[i] = false;
+            if(conceptDesc.get(i).equals(geoLeveLDesc)){
+                conceptchecked[i]=true;
+                lastConceptPostion=i;
+            }
+            else conceptchecked[i] = false;
         }
         conceptList.setLayoutManager(new LinearLayoutManager(context));
         conceptList.setLayoutManager(new LinearLayoutManager(conceptList.getContext(), LinearLayoutManager.VERTICAL, false));
         final ConceptMappingAdapter conceptMappingAdapter = new ConceptMappingAdapter(conceptDesc, context, conceptchecked);
         conceptList.setAdapter(conceptMappingAdapter);
-        if (conceptDesc.size() == 1) addlistnerOnConceptList(conceptMappingAdapter, 0);
+        lastSelectedOnConceptList(conceptMappingAdapter, lastConceptPostion);
         conceptList.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -457,14 +462,14 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 } else {
                     Toast.makeText(SnapDashboardActivity.this, "Check your network connectivity", Toast.LENGTH_LONG).show();
                 }
-                dialog.dismiss();
+                mappingDialog.dismiss();
                 return;
 
 
             }
         });
 
-        dialog.show();
+        mappingDialog.show();
 
     }
 
@@ -473,9 +478,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         for (int i = 0; i < conceptDesc.size(); i++) {
             if (position == i) conceptchecked[i] = true;
             else conceptchecked[i] = false;
-
         }
-
         conceptMappingAdapter.notifyDataSetChanged();
         List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
         lobData = new ArrayList<>();
@@ -489,12 +492,48 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         displaylobName(lobData);
 
     }
+    private void lastSelectedOnConceptList(ConceptMappingAdapter conceptMappingAdapter, int position) {
+
+        for (int i = 0; i < conceptDesc.size(); i++) {
+            if (position == i) conceptchecked[i] = true;
+            else conceptchecked[i] = false;
+        }
+        conceptMappingAdapter.notifyDataSetChanged();
+        List<Login_StoreList> list = db.db_GetListWhereClause(conceptDesc.get(position));
+        lobData = new ArrayList<>();
+        for (Login_StoreList data : list) {
+            lobData.add(data.getLobName());
+        }
+        Set<String> set = new HashSet<>();
+        set.addAll(lobData);
+        lobData.clear();
+        lobData.addAll(set);  // remove dublicate values from list
+        lastDisplaylobName(lobData);
+
+    }
 
     private void displaylobName(final ArrayList<String> lobData) {
 
         lobchecked = new boolean[lobData.size()];
         for (int i = 0; i < lobData.size(); i++) {
-            lobchecked[i] = false;
+             lobchecked[i] = false;
+        }
+        //if(lobData.size() == 1) lobchecked[0] = true;
+        lobList.setLayoutManager(new LinearLayoutManager(context));
+        lobList.setLayoutManager(new LinearLayoutManager(lobList.getContext(), LinearLayoutManager.VERTICAL, false));
+        final LobMappingAdapter lobMappingAdapter = new LobMappingAdapter(lobData, context, lobchecked);
+        lobList.setAdapter(lobMappingAdapter);
+
+
+    }
+    private void lastDisplaylobName(final ArrayList<String> lobData) {
+
+        lobchecked = new boolean[lobData.size()];
+        for (int i = 0; i < lobData.size(); i++) {
+            if(lobData.get(i).equals(lobName)){
+                 lobchecked[i] = true;
+            }
+            else lobchecked[i] = false;
         }
         lobList.setLayoutManager(new LinearLayoutManager(context));
         lobList.setLayoutManager(new LinearLayoutManager(lobList.getContext(), LinearLayoutManager.VERTICAL, false));
@@ -628,7 +667,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
             List<App> apps = getProduct(5, kpiIdArray);
             snapAdapter.addSnap(new Snap(Gravity.START, "Collaboration", apps));
         }
-        if (kpiIdArray.contains("022") || kpiIdArray.contains("023") || kpiIdArray.contains("024") || kpiIdArray.contains("025") || kpiIdArray.contains("046")) {
+        if (kpiIdArray.contains("022") || kpiIdArray.contains("023") || kpiIdArray.contains("024") || kpiIdArray.contains("025") ) {
             List<App> apps = getProduct(6, kpiIdArray);
             snapAdapter.addSnap(new Snap(Gravity.START, "Product Feedback", apps));
         }
@@ -639,6 +678,11 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
         if (kpiIdArray.contains("030") || kpiIdArray.contains("031") || kpiIdArray.contains("032") || kpiIdArray.contains("033") || kpiIdArray.contains("034") || kpiIdArray.contains("035")) {
             List<App> apps = getProduct(11, kpiIdArray);
             snapAdapter.addSnap(new Snap(Gravity.START, "Customer Feedback HO", apps));
+        }
+        //------
+        if (kpiIdArray.contains("046")) {
+            List<App> apps = getProduct(17, kpiIdArray);
+            snapAdapter.addSnap(new Snap(Gravity.START, "External App", apps));
         }
         if (kpiIdArray.contains("026")) {
             List<App> apps = getProduct(7, kpiIdArray);
@@ -893,7 +937,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void requestMarketingEventsAPI() {
 
-        geoLeveLDesc = sharedPreferences.getString("concept", "");
+       // geoLeveLDesc = sharedPreferences.getString("concept", "");
         String url = ConstsCore.web_url + "/v1/display/dashboardNew/" + userId + "?geoLevel2Code=" + geoLeveLDesc;
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {

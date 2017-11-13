@@ -600,8 +600,6 @@ public class SwitchingActivity extends AppCompatActivity
                 if (kpiIdArray.contains("025"))
                     apps.add(new App("Inspection History", R.mipmap.storeinspection,"025"));
 
-                if (kpiIdArray.contains("046"))
-                    apps.add(new App("VOC", R.mipmap.voc,"046"));
 
                 break;
 
@@ -710,6 +708,13 @@ public class SwitchingActivity extends AppCompatActivity
                     apps.add(new App("EDSC Performance", R.mipmap.salesanalysis,"050"));
                 if (kpiIdArray.contains("051"))
                     apps.add(new App("Assortment", R.mipmap.hourlyperformance,"051"));
+
+                break;
+
+            case 17 :
+
+                if (kpiIdArray.contains("046"))
+                    apps.add(new App("VOC", R.mipmap.voc,"046"));
 
                 break;
 //            case 101 :
