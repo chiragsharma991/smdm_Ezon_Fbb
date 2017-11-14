@@ -62,7 +62,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -348,6 +350,9 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void customAlert(final ArrayList<String> conceptDesc) {
 
+        geoLeveLDesc = sharedPreferences.getString("conceptDesc", "").trim();
+        geoLeveLCode = sharedPreferences.getString("concept", "").trim();
+        lobName = sharedPreferences.getString("lobname", "").trim();
         mappingDialog = new Dialog(context, R.style.ThemeDialog);
         mappingDialog.getWindow().getAttributes().windowAnimations = R.style.ThemeDialog;
         Window window = mappingDialog.getWindow();
@@ -423,7 +428,7 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
                 concept_txt.setText(model.getGeoLevel2Desc());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                if (model.getLobName().equals("FASHION") && model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB")) {
+                if (model.getLobName().equals("FASHION") && (model.getGeoLevel2Code().equals("BB") || model.getGeoLevel2Code().equals("FBB"))) {
                     editor.putString("concept", "BB,FBB");
                     editor.putString("conceptDesc", model.getGeoLevel2Desc());
                     editor.putString("lobid", model.getLobId());
@@ -937,13 +942,20 @@ public class SnapDashboardActivity extends SwitchingActivity implements onclickV
 
     private void requestMarketingEventsAPI() {
 
-       // geoLeveLDesc = sharedPreferences.getString("concept", "");
-        String url = ConstsCore.web_url + "/v1/display/dashboardNew/" + userId + "?geoLevel2Code=" + geoLeveLDesc;
+        String value="";
+        try {
+            geoLeveLDesc = sharedPreferences.getString("conceptDesc", "").trim();
+            value=URLEncoder.encode(geoLeveLDesc, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String url = ConstsCore.web_url + "/v1/display/dashboardNew/" + userId + "?geoLevel2Code=" + value;
+        Log.e(TAG, "requestMarketingEventsAPI: "+url );
         final JsonArrayRequest postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Log.i(TAG, "onResponse: "+response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0) {
                                 Reusable_Functions.hDialog();

@@ -1259,12 +1259,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         {
          url  = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit +"&geoLevel2Code="+ geoLevel2Code + "&lobId="+ lobId;
         }
-//       Log.e("url sales in fbb:", "" + url);
+        Log.e("url sales in fbb:", "" + url);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
+                    Log.i(TAG, "onResponse: "+response);
                     int i;
                     if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                         Reusable_Functions.hDialog();
@@ -1464,12 +1465,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         {
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + selectedsegValue + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
         }
-//        Log.e("Sales Analysis", "requestSalesViewPagerValueAPI: "+url);
+        Log.e("Sales Analysis", "requestSalesViewPagerValueAPI: "+url);
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -1598,13 +1600,14 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
                 url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&storeCode=" + saleFirstVisibleItem.substring(0, 4) + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code=" + geoLevel2Code + "&lobId=" + lobId;
             }
         }
-//        Log.e("Sales Analysis", "requestSalesPagerOnScrollAPI: "+url );
+        Log.e("Sales Analysis", "requestSalesPagerOnScrollAPI: "+url );
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             int valuePos = firstVisibleItem;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1682,12 +1685,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
     private void requestSalesCategoryList(final String deptName) {
         String salespvacategory_listurl;
         salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        Log.e("Sales Anlysis", "requestSalesCategoryList: "+salespvacategory_listurl);
+        Log.e("Sales Anlysis", "requestSalesCategoryList: "+salespvacategory_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvacategory_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -1828,11 +1832,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
     {
         String salespva_planclass_listurl = "";
         salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
+        Log.e(TAG, "requestSalesPlanClassListAPI: "+salespva_planclass_listurl );
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -1969,13 +1975,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
     private void requestSalesBrandListAPI(final String planclass) {
         String salespva_brand_listurl;
         salespva_brand_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        Log.e("salespva_brand_listurl "," "+salespva_brand_listurl);
+        Log.e("salespva_brand_listurl "," "+salespva_brand_listurl);
 
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brand_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Log.i(TAG, "onResponse: "+response);
                         try {
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -2115,12 +2121,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         String salespva_brandplan_listurl;
 
         salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        Log.e("salespva_brandplan_listurl "," "+salespva_brandplan_listurl);
+        Log.e("salespva_brandplan_listurl "," "+salespva_brandplan_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();
@@ -2264,12 +2271,12 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
         {
             salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + str + "&offset=" + offsetvalue + "&limit=" + limit+ "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
         }
-//        Log.e("requestSalesSelectedFilterVal: ",""+salespva_brandplan_listurl);
+        Log.e("requestSalesSelectedFilterVal: ",""+salespva_brandplan_listurl);
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Log.i(TAG, "onResponse: "+response);
                         if (sales_filter_level == 2)
                         {
                             txtheaderplanclass.setText(hierarchyList[1]);
@@ -2469,12 +2476,13 @@ public class SalesAnalysisActivity1 extends AppCompatActivity implements View.On
     {
         String viewby_url;
         viewby_url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + selectedsegValue + "&level=" + level + drill_down_val + "&offset=" + offsetvalue + "&limit=" + limit + "&geoLevel2Code="+geoLevel2Code + "&lobId="+ lobId;
-//        Log.e("Sales Anlysis", "requestViewByDisplay: "+viewby_url);
+        Log.e("Sales Anlysis", "requestViewByDisplay: "+viewby_url);
         postRequest = new JsonArrayRequest(Request.Method.GET, viewby_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Toast.makeText(context, "no data found", Toast.LENGTH_SHORT).show();

@@ -1231,11 +1231,13 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
     {
         String viewby_url;
         viewby_url = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + drill_down_val + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
+        Log.e(TAG, "requestViewbyDisplay: "+viewby_url );
         postRequest = new JsonArrayRequest(Request.Method.GET, viewby_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             int i;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1440,11 +1442,13 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         {
             salespva_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
         }
+        Log.e(TAG, "requestSalesListDisplayAPI: "+salespva_listurl );
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             int i;
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
@@ -1761,6 +1765,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                 url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweekNew/" + userId + "?storeCode=" + pvaFirstVisibleItem.substring(0,4) + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&view=" + salesPvA_SegmentClick + "&lobId=" + lobId;
 
             }
+            Log.e(TAG, "requestPvAChartAPI: "+url );
 
         }
 
@@ -1770,7 +1775,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 barChart.setData(null);
@@ -1844,11 +1849,13 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             salespvaweekChart_url = ConstsCore.web_url + "/v1/display/salesvisualpvaanalysisbyweekNew/" + userId + "?view=" + salesPvA_SegmentClick + "&geoLevel2Code=" + geoLevel2Code + "&level=" + level + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
 
         }
+        Log.e(TAG, "requestSalesWeekChart: "+salespvaweekChart_url );
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvaweekChart_url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 Reusable_Functions.hDialog();
@@ -2015,12 +2022,13 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         String salespvacategory_listurl;
 
         salespvacategory_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&department=" + deptName.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
-
+        Log.e(TAG, "requestSalesPvACategoryList: "+salespvacategory_listurl );
         postRequest = new JsonArrayRequest(Request.Method.GET, salespvacategory_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -2138,13 +2146,14 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         String salespva_planclass_listurl;
 
         salespva_planclass_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&category=" + category.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
-
+        Log.e(TAG, "requestSalesPvAPlanClassListAPI: "+salespva_planclass_listurl );
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_planclass_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -2253,7 +2262,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         String salespva_brand_listurl;
 
         salespva_brand_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&class=" + planclass.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
-
+        Log.e(TAG, "requestSalesPvABrandListAPI: "+salespva_brand_listurl );
 
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brand_listurl,
                 new Response.Listener<JSONArray>() {
@@ -2261,6 +2270,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     public void onResponse(JSONArray response) {
 
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -2367,14 +2377,14 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         String salespva_brandplan_listurl;
 
         salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&brand=" + brandnm.replaceAll(" ", "%20").replaceAll("&", "%26") + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
-
+        Log.e(TAG, "requestSalesPvABrandPlanListAPI: "+salespva_brandplan_listurl );
 
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -2609,7 +2619,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
         {
             url = ConstsCore.web_url + "/v1/display/salesanalysisbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + "&level=" + level + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
         }
-
+        Log.e(TAG, "requestSalesViewPagerValueAPI: "+url );
 
         postRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -2617,6 +2627,7 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
                     public void onResponse(JSONArray response) {
 
                         try {
+                            Log.i(TAG, "onResponse: "+response);
                             if (response.equals("") || response == null || response.length() == 0 && count == 0) {
                                 Reusable_Functions.hDialog();
                                 pva_progressBar.setVisibility(View.GONE);
@@ -2686,11 +2697,12 @@ public class SalesPvAActivity extends AppCompatActivity implements TabLayout.OnT
             salespva_brandplan_listurl = ConstsCore.web_url + "/v1/display/salesanalysisoptedbytimeNew/" + userId + "?view=" + salesPvA_SegmentClick + selectedString + "&geoLevel2Code=" + geoLevel2Code + "&offset=" + offsetvalue + "&limit=" + limit + "&lobId=" + lobId;
 
         }
+        Log.e(TAG, "requestSalesSelectedFilterVal: "+salespva_brandplan_listurl );
         postRequest = new JsonArrayRequest(Request.Method.GET, salespva_brandplan_listurl,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
+                        Log.i(TAG, "onResponse: "+response);
 
                         if (sales_filter_level == 2) {
                             txtheaderplanclass.setText(hierarchyList[1]);
